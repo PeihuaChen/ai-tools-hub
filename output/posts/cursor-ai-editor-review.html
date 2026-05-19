@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor AI 编辑器深度评测：2026年定价、功能与竞品对比 - AI知识宇宙 - 用AI采集，用AI生成</title>
+    <meta name="description" content="基于 cursor.com/pricing 最新数据的 Cursor AI 编辑器全面评测，涵盖定价方案、核心功能、优缺点分析，以及与 Copilot 和 Windsurf 的横向对比。">
+    <link rel="icon" href="/ai-tools-hub/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/ai-tools-hub/assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="/ai-tools-hub/">← 返回首页</a>
+                <a href="/ai-tools-hub/archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-05-16 · 5 分钟</span>
+            </div>
+            <blockquote>
+<p>数据来源: cursor.com/pricing | 最后验证: 2026-05-16</p>
+</blockquote>
+<h2 id="cursor">什么是 Cursor？</h2>
+<p>Cursor 是一款基于 VS Code 深度定制的 AI-first 代码编辑器，由 Anysphere 开发。与传统的 AI 插件不同，Cursor 将 AI 能力原生嵌入编辑器底层——Agent 可以自主读取项目结构、跨文件修改代码、执行终端命令，甚至通过 MCP（Model Context Protocol）连接外部工具。目前已被 Stripe、OpenAI、Linear、Nvidia、Figma、Adobe 等头部科技公司采用。</p>
+<h2 id="2026">2026 年定价方案（美元/月）</h2>
+<p>以下价格直接来自 cursor.com/pricing，验证日期 2026-05-16：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>月费</th>
+<th>Agent 额度</th>
+<th>核心特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hobby（免费）</strong></td>
+<td>$0</td>
+<td>有限</td>
+<td>基础 Tab 补全、有限 Agent 请求</td>
+</tr>
+<tr>
+<td><strong>Pro</strong></td>
+<td>$20</td>
+<td>标准</td>
+<td>扩展 Agent 额度、前沿模型、MCP/Skills/Hooks、Cloud Agents、Bugbot</td>
+</tr>
+<tr>
+<td><strong>Pro+</strong></td>
+<td>$60</td>
+<td>Pro 的 3 倍</td>
+<td>更高 Agent 并发，适合中重度用户</td>
+</tr>
+<tr>
+<td><strong>Ultra</strong></td>
+<td>$200</td>
+<td>Pro 的 20 倍</td>
+<td>新功能优先体验、超大 Agent 额度</td>
+</tr>
+<tr>
+<td><strong>Teams</strong></td>
+<td>$40/用户/月</td>
+<td>共享额度</td>
+<td>Cloud Agents + 团队上下文、SAML/OIDC SSO、团队市场</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>定制</td>
+<td>定制</td>
+<td>私有部署、专属支持、合规定制</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：Bugbot（自动修复 Bug）为用量计费，不在月费包内。</p>
+</blockquote>
+<h2 id="_1">核心功能全景</h2>
+<h3 id="agent">🤖 Agent（自主编程代理）</h3>
+<p>Cursor 的灵魂功能。Agent 能自主阅读整个代码库、规划修改方案、跨文件执行编辑，并可在终端运行命令。不同于简单补全，Agent 具备"意图理解"能力——告诉它"给所有 API 路由加上速率限制"，它会自动定位路由文件、添加中间件、更新类型定义。</p>
+<h3 id="tab">⇥ Tab（智能代码补全）</h3>
+<p>不仅预测下一行，还能预测下一个逻辑块。支持跨文件上下文感知：当你引用了一个函数，Tab 能自动补全对应的 import 语句和类型声明。</p>
+<h3 id="cloud-agents">☁️ Cloud Agents</h3>
+<p>将计算密集型任务卸载到云端运行，不占用本地资源。Pro 及以上方案可用。</p>
+<h3 id="mcpmodel-context-protocol">🔗 MCP（Model Context Protocol）</h3>
+<p>Cursor 支持的开放协议，允许模型与外部工具（数据库、API、文件系统）交互。开发者可自定义 MCP 服务端扩展编辑器能力。</p>
+<h3 id="skills-hooks">⚙️ Skills &amp; Hooks</h3>
+<p>自定义自动化规则：Skill 是可复用的 AI 指令模板，Hook 是代码事件的触发器（如保存时自动格式化 + 运行测试）。</p>
+<h3 id="bugbot">🐛 Bugbot</h3>
+<p>自动化 Bug 修复工具，可扫描代码库发现潜在缺陷并提交修复 PR。按使用量计费。</p>
+<h3 id="code-review">👁️ Code Review</h3>
+<p>AI 驱动的代码审查，直接在编辑器内对 PR 进行智能评审。</p>
+<h3 id="cli-mode">🖥️ CLI Mode</h3>
+<p>在终端中直接使用 Cursor AI 能力，无需打开编辑器。</p>
+<h2 id="_2">优缺点分析</h2>
+<h3 id="_3">✅ 优势</h3>
+<ul>
+<li><strong>项目级理解能力行业领先</strong>——Agent 能像 senior developer 一样理解整体架构</li>
+<li><strong>原生多文件编辑</strong>——修改一个 API 时自动同步前端类型定义、测试用例、文档</li>
+<li><strong>MCP 生态</strong>——可扩展性远超传统补全工具</li>
+<li><strong>Cloud Agents</strong>——大型项目不拖慢本地性能</li>
+<li><strong>更新极快</strong>——几乎每周都有新功能</li>
+</ul>
+<h3 id="_4">❌ 劣势</h3>
+<ul>
+<li><strong>价格较高</strong>——Pro $20/月是 Copilot 的两倍</li>
+<li><strong>Bugbot 额外计费</strong>——用量不透明可能导致意外支出</li>
+<li><strong>离线不可用</strong>——所有 AI 功能依赖云端</li>
+<li><strong>资源占用</strong>——Agent 模式在大型项目中 CPU/内存消耗明显</li>
+<li><strong>学习曲线</strong>——Agent/Skills/MCP 等功能需要时间上手</li>
+</ul>
+<h2 id="copilot-windsurf">与 Copilot 和 Windsurf 对比</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Cursor</th>
+<th>GitHub Copilot</th>
+<th>Windsurf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月费（个人）</td>
+<td>$20 Pro</td>
+<td>$10 Individual</td>
+<td>$15 Pro</td>
+</tr>
+<tr>
+<td>项目级理解</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>多文件编辑</td>
+<td>原生 Agent</td>
+<td>通过 Workspace（有限）</td>
+<td>Cascade Flow</td>
+</tr>
+<tr>
+<td>自主编程</td>
+<td>Agent 强</td>
+<td>Copilot Chat + Edits</td>
+<td>Cascade Agent</td>
+</tr>
+<tr>
+<td>MCP/扩展</td>
+<td>✅ MCP + Skills/Hooks</td>
+<td>❌ 有限</td>
+<td>❌ 有限</td>
+</tr>
+<tr>
+<td>Cloud Agent</td>
+<td>✅ Pro 以上</td>
+<td>❌</td>
+<td>✅ Pro Ultimate</td>
+</tr>
+<tr>
+<td>离线基础补全</td>
+<td>❌</td>
+<td>✅ 有</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>免费额度</td>
+<td>有限</td>
+<td>有限（免费版）</td>
+<td>有限</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话总结：</strong> 如果你追求<strong>最强的项目级自主编程能力</strong>且预算充足，选 Cursor；如果<strong>预算敏感但需要高质量补全</strong>，Copilot 胜在性价比；如果<strong>想要介于两者之间的平衡</strong>，Windsurf 是不错的选择。</p>
+<h2 id="_5">购买建议</h2>
+<h3 id="_6">🏆 推荐方案</h3>
+<table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th>推荐方案</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>尝鲜体验</td>
+<td>Hobby（免费）</td>
+<td>体验 Agent 和 Tab 基础能力</td>
+</tr>
+<tr>
+<td>个人独立开发者</td>
+<td><strong>Pro $20/月</strong></td>
+<td>性价比最高的主力方案</td>
+</tr>
+<tr>
+<td>重度 AI 用户</td>
+<td>Pro+ $60/月</td>
+<td>3 倍 Agent 额度，不限速</td>
+</tr>
+<tr>
+<td>专业团队（5-20人）</td>
+<td>Teams $40/人/月</td>
+<td>SSO + 团队上下文共享</td>
+</tr>
+<tr>
+<td>追求极致</td>
+<td>Ultra $200/月</td>
+<td>20 倍额度 + 优先体验新功能</td>
+</tr>
+<tr>
+<td>大型企业</td>
+<td>Enterprise（定制）</td>
+<td>安全合规 + 私有部署</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">💡 省钱策略</h3>
+<ol>
+<li><strong>按月订阅</strong>而非年付——Cursor 功能迭代快，随时可降级</li>
+<li>先用 Hobby 免费版测试<strong>一周</strong>，确认 Agent 模式适合你的工作流再付费</li>
+<li>团队用户优先考虑 <strong>Teams 方案</strong>（$40/人 vs Pro+ $60/人，团队上下文共享的价值远超 $20 差价）</li>
+<li>Bugbot 按量计费，建议先设置月度预算上限</li>
+</ol>
+<h2 id="_8">结语</h2>
+<p>Cursor 在 2026 年已经确立了 AI 编程编辑器的第一梯队地位。Pro 方案 ($20/月) 对于独立开发者而言，虽然比 Copilot 贵一倍，但 Agent 驱动的项目级编程能力让这个差价物有所值。如果你每天花 4 小时以上写代码，Cursor 带来的效率提升远超订阅成本。</p>
+<blockquote>
+<p>建议策略：先试用 14 天免费版，用实际项目测试 Agent 效果，再决定付费方案。</p>
+</blockquote>
+<h2 id="_9">参考来源</h2>
+<ul>
+<li>cursor.com/pricing — 定价数据（2026-05-16 验证）</li>
+<li>cursor.com/features — 功能介绍</li>
+<li>cursor.com/changelog — 更新日志</li>
+<li>GitHub Copilot 定价: github.com/features/copilot/plans</li>
+<li>Windsurf 定价: codeium.com/pricing</li>
+</ul>
+<hr />
+<p><em>本文基于 cursor.com/pricing 公开数据编写，数据最后验证日期 2026-05-16。定价可能随时调整，请以官网为准。</em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 尊尼获加&元气森林</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/Hrps3pr" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        </article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>
