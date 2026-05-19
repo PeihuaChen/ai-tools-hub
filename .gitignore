@@ -2,9 +2,9 @@
 # 忽略 output 目录（已部署）
 output/
 # 忽略 .md 文件（只推送转换后的 html）
-*.md
+# *.md  # 已注释 - 需要保存 Markdown 源文件
 # 忽略 .html 源码目录（只推送转换后的 html）
-content/
+# content/  # 已注释 - 需要保存 Markdown 源文件
 # 忽略临时文件
 *.tmp
 __pycache__/
