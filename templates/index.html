@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | AI 领域知识聚合</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="icon" href="{{ base_path }}/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ base_path }}/assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="{{ base_path }}/">
+                <img src="{{ base_path }}/assets/logo.png" alt="AI 知识宇宙 Logo" class="site-logo">
+                🌌 {{ title }}
+            </a></h1>
+            <div class="desc">{{ description }}</div>
+            <nav>
+                <a href="{{ base_path }}/">首页</a>
+                <a href="{{ base_path }}/archive.html">全部文章</a>
+                <a href="{{ base_path }}/about.html">关于</a>
+            </nav>
+        </header>
+        
+        <div class="hero">
+            <h2>🧠 每天探索 AI 领域新边界</h2>
+            <p>AI 知识宇宙 — 用 AI 采集全球最新技术动态，用 AI 生成深度解读内容。每天更新，让你永不落伍</p>
+            <div class="stats">
+                <a href="{{ base_path }}/archive.html"><strong>{{ posts_count }}</strong> 篇文章</a>
+                <a href="{{ base_path }}/archive.html"><strong>{{ categories|length }}</strong> 个分类</a>
+            </div>
+        </div>
+        
+        <div class="post-list" id="post-list">
+            {% for post in posts %}
+            <div class="post-card" data-index="{{ loop.index0 }}">
+                <a href="{{ base_path }}/archive.html?cat={{ post.get('category', '未分类') | urlencode }}" class="cat">{{ post.get('category', '未分类') }}</a>
+                <h3><a href="{{ base_path }}/posts/{{ post.slug }}.html">{{ post.title }}</a></h3>
+                <div class="meta">{{ post.date|date }} · {{ post.get('read_time', '5 分钟') }}</div>
+                <p>{{ post.get('description', '')[:150] }}{% if post.description|length > 150 %}...{% endif %}</p>
+                <a href="{{ base_path }}/posts/{{ post.slug }}.html" class="readmore">阅读全文 →</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="load-more" id="load-more-trigger">
+            <span class="spinner" id="load-spinner"></span>
+            <span id="load-status">加载更多文章...</span>
+        </div>
+        
+        <footer>
+            <p>© {{ year }} {{ title }} · 宇宙无边，AI 无界 🌌</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+
+    <script>
+    (function() {
+        var PAGE_SIZE = 10;
+        var cards = document.querySelectorAll('#post-list .post-card');
+        var totalCards = cards.length;
+        var shown = Math.min(PAGE_SIZE, totalCards);
+        var trigger = document.getElementById('load-more-trigger');
+        var statusEl = document.getElementById('load-status');
+        var spinnerEl = document.getElementById('load-spinner');
+
+        // Hide all cards beyond first batch
+        for (var i = shown; i < totalCards; i++) {
+            cards[i].style.display = 'none';
+        }
+
+        // Show first visible count
+        var statusText = '已加载 ' + shown + ' / ' + totalCards + ' 篇';
+        statusEl.textContent = statusText;
+
+        if (shown >= totalCards) {
+            spinnerEl.style.display = 'none';
+            statusEl.textContent = '✨ 全部 ' + totalCards + ' 篇文章已加载完成';
+            return;
+        }
+
+        // IntersectionObserver for infinite scroll
+        var observer = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && shown < totalCards) {
+                statusEl.textContent = '加载中...';
+                spinnerEl.style.display = '';
+
+                // Reveal next batch
+                var next = Math.min(shown + PAGE_SIZE, totalCards);
+                for (var i = shown; i < next; i++) {
+                    cards[i].style.display = '';
+                    // Fade-in effect
+                    cards[i].style.opacity = '0';
+                    cards[i].style.transform = 'translateY(10px)';
+                    requestAnimationFrame(function(el) {
+                        return function() {
+                            el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        };
+                    }(cards[i]));
+                }
+                shown = next;
+
+                statusEl.textContent = '已加载 ' + shown + ' / ' + totalCards + ' 篇';
+
+                if (shown >= totalCards) {
+                    spinnerEl.style.display = 'none';
+                    statusEl.textContent = '✨ 全部 ' + totalCards + ' 篇文章已加载完成';
+                    observer.disconnect();
+                }
+            }
+        }, { rootMargin: '100px' });
+
+        observer.observe(trigger);
+    })();
+    </script>
+</body>
+</html>

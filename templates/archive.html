@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部文章 - {{ title }}</title>
+    <meta name="description" content="所有 AI 工具评测文章归档">
+    <link rel="icon" href="{{ base_path }}/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ base_path }}/assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="{{ base_path }}/">← 返回首页</a>
+            </nav>
+        </header>
+        
+        <h1>📚 全部文章 (<span id="total-count">{{ posts|length }}</span>篇)</h1>
+        
+        <div class="archive-filters" id="filter-bar">
+            <a href="?" class="active" id="filter-clear">🏠 全部分类</a>
+            {% for cat_name, cat_posts in categories.items() %}
+            <a href="?cat={{ cat_name | urlencode }}" data-cat="{{ cat_name | urlencode }}">{{ cat_name }} ({{ cat_posts|length }})</a>
+            {% endfor %}
+        </div>
+        
+        <div class="archive-list" id="archive-list">
+            {% for post in posts %}
+            <div class="archive-item" data-cat="{{ post.get('category','未分类') }}">
+                <div class="meta">
+                    <a href="{{ base_path }}/archive.html?cat={{ post.get('category','未分类') | urlencode }}" class="cat">{{ post.get('category','未分类') }}</a>
+                    <h3><a href="{{ base_path }}/posts/{{post.slug}}.html">{{post.title}}</a></h3>
+                </div>
+                <div class="date">{{post.date|date}}</div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="archive-empty" id="archive-empty" style="display:none;">
+            <p>😕 暂未找到该分类下的文章</p>
+            <p><a href="?">← 查看全部分类</a></p>
+        </div>
+        
+        <footer>
+            <p>© {{ year }} {{ title }}</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var activeCat = params.get('cat');
+        var items = document.querySelectorAll('#archive-list .archive-item');
+        var totalSpan = document.getElementById('total-count');
+        var emptyEl = document.getElementById('archive-empty');
+        var filterTags = document.querySelectorAll('.archive-filters a[data-cat]');
+        var clearBtn = document.getElementById('filter-clear');
+
+        function updateFilter(cat) {
+            var visibleCount = 0;
+
+            items.forEach(function(item) {
+                var itemCat = item.getAttribute('data-cat');
+                if (!cat || itemCat === cat) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Update filter tag active state
+            filterTags.forEach(function(tag) {
+                var tagCat = tag.getAttribute('data-cat');
+                if (tagCat === cat) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+
+            // Update clear button
+            if (!cat) {
+                clearBtn.classList.add('active');
+            } else {
+                clearBtn.classList.remove('active');
+            }
+
+            // Update heading
+            var heading = document.querySelector('h1');
+            if (cat) {
+                heading.textContent = '🔖 ' + cat + ' (' + visibleCount + '篇)';
+            } else {
+                heading.innerHTML = '📚 全部文章 (<span id="total-count">' + items.length + '</span>篇)';
+            }
+
+            // Show/hide empty state
+            totalSpan.textContent = visibleCount;
+            if (visibleCount === 0 && cat) {
+                emptyEl.style.display = '';
+            } else {
+                emptyEl.style.display = 'none';
+            }
+        }
+
+        if (activeCat) {
+            updateFilter(decodeURIComponent(activeCat));
+        }
+    })();
+    </script>
+</body>
+</html>

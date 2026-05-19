@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }} - {{ title }}</title>
+    <meta name="description" content="{{ post.get('description', '')[:160] }}">
+    <link rel="icon" href="{{ base_path }}/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ base_path }}/assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="{{ base_path }}/">← 返回首页</a>
+                <a href="{{ base_path }}/archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <div class="post-meta">
+                <span class="cat">{{ post.get('category', '未分类') }}</span>
+                <span>{{ post.date|date }} · {{ post.get('read_time', '5 分钟') }}</span>
+            </div>
+            {{ post.html }}
+            
+            {% if jd_link %}
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 {{ jd_link.name }}</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="{{ jd_link.url }}" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            {% endif %}
+            
+        </article>
+        
+        <footer>
+            <p>© {{ year }} {{ title }}</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>
