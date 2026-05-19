@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI知识宇宙 - 用AI采集，用AI生成 | AI 领域知识聚合</title>
-    <meta name="description" content="每天更新AI领域新技术及新进展，让你永不落伍！">
-    <link rel="icon" href="/ai-tools-hub/assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/ai-tools-hub/assets/theme.css">
-    <script>
-        // 立即应用主题，避免闪烁
-        (function() {
-            var savedTheme = localStorage.getItem('theme') || 'dark';
-            if (savedTheme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
-        })();
-    </script>
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+    <title>AI 工具智库 | AI 领域知识聚合</title>
+    <meta name="description" content="深度评测全球最新 AI 工具，从大模型到应用落地，帮你找到最适合的 AI 生产力工具">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/theme.css">
+    <style>
+        .post-card { background: #1a1a2e; border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid #2a2a4e; transition: all 0.3s ease; }
+        .post-card:hover { transform: translateY(-4px); border-color: #667eea; box-shadow: 0 8px 24px rgba(102,126,234,0.2); }
+        .post-card .cat { display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; margin-bottom: 12px; }
+        .post-card h3 { margin: 12px 0; }
+        .post-card h3 a { color: #fff; text-decoration: none; font-size: 20px; }
+        .post-card h3 a:hover { color: #667eea; }
+        .post-card .meta { color: #888; font-size: 14px; margin-bottom: 12px; }
+        .post-card p { color: #aaa; line-height: 1.6; margin-bottom: 16px; }
+        .post-card .readmore { color: #667eea; text-decoration: none; font-weight: 600; }
+        .post-card .readmore:hover { text-decoration: underline; }
+        .new-badge { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-left: 8px; }
+    </style>
+</head>
 <body>
     <div class="container">
         <header>
-            <h1><a href="/ai-tools-hub/">
-                <img src="/ai-tools-hub/assets/logo.png" alt="AI 知识宇宙 Logo" class="site-logo">
-                🌌 AI知识宇宙 - 用AI采集，用AI生成
+            <h1><a href="/">
+                <img src="/assets/logo.png" alt="AI 知识宇宙 Logo" class="site-logo">
+                🌌 AI 工具智库
             </a></h1>
-            <div class="desc">每天更新AI领域新技术及新进展，让你永不落伍！</div>
+            <div class="desc">深度评测全球最新 AI 工具，从大模型到应用落地</div>
             <nav>
-                <a href="/ai-tools-hub/">首页</a>
-                <a href="/ai-tools-hub/archive.html">全部文章</a>
-                <a href="/ai-tools-hub/about.html">关于</a>
+                <a href="/">首页</a>
+                <a href="/archive.html">全部文章</a>
+                <a href="/about.html">关于</a>
             </nav>
         </header>
         
@@ -36,554 +40,110 @@
             <h2>🧠 每天探索 AI 领域新边界</h2>
             <p>AI 知识宇宙 — 用 AI 采集全球最新技术动态，用 AI 生成深度解读内容。每天更新，让你永不落伍</p>
             <div class="stats">
-                <a href="/ai-tools-hub/archive.html"><strong>55</strong> 篇文章</a>
-                <a href="/ai-tools-hub/archive.html"><strong>10</strong> 个分类</a>
+                <a href="/archive.html"><strong>52</strong> 篇文章</a>
+                <a href="/archive.html"><strong>11</strong> 个分类</a>
             </div>
         </div>
         
         <div class="post-list" id="post-list">
-            
-            <div class="post-card" data-index="0">
-                <a href="/ai-tools-hub/archive.html?cat=AI%20%E7%9F%A5%E8%AF%86%E5%BA%93" class="cat">AI 知识库</a>
-                <h3><a href="/ai-tools-hub/posts/weknora-vs-dify-ragflow-fastgpt-comparison.html">腾讯 WeKnora 知识管理平台深度评测：与 Dify、RAGFlow、FastGPT 全面对比</a></h3>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI 工具实战" class="cat">AI 工具实战</a>
+                <h3><a href="/posts/hermes-agent-wechat-integration-guide.html">Hermes Agent 个人微信（WeChat）原生对接适配全攻略<span class="new-badge">NEW</span></a></h3>
+                <div class="meta">2026-05-19 · 8分钟</div>
+                <p>深度解析 Hermes Agent 如何通过官方 iLink Bot API 原生接入个人微信，实现长轮询直连、Markdown 自动转换、记忆联动等核心功能。详细解读群聊限制与最佳实践。</p>
+                <a href="/posts/hermes-agent-wechat-integration-guide.html" class="readmore">阅读全文 →</a>
+            </div>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI 知识库" class="cat">AI 知识库</a>
+                <h3><a href="/posts/weknora-vs-dify-ragflow-fastgpt-comparison.html">腾讯 WeKnora 知识管理平台深度评测：与 Dify、RAGFlow、FastGPT 全面对比<span class="new-badge">NEW</span></a></h3>
                 <div class="meta">2026-05-19 · 5 分钟</div>
                 <p>腾讯开源的 WeKnora 知识管理平台究竟如何？本文从架构设计、文档处理、检索能力、部署难度等维度，与 Dify、RAGFlow、FastGPT 等主流开源知识库进行深度对比，提供选型指南和实战建议</p>
-                <a href="/ai-tools-hub/posts/weknora-vs-dify-ragflow-fastgpt-comparison.html" class="readmore">阅读全文 →</a>
+                <a href="/posts/weknora-vs-dify-ragflow-fastgpt-comparison.html" class="readmore">阅读全文 →</a>
             </div>
-            
-            <div class="post-card" data-index="1">
-                <a href="/ai-tools-hub/archive.html?cat=%E8%AF%84%E6%B5%8B" class="cat">评测</a>
-                <h3><a href="/ai-tools-hub/posts/kilo-code-review.html">Kilo Code 评测：2026 年最值得尝试的开源 AI 编程助手</a></h3>
+            <div class="post-card">
+                <a href="/archive.html?cat=评测" class="cat">评测</a>
+                <h3><a href="/posts/kilo-code-review.html">Kilo Code 评测：2026 年最值得尝试的开源 AI 编程助手<span class="new-badge">NEW</span></a></h3>
                 <div class="meta">2026-05-18 · 5 分钟</div>
                 <p></p>
-                <a href="/ai-tools-hub/posts/kilo-code-review.html" class="readmore">阅读全文 →</a>
+                <a href="/posts/kilo-code-review.html" class="readmore">阅读全文 →</a>
             </div>
-            
-            <div class="post-card" data-index="2">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/hermes-agent-deployment-guide.html">Hermes Agent 部署与使用指南：开源AI编程代理的完整实战</a></h3>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI编程助手" class="cat">AI编程助手</a>
+                <h3><a href="/posts/hermes-agent-deployment-guide.html">Hermes Agent 部署与使用指南：开源AI编程代理的完整实战<span class="new-badge">NEW</span></a></h3>
                 <div class="meta">2026-05-17 · 12分钟</div>
                 <p>从零部署 Hermes Agent 开源 AI 编程代理的完整指南，涵盖安装、配置、多平台接入、技能系统与高级用法</p>
-                <a href="/ai-tools-hub/posts/hermes-agent-deployment-guide.html" class="readmore">阅读全文 →</a>
+                <a href="/posts/hermes-agent-deployment-guide.html" class="readmore">阅读全文 →</a>
             </div>
-            
-            <div class="post-card" data-index="3">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/ai-tools-2025-roundup.html">2026 AI工具精选：从10+类工具中挑出最值得入手的15款</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>从编程、写作、图像、视频、语音到搜索，六大类AI工具精选推荐，每款附价格区间与推荐理由</p>
-                <a href="/ai-tools-hub/posts/ai-tools-2025-roundup.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="4">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/ai-code-tools-2025-guide.html">2026 AI编程工具选购指南：7款主流工具深度对比</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>2026年深度对比 Cursor、Copilot、Claude Sonnet 4、Windsurf、Replit Agent、ChatGPT、DeepSeek V3 七款AI编程工具，从功能、价格、场景帮你做选择</p>
-                <a href="/ai-tools-hub/posts/ai-code-tools-2025-guide.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="5">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/ai-tools-2025-must-have.html">2026年15款最值得订阅的AI工具：真实价格与性价比全面对比</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>从月费$5到$20，15款主流AI工具按编程/图像/视频/语音/搜索分类，真实价格与核心价值逐项拆解，附$50/$100/$200预算配置方案</p>
-                <a href="/ai-tools-hub/posts/ai-tools-2025-must-have.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="6">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/elevenlabs-review-2025.html">ElevenLabs 2026版评测：AI语音合成已听不出真假</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>ElevenLabs 2026版深度评测：中文配音实测、语音克隆效果、新功能体验、定价策略及竞品对比</p>
-                <a href="/ai-tools-hub/posts/elevenlabs-review-2025.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="7">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/notion-ai-review-productivity.html">Notion AI 深度体验：智能笔记助手真的能提升效率吗？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>Notion AI全功能评测，自动写作、翻译、知识库管理、会议笔记、自定义代理等功能实测</p>
-                <a href="/ai-tools-hub/posts/notion-ai-review-productivity.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="8">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%AF%B9%E8%AF%9D%E5%86%99%E4%BD%9C" class="cat">AI对话写作</a>
-                <h3><a href="/ai-tools-hub/posts/perplexity-ai-search-review.html">Perplexity AI 深度评测：它能取代 Google 搜索吗？2026 使用体验</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>Perplexity AI 搜索引擎详细评测，对比 Google 搜索优劣势，Pro 版定价及是否值得订阅（数据来源：perplexity.ai 公开页面，2026 年 5 月）</p>
-                <a href="/ai-tools-hub/posts/perplexity-ai-search-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="9">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/elevenlabs-tts-2025-review.html">ElevenLabs 2026快速入门：AI语音合成设置与使用</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>ElevenLabs快速入门指南：注册、设置、语音合成全流程，附完整评测链接</p>
-                <a href="/ai-tools-hub/posts/elevenlabs-tts-2025-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="10">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/pika-2-0-review.html">Pika 2.0 深度评测：AI视频生成的新标杆</a></h3>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI生产力工具" class="cat">AI生产力工具</a>
+                <h3><a href="/posts/motion-ai-calendar-automation-test.html">Motion AI 日历自动化工具深度测试：智能时间管理的未来已来？<span class="new-badge">NEW</span></a></h3>
                 <div class="meta">2026-05-16 · 5 分钟</div>
                 <p></p>
-                <a href="/ai-tools-hub/posts/pika-2-0-review.html" class="readmore">阅读全文 →</a>
+                <a href="/posts/motion-ai-calendar-automation-test.html" class="readmore">阅读全文 →</a>
             </div>
-            
-            <div class="post-card" data-index="11">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/runway-gen3-ai-video-review.html">Runway AI视频生成深度评测（2026）：Gen-4.5/Gen-4/Gen-3全面对比与真实定价分析</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>Runway AI视频生成能力深度评测（2026年更新），包含Gen-4.5/Gen-4/Gen-3全面对比，基于官网真实定价数据分析，与Pika和HeyGen的多维度对比</p>
-                <a href="/ai-tools-hub/posts/runway-gen3-ai-video-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="12">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/midjourney-vs-dalle-vs-sd.html">2026 AI 图像生成三巨头对决：Midjourney vs GPT-Image-2 vs Stable Diffusion 3.5/4</a></h3>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI视频工具" class="cat">AI视频工具</a>
+                <h3><a href="/posts/pika-2-0-review.html">Pika 2.0 深度评测：AI视频生成的新标杆<span class="new-badge">NEW</span></a></h3>
                 <div class="meta">2026-05-16 · 5 分钟</div>
                 <p></p>
-                <a href="/ai-tools-hub/posts/midjourney-vs-dalle-vs-sd.html" class="readmore">阅读全文 →</a>
+                <a href="/posts/pika-2-0-review.html" class="readmore">阅读全文 →</a>
             </div>
-            
-            <div class="post-card" data-index="13">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/midjourney-v6-ai-image-review.html">Midjourney V6 全面评测：AI图像生成的天花板？附Stable Diffusion 3与GPT-Image-2深度对比</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>Midjourney V6最新功能全覆盖评测，与Stable Diffusion 3和OpenAI GPT-Image-2的横评对比，含实拍效果、提示词工程、出图质量、性价比等多维度分析，文末附购买建议与避坑指南。</p>
-                <a href="/ai-tools-hub/posts/midjourney-v6-ai-image-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="14">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/chatgpt5-review.html">ChatGPT 深度评测（2026）：GPT-5.5 / GPT-5.4 全面能力与定价解析</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/chatgpt5-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="15">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/deepseek-v3-vs-gpt4o-chatgpt-comparison.html">DeepSeek V4 vs GPT-5.4 vs Claude：2026年AI模型对比评测</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>全面对比 DeepSeek V4 Flash/Pro、GPT-5.4/5.5、Claude Sonnet 4.6 在中文写作、代码生成、性价比上的真实表现</p>
-                <a href="/ai-tools-hub/posts/deepseek-v3-vs-gpt4o-chatgpt-comparison.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="16">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/copilot-vs-cursor-vs-codeium.html">GitHub Copilot vs Cursor vs Windsurf：2026年AI编程三强争霸</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>横向对比2026年三大AI编程工具——GitHub Copilot（$0-$39）、Cursor（$20-$200）、Windsurf（$0-$200）的定价、功能、Agent能力和适用场景，含真实数据来源。</p>
-                <a href="/ai-tools-hub/posts/copilot-vs-cursor-vs-codeium.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="17">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/cursor-ai-editor-review.html">Cursor AI 编辑器深度评测：2026年定价、功能与竞品对比</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>基于 cursor.com/pricing 最新数据的 Cursor AI 编辑器全面评测，涵盖定价方案、核心功能、优缺点分析，以及与 Copilot 和 Windsurf 的横向对比。</p>
-                <a href="/ai-tools-hub/posts/cursor-ai-editor-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="18">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/claude-sonnet-4-coding-review.html">Claude Sonnet 4 编程评测：定价、功能与实战分析</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>基于官方定价数据，全面评测 Claude Sonnet 4 的编程能力、Claude Code、定价方案及竞品对比</p>
-                <a href="/ai-tools-hub/posts/claude-sonnet-4-coding-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="19">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/github-copilot-2026-in-depth-review.html">GitHub Copilot 2026 深度评测：从免费版到 Enterprise，完整功能与定价指南</a></h3>
-                <div class="meta">2026-05-16 · 15分钟</div>
-                <p>基于官方文档和实际使用，全面评测 GitHub Copilot 2026年的功能矩阵、定价方案、Agent模式、Cloud Agent、Code Review等新特性，附真实使用场景测试。</p>
-                <a href="/ai-tools-hub/posts/github-copilot-2026-in-depth-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="20">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/canva-ai-2026-review.html">Canva AI 2026深度评测：设计小白也能做出专业级作品的秘密武器</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/canva-ai-2026-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="21">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/grammarly-vs-prowritingaid.html">Grammarly AI vs ProWritingAid 深度对比：英文写作辅助工具终极对决</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/grammarly-vs-prowritingaid.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="22">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/dalle3-review.html">DALL-E 3 深度评测：OpenAI 的 AI 图像生成旗舰是否依然能打？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/dalle3-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="23">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/stable-diffusion-3.5-workflow.html">Stable Diffusion 3.5 完整工作流指南：从入门到精通的实用教程</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/stable-diffusion-3.5-workflow.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="24">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/play-dot-ht-review-2025.html">Play.ht 2025深度评测：AI语音合成平台的全面进化</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/play-dot-ht-review-2025.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="25">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/ai-video-upscaling-tools-comparison.html">AI视频画质增强工具横评：Topaz Video AI vs Waifu2x vs DVDFab vs 其他方案</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/ai-video-upscaling-tools-comparison.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="26">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/comfyui-beginners-guide.html">ComfyUI 入门完全指南：从零开始的 Stable Diffusion 节点式工作流</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/comfyui-beginners-guide.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="27">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/synthesia-vs-heygen-vs-colossyan-2025.html">Synthesia vs HeyGen vs Colossyan 2025大对比：哪个AI视频创作平台更适合你？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/synthesia-vs-heygen-vs-colossyan-2025.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="28">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/otter-ai-vs-fireflies-comparison.html">Otter.ai vs Fireflies.ai：AI 会议笔记工具巅峰对决</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/otter-ai-vs-fireflies-comparison.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="29">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/murf-vs-elevenlabs-voiceover-comparison.html">Murf vs ElevenLabs 2025语音合成巅峰对决：AI配音工具深度横评</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/murf-vs-elevenlabs-voiceover-comparison.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="30">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/motion-ai-calendar-automation-test.html">Motion AI 日历自动化工具深度测试：智能时间管理的未来已来？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/motion-ai-calendar-automation-test.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="31">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/copyai-vs-writesonic.html">Copy.ai vs Writesonic 2026 横向对比：谁才是最佳 AI 写作助手？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/copyai-vs-writesonic.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="32">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/resemble-ai-voice-cloning-test.html">Resemble AI语音克隆深度测试：从声音复刻到实时合成</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/resemble-ai-voice-cloning-test.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="33">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/taskade-ai-project-management-review.html">Taskade AI 项目管理工具深度评测：AI 驱动的高效协作新范式</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/taskade-ai-project-management-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="34">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/obviously-ai-vs-obviously-comparison.html">Obviously AI vs Obviously：两大 AI 数据分析平台全方位对比评测</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/obviously-ai-vs-obviously-comparison.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="35">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/akkio-no-code-ml-review.html">Akkio 无代码机器学习平台评测：让每个人都能成为 AI 专家</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/akkio-no-code-ml-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="36">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/rows-com-ai-spreadsheet-review.html">Rows.com AI 电子表格评测：下一代智能表格工具的革命</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/rows-com-ai-spreadsheet-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="37">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/kaiber-ai-music-video-review.html">Kaiber AI音乐视频生成评测：让音乐可视化成为现实</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/kaiber-ai-music-video-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="38">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/jasper-ai-review.html">Jasper AI 2026 深度评测：企业级 AI 写作平台是否值得投入？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/jasper-ai-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="39">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/pandasai-tutorial-beginners.html">PandasAI 入门教程：用自然语言玩转 Python 数据分析</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/pandasai-tutorial-beginners.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="40">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/capcut-ai-video-editing-deep-dive.html">剪映CapCut AI视频编辑功能深度解析：从自动剪辑到智能特效</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/capcut-ai-video-editing-deep-dive.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="41">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/tableau-vs-power-bi-ai-comparison.html">Tableau vs Power BI：AI 功能全面对比，谁才是数据分析之王？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/tableau-vs-power-bi-ai-comparison.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="42">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/chatgpt-advanced-data-analysis-deep-dive.html">ChatGPT 高级数据分析功能深度解析：AI 数据分析的新纪元</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/chatgpt-advanced-data-analysis-deep-dive.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="43">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90" class="cat">AI数据分析</a>
-                <h3><a href="/ai-tools-hub/posts/julius-ai-data-analysis-review.html">Julius AI 数据分析工具深度评测：让数据说话的全能助手</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/julius-ai-data-analysis-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="44">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7" class="cat">AI视频工具</a>
-                <h3><a href="/ai-tools-hub/posts/heygen-digital-avatar-guide.html">HeyGen 数字人视频制作完全指南：从入门到精通</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/heygen-digital-avatar-guide.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="45">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/mem-ai-knowledge-management-review.html">Mem.ai 知识管理工具深度评测：AI 时代的第二大脑</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/mem-ai-knowledge-management-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="46">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/azure-speech-vs-aws-polly-enterprise.html">Azure Speech vs AWS Polly：企业级语音合成解决方案深度对比</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/azure-speech-vs-aws-polly-enterprise.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="47">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90" class="cat">AI图像生成</a>
-                <h3><a href="/ai-tools-hub/posts/leonardo-ai-game-assets.html">Leonardo AI 深度评测：游戏美术资产创作的 AI 利器</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/leonardo-ai-game-assets.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="48">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/ai-novel-writing-tools.html">2026 年 AI 小说写作工具全景评测：从创意构思到完稿的全流程指南</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p></p>
-                <a href="/ai-tools-hub/posts/ai-novel-writing-tools.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="49">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/vercel-ai-deploy-review.html">Vercel评测：为什么AI应用开发者都在用它？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>Vercel平台完整评测，涵盖部署流程、性能优化、Serverless Functions功能解析，以及为什么它成为AI应用开发者的首选部署平台。</p>
-                <a href="/ai-tools-hub/posts/vercel-ai-deploy-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="50">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/replit-agent-ai-coding-review.html">Replit Agent评测：自然语言从零构建Web应用</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>Replit Agent完整评测，用自然语言从0到1构建Web应用的全流程体验</p>
-                <a href="/ai-tools-hub/posts/replit-agent-ai-coding-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="51">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7" class="cat">AI生产力工具</a>
-                <h3><a href="/ai-tools-hub/posts/gamma-ai-presentation-review.html">Gamma.app评测：用AI一键生成PPT能让效率提升多少？</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>深度评测AI PPT制作工具Gamma.app，从生成速度、设计质量、功能完整度三个维度对比传统PPT制作流程，实测告诉你AI做PPT到底值不值。</p>
-                <a href="/ai-tools-hub/posts/gamma-ai-presentation-review.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="52">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B" class="cat">AI编程助手</a>
-                <h3><a href="/ai-tools-hub/posts/claude-sonnet-4-extended-coding.html">Claude Sonnet 4 编程实测：50个真实场景告诉你值不值</a></h3>
-                <div class="meta">2026-05-16 · 5 分钟</div>
-                <p>用50个真实编程任务全面测试Claude Sonnet 4的代码生成、Bug修复、架构设计能力，告诉你这款工具到底值不值得入手</p>
-                <a href="/ai-tools-hub/posts/claude-sonnet-4-extended-coding.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="53">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E8%AF%AD%E9%9F%B3%E5%B7%A5%E5%85%B7" class="cat">AI语音工具</a>
-                <h3><a href="/ai-tools-hub/posts/elevenlabs-vs-fish-audio.html">ElevenLabs vs Fish Audio：AI语音合成的新时代</a></h3>
-                <div class="meta">2026-05-16 · 8分钟</div>
-                <p>深度对比 ElevenLabs 和 Fish Audio 在语音自然度、情感表达、多语言支持和声音克隆四个维度的表现，通过真实测试数据告诉你哪个更适合你的场景。</p>
-                <a href="/ai-tools-hub/posts/elevenlabs-vs-fish-audio.html" class="readmore">阅读全文 →</a>
-            </div>
-            
-            <div class="post-card" data-index="54">
-                <a href="/ai-tools-hub/archive.html?cat=AI%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7" class="cat">AI写作工具</a>
-                <h3><a href="/ai-tools-hub/posts/claude-sonnet-4-review.html">Claude Sonnet 4 深度测评：编程与写作的双料冠军</a></h3>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI写作工具" class="cat">AI写作工具</a>
+                <h3><a href="/posts/claude-sonnet-4-review.html">Claude Sonnet 4 深度测评：编程与写作的双料冠军<span class="new-badge">NEW</span></a></h3>
                 <div class="meta">2026-05-16 · 10分钟</div>
                 <p>全面评测 Claude Sonnet 4 在编程辅助、长文写作和逻辑推理三个核心场景的实际表现，与 GPT-4o 和 Gemini 2.5 的详细对比。</p>
-                <a href="/ai-tools-hub/posts/claude-sonnet-4-review.html" class="readmore">阅读全文 →</a>
+                <a href="/posts/claude-sonnet-4-review.html" class="readmore">阅读全文 →</a>
             </div>
-            
+            <div class="post-card">
+                <a href="/archive.html?cat=AI生产力工具" class="cat">AI生产力工具</a>
+                <h3><a href="/posts/otter-ai-vs-fireflies-comparison.html">Otter.ai vs Fireflies.ai：AI 会议笔记工具巅峰对决<span class="new-badge">NEW</span></a></h3>
+                <div class="meta">2026-05-16 · 5 分钟</div>
+                <p></p>
+                <a href="/posts/otter-ai-vs-fireflies-comparison.html" class="readmore">阅读全文 →</a>
+            </div>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI图像生成" class="cat">AI图像生成</a>
+                <h3><a href="/posts/canva-ai-2026-review.html">Canva AI 2026深度评测：设计小白也能做出专业级作品的秘密武器<span class="new-badge">NEW</span></a></h3>
+                <div class="meta">2026-05-16 · 5 分钟</div>
+                <p></p>
+                <a href="/posts/canva-ai-2026-review.html" class="readmore">阅读全文 →</a>
+            </div>
+            <div class="post-card">
+                <a href="/archive.html?cat=AI数据分析" class="cat">AI数据分析</a>
+                <h3><a href="/posts/chatgpt-advanced-data-analysis-deep-dive.html">ChatGPT 高级数据分析功能深度解析：AI 数据分析的新纪元<span class="new-badge">NEW</span></a></h3>
+                <div class="meta">2026-05-16 · 5 分钟</div>
+                <p></p>
+                <a href="/posts/chatgpt-advanced-data-analysis-deep-dive.html" class="readmore">阅读全文 →</a>
+            </div>
         </div>
 
-        <div class="load-more" id="load-more-trigger">
-            <span class="spinner" id="load-spinner"></span>
-            <span id="load-status">加载更多文章...</span>
+        <div class="load-more">
+            <a href="archive.html" class="readmore" style="display: block; text-align: center; padding: 20px; font-size: 16px;">查看更多文章 →</a>
         </div>
         
         <footer>
-            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成 · 宇宙无边，AI 无界 🌌</p>
+            <p>© 2026 AI 工具智库 · 宇宙无边，AI 无界 🌌</p>
         </footer>
     </div>
-
-    <!-- 主题切换按钮 -->
+    
     <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
         <span id="theme-icon">☀️</span>
     </button>
-
+    
     <script>
-    // 主题切换功能
     (function() {
         var switcher = document.getElementById('theme-switcher');
         var icon = document.getElementById('theme-icon');
-        
-        function updateIcon(theme) {
-            icon.textContent = theme === 'light' ? '🌙' : '☀️';
-        }
-        
-        // 初始化图标
         var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-        updateIcon(currentTheme);
-        
+        icon.textContent = currentTheme === 'light' ? '🌙' : '☀️';
         switcher.addEventListener('click', function() {
             var isLight = document.documentElement.getAttribute('data-theme') === 'light';
             var newTheme = isLight ? 'dark' : 'light';
-            
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
+            icon.textContent = newTheme === 'light' ? '🌙' : '☀️';
         });
-    })();
-    </script>
-
-    <script>
-    (function() {
-        var PAGE_SIZE = 10;
-        var cards = document.querySelectorAll('#post-list .post-card');
-        var totalCards = cards.length;
-        var shown = Math.min(PAGE_SIZE, totalCards);
-        var trigger = document.getElementById('load-more-trigger');
-        var statusEl = document.getElementById('load-status');
-        var spinnerEl = document.getElementById('load-spinner');
-
-        // Hide all cards beyond first batch
-        for (var i = shown; i < totalCards; i++) {
-            cards[i].style.display = 'none';
-        }
-
-        // Show first visible count
-        var statusText = '已加载 ' + shown + ' / ' + totalCards + ' 篇';
-        statusEl.textContent = statusText;
-
-        if (shown >= totalCards) {
-            spinnerEl.style.display = 'none';
-            statusEl.textContent = '✨ 全部 ' + totalCards + ' 篇文章已加载完成';
-            return;
-        }
-
-        // IntersectionObserver for infinite scroll
-        var observer = new IntersectionObserver(function(entries) {
-            if (entries[0].isIntersecting && shown < totalCards) {
-                statusEl.textContent = '加载中...';
-                spinnerEl.style.display = '';
-
-                // Reveal next batch
-                var next = Math.min(shown + PAGE_SIZE, totalCards);
-                for (var i = shown; i < next; i++) {
-                    cards[i].style.display = '';
-                    // Fade-in effect
-                    cards[i].style.opacity = '0';
-                    cards[i].style.transform = 'translateY(10px)';
-                    requestAnimationFrame(function(el) {
-                        return function() {
-                            el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            el.style.opacity = '1';
-                            el.style.transform = 'translateY(0)';
-                        };
-                    }(cards[i]));
-                }
-                shown = next;
-
-                statusEl.textContent = '已加载 ' + shown + ' / ' + totalCards + ' 篇';
-
-                if (shown >= totalCards) {
-                    spinnerEl.style.display = 'none';
-                    statusEl.textContent = '✨ 全部 ' + totalCards + ' 篇文章已加载完成';
-                    observer.disconnect();
-                }
-            }
-        }, { rootMargin: '100px' });
-
-        observer.observe(trigger);
     })();
     </script>
 </body>
