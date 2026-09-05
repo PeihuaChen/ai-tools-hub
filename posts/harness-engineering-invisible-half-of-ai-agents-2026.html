@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harness 工程：当模型趋同，决定 AI Agent 成败的「看不见的一半」</title>
+    <meta name="description" content="同一套模型权重，换一个 Harness，基准分数能摆动 10-20 个百分点。当前沿模型逐渐趋同，真正决定 AI Agent 成败的是那一层包裹在模型外面、看不见的工程——Harness。本文拆解它的定义、架构、基准影响，以及 Anthropic、OpenAI、Stripe 的一线实践。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Harness 工程：当模型趋同，决定 AI Agent 成败的「看不见的一半」</h1>
+            <div class="post-meta">
+                <span class="cat">AI行业观察</span>
+                <span>2026-06-20 · 16 分钟</span>
+            </div>
+            <p>2026 年 6 月，一个被反复引用的数字开始让做 Agent 的团队睡不着觉：<strong>同一套模型权重，仅仅换一个外围工程，在 SWE-bench Verified、Terminal-Bench 这类基准上的分数能摆动 10 到 20 个百分点。</strong></p>
+<p>更极端的案例来自一份对 50 个编码 Agent 框架的横评：GPT-5.5 在 OpenAI 自家 Codex 的原生封装里跑功能测试得 61.5%，换到 Cursor 的封装里却拿到 87.2%——模型一个字节没变，差距却有 25 分。三个跑同样模型的框架，在 731 道题上的结果相差 17 道。</p>
+<p>如果模型是同一个，那这 25 分是谁挣来的？</p>
+<p>答案是一个 2026 年才真正进入主流视野的词：<strong>Harness</strong>——中文社区（如菜鸟教程）把它译作「驾驭工程」，也有人译作「挽具/支架」。它指的是一个 AI Agent 里，除了模型本体之外的所有东西。当前沿模型逐渐趋同、能力拉不开差距时，这层看不见的工程，正在成为决定产品体验、可靠性乃至项目生死的真正分水岭。有一个估算说，约 88% 的 AI Agent 项目最终没能上生产，多数不是因为模型不够强，而是因为 Harness 太脆弱。</p>
+<p>为什么是「驾驭」这个词？Harness 的本义是马具——缰绳、马鞍、嚼子，是一整套引导一匹强壮但不可预测的马的装备。驾驭工程的精髓，不是去削弱 AI 的能力，而是给它套上一副"黄金缰绳"，让它跑得又快又稳。本文后续会在「Harness」与「驾驭工程」之间交替使用，指的是同一件事。</p>
+<p>这篇文章想把这层"看不见的一半"讲清楚：它到底是什么、由什么组成、为什么能让分数摆动这么大，以及 Anthropic、OpenAI、Stripe 这些一线团队的真实做法。</p>
+<h2 id="agent-model-harness">一个公式：Agent = Model + Harness</h2>
+<p>业界现在有一个流传很广的共识公式，由 LangChain 概括得最干脆：<strong>如果你不是模型，那你就是 Harness。</strong></p>
+<p>用 Hugging Face 那篇术语表的说法：模型就是大语言模型，文本进、文本出（Claude、Qwen、GPT、Kimi、DeepSeek……）。它本身在两次调用之间没有记忆，也没有循环。模型可以"表达"出想调用某个工具的意图，但它需要一个 Harness 才能真正把工具执行起来。模型回答完一个 prompt 就停了，仅此而已。</p>
+<p>所以可以这样理解这个分工：</p>
+<ul>
+<li><strong>模型负责推理。</strong> 它是那团原始智能。</li>
+<li><strong>Harness 给推理一个落脚的地方。</strong> 让它能行动、能记住、能检查结果、能遵守规则。</li>
+</ul>
+<p>DataCamp 那篇解释文章给了一个很贴切的场景：让一个 Agent 去修一个失败的 Python 测试。没有 Harness 时，模型能写出一段"看起来像修复"的代码，但它读不到真实的测试文件，跑不了 pytest，看不到真正的报错，改不了出问题的函数，更没法确认修复后测试是否通过。而有了 Harness，这整个循环就变成 Agent 自己几分钟就能干完的活，每一步还都被记录在人类可以检查的地方。</p>
+<p>这个公式是一个心智模型，不是行业标准。直到今天，不同厂商嘴里的 "harness"、"framework"、"scaffold"（脚手架）有时指的还是差不多的东西。但它足够好用，足够帮我们把注意力从"挑哪个模型"挪到"建什么样的外围系统"。</p>
+<h2 id="_1">这个词是怎么火起来的</h2>
+<p>"Harness 工程"这个说法，是 HashiCorp 联合创始人 Mitchell Hashimoto 在 2026 年 2 月的一篇博文里带火的。他的观点朴素得近乎一句口号：<strong>每当 Agent 犯一次错，就去改造环境，让这个特定的错误再也不可能发生。</strong></p>
+<p>同一周，OpenAI 把这个词用在了自家 Codex 的工作上，LangChain 也跟着用了同样的表述。一个词，几乎在一夜之间从小圈子的黑话变成了行业通用语。</p>
+<p>但这背后并不是凭空造词。开发者们围着模型搭 wrapper、scaffold、执行环境，已经搭了好几年了。Harness 这个词真正的价值，是给一件"大家都在做、却没名字"的事，提供了一个统一的叫法，从而让它可以被当作一门独立的工程学科来讨论。</p>
+<h2 id="harness">Harness 由什么组成</h2>
+<p>不同产品的 Harness 配方各不相同，但大多数都共享几块基础积木。把它当成一份清单，而不是严格的产品规格——小 Agent 可能只需要其中几块，生产级 Agent 则几乎全都要。</p>
+<h3 id="_2">系统提示与行为规则</h3>
+<p>Harness 通常掌管着模型的基线指令：系统提示、项目规则、编码规范、角色约束、安全策略。在 LangChain 的 Deep Agents 里，一个 <code>AGENTS.md</code> 文件就可以在任务开始前定好"游戏规则"。</p>
+<p>2026 年的一些 Harness 还用上了"渐进式披露"：启动时不把所有工具说明一股脑塞进上下文，而是先给一个能力摘要，等模型真正要用某个工具时，再加载它的完整说明。</p>
+<h3 id="agent">工具：Agent 与世界交互的方式</h3>
+<p>工具让 Agent 能做文本生成之外的事：网页搜索、文件读写、数据库查询、API 调用、浏览器操作、代码执行、终端命令。Harness 控制着哪些工具可用、模型什么时候被允许调用、结果如何格式化后塞回上下文。</p>
+<p>2026 年，MCP（Model Context Protocol）已经成了这件事的标准接口。Anthropic Agent SDK、LangChain Deep Agents、OpenAI Agents SDK 都用 MCP 来连接外部工具服务器，省去为每个集成写定制代码的麻烦。关于 MCP 与另一套协议的对比，可以看我们之前的 <a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 协议深度对比</a>。</p>
+<h3 id="_3">记忆与状态</h3>
+<p>Agent 需要知道"刚才发生了什么"。Harness 可以把短期状态留在当前对话里，把长期状态写进文件、日志、摘要或保存的偏好里。一些 Harness 还会把过长的历史"压缩"成更短的摘要，这样模型不必把每个细节都背在上下文里。</p>
+<h3 id="agent_1">执行环境：Agent 干活的地方</h3>
+<p>很多有用的 Agent 都需要一个真正能干活的场所：文件系统、容器、沙箱化的终端、浏览器实例或云运行时。没有 Harness 管理的执行环境，工具调用就无处落地。</p>
+<p>如今很多 Harness 用的是隔离的沙箱容器——绑定到单次会话的短生命周期环境，任务结束就清理掉，这样一个任务里的文件写入、装的包、发的网络请求，就不会渗透到另一个任务里。</p>
+<h3 id="_4">编排与规划</h3>
+<p>有些任务装不进一条笔直的步骤线。Harness 可以提供一个规划工具，把目标拆成子任务并跟踪状态；也可以孵化出子 Agent（subagent），让它们各自处理一块，只把摘要交回主 Agent。LangChain Deep Agents 就把计划步骤记在文件系统的一个文件里，随着任务推进把每一步从"待办"更新成"完成"。</p>
+<h3 id="_5">护栏与权限</h3>
+<p>Harness 是放规则的地方：人工审批、被禁止的工具调用、基于角色的权限、输出检查。更安全的模式是把输入、输出、工具权限分开检查。</p>
+<h3 id="_6">可观测性与追踪</h3>
+<p>当一个五十步的 Agent 任务在第三十七步挂掉时，一条 trace 能告诉你到底发生了什么。追踪会记录模型调用、工具调用、交接、错误、延迟和成本。OpenTelemetry 已经成了以厂商中立格式导出 trace 的标准，这样你就不会被锁死在某一个可观测性工具上。这一层的更多门道，可以参考 <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：LLM 与 Agent 可观测性实战指南</a>。</p>
+<h2 id="harnessframeworkruntime">Harness、Framework、Runtime 到底有什么区别</h2>
+<p>这是个常被问到的问题，答案比多数科普文说得要乱。这套分类有用，但并不固定。一个常见的三层栈是这样的：</p>
+<ul>
+<li><strong>Runtime（运行时）</strong>：让 Agent 能长期可靠运行的底层，处理持久化执行、状态持久化、重试、人在回路、流式输出。代表是 LangGraph、Temporal、Inngest。</li>
+<li><strong>Framework（框架）</strong>：给开发者搭 Agent 的积木——模型调用、工具定义、记忆模式、Agent 循环结构。代表是早期 LangChain、CrewAI、Google ADK。框架告诉你怎么搭一个 Agent，但不总能告诉你怎么在生产里可靠地跑它。</li>
+<li><strong>Harness（挽具）</strong>：比框架更高层。框架给你零件，Harness 通常到手时就已经替你做好了更多决定——工具、规划、文件系统访问、上下文管理。Claude Code、Codex 就是这一层。</li>
+</ul>
+<p>LangChain 的 Harrison Chase 打过一个比方很形象：如果 Node.js 是运行时、Express 是框架，那 Harness 就像 Next.js。</p>
+<h2 id="harness-20">为什么换个 Harness，分数能差 20 分</h2>
+<p>回到开头那个让人睡不着的数字。要理解为什么外围工程能撬动这么大的分数差，得先看清楚那个被反复提及的"循环"到底有多薄，又有多厚。</p>
+<p>从一个 substack 作者的拆解看，核心循环其实小得惊人：模型暂停 → Harness 跑点东西 → 结果加进上下文 → 模型重启，每个工具调用都走这同一个循环。这套核心逻辑大约就是 60 到 75 行 Python。adarsha.dev 的说法更直接——那个循环"也许只占整个系统的 5%"。</p>
+<p>那另外 95% 的复杂度在哪？全在调优里：模型拿到哪些工具、这些工具怎么被描述、系统提示说了什么、上下文怎么管理、失败了怎么自我修正。这些都不改模型一个参数，却实实在在地决定了模型能发挥出几成功力。</p>
+<p>多家测评机构（digitalapplied、morphllm 等）反复确认了同一个现象：<strong>Harness 差异会在相同模型权重上造成 10-20 个百分点的方差。</strong> 这也是为什么 2026 年的基准世界信噪比格外糟糕——SWE-bench Verified 上 Claude Fable 5 一度冲到 95.0%，但 100 个榜单条目里有 99 个是厂商自报的，同一家族的模型在标准化 Harness 下分数会低得多。卖模型的那个数字，和能预测你实际结果的那个数字，往往不是同一个数字。</p>
+<p>LangChain 自己也报告过：给 Deep Agents 加上针对特定模型的 Harness profile 后，在 tau2-bench 的一个子集上涨了 10-20 分。模型没变，变的是外围的提示、工具和中间件——而调这个 profile 本身就是 Harness 工程。</p>
+<p>结论很冷峻：当你在选型时只盯着模型榜单，你可能正在用错误的指标做决策。</p>
+<h2 id="harness_1">Harness 工程实践：控制论视角</h2>
+<p>那么"Harness 工程"具体怎么做？Thoughtworks 的 Birgitta Böckeler 在 Martin Fowler 网站上给出的心智模型，是目前最系统的一套框架。她把 Harness 看成一个控制论意义上的"调节器"（governor），由两类控制组成：</p>
+<ul>
+<li><strong>Guides（前馈控制）</strong>：预判 Agent 的行为，在它动手之前就引导它。Guides 提升 Agent 第一次就做对的概率。例如 <code>AGENTS.md</code>、Skills、参考文档、代码迁移工具（codemods）、LSP 语言服务。</li>
+<li><strong>Sensors（反馈控制）</strong>：在 Agent 动手之后观察，帮它自我修正。当 Sensor 产出的信号是为"给 LLM 看"而优化的——比如一条自带修复指令的定制 linter 报错——它会格外强大，相当于一种善意的"提示注入"。</li>
+</ul>
+<p>她特别强调：只有前馈、没有反馈，你得到的是一个反复犯同一个错的 Agent；只有反馈、没有前馈，你得到的是一个编码了规则却永远不知道规则有没有生效的 Agent。两者必须配对。</p>
+<p>每一类控制又分两种执行方式：</p>
+<ul>
+<li><strong>Computational（计算型）</strong>：确定性、快、便宜，由 CPU 跑。测试、linter、类型检查、结构分析。毫秒到秒级出结果，可靠。</li>
+<li><strong>Inferential（推断型）</strong>：语义分析、AI 代码评审、"LLM 当裁判"。通常跑在 GPU/NPU 上，更慢更贵，结果更不确定，但能提供丰富的语义判断。</li>
+</ul>
+<p>这套框架还引出一个很实用的原则——<strong>Keep quality left（质量左移）</strong>：把检查尽量往交付链路的左侧（早期）放，因为越早发现问题越便宜。快而便宜的控制（linter、快测试、基础评审 Agent）在提交前甚至提交之前就跑；昂贵的控制（变异测试、需要全局视野的大范围评审）放到集成后的流水线里。</p>
+<p>Böckeler 还提出一个值得记住的概念——<strong>Harnessability（可挽具性）</strong>：不是每个代码库都同样好被"挽具化"。强类型语言天然自带类型检查这个 Sensor；清晰的模块边界让架构约束规则成为可能；像 Spring 这样的框架把细节抽象掉，隐式提高了 Agent 的成功率。残酷的地方在于：遗留系统、技术债重的代码库最需要 Harness，却也最难给它建 Harness。</p>
+<h2 id="_7">一线团队怎么做：四份实战样本</h2>
+<p>理论之外，2025 年底到 2026 年春，至少有四个团队公开了自己内部 Harness 的细节。有意思的是，它们用的词都不一样：Anthropic 说"初始化 Agent"，OpenAI 说"Harness 工程"，LangChain 说"Deep Agents"，Stripe 说"minions"。但内核高度一致。</p>
+<h3 id="openai">OpenAI：零手写代码的极限实验</h3>
+<p>OpenAI 的实践最激进。过去五个月，他们团队做了一个实验：构建并上线一个内部 Beta 软件产品，<strong>手写代码 0 行</strong>。从应用逻辑、测试、CI 配置、文档、可观测性到内部工具，每一行代码都由 Codex 写成。</p>
+<p>第一个提交落在 2025 年 8 月底的一个空仓库里。连那个指导 Agent 如何在仓库里工作的初始 <code>AGENTS.md</code>，都是 Codex 自己写的。五个月后，这个仓库长到了百万行量级的代码，约 1500 个 PR 被合并，而驱动这一切的只有 3 名工程师。他们估算，这比纯手写大约快了 10 倍。</p>
+<p>他们的核心转变是：工程师的主要工作不再是写代码，而是<strong>设计环境、明确意图、构建反馈循环</strong>。更多的决策被编码成可强制执行的规则——仓库文档、lint 规则、契约测试、防止 Agent 漂移的脚手架。他们还有一个反复运行的"垃圾回收"机制，扫描架构漂移并让 Agent 提出修复建议。他们最难的挑战，已经从"写代码"变成了"设计环境、反馈循环和控制系统"。</p>
+<h3 id="anthropic">Anthropic：把"大脑"和"双手"解耦</h3>
+<p>Anthropic 在长任务 Agent 上的实践，核心是几个反复出现的模式：</p>
+<ul>
+<li><strong>初始化 Agent + 编码 Agent 分工</strong>：用一个初始化 Agent 把产品规格拆解成任务清单，再让编码 Agent 一次只实现一个特性，完成后把工件（artifact）交接出去，以便跨会话传递上下文。</li>
+<li><strong>上下文压缩（compaction）</strong>：把上下文窗口的内容蒸馏成一份高保真摘要，让 Agent 在对话变长时仍能继续工作而性能几乎不掉。配合"工具结果清理"来对付工具调用本身带来的上下文膨胀。</li>
+<li><strong>子 Agent 隔离</strong>：主 Agent 把支线任务派给隔离的工作者，每个工作者有自己全新的上下文，只把摘要收集回主对话。</li>
+<li><strong>Skills</strong>：把可复用的工作流打包成 Markdown 文件，Agent 按需调用。</li>
+</ul>
+<p>Anthropic 还提出一个有远见的观点：Harness 会编码一些"随着模型变强就会过期"的假设。所以他们的 Managed Agents 服务刻意围绕"即使 Harness 变了也保持稳定"的接口来构建——也就是把"大脑"（模型）和"双手"（Harness）解耦。</p>
+<h3 id="stripe">Stripe：把反馈尽量左移</h3>
+<p>Stripe 的 "minions"（一次性、端到端的编码 Agent）实践里，最被强调的也是"把反馈左移"：用 pre-push 钩子，根据启发式规则只跑相关的 linter，把 Sensor 直接嵌进 Agent 的工作流。他们用"蓝图"（blueprints）来组织这些反馈传感器。</p>
+<h3 id="_8">共同的方法论</h3>
+<p>把四家的做法抽象一下，会发现几条收敛的最佳实践：</p>
+<ul>
+<li><strong>把工作拆给专门的 Agent</strong>，而不是把一个 Agent 喂得过饱。</li>
+<li><strong>把隐性知识显式化</strong>为可强制执行的规则：文档、lint、契约测试、脚手架。</li>
+<li><strong>持续对抗熵增</strong>：长任务里 Agent 会漂移、会累积混乱，需要结构化护栏和定期"清扫"。</li>
+<li><strong>让 Sensor 的输出为 LLM 优化</strong>：报错信息里直接带上"该怎么自我修正"的指令。</li>
+</ul>
+<p>这些实践和企业落地 Agent 的整体方法论是相通的，可以结合 <a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署实战指南</a> 一起看。</p>
+<h2 id="_9">落地框架：驾驭工程的四大护栏</h2>
+<p>前面讲的是理论与样本，这一节把它收成一套可以照着搭的落地框架。综合 OpenAI、Anthropic、LangChain 和 Martin Fowler 的实践，一套完整的 Harness 可以归纳为四根「护栏」。继续用马具的隐喻：它们合起来，就是那副让 AI 跑得又快又稳的"黄金缰绳"。</p>
+<h3 id="_10">护栏一：上下文工程——给新员工的工作手册</h3>
+<p><code>AGENTS.md</code> 是 AI 进入代码仓库时看到的第一份指南，相当于发给新员工的工作手册。但它不该是一本静态的千页说明书——上下文是稀缺资源，过多的指导反而会挤占任务、代码和相关文档的空间，最后沦为一座"陈旧规则的坟场"。</p>
+<p>更好的做法是：提供一个稳定、小巧的入口点，再教 Agent 根据当前任务按需检索、拉取更多上下文。一个值得借鉴的细节是：让 <code>AGENTS.md</code> 里的每一行都对应一个历史上的 Agent 失败案例——文档因此变成一个活的反馈循环，而不是一份静态制品。关于这一层的系统方法，可以参考 <a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent：ChatGPT「聊天已死」范式转移</a> 里关于上下文工程的讨论。</p>
+<h3 id="_11">护栏二：架构约束——缰绳本身</h3>
+<p>OpenAI 团队建立了严格的层级依赖模型，大致是 <code>Types → Config → Repo → Service → Runtime → UI</code> 这样自底向上的单向依赖，下层不能反向依赖上层。所有架构规则被编码成自定义 Linter 规则，一旦违反，CI 直接阻止合并——不管代码是人写的还是 AI 写的。</p>
+<p>这里有个呼应前文 Böckeler 观点的关键细节：Linter 的错误信息本身就是上下文工程。它不只是说"你违反了规则 X"，而是顺带解释这条规则为什么存在、正确做法是什么。Agent 读到这样的报错就能自我理解并修正，不需要人介入——这正是"为 LLM 优化的 Sensor 信号"在工程上的具体长相。</p>
+<h3 id="_12">护栏三：反馈循环——智能体审智能体</h3>
+<p>传统开发里代码审查（Code Review）由人类工程师做。在驾驭工程里，这件事很大程度上变成了"智能体审智能体"：一个 Agent 在本地审核自身的更改、请求额外审查，循环往复直到通过。</p>
+<p>反馈循环里的钩子可以跑预定义的测试套件，失败时带着错误信息回灌给模型；也可以让模型独立评估自己的代码。这里有个精妙的反作弊机制：如果 AI 写的测试用例居然让一段带 Bug 的代码"通过"了，Harness 就会判定这些测试无效，强迫模型重新思考测试边界——这恰好对应了 Böckeler 说的"不能把太多信任押在 AI 自己写的测试上"这个尚未解决的难题。</p>
+<h3 id="_13">护栏四：熵管理——定期垃圾回收</h3>
+<p>软件系统会随时间逐渐混乱（熵增），技术债务会累积。OpenAI 采用"持续小额偿还"的策略，而不是等问题积重难返时集中处理——他们把这个机制形象地叫做"垃圾回收"，并把技术债务比作高息贷款。</p>
+<p>具体措施包括：定期跑后台 Agent 任务扫描偏差、更新质量等级、发起针对性的重构 PR；甚至有专门的"文档园丁"（Doc-gardening）Agent，在后台自动扫描文档与代码的不一致，发现过时内容就提交 PR 修复——Agent 为 Agent 维护文档。这与 Fowler 文中提到的"垃圾回收"和"janitor army（清洁工大军）"是同一个思路。</p>
+<p>把四根护栏对齐到它们各自要解决的失败模式，就是下面这张表：</p>
+<table>
+<thead>
+<tr>
+<th>护栏</th>
+<th>要解决的问题</th>
+<th>典型手段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>上下文工程</td>
+<td>Agent 不知道该看什么、怎么找</td>
+<td>AGENTS.md 活文档、按需检索</td>
+</tr>
+<tr>
+<td>架构约束</td>
+<td>Agent 复制并放大坏模式</td>
+<td>分层依赖、自定义 Linter、CI 强制阻断</td>
+</tr>
+<tr>
+<td>反馈循环</td>
+<td>Agent 不知道自己做错了</td>
+<td>Agent 审 Agent、自动测试套件</td>
+</tr>
+<tr>
+<td>熵管理</td>
+<td>技术债务与文档腐烂</td>
+<td>文档园丁 Agent、持续垃圾回收</td>
+</tr>
+</tbody>
+</table>
+<h2 id="harness_2">你到底需不需要一个 Harness</h2>
+<p>不是所有任务都值得套一层 Harness。一个朴素的判断标准：如果这件事一次模型调用就能搞定，或者用一个带几行条件判断的小确定性脚本就能解决，那 Harness 大概率是过度设计。</p>
+<p>但只要你的系统满足下面任意一条，你大概就需要 Harness：</p>
+<ul>
+<li>它需要调用外部工具</li>
+<li>它需要跨会话记住进度</li>
+<li>它需要在真实环境里执行代码</li>
+<li>它要协调不止一个 Agent</li>
+<li>它需要在部分失败后不丢工作地恢复</li>
+<li>它需要人工审批</li>
+</ul>
+<p>实践中有两种相反的错误。一种是太早上 Harness：给一个本质上是一次性文本生成的任务，配上全套追踪和沙箱。另一种更痛——把模型裸着上线，然后在第二个失败的测试、第三个工具调用、第五次重启时，才发现根本没有可以兜底的基础设施。后者是更常见、也更致命的那一种。</p>
+<h2 id="_14">人在其中扮演什么角色</h2>
+<p>值得泼一盆冷静的水：Harness 不是为了把人彻底排除出去。</p>
+<p>Böckeler 说得很到位——作为人类开发者，我们给每个代码库都带来一层隐性的 Harness：我们吸收过约定与最佳实践，我们感受过复杂度带来的认知痛苦，我们知道提交上写着自己的名字。我们还携带着组织层面的对齐——知道团队想达成什么、哪些技术债是出于业务原因被容忍的、在这个具体语境里"好"长什么样。</p>
+<p>而编码 Agent 这些全都没有：没有社会问责感，看到 300 行的函数不会"审美不适"，没有"我们这儿不这么干"的直觉，也没有组织记忆。它分不清哪条约定是承重的、哪条只是习惯。</p>
+<p>所以 Harness 是在尝试把"人类开发者经验带来的东西"外化、显式化——但它只能走到一定程度。构建一套连贯的 Guides + Sensors + 自我修正循环是昂贵的，因此必须带着明确目标去取舍：<strong>好的 Harness 不该以彻底消除人的输入为目标，而该把人的输入引导到它最重要的地方去。</strong></p>
+<p>这也呼应了关于 Agent 治理的一个更大命题——自主性越高，隐性成本和治理负担越重，详见 <a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性的隐性成本</a>。</p>
+<h2 id="_15">小结</h2>
+<p>把这篇的要点收一收：</p>
+<ul>
+<li><strong>Agent = Model + Harness。</strong> Harness（驾驭工程）是一个 Agent 里除模型之外的所有东西：工具、记忆、执行环境、护栏、可观测性。</li>
+<li><strong>模型趋同，Harness 拉开差距。</strong> 同样的权重，换个 Harness，基准分能摆动 10-20 个百分点，极端案例差出 25 分。约 88% 的 Agent 项目死在上线前，多因 Harness 太脆弱。</li>
+<li><strong>核心循环只占 5%，95% 在调优。</strong> 那个"模型暂停 → 跑工具 → 结果回填 → 模型重启"的循环只有 60-75 行，真正的工程量在工具描述、上下文管理、自我修正。</li>
+<li><strong>方法论是控制论的。</strong> Guides（前馈）+ Sensors（反馈），Computational 与 Inferential 配对，质量左移，关注代码库的"可挽具性"。可落地为四根护栏：上下文工程、架构约束、反馈循环、熵管理。</li>
+<li><strong>一线团队殊途同归。</strong> OpenAI 零手写代码、Anthropic 解耦大脑与双手、Stripe 把反馈左移——都在把隐性知识显式化为可强制执行的规则，并持续对抗熵增。</li>
+<li><strong>Harness 不取代人。</strong> 它的目标是把人的注意力引导到最该用的地方。</li>
+</ul>
+<p>模型层的竞争还会继续，但对于真正想把 Agent 送进生产的团队来说，2026 年最该投入的工程，恰恰是那层最容易被忽视的、看不见的一半。</p>
+<h2 id="_16">免责声明</h2>
+<p>本文内容基于公开资料整理，旨在分享 Harness 工程的概念、架构与行业实践，不构成任何投资或技术选型建议。文中涉及的基准分数、产品特性和版本号均来自公开来源，可能随时间变化，请以各厂商官方信息为准。文中提及的具体模型版本号、得分等数据来自第三方测评与厂商博客，存在自报与口径差异，引用时已做相应说明。内容已为符合授权要求进行改写。</p>
+<h2 id="_17">参考来源</h2>
+<ul>
+<li><a href="https://www.datacamp.com/blog/agent-harness">What Is an Agent Harness? — DataCamp</a></li>
+<li><a href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html">Harness engineering for coding agent users — Martin Fowler / Birgitta Böckeler</a></li>
+<li><a href="https://openai.com/index/harness-engineering">Harness engineering: leveraging Codex in an agent-first world — OpenAI</a></li>
+<li><a href="https://anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents — Anthropic</a></li>
+<li><a href="https://www.langchain.com/blog/the-anatomy-of-an-agent-harness">The Anatomy of an Agent Harness — LangChain</a></li>
+<li><a href="https://o-mega.ai/articles/top-50-ai-coding-agent-frameworks-benchmarked-may-2026">Top 50 AI Coding Agent Frameworks Benchmarked — o-mega.ai</a></li>
+<li><a href="https://www.adarsha.dev/blog/inside-coding-agent-harness">It's Not Just a Loop: Inside a Coding Agent Harness — adarsha.dev</a></li>
+<li><a href="https://www.digitalapplied.com/blog/swe-bench-verified-june-2026-benchmark-vs-scaffolding-analysis">SWE-bench Verified June 2026: Benchmark vs Scaffolding — digitalapplied.com</a></li>
+<li><a href="https://learnagentic.substack.com/p/inside-the-agent-harnesses-of-anthropic">Inside the Agent Harnesses of Anthropic, OpenAI, LangChain, and Stripe — learnagentic</a></li>
+<li><a href="https://pinggy.io/blog/best_ai_harnesses_to_supercharge_llm_models/">The Layer That Makes Your LLM Applications Actually Work — pinggy.io</a></li>
+<li><a href="https://www.runoob.com/ai-agent/harness-engineering.html">Harness Engineering（驾驭工程）— 菜鸟教程</a></li>
+</ul>
+<h2 id="_18">延伸阅读</h2>
+<ul>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 协议深度对比</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署实战指南</a></li>
+<li><a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：LLM 与 Agent 可观测性实战指南</a></li>
+<li><a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性的隐性成本</a></li>
+<li><a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent：ChatGPT「聊天已死」范式转移</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(B组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6p6mzd" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝百亿补贴专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E7%BC%96%E7%A8%8B&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=harness-engineering-invisible-half-of-ai-agents-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=harness-engineering-invisible-half-of-ai-agents-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

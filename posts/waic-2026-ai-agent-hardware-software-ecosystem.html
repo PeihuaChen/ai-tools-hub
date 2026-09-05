@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 智能体应用元年：一份WAIC 2026中智能体软硬件生态与落地场景的产业地图</title>
+    <meta name="description" content="以 WAIC 2026 为窗口，全面梳理 AI 智能体从算力底座、端侧硬件到模型平台、落地场景的产业全栈生态，附 10 大镇馆之宝解读及关键数据。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">2026 智能体应用元年：一份WAIC 2026中智能体软硬件生态与落地场景的产业地图</h1>
+            <div class="post-meta">
+                <span class="cat">AI 行业观察</span>
+                <span>2026-07-17 · 15 分钟</span>
+            </div>
+            <h2 id="_1">序言：十万平方米里的"智能体时刻"</h2>
+<p>7 月 17 日，第九届世界人工智能大会（WAIC 2026）在上海"三地四馆"开幕——这一届的数字格外值得划线：<strong>1,100+ 企业、3,000+ 展品、300+ 全球首发、10 万平方米展区面积（史上首次突破六位数）</strong>。同期，29 国在上海签约成立<strong>世界人工智能合作组织（WAICO）</strong>，总部设在上海，旨在推动 AI 领域国际合作与治理。</p>
+<p>对产业参与者而言，更值得关注的是另一层叙事：<strong>2026 年被业界定调为"智能体应用元年"</strong>。IDC 预测，2025–2030 年全球 AI Agent 市场将以 139% 的年复合增长率扩张。在这一共识下，WAIC 2026 以"智能体 / 世界模型 / 具身智能 / AI 算力基建"四大板块为主线，呈现了一幅从芯片到应用端的<strong>全栈产业地图</strong>。</p>
+<p>本文将沿着这条产业链自底向上展开，逐层解读。</p>
+<p><img alt="AI 智能体产业链全栈架构（自底向上）" src="../images/waic-2026-agent-stack-diagram.svg" /></p>
+<p><em>▲ 图：AI 智能体产业链五层架构——从算力基建到行业落地，WAIC 2026 展出生态映射</em></p>
+<h2 id="_2">第一层：算力底座——超节点竞赛全面爆发</h2>
+<h3 id="atlas-950-superpod8192">华为 Atlas 950 SuperPod：8,192 卡超级节点</h3>
+<p>WAIC 2026 的"镇馆之宝"之一，是华为的 Atlas 950 超级计算节点。它的核心参数包括：</p>
+<ul>
+<li>最小配置 64 张昇腾 NPU / 柜</li>
+<li>可扩展至 <strong>8,192 张 NPU</strong>，作为单一逻辑集群运行</li>
+<li>液冷散热系统，面向万亿参数模型训推</li>
+<li>已适配制造、金融、医疗等 <strong>11 大行业</strong></li>
+<li>SuperCluster 规模报道超 50 万卡</li>
+</ul>
+<p>此外，华为还展出了面向 Agent 推理场景的 <strong>Atlas 850E 风冷超节点</strong>，采用升级 VCE 散热技术，专为低延迟 Agentic 推理设计——从训练大模型到推理智能体，华为的节点体系正在分层覆盖。</p>
+<p>展台工作人员表示"需求远超供给"，反映出各行业对国产高端算力的旺盛需求。</p>
+<h3 id="800010">曙光 8000「登峰」：10 万卡全国产超级集群</h3>
+<p>中科曙光推出的 Sugon 8000"登峰"集群采用"超智融合"路线——即不按传统方式将科学计算、大模型训练、AI 推理和工业仿真划分到不同集群，而是<strong>原生融合</strong>。该系统已接入国家超算互联网，面向高校、企业和个人用户提供算力服务。</p>
+<h3 id="_3">更多玩家：燧原、壁仞、沐曦</h3>
+<ul>
+<li><strong>燧原科技 + 中兴</strong>：发布异构超节点架构，允许不同类型 AI 芯片在同一集群中协作，降低适配成本。燧原于 7 月 7 日过会科创板 IPO，算是大会前的"献礼"</li>
+<li><strong>壁仞、沐曦</strong>：也各自发布新超节点集群，国产芯片在超节点层面形成"华为 / 曙光 / 燧原 / 壁仞 / 沐曦"五路并进的格局</li>
+</ul>
+<p>超节点之争的底层逻辑是：<strong>通过高带宽互联和集群规模扩展，在系统层面实现更强的整体算力</strong>。这是国产 AI 算力基建走向规模化的核心路径。</p>
+<h2 id="agent">第二层：端侧智能体硬件——Agent 手机与智能座舱</h2>
+<h3 id="stepx-neo-l3-ai">阶跃星辰 STEPX Neo：全球首款 L3 级 AI 智能体手机</h3>
+<p>上海独角兽阶跃星辰（StepFun）在 WAIC 首发了 <strong>STEPX Neo</strong> —— 全球首款通过中国 <strong>L3 级 AI 终端智能认证</strong>的手机。L3 认证要求设备能够：</p>
+<ul>
+<li>自主理解用户复杂意图</li>
+<li>将任务拆解为子步骤</li>
+<li>跨应用协调执行动作</li>
+</ul>
+<p>技术上，STEPX Neo 搭载了阶跃自研的 <strong>Step AOS</strong>（Agent 操作系统）和 <strong>Amoo 智能体</strong>，支持离线运行。官方演示的典型场景是：用户说一句"帮我规划一趟京都旅行"，Agent 会自动搜航班、推荐住宿、完成预订、整理行程，全程无需手动切换 App。</p>
+<p>此外，阶跃还发布了面向<strong>汽车智能座舱</strong>的升级版超级 Agent——将 Agent 从手机延伸到车机，是 StepFun "Agent OS everywhere" 策略的一环。</p>
+<p>相关阅读：<a href="../posts/ai-native-os-step-aos-harmonyos-gemini-2026.html">从系统级 Agent 到 Step AOS：AI 原生操作系统的演进路线</a></p>
+<h3 id="agent_1">中兴努比亚：另一条 Agent 手机路线</h3>
+<p>努比亚以"全球首款 AI 智能体手机"的名义参展 WAIC 2026，搭载字节豆包手机助手。与 StepFun 自研全栈（模型 + OS + 硬件）不同，努比亚走的是<strong>"终端品牌 + 外部大模型"</strong>的组合路线。</p>
+<p>Agent 手机赛道在 WAIC 上正式分化为两条路径：一方全栈自研，一方生态整合。</p>
+<h3 id="ai">阿里 + 荣耀：AI 设备操作系统联盟</h3>
+<p>除了手机厂商单兵突破，阿里巴巴与荣耀宣布深化合作，联手打造面向 AI 设备的操作系统层。这意味着 Agent 能力不只是一个 App，而要<strong>下沉到 OS 层</strong>，与系统调度、传感器、跨 App 数据流深度打通。</p>
+<h2 id="200">第三层：具身智能——200 家人形厂同台竞技</h2>
+<p>WAIC 2026 在 H3 馆设置了机器人专区，约 <strong>200 台机器人</strong>同场展出，覆盖双足人形、轮式协作、灵巧手等多种形态。大会组委会还搭建了一条<strong>人形机器人整车产线工作坊</strong>，5 大工序（电池模组装配 → 螺钉紧固 → 电力接驳 → 内饰音响 → 灯组测试）全部由具身智能机器人实时完成。</p>
+<h3 id="agilink-omnihand-3-ultra-m">傲意 AGILINK OmniHand 3 Ultra-M</h3>
+<ul>
+<li>仿人手尺寸，<strong>20 自由度</strong></li>
+<li>五指指尖均集成视觉 + 触觉传感器</li>
+<li>掌心分布式三维触觉感知</li>
+<li>现场展示双手折气球狗——全球唯一公开演示</li>
+</ul>
+<h3 id="genie-g2-max">智元机器人 + 京东物流 Genie G2 Max</h3>
+<p>重载具身智能机器人，核心参数：</p>
+<ul>
+<li>单臂 18kg / 双臂 38kg / 峰值 50kg 负载</li>
+<li>亚毫米级精度操作</li>
+<li>自主充电与换电，7×24 无间断运行</li>
+<li>已获安全认证</li>
+</ul>
+<h3 id="sensemart-go">商汤 SenseMart Go 无人店</h3>
+<p>将人形机器人直接投入零售场景：拣货、上架、盘点、异常处理。访客可扫码体验完整购物闭环——机器人在你面前取货、递到手上。</p>
+<h3 id="brainco">强脑科技 BrainCo：脑控机器人训练平台</h3>
+<p>全球首个一体化、图形化脑机接口机器人开发平台。无 BCI 背景的开发者 10 分钟即可让机器人执行脑控操作——将脑机接口从实验室拉向应用开发。</p>
+<h2 id="_4">第四层：模型与智能体平台</h2>
+<h3 id="minimax-m3-token">MiniMax M3：百万 token 原生多模态</h3>
+<p>MiniMax 发布 M3 旗舰多模态模型，核心亮点：</p>
+<ul>
+<li>上下文窗口 <strong>100 万 token</strong></li>
+<li>自研 MSA（MiniMax Sparse Attention）架构</li>
+<li>在长文本处理、Coding、Agentic 任务上显著提升</li>
+</ul>
+<p>百万级上下文为 Agent 执行复杂多步任务提供了"工作记忆"层面的保障——Agent 能在一次会话中读完整本合同、整个代码仓库、或持续数小时的对话历史。</p>
+<p>相关阅读：<a href="../posts/long-context-llm-12m-tokens-workflow-guide-2026.html">12M Token 长上下文工作流实战指南</a></p>
+<h3 id="full-stack-brain-20">蚂蚁灵波 Full-Stack Brain 2.0：一脑多机</h3>
+<p>蚂蚁集团旗下蚂蚁灵波展出 <strong>LingBot-VLA2.0</strong>——跨本体具身大模型，核心特点：</p>
+<ul>
+<li>预训练使用 <strong>6 万小时</strong>高质量真实世界数据</li>
+<li>已适配 <strong>17 家厂商、20+ 种构型</strong>（乐聚、智元、宇树、银河通用等），涵盖单臂、双臂、双足、轮式</li>
+<li>支持头部、腰部、末端执行器、移动底盘的全身自由度控制</li>
+</ul>
+<p>其落地场景——与国大药房合作的<strong>智能药房</strong>（接单 → 智能分拣 → 递送），入选十大"镇馆之宝"。"一脑多机"模式意味着换一个机器人本体不必重新采数据/训练，直接适配，大幅降低具身智能规模化部署的成本。</p>
+<h3 id="_5">西门子工程智能体</h3>
+<p>跨国企业中最引人注目的 Agent 发布。西门子首次展示其<strong>工程智能体</strong>——能够自主规划并执行工业自动化工程任务。西门子中国 CEO 肖松表示，AI 在中国的落地优势在于"场景驱动"：丰富的工业场景 × 完整的制造体系 × 快速的创新节奏。</p>
+<p>相关阅读：<a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署的 7 个陷阱与实战指南</a></p>
+<h3 id="_6">其他值得关注的发布</h3>
+<ul>
+<li><strong>FrameX AI Genesis</strong>：交互式视频模型，用户可"走进"视频与 AI 角色实时对话</li>
+<li><strong>FieldQuantum</strong>：量子 AI 智能体平台，面向半导体材料研发和创新药发现（百度风投、HSG 等天使轮）</li>
+</ul>
+<h2 id="_7">第五层：落地场景全景</h2>
+<p>将上述硬软件能力投射到具体行业，WAIC 2026 呈现的落地图谱如下：</p>
+<ul>
+<li><strong>智能制造</strong>：人形机器人整车产线（5 工序实时演示）、西门子工业自动化 Agent</li>
+<li><strong>医疗零售</strong>：蚂蚁灵波智能药房、SenseMart Go 无人店</li>
+<li><strong>物流仓储</strong>：智元 + 京东 Genie G2 Max 重载协作</li>
+<li><strong>消费终端</strong>：Agent 手机（阶跃 STEPX Neo / 努比亚）、汽车智能座舱</li>
+<li><strong>金融</strong>：WAIC 金融下午茶专场"智能体价值涌现"（智能投研、风控 Agent）</li>
+<li><strong>教育 / 养老</strong>：AI 作为"智能伙伴"的定位，AR 翻译眼镜（100+ 语种）</li>
+<li><strong>科研</strong>：FieldQuantum 量子 AI Agent 赋能新材料 / 新药研发</li>
+<li><strong>脑机接口 + 机器人</strong>：BrainCo 平台让脑控机器人从论文走向 SDK</li>
+</ul>
+<p>相关阅读：<a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent 的范式转换：聊天已死，执行为王</a></p>
+<h2 id="_8">十大"镇馆之宝"速览</h2>
+<p>WAIC 每年由组委会评选"镇馆之宝"（最多 10 项），标准为技术含量 × 市场前景 × 可复制性 × 社会价值。2026 年入选的代表项目包括：</p>
+<ul>
+<li>华为 Atlas 950 SuperPod</li>
+<li>曙光 8000「登峰」全国产超级集群</li>
+<li>阶跃星辰 STEPX Neo（L3 智能体手机）</li>
+<li>MiniMax M3 百万 token 多模态</li>
+<li>蚂蚁灵波智能药房（跨本体具身大模型）</li>
+<li>傲意 OmniHand 3 灵巧手</li>
+<li>智元 Genie G2 Max 重载具身机器人</li>
+</ul>
+<p>（其余项目因信息分散暂未完全确认）</p>
+<h2 id="_9">产业信号与投资启示</h2>
+<p>从 WAIC 2026 的展出结构中，可以提炼出几条清晰的产业信号：</p>
+<ul>
+<li><strong>从"参数竞赛"到"落地竞赛"</strong>：大会主题从往年强调模型能力，转向强调"实际服务人的能力"</li>
+<li><strong>超节点是当下国产算力的核心叙事</strong>：以高带宽互联与规模化集群为抓手；华为/曙光/燧原/壁仞/沐曦五路并进</li>
+<li><strong>Agent 的入口之争</strong>：手机 OS 层（阶跃 Step AOS vs 阿里+荣耀 vs 努比亚+豆包）、汽车座舱、机器人本体——谁掌握了 Agent 的入口，谁就拿到了下一代流量分配权</li>
+<li><strong>"一脑多机"是具身智能规模化的关键</strong>：蚂蚁灵波适配 17 厂商/20+ 构型的模式，比"一机一脑"路线更具经济性</li>
+<li><strong>政策强背书</strong>：十五五规划开局之年 + 国家层面高度重视 + 29 国签约 WAICO + 政府工作报告点名"智能经济"</li>
+</ul>
+<p>对投资者而言，关注方向可以沿"算力基建 → Agent OS/入口 → 具身智能本体 → 垂直行业 Agent SaaS"的链条展开。</p>
+<p>相关阅读：<a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性的隐藏成本</a></p>
+<h2 id="_10">小结</h2>
+<p>WAIC 2026 传递的最强信号不是某一项技术突破，而是<strong>整条产业链的同时就绪</strong>：算力超节点批量上线、Agent OS 竞争白热化、具身智能走出实验室进入产线和药房、百万 token 上下文让 Agent 拥有足够的"工作记忆"。</p>
+<p>当基础设施、操作系统、模型能力、场景需求四层同时 ready 时，所谓"应用元年"便不再只是口号——它是产业链共振的结果。</p>
+<hr />
+<p><strong>免责声明</strong>：本文基于公开报道和企业官方声明整理，不构成投资建议。文中提及的产品参数以企业官方发布为准，实际性能可能因版本迭代而变化。</p>
+<hr />
+<h2 id="_11">参考来源</h2>
+<ul>
+<li><a href="https://www.globaltimes.cn/page/202607/1366139.shtml">300 plus AI products set to make their global debuts at WAIC - Global Times</a></li>
+<li><a href="https://www.chinadaily.com.cn/a/202607/16/WS6a58ff56a310986e2b465af1.html">Event serves as innovation platform - China Daily</a></li>
+<li><a href="https://www.citynewsservice.cn/articles/china-biz-buzz/tech/china-tech-giants-push-computing-limits-as-waic-2026-opens-in-shanghai-znxeqvpm">China Tech Giants Push Computing Limits as WAIC 2026 Opens - City News Service</a></li>
+<li><a href="https://news.aibase.com/news/29639">Ant Brain Full-Stack 2.0 Makes Its Debut at WAIC - AI Base</a></li>
+<li><a href="http://english.scio.gov.cn/chinavoices/2026-07/15/content_118600284.html">Shanghai enters 'AI moment' with 2026 World AI Conference - SCIO</a></li>
+<li><a href="https://www.scmp.com/tech/article/3359733/huaweis-new-computing-cluster-worlds-first-ai-agent-phone-debut-china-ai-summit">Huawei's new computing cluster, world's first AI agent phone - SCMP</a></li>
+<li><a href="https://thebambooworks.com/shanghai-world-ai-conference-to-address-global-hardware-and-robotics-bottlenecks/">World AI Conference to address global hardware and robotics bottlenecks - Bamboo Works</a></li>
+<li><a href="https://www.gadgets360.com/mobiles/news/stepfun-stepx-neo-launch-agentic-smartphone-features-specifications-11767859">StepFun Unveils StepX Neo as World's First Agentic Smartphone - Gadgets360</a></li>
+<li><a href="https://www.citynewsservice.cn/articles/china-biz-buzz/tech/china-tech-giants-push-computing-limits-as-waic-2026-opens-in-shanghai-znxeqvpm">WAIC 2026 Signals Top-Level Endorsement for China's AI Ambitions - City News Service</a></li>
+<li><a href="https://news.futunn.com/en/post/75971116/emergence-of-agent-value-waic-finance-afternoon-tea-decodes-the">Emergence of Agent Value! WAIC Finance Afternoon Tea - Futunn</a></li>
+<li><a href="https://www.prnewswire.com/news-releases/ahead-of-waic-2026-yanshan-ai-releases-four-predictions-for-enterprise-ai-deployment-302827451.html">Ahead of WAIC 2026, Yanshan AI Releases Four Predictions - PR Newswire</a></li>
+</ul>
+<hr />
+<h2 id="_12">延伸阅读</h2>
+<ul>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 通信协议深度对比</a></li>
+<li><a href="../posts/multi-agent-collaboration-framework-guide-2026.html">多智能体协作框架实战指南</a></li>
+<li><a href="../posts/open-source-llm-comparison-2026.html">开源大模型选型 2026：从参数到性价比</a></li>
+<li><a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：LLM/Agent 可观测性入门指南</a></li>
+<li><a href="../posts/physical-ai-world-model-humanoid-robot-2026.html">物理 AI 与世界模型：人形机器人的大脑进化</a></li>
+<li><a href="../posts/humanoid-robot-2026-china-vs-us-investment.html">人形机器人 2026：中美投资版图对比</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 心动购物季主会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpdGZu" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=waic-2026-ai-agent-hardware-software-ecosystem" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=waic-2026-ai-agent-hardware-software-ecosystem" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

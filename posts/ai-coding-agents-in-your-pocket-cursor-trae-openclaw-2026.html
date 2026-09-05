@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随时随地指挥 AI 写代码：当 Cursor、Trae、OpenClaw 等把 Agent 塞进口袋之后</title>
+    <meta name="description" content="2026 年编程 Agent 集体搬进手机：Cursor Mobile、字节 Trae、Claude Code 远程操控、OpenClaw 四条路线拆解与横向对比，看软件开发如何从坐班敲代码转向随时随地的异步监督。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">随时随地指挥 AI 写代码：当 Cursor、Trae、OpenClaw 等把 Agent 塞进口袋之后</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-07-01 · 14 分钟</span>
+            </div>
+            <h2 id="pull-request">一个在地铁上被合并的 Pull Request</h2>
+<p>设想这样一个场景：早高峰的地铁里，一个工程师掏出手机，点开一个 App，看到昨晚睡前派下去的任务已经跑完——AI Agent 读了 issue、改了三个文件、跑通了测试、开好了 PR。他扫了一眼 diff，语音补了一句"把这个函数的错误处理也加上"，锁屏，抬头继续挤地铁。等他到公司坐下，代码已经在 CI 里跑绿了。</p>
+<p>这不是概念视频。2026 年 6 月 29 日，Cursor 正式推出了它的 iPhone/iPad 应用，让付费用户可以直接从手机发起、监控、审阅云端编程 Agent。而这只是一股更大潮流里最新的一朵浪花——从 Cursor 到字节的 Trae，从 Anthropic 的 Claude Code 到开源爆款 OpenClaw，编程 Agent 正在集体"离开电脑桌，钻进你的口袋"。</p>
+<p>这篇文章想说清三件事：这股潮流到底是什么、四大玩家各自怎么做的、以及它爽归爽，代价是什么。</p>
+<hr />
+<h2 id="_1">二、先看清潮流：编程正在从"坐班"变成"监工"</h2>
+<p>过去写代码是一件高度同步的事：你必须坐在电脑前，光标闪烁，一行一行地敲。而 2026 年正在发生的转变是——<strong>编程越来越像一份你"监督"的工作，而不是一张你必须"坐"在前面的桌子。</strong></p>
+<p>逻辑链条其实很清晰：</p>
+<ul>
+<li>当 Agent 强到可以独立读需求、改代码、跑测试、开 PR，人的角色就从"执行者"上移到了"审阅者与决策者"；</li>
+<li>审阅和决策这两件事，并不需要一块 27 寸显示器和一套机械键盘，一部手机的屏幕足够；</li>
+<li>而真正吃算力的编译、测试、长链条重构，可以丢到云端 VM 或你自己的开发机后台异步跑。</li>
+</ul>
+<p>于是"手机 + 云端/本地算力"的组合成立了：<strong>手机是控制面（起任务、看进度、审 diff、点合并），重活在别处跑。</strong> 这也是为什么几乎所有主流工具在 2026 年不约而同地做了手机端——它们抢的不是"在手机上写代码"，而是"在离开电脑时也别中断你的开发流"。</p>
+<p>这背后其实是我们此前聊过的 <a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent 的范式跃迁</a> 在编程场景里的落地：对话式 AI 退居其次，能自主完成长任务的 Agent 成了主角。</p>
+<hr />
+<h2 id="cursor-mobile-agent-iphone">三、Cursor Mobile：把云端 Agent 装进 iPhone</h2>
+<p>Cursor 是这波里动作最受关注的一个。</p>
+<p>它的路径很值得玩味。2026 年上半年，Cursor 的"手机端"其实是一个网页版（cursor.com/agents），你把它添加到主屏当 PWA 用。而到了 6 月底，它推出了真正的 iPhone/iPad 原生应用公测。据多家媒体报道，付费订阅用户可以在 App 里选一个仓库、像在桌面端一样启动 Agent、用语音口述想法、用斜杠命令引导方向，并任选一个前沿模型来干活。</p>
+<p>这一切能成立，是因为 Cursor 早已把底座切到了"独立 Agent"上：</p>
+<ul>
+<li><strong>Cursor 2.0</strong>（2025 年 10 月）把产品重心转向能独立作业的编程 Agent；</li>
+<li><strong>Background Agents / Subagents</strong>（2026 年初的 v3）让长任务能在后台异步跑，你在前台继续干别的；</li>
+<li><strong>Cursor 3.5</strong>（2026 年 5 月 20 日）推出 Cloud Agents——在隔离的云端虚拟机里运行，拥有完整终端、浏览器与桌面访问权限，能跨多个仓库并行，再把结果异步汇报回 IDE。</li>
+</ul>
+<p>有了云端 Agent 这个底座，手机端就顺理成章：手机不过是给云端 Agent 下指令、看回执的一块小屏。顺带一提，有报道称 Cursor 已"据传被 SpaceX 收购"——这一条尚未获官方正式确认，姑且当作行业传闻看待。</p>
+<p>如果你想更系统地对比 Cursor 与其它闭源工具，可以看我们之前的 <a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">2026 闭源 AI 编程工具横评</a>。</p>
+<hr />
+<h2 id="trae-pc">四、字节 Trae：跨设备"派单"，从手机到云再到 PC</h2>
+<p>如果说 Cursor 走的是"云端 Agent + 手机遥控"，字节跳动的 Trae 则把"跨设备派单"讲得更直白。</p>
+<p>Trae 本体是一个基于 VS Code 打造的免费 AI IDE，最大的卖点之一是 <strong>SOLO 模式</strong>——一个全自主编程 Agent，接过一个想法后自己规划流程、挑选工具、执行并交付可上线的代码。它的免费策略相当激进（提供一定额度的自动补全和对 Claude、GPT、DeepSeek 等模型的访问），一度被称作"免费版 Cursor"。</p>
+<p>而在手机端，Trae 的定位写得非常明确。它的应用商店介绍大意是：这是一个跨设备的 AI 工作助手，<strong>你可以从手机把任务派发到云端或你的个人电脑，Agent 自动完成从想法到交付的全过程。</strong> 换句话说，你的手机是"下单入口"，你的 PC 或云是"生产车间"。</p>
+<p>但 Trae 有一个绕不开的争议点：<strong>隐私</strong>。多篇评测指出字节的遥测数据收集、长达数年的数据留存策略，以及缺乏便捷的关闭选项，让它不太适合对数据敏感的企业或涉密项目。免费很香，但要想清楚代价。</p>
+<hr />
+<h2 id="claude-code-remote-control">五、Claude Code Remote Control：任务在本地跑，遥控器在你口袋</h2>
+<p>Anthropic 的思路又不一样——它没急着把算力搬上云，而是让你<strong>遥控本地</strong>。</p>
+<p>2026 年 2 月下旬，Anthropic 上线了 Claude Code 的 Remote Control：你在终端里起一个编程任务，然后合上笔记本塞进包里，用手机、平板或任意浏览器继续掌控它——而任务本身仍然运行在你自己的机器上。对于那些代码不能出内网、依赖本地环境的人来说，这个"本地跑、远程控"的组合戳中了真实痛点。</p>
+<p>围绕这条线，Anthropic 铺得很密：</p>
+<ul>
+<li><strong>Dispatch</strong>：从手机操控本地会话；</li>
+<li><strong>Xcode 26.3 原生集成 Claude Agent SDK</strong>：苹果官方让 Xcode 直接用上驱动 Claude Code 的同一套底座，含子代理、后台任务与插件；</li>
+<li><strong>Claude Cowork 移动版</strong>：把编程之外的长任务（写文档、做表格、出报告）也搬上手机后台；</li>
+<li><strong>Claude Orbit</strong>（即将到来）：一个能在手机上直接执行动作（打电话、发消息、操作 App）的移动 Agent。</li>
+</ul>
+<p>Anthropic 敢这么押，底气来自模型能力——Claude Opus 4.6 在 SWE-bench Verified 上拿到了约 80.84% 的成绩（2026 年 2 月）。这个数字的意义在于：<strong>仓库级的重构从"炫技"变成了"能放心交付"</strong>，Agent 才配得上"无人值守"这四个字。</p>
+<hr />
+<h2 id="openclaw">六、OpenClaw：开源自托管的"另类解法"</h2>
+<p>前面三个多少还是"厂商产品"，OpenClaw 则代表了完全不同的一派：开源、自托管、社区驱动。</p>
+<p>OpenClaw 是一个开源的个人 AI Agent，最大的特点是<strong>以消息平台作为主界面</strong>——你像给朋友发消息一样给它派活，它 7×24 小时在你自己控制的机器（本地电脑、VPS、甚至一块树莓派）上跑。它的热度堪称现象级：2026 年 1 月底上线首周就冲破 10 万 GitHub Star，之后一路涨到 28 万以上，一度超越 React 成为史上 Star 最多的开源项目。</p>
+<p>它同样能干编程的活。OpenClaw 的 coding-agent 技能可以读 issue、写修复、跑测试、自己开 PR——这套流程和商业工具并无二致，区别在于它跑在你自己的基础设施上，数据不出门。架构上它靠一个自托管的 Gateway、一个自主"心跳"机制和基于文件的记忆来维持长期运行。想深入了解免费开源路线，可以参考我们的 <a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 免费 AI 编程 Agent 指南</a>。</p>
+<p>但强大也意味着风险。正因为它能长期自主运行、还能碰你的真实系统，2026 年已有多个国家和地区（比利时、中国、韩国等）对这类自主 Agent 发出监管警示或使用建议。自托管把数据主权还给了你，也把安全责任一并压在了你肩上——这正是我们在 <a href="../posts/agent-governance-observability-hidden-costs.html">AI Agent 治理与可观测性</a> 里反复强调的隐藏成本。</p>
+<hr />
+<h2 id="_2">七、横向对比：四种"塞进口袋"的路线</h2>
+<p>同样是把 Agent 装进手机，四家的底层逻辑其实差别很大：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Cursor Mobile</th>
+<th>字节 Trae</th>
+<th>Claude Code 远程</th>
+<th>OpenClaw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算力在哪</td>
+<td>云端 VM（Cloud Agents）</td>
+<td>云或你的 PC（派单）</td>
+<td>你的本地机器</td>
+<td>你自托管的机器</td>
+</tr>
+<tr>
+<td>手机角色</td>
+<td>起任务/审 diff 的原生 App</td>
+<td>跨设备"下单"入口</td>
+<td>本地会话的遥控器</td>
+<td>消息 App 即界面</td>
+</tr>
+<tr>
+<td>开源</td>
+<td>否</td>
+<td>否（免费但闭源）</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>数据主权</td>
+<td>厂商云</td>
+<td>字节（隐私争议）</td>
+<td>留在本地，较强</td>
+<td>完全自控</td>
+</tr>
+<tr>
+<td>上手门槛</td>
+<td>低（装 App 即用）</td>
+<td>低（免费）</td>
+<td>中（要配终端/网络）</td>
+<td>高（要自己部署运维）</td>
+</tr>
+<tr>
+<td>最适合</td>
+<td>已用 Cursor 的团队</td>
+<td>预算敏感、快速原型</td>
+<td>代码不能出内网的人</td>
+<td>极客、隐私极致派</td>
+</tr>
+</tbody>
+</table>
+<p>一句话总结这张表：<strong>Cursor 把重活放云上、Trae 让你跨设备派单、Claude 让你遥控本地、OpenClaw 让你彻底自己掌控。</strong> 没有绝对的最优，只有匹配不匹配你的场景。</p>
+<hr />
+<h2 id="_3">八、爽之外，别忽略这些代价</h2>
+<p>"随时随地指挥 AI 写代码"听起来很美，但真正用起来，有几笔账要提前算清楚：</p>
+<ul>
+<li><strong>审阅疲劳是新瓶颈。</strong> 当写代码的成本趋近于零，审代码就成了唯一的瓶颈。在手机小屏上审几百行 diff，既累又容易漏，"一路点同意"是新时代最危险的习惯。</li>
+<li><strong>安全风险被放大。</strong> 让 Agent 自主碰你的仓库、终端甚至生产系统，一旦提示词注入或它"自作主张"，后果可能不可逆。我们在 <a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding 的隐藏代价</a> 里盘点过大量裸奔应用与权限漏洞的真实翻车案例。</li>
+<li><strong>隐私与合规。</strong> Trae 的数据留存、OpenClaw 的自主运行，都触及了企业最敏感的神经。选型时，"数据到底存在哪、留多久"必须问在前面。</li>
+<li><strong>成本不再是零。</strong> 云端 VM 和前沿模型的 token 都要真金白银。异步、并行、后台常驻，意味着账单也会在你不注意时悄悄跑起来。</li>
+<li><strong>模型可靠性仍有边界。</strong> 80.84% 的 SWE-bench 已经很强，但它不是 100%。放手让 Agent 无人值守，前提是你有足够的测试、CI 和回滚兜底。</li>
+</ul>
+<p>说到底，把 Agent 塞进口袋，改变的是<strong>开发的物理形态</strong>，而不是工程的基本纪律。测试、评审、权限、可观测性，一样都不能少——只是它们比以前更重要了。</p>
+<hr />
+<h2 id="_4">小结</h2>
+<p>2026 年这波"编程 Agent 进手机"，表面看是四个厂商各出一款移动端，本质上是同一件事的四种表达：<strong>软件开发正在从同步的、坐班式的敲代码，转向异步的、随时随地的监督。</strong></p>
+<ul>
+<li>Cursor 用云端 Agent + 原生 App，把"在手机上指挥"做成了顺滑体验；</li>
+<li>Trae 用免费和跨设备派单，把门槛压到了最低；</li>
+<li>Claude Code 用"本地跑、远程控"，稳住了数据不能出门的人；</li>
+<li>OpenClaw 用开源自托管，把主动权彻底交还给个人。</li>
+</ul>
+<p>它们共同指向一个判断：未来一两年，衡量一个开发者生产力的，可能不再是"你打字有多快"，而是"你能同时监督好几个 Agent、并在关键节点做出正确判断"。口袋里的程序员时代，才刚刚开始。而对每一个使用者来说，真正的护城河也从"会写"变成了"会审、会管、会兜底"。</p>
+<hr />
+<h2 id="_5">免责声明</h2>
+<p>本文基于各厂商官方博客、应用商店信息及公开媒体报道（含 TechCrunch、TechRepublic、Anthropic 官网、Google Play、维基百科等）整理，部分产品功能、发布时间与跑分数据引用自上述公开来源，可能随产品迭代而变化。"Cursor 被 SpaceX 收购"等为媒体报道中的未证实说法，请以官方公告为准。文中观点不构成任何投资或选型建议，实际使用效果请以官方最新信息与你的真实测试为准。</p>
+<h2 id="_6">参考来源</h2>
+<ul>
+<li><a href="https://techcrunch.com/2026/06/29/cursor-now-has-a-mobile-app-for-guiding-your-coding-agent-on-the-go/">Cursor now has a mobile app for guiding your coding agent on the go（TechCrunch）</a></li>
+<li><a href="https://www.techrepublic.com/article/news-spacex-cursor-ai-coding-agents-iphone/">New iPhone App Brings AI Coding Agents to Mobile（TechRepublic）</a></li>
+<li><a href="https://cursor.com/blog/ios-mobile-app">Build from anywhere with Cursor for iOS（Cursor 官方博客）</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.bytedance.trae.overseas">TRAE on Google Play（字节跳动）</a></li>
+<li><a href="https://vibecoding.app/blog/trae-review">Trae Review: Free AI IDE, Pricing, Features, Privacy（vibecoding.app）</a></li>
+<li><a href="https://www.nxcode.io/resources/news/claude-code-remote-control-mobile-terminal-handoff-guide-2026">Claude Code Remote Control: Run Your Terminal from Your Phone（nxcode.io）</a></li>
+<li><a href="https://www.anthropic.com/news/apple-xcode-claude-agent-sdk">Apple's Xcode now supports the Claude Agent SDK（Anthropic）</a></li>
+<li><a href="https://en.wikipedia.org/wiki/OpenClaw">OpenClaw（Wikipedia）</a></li>
+<li><a href="https://www.turingpost.com/p/openclaw">OpenClaw: Architecture &amp; Alternatives（Turing Post）</a></li>
+<li><a href="https://perpet.io/blog/a-realistic-look-at-cursor-mobile-mcp-and-claude-code-mobile-development/">A Realistic Look at Cursor Mobile, MCP and Claude Code Mobile Development（perpet.io）</a></li>
+</ul>
+<h2 id="_7">相关阅读</h2>
+<ul>
+<li><a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">2026 闭源 AI 编程工具横评：Claude Code vs Cursor vs Copilot vs Codex vs Windsurf</a></li>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 实战指南：免费 AI 编程 Agent + 免费大模型</a></li>
+<li><a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent 的范式跃迁：OpenAI「去聊天化」背后</a></li>
+<li><a href="../posts/ornith-1-0-self-scaffolding-coding-model-benchmaxxing-2026.html">35B 干翻 397B？Ornith-1.0 跑分背后是真突破还是 benchmaxxing</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding 的隐藏代价：2000 个裸奔应用与权限漏洞</a></li>
+<li><a href="../posts/agent-governance-observability-hidden-costs.html">AI Agent 治理与可观测性：企业落地的隐藏成本</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(A组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HgBm8rE" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="cta-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center;">
+  <h3 style="margin: 0 0 10px 0; color: #e94560; font-size: 18px;">🚀 立即体验 Cursor - AI代码编辑器</h3>
+  <p style="color: #aaa; margin: 0 0 15px 0;">点击直达 Cursor - AI代码编辑器 官方网站，获取最新定价与功能</p>
+  <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fcursor.sh%2F%3Fref%3Daitoolbox&platform=saas&article=ai-coding-agents-in-your-pocket-cursor-trae-openclaw-2026" target="_blank" rel="nofollow" style="display: inline-block; background: linear-gradient(135deg, #e94560, #0f3460); color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s;">👉 访问官方网站</a>
+  <p style="color: #555; font-size: 12px; margin-top: 12px;">💎 通过此链接注册可获得 20% 首月返佣</p>
+</div>
+
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的编程体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DDell%252520U2724D%2525204K%2525E6%252598%2525BE%2525E7%2525A4%2525BA%2525E5%252599%2525A8%2526enc%253Dutf-8&platform=jd&article=ai-coding-agents-in-your-pocket-cursor-trae-openclaw-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">4K显示器 - Dell U2724D</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">程序员双屏标配，27寸4K，护眼不疲劳</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥2500-3500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DMacBook%2520Pro%2520M4%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=ai-coding-agents-in-your-pocket-cursor-trae-openclaw-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发首选，M4芯片神经网络引擎极强</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥14000-19000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

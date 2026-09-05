@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5470"/>
+      <stop offset="0.5" stop-color="#ff9770"/>
+      <stop offset="1" stop-color="#ffd166"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#36d1dc"/>
+      <stop offset="0.5" stop-color="#5b86e5"/>
+      <stop offset="1" stop-color="#7b5be5"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#36d1dc"/>
+      <stop offset="1" stop-color="#7b9bff"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- 标签框 -->
+  <rect x="44" y="42" width="248" height="32" rx="6" fill="#ff547022" stroke="#ff5470" stroke-opacity="0.6"/>
+  <text x="60" y="64" fill="#ff9aa8" font-size="15" font-weight="600">AI 开发平台 · 防断供工作流</text>
+
+  <!-- 主标题 -->
+  <text x="44" y="138" fill="#ffffff" font-size="31" font-weight="700">不被「卡脖子」的 AI 工作流</text>
+  <text x="44" y="178" fill="url(#sub)" font-size="19" font-weight="600">从模型路由到 Prompt 可移植的完整防断供指南</text>
+
+  <!-- 关键亮点 -->
+  <text x="44" y="222" fill="#ffd166" font-size="13" font-weight="500">• Fable 5 三天下线：访问权随时可能被切断</text>
+  <text x="44" y="246" fill="#36d1dc" font-size="13" font-weight="500">• OpenRouter vs LiteLLM：多模型路由与主备回退</text>
+  <text x="44" y="270" fill="#a78bfa" font-size="13" font-weight="500">• 国产模型当底牌 + Prompt 可移植 + 断供演练</text>
+
+  <!-- 标签栏 pill -->
+  <g font-size="12" font-weight="500">
+    <rect x="44" y="296" width="92" height="26" rx="13" fill="none" stroke="#36d1dc" stroke-opacity="0.55"/>
+    <text x="58" y="313" fill="#8fe9f0">多模型路由</text>
+    <rect x="146" y="296" width="92" height="26" rx="13" fill="none" stroke="#5b86e5" stroke-opacity="0.55"/>
+    <text x="160" y="313" fill="#a9c2ff">OpenRouter</text>
+    <rect x="248" y="296" width="76" height="26" rx="13" fill="none" stroke="#7b5be5" stroke-opacity="0.55"/>
+    <text x="262" y="313" fill="#c4b4ff">LiteLLM</text>
+    <rect x="334" y="296" width="80" height="26" rx="13" fill="none" stroke="#ff9770" stroke-opacity="0.55"/>
+    <text x="348" y="313" fill="#ffc3a3">防断供</text>
+    <rect x="424" y="296" width="104" height="26" rx="13" fill="none" stroke="#ffd166" stroke-opacity="0.55"/>
+    <text x="438" y="313" fill="#ffe6a3">Prompt可移植</text>
+  </g>
+
+  <!-- 年份徽章 -->
+  <circle cx="824" cy="58" r="30" fill="none" stroke="#ff5470" stroke-opacity="0.6" stroke-width="2"/>
+  <text x="824" y="67" fill="#ff9aa8" font-size="26" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- 右侧示意图：网关路由 -->
+  <g stroke-width="2" fill="none">
+    <!-- app 节点 -->
+    <rect x="612" y="150" width="60" height="34" rx="6" fill="#5b86e533" stroke="#5b86e5"/>
+    <text x="642" y="172" fill="#a9c2ff" font-size="12" text-anchor="middle" stroke="none">App</text>
+    <!-- gateway 节点 -->
+    <rect x="708" y="150" width="68" height="34" rx="6" fill="#7b5be533" stroke="#7b5be5"/>
+    <text x="742" y="172" fill="#c4b4ff" font-size="12" text-anchor="middle" stroke="none">网关</text>
+    <line x1="672" y1="167" x2="708" y2="167" stroke="#7b9bff" stroke-opacity="0.7"/>
+    <!-- 三个模型节点 -->
+    <rect x="812" y="108" width="50" height="28" rx="6" fill="#36d1dc22" stroke="#36d1dc"/>
+    <text x="837" y="127" fill="#8fe9f0" font-size="11" text-anchor="middle" stroke="none">主力</text>
+    <rect x="812" y="153" width="50" height="28" rx="6" fill="#ffd16622" stroke="#ffd166"/>
+    <text x="837" y="172" fill="#ffe6a3" font-size="11" text-anchor="middle" stroke="none">备份</text>
+    <rect x="812" y="198" width="50" height="28" rx="6" fill="#ff547022" stroke="#ff5470"/>
+    <text x="837" y="217" fill="#ff9aa8" font-size="11" text-anchor="middle" stroke="none">备份</text>
+    <line x1="776" y1="167" x2="812" y2="122" stroke="#36d1dc" stroke-opacity="0.6"/>
+    <line x1="776" y1="167" x2="812" y2="167" stroke="#ffd166" stroke-opacity="0.6"/>
+    <line x1="776" y1="167" x2="812" y2="212" stroke="#ff5470" stroke-opacity="0.6"/>
+  </g>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="44" y1="344" x2="856" y2="344" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="44" y="366" fill="#8a8aa8" font-size="12">风险拆解 · 网关架构 · 主备回退 · 分级控本 · 迁移演练</text>
+  <text x="856" y="366" fill="#5a5a7a" font-size="12" text-anchor="end">AI工具箱</text>
+</svg>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大模型注意力机制全景：从 MHA 到 MLA、DSA 与混合线性架构，一文看懂技术演进</title>
+    <meta name="description" content="系统梳理 MHA、MQA、GQA、MLA、SWA、DSA、CSA/HCA、MSA 与混合线性架构，并对比 GLM-5.3、DeepSeek V4、Qwen3.8、Kimi K3、MiniMax M3 等模型的公开技术路线。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">大模型注意力机制全景：从 MHA 到 MLA、DSA 与混合线性架构，一文看懂技术演进</h1>
+            <div class="post-meta">
+                <span class="cat">AI技术趋势</span>
+                <span>2026-08-20 · 33 分钟</span>
+            </div>
+            <p>一个 Llama 3.1 70B 模型，在 FP16、128K 上下文下，仅<strong>KV Cache（推理时缓存的历史 Key/Value 张量，用于避免重复计算）</strong>就要占用约 43GB 显存——这比 Llama 3.2 3B 模型全部权重还大。这不是危言耸听，是把层数、KV 头数、head 维度、序列长度和字节数直接相乘算出来的结果。2022 年之前，主流上下文只有 2K-4K，没人把这当回事；一旦 128K 成为行业标配，KV Cache 就从"细节参数"变成了决定你能不能用消费级显卡跑大模型、能不能把批次做大、能不能把成本压下来的头号瓶颈。</p>
+<p>过去七年，几乎所有围绕注意力机制的架构创新，都是在回答同一个问题：<strong>该怎么在不明显伤害模型质量的前提下，把这块显存和这部分算力砍下来？</strong>从 2017 年的原始 Multi-Head Attention，到 2019 年 Google 提出的 Multi-Query Attention，到 2023 年成为事实标准的 Grouped-Query Attention，再到 2024 年 DeepSeek-V2 带来的 Multi-head Latent Attention，直至 2025-2026 年的学习式稀疏注意力、压缩混合注意力，以及 Qwen3.8、Kimi K3 采用的混合线性架构——这是一条清晰但常被简化成"谁比谁快"的技术脉络。本文尝试把这条脉络讲清楚：每种机制具体压缩了什么、代价是什么、谁在用，以及在 2026 年的今天，工程选型该怎么看这些选择。</p>
+<blockquote>
+<p>为便于阅读，下表给出本文核心缩写的英文全称与中文含义，后文直接使用简称。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>缩写/术语</th>
+<th>英文全称</th>
+<th>中文含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MHA</td>
+<td>Multi-Head Attention</td>
+<td>多头注意力，Transformer 原始设计</td>
+</tr>
+<tr>
+<td>MQA</td>
+<td>Multi-Query Attention</td>
+<td>多查询注意力，所有查询头共享一组 K/V</td>
+</tr>
+<tr>
+<td>GQA</td>
+<td>Grouped-Query Attention</td>
+<td>分组查询注意力，多个查询头分组共享 K/V</td>
+</tr>
+<tr>
+<td>MLA</td>
+<td>Multi-head Latent Attention</td>
+<td>多头潜在注意力，将 K/V 压缩进低秩潜空间再缓存</td>
+</tr>
+<tr>
+<td>SWA</td>
+<td>Sliding Window Attention</td>
+<td>滑动窗口注意力，只关注固定窗口内的近邻 token</td>
+</tr>
+<tr>
+<td>DSA</td>
+<td>DeepSeek Sparse Attention</td>
+<td>DeepSeek 稀疏注意力，用索引器学习式选择关注的历史 token</td>
+</tr>
+<tr>
+<td>MSA</td>
+<td>MiniMax Sparse Attention</td>
+<td>MiniMax 块稀疏注意力，按 GQA group 选择相关 KV block</td>
+</tr>
+<tr>
+<td>CSA</td>
+<td>Compressed Sparse Attention</td>
+<td>压缩稀疏注意力，DeepSeek V4 混合注意力中的稀疏分支</td>
+</tr>
+<tr>
+<td>HCA</td>
+<td>Heavily Compressed Attention</td>
+<td>高度压缩注意力，DeepSeek V4 混合注意力中的压缩分支</td>
+</tr>
+<tr>
+<td>KDA</td>
+<td>Kimi Delta Attention</td>
+<td>Kimi 的线性注意力模块，以门控快权重记忆处理序列</td>
+</tr>
+<tr>
+<td>AttnRes</td>
+<td>Attention Residuals</td>
+<td>注意力残差，使当前层可跨层检索历史表示</td>
+</tr>
+<tr>
+<td>KV Cache</td>
+<td>Key-Value Cache</td>
+<td>推理时缓存的历史 Key/Value 张量</td>
+</tr>
+<tr>
+<td>RoPE</td>
+<td>Rotary Position Embedding</td>
+<td>旋转位置编码</td>
+</tr>
+<tr>
+<td>MoE</td>
+<td>Mixture of Experts</td>
+<td>混合专家架构，每个 token 只激活部分参数</td>
+</tr>
+<tr>
+<td>SSM</td>
+<td>State Space Model</td>
+<td>状态空间模型，Mamba 系列的数学基础</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="大模型注意力机制的技术演进时间线" src="../images/attn-comp-evolution-timeline.png" /></p>
+<h2 id="_1">起点：为什么标准注意力撑不住长上下文</h2>
+<p>标准 Transformer 的自注意力（Self-Attention）机制让每个 token 都能看到序列中所有此前出现过的 token，并按学到的权重把这些信息混合进自己的新表示。这个机制的表达能力很强，代价也很直接：推理时，模型必须为每一层、每一个注意力头，缓存对应的 Key 和 Value 张量，这样生成下一个 token 时才不用把整段历史重新计算一遍。</p>
+<p>问题在于，这份缓存的大小和"层数 × 头数 × head 维度 × 序列长度"成正比。上下文越长，模型越大，这份缓存涨得越快，最终往往比模型权重本身更早撑爆显存。这也是为什么 GPT-4 时代之前，"上下文长度"更多是一个学术指标，而 2023 年之后，它变成了工程团队天天要盯着的成本项。</p>
+<p>面对这个瓶颈，业界走出了两条主线路，外加最近两年出现的第三条路：</p>
+<ul>
+<li><strong>路线一：压缩每个 token 要存的 KV。</strong> 保留完整的因果注意力模式，但让每份缓存变小。代表：MQA、GQA、MLA。</li>
+<li><strong>路线二：减少每次查询要读的 token 数。</strong> 攻击的是 O(L²) 的计算复杂度本身，而不是单条缓存的大小。代表：SWA、DSA、CSA/HCA、MSA。</li>
+<li><strong>路线三：把大部分注意力层换成线性/状态空间模块。</strong> 只在少数层保留完整注意力做精确检索，其余层用更便宜的线性机制处理长程依赖。代表：Qwen3-Next、Kimi Linear、Ling 2.5、Nemotron 系列的混合架构。</li>
+</ul>
+<p>下面逐一拆解。</p>
+<h2 id="token-mqagqamla">路线一：压缩每个 token 的存储——MQA、GQA、MLA</h2>
+<h3 id="mqa">MQA：最激进的压缩，也最早暴露了质量问题</h3>
+<p><a href="https://arxiv.org/abs/1911.02150">Multi-Query Attention</a> 由 Noam Shazeer 在 2019 年提出，思路很直接：所有查询头共享同一组 Key 和 Value，缓存量直接砍到 MHA 的 1/头数。PaLM、Falcon 等模型采用过这一方案，换来的是显著的推理加速。</p>
+<p>但代价同样清楚：在 70B 以上的规模，MQA 在推理和知识密集型基准上的质量退化是可以测出来的。业界后来的选择不是抛弃"共享 KV"这个思路，而是把共享比例调成可调参数——这正是 GQA 的由来。今天 MQA 更多出现在对缓存大小极度敏感、模型规模也偏小的端侧场景，而不是旗舰模型的默认选项。</p>
+<h3 id="gqa2023">GQA：2023 年之后的事实标准</h3>
+<p><a href="https://arxiv.org/abs/2305.13245">GQA</a> 由 Ainslie 等人在 2023 年提出，核心思想是让若干个查询头共享同一组 Key/Value 投影，而不是像 MQA 那样让所有查询头共享一组、或像 MHA 那样每个查询头都独立。这样一来，KV Cache 随共享比例线性收缩，而注意力本身的计算量基本不变。</p>
+<p>GQA 能成为事实标准，原因不只是效果好，更是因为它足够简单——不需要改变解码器的整体结构，几乎所有推理引擎都能直接支持。具体的分组比例，各家有自己的取舍：Llama 2 70B 用 8:1（64 个查询头共享 8 个 KV 头），Llama 3.1 70B 和 Qwen 2.5 72B 沿用 8:1，Mistral Large 2 用到 12:1，Llama 3.1 405B 甚至到 16:1。以 4:1 的分组比例为例，KV Cache 能降到 MHA 基线的约 25%，且注意力计算的 FLOPs 几乎不受影响。</p>
+<p>2026 年的今天，GQA 依然是绝大多数密集模型（Dense Model）的默认选项：Llama 3、Qwen3、Gemma 3、Mistral Small 3.1 都在用。它也常与后文的 SWA 搭配出现——两者分别攻击"缓存大小"和"每层要看的 token 数"这两个不同的成本维度，并不冲突。</p>
+<h3 id="mladeepseek">MLA：DeepSeek 带来的第二条压缩路径</h3>
+<p><a href="https://arxiv.org/abs/2405.04434">Multi-head Latent Attention</a> 由 DeepSeek 在 DeepSeek-V2 论文中提出，逻辑和 GQA 完全不同。GQA 靠"减少 KV 头的数量"省缓存；MLA 靠"压缩每份 KV 的信息量"省缓存——它把 Key 和 Value 投影进一个维度只有几百的低秩潜空间（外加一个专门处理位置信息的解耦 RoPE 分量），缓存的是这个压缩后的潜向量，需要用的时候再重建成完整的多头 K/V。</p>
+<p>这里有一个容易被忽略但很重要的细节：DeepSeek-V2 的消融实验显示，同等压缩比下 GQA 的建模效果会明显低于 MHA，而 MLA 却能保持甚至略微超过 MHA 的表现。换句话说，MLA 不只是"用质量换内存"的又一个变体，它在部分场景下同时拿到了内存收益和质量收益，这也是它能被视为比 GQA 更优架构设计的核心论据（参见 <a href="https://arxiv.org/html/2502.07864v1">Multi-head Latent Attention Is All You Need</a> 中对 GQA 与 MLA 表达能力的理论对比：GQA 总能等价转换成一个 MHA，反之则不一定成立）。</p>
+<p>代价是工程复杂度：MLA 需要定制的推理内核（比如 FlashMLA），主流推理框架花了大约一年时间才补齐支持，服务化部署也比 GQA 更"讲究"。采用 MLA 的代表包括 DeepSeek V3/R1、Kimi K2、Ling 2.5、Mistral Large 3；GLM-5 系列则以 MLA 为底层表示，并叠加后文所述的 DSA 稀疏选择；Kimi K3 也保留了 Gated MLA，但只把它放在混合架构中的重量层。一个值得参考的对照实验来自 Sarvam AI：他们同时训练了 30B（用 GQA）和 105B（用 MLA）两个版本，相当于用真实的工程决策而不是理论推导，回答了"什么时候该切换到 MLA"这个问题——业内经验大致是，MLA 在 100B 以上规模的优势更明显，而中小模型上 GQA 因为更好调、生态更完整，仍是更稳的默认选择。</p>
+<p><img alt="KV Cache 压缩效果对比：MHA、GQA、MQA、MLA" src="../images/attn-comp-kv-cache-comparison.png" /></p>
+<p><em>图片来源：数据整理自 <a href="https://www.pythonalchemist.com/llm-architectures/attention-variants">PythonAlchemist Attention Variants 交互页</a> 与 <a href="https://arxiv.org/abs/2405.04434">DeepSeek-V2 论文</a>，具体压缩比例随分组比例、潜空间维度和模型配置而变化，本图仅为量级示意。</em></p>
+<h2 id="swadsamsa">路线二：减少每次查询要读的范围——SWA、DSA、MSA</h2>
+<p>路线一解决的是"每份缓存有多大"，路线二解决的是"每次算注意力要读多少份缓存"——这是攻击 O(L²) 计算复杂度本身的思路。</p>
+<h3 id="swa">SWA：把全局注意力换成局部窗口</h3>
+<p><a href="https://arxiv.org/abs/2310.06825">Mistral 7B</a> 在 2023 年把滑动窗口注意力（Sliding Window Attention）和 GQA 一起用了起来：每个 token 只关注一个固定大小的近期窗口，而不是整段历史，把注意力计算从 O(L²) 降到 O(L·window)。Mistral 7B 用的是 4096-token 窗口。</p>
+<p>纯粹的 SWA 有个明显缺陷：窗口外的信息完全无法直接被关注到。Gemma 系列的解法是"局部+全局"交替：Gemma 2 用 1:1 的局部:全局层比例、4096 窗口；Gemma 3 把这个比例进一步推到 5:1、窗口缩到 1024，代价是极小的困惑度损失（<a href="https://arxiv.org/abs/2503.19786">Gemma 3 技术报告</a> 的消融实验显示，更激进的局部化对建模表现影响很有限）。这也是为什么"某模型用了 SWA"这句话意义不大，真正决定效果的是局部:全局的层比例和窗口大小这两个可调旋钮。</p>
+<h3 id="dsa-token">DSA：让模型自己学会该看哪些历史 token</h3>
+<p><a href="https://arxiv.org/html/2502.11089">DeepSeek Sparse Attention</a> 在 DeepSeek-V3.2 中登场，思路和 SWA 一脉相承——都是只让每个 token 关注历史的一个子集，但选择子集的方式完全不同。SWA 靠位置硬编码一个固定窗口；DSA 用一个"轻量索引器（Lightning Indexer）+ 选择器"两阶段流水线：索引器先给所有历史 token 打一个相关性分数，选择器再挑出分数最高的 top-k 个位置，构成这次注意力计算实际要读取的稀疏掩码。复杂度从 O(L²) 降到 O(L·k)，但保留了内容驱动的选择能力，理论上比位置驱动的 SWA 更能保住长程信息。</p>
+<p>DeepSeek 官方数据显示，DSA 在长文本训练和推理场景下带来显著效率提升，同时几乎不损失模型输出质量；第三方评测也报告了 2-3 倍的长文本处理速度提升和 30%-40% 的显存占用下降，DeepSeek API 定价也因此下调超过一半（<a href="https://www.datacamp.com/tutorial/deepseek-v-3-2-exp">DataCamp 的 V3.2-Exp 评测</a>）。<a href="https://arxiv.org/html/2602.15763">GLM-5 技术报告</a> 随后采用 MLA + DSA；GLM-5.2 引入可跨层复用索引结果的 IndexShare DSA，官方发布资料显示 GLM-5.3 沿用 5.2 基座，注意力架构并未另起炉灶，主要升级来自后训练。这说明 MLA 压缩缓存的"表示"、DSA 压缩要读取的"范围"可以叠加，但具体索引器设计仍在快速迭代。</p>
+<p>到了 DeepSeek V4，官方没有继续把架构简单描述成"MLA + DSA"，而是改用 <strong>Compressed Sparse Attention（CSA）+ Heavily Compressed Attention（HCA）</strong> 的混合注意力。根据 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro">DeepSeek V4-Pro 官方模型卡</a>，在 1M 上下文下，其单 token 推理 FLOPs 为 DeepSeek-V3.2 的 27%，KV Cache 为后者的 10%。因此，DeepSeek V4 应被视为压缩注意力与稀疏注意力进一步融合的新一代方案，而不能直接归入传统 MLA + DSA。</p>
+<h3 id="msaminimax-m3">MSA：MiniMax M3 从全注意力转向块稀疏选择</h3>
+<p>MiniMax M3 引入的 <a href="https://arxiv.org/html/2606.13392v1">MiniMax Sparse Attention（MSA）</a> 也属于学习式稀疏路线，但选择粒度与 DSA 不同：轻量 Index Branch 先给历史 KV block 打分，并为每个 GQA group 独立选择 Top-k block；Main Branch 再只对入选块执行精确的块稀疏注意力。它没有像 MLA/HCA 那样重编码或强压缩每份 KV，而是减少每次真正读取和计算的 KV block 数量。</p>
+<p>根据 <a href="https://huggingface.co/MiniMaxAI/MiniMax-M3">MiniMax M3 官方模型卡</a>，M3 是 428B 级 MoE 原生多模态模型，支持最高 1M 上下文；官方给出的 M3 对 M2 对比是在 1M 上下文下降低至约 1/20 的单 token 计算量，prefill 与解码分别提升约 9 倍和 15 倍。<a href="https://docs.nvidia.com/nemo/automodel/model-coverage/vision-language-models/minimax/minimax-m3">NVIDIA NeMo 的 M3 架构文档</a> 进一步显示，其文本骨干包含 60 层（3 层 Dense + 57 层 MoE），MSA 用于 MoE 层。因此 M3 更准确的描述是 <strong>基于 GQA group 的混合全注意力/块稀疏注意力架构</strong>，不能再沿用 M2 的“全注意力模型”标签。</p>
+<p>不过，无论 DSA、IndexShare DSA、CSA/HCA 还是 MSA，目前都比 GQA 更新，并依赖索引器、稀疏内核和具体硬件实现，尚未成为跨厂商的普遍选项。</p>
+<h2 id="_2">路线三：混合线性注意力——把大部分层换成更便宜的机制</h2>
+<p>前两条路线都还在"改良标准注意力"的框架里。第三条路线更激进：只在少数层保留完整（或潜在）注意力做精确检索，把大部分层换成线性时间的序列建模模块。</p>
+<p><a href="https://sebastianraschka.com/llm-architecture-gallery/">Qwen3-Next</a> 是这个方向上第一个接近旗舰规模的例子：它用 3:1 的比例混合 Gated DeltaNet 和 Gated Attention——三层 Gated DeltaNet 配一层保留下来的门控全注意力。Gated DeltaNet 和 Mamba-2 同属"线性时间门控序列模型"这一家族，但用的是 DeltaNet 风格的快权重（Fast-Weight）记忆更新，而不是 Mamba 的状态空间更新：每一步计算 Q、K、V 和两个门控信号，把信息写入一个压缩的小容量记忆，而不是像标准注意力那样构建完整的 token-to-token 矩阵。少数保留下来的全注意力层负责补足 DeltaNet 在精确内容检索上的短板。</p>
+<p>Qwen3.5 把这套架构从侧线实验提升为主力系列，<a href="https://huggingface.co/Qwen/Qwen3.8-27B">Qwen3.8-27B 官方模型卡</a> 则给出了更明确的层布局：64 层按 <code>16 ×（3 × Gated DeltaNet + 1 × Gated Attention）</code> 组织，仍是 3:1 混合比例；其中 Gated Attention 使用 24 个查询头和 4 个 KV 头，因此重量层本身又采用了 GQA。其原生上下文为 262,144 token，并可扩展到 1M。换句话说，Qwen3.8 既不能只标成"GQA"，也不是纯线性注意力，而是 <strong>Gated DeltaNet + 使用 GQA 的门控全注意力</strong>。</p>
+<p><a href="https://arxiv.org/abs/2510.26692">Kimi Linear</a>（Moonshot AI，2025 年 10 月）延续同样的 3:1 结构，但两侧都做了改动：轻量侧的 Kimi Delta Attention 用通道级门控替代 Qwen 的标量门控，记忆更新的精细度更高；重量侧则把 Gated Attention 换成了 Gated MLA。官方数据是在 128K 上下文下 KV Cache 相比全注意力方案减少最多 75%，1M 上下文下解码吞吐提升最高 6 倍，且在同等训练配方下，Kimi Linear 首次在多种场景（短上下文、长上下文、强化学习扩展）下全面超越了纯全注意力基线，而不只是"以质量换速度"。</p>
+<p><a href="https://arxiv.org/html/2607.24653">Kimi K3 技术报告</a> 把这条路线扩展到 2.8T 总参数、104B 激活参数的旗舰模型：每个块由 3 层 KDA 和 1 层 Gated MLA 组成，整体包含 69 层 KDA 与 24 层 MLA，并在末端额外放置 Gated MLA；同时加入 Attention Residuals（AttnRes），让当前层能够跨层检索历史表示。K3 支持 1M 上下文，因此其准确标签应是 <strong>KDA + Gated MLA（3:1）+ AttnRes</strong>，而不只是笼统的"Kimi Linear"。</p>
+<p><a href="https://huggingface.co/inclusionAI/Ling-2.5-1T">Ling 2.5</a> 走的是另一种组合：轻量侧用更简单的 Lightning Attention（一种循环式线性注意力变体）替代 DeltaNet，重量侧沿用 DeepSeek 的 MLA。据 Ling 团队披露，其 32K token 吞吐显著超过同等万亿参数规模的 Kimi K2，说明这条路线上确实存在不同厂商的多种可行搭配，而不是收敛到唯一方案。</p>
+<p>Nemotron 系列走得更远：<a href="https://sebastianraschka.com/llm-architecture-gallery/">Nemotron 3 Nano</a> 用 Mamba-2 状态空间块承担大部分序列建模工作，自注意力只出现在很小一部分层里；更大的 Nemotron 3 Super 沿用这套混合模式，并叠加了潜在 MoE 和共享权重的多 token 预测（用于投机解码加速）。</p>
+<p>这条路线的共识是：<strong>长上下文效率是核心卖点，建模效果的绝对上限暂时还是个开放问题</strong>——没有公开实验能在完全相同的数据和算力预算下，把混合线性架构和纯全注意力（或 MLA）架构做严格对照。Sebastian Raschka 在其 <a href="https://magazine.sebastianraschka.com/p/visual-attention-variants">注意力变体综述</a> 中也提到，这类混合架构目前仍偏"新颍"，对 Agent 类长上下文场景是很有吸引力的候选，但配套的推理引擎优化还没有 GQA 那么成熟，本地跑分有时反而不如经典架构。</p>
+<h2 id="_3">主流大模型注意力机制一览</h2>
+<p>把上面三条路线对应到具体模型，可以看到从经典架构到 2026 年新一代旗舰的技术站位：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>模型</th>
+<th>核心注意力机制</th>
+<th>公开信息与解读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>经典基线</td>
+<td>GPT-2 / Llama 2 7B</td>
+<td>MHA</td>
+<td>标准多头注意力，无 KV 压缩</td>
+</tr>
+<tr>
+<td>经典压缩</td>
+<td>PaLM / Falcon</td>
+<td>MQA</td>
+<td>单一共享 KV 头，压缩最激进</td>
+</tr>
+<tr>
+<td>2024-2025 主流</td>
+<td>Llama 3 / Qwen3（Dense）/ Gemma 3</td>
+<td>GQA（部分模型叠加 SWA）</td>
+<td>Dense 模型的成熟默认选项</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Mistral 7B</td>
+<td>GQA + SWA</td>
+<td>同时压缩 KV 头数量与每层读取范围</td>
+</tr>
+<tr>
+<td>2024-2025</td>
+<td>DeepSeek V3 / R1 / Kimi K2</td>
+<td>MLA</td>
+<td>低秩潜空间压缩，需要定制推理内核</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>DeepSeek V3.2</td>
+<td>MLA + DSA</td>
+<td>压缩缓存表示，并通过学习式索引缩小读取范围</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>GLM-5 系列（含 5.2 / 5.3）</td>
+<td>MLA + DSA；5.2/5.3 使用 IndexShare DSA</td>
+<td>5.3 沿用 5.2 基座，主要升级来自后训练，不是新的注意力架构</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>DeepSeek V4-Pro / V4-Flash</td>
+<td>CSA + HCA 混合注意力</td>
+<td>1M 上下文；官方称 Pro 的 KV Cache 为 V3.2 的 10%，单 token FLOPs 为 27%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>Qwen3-Next / Qwen3.5</td>
+<td>Gated DeltaNet + Gated Attention（3:1）</td>
+<td>多数层为线性序列模块，少数层做精确全注意力检索</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>Qwen3.8 系列</td>
+<td>Gated DeltaNet + Gated Attention（3:1；全注意力层使用 GQA）</td>
+<td>27B 模型为 64 层、24 Q 头/4 KV 头；262K 原生上下文，可扩展至 1M</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>Kimi Linear</td>
+<td>KDA + Gated MLA（3:1）</td>
+<td>混合线性注意力，官方称 KV Cache 最高减少 75%</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>Kimi K3</td>
+<td>KDA + Gated MLA（3:1）+ AttnRes</td>
+<td>69 层 KDA + 24 层 MLA，支持 1M 上下文，并加入跨层表示检索</td>
+</tr>
+<tr>
+<td>2025-2026</td>
+<td>Ling 2.5</td>
+<td>Lightning Attention + MLA</td>
+<td>混合线性注意力的另一种轻重搭配</td>
+</tr>
+<tr>
+<td>2025-2026</td>
+<td>Nemotron 3 Nano / Super</td>
+<td>Mamba-2 + 少量自注意力</td>
+<td>更接近状态空间模型的混合方案</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>MiniMax M2</td>
+<td>全注意力；KV 头配置未公开</td>
+<td>官方明确未采用当时的效率型注意力，不能据此进一步猜测为 GQA</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>MiniMax M3</td>
+<td>MSA：基于 GQA group 的块稀疏注意力，并保留少量 Dense 层</td>
+<td>428B 级 MoE、最高 1M 上下文；官方称相较 M2 单 token 计算量降至约 1/20</td>
+</tr>
+<tr>
+<td>闭源领先模型</td>
+<td>GPT-5.6 Sol / Claude Fable 5（及 Opus 4.8）/ Gemini 3.7 Flash</td>
+<td><strong>未公开</strong></td>
+<td>官方发布资料未披露注意力类型、KV 头数或层布局，故只作能力参照，不参与已知架构横向比较</td>
+</tr>
+</tbody>
+</table>
+<p>表中最值得注意的变化有四点：GLM-5.3 没有因版本号更新而换用全新注意力机制；DeepSeek V4 已从 V3.2 的 MLA + DSA 演进到 CSA + HCA，不能继续沿用旧标签；Qwen3.8 与 Kimi K3 都采用 3:1 混合结构，但前者是 Gated DeltaNet + 使用 GQA 的 Gated Attention，后者则是 KDA + Gated MLA，并额外加入 AttnRes；MiniMax 也从 M2 的全注意力转向 M3 的 MSA，说明同一家厂商的架构判断会随着索引器、稀疏内核和训练验证成熟而改变。</p>
+<h3 id="_4">为什么闭源领先模型没有可比的架构数据</h3>
+<p>GPT-5.6 Sol、Claude Fable 5、Claude Opus 4.8 和 Gemini 3.7 Flash 仍是能力、延迟、上下文与 Agent 表现对比中的重要参照，但其官方发布页没有公开参数规模、KV 头数、注意力机制或具体层布局。速度更快、价格更低或上下文更长，都不足以反推出模型使用了 GQA、MLA、稀疏注意力还是线性注意力。为避免把推测写成事实，本文将它们标为“未公开”，不纳入已知机制的技术优劣比较；这不代表它们的能力或效率更弱。</p>
+<p>各家模型的具体配置（分组比例、潜空间维度、局部窗口大小、混合层比例）也会随版本迭代频繁调整。上表反映的是截至 2026 年 8 月 20 日的公开资料，具体数字仍应以官方模型卡或技术报告为准。</p>
+<h2 id="m2-m3minimax">从 M2 到 M3：MiniMax 为什么改变了注意力路线</h2>
+<p>MiniMax M2 曾是一个值得认真对待的反例。团队在 <a href="https://huggingface.co/blog/MiniMax-AI/why-did-m2-end-up-as-a-full-attention-model">《Why Did M2 End Up as a Full Attention Model?》</a> 中表示，他们持续尝试过各类高效注意力方案，但在当时的工业级、大规模生产检验中，这些方案尚未稳定超越全注意力；切换机制还会牵动推理引擎适配、训练稳定性和长尾任务鲁棒性。因此 M2 最终保留全注意力，本文也不在官方信息之外猜测其 KV 头配置。</p>
+<p>但 M2 的选择不是 MiniMax 对稀疏注意力的永久否定。到了 M3，团队在可训练的块级索引器、按 GQA group 独立检索以及配套 GPU 稀疏内核成熟后，正式转向 MSA。也就是说，MiniMax 的路线不是简单的“全注意力优于稀疏注意力”，而是 <strong>M2 阶段认为收益尚不足以覆盖工程风险，M3 阶段则通过算法与内核协同把这笔账重新算通了</strong>。</p>
+<p>这个前后变化比单独看 M2 更有参考价值：论文里的效率数字必须经过真实训练、硬件内核和生产负载验证，但一次保守选择也不代表技术方向已经被永久否定。选型时既要看机制本身，也要看团队是否具备把理论稀疏性转化为实际吞吐的工程能力。</p>
+<h2 id="_5">工程选型的几条实用判断</h2>
+<p>结合上面的技术脈络，面向不同场景给出几条相对稳的判断：</p>
+<ul>
+<li>
+<p><strong>通用 Dense 模型，中等上下文（几万到十几万 token）</strong>：GQA 是最稳妥的默认选择，生态支持最完整，出问题时也最容易找到现成的排障经验，8:1 左右的分组比例是常见起点。</p>
+</li>
+<li>
+<p><strong>需要极长上下文（百万级 token）且已在使用 DeepSeek/Kimi/Qwen/MiniMax 系模型</strong>：应按具体版本选择 MLA + DSA、CSA + HCA、MSA 或混合线性架构，而不能只看厂商品牌。它们是当前能拿到较大缓存和计算收益的方向，但要预留时间验证推理引擎兼容性与实际吞吐，不要只看论文里的理论压缩比。</p>
+</li>
+<li>
+<p><strong>端侧或对延迟极度敏感的小模型</strong>：MQA 或激进比例的 GQA 依然有价值，此时缓存大小往往比绝对建模质量更影响用户体验。</p>
+</li>
+<li>
+<p><strong>对稳定性、可预测性要求高于极限效率的生产系统</strong>：MiniMax 从 M2 到 M3 的变化提供了更完整的参照——当稀疏机制和配套内核尚未验证成熟时，保留全注意力是合理选择；当索引器、训练配方与硬件实现共同成熟后，再切换到 MSA 也不迟。关键不是永远保守或永远追新，而是用自己的生产负载验证收益能否覆盖复杂度。</p>
+</li>
+<li>
+<p><strong>无论选哪种机制，都不要只信论文里的效率数字</strong>：分组比例、窗口大小、混合层比例这些参数都会显著影响最终表现，落地前最好用自己的真实上下文长度分布和硬件条件做一次独立压测。</p>
+</li>
+</ul>
+<h2 id="_6">小结</h2>
+<p>大模型的注意力机制演进，本质上是一场围绕 KV Cache 和计算复杂度展开的持续优化：GQA 靠"共享 KV 头"压缩缓存，MLA 靠"低秩潜空间压缩"做同一件事但保留了更多质量；SWA 靠"固定窗口"减少每次要读的历史范围，DSA 靠 token 级学习式索引选择，MiniMax M3 的 MSA 则按 GQA group 做块级稀疏检索；DeepSeek V4 的 CSA + HCA 继续融合压缩与稀疏路线；Qwen3.8、Kimi K3 等混合线性架构则把大部分层换成线性时间模块，只在少数层保留精确检索能力。没有一种机制是全场景最优解，GQA 的工程成熟度、MLA 的质量-压缩比、稀疏/压缩混合注意力与线性架构的长上下文效率，各自对应不同的业务约束。MiniMax 从 M2 全注意力转向 M3 MSA 也再次说明，架构选择是算法、内核和生产验证共同作用的阶段性结果。对于架构未公开的闭源模型，最可靠的做法仍是明确标注未知，而不是根据跑分反向猜测。</p>
+<h2 id="_7">免责声明</h2>
+<p>本文基于截至 2026 年 8 月 20 日可访问的公开论文、官方技术报告和第三方评测整理，旨在提供技术背景与学习参考，不构成模型选型、采购或投资建议。文中涉及的效率提升比例、KV Cache 压缩数据均来自厂商官方披露或第三方复现实验，具体数值会随模型版本、评测设置和硬件环境变化，请以最新官方文档为准。闭源模型未公开的架构信息均明确标注为未知，本文不依据性能、价格或上下文长度推测其注意力机制。</p>
+<h2 id="_8">参考来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/1911.02150">Fast Transformer Decoding: One Write-Head is All You Need（MQA 原始论文）</a></li>
+<li><a href="https://arxiv.org/abs/2305.13245">GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints</a></li>
+<li><a href="https://arxiv.org/abs/2405.04434">DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model（MLA 原始论文）</a></li>
+<li><a href="https://arxiv.org/html/2502.07864v1">Multi-head Latent Attention Is All You Need</a></li>
+<li><a href="https://arxiv.org/abs/2310.06825">Mistral 7B（SWA + GQA 原始论文）</a></li>
+<li><a href="https://arxiv.org/abs/2503.19786">Gemma 3 Technical Report</a></li>
+<li><a href="https://arxiv.org/html/2502.11089">Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention</a></li>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp">DeepSeek-V3.2-Exp 模型卡（Hugging Face）</a></li>
+<li><a href="https://www.datacamp.com/tutorial/deepseek-v-3-2-exp">DeepSeek-V3.2-Exp: A Guide With Demo Project（DataCamp）</a></li>
+<li><a href="https://arxiv.org/html/2602.15763">GLM-5 Technical Report</a></li>
+<li><a href="https://docs.z.ai/guides/llm/glm-5">GLM-5 官方文档（Z.ai）</a></li>
+<li><a href="https://docs.nvidia.com/nemo/automodel/latest/model-coverage/large-language-models/glm-5-moe-dsa">GLM-5 MoE DSA 架构文档（NVIDIA NeMo）</a></li>
+<li><a href="https://huggingface.co/docs/transformers/model_doc/glm_moe_dsa">GLM MoE DSA 模型文档（Hugging Face Transformers）</a></li>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro">DeepSeek-V4-Pro 官方模型卡</a></li>
+<li><a href="https://arxiv.org/abs/2606.19348">DeepSeek V4 Technical Report</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen3.8-27B">Qwen3.8-27B 官方模型卡</a></li>
+<li><a href="https://arxiv.org/abs/2510.26692">Kimi Linear: An Expressive, Efficient Attention Architecture</a></li>
+<li><a href="https://arxiv.org/html/2607.24653">Kimi K3: Open Frontier Intelligence</a></li>
+<li><a href="https://huggingface.co/inclusionAI/Ling-2.5-1T">Ling 2.5 模型卡（Hugging Face）</a></li>
+<li><a href="https://huggingface.co/blog/MiniMax-AI/why-did-m2-end-up-as-a-full-attention-model">Why Did M2 End Up as a Full Attention Model?（MiniMax 官方博客）</a></li>
+<li><a href="https://www.minimax.io/blog/minimax-m3">MiniMax M3 官方发布说明</a></li>
+<li><a href="https://huggingface.co/MiniMaxAI/MiniMax-M3">MiniMax M3 官方模型卡（Hugging Face）</a></li>
+<li><a href="https://arxiv.org/html/2606.13392v1">MiniMax Sparse Attention（MSA 技术论文）</a></li>
+<li><a href="https://docs.nvidia.com/nemo/automodel/model-coverage/vision-language-models/minimax/minimax-m3">MiniMax M3 架构文档（NVIDIA NeMo）</a></li>
+<li><a href="https://openai.com/index/previewing-gpt-5-6-sol/">Previewing GPT-5.6 Sol（OpenAI）</a></li>
+<li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Claude Fable 5 与 Mythos 5（Anthropic）</a></li>
+<li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/">Introducing Gemini 3.7 Flash（Google）</a></li>
+<li><a href="https://magazine.sebastianraschka.com/p/visual-attention-variants">A Visual Guide to Attention Variants in Modern LLMs（Sebastian Raschka）</a></li>
+<li><a href="https://www.pythonalchemist.com/llm-architectures/attention-variants">MHA, GQA, MQA, MLA, SWA, DSA 交互对比（PythonAlchemist）</a></li>
+</ul>
+<h2 id="_9">相关阅读</h2>
+<ul>
+<li><a href="../posts/open-source-llm-comparison-2026.html">开源大模型选型对比 2026</a></li>
+<li><a href="../posts/llm-inference-framework-comparison-2026.html">大模型推理框架对比指南 2026</a></li>
+<li><a href="../posts/dspark-vs-dflash-speculative-decoding-inference-2026.html">DSpark vs DFlash：投机解码推理加速对比</a></li>
+<li><a href="../posts/deepseek-harness-agent-runtime-open-source-2026.html">DeepSeek Harness：Agent Runtime 开源实践</a></li>
+<li><a href="../posts/llm-evaluation-guide-mmlu-swe-bench-arena-2026.html">大模型评测全指南：从 MMLU、SWE-bench 到 Arena</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 心动购物季主会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpdGZu" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝开发工具专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=llm-attention-mechanisms-comparison-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=llm-attention-mechanisms-comparison-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

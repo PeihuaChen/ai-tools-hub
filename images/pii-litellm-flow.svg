@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#ffffff"/>
+
+  <text x="600" y="44" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">LiteLLM + Presidio PII 脱敏数据流</text>
+  <text x="600" y="72" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6b7280">一处配置，全模型生效：入口脱敏 → 调用模型 → 可选还原 → 日志脱敏</text>
+
+  <defs>
+    <marker id="a1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0 0 L8 3 L0 6 Z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="a2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0 0 L8 3 L0 6 Z" fill="#15803d"/>
+    </marker>
+  </defs>
+
+  <!-- User -->
+  <rect x="40" y="240" width="150" height="100" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="115" y="278" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#111827">用户 / 应用</text>
+  <text x="115" y="302" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#b91c1c">"我卡号 4111...</text>
+  <text x="115" y="318" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#b91c1c">邮箱 a@b.com"</text>
+
+  <!-- LiteLLM gateway box -->
+  <rect x="270" y="110" width="470" height="380" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="505" y="140" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="bold" fill="#1d4ed8">LiteLLM 网关（config.yaml 配 guardrail）</text>
+
+  <!-- pre_call -->
+  <rect x="295" y="162" width="420" height="72" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2"/>
+  <text x="315" y="186" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a">① pre_call · 入口检测（scope: input）</text>
+  <text x="315" y="207" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4b5563">调 Presidio Analyzer/Anonymizer → MASK / BLOCK</text>
+  <text x="315" y="224" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4b5563">presidio_score_thresholds 按实体调阈值压误报</text>
+
+  <!-- Presidio call -->
+  <rect x="770" y="160" width="180" height="80" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="860" y="188" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#15803d">Presidio 容器</text>
+  <text x="860" y="209" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#166534">Analyzer :5002</text>
+  <text x="860" y="225" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#166534">Anonymizer :5001</text>
+
+  <!-- masked to model -->
+  <rect x="295" y="248" width="420" height="60" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="1.2"/>
+  <text x="315" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#b45309">② 送给模型的是占位符（原始 PII 不出境）</text>
+  <text x="315" y="293" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#92400e">"我卡号 &lt;CREDIT_CARD&gt; 邮箱 &lt;EMAIL_ADDRESS&gt;"</text>
+
+  <!-- post/output -->
+  <rect x="295" y="322" width="420" height="60" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2"/>
+  <text x="315" y="346" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a">③ post_call · 出口检测（scope: output）</text>
+  <text x="315" y="367" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4b5563">扫描模型响应，防止生成/回泄 PII</text>
+
+  <!-- output_parse / logging -->
+  <rect x="295" y="396" width="203" height="72" rx="10" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="396" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#6d28d9">④ output_parse_pii</text>
+  <text x="396" y="440" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#4b5563">响应里占位符</text>
+  <text x="396" y="455" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#4b5563">还原成真实值</text>
+
+  <rect x="512" y="396" width="203" height="72" rx="10" fill="#f8fafc" stroke="#0e7490" stroke-width="1.2"/>
+  <text x="613" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#0e7490">⑤ logging_only</text>
+  <text x="613" y="440" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#4b5563">写日志前脱敏</text>
+  <text x="613" y="455" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#4b5563">不污染可观测系统</text>
+
+  <!-- Models -->
+  <rect x="1000" y="300" width="160" height="150" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="1080" y="330" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#111827">下游模型</text>
+  <text x="1080" y="358" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4b5563">OpenAI GPT</text>
+  <text x="1080" y="380" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4b5563">Anthropic Claude</text>
+  <text x="1080" y="402" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4b5563">自建 / 私有模型</text>
+  <text x="1080" y="428" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" fill="#6b7280">只见到占位符</text>
+
+  <!-- arrows -->
+  <line x1="190" y1="285" x2="265" y2="220" stroke="#1d4ed8" stroke-width="2" marker-end="url(#a1)"/>
+  <line x1="715" y1="198" x2="765" y2="198" stroke="#15803d" stroke-width="2" marker-end="url(#a2)"/>
+  <line x1="715" y1="278" x2="995" y2="350" stroke="#b45309" stroke-width="2" marker-end="url(#a1)"/>
+  <line x1="995" y1="390" x2="718" y2="352" stroke="#1d4ed8" stroke-width="2" marker-end="url(#a1)"/>
+
+  <text x="40" y="540" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#6b7280">模式可叠加：pre_call 入口保护 + post_call 出口兜底 + logging_only 日志脱敏；MCP 场景用 pre_mcp_call 拦工具参数。</text>
+  <text x="40" y="562" font-family="Segoe UI, Arial, sans-serif" font-size="11.5" fill="#6b7280">环境变量：PRESIDIO_ANALYZER_API_BASE / PRESIDIO_ANONYMIZER_API_BASE 指向已部署的两个容器。</text>
+</svg>

@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#ffffff"/>
+
+  <text x="60" y="50" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" fill="#111827">四模态水印方案对照：代表实现、鲁棒性与已知攻击</text>
+  <text x="60" y="78" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">熵越低的模态越难嵌入；攻防不对称是结构性的——嵌入方要保质量，攻击方只要「看起来还是那个」</text>
+
+  <!-- header row -->
+  <g transform="translate(60,100)">
+    <rect x="0" y="0" width="180" height="44" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="90" y="28" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">模态</text>
+    <rect x="188" y="0" width="290" height="44" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="333" y="28" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">代表实现</text>
+    <rect x="486" y="0" width="256" height="44" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="614" y="28" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">校验方式</text>
+    <rect x="750" y="0" width="330" height="44" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="915" y="28" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">已知失效场景 / 攻击</text>
+  </g>
+
+  <!-- text row -->
+  <g transform="translate(60,152)">
+    <rect x="0" y="0" width="180" height="118" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.2"/>
+    <text x="90" y="40" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#b45309" text-anchor="middle">文本</text>
+    <text x="90" y="66" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">熵最低 · 最难</text>
+    <rect x="70" y="80" width="40" height="20" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="1"/>
+    <text x="90" y="94" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">★☆☆</text>
+
+    <rect x="188" y="0" width="290" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="204" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">SynthID-Text（g-function + 锦标赛采样）</text>
+    <text x="204" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">keys 建议 20-30 个 · ngram_len 默认 5</text>
+    <text x="204" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">KGW 绿名单 + logits 偏置</text>
+    <text x="204" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">PostMark（纯黑盒事后插词）</text>
+    <text x="204" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">已开源进 transformers v4.46</text>
+
+    <rect x="486" y="0" width="256" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="502" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Bayesian 分类器（需单独训练）</text>
+    <text x="502" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">训练集建议 ≥ 1 万条样本</text>
+    <text x="502" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">KGW：绿词占比 z 检验</text>
+    <text x="502" y="86" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">同 tokenizer 模型可共享检测器</text>
+    <text x="502" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#b45309">水印配置泄露 = 水印可伪造</text>
+
+    <rect x="750" y="0" width="330" height="118" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="766" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">事实型 / 短答案几乎无法嵌入（原理限制）</text>
+    <text x="766" y="46" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">全文重写、跨语言翻译 → 置信度骤降</text>
+    <text x="766" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">绿名单窃取（混合整数规划）</text>
+    <text x="766" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">偏置反转规避 · 改写攻击</text>
+    <text x="766" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">SynthID-Text 层膨胀攻击 · PRNG 不可信</text>
+  </g>
+
+  <!-- image row -->
+  <g transform="translate(60,278)">
+    <rect x="0" y="0" width="180" height="118" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="90" y="40" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">图像</text>
+    <text x="90" y="66" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">最成熟 · 攻击也最成熟</text>
+    <rect x="70" y="80" width="40" height="20" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="90" y="94" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">★★☆</text>
+
+    <rect x="188" y="0" width="290" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="204" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">SynthID Image（像素级，规模最大）</text>
+    <text x="204" y="46" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Stable Signature（微调 LDM 解码器）</text>
+    <text x="204" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Tree-Ring（改初始噪声，频域环形）</text>
+    <text x="204" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">DWT/DCT · StegaStamp（后处理型）</text>
+    <text x="204" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">模型内生型可堵住「不打水印」的路径</text>
+
+    <rect x="486" y="0" width="256" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="502" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">SynthID Detector 门户 / Gemini App</text>
+    <text x="502" y="46" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">OpenAI Verify（图像，含 API）</text>
+    <text x="502" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Tree-Ring：DDIM 反演后匹配图案</text>
+    <text x="502" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Stable Signature：解码签名位串</text>
+    <text x="502" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">抗压缩 / 裁剪 / 重编码</text>
+
+    <rect x="750" y="0" width="330" height="118" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="766" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">SemanticRegen：唯一击穿 Tree-Ring（p=0.10）</text>
+    <text x="766" y="46" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">其余三套 bit accuracy 压至 0.75 以下</text>
+    <text x="766" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">攻击后 masked SSIM 仍达 0.94 ± 0.01</text>
+    <text x="766" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">A Crack in the Bark（USENIX Sec 25）</text>
+    <text x="766" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">微调即可洗除 Stable Signature</text>
+  </g>
+
+  <!-- audio row -->
+  <g transform="translate(60,404)">
+    <rect x="0" y="0" width="180" height="118" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+    <text x="90" y="40" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#15803d" text-anchor="middle">音频 / 语音</text>
+    <text x="90" y="66" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">需片段级定位</text>
+    <rect x="70" y="80" width="40" height="20" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="1"/>
+    <text x="90" y="94" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#15803d" text-anchor="middle">★★☆</text>
+
+    <rect x="188" y="0" width="290" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="204" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">AudioSeal（Meta，开源）</text>
+    <text x="204" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">generator/detector 联合训练 + 定位损失</text>
+    <text x="204" y="66" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">感知损失借鉴听觉掩蔽效应</text>
+    <text x="204" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">SynthID Audio · Voice Engine 水印</text>
+    <text x="204" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">2026-07-31 起 OpenAI 音频接入 SynthID</text>
+
+    <rect x="486" y="0" width="256" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="502" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">AudioSeal detector：采样点级定位</text>
+    <text x="502" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">能指出长音频里哪几段带水印</text>
+    <text x="502" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">OpenAI Verify 已支持音频 + 验证 API</text>
+    <text x="502" y="86" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">检测器速度快，适合在线大规模检测</text>
+    <text x="502" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">整段判定不够，克隆攻击常只换几秒</text>
+
+    <rect x="750" y="0" width="330" height="118" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="766" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">溯源水印会干扰音频深伪检测器判断</text>
+    <text x="766" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">内建式、AudioSeal、商业平台均可能出现</text>
+    <text x="766" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">重采样 / 有损编码 / 加噪 / 变速</text>
+    <text x="766" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">片段拼接混入真实录音</text>
+    <text x="766" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#b45309">→ 水印与深伪检测必须端到端一起评测</text>
+  </g>
+
+  <!-- video row -->
+  <g transform="translate(60,530)">
+    <rect x="0" y="0" width="180" height="118" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="90" y="40" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#6d28d9" text-anchor="middle">视频</text>
+    <text x="90" y="66" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">多一个时间维度</text>
+    <rect x="70" y="80" width="40" height="20" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="1"/>
+    <text x="90" y="94" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6d28d9" text-anchor="middle">★★☆</text>
+
+    <rect x="188" y="0" width="290" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="204" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">SynthID for video（逐帧嵌入像素）</text>
+    <text x="204" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">Veo 生成的视频全量加水印</text>
+    <text x="204" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Sora：可见动态水印 + C2PA 元数据</text>
+    <text x="204" y="86" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">逐帧冗余高，抽帧 / 时间裁剪仍可检出</text>
+    <text x="204" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">成本随时长线性增长，需处理帧间一致性</text>
+
+    <rect x="486" y="0" width="256" height="118" rx="8" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="502" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">抽帧检测后聚合投票</text>
+    <text x="502" y="46" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">按图像检测器逐帧跑，再做时序统计</text>
+    <text x="502" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#111827">Gemini App 内 SynthID 视频验证</text>
+    <text x="502" y="86" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">C2PA 软绑定可用于恢复被剥离凭证</text>
+    <text x="502" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">元数据一定会在平台转码时丢</text>
+
+    <rect x="750" y="0" width="330" height="118" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="766" y="26" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">转码与重压缩（平台必做，不可避免）</text>
+    <text x="766" y="46" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">录屏 / 二次拍摄</text>
+    <text x="766" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">时间裁剪 / 抽帧 / 插帧 / 变速</text>
+    <text x="766" y="86" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">画面裁边 / 加边框（短视频常规操作）</text>
+    <text x="766" y="106" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#b45309">去移动 Logo 与剥离 C2PA 的工具已普及</text>
+  </g>
+
+  <text x="60" y="682" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">星级为在「一次平台转码 + 一次常规二次编辑」后水印仍可检出的相对难度评估，非绝对指标；★☆☆ 表示最脆弱。数据来源见文末参考。</text>
+</svg>

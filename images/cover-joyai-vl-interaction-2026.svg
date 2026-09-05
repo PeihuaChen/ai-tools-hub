@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#1a0a28"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c084fc"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="grid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a855f7" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="gridp" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#3b2460" stroke-opacity="0.28" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#gridp)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- accent bars -->
+  <rect x="0" y="0" width="300" height="4" fill="#c084fc"/>
+  <rect x="300" y="0" width="300" height="4" fill="#38bdf8"/>
+  <rect x="600" y="0" width="300" height="4" fill="#fb7185"/>
+  <rect x="0" y="379" width="450" height="4" fill="#c084fc"/>
+  <rect x="450" y="379" width="450" height="4" fill="#38bdf8"/>
+
+  <!-- tag box -->
+  <rect x="48" y="40" width="274" height="34" rx="6" fill="#1e1030" stroke="#a855f7" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="64" y="62" font-size="15" fill="#d8b4fe" font-weight="600">AI 行业观察 · 实时视觉交互</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="26" fill="#1e1030" stroke="#38bdf8" stroke-opacity="0.7" stroke-width="1.5"/>
+  <text x="838" y="65" font-size="22" fill="#7dd3fc" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="132" font-size="31" fill="#ffffff" font-weight="800">AI 不再等你开口</text>
+  <text x="48" y="170" font-size="19" font-weight="700" fill="url(#sub)">京东 JoyAI-VL-Interaction 开源</text>
+  <text x="48" y="198" font-size="19" font-weight="700" fill="url(#sub)">全球首个"主动视觉交互"全栈系统</text>
+
+  <!-- highlight lines -->
+  <text x="48" y="238" font-size="13" fill="#d8b4fe">▸ 每秒三选一：说话 / 沉默 / 委派（模型原生学习）</text>
+  <text x="48" y="260" font-size="13" fill="#7dd3fc">▸ 事件驱动场景胜率 77.6%（vs 豆包）/ 87.9%（vs Gemini）</text>
+  <text x="48" y="282" font-size="13" fill="#fda4af">▸ 8B 参数 · Apache 2.0 · 权重+数据+部署代码全开</text>
+
+  <!-- pills -->
+  <g font-size="12" font-weight="600">
+    <rect x="48" y="306" width="64" height="26" rx="13" fill="none" stroke="#c084fc" stroke-opacity="0.6"/>
+    <text x="80" y="323" fill="#d8b4fe" text-anchor="middle">JoyAI</text>
+    <rect x="120" y="306" width="90" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.6"/>
+    <text x="165" y="323" fill="#7dd3fc" text-anchor="middle">主动交互</text>
+    <rect x="218" y="306" width="78" height="26" rx="13" fill="none" stroke="#fb7185" stroke-opacity="0.6"/>
+    <text x="257" y="323" fill="#fda4af" text-anchor="middle">视频流</text>
+    <rect x="304" y="306" width="90" height="26" rx="13" fill="none" stroke="#4ade80" stroke-opacity="0.6"/>
+    <text x="349" y="323" fill="#86efac" text-anchor="middle">Apache 2.0</text>
+  </g>
+
+  <!-- right concept: video feed → decision -->
+  <g transform="translate(640,104)" opacity="0.95">
+    <!-- camera icon -->
+    <rect x="20" y="0" width="60" height="42" rx="6" fill="#1e1030" stroke="#c084fc" stroke-opacity="0.7"/>
+    <circle cx="50" cy="21" r="10" fill="none" stroke="#d8b4fe" stroke-width="1.5"/>
+    <circle cx="50" cy="21" r="4" fill="#c084fc" opacity="0.7"/>
+    <text x="50" y="58" font-size="10" fill="#94a3b8" text-anchor="middle">Live Feed</text>
+
+    <!-- arrow down -->
+    <line x1="50" y1="62" x2="50" y2="82" stroke="#7dd3fc" stroke-width="2"/>
+    <path d="M50 86 l-5 -6 h10 z" fill="#7dd3fc"/>
+
+    <!-- decision box -->
+    <rect x="0" y="90" width="100" height="50" rx="8" fill="#1e1030" stroke="#38bdf8" stroke-opacity="0.7"/>
+    <text x="50" y="110" font-size="11" fill="#7dd3fc" text-anchor="middle" font-weight="600">每秒决策</text>
+    <text x="50" y="128" font-size="10" fill="#d8b4fe" text-anchor="middle">说 | 静 | 委派</text>
+
+    <!-- right labels -->
+    <text x="108" y="100" font-size="9" fill="#86efac">→ speak</text>
+    <text x="108" y="115" font-size="9" fill="#94a3b8">→ silent</text>
+    <text x="108" y="130" font-size="9" fill="#fda4af">→ delegate</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="356" x2="852" y2="356" stroke="#3b2460" stroke-opacity="0.5" stroke-width="1"/>
+  <text x="48" y="372" font-size="11" fill="#8a7898">技术拆解 · 效果对比 · 竞品全景 · 落地场景</text>
+  <text x="852" y="372" font-size="11" fill="#6a5878" text-anchor="end">公众号：AI工具箱</text>
+</svg>

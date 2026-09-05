@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4aa"/>
+      <stop offset="33%" style="stop-color:#667eea"/>
+      <stop offset="66%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f5576c"/>
+      <stop offset="33%" style="stop-color:#f093fb"/>
+      <stop offset="66%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#00d4aa"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4aa"/>
+      <stop offset="100%" style="stop-color:#667eea"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Label box (top-left) -->
+  <rect x="32" y="28" width="240" height="28" rx="4" fill="none" stroke="#00d4aa" stroke-width="1" opacity="0.8"/>
+  <text x="44" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#00d4aa" font-weight="500">AI 工具观察 · Agent CLI 工具实战</text>
+
+  <!-- Year badge (top-right) -->
+  <rect x="832" y="24" width="44" height="44" rx="6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="854" y="52" font-family="system-ui, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)" text-anchor="middle" font-weight="700">26</text>
+
+  <!-- Main title -->
+  <text x="44" y="108" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#ffffff" font-weight="700">一行命令让 AI Agent</text>
+  <text x="44" y="146" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#ffffff" font-weight="700">读推特、刷 B 站、看小红书</text>
+
+  <!-- Subtitle -->
+  <text x="44" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="url(#subtitle)">Agent-Reach · OpenCLI · AutoCLI · Firecrawl CLI 深度横评</text>
+
+  <!-- Key highlights -->
+  <text x="44" y="222" font-family="monospace" font-size="12" fill="#00d4aa">★ Agent-Reach 51.8K Stars — 编排层哲学，后端自动切换零维护</text>
+  <text x="44" y="244" font-family="monospace" font-size="12" fill="#f093fb">★ OpenCLI 24K Stars — 80+ 平台适配，复用浏览器登录态</text>
+  <text x="44" y="266" font-family="monospace" font-size="12" fill="#667eea">★ AutoCLI 4.7MB Rust 二进制 — 55+ 平台，零依赖极速访问</text>
+
+  <!-- Tag pills -->
+  <rect x="44" y="292" width="88" height="24" rx="12" fill="none" stroke="rgba(0,212,170,0.5)" stroke-width="1"/>
+  <text x="88" y="308" font-family="system-ui, sans-serif" font-size="11" fill="#00d4aa" text-anchor="middle">Agent-Reach</text>
+
+  <rect x="142" y="292" width="68" height="24" rx="12" fill="none" stroke="rgba(240,147,251,0.5)" stroke-width="1"/>
+  <text x="176" y="308" font-family="system-ui, sans-serif" font-size="11" fill="#f093fb" text-anchor="middle">OpenCLI</text>
+
+  <rect x="220" y="292" width="64" height="24" rx="12" fill="none" stroke="rgba(102,126,234,0.5)" stroke-width="1"/>
+  <text x="252" y="308" font-family="system-ui, sans-serif" font-size="11" fill="#667eea" text-anchor="middle">AutoCLI</text>
+
+  <rect x="294" y="292" width="82" height="24" rx="12" fill="none" stroke="rgba(245,87,108,0.5)" stroke-width="1"/>
+  <text x="335" y="308" font-family="system-ui, sans-serif" font-size="11" fill="#f5576c" text-anchor="middle">Firecrawl CLI</text>
+
+  <rect x="386" y="292" width="72" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="422" y="308" font-family="system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.6)" text-anchor="middle">CLI 浪潮</text>
+
+  <rect x="468" y="292" width="68" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="502" y="308" font-family="system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.6)" text-anchor="middle">互联网触达</text>
+
+  <!-- Right side: conceptual diagram -->
+  <!-- Agent icon -->
+  <rect x="640" y="80" width="120" height="36" rx="6" fill="none" stroke="rgba(0,212,170,0.6)" stroke-width="1.5"/>
+  <text x="700" y="103" font-family="monospace" font-size="11" fill="#00d4aa" text-anchor="middle">AI Agent</text>
+
+  <!-- Arrow down -->
+  <line x1="700" y1="116" x2="700" y2="138" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="695,136 700,143 705,136" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- CLI Layer -->
+  <rect x="620" y="145" width="160" height="36" rx="6" fill="none" stroke="rgba(102,126,234,0.6)" stroke-width="1.5"/>
+  <text x="700" y="168" font-family="monospace" font-size="11" fill="#667eea" text-anchor="middle">CLI 工具层</text>
+
+  <!-- Arrow down -->
+  <line x1="700" y1="181" x2="700" y2="203" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="695,201 700,208 705,201" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Platform boxes -->
+  <rect x="610" y="210" width="52" height="28" rx="4" fill="rgba(245,87,108,0.1)" stroke="rgba(245,87,108,0.4)" stroke-width="1"/>
+  <text x="636" y="228" font-family="system-ui, sans-serif" font-size="9" fill="#f5576c" text-anchor="middle">Twitter</text>
+
+  <rect x="670" y="210" width="52" height="28" rx="4" fill="rgba(240,147,251,0.1)" stroke="rgba(240,147,251,0.4)" stroke-width="1"/>
+  <text x="696" y="228" font-family="system-ui, sans-serif" font-size="9" fill="#f093fb" text-anchor="middle">B站</text>
+
+  <rect x="730" y="210" width="52" height="28" rx="4" fill="rgba(0,212,170,0.1)" stroke="rgba(0,212,170,0.4)" stroke-width="1"/>
+  <text x="756" y="228" font-family="system-ui, sans-serif" font-size="9" fill="#00d4aa" text-anchor="middle">小红书</text>
+
+  <rect x="610" y="246" width="52" height="28" rx="4" fill="rgba(102,126,234,0.1)" stroke="rgba(102,126,234,0.4)" stroke-width="1"/>
+  <text x="636" y="264" font-family="system-ui, sans-serif" font-size="9" fill="#667eea" text-anchor="middle">Reddit</text>
+
+  <rect x="670" y="246" width="52" height="28" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="696" y="264" font-family="system-ui, sans-serif" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">GitHub</text>
+
+  <rect x="730" y="246" width="52" height="28" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="756" y="264" font-family="system-ui, sans-serif" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">YouTube</text>
+
+  <!-- Bottom separator and info -->
+  <line x1="44" y1="340" x2="856" y2="340" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="44" y="362" font-family="system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.35)">全文 12 章节 · 含架构图解与选型矩阵 · 3000+ 字深度分析</text>
+  <text x="856" y="362" font-family="system-ui, sans-serif" font-size="10" fill="rgba(255,255,255,0.2)" text-anchor="end">VXI · AI 工具观察</text>
+</svg>

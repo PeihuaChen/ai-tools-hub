@@ -1,0 +1,3030 @@
+{
+  "generated_at": "2026-09-05T10:27:43.369671",
+  "total": 161,
+  "posts": [
+    {
+      "slug": "firecrawl-web-context-api-rag-dify-mcp-2026",
+      "title": "让 Agent 学会上网：Firecrawl 的五大能力与四类应用（RAG、Dify、MCP、深度研究）",
+      "date": "2026-09-04",
+      "category": "开源工具",
+      "description": "Firecrawl 把任意网页变成 LLM 可直接消费的干净 Markdown。本文拆解它的 scrape/crawl/map/extract/search 五大能力，以及在 RAG 知识库、Dify 数据源、MCP 工具、深度研究 Agent 四类场景的落地方式，附自建部署与竞品取舍。",
+      "keywords": [
+        "Firecrawl",
+        "网页抓取",
+        "RAG",
+        "Dify",
+        "MCP"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 10488,
+      "view_count": 0,
+      "created_at": "2026-09-04 11:24:20",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "k2-horizon-fully-open-source-fleet-mbzuai-ifm-2026",
+      "title": "不只是开放权重：K2 Horizon 把训练数据、代码、中间检查点全掀了",
+      "date": "2026-09-04",
+      "category": "AI 行业观察",
+      "description": "阿联酋 MBZUAI 旗下 IFM 一次开源六个模型（0.9B 到 375B），号称 AI 史上最大规模的完全开源发布。本文拆解它开放的到底是什么、MoVA 与无损 3 倍提速两项技术、六个尺寸的性能账，以及它主动披露 reward hacking 背后从 open weights 走向 open science 的真正意义。",
+      "keywords": [
+        "K2 Horizon",
+        "IFM",
+        "MBZUAI",
+        "完全开源",
+        "开源模型",
+        "MoE",
+        "阿联酋AI"
+      ],
+      "read_time": "19 分钟",
+      "word_count": 11408,
+      "view_count": 0,
+      "created_at": "2026-09-05 02:27:39",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "llm-knowledge-graph-graphrag-graph-native-agent-2026",
+      "title": "大模型与知识图谱的双向奔赴：从 GraphRAG 到图原生 Agent 的 2026 全景",
+      "date": "2026-09-03",
+      "category": "AI 基础设施",
+      "description": "大模型自动抽取实体关系，把知识图谱最贵的构建环节做成了流水线；图谱反过来给 Agent 提供可验证的记忆与推理底座。本文拆解 LLM 建图与图谱喂 Agent 的双向关系，覆盖 GraphRAG 原理、准确率对比、Zep/Mem0/Cognee 等记忆方案，以及从 RAG 到图原生 Agent 的演进与落地避坑。",
+      "keywords": [
+        "知识图谱",
+        "GraphRAG",
+        "AI Agent",
+        "Agent记忆",
+        "RAG"
+      ],
+      "read_time": "25 分钟",
+      "word_count": 15403,
+      "view_count": 0,
+      "created_at": "2026-09-03 11:24:53",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ai-chip-design-democratization-redwood-2026",
+      "title": "2 人 + AI，两周造出一颗芯片：AI 正在把芯片设计从巨头手里\"民主化\"吗？",
+      "date": "2026-09-02",
+      "category": "AI 行业观察",
+      "description": "从 Redwood 两周造芯、AlphaChip 强化学习布局，到 Tiny Tapeout 与开源 EDA，AI 正在重写芯片设计的规则。本文用真实数据梳理 AI 在芯片设计的应用现状，并冷静探讨\"芯片设计民主化\"到底是真命题还是又一次泡沫。",
+      "keywords": [
+        "AI芯片设计",
+        "EDA",
+        "芯片民主化",
+        "RISC-V",
+        "AlphaChip"
+      ],
+      "read_time": "19 分钟",
+      "word_count": 11626,
+      "view_count": 0,
+      "created_at": "2026-09-02 11:23:26",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "ai-agent-temporal-awareness-time-perception-guide-2026",
+      "title": "AI Agent 的\"时间盲区\"：为什么大模型不知道今天几号，以及如何让它拥有时间感知",
+      "date": "2026-09-01",
+      "category": "AI 行业观察",
+      "description": "大模型天生没有时钟：不知道今天几号、算不清时间差、记不住事实何时变化。本文拆解 AI Agent 时间感知的四层缺陷、根因，以及 Prompt 注入、工具化、双时间记忆图谱、训练强化四条修复路线。",
+      "keywords": [
+        "AI Agent",
+        "时间感知",
+        "时序推理",
+        "Agent 记忆",
+        "知识截止"
+      ],
+      "read_time": "23 分钟",
+      "word_count": 13816,
+      "view_count": 0,
+      "created_at": "2026-09-01 14:15:21",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "rag-data-leakage-four-chains-defense-2026",
+      "title": "RAG 的四条泄露链：从向量库裸奔到知识库被逐字抽干",
+      "date": "2026-08-30",
+      "category": "AI风险与合规",
+      "description": "1170 个向量库在公网裸奔、92% 的输入文本可从 embedding 还原、25 个商用 GPTs 用 2 次查询 100% 泄库。RAG 的信息泄露不是一个问题，而是入口、表示层、检索、生成四条彼此独立的链路。逐条拆解攻击手法与真实事故，给出隔离策略的五个层级与代价，以及一份可以直接拿去做评审的加固清单。",
+      "keywords": [
+        "RAG安全",
+        "向量数据库",
+        "嵌入反演",
+        "知识库隔离",
+        "提示注入",
+        "OWASP LLM Top 10"
+      ],
+      "read_time": "53 分钟",
+      "word_count": 32566,
+      "view_count": 0,
+      "created_at": "2026-08-31 11:47:39",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "ocr-selection-guide-open-source-vs-commercial-2026",
+      "title": "2026 OCR 选型手册：12 个开源模型 + 10 家商业 API 的成本、精度与落地边界",
+      "date": "2026-08-26",
+      "category": "AI开发平台",
+      "description": "2026 年 OCR 生态已经彻底改写：0.9B 专用小模型在文档解析上打赢千亿级通用 VLM，中国团队几乎包场开源阵营，商业 API 价格被打到每千页 2 美元。本文横向盘点 12 个主流开源模型与 10 家商业 API，给出成本模型、精度真相与六类场景的落地边界。",
+      "keywords": [
+        "OCR",
+        "文档解析",
+        "PaddleOCR",
+        "DeepSeek-OCR",
+        "GLM-OCR",
+        "MinerU",
+        "Mistral OCR",
+        "IDP",
+        "RAG",
+        "选型"
+      ],
+      "read_time": "41 分钟",
+      "word_count": 25975,
+      "view_count": 0,
+      "created_at": "2026-08-25 11:37:52",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ai-hallucination-liability-chain-2026",
+      "title": "AI 幻觉责任链：从律师罚单到航司赔款，谁在为编造的政策买单",
+      "date": "2026-08-25",
+      "category": "AI风险与合规",
+      "description": "全球已有约1490起法院裁决涉及AI幻觉材料，最大单笔律师罚款11万美元，航司因客服机器人编造政策被判赔偿。梳理法律、医疗、客服、保险四条战线的真实事故，对比欧盟高风险义务延期16个月与美国保险监管已进入实操检查的反差，并给出企业可执行的幻觉治理清单。",
+      "keywords": [
+        "AI幻觉",
+        "AI责任",
+        "合规风险",
+        "EU AI Act",
+        "AI责任险",
+        "企业AI治理"
+      ],
+      "read_time": "55 分钟",
+      "word_count": 33079,
+      "view_count": 0,
+      "created_at": "2026-08-25 11:37:47",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "test-time-compute-self-improving-llm-2026",
+      "title": "不重训也能变强：推理时计算与模型自我学习的 2026 全景",
+      "date": "2026-08-24",
+      "category": "AI行业观察",
+      "description": "推理时算力已经不只是让模型多想一会儿。本文把 test-time compute 与模型自我学习切成五条轴——延长思考、并行采样、潜空间深度、权重更新、记忆演化，逐条给出 2026 年的真实方案、实测数字与已知边界，并附上一份坏消息清单和工程选型判断。",
+      "keywords": [
+        "推理时计算",
+        "Test-Time Compute",
+        "Test-Time Training",
+        "自我进化",
+        "Agent记忆",
+        "Recirculation",
+        "SEAL",
+        "上下文工程",
+        "持续学习",
+        "大模型"
+      ],
+      "read_time": "45 分钟",
+      "word_count": 27185,
+      "view_count": 0,
+      "created_at": "2026-08-24 11:44:11",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "awesome-llm-apps-complete-guide-2026",
+      "title": "100+可运行AI模板：awesome-llm-apps重新定义LLM应用开发",
+      "date": "2026-08-23",
+      "category": "AI行业观察",
+      "description": "深入解析GitHub上13万Star的AI应用模板库awesome-llm-apps，覆盖100+可直接运行的AI智能体与RAG应用，助你快速构建生产级LLM应用。",
+      "keywords": [
+        "AI Agent",
+        "RAG",
+        "开源项目",
+        "LLM应用",
+        "开发模板"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 13181,
+      "view_count": 0,
+      "created_at": "2026-08-23 12:42:46",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "ai-agent-memory-systems-open-source-guide-2026",
+      "title": "AI Agent 记忆系统全解析：原理拆解、五大开源方案与真实应用场景",
+      "date": "2026-08-22",
+      "category": "AI 基础设施",
+      "description": "AI Agent 没有记忆会怎样？每次对话都从零开始，用户偏好、历史决策、领域知识全部清零。本文拆解 Agent 记忆的分层原理、写入检索机制，深度对比 Mem0、Letta、Zep、LangMem、MemOS 五大开源方案，并结合客服、知识助手、多智能体协同等真实场景，附记忆投毒等安全隐患解读。",
+      "keywords": [
+        "AI Agent",
+        "Agent记忆",
+        "Mem0",
+        "Zep",
+        "MemOS",
+        "Letta"
+      ],
+      "read_time": "24 分钟",
+      "word_count": 14070,
+      "view_count": 0,
+      "created_at": "2026-08-23 02:22:58",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "slm-ecosystem-2026-healthcare-agriculture-electronics",
+      "title": "2026 SLM 生态全景：从\"参数竞赛\"到\"场景为王\"的端侧革命",
+      "date": "2026-08-21",
+      "category": "AI行业观察",
+      "description": "小语言模型正从技术演示走向端侧落地。本文梳理模型、芯片与软件栈生态，并用乌干达离线临床决策、AUGURY 土壤指标、智能眼镜视障导航三个可核验案例，拆解医疗、农业与消费电子的真实边界。",
+      "keywords": [
+        "SLM",
+        "小语言模型",
+        "端侧AI",
+        "医疗AI",
+        "智慧农业",
+        "消费电子",
+        "MiniCPM"
+      ],
+      "read_time": "29 分钟",
+      "word_count": 16582,
+      "view_count": 0,
+      "created_at": "2026-08-21 11:49:17",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "llm-attention-mechanisms-comparison-guide-2026",
+      "title": "大模型注意力机制全景：从 MHA 到 MLA、DSA 与混合线性架构，一文看懂技术演进",
+      "date": "2026-08-20",
+      "category": "AI技术趋势",
+      "description": "系统梳理 MHA、MQA、GQA、MLA、SWA、DSA、CSA/HCA、MSA 与混合线性架构，并对比 GLM-5.3、DeepSeek V4、Qwen3.8、Kimi K3、MiniMax M3 等模型的公开技术路线。",
+      "keywords": [
+        "注意力机制",
+        "MLA",
+        "GQA",
+        "稀疏注意力",
+        "混合线性注意力",
+        "Transformer架构",
+        "大模型"
+      ],
+      "read_time": "33 分钟",
+      "word_count": 19706,
+      "view_count": 0,
+      "created_at": "2026-08-20 11:29:40",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "zed-editor-ai-coding-review-2026",
+      "title": "Zed 编辑器深度调研：Rust 原生 AI IDE，能否挑战 Cursor、VS Code 与 JetBrains？",
+      "date": "2026-08-19",
+      "category": "AI编程助手",
+      "description": "系统调研 Zed 的 Rust 原生架构、开源许可、AI Agent、协作与 Windows 支持，并与 Cursor、Windsurf、VS Code、JetBrains、Neovim 对比，给出个人与团队迁移决策框架。",
+      "keywords": [
+        "Zed",
+        "AI编程",
+        "Cursor",
+        "VS Code",
+        "JetBrains",
+        "开源软件"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 7479,
+      "view_count": 0,
+      "created_at": "2026-08-19 10:59:09",
+      "updated_at": "2026-09-05 02:27:43"
+    },
+    {
+      "slug": "llm-evaluation-guide-mmlu-swe-bench-arena-2026",
+      "title": "大模型评测全指南：从 MMLU、SWE-bench 到 Arena，读懂指标、排名与真实能力",
+      "date": "2026-08-18",
+      "category": "AI开发平台",
+      "description": "系统拆解 MMLU、GPQA、HLE、MMMU、SWE-bench 与 Arena 的测量对象、计分方式和局限，给出当前可核验排名快照及企业自建评测方法。",
+      "keywords": [
+        "大模型评测",
+        "MMLU",
+        "SWE-bench",
+        "Arena",
+        "模型选型",
+        "AI Agent"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9716,
+      "view_count": 0,
+      "created_at": "2026-08-18 11:04:02",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "deepseek-harness-agent-runtime-open-source-2026",
+      "title": "DeepSeek 入局 Agent 基础设施：代码智能体竞争进入 Harness 时代",
+      "date": "2026-08-17",
+      "category": "AI编程助手",
+      "description": "DeepSeek Harness 将模型、工具、沙箱、会话与 Agent 循环做成可替换插件。本文拆解其架构意义、评测边界、企业落地价值与治理风险。",
+      "keywords": [
+        "DeepSeek Harness",
+        "AI Agent",
+        "代码智能体",
+        "Agent基础设施",
+        "Cordis",
+        "开源"
+      ],
+      "read_time": "9 分钟",
+      "word_count": 5465,
+      "view_count": 0,
+      "created_at": "2026-08-16 12:54:33",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "mini-swe-agent-bash-first-react-evaluation-harness-2026",
+      "title": "拆解 Mini-SWE-Agent：一个 Bash-first ReAct 循环，如何成为代码模型评测底座",
+      "date": "2026-08-16",
+      "category": "AI编程助手",
+      "description": "Mini-SWE-Agent 将编程 Agent 的核心循环压缩到约 100 行 Python，并以 Bash-first ReAct 方式成为 SWE-bench 模型横评的重要底座。本文拆解其架构、评测意义、局限与落地边界。",
+      "keywords": [
+        "Mini-SWE-Agent",
+        "SWE-bench",
+        "ReAct",
+        "AI编程Agent",
+        "Bash",
+        "代码模型评测"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 8528,
+      "view_count": 0,
+      "created_at": "2026-08-16 12:54:35",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ai-supply-chain-security-guide-data-model-dependency-cicd-2026",
+      "title": "企业 AI 供应链安全指南：数据、模型、依赖与 CI/CD 的防投毒清单",
+      "date": "2026-08-15",
+      "category": "AI安全",
+      "description": "从训练数据、开源模型到 Python 依赖和 CI/CD，AI 供应链正成为企业新的高风险边界。本文结合模型投毒研究与 LiteLLM 事件，给出可落地的分层防护框架和 30 天检查清单。",
+      "keywords": [
+        "AI供应链安全",
+        "模型投毒",
+        "数据安全",
+        "MLOps",
+        "DevSecOps",
+        "CI/CD"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 7320,
+      "view_count": 0,
+      "created_at": "2026-08-15 13:03:23",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "openhands-deep-dive-opendevin-to-80k-stars-2026",
+      "title": "OpenHands 深度调研：从 OpenDevin 到 80K Star 开源编程 Agent 的两年进化",
+      "date": "2026-08-14",
+      "category": "AI编程助手",
+      "description": "OpenHands（原 OpenDevin）两年内从一个致敬 Devin 的开源项目，成长为 80K+ Star、$23.8M 融资的编程 Agent 平台。本文梳理其起源、融资、V0到V1的架构重构，以及与 Devin、Claude Code、OpenCode 的实力对比。",
+      "keywords": [
+        "OpenHands",
+        "OpenDevin",
+        "AI编程Agent",
+        "开源",
+        "All Hands AI",
+        "SWE-bench",
+        "Agent SDK"
+      ],
+      "read_time": "19 分钟",
+      "word_count": 11182,
+      "view_count": 0,
+      "created_at": "2026-08-14 10:54:19",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "ohmypi-fork-ide-in-terminal-2026",
+      "title": "oh-my-pi 深度调研：从「反 Claude Code」到把 IDE 塞进终端的疯狂 Fork",
+      "date": "2026-08-13",
+      "category": "AI编程助手",
+      "description": "oh-my-pi是Mario Zechner极简编程Agent Pi的一个反向重装fork——把LSP语义重构、DAP真调试器、Hashline哈希锚定编辑、角色化模型路由统统焊进终端。本文调研它的技术谱系，并与Pi、Claude Code、Cursor、OpenCode做全面对比。",
+      "keywords": [
+        "oh-my-pi",
+        "Pi",
+        "Claude Code",
+        "Cursor",
+        "终端AI编程",
+        "编程Agent",
+        "Harness工程"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 10057,
+      "view_count": 0,
+      "created_at": "2026-08-13 10:42:12",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "buzz-block-nostr-agent-workspace-2026",
+      "title": "当 Agent 拥有自己的密钥对：Block 的 Buzz 如何重新定义\"团队协作\"",
+      "date": "2026-08-12",
+      "category": "AI 工具",
+      "description": "深度拆解 Block 开源的 Buzz——基于 Nostr 协议的人机协作工作空间。Agent 不再是 Bot，而是拥有密钥对、审计记录和频道成员资格的正式队友。含架构解析、国内自托管方案和竞品对比。",
+      "keywords": [
+        "Buzz",
+        "Block",
+        "Nostr",
+        "AI Agent",
+        "团队协作",
+        "开源",
+        "自托管"
+      ],
+      "read_time": "16 分钟",
+      "word_count": 10979,
+      "view_count": 0,
+      "created_at": "2026-08-12 12:41:28",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "meta-muse-glimmer-30b-open-weights-distillation-war-2026",
+      "title": "扎克伯格公开为\"蒸馏\"辩护：Meta 开源 30B Agent 模型背后的三场战争",
+      "date": "2026-08-11",
+      "category": "AI 行业观察",
+      "description": "Meta 于 2026 年 8 月 10 日开源 30B 参数的 Muse Glimmer，这是 Llama 4 之后的第一个开放权重模型。本文拆解它的稠密架构与 24GB 显存工程账、Meta 自己承认不对等的基准方法论、以及扎克伯格公开为蒸馏辩护背后那场关于开源合法性与 6000 亿美元回报的赌局。",
+      "keywords": [
+        "Meta",
+        "Muse Glimmer",
+        "开源模型",
+        "本地Agent",
+        "模型蒸馏",
+        "投机解码",
+        "Qwen"
+      ],
+      "read_time": "32 分钟",
+      "word_count": 19777,
+      "view_count": 0,
+      "created_at": "2026-08-11 10:50:37",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ai-content-watermarking-engineering-guide-2026",
+      "title": "给 AI 生成内容加水印并校验：从 GB 45438 到 C2PA、SynthID、AudioSeal 的工程落地手册",
+      "date": "2026-08-10",
+      "category": "AI 工程实践",
+      "description": "GB 45438 与欧盟 AI Act 第 50 条把 AI 内容标识变成了法定义务，但没有任何单一技术能同时满足四项监管要求。本文拆解文本、图像、音频、视频四种模态的水印生成与校验方案，以及 C2PA 软绑定如何把可验证性与鲁棒性缝在一起。",
+      "keywords": [
+        "AI水印",
+        "内容溯源",
+        "C2PA",
+        "SynthID",
+        "合规"
+      ],
+      "read_time": "39 分钟",
+      "word_count": 24189,
+      "view_count": 0,
+      "created_at": "2026-08-10 03:12:32",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "full-duplex-voice-model-open-vs-closed-2026",
+      "title": "像打电话一样聊AI：全双工语音模型开源/闭源终极横评，谁更值得押注？",
+      "date": "2026-08-10",
+      "category": "AI 行业观察",
+      "description": "NVIDIA 开源 NemotronLabs VoiceChat 11B，以 448ms 轮换延迟成为首个支持工具调用的开放全双工语音模型。本文横评从 Moshi 到 MiniCPM-o 4.5 的开源生态，与 GPT-Live、Gemini Live、豆包 Seeduplex 组成的闭源阵营，拆解延迟、智能、成本、可微调性与生产成熟度六大维度，回答开源与闭源谁更值得押注。",
+      "keywords": [
+        "全双工语音",
+        "语音Agent",
+        "speech-to-speech",
+        "NVIDIA",
+        "GPT-Live",
+        "Seeduplex",
+        "开源模型"
+      ],
+      "read_time": "24 分钟",
+      "word_count": 14357,
+      "view_count": 0,
+      "created_at": "2026-08-10 10:55:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "self-hosted-voice-agent-huggingface-speech-to-speech-guide-2026",
+      "title": "自建语音 Agent 实战指南：HuggingFace speech-to-speech 从部署到中文适配",
+      "date": "2026-08-08",
+      "category": "AI 工程实践",
+      "description": "HuggingFace speech-to-speech 已从 2024 年的语音 Demo 变成给数千台机器人供能的生产级后端。本文拆解它的四段级联架构、Smart Turn 投机回滚机制、成本拐点，核对被广泛引用的 Qwen3-TTS 性能数据，并给出可落地的中文 pipeline 配置。",
+      "keywords": [
+        "语音Agent",
+        "speech-to-speech",
+        "Realtime API",
+        "FunASR",
+        "CosyVoice",
+        "vLLM"
+      ],
+      "read_time": "32 分钟",
+      "word_count": 21003,
+      "view_count": 0,
+      "created_at": "2026-08-08 13:06:45",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "specialized-small-models-vs-llm-coexistence-2026",
+      "title": "大模型时代的专用小模型图鉴：从对抗到共生",
+      "date": "2026-08-07",
+      "category": "AI 工程实践",
+      "description": "LLM 席卷一切的叙事下，BERT、XGBoost、CRF 等专用监督小模型不仅没有消亡，反而在延迟、成本、可解释性上牢牢把持着企业利润中心。本文梳理它们的生存逻辑、不可替代场景，以及与大模型协作的新范式。",
+      "keywords": [
+        "小模型",
+        "BERT",
+        "XGBoost",
+        "LLM",
+        "机器学习",
+        "模型选型"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11420,
+      "view_count": 0,
+      "created_at": "2026-08-07 10:50:30",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "bitchat-decentralized-mesh-chat-guide-2026",
+      "title": "BitChat 从技术原理到实战：无网络环境下的加密通信指南",
+      "date": "2026-08-06",
+      "category": "AI 工具",
+      "description": "深度拆解 Jack Dorsey 打造的 BitChat：BLE Mesh + Nostr 双传输层架构、Noise 协议加密原理、存储转发机制，以及 iOS/Android 实战上手指南。",
+      "keywords": [
+        "BitChat",
+        "去中心化通信",
+        "蓝牙Mesh",
+        "Nostr",
+        "隐私加密",
+        "P2P"
+      ],
+      "read_time": "20 分钟",
+      "word_count": 13967,
+      "view_count": 0,
+      "created_at": "2026-08-06 11:22:01",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "airllm-layer-wise-streaming-low-vram-guide-2026",
+      "title": "显存不够也能跑万亿参数模型：AirLLM 逐层流式加载原理与实战避坑指南",
+      "date": "2026-08-05",
+      "category": "技术解析",
+      "description": "AirLLM 让 70B 模型跑在 4GB 显卡、671B 跑在 12GB、2.8T 跑在不到 4GB，且不做量化。本文拆解逐层流式加载与按专家流式的核心机制，讲清它的真实速度代价、适用场景，以及和量化路线的取舍。",
+      "keywords": [
+        "AirLLM",
+        "大模型推理",
+        "显存优化",
+        "逐层加载",
+        "MoE"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9616,
+      "view_count": 0,
+      "created_at": "2026-08-05 11:12:28",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "microsoft-orchard-agentic-modeling-framework-2026",
+      "title": "微软开源 Orchard：把「训练环境」做成服务，让小模型逼近前沿智能体",
+      "date": "2026-08-04",
+      "category": "AI行业观察",
+      "description": "2026 年 8 月 3 日微软研究院开源 Orchard，一个 K8s 原生的智能体建模框架。核心 Orchard Env 把训练环境抽成独立服务，让约 3B 激活参数的模型在 SWE-bench Verified 上冲到 73%。本文拆解它的架构、原理、三个训练配方，并把它放进整个智能体训练环境生态里看坐标。",
+      "keywords": [
+        "Orchard",
+        "智能体训练",
+        "AI Agent",
+        "强化学习",
+        "SWE-bench"
+      ],
+      "read_time": "21 分钟",
+      "word_count": 12878,
+      "view_count": 0,
+      "created_at": "2026-08-04 11:15:43",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "bm25-rag-hybrid-search-scaling-2026",
+      "title": "BM25 没有过时，反而在大规模 RAG 里赢了：原理、混合检索与最新规模研究",
+      "date": "2026-08-03",
+      "category": "AI 技术解析",
+      "description": "一篇讲透 BM25 的长文：从词频饱和、IDF、文档长度归一化的打分原理，到它在大模型 RAG 混合检索里的角色，再到 Dify+Weaviate 的工程落地，以及 2026 年最新研究为什么说语料越大 BM25 越能打。",
+      "keywords": [
+        "BM25",
+        "RAG",
+        "混合检索",
+        "向量数据库",
+        "信息检索"
+      ],
+      "read_time": "23 分钟",
+      "word_count": 14409,
+      "view_count": 0,
+      "created_at": "2026-08-03 11:28:47",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "pii-masking-presidio-litellm-guide-2026",
+      "title": "给大模型加一道隐私闸门：Presidio + LiteLLM 实战 PII 脱敏指南（2026）",
+      "date": "2026-08-02",
+      "category": "AI 工程实践",
+      "description": "系统拆解 PII 合规检测的技术路线，深度解析微软开源框架 Presidio，横向对比 Google DLP、Nightfall、Skyflow 等平台，并给出在 LiteLLM 网关中落地 PII 脱敏的完整 config.yaml 实战配置。",
+      "keywords": [
+        "PII脱敏",
+        "Presidio",
+        "LiteLLM",
+        "数据合规",
+        "AI Gateway",
+        "PIPL"
+      ],
+      "read_time": "30 分钟",
+      "word_count": 19283,
+      "view_count": 0,
+      "created_at": "2026-08-01 12:33:51",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "generative-ai-design-tools-landscape-2026",
+      "title": "AI 也能当设计师了：Claude Design、Figma Make、Open Design 领衔的生成式设计工具全景（2026）",
+      "date": "2026-08-01",
+      "category": "AI工具横评",
+      "description": "深度横评 Claude Design、Figma Make、Open Design 三大生成式设计工具，并梳理 v0、Lovable、Bolt、Google Stitch、Onlook、Superdesign 等闭源与开源玩家，帮你看懂 prompt-to-design 新范式怎么选。",
+      "keywords": [
+        "Claude Design",
+        "Figma Make",
+        "Open Design",
+        "生成式设计",
+        "AI设计工具"
+      ],
+      "read_time": "22 分钟",
+      "word_count": 12018,
+      "view_count": 0,
+      "created_at": "2026-08-01 12:33:49",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "tts-commercial-open-source-comparison-guide-2026",
+      "title": "别再为 TTS 多花钱——2026 年商用 + 开源语音合成选型指南（含方言/小语种评测）",
+      "date": "2026-07-31",
+      "category": "AI 工具评测",
+      "description": "横评 14 款商用与开源 TTS 模型，从中文、英文、方言到小语种全维度拆解音质、延迟与价格，帮你找到最适合的语音合成方案。",
+      "keywords": [
+        "TTS",
+        "语音合成",
+        "ElevenLabs",
+        "CosyVoice",
+        "Qwen-TTS",
+        "开源模型",
+        "方言"
+      ],
+      "read_time": "22 分钟",
+      "word_count": 16821,
+      "view_count": 0,
+      "created_at": "2026-07-31 10:58:03",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "commercial-asr-comparison-chinese-english-dialect-2026",
+      "title": "2026 商用 ASR 语音识别全景选型：国内外 13 款产品横评，中文/英文/方言/小语种全覆盖",
+      "date": "2026-07-30",
+      "category": "AI 工具横评",
+      "description": "从中文普通话、英文、方言到小语种，从云端API到自部署开源模型，系统横评 2026 年 13 款主流商用ASR产品的准确率、延迟、价格与部署策略，帮助企业做出最优语音识别选型决策。",
+      "keywords": [
+        "ASR",
+        "语音识别",
+        "Speech-to-Text",
+        "选型指南",
+        "企业AI"
+      ],
+      "read_time": "24 分钟",
+      "word_count": 16709,
+      "view_count": 0,
+      "created_at": "2026-07-30 11:23:36",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "free-open-source-design-tools-comparison-2026",
+      "title": "告别按 License 付费：6 款开源/免费设计工具深度横评与选型指南（2026）",
+      "date": "2026-07-29",
+      "category": "AI工具横评",
+      "description": "深度横评 Penpot、Lunacy、Excalidraw、Quant-UX、Plasmic、Graphite 六款开源/免费设计工具，对比 Figma 等闭源方案，帮助团队找到最适合的零成本设计平台。",
+      "keywords": [
+        "设计工具",
+        "Penpot",
+        "Figma",
+        "开源",
+        "UI设计",
+        "免费工具"
+      ],
+      "read_time": "25 分钟",
+      "word_count": 17916,
+      "view_count": 0,
+      "created_at": "2026-07-29 10:52:34",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "graphify-vs-codegraph-knowledge-graph-fork-2026",
+      "title": "两个代码知识图谱的分岔路：CodeGraph 押注 Rust 性能，Graphify 押注全语料语义",
+      "date": "2026-07-28",
+      "category": "AI编程助手",
+      "description": "Graphify 冲到 97.3k 星拿下 YC S26，CodeGraph 翻倍到 62.9k 星并换上 Rust 内核。同一个痛点长出了两条完全不同的技术路线：确定性 AST 快查层 vs LLM 语义汇聚层。本文拆开两家的 benchmark、覆盖率、风险清单与选型逻辑。",
+      "keywords": [
+        "Graphify",
+        "CodeGraph",
+        "AI编程助手",
+        "知识图谱",
+        "Claude Code",
+        "开源"
+      ],
+      "read_time": "56 分钟",
+      "word_count": 37618,
+      "view_count": 0,
+      "created_at": "2026-07-28 09:39:50",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "openmontage-open-source-agentic-video-production-guide-2026",
+      "title": "OpenMontage 开源视频制作指南与竞品横评：开源能否打败月费百刀的闭源产品？",
+      "date": "2026-07-27",
+      "category": "AI工具评测",
+      "description": "深度解析全球首个开源 Agentic 视频制作系统 OpenMontage，对比 InVideo AI、HeyGen、Descript、Runway 等商用产品，从架构、成本、质量三个维度回答：开源方案能否替代付费视频工具？",
+      "keywords": [
+        "OpenMontage",
+        "AI视频制作",
+        "开源工具",
+        "Agentic AI",
+        "视频生产",
+        "Claude Code"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 13151,
+      "view_count": 0,
+      "created_at": "2026-07-27 11:40:31",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "loop-engineering-hottest-ai-concept-2026",
+      "title": "2026 年中最热 AI 概念：Loop Engineering 为何一天 650 万阅读量",
+      "date": "2026-07-26",
+      "category": "AI 工程实践",
+      "description": "Loop Engineering（循环工程）在 2026 年 6 月爆红，一篇帖子 24 小时内斩获 650 万阅读。本文从概念起源、核心架构、设计模式、国内外平台对比到成本控制，全景拆解这一 AI 工程学新范式。",
+      "keywords": [
+        "Loop Engineering",
+        "AI Agent",
+        "循环工程",
+        "Claude Code",
+        "Qwen Code",
+        "Dify",
+        "Coze Loop"
+      ],
+      "read_time": "19 分钟",
+      "word_count": 13271,
+      "view_count": 0,
+      "created_at": "2026-07-26 13:09:12",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "llm-guardrails-open-source-production-guide-2026",
+      "title": "从零搭建 LLM 安全护栏：开源工具选型 + 生产架构实战",
+      "date": "2026-07-25",
+      "category": "AI 工程实践",
+      "description": "全面对比 13 款 LLM Guardrails 工具（NeMo、Llama Guard、Guardrails AI、Lakera、Azure Content Safety 等），拆解六层防护架构，提供从选型到生产部署的实战指南。",
+      "keywords": [
+        "LLM Guardrails",
+        "AI安全",
+        "NeMo Guardrails",
+        "Llama Guard",
+        "Prompt Injection",
+        "AI合规"
+      ],
+      "read_time": "25 分钟",
+      "word_count": 18639,
+      "view_count": 0,
+      "created_at": "2026-07-25 13:06:18",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "multica-managed-agents-open-source-platform-2026",
+      "title": "开源 Multica 全解析：Managed Agents 平台如何让编码 Agent 变成你的正式队友",
+      "date": "2026-07-24",
+      "category": "AI 工具",
+      "description": "深度拆解 GitHub 37K Star 的开源平台 Multica——它如何将 Claude Code、OpenCode 等编码 Agent 变成看板上的正式队友，实现任务分配、状态追踪、技能复用的全生命周期管理。含 OpenCode 对接实操案例。",
+      "keywords": [
+        "Multica",
+        "Managed Agents",
+        "AI Agent",
+        "开源",
+        "多Agent协作",
+        "OpenCode"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11329,
+      "view_count": 0,
+      "created_at": "2026-07-24 11:25:39",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "world-model-2026-landscape-technical-routes",
+      "title": "世界模型 2026 全景：从 30 亿美元豪赌到四大技术路线深度拆解",
+      "date": "2026-07-23",
+      "category": "AI 前沿",
+      "description": "2026 上半年超 30 亿美元涌入世界模型赛道。本文全景梳理四大技术范式（自回归/扩散/JEPA/世界-动作耦合）、核心玩家（AMI Labs/World Labs/DeepMind/小米/腾讯）、落地场景与未解难题。",
+      "keywords": [
+        "世界模型",
+        "World Model",
+        "JEPA",
+        "Genie 3",
+        "自动驾驶",
+        "AGI",
+        "物理AI"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11412,
+      "view_count": 0,
+      "created_at": "2026-07-23 11:34:34",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "open-source-vector-database-comparison-2026",
+      "title": "2026 开源向量库全景对比：Milvus、Qdrant、Weaviate、pgvector 到底怎么选",
+      "date": "2026-07-22",
+      "category": "AI 基础设施",
+      "description": "一篇讲清 2026 年主流开源向量库的选型逻辑：Milvus、Qdrant、Weaviate、Chroma、LanceDB 各自的定位，pgvector 回迁 Postgres 的趋势，以及和 Pinecone 等商用方案的成本对比。附速查表与决策路径。",
+      "keywords": [
+        "向量数据库",
+        "RAG",
+        "Milvus",
+        "Qdrant",
+        "pgvector"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 10820,
+      "view_count": 0,
+      "created_at": "2026-07-22 11:09:42",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "vla-vs-ros-humanoid-robot-operating-system-2026",
+      "title": "端到端 VLA vs 传统 ROS：2026 人形机器人操作系统的两条技术路线之争",
+      "date": "2026-07-21",
+      "category": "AI行业观察",
+      "description": "当所有人都在谈人形机器人本体时，真正决定胜负的是它的操作系统。本文拆解 2026 年人形机器人 OS 的两条技术路线——端到端 VLA（GR00T、π系列）与传统 ROS 分层架构（RoboNeuron、rosaOS、EMOS），对比大脑-小脑分层范式、实时性与安全约束，并盘点 NVIDIA Isaac GR00T 全栈生态、中美路线差异，看清谁在定义具身智能的底座。",
+      "keywords": [
+        "人形机器人",
+        "具身智能",
+        "操作系统",
+        "VLA",
+        "ROS",
+        "NVIDIA",
+        "Isaac GR00T",
+        "机器人操作系统",
+        "Physical AI"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 12094,
+      "view_count": 0,
+      "created_at": "2026-07-21 11:00:53",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "mineru-document-parsing-agent-rag-vlm-2026",
+      "title": "MinerU 深度解析：一个 1.2B 小模型，如何成为 Agent 与 RAG 的“文档之眼”",
+      "date": "2026-07-20",
+      "category": "AI开发平台",
+      "description": "MinerU 是 OpenDataLab 开源的文档解析平台，把 PDF、扫描件、Office 文档转成 LLM-ready 的 Markdown/JSON。本文拆解它“由粗到细”两阶段解耦的 VLM 架构、1.2B 模型如何在 OmniDocBench 上击败 GPT-4o 与 Gemini 2.5 Pro、与 Docling/Marker 的横向对比、部署实战与 RAG/Agent 落地场景。",
+      "keywords": [
+        "MinerU",
+        "文档解析",
+        "RAG",
+        "AI Agent",
+        "视觉语言模型",
+        "VLM",
+        "OCR",
+        "OpenDataLab",
+        "PDF解析"
+      ],
+      "read_time": "21 分钟",
+      "word_count": 13596,
+      "view_count": 0,
+      "created_at": "2026-07-20 11:33:30",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "random-forest-to-mixture-of-agents-ensemble-evolution-2026",
+      "title": "从随机森林到 Mixture-of-Agents：多模型集成从传统机器学习到大模型时代",
+      "date": "2026-07-19",
+      "category": "AI技术趋势",
+      "description": "一堆便宜模型组队，为什么能干翻单个最强大模型？本文从传统机器学习的集成学习（Bagging/Boosting/Stacking）讲到大模型时代的多模型集成（Ensemble/Merging/Routing/Cascade/MoA），厘清两代\"多模型联合预测\"的本质区别，并给出选型建议。",
+      "keywords": [
+        "集成学习",
+        "随机森林",
+        "XGBoost",
+        "Mixture-of-Agents",
+        "LLM Ensemble",
+        "模型路由",
+        "MoE",
+        "多模型集成"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 11539,
+      "view_count": 0,
+      "created_at": "2026-07-19 11:20:41",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "1-bit-llm-quantization-guide-model-selection-2026",
+      "title": "手机跑 27B 大模型？1-bit 量化落地指南与模型选型 2026",
+      "date": "2026-07-18",
+      "category": "AI开发平台",
+      "description": "把 27B 大模型塞进手机不再是幻想。本文系统讲清 1-bit / 1.58-bit 量化的两大技术路线（原生训练 vs 后训练量化）、盘点 BitNet、Falcon3、Bonsai 27B、Unsloth Dynamic 等代表模型，对比 bitnet.cpp/llama.cpp/MLX 部署框架，给出落地场景与选型建议。",
+      "keywords": [
+        "1-bit量化",
+        "1.58-bit",
+        "BitNet",
+        "Bonsai 27B",
+        "端侧大模型",
+        "模型压缩",
+        "边缘AI",
+        "Unsloth"
+      ],
+      "read_time": "32 分钟",
+      "word_count": 19523,
+      "view_count": 0,
+      "created_at": "2026-07-18 13:21:28",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "waic-2026-ai-agent-hardware-software-ecosystem",
+      "title": "2026 智能体应用元年：一份WAIC 2026中智能体软硬件生态与落地场景的产业地图",
+      "date": "2026-07-17",
+      "category": "AI 行业观察",
+      "description": "以 WAIC 2026 为窗口，全面梳理 AI 智能体从算力底座、端侧硬件到模型平台、落地场景的产业全栈生态，附 10 大镇馆之宝解读及关键数据。",
+      "keywords": [
+        "WAIC 2026",
+        "AI Agent",
+        "智能体",
+        "算力基础设施",
+        "具身智能",
+        "人形机器人",
+        "Agent手机"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9901,
+      "view_count": 0,
+      "created_at": "2026-07-17 11:43:15",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "ai-native-os-step-aos-harmonyos-gemini-2026",
+      "title": "AI Native OS 群雄逐鹿：从 Step AOS 到 HarmonyOS 7，操作系统正在被重写",
+      "date": "2026-07-16",
+      "category": "AI 行业观察",
+      "description": "2026年7月，阶跃星辰发布全球首款智能体原生操作系统 Step AOS 和 StepX Neo 手机。本文全景梳理 AI Native OS 赛道现状，对比 Step AOS、HarmonyOS 7、Gemini Intelligence、Apple Intelligence 等路线，解析大模型厂商为何'杀入'硬件。",
+      "keywords": [
+        "AI Native OS",
+        "Step AOS",
+        "StepX Neo",
+        "HarmonyOS 7",
+        "Gemini Intelligence",
+        "智能体手机",
+        "阶跃星辰"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11730,
+      "view_count": 0,
+      "created_at": "2026-07-16 11:35:15",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "deepfake-attack-defense-enterprise-guide-2026",
+      "title": "AI技术的攻与防：深度伪造五大攻击场景与企业防御技术全解析2026",
+      "date": "2026-07-15",
+      "category": "AI安全",
+      "description": "深度伪造正从实验室走向犯罪链。从2560万美元CEO换脸骗局到AI面试候选人，本文拆解五大真实攻击场景，梳理C2PA、活体检测、多因子验证等防御技术栈，为企业构建可落地的反深度伪造安全体系。",
+      "keywords": [
+        "深度伪造",
+        "Deepfake",
+        "企业安全",
+        "AI诈骗",
+        "C2PA",
+        "活体检测"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 9820,
+      "view_count": 0,
+      "created_at": "2026-07-15 10:59:27",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "agent-reach-cli-tools-ai-agent-internet-access-guide-2026",
+      "title": "一行命令让 AI Agent 读推特、刷 B 站、看小红书——Agent-Reach 等 CLI 工具实战指南",
+      "date": "2026-07-14",
+      "category": "AI 工具",
+      "description": "深度对比 Agent-Reach、OpenCLI、AutoCLI、Firecrawl CLI 四大 AI Agent 互联网访问 CLI 工具，涵盖架构设计、平台覆盖、安装使用与实战场景选型。",
+      "keywords": [
+        "Agent-Reach",
+        "OpenCLI",
+        "AutoCLI",
+        "Firecrawl CLI",
+        "AI Agent",
+        "CLI工具"
+      ],
+      "read_time": "22 分钟",
+      "word_count": 16409,
+      "view_count": 0,
+      "created_at": "2026-07-14 11:12:49",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "cli-anything-agent-native-software-tool-market-2026",
+      "title": "当软件的下一代用户是 AI：CLI-Anything 与 Agent 工具市场的未来",
+      "date": "2026-07-13",
+      "category": "AI 工具生态",
+      "description": "深度解析港大开源项目 CLI-Anything 如何用一条命令让所有软件变成 AI Agent 可控的工具，以及 Agent-native CLI 生态市场的崛起趋势与应用场景。",
+      "keywords": [
+        "CLI-Anything",
+        "Agent-native",
+        "CLI生态",
+        "AI Agent",
+        "MCP",
+        "开发者工具"
+      ],
+      "read_time": "21 分钟",
+      "word_count": 14684,
+      "view_count": 0,
+      "created_at": "2026-07-13 10:51:18",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "llm-doom-loop-fix-antidoom-comparison-2026",
+      "title": "你的推理模型还在原地转圈？死循环修复方案实测对比 2026",
+      "date": "2026-07-12",
+      "category": "AI 工程实践",
+      "description": "深入对比 Liquid AI Antidoom、神经元手术、LZ Penalty 等六大主流方案，帮你彻底解决推理模型死循环问题。含原理拆解、数据实测与选型建议。",
+      "keywords": [
+        "大模型推理",
+        "Doom Loop",
+        "Antidoom",
+        "FTPO",
+        "推理优化",
+        "LLM"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 12419,
+      "view_count": 0,
+      "created_at": "2026-07-12 11:25:46",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "llm-finetuning-framework-comparison-2026",
+      "title": "大模型微调框架对比：LLaMA-Factory、ms-swift、Unsloth、Axolotl、TRL、TorchTune 怎么选",
+      "date": "2026-07-10",
+      "category": "AI 行业观察",
+      "description": "一篇讲清六大主流开源微调框架的定位与取舍：LLaMA-Factory 的零代码 WebUI、ms-swift 的模型最全、Unsloth 的极致省显存、Axolotl 的多卡集群、TRL 的官方底座、TorchTune 的原生血统。附横向对比表与场景化选型建议。",
+      "keywords": [
+        "LLaMA-Factory",
+        "ms-swift",
+        "Unsloth",
+        "大模型微调",
+        "LoRA"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 11368,
+      "view_count": 0,
+      "created_at": "2026-07-11 12:10:21",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "multi-domain-finetuning-seesaw-effect-solutions-2026",
+      "title": "学了金融忘了医疗？多领域微调的跷跷板效应与破局之道",
+      "date": "2026-07-10",
+      "category": "AI 工程实践",
+      "description": "深入解析大模型多领域微调中的跷跷板效应（Seesaw Effect）——为什么提升一个领域能力会损失另一个？本文系统梳理参数隔离、MoE-LoRA、模型合并、数据配比优化等 6 大技术路径，附工程落地建议。",
+      "keywords": [
+        "微调",
+        "跷跷板效应",
+        "MoE",
+        "LoRA",
+        "灾难性遗忘",
+        "多任务学习",
+        "模型合并"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11310,
+      "view_count": 0,
+      "created_at": "2026-07-10 11:02:48",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ai-search-geo-brand-citation-roi-2026",
+      "title": "8.2 亿人用 AI 找答案：品牌、文章、产品如何被大模型引用，把 GEO 变成企业增长杠杆",
+      "date": "2026-07-08",
+      "category": "AI 行业观察",
+      "description": "AI 搜索正在取代传统搜索入口，被大模型引用成为品牌新流量入口。本文拆解 GEO 的底层逻辑、真实数据、可落地方法与 ROI 度量体系，帮企业系统性进入 ChatGPT、豆包们的答案。",
+      "keywords": [
+        "GEO",
+        "AI搜索",
+        "生成式引擎优化",
+        "企业增长",
+        "内容营销"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 8890,
+      "view_count": 0,
+      "created_at": "2026-07-09 11:24:00",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "code-sandbox-ai-agent-guide-2026",
+      "title": "代码沙箱：给 AI Agent 一台\"炸不坏\"的云电脑——原理、方案与价值全解",
+      "date": "2026-07-08",
+      "category": "AI 行业观察",
+      "description": "当 AI Agent 开始自己写代码、装依赖、跑测试、操控浏览器，执行环节就同时成了它最大的价值和最大的攻击面。本文讲清代码沙箱的作用、Firecracker/gVisor/microVM 的实现机理、E2B 与 Daytona 等主流方案，以及它为什么正在成为 Agent 的核心基础设施。",
+      "keywords": [
+        "代码沙箱",
+        "AI Agent",
+        "Firecracker",
+        "gVisor",
+        "安全隔离"
+      ],
+      "read_time": "25 分钟",
+      "word_count": 15449,
+      "view_count": 0,
+      "created_at": "2026-07-08 11:30:30",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "browser-mcp-year-safari-chrome-webmcp-2026",
+      "title": "浏览器 MCP 元年：Safari 原生入场、Chrome 开源领跑、WebMCP 反向革命",
+      "date": "2026-07-07",
+      "category": "AI 行业观察",
+      "description": "2026 年夏天，Apple 把 MCP 服务器塞进 Safari，Google 的 Chrome DevTools MCP 已开源领跑，微软用 Playwright MCP 和 WebMCP 两头下注。浏览器正集体给 AI Agent 装上眼睛，前端开发的调试闭环被彻底重写。",
+      "keywords": [
+        "MCP",
+        "AI Agent",
+        "浏览器",
+        "前端开发",
+        "Safari"
+      ],
+      "read_time": "19 分钟",
+      "word_count": 11492,
+      "view_count": 0,
+      "created_at": "2026-07-07 11:39:00",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "scaling-law-bug-kaplan-chinchilla-truth-2026",
+      "title": "缩放定律的 Bug 与真相：当前大模型训练方式到底对不对？",
+      "date": "2026-07-06",
+      "category": "AI 行业观察",
+      "description": "前 OpenAI 研究员 Diogo Almeida 公开指出最初的 Kaplan 缩放定律因一个训练配置 Bug 而出错，导致行业训练出一批又大又欠训练的模型。本文复盘事件始末，拆解 Bug 的三个成因，并回答一个更现实的问题：当前大模型的训练方式对不对，模型参数规模和数据量到底该怎么匹配。",
+      "keywords": [
+        "Scaling Law",
+        "Chinchilla",
+        "大模型训练",
+        "算力最优",
+        "数据墙"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11156,
+      "view_count": 0,
+      "created_at": "2026-07-06 11:12:35",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "agency-agents-open-source-ai-specialists-review-2026",
+      "title": "别被\"232个AI专家\"唬住：Agency-Agents是神器还是提示词大礼包？",
+      "date": "2026-07-05",
+      "category": "AI工具评测",
+      "description": "一个起源于Reddit帖子的开源项目，攒到12.7万Star：232个人格化AI专家，横跨16个部门，一键装进Claude Code、Cursor、Copilot全家桶。它到底是重新定义提示词的神器，还是一个包装精美的提示词大礼包？本文拆解它的真实形态、6大应用场景、中文生态，以及一个必须诚实面对的问题——它真能提效吗？",
+      "keywords": [
+        "Agency-Agents",
+        "Claude Code",
+        "Cursor",
+        "AI编程",
+        "Subagent",
+        "提示词工程",
+        "多智能体",
+        "开源项目"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9681,
+      "view_count": 0,
+      "created_at": "2026-07-05 12:55:41",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "forward-deployed-engineer-microsoft-aws-ai-delivery-2026",
+      "title": "95%的AI试点失败之后：微软亚马逊等巨头用\"人肉交付\"破局，中小厂商能学什么？",
+      "date": "2026-07-04",
+      "category": "AI行业观察",
+      "description": "一个月内，微软砸25亿、AWS砸10亿、OpenAI砸40亿、Anthropic砸15亿，集体成立\"驻场工程师\"组织把人塞进客户办公室。当AI试点95%失败成为悬在头顶的达摩克利斯之剑，巨头们为什么不约而同押注\"人肉交付\"？这套抄自Palantir的打法，给没钱砸几十亿的中小厂商留下了什么可复制的启示？",
+      "keywords": [
+        "Forward Deployed Engineer",
+        "FDE",
+        "微软",
+        "AWS",
+        "OpenAI",
+        "Anthropic",
+        "AI落地",
+        "企业服务"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 11253,
+      "view_count": 0,
+      "created_at": "2026-07-04 12:41:47",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "browser-gui-agent-page-agent-browser-use-stagehand-skyvern-2026",
+      "title": "浏览器内 GUI Agent 全景：Page Agent、browser-use、Stagehand、Skyvern 技术路线拆解",
+      "date": "2026-07-03",
+      "category": "AI 基础设施",
+      "description": "阿里开源的 Page Agent 把 GUI Agent 直接塞进浏览器，引爆了浏览器内 Agent 的技术路线之争。本文横向拆解 Page Agent、browser-use、Stagehand、Skyvern、Operator 五大方案的架构差异与选型逻辑。",
+      "keywords": [
+        "GUI Agent",
+        "浏览器自动化",
+        "Page Agent",
+        "browser-use",
+        "Stagehand",
+        "Skyvern",
+        "AI Agent"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 11437,
+      "view_count": 0,
+      "created_at": "2026-07-03 11:12:14",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "dspark-vs-dflash-speculative-decoding-inference-2026",
+      "title": "DSpark 提速 85%、DFlash 加速 6x——推理加速两大技术路线怎么选？",
+      "date": "2026-07-02",
+      "category": "AI 基础设施",
+      "description": "DeepSeek DSpark 与 NVIDIA DFlash 是 2026 年推理加速领域最受关注的两大投机解码框架。本文从技术原理、性能数据、适用场景三个维度深度对比，帮助开发者选出最适合自己的加速方案。",
+      "keywords": [
+        "推理加速",
+        "投机解码",
+        "DeepSeek",
+        "NVIDIA",
+        "DSpark",
+        "DFlash",
+        "大模型推理"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 9109,
+      "view_count": 0,
+      "created_at": "2026-07-02 11:38:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "ai-coding-agents-in-your-pocket-cursor-trae-openclaw-2026",
+      "title": "随时随地指挥 AI 写代码：当 Cursor、Trae、OpenClaw 等把 Agent 塞进口袋之后",
+      "date": "2026-07-01",
+      "category": "AI编程助手",
+      "description": "2026 年编程 Agent 集体搬进手机：Cursor Mobile、字节 Trae、Claude Code 远程操控、OpenClaw 四条路线拆解与横向对比，看软件开发如何从坐班敲代码转向随时随地的异步监督。",
+      "keywords": [
+        "Cursor",
+        "Trae",
+        "OpenClaw",
+        "Claude Code",
+        "AI编程",
+        "编程Agent",
+        "异步开发",
+        "字节跳动"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 9052,
+      "view_count": 0,
+      "created_at": "2026-07-02 01:20:37",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "qwen-agentworld-language-world-model-2026",
+      "title": "不再\"模拟\"环境，而是\"预言\"环境：Qwen-AgentWorld 凭什么压过 GPT-5.4 和 Claude Opus 4.8",
+      "date": "2026-06-30",
+      "category": "AI行业观察",
+      "description": "阿里 Qwen 团队发布业界首个原生语言世界模型 Qwen-AgentWorld，单一模型覆盖七大智能体环境。本文拆解它的基础模型 Qwen3.5-35B-A3B-Base、AgentWorldBench 上 58.71 超越 GPT-5.4 和 Claude Opus 4.8 的性能对比，以及环境模拟器与智能体基座两大应用范式的真实落地效果。",
+      "keywords": [
+        "Qwen",
+        "世界模型",
+        "智能体",
+        "阿里通义千问",
+        "Agent",
+        "强化学习",
+        "开源",
+        "AgentWorldBench"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 13999,
+      "view_count": 0,
+      "created_at": "2026-06-30 11:16:53",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "joyai-vl-interaction-proactive-vision-language-2026",
+      "title": "AI 不再等你开口：京东 JoyAI-VL-Interaction 开源全球首个\"主动视觉交互\"全栈系统",
+      "date": "2026-06-28",
+      "category": "AI行业观察",
+      "description": "京东开源 JoyAI-VL-Interaction，一个 8B 参数的视觉优先实时交互模型，能持续观看视频流并自主决定何时说话、何时沉默。本文拆解其技术架构（AdaCodec + 训练沉默 + 三层记忆），对比 Mira Murati 的 TML、GPT-Realtime、豆包和 Gemini，并分析六大落地场景与局限。",
+      "keywords": [
+        "JoyAI",
+        "视觉语言模型",
+        "实时交互",
+        "主动AI",
+        "京东",
+        "开源",
+        "视频流",
+        "多模态"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 7029,
+      "view_count": 0,
+      "created_at": "2026-06-29 11:08:09",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "moe-post-training-acceleration-nemo-automodel-2026",
+      "title": "换一行代码提速 3.7 倍：NVIDIA NeMo AutoModel 与 MoE 后训练加速方法实测对比",
+      "date": "2026-06-28",
+      "category": "AI开发平台",
+      "description": "MoE 已是前沿大模型的主流架构，但后训练慢、显存爆。本文体系化梳理专家并行、DeepEP 通信重叠、GroupedGEMM、低精度等五大加速流派，并用 NVIDIA 刚开源的 NeMo AutoModel 实测数据（微调提速 3.4-3.7 倍、显存省三成）做横向对比与选型建议。",
+      "keywords": [
+        "MoE",
+        "混合专家",
+        "后训练",
+        "NeMo AutoModel",
+        "DeepEP",
+        "专家并行",
+        "TransformerEngine",
+        "模型训练加速"
+      ],
+      "read_time": "13 分钟",
+      "word_count": 9997,
+      "view_count": 0,
+      "created_at": "2026-06-28 11:58:35",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "alibaba-qwen-open-source-monetization-vs-aws-2026",
+      "title": "开源不赚钱，那阿里图什么？拆解通义千问\"开源—云—电商 Agent\"三级变现逻辑",
+      "date": "2026-06-27",
+      "category": "AI行业观察",
+      "description": "Qwen 累计下载破 10 亿、衍生模型超 20 万，却始终被问\"开源到底怎么赚钱\"。本文拆解阿里\"开源造势—云上收钱—电商 Agent 闭环\"的三级变现逻辑，并与 AWS Bedrock 的\"中立货架\"模式做镜像对比，看清 Agent 时代两条不同的 AI 变现路。",
+      "keywords": [
+        "阿里巴巴",
+        "通义千问",
+        "Qwen",
+        "开源策略",
+        "商业化",
+        "AWS Bedrock",
+        "AI Agent",
+        "云计算"
+      ],
+      "read_time": "13 分钟",
+      "word_count": 7984,
+      "view_count": 0,
+      "created_at": "2026-06-27 14:25:50",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "ornith-1-0-self-scaffolding-coding-model-benchmaxxing-2026",
+      "title": "35B 干翻 397B？Ornith-1.0 的惊人跑分背后，是真突破还是又一次 benchmaxxing",
+      "date": "2026-06-26",
+      "category": "AI开发平台",
+      "description": "DeepReinforce 开源的 Ornith-1.0 号称 35B 超过自家 397B、397B 在 SWE-Bench Verified 上拿到 82.4 超越 Claude Opus 4.7。本文拆解它的自搭脚手架训练法，把跑分与 Qwen3.5、Gemma 4、DeepSeek V4、GLM 5.2、Claude Opus 4.8、GPT-5.5 逐项对齐，并直面 benchmaxxing 质疑。",
+      "keywords": [
+        "Ornith-1.0",
+        "开源大模型",
+        "Agentic Coding",
+        "SWE-bench",
+        "DeepSeek V4",
+        "GLM 5.2",
+        "Claude Opus 4.8",
+        "GPT-5.5"
+      ],
+      "read_time": "13 分钟",
+      "word_count": 13643,
+      "view_count": 0,
+      "created_at": "2026-06-26 03:41:51",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "oak-vcs-ai-agent-git-alternative-2026",
+      "title": "Git 不是为 Agent 设计的：开源新秀 Oak 如何用 95% 的提速挑战版本控制霸主",
+      "date": "2026-06-25",
+      "category": "AI开发平台",
+      "description": "Oak 是一款用 Rust 编写、专为 AI Agent 时代设计的开源版本控制系统。它用 BLAKE3 内容寻址、内容定义分块和惰性挂载，在快照、状态检查和大文件操作上做到比 Git 低最多 95% 的延迟。本文完整拆解 Oak 的架构、四大 Git 痛点解法、性能数据，以及它与 Git 的真实差异和适用边界。",
+      "keywords": [
+        "Oak",
+        "版本控制",
+        "Git替代",
+        "AI Agent",
+        "BLAKE3",
+        "内容寻址",
+        "惰性挂载",
+        "Rust",
+        "VCS",
+        "智能体编程"
+      ],
+      "read_time": "16 分钟",
+      "word_count": 10892,
+      "view_count": 0,
+      "created_at": "2026-06-25 11:09:51",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ibm-cuga-enterprise-generalist-agent-deep-dive-2026",
+      "title": "IBM CUGA 深度解读：开源企业级通用 Agent 框架的架构、治理与落地实践",
+      "date": "2026-06-24",
+      "category": "AI开发平台",
+      "description": "IBM Research 开源的 CUGA（Configurable Generalist Agent）是 2026 年最值得关注的企业级 Agent 框架之一。它以 AppWorld #1、WebArena #1 的基准成绩证明了通用能力，又以 policy-as-code 治理层回答了企业最关心的合规问题。本文从架构、治理、工具生态、落地案例四个维度完整拆解这款框架。",
+      "keywords": [
+        "IBM CUGA",
+        "通用智能体",
+        "企业Agent",
+        "Governance",
+        "MCP",
+        "OpenAPI",
+        "Planner-Executor",
+        "Agent框架",
+        "开源",
+        "BPO"
+      ],
+      "read_time": "16 分钟",
+      "word_count": 11664,
+      "view_count": 0,
+      "created_at": "2026-06-24 11:30:04",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "multi-agent-collaboration-framework-guide-2026",
+      "title": "从单 Agent 到多 Agent：2026 协作框架选型、架构模式与场景落地全景",
+      "date": "2026-06-23",
+      "category": "AI开发平台",
+      "description": "2026年多智能体协作技术完全指南：系统拆解 LangGraph、CrewAI、OpenAI Agents SDK、Google ADK、Microsoft Agent Framework 五大框架的核心差异与真实性能数据，深度解析五种编排模式（Pipeline/Supervisor/Swarm/状态图/层级），并给出客服、研发、金融、营销四大场景的明确选型建议。",
+      "keywords": [
+        "多智能体",
+        "Multi-Agent",
+        "LangGraph",
+        "CrewAI",
+        "OpenAI Agents SDK",
+        "Google ADK",
+        "A2A协议",
+        "MCP",
+        "智能体协作",
+        "架构模式"
+      ],
+      "read_time": "20 分钟",
+      "word_count": 14181,
+      "view_count": 0,
+      "created_at": "2026-06-23 11:15:11",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "scaling-law-bottleneck-to-asi-breakthrough-paths-2026",
+      "title": "从 Scaling Law 瓶颈到 ASI：五种突破路线的有效性与未来展望",
+      "date": "2026-06-22",
+      "category": "AI行业观察",
+      "description": "预训练撞墙之后，通往 AGI 与 ASI 的路怎么走？本文系统拆解突破 Scaling Law 瓶颈的五条主要路线——推理时计算、强化学习扩展、合成数据、新架构与持续学习、多智能体涌现，逐一评估它们的真实有效性、已知边界与未来展望，并给出一张清醒的判断地图。",
+      "keywords": [
+        "Scaling Law",
+        "AGI",
+        "ASI",
+        "推理时计算",
+        "强化学习",
+        "合成数据",
+        "世界模型",
+        "Agentic AI",
+        "大模型",
+        "持续学习"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 10508,
+      "view_count": 0,
+      "created_at": "2026-06-22 05:43:46",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "ai-talent-war-john-jumper-anthropic-2026",
+      "title": "48 小时，谷歌失去两位「Transformer 时代」的奠基人：AI 人才战白热化",
+      "date": "2026-06-21",
+      "category": "AI行业观察",
+      "description": "2026 年 6 月的同一周，诺奖得主、AlphaFold 负责人 John Jumper 离开谷歌 DeepMind 加入 Anthropic；一天前，Transformer 论文作者、Gemini 联合负责人 Noam Shazeer 转投 OpenAI。48 小时内，谷歌失去了定义这个时代的两位科学家。本文复盘这场人才战的来龙去脉、天价薪酬、留存数据，以及它揭示的行业拐点。",
+      "keywords": [
+        "AI人才战",
+        "John Jumper",
+        "AlphaFold",
+        "Anthropic",
+        "Noam Shazeer",
+        "OpenAI",
+        "Google DeepMind"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 10033,
+      "view_count": 0,
+      "created_at": "2026-06-21 12:12:19",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "harness-engineering-invisible-half-of-ai-agents-2026",
+      "title": "Harness 工程：当模型趋同，决定 AI Agent 成败的「看不见的一半」",
+      "date": "2026-06-20",
+      "category": "AI行业观察",
+      "description": "同一套模型权重，换一个 Harness，基准分数能摆动 10-20 个百分点。当前沿模型逐渐趋同，真正决定 AI Agent 成败的是那一层包裹在模型外面、看不见的工程——Harness。本文拆解它的定义、架构、基准影响，以及 Anthropic、OpenAI、Stripe 的一线实践。",
+      "keywords": [
+        "Harness工程",
+        "AI Agent",
+        "智能体",
+        "上下文工程",
+        "编程智能体"
+      ],
+      "read_time": "16 分钟",
+      "word_count": 14959,
+      "view_count": 0,
+      "created_at": "2026-06-20 11:56:21",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "ai-distillation-war-china-models-2026",
+      "title": "AI 蒸馏之战：美国为何要封锁「蒸馏」，国产模型如何「青出于蓝」",
+      "date": "2026-06-18",
+      "category": "AI行业观察",
+      "description": "2026年，一个原本中性的机器学习术语「蒸馏」，成了中美AI战争的导火索。OpenAI、Anthropic指控国产模型「工业级蒸馏」窃取能力，美国甚至以此为由动用出口管制。本文从技术、法律、地缘三个层面拆解：蒸馏到底是什么、为何被封锁、合法边界在哪，以及国产模型「青出于蓝」靠的究竟是不是蒸馏。",
+      "keywords": [
+        "AI蒸馏",
+        "知识蒸馏",
+        "DeepSeek",
+        "模型萃取",
+        "出口管制",
+        "国产大模型",
+        "自蒸馏",
+        "合成数据",
+        "中美AI",
+        "Anthropic"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9503,
+      "view_count": 0,
+      "created_at": "2026-06-19 05:40:33",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "anti-vendor-lockin-ai-workflow-2026",
+      "title": "不被卡脖子的AI工作流：从模型路由到Prompt可移植的完整防断供指南",
+      "date": "2026-06-17",
+      "category": "AI开发平台",
+      "description": "2026年6月Fable 5被一纸出口管制令全球下线，证明任何单一AI厂商都可能一夜失效。本文面向个人与小团队，给出一套可落地的防断供方案：从多模型路由（OpenRouter vs LiteLLM）、主备自动切换、按任务分级路由控成本，到Prompt可移植性与迁移演练，帮你把AI工作流的命脉握回自己手里。",
+      "keywords": [
+        "多模型路由",
+        "OpenRouter",
+        "LiteLLM",
+        "防断供",
+        "Prompt可移植",
+        "Vendor Lock-in",
+        "模型迁移",
+        "DeepSeek",
+        "GLM",
+        "一人公司"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 12751,
+      "view_count": 0,
+      "created_at": "2026-06-17 11:34:44",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "litellm-ai-gateway-deep-dive-2026",
+      "title": "LiteLLM 深度调研：用一个开源网关统一 100+ 大模型的完整实战指南",
+      "date": "2026-06-17",
+      "category": "AI开发平台",
+      "description": "LiteLLM 是 2026 年最流行的开源 AI 网关之一：一个 OpenAI 兼容端点接管 100+ 模型供应商，内置虚拟 Key、预算管控、自动容灾、成本追踪与可观测性。本文从是什么、架构、配置实操、可观测性、选型对比到生产短板，完整拆解 LiteLLM，帮你判断它是否是你团队的最优解。",
+      "keywords": [
+        "LiteLLM",
+        "AI Gateway",
+        "LLM网关",
+        "多模型路由",
+        "虚拟Key",
+        "成本追踪",
+        "可观测性",
+        "OpenAI兼容",
+        "Proxy",
+        "开源"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 11985,
+      "view_count": 0,
+      "created_at": "2026-06-17 13:36:26",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "ai-world-cup-2026-football-intelligence",
+      "title": "大模型走进绿茵场：2026世界杯背后的 AI 全景与体育智能化的下一站",
+      "date": "2026-06-16",
+      "category": "AI行业观察",
+      "description": "2026世界杯被称为史上技术最先进的一届：25秒生成的3D越位动画、直达裁判耳麦的AI判罚、3D球员虚拟形象、AI个性化转播。本文从赛场、转播、球队、商业四个维度拆解大模型与AI如何重构足球，并展望体育智能化的下一站与它带来的信任难题。",
+      "keywords": [
+        "世界杯2026",
+        "AI体育",
+        "大模型应用",
+        "半自动越位",
+        "智能转播",
+        "体育科技"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 11533,
+      "view_count": 0,
+      "created_at": "2026-06-17 01:21:38",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "ai-smart-transportation-seven-applications-2026",
+      "title": "AI大模型重塑智能交通2026：从端到端自动驾驶到城市交通治理的七大应用场景全景",
+      "date": "2026-06-15",
+      "category": "AI行业观察",
+      "description": "2026年是智能交通的拐点年：Waymo目标百万次/周、小马智行订单增长544%、AI信号优化降延误40%、AI执法每年预防千余起事故。本文系统梳理AI大模型在智能交通的七大应用场景——端到端自动驾驶、世界模型仿真、Robotaxi商业化、交通信号智能控制、AI违法检测与执法、交通态势感知、座舱AI出行Agent——并分析中美路线差异与未来趋势。",
+      "keywords": [
+        "智能交通",
+        "自动驾驶",
+        "Waymo",
+        "Robotaxi",
+        "交通大模型",
+        "世界模型",
+        "小马智行",
+        "百度Apollo",
+        "智慧出行",
+        "交通治理"
+      ],
+      "read_time": "16 分钟",
+      "word_count": 11652,
+      "view_count": 0,
+      "created_at": "2026-06-15 09:02:12",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "llm-inference-framework-comparison-2026",
+      "title": "大模型推理框架选型2026：vLLM、SGLang、TensorRT-LLM、Ollama、Xinference五大框架怎么选",
+      "date": "2026-06-14",
+      "category": "AI开发平台",
+      "description": "2026年大模型推理框架选型完全指南：从引擎层（vLLM、SGLang、TensorRT-LLM、llama.cpp）到平台层（Xinference、Ollama），逐一拆解核心技术（PagedAttention vs RadixAttention）、性能基准、适用场景，并给出五种典型部署场景的明确推荐。一篇文章终结你的选型纠结。",
+      "keywords": [
+        "推理框架",
+        "vLLM",
+        "SGLang",
+        "TensorRT-LLM",
+        "Ollama",
+        "Xinference",
+        "llama.cpp",
+        "大模型部署",
+        "LLM Inference",
+        "PagedAttention"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 12558,
+      "view_count": 0,
+      "created_at": "2026-06-14 04:00:31",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "claude-fable-5-ban-china-ai-opportunity-2026",
+      "title": "当AI模型成为「出口管制品」：Claude 5停服事件与中国大模型的历史性窗口",
+      "date": "2026-06-13",
+      "category": "AI行业观察",
+      "description": "2026年6月12日，美国政府以国家安全为由强制下线Claude Fable 5——AI行业史上首次对公开可用模型实施出口管制。次日，中国智谱GLM-5.2以MIT开源+1M上下文+1/90成本接棒。本文复盘72小时事件全貌、分析AI模型武器化趋势，并深度剖析中国大模型面临的历史性窗口：从备份选项到独立路线的战略转折。",
+      "keywords": [
+        "Claude 5",
+        "Anthropic",
+        "出口管制",
+        "GLM-5.2",
+        "中国大模型",
+        "DeepSeek",
+        "Qwen",
+        "开源AI",
+        "AI安全",
+        "地缘政治"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 10301,
+      "view_count": 0,
+      "created_at": "2026-06-13 12:17:48",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "physical-ai-world-model-humanoid-robot-2026",
+      "title": "物理AI是什么：从世界模型到人形机器人，一文看懂AI下一个40万亿美元赛道",
+      "date": "2026-06-12",
+      "category": "AI行业观察",
+      "description": "Physical AI（物理AI）是2026年最大的产业叙事：让AI走出屏幕、走进物理世界。本文从定义出发，拆解世界模型（Cosmos 3）、具身模型（GR00T）、仿真平台（Omniverse）的技术栈，盘点四大应用场景（自动驾驶、人形机器人、智能工厂、视觉Agent），对比中美路线（NVIDIA全栈 vs 中国具身智能国策），并分析Jensen Huang所说的40万亿美元市场背后的机遇与挑战。",
+      "keywords": [
+        "Physical AI",
+        "物理AI",
+        "具身智能",
+        "世界模型",
+        "NVIDIA",
+        "Cosmos",
+        "人形机器人",
+        "数字孪生",
+        "自动驾驶",
+        "Omniverse"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 13876,
+      "view_count": 0,
+      "created_at": "2026-06-12 02:39:39",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "ai-customer-service-agent-landscape-2026",
+      "title": "智能客服Agent全景2026：国内外厂商盘点、大模型应用场景与成效避坑指南",
+      "date": "2026-06-11",
+      "category": "AI行业观察",
+      "description": "2026年智能客服Agent全景调研：从规则机器人到自主解决问题的Agent范式切换，盘点国外Sierra、Decagon、Agentforce、Intercom Fin与国内网易七鱼、阿里、智齿、容联云等主流厂商，剖析大模型与智能体的六大应用场景，并用Klarna省4000万美元与74%企业回滚的强烈反差，给出一份成效真相与选型避坑指南。",
+      "keywords": [
+        "智能客服",
+        "客服Agent",
+        "大模型应用",
+        "Sierra",
+        "Agentforce",
+        "网易七鱼",
+        "Klarna",
+        "Customer Service",
+        "Agentic AI",
+        "RAG"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 10151,
+      "view_count": 0,
+      "created_at": "2026-06-11 06:12:57",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "chatgpt-chat-is-dead-llm-to-agent-paradigm-2026",
+      "title": "从LLM到Agent的范式跃迁2026：OpenAI「去聊天化」背后，整个行业在押注什么",
+      "date": "2026-06-09",
+      "category": "AI生产力工具",
+      "description": "2026年6月，OpenAI被曝将ChatGPT重构为捆绑Codex与AI Agent的「超级应用」，一名高管直言「Chat is dead」。本文从这次事件切入，系统梳理从LLM到Agent的范式跃迁：为什么是现在、技术分水岭在哪、OpenAI与Anthropic及国产大模型的Agent之战，以及对开发者、企业和普通用户意味着什么。",
+      "keywords": [
+        "AI Agent",
+        "智能体",
+        "OpenAI",
+        "ChatGPT",
+        "超级应用",
+        "Codex",
+        "Anthropic",
+        "范式转变",
+        "Agentic AI"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 9277,
+      "view_count": 0,
+      "created_at": "2026-06-09 11:38:18",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "xinference-deployment-practice-guide-2026",
+      "title": "Xinference部署与应用实战2026：一个平台搞定LLM+Embedding+Rerank的私有化推理",
+      "date": "2026-06-09",
+      "category": "AI开发平台",
+      "description": "Xinference（Xorbits Inference）实战指南：从pip、Docker、K8s四种部署方式，到WebUI/CLI/Python三种调用方式，再到对接Dify/RAGFlow搭建私有化RAG知识库。一个OpenAI兼容平台统一管理LLM、Embedding、Rerank与多模态模型，附选型建议与避坑清单。",
+      "keywords": [
+        "Xinference",
+        "Xorbits Inference",
+        "大模型部署",
+        "私有化推理",
+        "RAG",
+        "Embedding",
+        "Rerank",
+        "vLLM",
+        "Dify"
+      ],
+      "read_time": "13 分钟",
+      "word_count": 9747,
+      "view_count": 0,
+      "created_at": "2026-06-10 05:28:09",
+      "updated_at": "2026-09-05 02:27:43"
+    },
+    {
+      "slug": "ai-toys-2026-china-vs-us-market-and-competition",
+      "title": "AI玩具2026：中国铺量狂奔、美国合规踩刹车，谁能造出下一个爆款？",
+      "date": "2026-06-08",
+      "category": "AI生产力工具",
+      "description": "2026年AI玩具从语音问答进化为情感陪伴智能体。中国靠供应链与应用层铺量狂奔（跃然创新BubblePal、FoloToy），美国靠模型与IP却被安全合规踩刹车（Mattel×OpenAI推迟、Curio Grok、Miko）。本文系统对比中美市场规模、竞品矩阵、商业模式与监管风险，并研判未来趋势。",
+      "keywords": [
+        "AI玩具",
+        "智能玩具",
+        "情感陪伴",
+        "BubblePal",
+        "跃然创新",
+        "Mattel",
+        "OpenAI",
+        "儿童AI",
+        "出海"
+      ],
+      "read_time": "13 分钟",
+      "word_count": 9610,
+      "view_count": 0,
+      "created_at": "2026-06-09 02:29:28",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "humanoid-robot-2026-china-vs-us-investment",
+      "title": "人形机器人2026：中国产量碾压、美国AI领先，谁会赢？",
+      "date": "2026-06-08",
+      "category": "AI生产力工具",
+      "description": "2026年人形机器人从演示走向量产。中国企业（智元、宇树、优必选）出货量占全球85%、价格仅为西方1/5-1/10，但美国（Tesla、Figure AI）在AI大脑上领先。本文系统梳理中美两路线对比、核心落地场景、产业链BOM拆解与投资机会。",
+      "keywords": [
+        "人形机器人",
+        "具身智能",
+        "Tesla Optimus",
+        "Figure AI",
+        "宇树科技",
+        "智元机器人",
+        "产业链投资"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 11489,
+      "view_count": 0,
+      "created_at": "2026-06-08 06:40:45",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "long-context-llm-12m-tokens-workflow-guide-2026",
+      "title": "超长上下文时代：1200万Token如何改变你的工作流",
+      "date": "2026-06-07",
+      "category": "AI开发平台",
+      "description": "SubQ 1200万token、Gemini 200万、Claude 100万——2026年上下文窗口的军备竞赛让AI能一次性'读完'整个代码库或120本书。本文对比三大模型实际可用性，提供五大场景工作流模板，解析注意力衰减的真相与应对技巧，并给出长上下文 vs RAG的成本决策框架。",
+      "keywords": [
+        "长上下文",
+        "超长上下文",
+        "SubQ",
+        "Gemini",
+        "Claude",
+        "RAG",
+        "百万token",
+        "工作流"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 11273,
+      "view_count": 0,
+      "created_at": "2026-06-08 04:46:58",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "ai-era-college-major-guide-2026-gaokao",
+      "title": "2026高考志愿指南：AI时代大学专业该怎么选？",
+      "date": "2026-06-06",
+      "category": "AI生产力工具",
+      "description": "2026年高考季，AI正在重塑就业市场。计算机科学入学率下降11%，护理工程逆势增长。本文基于全球最新就业数据，为高中毕业生提供AI时代专业选择的完整判断框架：哪些方向AI替代不了、哪些是'AI+'黄金组合、哪些坑千万别踩，帮你做出未来四年不后悔的选择。",
+      "keywords": [
+        "高考志愿",
+        "AI时代",
+        "专业选择",
+        "就业前景",
+        "人工智能专业",
+        "跨学科",
+        "2026高考"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 7394,
+      "view_count": 0,
+      "created_at": "2026-06-06 13:08:54",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "on-device-llm-2026-gemma4-minicpm-qwen",
+      "title": "2026端侧大模型全景：当多模态AI塞进你的手机和笔记本",
+      "date": "2026-06-05",
+      "category": "AI开发平台",
+      "description": "2026年端侧大模型从演示噱头走向实用工程。本文系统梳理端侧AI的技术突破（内存带宽瓶颈、4-bit量化、无编码器多模态）、硬件现状，并深度对比Google Gemma 4、面壁MiniCPM5-1B/MiniCPM-V 4.6、阿里Qwen3.5小模型系列等中美代表模型，剖析手机/PC/汽车的真实落地场景与挑战。",
+      "keywords": [
+        "端侧大模型",
+        "On-Device AI",
+        "Gemma 4",
+        "MiniCPM",
+        "Qwen3.5",
+        "边缘AI",
+        "小模型",
+        "本地部署"
+      ],
+      "read_time": "16 分钟",
+      "word_count": 14250,
+      "view_count": 0,
+      "created_at": "2026-06-05 10:05:25",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "langfuse-llm-agent-observability-guide-2026",
+      "title": "Langfuse实战：给AI Agent装上黑匣子——开源LLM可观测性平台完全指南",
+      "date": "2026-06-04",
+      "category": "AI开发平台",
+      "description": "Langfuse是2026年最主流的开源LLM可观测性平台，被誉为AI应用的Datadog。本文系统讲解Langfuse在大模型Agent服务中的五大应用场景（追踪/评估/提示词管理/成本/监控）、Docker自托管部署、LangGraph/CrewAI/OpenAI Agents框架集成，以及企业级落地案例。",
+      "keywords": [
+        "Langfuse",
+        "LLM可观测性",
+        "AI Agent",
+        "追踪Tracing",
+        "提示词管理",
+        "成本监控",
+        "开源工具"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 11107,
+      "view_count": 0,
+      "created_at": "2026-06-04 11:45:13",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "vibe-coding-hidden-costs-security-risks-2026",
+      "title": "Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞",
+      "date": "2026-06-03",
+      "category": "AI编程助手",
+      "description": "Vibe Coding让代码产出提升46倍，但2026年上半年密集爆发的安全事故揭示了另一面：2000个应用裸奔、Amazon丢失630万订单、AI代码权限漏洞比人工高322%。本文用真实案例和数据解析Vibe Slop的结构性成因，并提供双轨开发策略和安全门控方案。",
+      "keywords": [
+        "Vibe Coding",
+        "AI安全",
+        "Vibe Slop",
+        "代码安全",
+        "技术债务",
+        "AI编程风险"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 9429,
+      "view_count": 0,
+      "created_at": "2026-06-03 08:28:42",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "opencode-free-ai-coding-agent-guide-2026",
+      "title": "OpenCode实战指南：免费AI编程Agent + 免费大模型，零成本搞定代码开发",
+      "date": "2026-06-02",
+      "category": "AI编程助手",
+      "description": "OpenCode是GitHub 168K Stars的开源AI编程Agent，支持75+模型且完全免费。本文从安装到实战，手把手教你用OpenCode搭配DeepSeek V4 Flash、MiMo V2.5、MiniMax M3等免费模型，实现零成本AI辅助编程。",
+      "keywords": [
+        "OpenCode",
+        "AI编程",
+        "免费大模型",
+        "DeepSeek V4 Flash",
+        "MiMo V2.5",
+        "MiniMax M3",
+        "AI编码Agent"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 11083,
+      "view_count": 0,
+      "created_at": "2026-06-02 05:36:40",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "agent-governance-observability-hidden-costs",
+      "title": "AI Agent治理与可观测性：企业落地的隐藏成本",
+      "date": "2026-06-01",
+      "category": "AI开发平台",
+      "description": "Gartner预测超过40%的AI Agent项目将在2027年底前取消，核心原因不是技术不行，而是治理成本失控。本文系统分析Agent可观测性技术栈（追踪/评估/护栏/成本归因）、成本失控的三大模式，以及国内《数据安全法》和2026年5月三部委《智能体规范应用与创新发展实施意见》对Agent部署的约束，为企业提供一份从可观测到合规的完整落地框架。",
+      "keywords": [
+        "AI Agent治理",
+        "Agent可观测性",
+        "AI风险管理",
+        "企业TCO",
+        "数据安全法",
+        "智能体合规"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 10762,
+      "view_count": 0,
+      "created_at": "2026-06-01 11:31:02",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "enterprise-ai-agent-deployment-guide-2026",
+      "title": "企业AI Agent部署实战：从0到1600个Agent的落地路径",
+      "date": "2026-05-31",
+      "category": "AI开发平台",
+      "description": "IBM调查显示大型企业年底前将平均部署1600个AI Agent，但70%无法有效治理。本文拆解KPMG、OpenAI DeployCo等真实案例，提供从试点到规模化的完整落地路径、成本模型与避坑指南。",
+      "keywords": [
+        "AI Agent",
+        "企业部署",
+        "Agent治理",
+        "MCP",
+        "A2A",
+        "DeployCo",
+        "智能体"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9240,
+      "view_count": 0,
+      "created_at": "2026-05-31 04:07:43",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "open-source-llm-comparison-2026",
+      "title": "2026年开源大模型最新选型指南：Kimi K2.6 / DeepSeek V4 / Qwen 3.6 / Llama 4 / MiniMax M2 / GLM-5.1 六大模型深度对比",
+      "date": "2026-05-30",
+      "category": "AI开发平台",
+      "description": "2026年开源大模型格局剧变。本文从编码、推理、中文、多模态、Agent能力五大维度，深度对比Kimi K2.6、DeepSeek V4、Qwen 3.6、Llama 4、MiniMax M2.7、GLM-5.1六大模型家族，并提供本地部署硬件指南与场景选型决策树。",
+      "keywords": [
+        "开源大模型",
+        "DeepSeek V4",
+        "Qwen 3.6",
+        "Kimi K2.6",
+        "Llama 4",
+        "MiniMax M2",
+        "GLM-5.1",
+        "本地部署",
+        "模型选型"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 15554,
+      "view_count": 0,
+      "created_at": "2026-05-31 02:22:07",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "codegraph-ai-coding-knowledge-graph-review",
+      "title": "CodeGraph 深度评测：GitHub月榜第一，让AI编码省35%费用的代码知识图谱 - AI知识宇宙",
+      "date": "2026-05-28",
+      "category": "AI编程助手",
+      "description": "深度评测 GitHub Trending 月榜第一的 CodeGraph：为 Claude Code、Cursor、Kiro 等 AI 编码工具提供预索引知识图谱，实测减少 70% 工具调用、节省 35% 费用",
+      "keywords": [
+        "AI编程助手",
+        "CodeGraph",
+        "Claude Code",
+        "Cursor",
+        "开源",
+        "代码知识图谱"
+      ],
+      "read_time": "13分钟",
+      "word_count": 13150,
+      "view_count": 0,
+      "created_at": "2026-05-28 14:42:37",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "ai-resume-optimization-guide-2026",
+      "title": "新时代打工人必看：用AI优化简历的完整指南（2026实战版） - AI知识宇宙",
+      "date": "2026-05-27",
+      "category": "AI生产力工具",
+      "description": "手把手教你用豆包、DeepSeek、超级简历等国内主流AI工具优化简历，附实用prompt模板和前后对比案例，让你的面试率翻倍",
+      "keywords": [
+        "AI生产力工具",
+        "求职",
+        "简历优化",
+        "DeepSeek",
+        "豆包"
+      ],
+      "read_time": "12分钟",
+      "word_count": 7967,
+      "view_count": 0,
+      "created_at": "2026-05-27 02:27:35",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "openhuman-ai-agent-review-2026",
+      "title": "OpenHuman 深度评测：3个月28.6k Star，这个桌面AI助手凭什么火爆全网？ - AI知识宇宙",
+      "date": "2026-05-27",
+      "category": "AI编程助手",
+      "description": "深度评测 OpenHuman 开源桌面 AI 智能体：Memory Tree 记忆系统、118+ 一键集成、TokenJuice 压缩技术，以及与 Hermes Agent、OpenClaw 的三方对比",
+      "keywords": [
+        "AI编程助手",
+        "AI Agent",
+        "OpenHuman",
+        "开源",
+        "智能体"
+      ],
+      "read_time": "14分钟",
+      "word_count": 11555,
+      "view_count": 0,
+      "created_at": "2026-05-27 09:21:16",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "hermes-agent-autoreason-deep-dive",
+      "title": "Hermes Agent 最新论文 Autoreason 深度解读：自我精炼终于学会了「适可而止」 - AI知识宇宙",
+      "date": "2026-05-26",
+      "category": "AI编程助手",
+      "description": "深度解读 Nous Research 最新论文 Autoreason，揭示 AI Agent 如何通过三方竞争+盲审投票机制实现自我精炼，以及为什么「什么都不改」才是最难学会的能力",
+      "keywords": [
+        "AI编程助手",
+        "AI Agent",
+        "论文解读",
+        "Hermes Agent",
+        "Autoreason"
+      ],
+      "read_time": "15分钟",
+      "word_count": 11418,
+      "view_count": 0,
+      "created_at": "2026-05-26 07:01:02",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "one-person-company-2026-ai-guide",
+      "title": "一人公司时代：2026 年用 AI 从零构建产品的完整指南 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-25",
+      "category": "AI编程助手",
+      "description": "从需求收敛到原型设计、从核心开发到测试迭代、从部署上线到运营增长，本文提供一套完整的 6 阶段 AI 工作流，让一个人也能完成全栈产品构建。Gamma 50 人 $100M ARR、Cursor 75% 代码由 AI 生成、蚂蚁灵光 3000 万闪应用——这些不是神话，而是 2026 年正在发生的现实",
+      "keywords": [
+        "一人公司",
+        "OPC",
+        "AI编程助手",
+        "超级个体",
+        "产品构建",
+        "AI工具"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 16336,
+      "view_count": 0,
+      "created_at": "2026-05-25 09:07:41",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "mcp-vs-a2a-ai-agent-protocols-deep-dive-2026",
+      "title": "MCP vs A2A：重塑 AI Agent 生态的两大协议深度解析 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-24",
+      "category": "AI编程助手",
+      "description": "MCP 月 SDK 下载量 9700 万+ 成为 AI 工具连接的事实标准，A2A v1.0 正式发布开启 Agent 间通信新纪元。本文从架构原理、核心特性、生态版图到实战选型，深度解析两大协议的互补关系，附完整架构图和决策流程",
+      "keywords": [
+        "AI Agent",
+        "MCP",
+        "A2A",
+        "协议标准",
+        "AI编程助手"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 19484,
+      "view_count": 0,
+      "created_at": "2026-05-24 06:35:45",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "closed-source-ai-coding-tools-comparison-2026",
+      "title": "2026 年最全闭源 AI 编程工具横评：Claude Code vs Cursor vs Copilot vs Codex vs Windsurf - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-23",
+      "category": "AI编程助手",
+      "description": "Claude Code市场份额54%碾压Copilot、Cursor ARR破10亿美元、Codex免费两个月截流、Windsurf被Cognition收购后融入Devin——2026年五款闭源AI编程工具深度横评，从定价、功能、场景到核心竞争力，帮你找到最适合的工具",
+      "keywords": [
+        "AI编程助手",
+        "闭源"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 21145,
+      "view_count": 0,
+      "created_at": "2026-05-23 15:20:11",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "livekit-realtime-voice-video-ai-platform-intro",
+      "title": "LiveKit 深度解析：开源实时语音/视频 AI Agent 平台 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-22",
+      "category": "AI开发平台",
+      "description": "全面解析 LiveKit（18.8K⭐）——开源实时音视频与AI Agent平台。涵盖WebRTC SFU核心架构、LiveKit Agents框架、语音AI智能体构建、Cloud部署、与Agora/Daily/Twilio竞品对比，附延迟优化、成本分析和真实应用场景",
+      "keywords": [
+        "AI开发平台"
+      ],
+      "read_time": "8 分钟",
+      "word_count": 13944,
+      "view_count": 0,
+      "created_at": "2026-05-22 03:44:36",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "dify-vs-coze-ragflow-n8n-fastgpt-comparison",
+      "title": "Dify vs Coze vs RAGFlow vs N8N vs FastGPT：2026年低代码AI平台深度对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-21",
+      "category": "AI开发平台",
+      "description": "深度对比五大低代码AI平台——Dify（142K⭐开源LLM平台）、Coze（字节跳动无代码Bot工具）、RAGFlow（80K⭐专业RAG引擎）、N8N（188K⭐工作流自动化）、FastGPT（26K⭐知识库问答），从定位、功能、部署、定价到选型建议，帮你找到最适合的AI应用构建平台",
+      "keywords": [
+        "AI开发平台"
+      ],
+      "read_time": "8 分钟",
+      "word_count": 12824,
+      "view_count": 0,
+      "created_at": "2026-05-21 11:54:33",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "hermes-agent-wechat-integration-guide",
+      "title": "Hermes Agent 个人微信（WeChat）原生对接适配全攻略",
+      "date": "2026-05-19",
+      "category": "AI 工具实战",
+      "description": "",
+      "keywords": [
+        "AI 工具实战"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4110,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "kilo-code-review",
+      "title": "Kilo Code 评测：2026 年最值得尝试的开源 AI 编程助手 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-19",
+      "category": "AI编程助手",
+      "description": "",
+      "keywords": [
+        "评测"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 8012,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "weknora-vs-dify-ragflow-fastgpt-comparison",
+      "title": "腾讯 WeKnora 知识管理平台深度评测：与 Dify、RAGFlow、FastGPT 全面对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-19",
+      "category": "AI 知识库",
+      "description": "腾讯开源的 WeKnora 知识管理平台究竟如何？本文从架构设计、文档处理、检索能力、部署难度等维度，与 Dify、RAGFlow、FastGPT 等主流开源知识库进行深度对比，提供选型指南和实战建议",
+      "keywords": [
+        "AI 知识库"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 11544,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "hermes-agent-deployment-guide",
+      "title": "Hermes Agent 部署与使用指南：开源AI编程代理的完整实战 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-17",
+      "category": "AI编程助手",
+      "description": "从零部署 Hermes Agent 开源 AI 编程代理的完整指南，涵盖安装、配置、多平台接入、技能系统与高级用法",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "12分钟",
+      "word_count": 10432,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "ai-code-tools-2025-guide",
+      "title": "2026 AI编程工具选购指南：7款主流工具深度对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "2026年深度对比 Cursor、Copilot、Claude Sonnet 4、Windsurf、Replit Agent、ChatGPT、DeepSeek V3 七款AI编程工具，从功能、价格、场景帮你做选择",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 13386,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "ai-novel-writing-tools",
+      "title": "2026 年 AI 小说写作工具全景评测：从创意构思到完稿的全流程指南 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4311,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:35"
+    },
+    {
+      "slug": "ai-tools-2025-must-have",
+      "title": "2026年15款最值得订阅的AI工具：真实价格与性价比全面对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "从月费$5到$20，15款主流AI工具按编程/图像/视频/语音/搜索分类，真实价格与核心价值逐项拆解，附$50/$100/$200预算配置方案",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 12029,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "ai-tools-2025-roundup",
+      "title": "2026 AI工具精选：从10+类工具中挑出最值得入手的15款 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "从编程、写作、图像、视频、语音到搜索，六大类AI工具精选推荐，每款附价格区间与推荐理由",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4238,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "ai-video-upscaling-tools-comparison",
+      "title": "AI视频画质增强工具横评：Topaz Video AI vs Waifu2x vs DVDFab vs 其他方案 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4367,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "akkio-no-code-ml-review",
+      "title": "Akkio 无代码机器学习平台评测：让每个人都能成为 AI 专家 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4902,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "azure-speech-vs-aws-polly-enterprise",
+      "title": "Azure Speech vs AWS Polly：企业级语音合成解决方案深度对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4638,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:36"
+    },
+    {
+      "slug": "canva-ai-2026-review",
+      "title": "Canva AI 2026深度评测：设计小白也能做出专业级作品的秘密武器 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3573,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "capcut-ai-video-editing-deep-dive",
+      "title": "剪映CapCut AI视频编辑功能深度解析：从自动剪辑到智能特效 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3562,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "chatgpt-advanced-data-analysis-deep-dive",
+      "title": "ChatGPT 高级数据分析功能深度解析：AI 数据分析的新纪元 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4554,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "chatgpt5-review",
+      "title": "ChatGPT 深度评测（2026）：GPT-5.5 / GPT-5.4 全面能力与定价解析 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 6334,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "claude-sonnet-4-coding-review",
+      "title": "Claude Sonnet 4 编程评测：定价、功能与实战分析 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "基于官方定价数据，全面评测 Claude Sonnet 4 的编程能力、Claude Code、定价方案及竞品对比",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5126,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "claude-sonnet-4-extended-coding",
+      "title": "Claude Sonnet 4 编程实测：50个真实场景告诉你值不值 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "用50个真实编程任务全面测试Claude Sonnet 4的代码生成、Bug修复、架构设计能力，告诉你这款工具到底值不值得入手",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7103,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "claude-sonnet-4-review",
+      "title": "Claude Sonnet 4 深度测评：编程与写作的双料冠军 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "全面评测 Claude Sonnet 4 在编程辅助、长文写作和逻辑推理三个核心场景的实际表现，与 GPT-4o 和 Gemini 2.5 的详细对比。",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "10分钟",
+      "word_count": 3789,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "comfyui-beginners-guide",
+      "title": "ComfyUI 入门完全指南：从零开始的 Stable Diffusion 节点式工作流 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 6001,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "copilot-vs-cursor-vs-codeium",
+      "title": "GitHub Copilot vs Cursor vs Windsurf：2026年AI编程三强争霸 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "横向对比2026年三大AI编程工具——GitHub Copilot（$0-$39）、Cursor（$20-$200）、Windsurf（$0-$200）的定价、功能、Agent能力和适用场景，含真实数据来源。",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5058,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "copyai-vs-writesonic",
+      "title": "Copy.ai vs Writesonic 2026 横向对比：谁才是最佳 AI 写作助手？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3724,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "cursor-ai-editor-review",
+      "title": "Cursor AI 编辑器深度评测：2026年定价、功能与竞品对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "基于 cursor.com/pricing 最新数据的 Cursor AI 编辑器全面评测，涵盖定价方案、核心功能、优缺点分析，以及与 Copilot 和 Windsurf 的横向对比。",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5265,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "dalle3-review",
+      "title": "DALL-E 3 深度评测：OpenAI 的 AI 图像生成旗舰是否依然能打？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3412,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:37"
+    },
+    {
+      "slug": "deepseek-v3-vs-gpt4o-chatgpt-comparison",
+      "title": "DeepSeek V4 vs GPT-5.4 vs Claude：2026年AI模型对比评测 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "全面对比 DeepSeek V4 Flash/Pro、GPT-5.4/5.5、Claude Sonnet 4.6 在中文写作、代码生成、性价比上的真实表现",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7861,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:22",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "elevenlabs-review-2025",
+      "title": "ElevenLabs 2026版评测：AI语音合成已听不出真假 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "ElevenLabs 2026版深度评测：中文配音实测、语音克隆效果、新功能体验、定价策略及竞品对比",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 6340,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "elevenlabs-tts-2025-review",
+      "title": "ElevenLabs 2026快速入门：AI语音合成设置与使用 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "ElevenLabs快速入门指南：注册、设置、语音合成全流程，附完整评测链接",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 2391,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "elevenlabs-vs-fish-audio",
+      "title": "ElevenLabs vs Fish Audio：AI语音合成的新时代 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "深度对比 ElevenLabs 和 Fish Audio 在语音自然度、情感表达、多语言支持和声音克隆四个维度的表现，通过真实测试数据告诉你哪个更适合你的场景。",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "8分钟",
+      "word_count": 4596,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "gamma-ai-presentation-review",
+      "title": "Gamma.app评测：用AI一键生成PPT能让效率提升多少？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "深度评测AI PPT制作工具Gamma.app，从生成速度、设计质量、功能完整度三个维度对比传统PPT制作流程，实测告诉你AI做PPT到底值不值。",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7631,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "github-copilot-2026-in-depth-review",
+      "title": "GitHub Copilot 2026 深度评测：从免费版到 Enterprise，完整功能与定价指南 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "基于官方文档和实际使用，全面评测 GitHub Copilot 2026年的功能矩阵、定价方案、Agent模式、Cloud Agent、Code Review等新特性，附真实使用场景测试。",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "15分钟",
+      "word_count": 10324,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "grammarly-vs-prowritingaid",
+      "title": "Grammarly AI vs ProWritingAid 深度对比：英文写作辅助工具终极对决 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4072,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:38"
+    },
+    {
+      "slug": "heygen-digital-avatar-guide",
+      "title": "HeyGen 数字人视频制作完全指南：从入门到精通 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3093,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "jasper-ai-review",
+      "title": "Jasper AI 2026 深度评测：企业级 AI 写作平台是否值得投入？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI写作工具",
+      "description": "",
+      "keywords": [
+        "AI写作工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3386,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "julius-ai-data-analysis-review",
+      "title": "Julius AI 数据分析工具深度评测：让数据说话的全能助手 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4439,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "kaiber-ai-music-video-review",
+      "title": "Kaiber AI音乐视频生成评测：让音乐可视化成为现实 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3503,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "leonardo-ai-game-assets",
+      "title": "Leonardo AI 深度评测：游戏美术资产创作的 AI 利器 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3804,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:39"
+    },
+    {
+      "slug": "mem-ai-knowledge-management-review",
+      "title": "Mem.ai 知识管理工具深度评测：AI 时代的第二大脑 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4645,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "midjourney-v6-ai-image-review",
+      "title": "Midjourney V6 全面评测：AI图像生成的天花板？附Stable Diffusion 3与GPT-Image-2深度对比 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "Midjourney V6最新功能全覆盖评测，与Stable Diffusion 3和OpenAI GPT-Image-2的横评对比，含实拍效果、提示词工程、出图质量、性价比等多维度分析，文末附购买建议与避坑指南。",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 9820,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "midjourney-vs-dalle-vs-sd",
+      "title": "2026 AI 图像生成三巨头对决：Midjourney vs GPT-Image-2 vs Stable Diffusion 3.5/4 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7547,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "motion-ai-calendar-automation-test",
+      "title": "Motion AI 日历自动化工具深度测试：智能时间管理的未来已来？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4618,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "murf-vs-elevenlabs-voiceover-comparison",
+      "title": "Murf vs ElevenLabs 2025语音合成巅峰对决：AI配音工具深度横评 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4064,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "notion-ai-review-productivity",
+      "title": "Notion AI 深度体验：智能笔记助手真的能提升效率吗？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "Notion AI全功能评测，自动写作、翻译、知识库管理、会议笔记、自定义代理等功能实测",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7982,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "obviously-ai-vs-obviously-comparison",
+      "title": "Obviously AI vs Obviously：两大 AI 数据分析平台全方位对比评测 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5482,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:40"
+    },
+    {
+      "slug": "otter-ai-vs-fireflies-comparison",
+      "title": "Otter.ai vs Fireflies.ai：AI 会议笔记工具巅峰对决 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5667,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "pandasai-tutorial-beginners",
+      "title": "PandasAI 入门教程：用自然语言玩转 Python 数据分析 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 6965,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "perplexity-ai-search-review",
+      "title": "Perplexity AI 深度评测：它能取代 Google 搜索吗？2026 使用体验 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI对话写作",
+      "description": "Perplexity AI 搜索引擎详细评测，对比 Google 搜索优劣势，Pro 版定价及是否值得订阅（数据来源：perplexity.ai 公开页面，2026 年 5 月）",
+      "keywords": [
+        "AI对话写作"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7738,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "pika-2-0-review",
+      "title": "Pika 2.0 深度评测：AI视频生成的新标杆 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4138,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "play-dot-ht-review-2025",
+      "title": "Play.ht 2025深度评测：AI语音合成平台的全面进化 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3673,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:23",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "replit-agent-ai-coding-review",
+      "title": "Replit Agent评测：自然语言从零构建Web应用 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "Replit Agent完整评测，用自然语言从0到1构建Web应用的全流程体验",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7354,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:41"
+    },
+    {
+      "slug": "resemble-ai-voice-cloning-test",
+      "title": "Resemble AI语音克隆深度测试：从声音复刻到实时合成 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI语音工具",
+      "description": "",
+      "keywords": [
+        "AI语音工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 3724,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "rows-com-ai-spreadsheet-review",
+      "title": "Rows.com AI 电子表格评测：下一代智能表格工具的革命 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5078,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "runway-gen3-ai-video-review",
+      "title": "Runway AI视频生成深度评测（2026）：Gen-4.5/Gen-4/Gen-3全面对比与真实定价分析 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "Runway AI视频生成能力深度评测（2026年更新），包含Gen-4.5/Gen-4/Gen-3全面对比，基于官网真实定价数据分析，与Pika和HeyGen的多维度对比",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 9014,
+      "view_count": 0,
+      "created_at": "2026-05-19 10:48:00",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "stable-diffusion-3.5-workflow",
+      "title": "Stable Diffusion 3.5 完整工作流指南：从入门到精通的实用教程 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI图像生成",
+      "description": "",
+      "keywords": [
+        "AI图像生成"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5191,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "synthesia-vs-heygen-vs-colossyan-2025",
+      "title": "Synthesia vs HeyGen vs Colossyan 2025大对比：哪个AI视频创作平台更适合你？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI视频工具",
+      "description": "",
+      "keywords": [
+        "AI视频工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4078,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "tableau-vs-power-bi-ai-comparison",
+      "title": "Tableau vs Power BI：AI 功能全面对比，谁才是数据分析之王？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI数据分析",
+      "description": "",
+      "keywords": [
+        "AI数据分析"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 5750,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "taskade-ai-project-management-review",
+      "title": "Taskade AI 项目管理工具深度评测：AI 驱动的高效协作新范式 - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI生产力工具",
+      "description": "",
+      "keywords": [
+        "AI生产力工具"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 4905,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    },
+    {
+      "slug": "vercel-ai-deploy-review",
+      "title": "Vercel评测：为什么AI应用开发者都在用它？ - AI知识宇宙 - 用AI采集，用AI生成",
+      "date": "2026-05-16",
+      "category": "AI编程助手",
+      "description": "Vercel平台完整评测，涵盖部署流程、性能优化、Serverless Functions功能解析，以及为什么它成为AI应用开发者的首选部署平台。",
+      "keywords": [
+        "AI编程助手"
+      ],
+      "read_time": "5 分钟",
+      "word_count": 7408,
+      "view_count": 0,
+      "created_at": "2026-05-19 11:32:24",
+      "updated_at": "2026-09-05 02:27:42"
+    }
+  ]
+}

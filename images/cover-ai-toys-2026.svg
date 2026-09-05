@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#161638"/>
+      <stop offset="100%" stop-color="#0d0d25"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="plush" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/><line x1="0" y1="192" x2="900" y2="192"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="450" height="4" fill="url(#red)"/>
+  <rect x="450" y="0" width="450" height="4" fill="url(#blue)"/>
+  <rect x="0" y="379" width="450" height="4" fill="url(#red)"/>
+  <rect x="450" y="379" width="450" height="4" fill="url(#blue)"/>
+
+  <!-- Right side: Plush toy + AI chat bubble -->
+  <g transform="translate(648, 70)">
+    <!-- Ears -->
+    <circle cx="40" cy="22" r="20" fill="url(#plush)"/>
+    <circle cx="128" cy="22" r="20" fill="url(#plush)"/>
+    <circle cx="40" cy="22" r="9" fill="#b45309" opacity="0.5"/>
+    <circle cx="128" cy="22" r="9" fill="#b45309" opacity="0.5"/>
+    <!-- Head -->
+    <circle cx="84" cy="78" r="58" fill="url(#plush)"/>
+    <!-- Eyes -->
+    <circle cx="62" cy="70" r="8" fill="#1f2937"/>
+    <circle cx="106" cy="70" r="8" fill="#1f2937"/>
+    <circle cx="64" cy="67" r="2.5" fill="#fff"/>
+    <circle cx="108" cy="67" r="2.5" fill="#fff"/>
+    <!-- Nose -->
+    <ellipse cx="84" cy="90" rx="7" ry="5" fill="#7c2d12"/>
+    <!-- Smile -->
+    <path d="M70 102 Q84 116 98 102" fill="none" stroke="#7c2d12" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- AI core badge on chest -->
+    <circle cx="84" cy="150" r="20" fill="#0d0d25" stroke="url(#blue)" stroke-width="2"/>
+    <text x="84" y="156" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#60a5fa" text-anchor="middle">AI</text>
+    <!-- Chat bubble -->
+    <g transform="translate(120, -8)">
+      <rect x="0" y="0" width="70" height="42" rx="10" fill="#1e1e3a" stroke="url(#blue)" stroke-width="1.5"/>
+      <path d="M14 42 L14 56 L28 42 Z" fill="#1e1e3a"/>
+      <circle cx="20" cy="21" r="4" fill="#3b82f6"/>
+      <circle cx="35" cy="21" r="4" fill="#8b5cf6"/>
+      <circle cx="50" cy="21" r="4" fill="#ef4444"/>
+    </g>
+  </g>
+
+  <!-- Left: China/US badges -->
+  <g transform="translate(50, 30)">
+    <rect x="0" y="0" width="60" height="28" rx="4" fill="url(#red)" opacity="0.9"/>
+    <text x="30" y="19" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="bold" font-size="13" fill="#fff" text-anchor="middle">中国</text>
+    <text x="72" y="19" font-family="Arial,sans-serif" font-size="14" fill="#666">vs</text>
+    <rect x="88" y="0" width="60" height="28" rx="4" fill="url(#blue)" opacity="0.9"/>
+    <text x="118" y="19" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="bold" font-size="13" fill="#fff" text-anchor="middle">美国</text>
+  </g>
+
+  <text x="50" y="110" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="32" font-weight="bold" fill="#ffffff">AI玩具 2026</text>
+  <text x="50" y="152" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="20" font-weight="bold" fill="url(#plush)">铺量狂奔 vs 合规踩刹车</text>
+
+  <!-- Key stats -->
+  <g transform="translate(50, 175)">
+    <text x="0" y="0" font-family="'Courier New',monospace" font-size="13" fill="#ef4444">中国 月销千万 · 毛利90%+</text>
+    <text x="0" y="22" font-family="'Courier New',monospace" font-size="13" fill="#3b82f6">Mattel×OpenAI 推迟发布</text>
+    <text x="0" y="44" font-family="'Courier New',monospace" font-size="13" fill="#94a3b8">2025 全球售出 2200万个</text>
+  </g>
+
+  <!-- Tags -->
+  <g transform="translate(50, 248)">
+    <rect x="0" y="0" width="84" height="24" rx="12" fill="#1e1e3a" stroke="#ef4444" stroke-width="0.8"/>
+    <text x="42" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fca5a5" text-anchor="middle">BubblePal</text>
+
+    <rect x="92" y="0" width="72" height="24" rx="12" fill="#1e1e3a" stroke="#ef4444" stroke-width="0.8"/>
+    <text x="128" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fca5a5" text-anchor="middle">FoloToy</text>
+
+    <rect x="172" y="0" width="60" height="24" rx="12" fill="#1e1e3a" stroke="#3b82f6" stroke-width="0.8"/>
+    <text x="202" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#93c5fd" text-anchor="middle">Grok</text>
+
+    <rect x="240" y="0" width="60" height="24" rx="12" fill="#1e1e3a" stroke="#3b82f6" stroke-width="0.8"/>
+    <text x="270" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#93c5fd" text-anchor="middle">Miko</text>
+
+    <rect x="308" y="0" width="82" height="24" rx="12" fill="#1e1e3a" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="349" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">情感陪伴</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="50" y="290" width="460" height="1" fill="#fff" opacity="0.06"/>
+  <text x="50" y="315" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4a4f70">中美市场对比 · 竞品矩阵 · 商业模式 · 监管风险</text>
+  <text x="50" y="348" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#33385a">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 30)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#blue)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#3b82f6" text-anchor="middle">26</text>
+  </g>
+</svg>

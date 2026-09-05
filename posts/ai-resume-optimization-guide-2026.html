@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新时代打工人必看：用AI优化简历的完整指南（2026实战版） - AI知识宇宙</title>
+    <meta name="description" content="手把手教你用豆包、DeepSeek、超级简历等国内主流AI工具优化简历，附实用prompt模板和前后对比案例，让你的面试率翻倍">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">新时代打工人必看：用AI优化简历的完整指南（2026实战版） - AI知识宇宙</h1>
+            <div class="post-meta">
+                <span class="cat">AI生产力工具</span>
+                <span>2026-05-27 · 12分钟</span>
+            </div>
+            <h2 id="hr">一、残酷的现实：你的简历可能连HR的眼都没过</h2>
+<p>先说几个扎心的数据：</p>
+<ul>
+<li><strong>76%</strong> 的大公司使用 ATS（简历筛选系统）自动过滤简历</li>
+<li>HR 平均只花 <strong>6-8 秒</strong> 扫一份简历</li>
+<li>同一个岗位平均收到 <strong>200-500 份</strong> 简历</li>
+<li>2026 年应届毕业生预计 <strong>1200万+</strong></li>
+</ul>
+<p>也就是说，你精心写了两天的简历，大概率连人眼都没见到就被机器刷掉了。</p>
+<p>但好消息是——<strong>AI 能帮你反杀</strong>。</p>
+<p><img alt="AI简历优化流程" src="../images/cover-ai-resume-guide.svg" /></p>
+<hr />
+<h2 id="ai">二、第一层：免费AI对话工具改简历（人人能用）</h2>
+<p>不需要花一分钱，用国内免费的 AI 对话工具就能大幅提升简历质量。</p>
+<h3 id="21">2.1 推荐工具</h3>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>优势</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.doubao.com">豆包</a></td>
+<td>字节出品，中文理解最强，免费无限用</td>
+<td>日常改写、润色</td>
+</tr>
+<tr>
+<td><a href="https://chat.deepseek.com">DeepSeek</a></td>
+<td>推理能力强，擅长量化和逻辑优化</td>
+<td>成果量化、STAR法则改写</td>
+</tr>
+<tr>
+<td><a href="https://kimi.moonshot.cn">Kimi</a></td>
+<td>支持上传长文档，可直接分析PDF简历</td>
+<td>整体诊断、对标JD</td>
+</tr>
+<tr>
+<td><a href="https://yuanbao.tencent.com">腾讯元宝</a></td>
+<td>微信生态，手机随时用</td>
+<td>碎片时间快速优化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-prompt">2.2 万能 Prompt 模板</h3>
+<h4 id="prompt-1">Prompt 1：简历整体诊断</h4>
+<pre><code>你是一位有10年经验的HR总监和职业规划师。请从以下维度诊断我的简历：
+1. 内容完整性（是否缺少关键模块）
+2. 量化程度（数据支撑是否充分）
+3. 关键词密度（是否匹配目标岗位）
+4. 排版可读性（是否方便6秒快速扫描）
+5. 亮点突出度（核心竞争力是否一眼可见）
+
+我的目标岗位是：[填入目标岗位名称]
+我的简历内容如下：
+[粘贴你的简历全文]
+
+请给出具体的修改建议和优先级排序。
+</code></pre>
+<h4 id="prompt-2-star">Prompt 2：工作经历 STAR 法则改写</h4>
+<pre><code>请用STAR法则（情境-任务-行动-结果）改写以下工作经历描述，要求：
+1. 每条控制在1-2行
+2. 必须包含具体数字（如果原文没有，请用合理的估算值并标注）
+3. 动词开头，体现主动性
+4. 突出业务价值而非执行动作
+
+原文：
+[粘贴你的工作经历描述]
+
+目标岗位：[填入]
+</code></pre>
+<h4 id="prompt-3jd">Prompt 3：针对JD定制简历</h4>
+<pre><code>以下是我要投递的岗位JD和我的简历。请帮我：
+1. 找出JD中的核心关键词（硬技能+软技能）
+2. 标记我简历中已覆盖和未覆盖的关键词
+3. 给出具体的修改建议，让简历匹配度达到80%以上
+4. 不要编造经历，只优化表达方式
+
+【岗位JD】
+[粘贴JD]
+
+【我的简历】
+[粘贴简历]
+</code></pre>
+<h4 id="prompt-4">Prompt 4：自我评价/个人总结生成</h4>
+<pre><code>根据以下信息，帮我写一段3-4行的个人总结，要求：
+- 不要用&quot;性格开朗&quot;&quot;吃苦耐劳&quot;这类空话
+- 用数据和事实说话
+- 突出与目标岗位的匹配度
+- 语气自信但不浮夸
+
+工作年限：[X年]
+核心技能：[列举3-5个]
+最大成就：[描述1-2个]
+目标岗位：[填入]
+</code></pre>
+<h3 id="23">2.3 实战案例：前后对比</h3>
+<p><strong>改写前（典型问题简历）：</strong></p>
+<blockquote>
+<p>负责公司新媒体运营工作，包括公众号、抖音等平台的内容发布和粉丝维护，完成领导交代的各项任务。</p>
+</blockquote>
+<p><strong>用 DeepSeek 改写后：</strong></p>
+<blockquote>
+<p>独立运营公司3个新媒体平台（公众号/抖音/小红书），6个月内实现粉丝从2万增长至8.5万（+325%），单篇爆款阅读量突破50万；搭建内容选题SOP，将团队周产出从3篇提升至8篇，内容互动率提升至行业TOP 10%。</p>
+</blockquote>
+<p><strong>差距一目了然</strong>：有数字、有结果、有方法论。</p>
+<hr />
+<h2 id="ai_1">三、第二层：专业简历平台的AI功能</h2>
+<p>如果你想要更系统的优化，这些平台提供了完整的 AI 简历解决方案。</p>
+<h3 id="31-wondercv">3.1 超级简历 WonderCV（国内最主流）</h3>
+<p><strong>网址</strong>：<a href="https://www.wondercv.com">wondercv.com</a></p>
+<p>核心功能：
+- <strong>AI 智能优化建议</strong>：逐条分析你的经历描述，给出改进方向
+- <strong>行业简历范文库</strong>：参考同岗位大牛的简历写法
+- <strong>HR 推荐模板</strong>：经过真实 HR 验证的排版格式
+- <strong>中英文双版本</strong>：一键切换，投外企必备</p>
+<p>适合人群：应届生、1-5年经验的职场人</p>
+<p>价格：基础功能免费，会员 ¥99/季度起</p>
+<h3 id="32-boss-ai">3.2 BOSS直聘 AI 简历助手</h3>
+<p>如果你已经在 BOSS 直聘上投简历，它内置的 AI 功能值得用起来：</p>
+<ul>
+<li><strong>简历评分</strong>：给你的简历打分并指出薄弱环节</li>
+<li><strong>AI 打招呼语</strong>：根据岗位自动生成个性化开场白</li>
+<li><strong>岗位匹配度分析</strong>：告诉你和目标岗位的匹配程度</li>
+</ul>
+<blockquote>
+<p>💡 <strong>技巧</strong>：在 BOSS 上投递前，先用 AI 诊断功能看一下评分，低于 70 分的简历建议优化后再投。</p>
+</blockquote>
+<h3 id="33-up">3.3 UP简历（校招首选）</h3>
+<p>2026 届校招圈最火的平台，特点：
+- 聚合各大厂校招信息
+- AI 匹配推荐适合你的岗位
+- 简历模板针对校招场景优化</p>
+<h3 id="34-ai">3.4 智联招聘 AI 功能</h3>
+<p>智联的「AI 简历优化」功能：
+- 上传简历后自动分析
+- 给出行业对标建议
+- 推荐匹配岗位</p>
+<hr />
+<h2 id="_1">四、第三层：进阶玩法</h2>
+<h3 id="41-ai">4.1 用 AI 针对每个岗位定制简历</h3>
+<p><strong>核心思路</strong>：一份"母版简历" + 针对每个 JD 的定制版本。</p>
+<p>操作流程：
+1. 准备一份包含所有经历的"母版简历"（可以很长）
+2. 复制目标岗位的 JD
+3. 用 Prompt 3 让 AI 帮你从母版中筛选最匹配的内容
+4. 调整关键词和表述方式
+5. 输出定制版</p>
+<blockquote>
+<p>这个方法的核心是：<strong>不是改简历，是选简历</strong>。你的经历不变，但展示的侧重点随岗位变化。</p>
+</blockquote>
+<h3 id="42-ai">4.2 AI 自动投递（技术党专属）</h3>
+<p>GitHub 上有多个开源的 BOSS 直聘自动投递工具：
+- 根据你的简历和岗位要求自动生成打招呼语
+- 批量筛选符合条件的岗位
+- 自动发送沟通请求</p>
+<blockquote>
+<p>⚠️ <strong>注意</strong>：自动投递有被封号风险，建议控制频率，每天不超过 30 个。</p>
+</blockquote>
+<h3 id="43-ai">4.3 AI 模拟面试</h3>
+<p>简历过了之后，面试也可以用 AI 准备：</p>
+<pre><code>你是[目标公司]的面试官，正在面试[目标岗位]。
+请根据我的简历，问我5个最可能被问到的面试问题。
+每个问题后给出回答要点和评分标准。
+
+我的简历：[粘贴]
+</code></pre>
+<hr />
+<h2 id="2026hrai">五、避坑指南：2026年HR已经能识别AI简历了</h2>
+<h3 id="_2">❌ 这些坑千万别踩</h3>
+<ol>
+<li><strong>不要让 AI 完全代写</strong> — HR 一眼就能看出"AI味"，面试时答不上来更尴尬</li>
+<li><strong>不要用模板化的表述</strong> — "结果导向""团队协作能力强"这类 AI 最爱生成的废话</li>
+<li><strong>不要虚构数据</strong> — AI 帮你估算可以，但别把 10% 写成 300%</li>
+<li><strong>不要一份简历投所有岗位</strong> — 这是 AI 时代最大的浪费，定制成本已经很低了</li>
+<li><strong>不要忽略排版</strong> — ATS 系统对格式很敏感，避免表格、图片、多栏布局</li>
+</ol>
+<h3 id="_3">✅ 正确的使用姿势</h3>
+<ol>
+<li><strong>AI 是编辑，不是作者</strong> — 你提供素材和经历，AI 帮你优化表达</li>
+<li><strong>每条经历都要能展开讲</strong> — 面试时会被追问细节</li>
+<li><strong>数据要经得起推敲</strong> — 用 AI 帮你回忆和估算，但要确保合理</li>
+<li><strong>保持个人风格</strong> — 最终版本要读起来像你自己写的</li>
+<li><strong>多找人看</strong> — AI 优化后再找行业内的朋友帮你把关</li>
+</ol>
+<hr />
+<h2 id="3">六、3步行动清单</h2>
+<p>看完这篇文章，你现在就可以做的三件事：</p>
+<p><strong>第1步（5分钟）</strong>：打开豆包或 DeepSeek，用 Prompt 1 诊断你现有的简历</p>
+<p><strong>第2步（30分钟）</strong>：用 Prompt 2 改写你最近一份工作的经历描述，对比前后差异</p>
+<p><strong>第3步（1小时）</strong>：找一个你想投的岗位 JD，用 Prompt 3 做一次定制化优化</p>
+<hr />
+<h2 id="_4">七、工具汇总表</h2>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>费用</th>
+<th>核心能力</th>
+<th>推荐指数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.doubao.com">豆包</a></td>
+<td>免费</td>
+<td>中文改写、润色、诊断</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="https://chat.deepseek.com">DeepSeek</a></td>
+<td>免费</td>
+<td>逻辑优化、量化改写</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="https://kimi.moonshot.cn">Kimi</a></td>
+<td>免费</td>
+<td>长文档分析、PDF简历诊断</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="https://yuanbao.tencent.com">腾讯元宝</a></td>
+<td>免费</td>
+<td>微信生态、随时随地</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="https://www.wondercv.com">超级简历</a></td>
+<td>免费/¥99起</td>
+<td>专业模板、AI优化建议</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="https://www.zhipin.com">BOSS直聘</a></td>
+<td>免费</td>
+<td>简历评分、AI打招呼</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="https://www.upjianli.com">UP简历</a></td>
+<td>免费/付费</td>
+<td>校招聚合、AI匹配</td>
+<td>⭐⭐⭐⭐（校招）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_5">🛒 求职装备推荐</h2>
+<blockquote>
+<p>面试季来了，一台好设备让你的视频面试和远程办公更从容：</p>
+</blockquote>
+<h3 id="_6">京东精选</h3>
+<table>
+<thead>
+<tr>
+<th>商品推荐</th>
+<th>推荐理由</th>
+<th>参考价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/mmylQGzzOAGbTMsnoXGMAD0RTC_3XCylQGzzOmGpLPd5S.html">笔记本电脑支架 铝合金散热</a></td>
+<td>视频面试抬高视角，告别"俯视脸"</td>
+<td>¥29.9</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/iiApHcAN25q9bxPzfbqok4WEsJ_3ERApHcAN2iq6EXRd6.html">雷神 显示器屏幕挂灯 护眼</a></td>
+<td>视频面试补光，专业感拉满</td>
+<td>¥119</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/880UEpkTohVu6x2B0RVOmBvd0m_3BN0UEpkTo8VIwSJXW.html">Bose QC消噪耳机Ultra</a></td>
+<td>远程面试降噪，听清每个问题</td>
+<td>¥1,943</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <a href="https://u.jd.com/HOpdGZu">更多京东数码精选 →</a></p>
+<h3 id="_7">淘宝优选</h3>
+<table>
+<thead>
+<tr>
+<th>商品推荐</th>
+<th>推荐理由</th>
+<th>参考价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://s.taobao.com/search?q=%E8%81%94%E6%83%B3%20%E6%8B%AF%E6%95%91%E8%80%85%20Y9000P&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">联想拯救者 Y9000P 2026</a></td>
+<td>高性能笔记本，远程办公+AI工具流畅运行</td>
+<td>¥9,000-12,000</td>
+</tr>
+<tr>
+<td><a href="https://s.taobao.com/search?q=%E7%BD%97%E6%8A%80%20MX%20Keys%20Mini&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">罗技 MX Keys Mini</a></td>
+<td>紧凑键盘，多设备切换，打字舒适</td>
+<td>¥500-700</td>
+</tr>
+<tr>
+<td><a href="https://s.taobao.com/search?q=Sony%20WH-1000XM5&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">Sony WH-1000XM5 降噪耳机</a></td>
+<td>面试降噪首选，30小时续航</td>
+<td>¥2,000-2,800</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <a href="https://s.taobao.com/search?q=%E6%B1%82%E8%81%8C%E8%A3%85%E5%A4%87&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">更多淘宝求职装备 →</a></p>
+<hr />
+<p><em>祝每一位打工人都能找到满意的工作。简历只是敲门砖，真正的竞争力是你的经历和能力——AI 只是帮你把它们更好地展示出来。</em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(B组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6p6mzd" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=ai-resume-optimization-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=ai-resume-optimization-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

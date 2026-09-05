@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Langfuse实战：给AI Agent装上黑匣子——开源LLM可观测性平台完全指南</title>
+    <meta name="description" content="Langfuse是2026年最主流的开源LLM可观测性平台，被誉为AI应用的Datadog。本文系统讲解Langfuse在大模型Agent服务中的五大应用场景（追踪/评估/提示词管理/成本/监控）、Docker自托管部署、LangGraph/CrewAI/OpenAI Agents框架集成，以及企业级落地案例。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Langfuse实战：给AI Agent装上黑匣子——开源LLM可观测性平台完全指南</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-06-04 · 14 分钟</span>
+            </div>
+            <h2 id="ai-agent">为什么AI Agent需要可观测性</h2>
+<p>传统软件是确定性的：相同输入，相同输出，出问题看日志就能定位。</p>
+<p>但AI Agent不一样。它是<strong>非确定性系统</strong>——同一个用户请求，可能产生完全不同的执行路径。一个基于工具调用的Agent，在单次请求中可能调用5到20次LLM、动态选择工具、检索数据、调用子Agent，单次成本从$0.001到$2.50不等。</p>
+<p>当这样的Agent上了生产，传统的APM（应用性能监控）工具完全失效，因为它们的设计前提是确定性执行。你会遇到这些在开发环境从没出现过的问题：</p>
+<ul>
+<li>模型漂移：同样的提示词，效果慢慢变差</li>
+<li>工具重试循环：Agent卡在某个工具调用上反复重试</li>
+<li>提示词回归：升级框架后，原本好用的提示词突然不灵了</li>
+<li>成本飙升：某个失控的循环把token烧到天价</li>
+</ul>
+<p>要解决这些问题，你需要一个<strong>LLM原生的可观测性平台</strong>。2026年，最主流的开源选择就是 Langfuse。</p>
+<hr />
+<h2 id="langfuse">Langfuse是什么</h2>
+<p>Langfuse是一个开源的LLM工程平台，为大模型应用和Agent提供完整的可观测性能力。它捕捉每一次LLM交互的细节——输入提示词、输出结果、token数量、延迟、成本和元数据，并以结构化界面呈现，用于调试和分析。</p>
+<p>业界常把它比作"LLM应用的Datadog"或"LLM应用的Mixpanel"。</p>
+<h3 id="_1">基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定位</td>
+<td>开源LLM工程/可观测性平台</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT（核心开源）</td>
+</tr>
+<tr>
+<td>部署方式</td>
+<td>自托管（Docker）+ 托管云双选项</td>
+</tr>
+<tr>
+<td>当前版本</td>
+<td>v3</td>
+</tr>
+<tr>
+<td>SDK</td>
+<td>Python 4.x / JS / TS</td>
+</tr>
+<tr>
+<td>接入标准</td>
+<td>原生SDK + OpenTelemetry</td>
+</tr>
+<tr>
+<td>框架支持</td>
+<td>LangGraph、OpenAI Agents、CrewAI、Pydantic AI、n8n等</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">四大支柱</h3>
+<p>Langfuse的能力可以归纳为四个支柱：</p>
+<ol>
+<li><strong>Tracing（追踪）</strong>：记录Agent每一步的完整执行链路</li>
+<li><strong>Evaluation（评估）</strong>：量化Agent输出质量，防止回归</li>
+<li><strong>Prompt Management（提示词管理）</strong>：版本化、团队协作、A/B测试</li>
+<li><strong>Cost（成本）</strong>：按维度归因token消耗和费用</li>
+</ol>
+<h3 id="_3">与竞品对比</h3>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>开源/自托管</th>
+<th>框架支持</th>
+<th>定位</th>
+<th>厂商锁定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Langfuse</strong></td>
+<td>✅ MIT，可自托管</td>
+<td>广（OTEL+原生SDK）</td>
+<td>中立默认选项</td>
+<td>无</td>
+</tr>
+<tr>
+<td>LangSmith</td>
+<td>❌ 闭源</td>
+<td>LangChain原生</td>
+<td>LangChain生态</td>
+<td>较强</td>
+</tr>
+<tr>
+<td>Helicone</td>
+<td>✅ 可自托管</td>
+<td>代理网关模式</td>
+<td>轻量接入</td>
+<td>弱</td>
+</tr>
+<tr>
+<td>Arize Phoenix</td>
+<td>✅ Phoenix OSS</td>
+<td>OpenInference</td>
+<td>企业级评估</td>
+<td>中</td>
+</tr>
+</tbody>
+</table>
+<p>Langfuse的核心优势：<strong>开源自托管 + 托管云双选项 + 框架支持广 + 无厂商锁定</strong>——这让它成为既要可观测性、又不想被锁定的团队的安全默认选择。</p>
+<hr />
+<h2 id="_4">五大应用场景</h2>
+<h3 id="agent">场景一：分布式追踪——还原Agent执行链路</h3>
+<p>这是Langfuse最核心的能力。每个用户请求生成一棵trace树：根节点是用户消息，子节点是LLM调用、工具调用、检索和子Agent调用。</p>
+<p>trace记录的关键信息：请求ID、模型名称、提示词文本、响应文本、时间戳、持续时长。一个trace可能跨越多个跳转（路由器、推理服务器、后处理器），trace树清晰展示<strong>时间到底花在了哪里</strong>。</p>
+<p>典型的Agent trace结构：</p>
+<pre><code>trace: 用户查询&quot;帮我分析这份销售数据&quot;
+├─ llm_call (规划，1240 tokens, $0.038, 1.2s)
+├─ tool: query_database (320ms)
+├─ tool: generate_chart (失败，重试×2)
+├─ llm_call (总结，890 tokens, $0.024, 0.8s)
+└─ 总计: 4次调用, $0.062, 6.3s
+</code></pre>
+<p>有了这样的追踪，当Agent出问题时，你能立即看到是哪一步失败、为什么慢、钱花在了哪。</p>
+<h3 id="_5">场景二：评估体系——三层评估防回归</h3>
+<p>Langfuse提出了三层评估体系，这是可靠Agent的基础：</p>
+<table>
+<thead>
+<tr>
+<th>评估层</th>
+<th>对象</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单步评估（Unit Eval）</strong></td>
+<td>离散的单个步骤</td>
+<td>断言式检查（如工具调用参数是否正确）</td>
+</tr>
+<tr>
+<td><strong>LLM-as-Judge回归测试</strong></td>
+<td>主观输出质量</td>
+<td>用另一个LLM打分</td>
+</tr>
+<tr>
+<td><strong>生产trace采样</strong></td>
+<td>真实世界漂移</td>
+<td>持续采样生产数据评估</td>
+</tr>
+</tbody>
+</table>
+<p>核心工作流是 <strong>Dataset + Experiment</strong>：</p>
+<ol>
+<li>把一组用户提示词存为Langfuse的Dataset</li>
+<li>用这些提示词运行Agent，追踪行为（Experiment）</li>
+<li>基于结果改进，再跑一遍流水线对比</li>
+</ol>
+<p>这样每一次提示词调整、模型替换、配置变更都成为一次可量化的实验，避免"改了一处，坏了另一处"的回归问题。Langfuse还支持把评估集成到CI/CD管线，每次变更都带着证据上线。</p>
+<h3 id="_6">场景三：提示词管理——版本化与团队协作</h3>
+<p>提示词是Agent的"源代码"，但很多团队还在用硬编码字符串管理它。Langfuse提供：</p>
+<ul>
+<li><strong>版本化</strong>：每个提示词都有版本历史，可回滚</li>
+<li><strong>团队协作编辑</strong>：非工程师（产品、运营）也能编辑提示词</li>
+<li><strong>与trace关联</strong>：每条trace都记录用了哪个版本的提示词</li>
+<li><strong>A/B测试</strong>：对比不同提示词版本的实际效果</li>
+</ul>
+<p>这意味着你可以在不改代码、不重新部署的情况下迭代提示词，并用真实数据验证效果。</p>
+<h3 id="token">场景四：成本与Token归因</h3>
+<p>Agent的成本爆炸往往源于不可预测的调用链。Langfuse在同一个分析空间里呈现：traces、observations、cost、tokens、latency、time-to-first-token、prompts、prompt版本、models、评估分数。</p>
+<p>你可以按<strong>用户、模型、会话</strong>等维度做成本归因，快速回答：
+- 哪个用户/部门消耗了最多token？
+- 哪个模型的性价比最高？
+- 哪次发布导致了成本飙升？</p>
+<h3 id="_7">场景五：生产监控与告警</h3>
+<p>Langfuse捕捉那些传统APM发现不了的问题：</p>
+<ul>
+<li><strong>模型漂移</strong>：输出质量随时间下降</li>
+<li><strong>工具重试循环</strong>：Agent卡在某步反复重试</li>
+<li><strong>提示词回归</strong>：框架升级后提示词失效</li>
+<li><strong>失控循环</strong>：导致成本暴涨的无限循环</li>
+</ul>
+<p>配合告警，可以在问题变成事故前就介入。</p>
+<hr />
+<h2 id="_8">部署实战</h2>
+<h3 id="docker-compose">自托管（Docker Compose）</h3>
+<p>Langfuse v3 支持完整的自托管，适合对数据隐私有要求的团队：</p>
+<pre><code class="language-bash"># 克隆仓库
+git clone https://github.com/langfuse/langfuse.git
+cd langfuse
+
+# 启动（包含 PostgreSQL + ClickHouse + Redis）
+docker compose up -d
+
+# 默认访问 http://localhost:3000
+</code></pre>
+<p>Langfuse v3 的架构包含：
+- PostgreSQL：存储元数据
+- ClickHouse：存储大规模trace数据（高性能分析）
+- Redis：缓存和队列</p>
+<h3 id="sdkpython">SDK接入（Python）</h3>
+<pre><code class="language-python">from langfuse import Langfuse
+from langfuse.decorators import observe
+
+# 初始化
+langfuse = Langfuse(
+    public_key=&quot;pk-lf-...&quot;,
+    secret_key=&quot;sk-lf-...&quot;,
+    host=&quot;http://localhost:3000&quot;  # 自托管地址
+)
+
+# 用装饰器自动追踪
+@observe()
+def my_agent(query: str):
+    # 你的Agent逻辑
+    result = call_llm(query)
+    return result
+</code></pre>
+<h3 id="vllm">与vLLM配合的本地化方案</h3>
+<p>如果你用vLLM跑本地模型，可以把Langfuse和vLLM组合成完全本地化的可观测方案——模型推理在vLLM，调用追踪在自托管Langfuse，数据完全不出企业。这对国内有数据合规要求的场景特别有价值。</p>
+<h3 id="_9">国内部署考量</h3>
+<ul>
+<li>ClickHouse和PostgreSQL都可部署在阿里云/腾讯云/华为云</li>
+<li>自托管方案确保trace数据（可能包含敏感业务信息）不出境，满足《数据安全法》要求</li>
+<li>配合本地模型（Qwen/DeepSeek/GLM）可实现全链路国产化</li>
+</ul>
+<hr />
+<h2 id="_10">框架集成示例</h2>
+<p>Langfuse原生支持主流Agent框架，接入成本极低。</p>
+<h3 id="openai-sdk">OpenAI SDK（一行替换）</h3>
+<p>最简单的集成——只改一个import：</p>
+<pre><code class="language-python"># 原来
+# from openai import OpenAI
+
+# 改成 Langfuse 的 drop-in 替代
+from langfuse.openai import OpenAI
+
+client = OpenAI()
+# 之后所有调用自动被追踪，无需改其他代码
+</code></pre>
+<h3 id="langgraph">LangGraph</h3>
+<pre><code class="language-python">from langfuse.callback import CallbackHandler
+
+langfuse_handler = CallbackHandler()
+
+# 在调用时传入 callback
+graph.invoke(
+    {&quot;messages&quot;: [(&quot;user&quot;, &quot;分析这份报告&quot;)]},
+    config={&quot;callbacks&quot;: [langfuse_handler]}
+)
+</code></pre>
+<h3 id="crewai">CrewAI</h3>
+<p>CrewAI通过OpenTelemetry与Langfuse集成，追踪多Agent团队中每个Agent的角色、工具调用和协作过程。</p>
+<h3 id="opentelemetry">通用接入：OpenTelemetry</h3>
+<p>如果你的框架不在原生支持列表中，可以通过OpenTelemetry接入——这是Langfuse保持"框架中立"的关键。任何支持OTEL的系统都能把trace发给Langfuse。</p>
+<h3 id="rag">无代码/RAG平台集成</h3>
+<p>除了代码框架，Langfuse也深度支持无代码LLM应用平台和RAG框架，这对国内团队尤其友好：</p>
+<ul>
+<li><strong>Dify</strong>：原生集成Langfuse。在Dify应用的「监控」侧边栏选择「Tracing应用性能」，简单配置即可接入，无需改任何代码就能看到成本、延迟和质量数据。这是国内团队用得最多的组合之一</li>
+<li><strong>WeKnora</strong>（腾讯开源RAG框架）：可通过OpenTelemetry标准接入Langfuse，实现对检索链路和生成质量的追踪</li>
+<li><strong>其他</strong>：Langflow（v1.0.17+原生）、OpenWebUI、Amazon Bedrock AgentCore（OTEL兼容）等</li>
+</ul>
+<blockquote>
+<p>如果你之前用过 Dify 或 WeKnora 搭建RAG/Agent应用，接入Langfuse几乎是零成本的升级——把"能跑"变成"可观测、可优化"。</p>
+</blockquote>
+<hr />
+<h2 id="_11">企业级落地案例</h2>
+<h3 id="oracleagent">Oracle：多Agent系统可观测</h3>
+<p>Oracle在其AI数据科学博客中明确指出，Langfuse为AI应用提供追踪、可观测性、评估和成本可见性。在企业AI中，它成为让系统"可追溯、可度量、可改进"的操作层。</p>
+<h3 id="ibm-watsonx-orchestrate">IBM watsonx Orchestrate集成</h3>
+<p>IBM提供了将Langfuse与watsonx Orchestrate集成的教程，结合后者的结构化平台（支持自托管、工具推理、API调用和企业级控制），增强Agent可观测性，无需编写自定义编排代码。</p>
+<h3 id="agentic-data-stack">Agentic Data Stack（开源全栈方案）</h3>
+<p>ClickHouse构建的开源自托管栈，把聊天UI（LibreChat）通过MCP连接到数据（ClickHouse），由Langfuse提供完整的LLM可观测性——<code>docker compose up</code>一键部署。这是一个很好的"开箱即用"参考架构。</p>
+<hr />
+<h2 id="build-vs-buy-vs">Build vs Buy：自托管 vs 托管云</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>自托管</th>
+<th>托管云</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据控制</td>
+<td>完全</td>
+<td>依赖厂商</td>
+</tr>
+<tr>
+<td>部署成本</td>
+<td>需运维</td>
+<td>零运维</td>
+</tr>
+<tr>
+<td>合规适配</td>
+<td>强（数据不出境）</td>
+<td>看厂商</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td>自己负责</td>
+<td>厂商负责</td>
+</tr>
+<tr>
+<td>适合团队</td>
+<td>有DevOps能力、合规要求高</td>
+<td>快速起步、小团队</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选型建议</strong>：</p>
+<ul>
+<li><strong>小团队/快速验证</strong> → 托管云，零运维快速起步</li>
+<li><strong>中大型企业/合规要求</strong> → 自托管，数据完全可控</li>
+<li><strong>国内政企/信创</strong> → 自托管 + 本地模型，全链路国产化</li>
+</ul>
+<p>Langfuse的最大价值在于<strong>两条路都给你留着</strong>——先用托管云起步，规模和合规要求上来后无缝切换到自托管，不存在厂商锁定。</p>
+<hr />
+<h2 id="_12">总结</h2>
+<p>当AI Agent从Demo走向生产，可观测性不是锦上添花，而是上生产线的必备能力。</p>
+<p>Langfuse之所以成为2026年的主流选择，核心原因有三：</p>
+<ol>
+<li><strong>LLM原生</strong>：专为非确定性的Agent系统设计，传统APM做不到</li>
+<li><strong>开源中立</strong>：MIT许可、自托管可选、框架支持广、无厂商锁定</li>
+<li><strong>闭环完整</strong>：追踪→评估→提示词管理→成本，覆盖AI工程的完整生命周期</li>
+</ol>
+<p>如果你正在把Agent推向生产，或者已经被"线上为什么出问题说不清"困扰，Langfuse是值得优先评估的工具。先用Docker在本地跑一个实例，接入你现有的Agent，你会立刻看到那些之前看不见的东西。</p>
+<hr />
+<h2 id="_13">参考文献</h2>
+<ol>
+<li>Langfuse官方文档. https://langfuse.com/docs</li>
+<li>Langfuse, "AI Agent Observability, Tracing &amp; Evaluation with Langfuse". https://langfuse.com/blog/2024-07-ai-agent-observability-with-langfuse</li>
+<li>Oracle, "Observability for Multi Agent Systems", 2026. https://blogs.oracle.com/ai-and-datascience/observability-for-multi-agent-systems</li>
+<li>IBM, "Enhance AI Agent Observability with Langfuse using watsonx Orchestrate". https://www.ibm.com/think/tutorials/ai-agent-observability-langfuse-watsonx-orchestrate</li>
+<li>jangwook.net, "Langfuse v3 Self-Hosting Complete Guide", 2026. https://jangwook.net/en/blog/en/langfuse-self-hosted-llm-tracing-setup-guide-2026</li>
+<li>PyImageSearch, "LLM Observability with Self-Hosted Langfuse and vLLM", May 2026. https://pyimagesearch.com/2026/05/18/llm-observability-with-self-hosted-langfuse-and-vllm/</li>
+<li>guptadeepak.com, "Top 5 LLM Observability Platforms 2026: Langfuse vs LangSmith vs Helicone vs Arize". https://guptadeepak.com/tools/top-5-llm-observability-platforms-2026/</li>
+<li>Digital Applied, "Agent Observability Platforms: LangSmith, Langfuse, Arize 2026". https://www.digitalapplied.com/blog/agent-observability-platforms-langsmith-langfuse-arize-2026</li>
+<li>Langfuse, "Observability for CrewAI with Langfuse Integration". https://langfuse.com/integrations/frameworks/crewai</li>
+<li>Langfuse, "Open Source Observability for LangGraph". https://langfuse.com/guides/cookbook/integration_langgraph</li>
+<li>Langfuse, "Agentic Data Stack: LibreChat + ClickHouse + Langfuse". https://langfuse.com/integrations/agentic-data-stack</li>
+<li>Spheron, "LLM Observability on GPU Cloud: Deploy Langfuse, Arize Phoenix, and Helicone", 2026. https://www.spheron.network/blog/llm-observability-gpu-cloud-langfuse-arize-phoenix-helicone/</li>
+<li>Langfuse, "Observability and tracing for Dify". https://langfuse.com/integrations/no-code/dify</li>
+<li>Dify官方文档, "Integrate with Langfuse". https://docs.dify.ai/en/guides/monitoring/integrate-external-ops-tools/integrate-langfuse</li>
+</ol>
+<hr />
+<p><em>相关阅读：<a href="../posts/agent-governance-observability-hidden-costs.html">AI Agent治理与可观测性：企业落地的隐藏成本</a> | <a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业AI Agent部署实战</a> | <a href="../posts/dify-vs-coze-ragflow-n8n-fastgpt-comparison.html">Dify vs Coze vs RAGFlow 对比</a> | <a href="../posts/weknora-vs-dify-ragflow-fastgpt-comparison.html">WeKnora vs Dify vs RAGFlow 对比</a></em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(B组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6p6mzd" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝开发工具专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=langfuse-llm-agent-observability-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=langfuse-llm-agent-observability-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

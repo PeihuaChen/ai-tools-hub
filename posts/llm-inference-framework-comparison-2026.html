@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大模型推理框架选型2026：vLLM、SGLang、TensorRT-LLM、Ollama、Xinference五大框架怎么选</title>
+    <meta name="description" content="2026年大模型推理框架选型完全指南：从引擎层（vLLM、SGLang、TensorRT-LLM、llama.cpp）到平台层（Xinference、Ollama），逐一拆解核心技术（PagedAttention vs RadixAttention）、性能基准、适用场景，并给出五种典型部署场景的明确推荐。一篇文章终结你">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">大模型推理框架选型2026：vLLM、SGLang、TensorRT-LLM、Ollama、Xinference五大框架怎么选</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-06-14 · 15 分钟</span>
+            </div>
+            <h2 id="_1">引子：模型决定智商，引擎决定效率</h2>
+<p>你花了大量时间选模型——DeepSeek V4 还是 Qwen3.6？GPT-5.5 还是 GLM-5.2？但很多人忽略了一个同样关键的决策：<strong>用什么框架来跑这些模型。</strong></p>
+<p>同一个 Llama 3.3 70B，在不同推理框架下的表现可以差出<strong>数倍</strong>——vLLM在8并发下吞吐是Ollama的2.3倍；SGLang在前缀复用场景下延迟比vLLM低35%；TensorRT-LLM在H100 FP8下比vLLM再快27%。</p>
+<p>选错引擎，轻则多花几倍GPU费用，重则延迟爆表、服务不稳。</p>
+<p>这篇文章帮你终结选型纠结：<strong>逐个拆解六大框架的核心技术和适用场景，最后按你的实际需求给出明确推荐。</strong></p>
+<hr />
+<h2 id="vs">一、先分清两层：推理引擎 vs 推理平台</h2>
+<p>在开始对比之前，先厘清一个容易混淆的分层——这个分层理解错了，后面的选型就全乱了。</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>解决什么问题</th>
+<th>代表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>推理引擎（Engine）</strong></td>
+<td>让单个模型跑得快——优化吞吐、延迟、显存利用率</td>
+<td>vLLM、SGLang、TensorRT-LLM、llama.cpp</td>
+</tr>
+<tr>
+<td><strong>推理平台（Platform）</strong></td>
+<td>让一堆不同类型的模型管得省心——统一API、WebUI、多模型编排</td>
+<td>Xinference、Ollama</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vLLM 和 SGLang 是"引擎"</strong>——它们关心的是如何把一个 LLM 跑到极致。</p>
+<p><strong>Xinference 是"平台"</strong>——它底层可以调用 vLLM、llama.cpp 等不同引擎，对上提供统一的多模型管理能力。</p>
+<p><strong>Ollama 比较特殊</strong>——它既是一个"极简平台"（模型管理、一键启动），底层引擎是 llama.cpp + MLX。</p>
+<p>理解这个分层，你就不会拿 Xinference 去跟 vLLM 比吞吐——它们根本不在同一层竞争。</p>
+<hr />
+<h2 id="_2">二、推理引擎逐个拆解</h2>
+<h3 id="1-vllm">1. vLLM — 生产推理的事实标准</h3>
+<p><strong>一句话定位</strong>：如果你只能选一个引擎做生产serving，选vLLM不会错。</p>
+<p><strong>核心技术</strong>：</p>
+<ul>
+<li><strong>PagedAttention</strong>：借鉴操作系统虚拟内存的分页机制，让KV cache不再需要连续内存。传统方法中，每个请求的KV cache必须占用连续显存，导致严重碎片化；PagedAttention把KV cache切成"页"，按需分配，显存利用率飙升，从而能塞进更大的batch。</li>
+</ul>
+<p>关键特性清单：</p>
+<ul>
+<li>Continuous batching（动态批处理，请求来一个处理一个，不等凑满）</li>
+<li>Prefix caching（前缀缓存）</li>
+<li>Tensor parallel / Pipeline parallel（多卡分布式）</li>
+<li>FP8 / INT4 / AWQ / GPTQ 量化</li>
+<li>OpenAI兼容API</li>
+<li>支持NVIDIA、AMD ROCm、Apple Silicon</li>
+</ul>
+<p><strong>性能参考</strong>（公开基准数据）：</p>
+<ul>
+<li>比HuggingFace Transformers原生推理快<strong>最高24倍</strong></li>
+<li>8并发下吞吐比Ollama高约<strong>2.3倍</strong>（Red Hat 2026 benchmark）</li>
+<li>单张T4上可处理100+ requests/s（Mistral 7B）</li>
+<li>AMD MI355X上vLLM ROCm已达NVIDIA同级表现（2.5x提升）</li>
+</ul>
+<p><strong>什么时候选vLLM</strong>：</p>
+<ul>
+<li>多用户生产API服务</li>
+<li>需要稳定、成熟、生态最完善的方案</li>
+<li>硬件异构（NVIDIA + AMD混用）</li>
+<li>"不确定选什么，先选vLLM"——这是2026年最安全的默认选择</li>
+</ul>
+<hr />
+<h3 id="2-sglang-vllm">2. SGLang — vLLM 最强挑战者</h3>
+<p><strong>一句话定位</strong>：如果你的场景是Agent链路或需要结构化JSON输出，SGLang比vLLM更优。</p>
+<p><strong>核心技术</strong>：</p>
+<ul>
+<li>
+<p><strong>RadixAttention</strong>：用 radix tree（基数树）缓存KV activations，跨请求自动复用共享前缀。在Agent/RAG场景中，大量请求共享相同的system prompt或检索上下文——RadixAttention让这些共享前缀的计算结果被缓存并复用，<strong>而不是每次重新计算</strong>。</p>
+</li>
+<li>
+<p><strong>XGrammar</strong>：token级别的结构化生成——在解码过程中实时约束输出必须符合JSON Schema或正则表达式，不需要后处理验证。</p>
+</li>
+</ul>
+<p>关键特性清单：</p>
+<ul>
+<li>RadixAttention前缀复用</li>
+<li>结构化生成（JSON Schema / regex）</li>
+<li>Multi-step branching（多步分支执行）</li>
+<li>Zero-overhead CPU scheduler</li>
+<li>Continuous batching、paged attention、tensor parallel</li>
+<li>OpenAI兼容API</li>
+</ul>
+<p><strong>性能参考</strong>：</p>
+<ul>
+<li>单用户延迟比vLLM低约<strong>35%</strong>（Llama-3-70B）</li>
+<li>前缀重叠60%+时TTFT（Time-to-First-Token）大幅下降</li>
+<li>号称最高可达<strong>6倍</strong>吞吐提升（高前缀复用场景）</li>
+<li>冷启动比vLLM快<strong>2.1倍</strong>（4.3s vs 9.1s）</li>
+<li>batch size 1时吞吐1293 tok/s vs vLLM 1158 tok/s；batch 32时vLLM反超（1821 vs 1642）</li>
+</ul>
+<p><strong>什么时候选SGLang</strong>：</p>
+<ul>
+<li>Agent链路（大量请求共享system prompt + 工具定义）</li>
+<li>需要模型直接输出结构化JSON（不能容忍格式错误）</li>
+<li>多轮对话（前缀复用价值高）</li>
+<li>愿意接受比vLLM小一些的生态</li>
+</ul>
+<p><strong>什么时候不如vLLM</strong>：</p>
+<ul>
+<li>超大batch高并发场景（batch 32+时vLLM吞吐更高）</li>
+<li>需要最广泛的硬件支持（SGLang主要优化NVIDIA）</li>
+</ul>
+<hr />
+<h3 id="3-tensorrt-llm">3. TensorRT-LLM — 极致性能，代价是复杂度</h3>
+<p><strong>一句话定位</strong>：如果你有纯NVIDIA集群、有严格延迟SLA、有工程团队来维护——它是性能天花板。</p>
+<p><strong>核心技术</strong>：NVIDIA官方深度优化的推理引擎，自定义CUDA kernel，FP8原生支持，Inflight Batching。</p>
+<p><strong>性能参考</strong>：</p>
+<ul>
+<li>H100 FP8: Llama 2 70B 达到<strong>2800 tokens/s</strong>（同硬件vLLM为2200，快约27%）</li>
+<li>峰值可达<strong>10000+ output tokens/s</strong>，TTFT &lt; 100ms</li>
+<li>p99 decode稳定性在多GPU下最优</li>
+</ul>
+<p><strong>优缺点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>绝对性能最高</td>
+<td>只支持NVIDIA GPU</td>
+</tr>
+<tr>
+<td>FP8原生优化</td>
+<td>需要engine build编译流程（复杂）</td>
+</tr>
+<tr>
+<td>支持最大规模部署</td>
+<td>版本迭代快,兼容性问题</td>
+</tr>
+<tr>
+<td>NVIDIA官方维护</td>
+<td>学习曲线陡峭</td>
+</tr>
+</tbody>
+</table>
+<p><strong>什么时候选TensorRT-LLM</strong>：</p>
+<ul>
+<li>纯NVIDIA环境 + 有专职MLOps团队</li>
+<li>毫秒级延迟SLA（金融、实时对话）</li>
+<li>日请求量百万级以上，每1%性能提升都有显著成本节约</li>
+<li>能接受每次模型更换都要重新build engine</li>
+</ul>
+<hr />
+<h3 id="4-llamacpp">4. llama.cpp — 边缘推理之王</h3>
+<p><strong>一句话定位</strong>：在消费级硬件和边缘设备上跑大模型,它是无可替代的选择。</p>
+<p><strong>核心技术</strong>：纯C++实现,零外部依赖,GGUF量化格式(Q4_K_M可将70B模型压到24GB可跑)。</p>
+<p><strong>关键特性</strong>：</p>
+<ul>
+<li>CPU/GPU混合推理（partial offloading）</li>
+<li>跨平台（Windows/Mac/Linux/Android/iOS）</li>
+<li>极致轻量——单个二进制文件即可运行</li>
+<li>量化类型丰富（Q2到Q8,适配不同显存/精度需求）</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>消费级GPU（RTX 4090 / 3060等）</li>
+<li>边缘设备、机器人本地推理</li>
+<li>移动端</li>
+<li>对依赖项有严格限制的嵌入式环境</li>
+</ul>
+<p><strong>与Ollama的关系</strong>：Ollama底层在NVIDIA/AMD GPU上就是调用llama.cpp（在Apple Silicon上是MLX）。</p>
+<hr />
+<h2 id="_3">三、推理平台逐个拆解</h2>
+<h3 id="5-ollama">5. Ollama — 开发者的最爱</h3>
+<p><strong>一句话定位</strong>：两分钟跑起一个本地模型，没有比它更简单的了。</p>
+<p><strong>核心逻辑</strong>：Ollama不是在跟vLLM比性能——它在比<strong>易用性</strong>。它是给单个开发者用的"本地模型管家"，而不是给团队做生产serving的。</p>
+<p><strong>2026年亮点</strong>：</p>
+<ul>
+<li><strong>MLX后端</strong>（0.19版本）：Apple Silicon上性能翻倍——M5 Max达到<strong>1851 tok/s prefill、134 tok/s decode</strong>（int4）</li>
+<li>GitHub Stars超<strong>17.2万</strong>（2026年5月）</li>
+<li>GGUF生态全面兼容（0.30版本扩展）</li>
+<li>OpenAI兼容API</li>
+</ul>
+<p><strong>什么时候选Ollama</strong>：</p>
+<ul>
+<li>本地开发和快速原型</li>
+<li>Apple Silicon笔记本（Mac是它的主场）</li>
+<li>教学和实验</li>
+<li>不需要高并发,只服务自己</li>
+</ul>
+<p><strong>什么时候不选</strong>：</p>
+<ul>
+<li>多用户生产serving（并发下吞吐仅vLLM的1/2.3）</li>
+<li>需要管理Embedding/Rerank/多模态等多种模型类型</li>
+</ul>
+<hr />
+<h3 id="6-xinference">6. Xinference — 一站式多模型管理</h3>
+<p><strong>一句话定位</strong>：不解决"一个模型怎么跑快"的问题，解决"一堆不同类型的模型怎么统一管起来"的问题。</p>
+<p><strong>核心差异</strong>（相比上面所有引擎）：</p>
+<ul>
+<li><strong>全模型类型覆盖</strong>：LLM + Embedding + Rerank + ASR + TTS + 图像 + 多模态——一个平台全管</li>
+<li><strong>多引擎后端</strong>：底层可选vLLM、llama.cpp、Transformers等</li>
+<li><strong>OpenAI兼容API</strong>：应用只改一行base_url</li>
+<li><strong>WebUI管理</strong>：可视化启动/停止/监控模型</li>
+<li><strong>分布式集群</strong>：多机多卡部署</li>
+</ul>
+<p><strong>最典型用途</strong>：搭一套私有化RAG知识库——LLM（Qwen3.6）+ Embedding（bge-m3）+ Rerank（bge-reranker）三个模型,<strong>一个Xinference实例全部搞定</strong>,再对接Dify/FastGPT。</p>
+<p>如果你只跑一个LLM追求极致吞吐——直接用vLLM更轻量。但如果你需要<strong>同时管理多种模型</strong>——Xinference是唯一能一站式搞定的选择。</p>
+<blockquote>
+<p>想深入了解Xinference的部署实战,可以看 <a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference部署与应用实战</a>。</p>
+</blockquote>
+<hr />
+<h2 id="_4">四、横向对比总表</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>vLLM</th>
+<th>SGLang</th>
+<th>TensorRT-LLM</th>
+<th>Ollama</th>
+<th>Xinference</th>
+<th>llama.cpp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>定位</strong></td>
+<td>生产标准</td>
+<td>高性能+结构化</td>
+<td>极致性能</td>
+<td>本地开发</td>
+<td>多模型平台</td>
+<td>边缘推理</td>
+</tr>
+<tr>
+<td><strong>核心技术</strong></td>
+<td>PagedAttention</td>
+<td>RadixAttention</td>
+<td>CUDA深度优化</td>
+<td>llama.cpp+MLX</td>
+<td>多引擎编排</td>
+<td>GGUF量化</td>
+</tr>
+<tr>
+<td><strong>高并发吞吐</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐½</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>取决于引擎</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>单用户延迟</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>取决于引擎</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>易用性</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>NVIDIA</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅（唯一）</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>AMD</strong></td>
+<td>✅ ROCm</td>
+<td>有限</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Apple Silicon</strong></td>
+<td>有端口</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅ MLX</td>
+<td>✅ Metal</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>多模型管理</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>基础</td>
+<td>✅ 全类型</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>结构化输出</strong></td>
+<td>基础</td>
+<td>✅ 一等公民</td>
+<td>基础</td>
+<td>❌</td>
+<td>取决于引擎</td>
+<td>基础</td>
+</tr>
+<tr>
+<td><strong>OpenAI兼容</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>server模式✅</td>
+</tr>
+<tr>
+<td><strong>开源许可</strong></td>
+<td>Apache 2.0</td>
+<td>Apache 2.0</td>
+<td>Apache 2.0</td>
+<td>MIT</td>
+<td>Apache 2.0</td>
+<td>MIT</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_5">五、五种场景,明确推荐</h2>
+<p>不想看那么多细节？直接按你的场景选：</p>
+<h3 id="api">场景一：多用户生产API服务（高并发）</h3>
+<p><strong>推荐：vLLM</strong>（默认）或 <strong>SGLang</strong>（Agent/结构化输出场景）</p>
+<p>理由：vLLM是最稳妥、生态最完善的选择,几乎所有云厂商和推理平台都支持。如果你的应用是Agent链路或需要JSON结构化输出,SGLang的RadixAttention+XGrammar组合会给你更好的延迟和可靠性。</p>
+<h3 id="sla-nvidia">场景二：极致延迟SLA + 纯NVIDIA集群</h3>
+<p><strong>推荐：TensorRT-LLM</strong></p>
+<p>理由：在同硬件上比vLLM快约27%,p99延迟最稳定。前提是你有团队能handle它的编译流程和版本管理复杂度。</p>
+<h3 id="apple-silicon">场景三：本地开发 / 快速原型 / Apple Silicon</h3>
+<p><strong>推荐：Ollama</strong></p>
+<p>理由：一条命令跑起来,Mac上MLX后端体验极佳,17万Stars说明生态和社区极其活跃。</p>
+<h3 id="ragllmembeddingrerank">场景四：私有化RAG知识库（需要LLM+Embedding+Rerank）</h3>
+<p><strong>推荐：Xinference</strong></p>
+<p>理由：唯一能一站式管理全部模型类型的平台。底层引擎用vLLM跑LLM、用Transformers跑Embedding/Rerank,对上提供统一OpenAI兼容API,对接Dify/FastGPT零成本。</p>
+<h3 id="gpu">场景五：边缘设备 / 消费级GPU / 移动端</h3>
+<p><strong>推荐：llama.cpp</strong>（或通过Ollama间接使用）</p>
+<p>理由：极致轻量,Q4_K_M量化让70B模型跑在24GB显存上,跨平台无依赖。</p>
+<hr />
+<h2 id="2026">六、2026年趋势与展望</h2>
+<h3 id="sglangvllm">SGLang正在蚕食vLLM的份额</h3>
+<p>RadixAttention + 结构化生成的组合,在Agent场景下优势明显。Hugging Face Inference Endpoints已经把SGLang列为一等公民引擎。但vLLM也在快速补课——它的结构化输出能力在持续加强。2026年下半年两者可能进一步趋同。</p>
+<h3 id="ollama-mlx-macai">Ollama + MLX = Mac本地AI的标准栈</h3>
+<p>Apple Silicon的统一内存让64GB MacBook能跑大多数GPU跑不了的模型（纯靠内存大）。Ollama的MLX后端让这条路彻底走通,2026年"Mac就是本地AI开发机"已成共识。</p>
+<h3 id="_6">"引擎+平台"分层越来越清晰</h3>
+<p>随着RAG和Agent应用爆发,只有单一引擎远远不够——你总要同时管理LLM、Embedding、Rerank。Xinference这类平台层产品的价值在2026年快速凸显。预计会有更多类似产品出现。</p>
+<h3 id="amd-rocm">AMD ROCm破局</h3>
+<p>vLLM ROCm在MI355X/MI350X上的表现已经不逊NVIDIA同级。2026年"推理不一定要NVIDIA"已经从理论变成了现实选项,这对成本控制是巨大利好。</p>
+<h3 id="_7">推理成本仍在快速下降</h3>
+<p>引擎优化+量化技术+新硬件三重叠加,同等模型的推理成本每年约下降40-50%。这意味着一年前算不过来ROI的场景,现在可能已经可行了。</p>
+<hr />
+<h2 id="_8">七、小结</h2>
+<p>大模型推理框架的选型,本质上只需要回答两个问题：</p>
+<ol>
+<li><strong>你要解决的是"跑快"还是"管好"？</strong> 前者选引擎（vLLM/SGLang/TRT-LLM），后者选平台（Xinference）。</li>
+<li><strong>你的部署场景是什么？</strong> 生产多用户→vLLM/SGLang；极致延迟→TRT-LLM；本地开发→Ollama；多模型管理→Xinference；边缘设备→llama.cpp。</li>
+</ol>
+<p>不存在"最好的框架"——只有<strong>最匹配你场景的框架</strong>。vLLM是2026年最安全的默认选择,但如果你的场景恰好踩中SGLang的RadixAttention或Xinference的多模型管理,它们会给你远超vLLM的体验。</p>
+<p>最后一个建议：<strong>不要把选型当成一次性决策。</strong> 推理框架领域还在快速迭代,今天的最优解六个月后可能就不是了。设计应用时把模型层和推理层抽象出来,让切换成本最低——这比选对框架更重要。</p>
+<blockquote>
+<p>⚠️ 免责声明：本文性能数据来自公开基准测试报告,不同硬件、模型、batch配置下结果可能有显著差异。请以实际场景实测为准。</p>
+</blockquote>
+<hr />
+<h2 id="_9">参考来源</h2>
+<ol>
+<li>Spheron, "vLLM vs TensorRT-LLM vs SGLang: H100 Benchmarks (2026)". https://www.spheron.network/blog/vllm-vs-tensorrt-llm-vs-sglang-benchmarks/</li>
+<li>JarvisLabs, "vLLM, SGLang, or TensorRT-LLM? Picking an LLM Serving Stack". https://jarvislabs.ai/blog/vllm-sglang-trtllm-comparison</li>
+<li>n1n.ai, "A Comprehensive Comparison of LLM Inference Engines (2026)". https://explore.n1n.ai/blog/llm-inference-engine-comparison-vllm-tgi-tensorrt-sglang-2026-03-13</li>
+<li>MarkAICode, "SGLang Latency Benchmark: p95 Under 50ms on L40S". https://markaicode.com/benchmarks/sglang-production-benchmark-latency/</li>
+<li>Ollama Blog, "Ollama is now powered by MLX on Apple Silicon". https://ollama.com/blog/mlx</li>
+<li>Codersera, "vLLM vs Ollama vs LM Studio 2026". https://codersera.com/blog/vllm-vs-ollama-vs-lm-studio-production-2026/</li>
+<li>RunPod, "SGLang in Production for LLM Pipelines". https://www.runpod.io/articles/guides/blog-sglang-production-llm-pipelines</li>
+<li>Fish Audio, "Open-source LLM inference engines compared (2026)". https://fish.audio/blog/open-source-llm-inference-engines-2026/</li>
+</ol>
+<hr />
+<p><em>相关阅读：<a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference部署与应用实战</a> | <a href="../posts/open-source-llm-comparison-2026.html">2026开源大模型选型指南</a> | <a href="../posts/claude-fable-5-ban-china-ai-opportunity-2026.html">当AI模型成为出口管制品</a></em></p>
+<p><em>延伸阅读：<a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业AI Agent部署实战</a> | <a href="../posts/dify-vs-coze-ragflow-n8n-fastgpt-comparison.html">Dify vs Coze vs RAGFlow对比</a> | <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：给AI Agent装上黑匣子</a></em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 尊尼获加&元气森林</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/Hrps3pr" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=llm-inference-framework-comparison-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=llm-inference-framework-comparison-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

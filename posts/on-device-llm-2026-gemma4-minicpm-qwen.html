@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026端侧大模型全景：当多模态AI塞进你的手机和笔记本</title>
+    <meta name="description" content="2026年端侧大模型从演示噱头走向实用工程。本文系统梳理端侧AI的技术突破（内存带宽瓶颈、4-bit量化、无编码器多模态）、硬件现状，并深度对比Google Gemma 4、面壁MiniCPM5-1B/MiniCPM-V 4.6、阿里Qwen3.5小模型系列等中美代表模型，剖析手机/PC/汽车的真实落地场景与挑战。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">2026端侧大模型全景：当多模态AI塞进你的手机和笔记本</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-06-05 · 16 分钟</span>
+            </div>
+            <h2 id="2026">端侧大模型，2026年真的成了</h2>
+<p>过去三年，"用AI"几乎等于"把数据发到别人的服务器上等回复"。这个模式对很多场景有效，但有些情况它彻底失灵：飞机上没Wi-Fi、数据敏感到不能离开设备、每一毫秒延迟都要命、或者你单纯不想让某家公司记录你的每一次提问。</p>
+<p>2026年，端侧大模型（On-Device LLM）跨过了一个关键门槛。消费级设备里强大的神经处理硬件、被高度优化的小语言模型、加上成熟的部署工具链——这三者叠加，让你现在能在手机、笔记本甚至嵌入式设备上跑真正可用的AI模型。</p>
+<p>更重要的是一个认知转变：<strong>2026年最大的突破不是来自更快的芯片，而是来自重新思考模型该如何被构建、训练、压缩和部署。</strong> 手机没有变成GPU，是整个领域学会了把"内存带宽"而非"算力"当作真正的约束，并从一开始就为这个现实设计更小、更聪明的模型。</p>
+<p>这篇文章把端侧大模型的整体现状讲清楚：技术上到底突破了什么、硬件够不够用、有哪些代表模型（中美两边都看）、能落地到哪些场景、还有哪些坑。</p>
+<blockquote>
+<p>说明：本文数据来自各模型厂商公开发布与第三方评测（Artificial Analysis、Edge AI and Vision Alliance等），引用内容均经改写以符合授权合规要求，关键数字建议以官方模型卡为准。</p>
+</blockquote>
+<hr />
+<h2 id="_1">一、整体格局：不是替代云端，而是端云协同</h2>
+<p>2026年最关键的判断是：<strong>端侧不再试图替代云端，而是形成分层架构。</strong></p>
+<ul>
+<li>日常实用任务——格式化、摘要、轻量问答、翻译、分类、自动补全——越来越多落在端侧；</li>
+<li>前沿推理、超长上下文、复杂多步规划，仍然偏向云端；</li>
+<li>主流应用架构是<strong>混合（hybrid）模式</strong>：先做复杂度评估，简单任务走本地（快、私密、免费），复杂任务回退到云API。</li>
+</ul>
+<p>推动端侧落地的，是四个反复被提及的核心动因：</p>
+<table>
+<thead>
+<tr>
+<th>动因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>延迟</strong></td>
+<td>云端API往返通常增加200–800ms网络延迟，对实时语音、AR、IDE代码补全不可接受</td>
+</tr>
+<tr>
+<td><strong>隐私</strong></td>
+<td>数据不出设备就无法被泄露，满足EU AI Act、医疗金融等行业合规</td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td>把推理转移到用户硬件，规模化后为开发者省下巨额API费用</td>
+</tr>
+<tr>
+<td><strong>可用性</strong></td>
+<td>本地模型离线可用——飞机、地下、偏远地区、网络中断时照常工作</td>
+</tr>
+</tbody>
+</table>
+<p>一个务实的判断标准：<strong>当任务边界清晰（摘要、分类、抽取、翻译、简单问答）时用端侧；当你需要前沿智能、海量上下文、或最新模型时用云端。</strong> 端侧模型通常比云端落后3–6个月，这是它的能力天花板。</p>
+<hr />
+<h2 id="_2">二、研发突破：真正的瓶颈是内存带宽</h2>
+<h3 id="tops">别再盯着TOPS了</h3>
+<p>业界一个重要的纠偏：大家过度关注TOPS（每秒万亿次操作）。实际上，<strong>解码阶段的推理是内存带宽受限的</strong>——每生成一个token，都要把模型权重完整地从内存里流式读出一遍。</p>
+<ul>
+<li>移动设备内存带宽约 50–90 GB/s，数据中心GPU是 2–3 TB/s，差距 30–50 倍，这才是真实吞吐的主导因素。</li>
+<li>这也解释了为什么<strong>压缩的影响如此巨大</strong>：16-bit降到4-bit不只是省4倍存储，更是每个token减少4倍内存流量。</li>
+<li>实际可用RAM比标称紧张得多（去掉系统开销后常常不足4GB），直接限制了模型规模。</li>
+</ul>
+<p>正因如此，<strong>4-bit量化在2026年成了事实上的行业标准</strong>——不仅为了省存储，更是为了把每个token的内存流量降到最低。</p>
+<h3 id="_3">小模型真的"能打"了</h3>
+<p>过去认为7B是连贯生成的下限，现在sub-1B（十亿参数以下）模型已能胜任大量实用任务。一个重要规律：<strong>在约1B参数以下，架构比规模更重要</strong>——更深更窄的网络持续优于更宽更浅的。</p>
+<p>推理能力也不再是规模的专属：经过蒸馏的小模型，在数学和推理基准上能超过大它数倍的基础模型。高质量合成数据、领域定向数据混合、从大模型蒸馏，比单纯堆参数更划算。</p>
+<h3 id="_4">成熟的"压缩工具箱"</h3>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>量化（Quantization）</strong></td>
+<td>16-bit训练、4-bit部署；GPTQ/AWQ等PTPQ方法在4倍压缩下保留大部分质量</td>
+</tr>
+<tr>
+<td><strong>KV cache管理</strong></td>
+<td>长上下文下KV cache可能超过权重本身，按语义压缩、保留"注意力锚点"token</td>
+</tr>
+<tr>
+<td><strong>投机解码（Speculative Decoding）</strong></td>
+<td>小草稿模型提议多个token、大模型并行验证，2–3倍加速</td>
+</tr>
+<tr>
+<td><strong>剪枝（Pruning）</strong></td>
+<td>结构化剪枝（移除整个head/layer）在移动硬件上跑得快</td>
+</tr>
+</tbody>
+</table>
+<p>软件栈也不再需要"英雄式"自研：ExecuTorch（移动部署，约50KB占用）、llama.cpp（CPU推理）、MLX（Apple Silicon）、Ollama / LM Studio（本地API与图形界面）、Google LiteRT-LM 等已经把部署门槛降到很低。</p>
+<hr />
+<h2 id="npu">三、硬件现状：NPU已经无处不在</h2>
+<p>消费级设备普遍内置了专用AI加速硬件：</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>代表芯片</th>
+<th>算力</th>
+<th>可跑模型规模（量化后）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple Silicon</td>
+<td>A18 Pro / M4系列</td>
+<td>35–40 TOPS</td>
+<td>手机约4B；MacBook 14B–70B+</td>
+</tr>
+<tr>
+<td>Qualcomm Hexagon</td>
+<td>Snapdragon 8 Gen 4 / X Elite</td>
+<td>40–45 TOPS</td>
+<td>手机约7B；笔记本约14B</td>
+</tr>
+<tr>
+<td>Intel / AMD</td>
+<td>Lunar Lake / Ryzen AI 300</td>
+<td>40–50 TOPS</td>
+<td>软件支持仍落后于苹果和高通</td>
+</tr>
+</tbody>
+</table>
+<p>要注意：<strong>Apple Silicon的优势主要来自高内存带宽（M4 Max高达800 GB/s）和统一内存架构</strong>，而非单纯的神经引擎算力——这又一次印证了"内存带宽才是关键"。</p>
+<p>芯片设计侧还有一个核心争论：固定功能NPU（fixed-function NPU）面对快速演进的模型架构（Transformer → MoE → 下一代注意力机制）容易"过时"，被迫不断流片重做。业界正转向<strong>可编程的通用神经处理单元</strong>，强调用软件更新适配新算子和新量化方案，而非硬件重做。被普遍看好的"甜点区"是3B–30B参数——足够在手机、汽车、工业设备上提供接近GPT-4级的能力，又能塞进端侧的热和功耗预算。</p>
+<hr />
+<h2 id="_5">四、代表模型深度对比</h2>
+<p>2026年的端侧小模型，中美两边都很热闹。下面挑出最有代表性的几家展开。</p>
+<h3 id="google-gemma-4-12b16gb">Google Gemma 4 12B：把多模态塞进16GB笔记本</h3>
+<p><strong>发布与定位</strong>：Google DeepMind于2026年6月3日发布Gemma 4 12B。Gemma 4家族此前在4月先推出了边缘友好的E4B和更大的26B MoE版本；12B是中间档的"统一（Unified）"稠密模型，刚好卡在"消费级笔记本能跑、能力又逼近26B"的位置。</p>
+<p>核心规格：</p>
+<ul>
+<li><strong>参数</strong>：12B稠密、decoder-only Transformer</li>
+<li><strong>模态</strong>：原生处理文本、图像、视频，<strong>首次在中型Gemma上支持原生音频输入</strong></li>
+<li><strong>上下文</strong>：最高256K tokens；多语言140+种</li>
+<li><strong>许可证</strong>：Apache 2.0（从Gemma 3的source-available条款转为完全开源，对企业商用很关键）</li>
+<li><strong>内存</strong>：BF16约26.7GB / SFP8约13.4GB / Q4_0约6.7GB（未含上下文开销）</li>
+</ul>
+<p><strong>最大亮点是"无编码器（encoder-free）"架构</strong>：大多数多模态模型会外挂独立的视觉编码器（常还有独立音频编码器），再做跨模态翻译。Gemma 4 12B把这套机制去掉了——图像用一个轻量级约3500万参数的视觉模块转成token（取代过去约5.5亿参数的视觉编码器），音频则把16kHz原始声音直接映射进token空间，全部走一条统一的decoder-only主干。更少的组件意味着更低的内存与延迟，这正是12B多模态模型能塞进16GB笔记本的关键。模型还内置Multi-Token Prediction（MTP）草稿器做投机解码。</p>
+<p><strong>性能口径要谨慎</strong>：Google官方说法是12B在标准基准上接近26B MoE（内存不到一半），并在GPQA Diamond、MMLU Pro、DocVQA等套件上明显超过旧的Gemma 3 27B。但<strong>Google发布时没有给出完整的数字化基准表</strong>，坊间流传的具体百分比应视为"报道未证实"，引用前需核对官方模型卡。比较稳妥的说法是相对结论：接近26B、明显强于Gemma 3 27B、内存约一半。</p>
+<p><strong>端侧实测</strong>：面向16GB机器设计。社区上线初期测得RTX 4060用llama.cpp约21 tokens/s，MacBook Pro经MLX流畅运行，Q4量化是塞进16GB的实用默认值。Day-one即支持Ollama、LM Studio、llama.cpp、MLX和Google AI Edge（含已上线macOS的AI Edge Gallery）。</p>
+<h3 id="minicpm5-1b1bsota">面壁智能 MiniCPM5-1B：1B级开源SOTA</h3>
+<p><strong>出身</strong>：OpenBMB是2022年由清华大学NLP实验室与面壁智能（ModelBest）联合发起的中国实验室。MiniCPM5-1B是MiniCPM5系列首个模型，2026年5月底发布。</p>
+<p>核心规格：</p>
+<ul>
+<li><strong>参数</strong>：约10.8亿（1B稠密），24层，GQA（Q头16、KV头2）</li>
+<li><strong>上下文</strong>：128K；<strong>仅文本输入输出</strong>（注意：它不是多模态）</li>
+<li><strong>精度</strong>：BF16；许可证Apache 2.0</li>
+<li><strong>混合推理</strong>：内置<code>&lt;think&gt;</code>模板，通过<code>enable_thinking</code>在"快速助手"和"深思推理"间切换，同一权重两用</li>
+<li><strong>部署</strong>：GGUF/MLX等格式齐全，Ollama上Q4_K_M仅688MB，fp16为2.2GB</li>
+</ul>
+<p><strong>性能（关键）</strong>：</p>
+<ul>
+<li>在Artificial Analysis Intelligence Index上得<strong>17.9分，是1B及以下开源模型中的最高分</strong>，领先第二名（Qwen3.5 0.8B Reasoning，10.5）达7.4分；</li>
+<li>比前代MiniCPM-V 4.6 1.3B（12.7）高5.3分，参数还少约23%；</li>
+<li><strong>Token效率高</strong>：跑完整个Index仅用1260万输出token，约为同级推理模型Qwen3.5 2B的1/31；</li>
+<li><strong>AA-Omniscience得-1分，为同尺寸最高</strong>——这是因为它在不确定时倾向于拒答而非强行作答，从而规避了知识广度评测中的幻觉惩罚（同级模型常掉到-70至-89）。这是一种偏稳健的产品取舍。优势最明显的领域是Agentic工具调用、代码生成、困难推理。</li>
+</ul>
+<h3 id="minicpm-v-4613b">面壁智能 MiniCPM-V 4.6：1.3B的"口袋多模态"</h3>
+<p><strong>发布</strong>：2026年5月11日，面壁联合清华和OpenBMB推出，是MiniCPM-V家族迄今最小的成员。</p>
+<ul>
+<li><strong>架构</strong>：1.3B参数，由<strong>SigLIP2-400M视觉编码器 + Qwen3.5-0.8B语言主干</strong>组成，基于LLaVA-UHD v4方法</li>
+<li><strong>上下文</strong>：262K tokens（约393页A4文本）；支持单图、多图、视频（最高128帧）</li>
+<li><strong>许可证</strong>：Apache 2.0；发布即支持vLLM、SGLang、llama.cpp、Ollama</li>
+</ul>
+<p><strong>端侧效率（4.6的工程重点）</strong>：LLaVA-UHD v4技术把视觉编码FLOPs降低50%+，高分辨率浮点运算降低约55.8%；创新支持4×/16×混合token压缩，可在"性能优先"和"速度优先"间切换。<strong>内存需求降至约6GB</strong>，主流手机、PC、智能家居设备可流畅运行；量化后int4/AWQ/GPTQ约3GB显存，GGUF在CPU上约2GB。处理3136²超高清大图时首响应延迟仅75.7ms。</p>
+<p><strong>性能与落地</strong>：在Intelligence Index上得13分，同尺寸28个模型排第3；在OpenCompass、OCRBench等视觉语言任务上据称达到Qwen3.5 2B级别能力。官方在iPhone 17 Pro Max（iOS）、Redmi K70（Android）、HUAWEI nova 14（HarmonyOS）上提供参考demo，覆盖手写识别、光学折射推理、票据解析。据报道该系列已在汽车、PC、智能家居、工业质检等领域落地。</p>
+<h3 id="qwen35">阿里 Qwen3.5 小模型系列：全尺寸统一架构</h3>
+<p><strong>发布与定位</strong>：2026年3月2日，阿里Qwen团队发布<strong>Qwen3.5-0.8B / 2B / 4B / 9B</strong>四个稠密小模型，专为端侧设计。它们是一次16天内发完9个模型（0.8B到397B）的收尾，小模型与大模型<strong>共享同一架构、词表和原生多模态能力</strong>。全部Apache 2.0开源。</p>
+<p><strong>架构亮点（与MiniCPM-V 4.6同源思路）</strong>：</p>
+<ul>
+<li><strong>Gated DeltaNet混合架构</strong>：线性注意力与传统全softmax注意力按3:1排布。线性层保持恒定内存复杂度（不随序列长度增长），全注意力块负责精度关键的推理。这是9B能原生支持262K上下文（YaRN可扩到100万+）而不内存爆炸的原因；</li>
+<li><strong>MTP投机解码</strong>、<strong>DeepStack ViT</strong>原生视频理解、248K token词表（覆盖201种语言）、<strong>原生多模态</strong>（四个模型都从统一架构处理文本/图像/视频）。</li>
+</ul>
+<p><strong>性能（关键卖点）</strong>：</p>
+<ul>
+<li>Qwen3.5-9B（Reasoning）在Intelligence Index得32分，是10B以下最强，约为次名的两倍；4B得27分，是5B以下最强；</li>
+<li>9B在MMLU-Pro、GPQA Diamond、IFEval、LongBench v2上<strong>超过比它大13倍的OpenAI GPT-OSS-120B</strong>；</li>
+<li>视觉任务差距更大：9B的MMMU-Pro约69–70，明显领先GPT-5-Nano（57.2）。</li>
+</ul>
+<p><strong>端侧部署</strong>：0.8B约1.6GB（手机/树莓派）、2B约4GB（平板/轻薄本）、4B约8GB（RTX 3060/M系Mac）、9B约18GB（4-bit量化后约6GB可进8GB显存）。全面支持vLLM、SGLang、llama.cpp、MLX。</p>
+<p><strong>两个需要客观说明的特点</strong>（来自第三方评测）：</p>
+<ol>
+<li><strong>Token消耗较高</strong>：四个小模型跑完Index用了230–390M输出token，高于更大的Qwen3.5 27B（98M）——这与其"充分思考再作答"的推理风格有关，在端侧实跑会更耗电耗时，使用时可通过关闭thinking模式来平衡；</li>
+<li><strong>评测口径差异</strong>：在AA-Omniscience这类"知识广度"评测上，Qwen3.5小模型倾向于尽量作答，幻觉率相应偏高；而MiniCPM5-1B倾向于在不确定时拒答以规避惩罚。两者代表了不同的产品取舍——前者覆盖面更广，后者更保守稳健——没有绝对优劣，取决于应用场景对"宁缺毋滥"还是"尽量响应"的偏好。</li>
+</ol>
+<h3 id="_6">横向对比一览</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>厂商</th>
+<th>参数</th>
+<th>模态</th>
+<th>上下文</th>
+<th>目标硬件</th>
+<th>端侧亮点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gemma 4 12B</td>
+<td>Google</td>
+<td>12B稠密</td>
+<td>文/图/音/视频</td>
+<td>256K</td>
+<td>16GB笔记本</td>
+<td>无编码器多模态</td>
+</tr>
+<tr>
+<td>MiniCPM5-1B</td>
+<td>面壁/清华/OpenBMB</td>
+<td>1B稠密</td>
+<td>纯文本</td>
+<td>128K</td>
+<td>手机/IoT（&lt;1GB）</td>
+<td>1B级SOTA、宁拒答不幻觉</td>
+</tr>
+<tr>
+<td>MiniCPM-V 4.6</td>
+<td>面壁/清华/OpenBMB</td>
+<td>1.3B</td>
+<td>文/图/视频</td>
+<td>262K</td>
+<td>手机（约6GB）</td>
+<td>LLaVA-UHD v4视觉压缩</td>
+</tr>
+<tr>
+<td>Qwen3.5 系列</td>
+<td>阿里巴巴</td>
+<td>0.8B–9B</td>
+<td>文/图/视频</td>
+<td>262K</td>
+<td>手机到笔记本</td>
+<td>全尺寸统一架构</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_7">五、其他值得关注的端侧玩家</h2>
+<table>
+<thead>
+<tr>
+<th>厂商</th>
+<th>模型</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft</td>
+<td>Phi-4 mini（3.8B）/ Aion-1.0-Instruct</td>
+<td>Aion比Phi-4-mini更小更快，进Edge浏览器，计划7月开源</td>
+</tr>
+<tr>
+<td>Meta</td>
+<td>Llama 3.2（1B/3B/11B）</td>
+<td>英文端侧基线，生态成熟</td>
+</tr>
+<tr>
+<td>NVIDIA</td>
+<td>Nemotron Nano 9B V2</td>
+<td>端侧推理模型，被Qwen3.5直接对标</td>
+</tr>
+<tr>
+<td>Liquid AI</td>
+<td>LFM2.5系列（350M–8B-A1B）</td>
+<td>端侧专精，含手机端推理（&lt;1GB）与视觉模型</td>
+</tr>
+</tbody>
+</table>
+<p>其中Liquid AI走了很纯粹的"端侧优先"路线：LFM2.5-8B-A1B是稀疏MoE（总参8.3B、每token仅激活约1.5B），LFM2.5-1.2B-Thinking能在900MB内存内于手机上跑完整推理，"两年前需要数据中心的能力如今离线装进口袋"。</p>
+<blockquote>
+<p>选型提示：判定"端侧大模型"应看可实际部署到端侧的尺寸——稠密模型一般≤约14B（量化后能进16GB内存/显存），MoE则要看每token激活参数与总权重加载量是否落在手机/PC的内存与功耗预算内。像激活15B+、总权重数百GB的旗舰MoE（即便开源）仍属云端模型，不在此列。</p>
+</blockquote>
+<hr />
+<h2 id="_8">六、真实落地场景</h2>
+<p>实用化场景（端侧已胜任）：</p>
+<ul>
+<li><strong>手机/平板</strong>：本地助手、摘要、翻译、表单填写、简单代码生成</li>
+<li><strong>PC/笔记本</strong>：编码助手、文档分析、本地RAG、创意写作、设备端Agent（规划/调用工具/读文件）</li>
+<li><strong>浏览器</strong>：网页翻译、语种检测、本地语音识别、内置摘要/改写</li>
+<li><strong>汽车座舱</strong>：实时自然语言理解，无需云连接</li>
+<li><strong>工业/机器人</strong>：确定性低延迟的智能决策</li>
+<li><strong>医疗设备</strong>：敏感数据本地处理满足合规</li>
+</ul>
+<p>性能参考（Q4量化，真实硬件）：3B模型在旗舰手机约25 tok/s、笔记本约35–52 tok/s；首token时间0.5–1.2s（普遍快于云端的网络往返）。经验阈值：&gt;15 tok/s即有实时交互感。<strong>电池是被多数评测忽略的关键指标</strong>——3B模型持续生成时手机耗电约25%/小时，因此实践建议"按需加载、短突发生成、用完卸载"。</p>
+<hr />
+<h2 id="_9">七、还没解决的挑战</h2>
+<ol>
+<li><strong>MoE上端仍然困难</strong>：稀疏激活省了计算，但所有专家仍需加载，内存搬运成为瓶颈；</li>
+<li><strong>内存与电池的硬约束</strong>：决定了模型规模上限和交互模式；</li>
+<li><strong>端侧滞后云端3–6个月</strong>：能力天花板仍在云端；</li>
+<li><strong>跨平台标准不统一</strong>：浏览器本地AI API目前仍是实验性、非Baseline，不同浏览器输出质量不保证一致；</li>
+<li><strong>产品取舍各异</strong>：面对不确定问题是"宁可拒答"还是"尽量作答"，不同团队取舍不同，没有绝对优劣，需按场景选择。</li>
+</ol>
+<p>值得关注的前沿方向：投机解码普及、模型合并、硬件感知训练、WebGPU浏览器内推理、<strong>端侧本地微调实现个性化</strong>（用户专属行为而不外传隐私）、测试时计算（让小模型在难题上多花推理预算）。</p>
+<hr />
+<h2 id="gb">结语：竞争从"参数"转向"每GB能力"</h2>
+<p>把所有调研对象放在一起看，2026年端侧大模型呈现三个清晰特征：</p>
+<ol>
+<li><strong>架构趋同，目标一致</strong>：线性/混合注意力（Qwen Gated DeltaNet、Liquid LFM）、无编码器多模态（Gemma 4）、视觉编码压缩（MiniCPM LLaVA-UHD v4）、投机解码（Qwen与Gemma都用）——所有创新都指向同一件事：在端侧的热/内存预算内塞进更多能力。</li>
+<li><strong>Apache 2.0成为端侧开源的事实标准</strong>，许可证不再是选型摩擦点，竞争转向"每GB内存的能力"和"token/电量效率"。</li>
+<li><strong>中美两强正面竞争</strong>：中国阵营（阿里Qwen3.5、面壁MiniCPM）在小模型端侧密度上非常激进，且常是同尺寸段的标杆——Qwen3.5-9B在10B以下第一，MiniCPM5-1B在1B以下第一；西方阵营（Google Gemma 4、Microsoft Phi/Aion、Meta Llama、NVIDIA Nemotron、Liquid AI）则在生态与多模态工程上持续推进。</li>
+</ol>
+<p>对开发者来说，结论很实在：<strong>端侧AI在2026年不再是妥协，而是一个有明确优势（隐私、延迟、成本、离线）的合法部署策略。</strong> 最佳实践是"本地优先"处理简单任务，把云端API当作能力天花板而非默认选项——用户得到更快的响应、更好的隐私和更低的成本，而当任务真正需要前沿智能时，云端始终只有一次API调用之遥。</p>
+<hr />
+<h2 id="_10">参考来源</h2>
+<ol>
+<li>Edge AI and Vision Alliance, "On-Device LLMs in 2026: What Changed, What Matters, What's Next", 2026-01. https://www.edge-ai-vision.com/2026/01/on-device-llms-in-2026-what-changed-what-matters-whats-next/</li>
+<li>Edge AI and Vision Alliance / Quadric, "The On-Device LLM Revolution: Why 3B-30B Models Are Moving to the Edge", 2026-04. https://www.edge-ai-vision.com/2026/04/the-on-device-llm-revolution-why-3b-30b-models-are-moving-to-the-edge/</li>
+<li>AI Magicx, "On-Device AI in 2026: Running LLMs Locally on Your Phone, Laptop, and IoT Devices", 2026-03. https://www.aimagicx.com/blog/on-device-ai-models-local-llm-guide-2026</li>
+<li>Build Fast with AI, "Gemma 4 12B: Specs, Benchmarks &amp; How to Run It Locally", 2026-06. https://www.buildfastwithai.com/blogs/gemma-4-12b-guide</li>
+<li>Hugging Face, "google/gemma-4-12B model card". https://huggingface.co/google/gemma-4-12B</li>
+<li>Artificial Analysis, "OpenBMB has released MiniCPM5-1B, the leading 1B open-weights model", 2026-05. https://www.artificialanalysis.ai/articles/minicpm5-1b-the-leading-1b-open-weights-model</li>
+<li>Ollama, "openbmb/minicpm5". https://ollama.com/openbmb/minicpm5</li>
+<li>NYU Shanghai RITS, "MiniCPM-V 4.6: A 1.3B Multimodal Model Built for Phones", 2026-05. https://rits.shanghai.nyu.edu/ai/minicpm-v-4-6-a-1-3b-multimodal-model-built-for-phones/</li>
+<li>AIbase, "MiniCPM-V 4.6 Redefines the Peak of Edge-side Multimodal Technology", 2026-05. https://www.aibase.com/news/28378</li>
+<li>NYU Shanghai RITS, "Qwen 3.5 Small Models: 9B Parameters That Beat 120B", 2026-03. https://rits.shanghai.nyu.edu/ai/qwen-3-5-small-models-9b-parameters-that-beat-120b/</li>
+<li>Artificial Analysis, "Qwen3.5 small models: Everything you need to know", 2026-03. https://artificialanalysis.ai/articles/qwen3-5-small-models</li>
+<li>Microsoft Edge Dev Blog, "Expanding on-device AI in Microsoft Edge", 2026-06. https://blogs.windows.com/msedgedev/2026/06/02/expanding-on-device-ai-in-microsoft-edge-new-models-and-apis-for-the-web/</li>
+<li>Liquid AI, "LFM2.5-8B-A1B: an Even Better on-Device Mixture-of-Experts", 2026-05. https://www.liquid.ai/blog/lfm2-5-8b-a1b</li>
+</ol>
+<hr />
+<p><em>相关阅读：<a href="../posts/open-source-llm-comparison-2026.html">2026年开源大模型选型指南</a> | <a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：两大AI Agent协议深度解析</a></em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 奢品心动购物季会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6pMqvp" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=on-device-llm-2026-gemma4-minicpm-qwen" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=on-device-llm-2026-gemma4-minicpm-qwen" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

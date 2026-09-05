@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拆解 Mini-SWE-Agent：一个 Bash-first ReAct 循环，如何成为代码模型评测底座</title>
+    <meta name="description" content="Mini-SWE-Agent 将编程 Agent 的核心循环压缩到约 100 行 Python，并以 Bash-first ReAct 方式成为 SWE-bench 模型横评的重要底座。本文拆解其架构、评测意义、局限与落地边界。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">拆解 Mini-SWE-Agent：一个 Bash-first ReAct 循环，如何成为代码模型评测底座</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-08-16 · 14 分钟</span>
+            </div>
+            <p>当 Claude Code、Codex、Cursor 和 OpenHands 都在把工具、子 Agent、规则、记忆与云端协作塞进产品时，Mini-SWE-Agent 反其道而行：它问的不是“还需要多少能力”，而是“一个代码模型只拿到任务和 Bash，到底能做到哪一步”。它把默认 Agent 的核心循环缩到约 100 行 Python，却被 SWE-bench 用作 Bash-only 模型比较的统一底座，官方项目也宣称其在合适模型与配置下可在 SWE-bench Verified 达到超过 74% 的解决率（参考<a href="https://github.com/SWE-agent/mini-swe-agent">官方仓库</a>）。</p>
+<p>这不是一款试图取代所有 IDE 的产品，而是一把足够锋利的手术刀：剥掉厚重脚手架后，开发者终于能分辨——代码模型的成绩，究竟来自模型本身，还是来自 Agent 外壳的工程堆叠？</p>
+<h2 id="mini">先看结论：Mini 真正“极简”的是什么</h2>
+<p>Mini-SWE-Agent 的“100 行”并不意味着整个项目只有 100 行，也不代表生产环境不需要工程化。它精简的是最关键的决策层：默认 Agent 如何把用户问题、历史观察和模型回答组织成一个持续迭代的行动循环。环境隔离、模型适配、CLI、批量评测、轨迹查看和测试仍是独立模块。</p>
+<p>它的核心取舍可以浓缩为三句话：</p>
+<ul>
+<li>不预设一长串专有工具，把通用操作收敛为 Shell；</li>
+<li>不把复杂工作流硬编码进框架，让模型根据观察结果决定下一步；</li>
+<li>不把 Agent 与某一家模型或云环境绑定，让模型、环境和运行任务可以替换。</li>
+</ul>
+<p>因此，Mini 更像一个“可复现实验台”而非黑盒助手。它保留软件工程 Agent 必需的闭环：理解 Issue、搜索仓库、阅读代码、修改文件、执行测试、根据报错修复；但将每一环都尽量交还给模型和真实终端。</p>
+<h2 id="bash-first-react-agent">Bash-first ReAct 循环：四个动作组成的 Agent</h2>
+<p>ReAct 的思想并不复杂：模型先推理，再行动；行动产生观察，观察反过来修正下一轮推理。Mini-SWE-Agent 将“行动”主要落实为 Bash 命令。模型能用 <code>rg</code> 搜索调用点、<code>sed</code> 或 <code>cat</code> 阅读文件、用编辑命令改代码、运行 <code>pytest</code> 或项目自带测试，终端输出则成为下一轮上下文。</p>
+<p><img alt="Mini-SWE-Agent 的 Bash-first ReAct 执行与评测结构" src="../images/mini-swe-evaluation-loop.png" /></p>
+<p>图中最重要的不是箭头，而是边界。用户只提供一个任务；模型并不直接获得“修复成功”的结论，而是通过命令输出、测试失败、Git diff 与运行结果逐步缩小假设。最终的补丁还必须在评测器或 CI 中接受独立验证。</p>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>模型看到什么</th>
+<th>模型决定什么</th>
+<th>系统返回什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务初始化</td>
+<td>Issue、仓库说明、执行约束</td>
+<td>先检索哪里、先复现什么</td>
+<td>工作目录与初始提示</td>
+</tr>
+<tr>
+<td>推理与行动</td>
+<td>历史命令和输出</td>
+<td>下一条 Bash 命令或完成</td>
+<td>命令执行结果</td>
+</tr>
+<tr>
+<td>验证与修正</td>
+<td>测试日志、差异、错误栈</td>
+<td>保留、回退或继续修改</td>
+<td>新的可观察证据</td>
+</tr>
+<tr>
+<td>收尾</td>
+<td>修改后的工作树</td>
+<td>输出补丁并结束</td>
+<td>评测器执行隐藏/目标测试</td>
+</tr>
+</tbody>
+</table>
+<p>这套设计的优势在于通用性。Bash 不关心语言、框架或项目风格；只要环境中具备常见命令与测试工具，模型就能探索陌生仓库。代价同样明显：模型必须会规划命令、读懂冗长输出、控制上下文，并在错误方向上及时止损。Mini 没有消除这些难题，只是把它们暴露得更清楚。</p>
+<h2 id="_1">为什么它会成为模型评测底座</h2>
+<p>SWE-bench Verified 从原始 SWE-bench 中人工筛选出 500 个实例，逐一确认任务描述清晰、测试补丁正确、且在可用信息下可以解决。它衡量的不是补全一行代码，而是面对真实 GitHub Issue 时，系统能否交出通过测试的修复补丁。（参考<a href="https://www.swebench.com/verified">SWE-bench Verified 说明</a>）</p>
+<p>问题在于，同一个模型装进不同 Agent，得分会大幅变化：有人给它代码搜索、索引和 RAG，有人让多个 Agent 投票，有人提供网页浏览、复杂的回顾策略或并行采样。如果把这些系统和模型混在同一张榜单上，读者很难知道提升来自模型能力，还是来自外部脚手架。</p>
+<p>SWE-bench 的 Bash-only 设置正是为了切开这层混淆：在统一的 Mini-SWE-Agent、最小 Bash 环境和相同任务下运行模型。官方将其称为简单的 ReAct 循环——没有专门工具、没有额外 scaffold 结构，比较的重点是“面对问题和终端时，模型能走多远”。（参考<a href="https://www.swebench.com/verified">SWE-bench Verified</a>）</p>
+<p>这让 Mini-SWE-Agent 扮演了三种角色：</p>
+<ul>
+<li><strong>能力标尺</strong>：同一执行壳体下，不同模型的解决率、成本、耗时和轨迹更可比较；</li>
+<li><strong>研究基线</strong>：新提示词、上下文策略、轨迹训练或推理时扩展方案，都能从一个简洁基线开始验证；</li>
+<li><strong>诊断工具</strong>：当模型失败时，研究者能查看每一条命令与观察，区分是检索错、编辑错、测试没跑，还是推理陷入循环。</li>
+</ul>
+<p>这也是它与 <a href="../posts/openhands-deep-dive-opendevin-to-80k-stars-2026.html">OpenHands 深度调研</a> 的分工：OpenHands 面向更完整的开放式开发平台与可组合 SDK；Mini 则将“模型 + 终端”的最小实验条件固定下来。前者更像可扩展的施工现场，后者更像用于标定材料性能的标准试验机。</p>
+<h2 id="100">100 行背后：模型、环境和运行器仍然重要</h2>
+<p>把 Agent 循环缩短，并不等于把系统能力缩掉。Mini-SWE-Agent 的外层至少保留三类可替换组件。</p>
+<h3 id="1">1. 模型适配层：不把能力押在单一厂商上</h3>
+<p>项目通过 LiteLLM 等路径接入多类模型与网关，并支持常见的 completion 与 responses 端点。官方文档建议模型名称中显式带上服务商前缀，反映了一个实用事实：Agent 的行为不仅受模型名影响，也会受 API 格式、思考输出、上下文窗口、价格与限流策略影响。（参考<a href="https://github.com/SWE-agent/mini-swe-agent">官方仓库</a>）</p>
+<p>因此，“Mini-SWE-Agent 超过 74%”不是可以直接贴到框架上的永久标签。它是特定模型、采样配置、任务版本、执行预算与环境共同产生的实验结果。选型时应追问：用了什么模型？单次还是多次采样？允许多少 token、时间和命令？失败是否可重试？这些条件不透明，分数就很难迁移到自己的代码库。</p>
+<h3 id="2">2. 环境层：真正的边界在命令能做什么</h3>
+<p>官方列出的运行环境覆盖本地、Docker/Podman、Singularity/Apptainer、Bubblewrap、Contree 等方案。这决定了 Mini 既可以是个人电脑上的 CLI，也可以进入隔离容器或批量评测集群。</p>
+<p>对企业而言，环境层往往比 Agent 循环更重要。一个能执行 Bash 的模型，理论上也能读取不该读取的文件、访问凭据、删除工作树、触发昂贵任务或向外发送数据。合理的生产边界至少包括：临时容器、只读挂载、短期凭据、网络白名单、命令审计、资源限额，以及必须经过人工审核的提交出口。关于这部分治理，可结合 <a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署指南</a> 与 <a href="../posts/code-sandbox-ai-agent-guide-2026.html">代码沙箱实践</a> 一起看。</p>
+<h3 id="3">3. 运行与观察层：极简不是不可观测</h3>
+<p>Mini 提供交互式 CLI、Python 调用方式、批处理能力以及轨迹查看/检查工具。对于研究者，这意味着能比较不同模型的命令路径；对于工程团队，这意味着能在上线前抽样复盘：Agent 是否一开始就读对模块、是否真正运行了测试、是否因一条无效命令浪费了大量上下文。</p>
+<p>从这个角度看，Mini 的价值不只是“短”。短代码让团队更容易看清控制流、插入自定义策略、锁住危险命令，并为每一步收集指标。复杂平台当然也能做到，但往往要先理解更多抽象层。</p>
+<h2 id="coding-agent">与产品型 Coding Agent 相比，它少了什么，又多了什么</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Mini-SWE-Agent</th>
+<th>产品型 Coding Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首要目标</td>
+<td>透明、最小化、可复现的 Agent 基线</td>
+<td>流畅完成日常研发任务</td>
+</tr>
+<tr>
+<td>操作接口</td>
+<td>以 Bash 和项目环境为中心</td>
+<td>IDE、终端、浏览器、云服务、协作工具的组合</td>
+</tr>
+<tr>
+<td>模型策略</td>
+<td>可替换，适合横评</td>
+<td>常绑定或深度优化少数模型</td>
+</tr>
+<tr>
+<td>工作流</td>
+<td>主要由模型在循环中自行决定</td>
+<td>常有规划、并行、记忆、Review、权限等产品能力</td>
+</tr>
+<tr>
+<td>最适合谁</td>
+<td>研究者、Agent 开发者、私有化实验团队</td>
+<td>希望快速获得体验的日常开发者</td>
+</tr>
+<tr>
+<td>核心风险</td>
+<td>Shell 权限、成本失控、模型执行不稳定</td>
+<td>黑盒行为、供应商锁定、数据边界与可迁移性</td>
+</tr>
+</tbody>
+</table>
+<p>若你的目标是“今天就让团队在 IDE 里提速”，不必为了极简而放弃成熟产品；可先参考 <a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">闭源 AI 编程工具横评</a>。若你的目标是“弄清一个模型在受控环境下究竟有多强”，或者希望为内网仓库搭一个可审计的最小 Agent，Mini 的取舍反而更合理。</p>
+<p>它尤其适合作为三类项目的起点：模型供应商横评、面向特定语言/仓库的定制 Agent、以及强化学习或轨迹蒸馏的训练环境。微软 Orchard-SWE 就在 Mini-SWE-Agent 框架上探索了软件工程智能体训练、轨迹利用和候选重排；相关训练细节可见 <a href="../posts/microsoft-orchard-agentic-modeling-framework-2026.html">Orchard 框架解读</a>。这说明 Mini 的“少”不是功能缺席，而是给研究与定制留下了更干净的接口。</p>
+<h2 id="swe-bench">不要误读 SWE-bench 分数</h2>
+<p>SWE-bench Verified 仍是重要参照，但它不是企业生产力的完整替身。500 个经过筛选的开源 Issue 无法穷尽私有仓库中的跨服务依赖、未写明的业务意图、权限审批、第三方系统、长周期协作和发布责任。一个模型在基准中解决了 Issue，也不代表它能独立负责线上变更。</p>
+<p>此外，基准越流行，训练数据污染、题目记忆和针对性优化的风险越高。OpenAI 已公开说明，SWE-bench Verified 不再适合作为衡量前沿编程能力的唯一指标，原因正包括能力上升后评测区分度与污染问题的变化。（参考<a href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">OpenAI：为何不再以 SWE-bench Verified 衡量前沿编码能力</a>）</p>
+<p>这并不会削弱 Mini 的意义，反而更凸显其价值：当榜单需要更新时，行业仍需要一个可读、可复现、能快速接入新任务集的基础 Agent。评测应组合多种信号——任务成功率、成本、运行时长、命令风险、补丁可维护性、人工 Review 通过率，以及在自家代码库的盲测结果——而不是围绕单个百分比做产品决策。</p>
+<h2 id="_2">给技术团队的落地建议</h2>
+<p>如果准备试用 Mini-SWE-Agent，不建议第一天就把它接进生产仓库。更可行的路径是：</p>
+<ol>
+<li><strong>先固定实验问题</strong>：挑选 20 到 50 个历史 Bug，保留 Issue、失败测试与最终补丁，但不要把答案提供给 Agent；</li>
+<li><strong>把环境锁小</strong>：为每个任务启动一次性容器，默认无生产密钥、无外网或仅允许必要源；</li>
+<li><strong>记录完整轨迹</strong>：保存模型、提示词、命令、耗时、token、测试结果和最终 diff，以便复盘而非只看成功率；</li>
+<li><strong>分开衡量模型和工作流</strong>：先用同一 Mini 循环横评模型，再单独加入检索、规划或 Review，看增益是否值得复杂度；</li>
+<li><strong>保留人类提交权</strong>：让 Agent 产出补丁与证据，不让它直接合并或部署；将安全扫描、测试和代码审查放在强制门禁之后。</li>
+</ol>
+<p>这条路径同样适用于 <a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 编程 Agent</a> 等开源工具：先把“能跑”变成“在受控数据、受控权限和可量化标准下稳定有用”，再讨论规模化。</p>
+<h2 id="agent">小结：最小 Agent，最大的价值是把问题问清楚</h2>
+<p>Mini-SWE-Agent 不会让软件工程变成一次提示词就能交付的魔法。它的贡献是把复杂 Agent 拆回一个人人能检查的事实：一个模型获得任务、终端和反馈之后，究竟会怎样探索、犯什么错、在什么条件下完成修复。</p>
+<p>对研究者，它是低噪声的评测基线；对平台团队，它是可控的原型骨架；对使用者，它则是一面镜子——当一个重型编程 Agent 给出漂亮结果时，你可以追问：是模型真的更强，还是脚手架替它做了更多工作？在这个问题上，约 100 行的 Mini-SWE-Agent 提供了难得清晰的答案起点。</p>
+<hr />
+<p><strong>免责声明</strong>：本文基于公开资料整理，不构成采购、投资、安全或合规建议。请勿在未隔离、未审计的生产环境中直接赋予 AI Agent 终端权限；涉及源代码、客户数据、凭据和发布系统时，请依据组织安全规范进行评估。</p>
+<h2 id="_3">参考来源</h2>
+<ul>
+<li><a href="https://github.com/SWE-agent/mini-swe-agent">SWE-agent/mini-swe-agent（GitHub）</a></li>
+<li><a href="https://github.com/SWE-agent/mini-swe-agent/blob/main/docs/quickstart.md">Mini-SWE-Agent Quick Start（GitHub）</a></li>
+<li><a href="https://pypi.org/project/mini-swe-agent/">mini-swe-agent 2.4.6（PyPI）</a></li>
+<li><a href="https://www.swebench.com/verified">SWE-bench Verified</a></li>
+<li><a href="https://arxiv.org/abs/2405.15793">SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering（NeurIPS 2024）</a></li>
+<li><a href="https://openai.com/index/introducing-swe-bench-verified">Introducing SWE-bench Verified（OpenAI）</a></li>
+<li><a href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">Why SWE-bench Verified no longer measures frontier coding capabilities（OpenAI）</a></li>
+</ul>
+<h2 id="_4">相关阅读</h2>
+<ul>
+<li><a href="../posts/openhands-deep-dive-opendevin-to-80k-stars-2026.html">OpenHands 深度调研：从 OpenDevin 到开源编程 Agent</a></li>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 实战指南：免费 AI 编程 Agent</a></li>
+<li><a href="../posts/microsoft-orchard-agentic-modeling-framework-2026.html">微软开源 Orchard：训练环境如何服务智能体</a></li>
+<li><a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">闭源 AI 编程工具横评</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署指南</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=mini-swe-agent-bash-first-react-evaluation-harness-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=mini-swe-agent-bash-first-react-evaluation-harness-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

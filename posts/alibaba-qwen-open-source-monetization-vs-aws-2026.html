@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开源不赚钱，那阿里图什么？拆解通义千问"开源—云—电商 Agent"三级变现逻辑</title>
+    <meta name="description" content="Qwen 累计下载破 10 亿、衍生模型超 20 万，却始终被问"开源到底怎么赚钱"。本文拆解阿里"开源造势—云上收钱—电商 Agent 闭环"的三级变现逻辑，并与 AWS Bedrock 的"中立货架"模式做镜像对比，看清 Agent 时代两条不同的 AI 变现路。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">开源不赚钱，那阿里图什么？拆解通义千问"开源—云—电商 Agent"三级变现逻辑</h1>
+            <div class="post-meta">
+                <span class="cat">AI行业观察</span>
+                <span>2026-06-27 · 13 分钟</span>
+            </div>
+            <h2 id="_1">一个绕不开的灵魂拷问</h2>
+<p>通义千问（Qwen）在 Hugging Face 上的累计下载量，2026 年初已突破 7 亿次，阿里官方口径更是"超过 10 亿次、衍生模型超 20 万个、支持 119 种语言"。无论用哪个数字，它都是全球被下载、被二次开发最多的开源大模型家族。</p>
+<p>但每次阿里发开源模型，评论区总有同一个问题冒出来：<strong>"免费开源，那你到底靠什么赚钱？"</strong></p>
+<p>这不是抬杠。纯做开源模型的公司，确实普遍困在变现难题里——权重都白送了，用户下载回去自己部署，一分钱不付，模型公司图什么？</p>
+<p>阿里给出的答案，藏在集团主席蔡崇信 2026 年 2 月在迪拜世界政府峰会上的一句话里。他把开源 AI 玩家分成两类：一类是纯模型开发商，要直接从开源模型变现，"过程中面临本质上的挑战"；另一类是像阿里、Google 这样的<strong>全栈科技企业</strong>，从云基础设施、基础模型到应用层全都自己做，可以"在其他技术层捕捉价值"。蔡崇信原话大意是：<strong>千问是开源的，我们同时经营云业务；当用户在我们的基础设施上训练、开发、推理，我们就实现了变现。</strong></p>
+<p>一句话戳破了天机：<strong>对阿里来说，开源模型本身不是商品，而是把开发者引到自家云上的"钩子"。</strong> 这篇文章就来拆解这套"开源造势—云上收钱—电商 Agent 闭环"的三级变现逻辑，并和大洋彼岸的 AWS 做个镜像对比，看看 Agent 时代两条截然不同的 AI 变现路，到底谁更稳。</p>
+<hr />
+<h2 id="_2">第一级：开源，是最便宜的获客</h2>
+<p>先说清楚一件事：阿里的开源不是慈善，是<strong>精算过的市场费用</strong>。</p>
+<p>把模型权重以 Apache 2.0 这种宽松许可证免费放出去，换来的是三样东西：</p>
+<ul>
+<li><strong>规模与心智</strong>：10 亿次下载、20 万个衍生模型，意味着全球开发者在拿 Qwen 当默认底座。我们之前在<a href="../posts/open-source-llm-comparison-2026.html">《2026 开源大模型选型指南》</a>里就提到，Qwen 系列几乎是开源阵营里尺寸最全、生态最广的一支。连我们拆解过的 <a href="../posts/ornith-1-0-self-scaffolding-coding-model-benchmaxxing-2026.html">Ornith-1.0</a> 这种第三方模型，都是直接拿 Qwen 3.5 当预训练底座做后训练——这就是生态绑定的力量。</li>
+<li><strong>真实企业客户</strong>：Airbnb 用 Qwen 做 AI 客服 chatbot，Pinterest 把 Qwen 和自研模型并用。这些客户一旦在 Qwen 上跑通业务，迁移成本就成了阿里的护城河。</li>
+<li><strong>品牌与话语权</strong>：在中文和亚太市场，"开源最强"的标签本身就是营销，能反哺阿里云的销售。</li>
+</ul>
+<p>关键在于，<strong>这笔"市场费用"的回收口，不在模型本身，而在下一级。</strong></p>
+<hr />
+<h2 id="_3">第二级：云，才是真正的收银台</h2>
+<p>开源把人引进门，阿里云负责收钱。这一级的逻辑是经典的"羊毛出在猪身上"——你免费用模型，但训练、微调、推理的算力得在我这买。</p>
+<p>数据很能说明问题：</p>
+<ul>
+<li>阿里云 2025 年 9 月季度收入同比增长 <strong>34%</strong>，其中 AI 相关产品收入<strong>连续 9 个季度实现三位数同比增长</strong>。</li>
+<li>据 IDC 2025 下半年报告，中国大模型训推公有云市场规模约 79 亿元，<strong>阿里云以 42.2% 份额位列第一，同比增长 116%</strong>。</li>
+<li>集团给阿里云定的目标是<strong>五年内云收入达 1000 亿美元，复合年增长率超过 40%</strong>。</li>
+</ul>
+<p>为了喂饱这台收银机，阿里在基建上下了血本：从 2025 年 2 月宣布的 3800 亿元人民币，到 2026 年中被报道的<strong>三年约 690 亿美元</strong> AI 与云基础设施投入，公司 80% 以上的开放岗位都打上了 AI 标签。</p>
+<p>这就解释了为什么阿里愿意一边开源、一边砸钱建数据中心：<strong>开源模型跑得越火，云上的算力消耗就越多，越多的推理和微调发生在阿里云，变现就越扎实。</strong> 模型是引流的，算力才是计费的。</p>
+<hr />
+<h2 id="agent">第三级：旗舰转闭源 + 电商 Agent，把毛利留住</h2>
+<p>如果说前两级是阿里这两年一直在做的，那 2026 年最值得注意的，是它在变现链条顶端的两个新动作。</p>
+<h3 id="api">动作一：旗舰模型开始转向闭源 API</h3>
+<p>从 2025 年 9 月的 Qwen3-Max 起，阿里的旗舰模型开始"只给 API、不放权重"。到 2026 年 3 月底，三天内连发三款闭源模型（图像生成升级、多模态的 Qwen3.5-Omni、以及主打 agentic coding + 100 万 token 上下文的 Qwen3.6-Plus），全部面向企业买家，输入价低至 2 元/百万 token（约 0.28 美元）。同期阿里云存储价格上调最高 34%。</p>
+<p>这个转向的潜台词很清楚：<strong>开源负责走量和造势，闭源旗舰负责守住高毛利。</strong> 开发者友好的中小尺寸继续开源维持生态，但最强、最赚钱的能力放进付费 API，避免"白送旗舰"。</p>
+<h3 id="agent-agentic-commerce">动作二：把 Agent 接进电商，做 agentic commerce</h3>
+<p>这是阿里区别于所有对手的杀手锏。它把 Qwen 重新定义为"企业流程里的执行层"，而不只是聊天助手：</p>
+<ul>
+<li><strong>企业侧</strong>：百炼（Model Studio）做模型服务平台，2026 年 3 月推出企业级 agentic 平台 Wukong（悟空），旗舰模型直接插入。</li>
+<li><strong>消费侧 + 电商闭环</strong>：千问 App 月活已破 1 亿，升级为整合购物、实时零售、旅游出行的跨平台智能助手，把 Agent 接进淘宝和支付宝，让 AI <strong>自主完成下单、支付</strong>等任务。</li>
+</ul>
+<p>这一步的想象空间在于：当 Agent 能自主交易，阿里就能在<strong>交易环节</strong>而不只是 token 调用上变现——这是它坐拥淘宝、支付宝才能玩的牌。关于 Agent 真正落地企业流程的难点，可以参考我们的<a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">《企业 AI Agent 部署指南》</a>。</p>
+<hr />
+<h2 id="vs-aws">镜像对比：阿里的"全栈国家队" vs AWS 的"中立瑞士"</h2>
+<p>把视线移到大洋彼岸，AWS 给出了一条几乎相反的路。理解这组对比，就理解了 Agent 时代两种 AI 变现哲学。</p>
+<p><strong>AWS 的选择是：我不下场做最强模型，我做所有模型的货架和收银台。</strong> 它的 Bedrock 平台上架了 100 多个第三方模型，从 Anthropic 的 Claude 到 Google、Meta，2026 年 6 月连曾经被微软"独占"的 OpenAI GPT-5.5/5.4 和 Codex 都上了 Bedrock，且定价对齐官方、用量计入 AWS 消费承诺。有评论直接说，AWS 靠"成为中立聚合层"赢下了云 AI 市场之争，其 AI 业务收入 run rate 已超 150 亿美元。</p>
+<p>两条路的核心差异，一张表看清：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>阿里巴巴</th>
+<th>AWS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自研模型</td>
+<td><strong>自研 Qwen</strong>，开源 + 闭源旗舰双轨</td>
+<td><strong>不自研主力前沿模型</strong></td>
+</tr>
+<tr>
+<td>平台定位</td>
+<td>全栈自有：模型 + 云 + 应用 + 电商</td>
+<td><strong>中立聚合层</strong>：第三方模型的货架</td>
+</tr>
+<tr>
+<td>关键动作</td>
+<td>旗舰转闭源 API、Agent 接入淘宝/支付宝</td>
+<td>把 OpenAI、Claude 等全拉上 Bedrock</td>
+</tr>
+<tr>
+<td>变现核心</td>
+<td>云算力 + 闭源 API + 电商 Agent 交易</td>
+<td>云算力 + 跨模型 token 流水 + 合规增值</td>
+</tr>
+<tr>
+<td>护城河</td>
+<td>开源社区 + 中文/亚太 + 自有交易场景</td>
+<td>企业信任 + IAM/VPC 合规 + 模型中立</td>
+</tr>
+<tr>
+<td>主要风险</td>
+<td>自研巨额 capex、技术与团队风险</td>
+<td>模型层高毛利让给了模型厂商</td>
+</tr>
+</tbody>
+</table>
+<p>打个比方：<strong>AWS 像"瑞士"——保持中立，谁都能上架，靠当所有人的收银台和合规管家赚钱；阿里像"全垂直整合的国家队"——从算力到电商一条龙，把价值尽量留在自家全栈里。</strong></p>
+<p>两者并非全无共识：都把云算力当作压舱石。但分歧在于模型层——AWS 主动放弃自研、把高毛利让给 Anthropic 和 OpenAI，换来轻资产和中立性；阿里坚持自研，多了"模型话语权"和"电商 Agent 闭环"两张牌，代价是要扛住巨额资本开支和自研失败的风险。</p>
+<hr />
+<h2 id="_4">风险：这套飞轮也有几个裂缝</h2>
+<p>阿里的逻辑自洽，但并非没有隐忧，公众号读者尤其该警惕这几点：</p>
+<ul>
+<li><strong>闭源化可能反噬社区</strong>。开源辛苦建起的护城河，正被旗舰闭源化"抽干去浇另一块田"。Pinterest 的技术高管就直言，开源近来已大幅缩小与闭源的性能差距。阿里赌的是"闭源能重新拉开差距、企业愿为距离付费"——这个假设未必永远成立。</li>
+<li><strong>团队动荡</strong>。Qwen 的灵魂人物林俊旸于 2026 年 3 月离职，留下一句"me stepping down. bye my beloved qwen"，接任者来自 Google DeepMind 的 Gemini 团队。社区有声音担忧："用消费 App 的 DAU 逻辑去管基础模型团队，别怪创新曲线变平。"</li>
+<li><strong>地缘与合规摩擦</strong>。2026 年 6 月，Anthropic 向美国参议院指控，与阿里 Qwen 实验室相关的操作方在 6 周内用约 2.5 万个欺诈账户、发起近 2880 万次未授权的 Claude 调用以蒸取其能力。<strong>需要强调：这目前是 Anthropic 的单方指控，尚无第三方定论</strong>，但它折射出阿里 AI 出海正面临的地缘与合规阻力在加大。关于中美 AI 的这种结构性摩擦，我们在<a href="../posts/claude-fable-5-ban-china-ai-opportunity-2026.html">《Claude 5 停服与中国 AI 的机会》</a>里也聊过。</li>
+<li><strong>回报周期与资本开支错配</strong>。690 亿美元的投入对应的回报周期很长，短期内利润端会承压，估值已部分提前price in 了 agentic commerce 的乐观预期。</li>
+</ul>
+<hr />
+<h2 id="_5">小结</h2>
+<p><strong>阿里从来没指望靠开源模型本身赚钱，它图的是用开源换规模和开发者心智，再用全栈（云算力 + 闭源旗舰 + 电商 Agent）把规模变成现金流。</strong> 这是一套"开源造势、全栈收钱"的三级飞轮。</p>
+<p>它和 AWS 的"中立货架"模式形成镜像：AWS 把模型层让出去、专心做平台收过路费；阿里坚持自研、把价值留在自家全栈里。Agent 时代真正的分水岭，可能不在于谁的模型跑分更高，而在于<strong>谁能把"Agent 自主执行"接进真实交易场景</strong>——这恰恰是阿里靠淘宝、支付宝有机会建立、而 AWS 在结构上不具备的差异化优势。</p>
+<p>当然，飞轮能不能持续转下去，取决于阿里能否扛住闭源反噬、团队动荡和地缘摩擦这三道裂缝。未来 12 个月，会给出答案。</p>
+<hr />
+<h2 id="_6">免责声明</h2>
+<p>本文数据来自阿里巴巴官方公告、公开财报、IDC 报告及第三方媒体报道，部分为各方口径，存在差异时已标注。文中涉及的第三方指控（如 Anthropic 相关说法）截至发稿尚无定论，仅作客观转述。本文为行业分析，不构成任何投资建议。</p>
+<h2 id="_7">参考来源</h2>
+<ul>
+<li><a href="https://www.alibabagroup.com/document-1956438710056648704">蔡崇信谈 AI 开源的未来：为何全栈型企业将脱颖而出（阿里巴巴集团官网）</a></li>
+<li><a href="https://www.implicator.ai/alibaba-releases-third-closed-source-ai-model-in-three-days-signals-profit-first-strategy/">Alibaba Releases Third Closed-Source AI Model in Three Days（Implicator.ai）</a></li>
+<li><a href="https://www.tmgm.com/en/analysis/market-insight/alibaba-cloud-ai-enabler">Alibaba Cloud's Growth Trajectory as China's Premier AI Enabler（TMGM）</a></li>
+<li><a href="https://m.ebrun.com/682266.html">马云出手，阿里云拿下全国第一（亿邦动力，引 IDC 2025H2）</a></li>
+<li><a href="https://www.ainvest.com/news/alibaba-betting-69-billion-open-source-ai-win-stock-pricing-story-2606/">Alibaba Is Betting $69 Billion That Open-Source AI Will Win（AInvest）</a></li>
+<li><a href="https://em360tech.com/tech-articles/what-alibabas-qwen-multimodal-model-enterprise-agent-platform">Alibaba's Qwen: Enterprise Agent Platform Explained（EM360Tech）</a></li>
+<li><a href="https://andrewbaker.ninja/2026/04/30/the-cloud-ai-marketplace-war-is-over-and-aws-won/">The Cloud AI Marketplace War Is Over and AWS Won It（Andrew Baker）</a></li>
+<li><a href="https://www.aboutamazon.com/news/aws/bedrock-openai-models">OpenAI models GPT-5.5 and GPT-5.4—now on Amazon Bedrock（About Amazon）</a></li>
+<li><a href="https://www.techtimes.com/articles/319105/20260625/alibaba-ran-largest-known-ai-theft-campaign-against-claude-anthropic-tells-senate.htm">Anthropic tells Senate about Alibaba Claude extraction（TechTimes）</a></li>
+</ul>
+<h2 id="_8">相关阅读</h2>
+<ul>
+<li><a href="../posts/open-source-llm-comparison-2026.html">2026 年开源大模型最新选型指南：六大模型深度对比</a></li>
+<li><a href="../posts/ornith-1-0-self-scaffolding-coding-model-benchmaxxing-2026.html">35B 干翻 397B？Ornith-1.0 的惊人跑分背后</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署指南 2026</a></li>
+<li><a href="../posts/claude-fable-5-ban-china-ai-opportunity-2026.html">Claude 5 停服与中国 AI 的机会</a></li>
+<li><a href="../posts/ai-distillation-war-china-models-2026.html">AI 蒸馏战争：中国模型的崛起路径</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(B组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6p6mzd" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝百亿补贴专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E7%BC%96%E7%A8%8B&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=alibaba-qwen-open-source-monetization-vs-aws-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=alibaba-qwen-open-source-monetization-vs-aws-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

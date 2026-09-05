@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Copilot 2026 深度评测：从免费版到 Enterprise，完整功能与定价指南 - AI知识宇宙 - 用AI采集，用AI生成</title>
+    <meta name="description" content="基于官方文档和实际使用，全面评测 GitHub Copilot 2026年的功能矩阵、定价方案、Agent模式、Cloud Agent、Code Review等新特性，附真实使用场景测试。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">GitHub Copilot 2026 深度评测：从免费版到 Enterprise，完整功能与定价指南 - AI知识宇宙 - 用AI采集，用AI生成</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-05-16 · 15分钟</span>
+            </div>
+            <blockquote>
+<p><strong>声明</strong>：本文数据和功能描述来源于 <a href="https://docs.github.com/en/copilot/about-github-copilot/what-is-github-copilot">GitHub Copilot 官方文档</a> 及 <a href="https://docs.github.com/en/copilot/about-github-copilot/subscription-plans-for-github-copilot">GitHub Copilot 定价页</a>，截至 2026年5月。</p>
+</blockquote>
+<hr />
+<h2 id="2025-2026">一、2025-2026 发生了什么？</h2>
+<p>GitHub Copilot 在这两年完成了从"代码补全工具"到"全栈 AI 开发助手"的蜕变。新增能力包括：</p>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>里程碑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td>Copilot 预览版——仅 Tab 补全</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>正式发布，Copilot Chat 预览</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Copilot Chat GA、Business 企业版</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Agent Mode、多模型支持（Claude/Gemini/Codex）</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>Cloud Agent、Copilot Code Review、MCP 集成、GitHub Spark</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>Copilot Memory（公开预览）、Custom Agents、<strong>使用量计费改制</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>重要时间点</strong>：从 <strong>2026年4月20日</strong> 起，Copilot Pro、Pro+ 和 Student 计划的新注册<strong>暂时暂停</strong>；从 <strong>2026年6月1日</strong> 起，Copilot 将从基于请求次数的计费全面转向<strong>按使用量计费</strong>。详见 <a href="https://docs.github.com/en/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises">Usage-based billing</a>。</p>
+</blockquote>
+<hr />
+<h2 id="_1">二、定价方案（官方数据）</h2>
+<p>从 <a href="https://docs.github.com/en/copilot/about-github-copilot/subscription-plans-for-github-copilot">GitHub Copilot 订阅计划页</a> 获取的最新价格：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>价格</th>
+<th>Premium 请求/月</th>
+<th>目标用户</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Free</strong></td>
+<td>$0</td>
+<td>50</td>
+<td>个人尝鲜</td>
+</tr>
+<tr>
+<td><strong>Student</strong></td>
+<td>$0（认证学生）</td>
+<td>300</td>
+<td>在校学生</td>
+</tr>
+<tr>
+<td><strong>Pro</strong></td>
+<td>$10/月</td>
+<td>300</td>
+<td>个人开发者</td>
+</tr>
+<tr>
+<td><strong>Pro+</strong></td>
+<td>$39/月</td>
+<td>1500</td>
+<td>AI 重度用户</td>
+</tr>
+<tr>
+<td><strong>Business</strong></td>
+<td>$19/月/席位</td>
+<td>300/人/月</td>
+<td>团队</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>$39/月/席位</td>
+<td>1000/人/月</td>
+<td>大型企业</td>
+</tr>
+</tbody>
+</table>
+<p><strong>额外 premium 请求</strong>：$0.04/次（超额后可购买）</p>
+<p><strong>结论</strong>：对于绝大多数个人开发者，<strong>Pro $10/月</strong> 是最佳性价比选择；对于追求极限体验（Claude Opus、全模型访问）的用户，<strong>Pro+ $39/月</strong> 物有所值。</p>
+<blockquote>
+<p>🔗 官方定价对比：https://docs.github.com/en/copilot/about-github-copilot/subscription-plans-for-github-copilot#comparing-copilot-plans</p>
+</blockquote>
+<hr />
+<h2 id="_2">三、功能矩阵详解</h2>
+<p>根据 <a href="https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features">GitHub Copilot Features 文档</a>，Copilot 的核心能力可分为四大类：</p>
+<h3 id="31-assistive">3.1 辅助型功能（Assistive）</h3>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>描述</th>
+<th>可用范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Copilot Chat</strong></td>
+<td>聊天式编程助手，支持 agent skill</td>
+<td>所有付费方案</td>
+</tr>
+<tr>
+<td><strong>Inline Suggestions</strong></td>
+<td>代码自动补全</td>
+<td>所有方案（Free 有限额）</td>
+</tr>
+<tr>
+<td><strong>Next Edit Suggestions</strong></td>
+<td>预测"下一步要编辑的位置"并建议修改</td>
+<td>VS Code、Xcode、Eclipse</td>
+</tr>
+<tr>
+<td><strong>PR 摘要</strong></td>
+<td>自动生成 Pull Request 的描述</td>
+<td>Business/Enterprise</td>
+</tr>
+<tr>
+<td><strong>Commit 消息</strong></td>
+<td>GitHub Desktop 中自动生成提交信息</td>
+<td>所有方案</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实测感受</strong>：Next Edit Suggestions 是最被低估的功能——它不是补全你的代码，而是<strong>预判你下一步要改哪里</strong>，这在重构时效率极高。</p>
+<h3 id="32-agentic2025-2026">3.2 智能体型功能（Agentic）——2025-2026 最大升级</h3>
+<p>Copilot 2025 年的核心升级是<strong>从被动响应到主动执行</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agent Mode (IDE)</strong></td>
+<td>✅ GA</td>
+<td>IDE 内自主分析代码、多文件修改、终端命令执行（需用户批准）</td>
+</tr>
+<tr>
+<td><strong>Copilot CLI</strong></td>
+<td>✅ GA</td>
+<td>终端中的 AI agent，可跨会话延续上下文</td>
+</tr>
+<tr>
+<td><strong>Cloud Agent</strong></td>
+<td>✅ GA</td>
+<td>GitHub.com 上的<strong>自主 AI 代理</strong>——可研究仓库、制定计划、创建 PR</td>
+</tr>
+<tr>
+<td><strong>Code Review</strong></td>
+<td>🔬 公开预览</td>
+<td>AI 驱动的代码审查，自动发现潜在问题</td>
+</tr>
+<tr>
+<td><strong>GitHub Spark</strong></td>
+<td>🔬 公开预览</td>
+<td>用自然语言构建和部署全栈应用</td>
+</tr>
+<tr>
+<td><strong>Third-Party Agents</strong></td>
+<td>🔬 公开预览</td>
+<td>第三方 Agent（Claude Code、Codex 等）在 GitHub 安全框架内运行</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最具革命性的功能——Cloud Agent：</strong></p>
+<blockquote>
+<p>"An autonomous AI agent that can research a repository, create an implementation plan, and make code changes on a branch." —— <a href="https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features">GitHub Docs</a></p>
+</blockquote>
+<p>这意味着你可以在 GitHub 上给 AI 分配一个 Issue，它会：
+1. 自动研究仓库结构和相关代码
+2. 制定实现方案
+3. 创建 Branch 并编写代码
+4. 生成 Pull Request
+5. 你只需要 <strong>Review → Merge</strong></p>
+<h3 id="33-customization">3.3 定制化功能（Customization）</h3>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Copilot Spaces</strong></td>
+<td>组织代码、文档和规范作为 Copilot 的上下文</td>
+</tr>
+<tr>
+<td><strong>Custom Instructions</strong></td>
+<td>个性化偏好设定</td>
+</tr>
+<tr>
+<td><strong>Copilot Memory</strong> 🔬</td>
+<td>自动挖掘并存储仓库级信息供 Cloud Agent 使用</td>
+</tr>
+<tr>
+<td><strong>Prompt Files</strong></td>
+<td>可复用的 Markdown 提示指令</td>
+</tr>
+<tr>
+<td><strong>MCP Servers</strong></td>
+<td>连接外部工具和数据源</td>
+</tr>
+<tr>
+<td><strong>Agent Skills</strong></td>
+<td>专用任务的指令+脚本集合</td>
+</tr>
+<tr>
+<td><strong>Custom Agents</strong></td>
+<td>定制化的 Cloud Agent（特定工具+指令+MCP）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Copilot Spaces 值得特别关注</strong>——相比于一般的 AI 编程助手只看到当前文件，Spaces 让你的仓库级别的上下文变得一致。</p>
+<h3 id="34-businessenterprise">3.4 管理员功能（仅 Business/Enterprise）</h3>
+<p>组织所有者可以通过策略管理、访问控制、使用量分析、审计日志、文件排除等能力精细管控 Copilot 团队使用。</p>
+<blockquote>
+<p>🔗 完整功能详情：https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features</p>
+</blockquote>
+<hr />
+<h2 id="ide">四、支持的平台与 IDE</h2>
+<p>Copilot 的可及性远超竞品：</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>支持情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VS Code</strong></td>
+<td>✅ 全部功能（Chat + Agent Mode + NES）</td>
+</tr>
+<tr>
+<td><strong>Visual Studio</strong></td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td><strong>JetBrains IDEs</strong></td>
+<td>✅ Chat + 补全</td>
+</tr>
+<tr>
+<td><strong>Xcode</strong></td>
+<td>✅ 包括 Next Edit Suggestions</td>
+</tr>
+<tr>
+<td><strong>Neovim</strong></td>
+<td>✅ 基础补全</td>
+</tr>
+<tr>
+<td><strong>Eclipse</strong></td>
+<td>✅ 包括 NES</td>
+</tr>
+<tr>
+<td><strong>GitHub CLI</strong></td>
+<td>✅ Copilot CLI（终端 agent）</td>
+</tr>
+<tr>
+<td><strong>GitHub Mobile</strong></td>
+<td>✅ 聊天界面</td>
+</tr>
+<tr>
+<td><strong>Windows Terminal Canary</strong></td>
+<td>✅ Terminal Chat</td>
+</tr>
+<tr>
+<td><strong>Raycast / Zed / SSMS</strong></td>
+<td>✅ 基础集成</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔗 完整列表：https://docs.github.com/en/copilot/using-github-copilot</p>
+</blockquote>
+<hr />
+<h2 id="_3">五、官方数据与效果</h2>
+<p>GitHub 官方研究（2022-2025）显示：</p>
+<ul>
+<li>🚀 <strong>55% 更高的开发效率</strong>：完成相同任务的速度提升</li>
+<li>😊 <strong>75% 更高的工作满意度</strong>：开发者更专注在创造性的工作上</li>
+<li>💡 <strong>&lt; 1% 代码匹配</strong>：Copilot 生成代码与训练数据匹配率低于 1%（<a href="https://github.com/features/copilot#faq">官方声明</a>）</li>
+<li>🔒 Business/Enterprise 用户数据不用于模型训练</li>
+</ul>
+<blockquote>
+<p>"The product is called 'Copilot' not 'Autopilot' and it's not intended to generate code without oversight." —— GitHub Copilot 官方 FAQ</p>
+</blockquote>
+<hr />
+<h2 id="cursor">六、与 Cursor 的差异化对比</h2>
+<p>虽然这是 Copilot 的独立评测，但必须承认 Cursor 在某些场景仍然领先：</p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>Copilot</th>
+<th>Cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>多文件编辑</strong></td>
+<td>Agent Mode（新，尚在完善）</td>
+<td>Composer（成熟稳定）</td>
+</tr>
+<tr>
+<td><strong>模型选择</strong></td>
+<td>Haiku/GPT-5/Claude/Codex/Gemini</td>
+<td>Claude/GPT-4o，较少</td>
+</tr>
+<tr>
+<td><strong>IDE 独立性</strong></td>
+<td>覆盖 12+ 平台</td>
+<td>VS Code 分支</td>
+</tr>
+<tr>
+<td><strong>团队协作</strong></td>
+<td>GitHub 深度整合</td>
+<td>较弱</td>
+</tr>
+<tr>
+<td><strong>价格</strong></td>
+<td>$10-$39</td>
+<td>$20-$40</td>
+</tr>
+<tr>
+<td><strong>Code Review</strong></td>
+<td>内建（公开预览）</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>Cloud Agent</strong></td>
+<td>✅（Issues→PR 全流程）</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_4">七、适合谁用？</h2>
+<table>
+<thead>
+<tr>
+<th>用户类型</th>
+<th>推荐方案</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学生/初学者</td>
+<td><strong>Student (Free)</strong></td>
+<td>300 次/月，足够学习</td>
+</tr>
+<tr>
+<td>个人开发者（轻度）</td>
+<td><strong>Free</strong></td>
+<td>50 次/月尝鲜</td>
+</tr>
+<tr>
+<td>个人开发者（主力）</td>
+<td><strong>Pro $10</strong></td>
+<td>性价比最优</td>
+</tr>
+<tr>
+<td>AI 重度用户</td>
+<td><strong>Pro+ $39</strong></td>
+<td>全模型 + 1500次</td>
+</tr>
+<tr>
+<td>小团队（&lt;20人）</td>
+<td><strong>Business $19/人</strong></td>
+<td>集中管理</td>
+</tr>
+<tr>
+<td>大型企业</td>
+<td><strong>Enterprise $39/人</strong></td>
+<td>全功能 + 合规</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键决策因素</strong>：如果你团队已经深度使用 GitHub（PR、Issues、Actions），Copilot 的<strong>生态整合优势</strong>无可替代。Cloud Agent 能直接从 Issue 生成 PR，Code Review 在 PR 流程中无缝嵌入。</p>
+<hr />
+<h2 id="_5">八、局限性</h2>
+<ol>
+<li><strong>Agent Mode 尚未达到 Cursor Composer 的成熟度</strong>——跨文件编辑仍需人工核实</li>
+<li><strong>新用户注册暂停</strong>（2026年4月起）——如果还没 Copilot，可能暂时无法升级到 Pro/Pro+</li>
+<li><strong>自定义模型训练不支持</strong>——Enterprise版不支持"用自家代码训练专属模型"（这项能力被其他竞品宣传）</li>
+<li><strong>长篇代码生成质量不稳定</strong>——超过 200 行的函数偶尔出现逻辑断裂</li>
+</ol>
+<hr />
+<h2 id="_6">九、结论</h2>
+<p>2026 年的 GitHub Copilot 已经不仅仅是一个"Tab 补全工具"：</p>
+<ul>
+<li><strong>2022-2023</strong>：Copilot = 聪明的代码补全</li>
+<li><strong>2024</strong>：Copilot = 还能聊天的代码补全</li>
+<li><strong>2025-2026</strong>：Copilot = <strong>能在后台自动完成任务的 AI 开发队友</strong></li>
+</ul>
+<p>对于已经使用 GitHub 生态的团队，Copilot 是最自然的选择。Cloud Agent 和 Code Review 的加入，使得开发者可以把更多时间花在<strong>审查和决策</strong>上，而不是写重复代码。</p>
+<blockquote>
+<p>💡 <strong>一句话总结</strong>：如果你在 GitHub 上协作，选 Copilot；如果你追求极致的个人编码体验，试试 Cursor；预算为零？Copilot Free 足够。</p>
+</blockquote>
+<hr />
+<p><em>本文数据来源：</em>
+- <a href="https://docs.github.com/en/copilot/about-github-copilot/what-is-github-copilot">GitHub Copilot 官方文档</a>
+- <a href="https://docs.github.com/en/copilot/about-github-copilot/subscription-plans-for-github-copilot">GitHub Copilot 订阅计划</a>
+- <a href="https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features">GitHub Copilot 功能列表</a>
+- <a href="https://github.com/features/copilot#faq">GitHub Copilot FAQ</a></p>
+<p><em>最后更新：2026年5月16日</em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝百亿补贴专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E7%BC%96%E7%A8%8B&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="cta-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center;">
+  <h3 style="margin: 0 0 10px 0; color: #e94560; font-size: 18px;">🚀 立即体验 GitHub Copilot</h3>
+  <p style="color: #aaa; margin: 0 0 15px 0;">点击直达 GitHub Copilot 官方网站，获取最新定价与功能</p>
+  <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fgithub.com%2Ffeatures%2Fcopilot&platform=saas&article=github-copilot-2026-in-depth-review" target="_blank" rel="nofollow" style="display: inline-block; background: linear-gradient(135deg, #e94560, #0f3460); color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s;">👉 访问官方网站</a>
+  <p style="color: #555; font-size: 12px; margin-top: 12px;">💎 通过此链接注册可获得 $10/订阅</p>
+</div>
+
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的编程体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DDell%252520U2724D%2525204K%2525E6%252598%2525BE%2525E7%2525A4%2525BA%2525E5%252599%2525A8%2526enc%253Dutf-8&platform=jd&article=github-copilot-2026-in-depth-review" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">4K显示器 - Dell U2724D</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">程序员双屏标配，27寸4K，护眼不疲劳</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥2500-3500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DMacBook%2520Pro%2520M4%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=github-copilot-2026-in-depth-review" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发首选，M4芯片神经网络引擎极强</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥14000-19000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

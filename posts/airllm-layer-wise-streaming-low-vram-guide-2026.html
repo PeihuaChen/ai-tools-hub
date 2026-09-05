@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显存不够也能跑万亿参数模型：AirLLM 逐层流式加载原理与实战避坑指南</title>
+    <meta name="description" content="AirLLM 让 70B 模型跑在 4GB 显卡、671B 跑在 12GB、2.8T 跑在不到 4GB，且不做量化。本文拆解逐层流式加载与按专家流式的核心机制，讲清它的真实速度代价、适用场景，以及和量化路线的取舍。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">显存不够也能跑万亿参数模型：AirLLM 逐层流式加载原理与实战避坑指南</h1>
+            <div class="post-meta">
+                <span class="cat">技术解析</span>
+                <span>2026-08-05 · 15 分钟</span>
+            </div>
+            <p>一个数字先摆在这里：Llama 3 的 70B 模型，FP16 权重约 130GB。按常规做法，光是把它塞进显存，就得两张各 80GB 的 A100。可 AirLLM 说，你用一张 <strong>4GB</strong> 的显卡就能跑——不量化、不蒸馏、不剪枝，权重一个 bit 都不动。</p>
+<p>更离谱的是官方后来的数据：405B 的 Llama 3.1 跑在 8GB，671B 的 DeepSeek-V3 跑在约 12GB，而目前最大的开源模型 Kimi K3（2.8T 参数）在一张 RTX 6000 Ada 上端到端实测只占 <strong>3.72GB</strong> 显存。</p>
+<p>参数量涨了几百倍，显存却几乎没动。这不是魔法，也不是营销话术里那种"黑科技压缩"。它背后是一个朴素到近乎"作弊"的观察：Transformer 推理时，其实一次只需要一层。本文就来把这件事拆开讲清楚——它怎么做到的、代价是什么、什么时候该用、什么时候别用。</p>
+<h2 id="_1">先理解常规推理为什么这么吃显存</h2>
+<p>要看懂 AirLLM 的巧思，得先明白显存都花在哪了。跑一个大模型做推理，显存主要被三块吃掉：</p>
+<ul>
+<li><strong>模型权重本身</strong>：70B 模型 FP16 就是约 130GB，这是大头。</li>
+<li><strong>KV 缓存（KV cache）</strong>：自回归生成时，为避免重复计算，把每个 token 的 key/value 存下来。它随上下文长度和 batch 大小增长，长上下文场景下能吃掉几十 GB。</li>
+<li><strong>注意力计算的中间激活</strong>：注意力机制的显存需求随输入长度呈二次增长，序列一长就很可观。</li>
+</ul>
+<p>常规推理框架的默认前提是：<strong>整个模型必须同时驻留在显存里</strong>。因为下一秒要用哪层、哪个权重都不确定，索性全部装进去最省事。于是显存需求 ≈ 模型总大小，这就是"70B 必须几十上百 GB 显存"这条铁律的由来。</p>
+<p>AirLLM 做的事，就是把这条"必须全部驻留"的前提给拆了。</p>
+<h2 id="_2">核心机制一：逐层流式加载</h2>
+<p>Transformer 有一个常被忽略的结构性事实：<strong>它的层是严格顺序执行的</strong>。第 1 层的输出是第 2 层的输入，第 2 层的输出是第 3 层的输入……任意一个时刻，真正在做计算的只有一层，其余几十层都只是"排队等着"。</p>
+<p>既然如此，为什么要把所有层都放在显存里？AirLLM 的答案是：不放。</p>
+<p>它的流程是这样的：</p>
+<ul>
+<li>把当前要计算的这一层权重从磁盘加载进显存</li>
+<li>用它算出这一层的输出</li>
+<li><strong>算完立刻把这层权重从显存里释放掉</strong></li>
+<li>加载下一层，重复上述过程</li>
+</ul>
+<p>这样一来，任意时刻显存里只有"一层的权重 + 少量中间状态"。峰值显存不再取决于<strong>模型总大小</strong>，而是取决于<strong>单层的大小</strong>。</p>
+<p>这就是那个看似矛盾的数字的来源：70B 模型 FP16 精度下，单层权重大约 1.75GB，塞进 4GB 显卡绰绰有余。至于那 130GB 的完整模型？它一直躺在你的硬盘上，推理时一层一层地"流过"GPU，而不是一次性全部住进显存。</p>
+<p><img alt="AirLLM 逐层流式加载工作流：模型分片存在磁盘，一次只把一层权重加载进 4GB 显存，算完即释放，再加载下一层" src="../images/airllm-streaming-flow.png" /></p>
+<p>首次运行时，AirLLM 会先把原始模型按层"拆开"，以 safetensors 分片的形式保存到磁盘。这一步很吃磁盘空间（后面避坑部分会详细说），但只做一次，之后每次推理直接读分片。</p>
+<h2 id="moe">核心机制二：MoE 模型按专家流式</h2>
+<p>上面讲的是稠密（dense）模型的"逐层"。但 2026 年最大的那批开源模型——Qwen3-235B、DeepSeek-V3、Kimi K3——都是稀疏 MoE（Mixture of Experts）架构。这类模型每一层里有很多个"专家"子网络，但每个 token 实际上只会被路由到其中很少的几个专家。</p>
+<p>AirLLM 在 v3.0 之后针对 MoE 做了更细的处理：不是加载整层，而是<strong>只加载当前 token 真正路由到的那几个专家</strong>。</p>
+<p>这就解释了 Kimi K3 那个反直觉的数字：2.8T 参数的模型，为什么显存占用反而比 70B 稠密模型还低（不到 4GB）？因为对每个 token 来说，需要动用的专家权重非常少，一次流式加载的量比一整个稠密层还小。参数总量在这里几乎变成了一个"和显存无关"的数字——它只决定你需要多大的硬盘。</p>
+<p>如果你想更系统地理解 MoE 架构本身的取舍，可以参考我们之前写的 <a href="../posts/moe-post-training-acceleration-nemo-automodel-2026.html">MoE 训练后加速实践</a>。</p>
+<h2 id="_3">核心机制三：块级权重压缩（可选，且不是传统量化）</h2>
+<p>AirLLM 默认不压缩，保持原始精度。但它提供了一个可选的加速开关——<strong>块级（block-wise）权重压缩</strong>，宣称最高能带来 3 倍推理提速，精度损失几乎可忽略。</p>
+<p>这里有个容易混淆的点，作者也特意做了区分：<strong>它和常规量化不是一回事</strong>。</p>
+<ul>
+<li><strong>传统量化</strong>：为了真正提速，通常要同时量化权重和激活。这就得处理各种输入下的离群值（outlier），维持精度的难度更高。</li>
+<li><strong>AirLLM 的做法</strong>：因为它的瓶颈根本不在计算，而在磁盘加载速度，所以只需要让"加载的体积"变小就行。于是它<strong>只量化权重、不碰激活</strong>，精度更容易保住。</li>
+</ul>
+<p>启用也很简单，初始化时传一个参数：</p>
+<pre><code class="language-python">from airllm import AutoModel
+
+model = AutoModel.from_pretrained(
+    &quot;garage-bAInd/Platypus2-70B-instruct&quot;,
+    compression='4bit'  # 或 '8bit'，做块级量化以减小加载体积
+)
+</code></pre>
+<p>前提是装好 <code>bitsandbytes</code>。如果你对量化本身的取舍感兴趣，可以延伸阅读 <a href="../posts/1-bit-llm-quantization-guide-model-selection-2026.html">1-bit 量化选型指南</a>，那篇讲的是另一条"压精度换资源"的路线。</p>
+<h2 id="_4">最短上手路径</h2>
+<p>AirLLM 的接口刻意做得和普通 transformers 一模一样，一行 <code>AutoModel.from_pretrained</code> 自动识别模型类型，不用你手动指定模型类：</p>
+<pre><code class="language-python">from airllm import AutoModel
+
+MAX_LENGTH = 128
+
+# 传入 Hugging Face 仓库 ID，几乎所有主流模型都支持：
+model = AutoModel.from_pretrained(&quot;Qwen/Qwen3-32B&quot;)
+
+# 换更大的模型，还是同一行：
+# model = AutoModel.from_pretrained(&quot;Qwen/Qwen3-235B-A22B&quot;)   # 235B，约 3GB
+# model = AutoModel.from_pretrained(&quot;deepseek-ai/DeepSeek-V3&quot;) # 671B，约 12GB
+
+input_text = ['What is the capital of United States?']
+
+input_tokens = model.tokenizer(
+    input_text,
+    return_tensors=&quot;pt&quot;,
+    return_attention_mask=False,
+    truncation=True,
+    max_length=MAX_LENGTH,
+    padding=False
+)
+
+generation_output = model.generate(
+    input_tokens['input_ids'].cuda(),
+    max_new_tokens=20,
+    use_cache=True,
+    return_dict_in_generate=True
+)
+
+print(model.tokenizer.decode(generation_output.sequences[0]))
+</code></pre>
+<p>安装只需要 <code>pip install airllm</code>。支持的模型覆盖面很广：Llama 2/3/3.1/3.3/4、Qwen 全系（含 MoE 和 FP8）、DeepSeek V2/V3/R1、Mistral 与 Mixtral、Phi、Gemma、ChatGLM、Baichuan、InternLM、Yi。MacOS（Apple Silicon + mlx）和纯 CPU 推理也都支持。</p>
+<p>官方给出的显存对照表值得贴一下，它直观体现了"显存看单层不看总量"这个规律：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>规模</th>
+<th>所需显存</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3 / Mistral / Phi</td>
+<td>≈8B</td>
+<td>~1–2 GB</td>
+</tr>
+<tr>
+<td>Qwen3-30B / Mixtral (MoE)</td>
+<td>30–47B</td>
+<td>~1–3 GB</td>
+</tr>
+<tr>
+<td>Qwen3-235B (MoE)</td>
+<td>235B</td>
+<td>~3 GB</td>
+</tr>
+<tr>
+<td>Llama 3.x 70B（全精度）</td>
+<td>70B</td>
+<td>~4 GB</td>
+</tr>
+<tr>
+<td>Llama 3.1 405B</td>
+<td>405B</td>
+<td>~8 GB</td>
+</tr>
+<tr>
+<td>DeepSeek-V3</td>
+<td>671B</td>
+<td>~12 GB</td>
+</tr>
+<tr>
+<td>Kimi K3</td>
+<td>2.8T</td>
+<td>&lt;4 GB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">必须直面的代价：慢</h2>
+<p>到这里如果你已经跃跃欲试，先冷静一下。AirLLM 的本质是<strong>用磁盘 I/O 换显存</strong>，这个交换不是免费的。</p>
+<p>想想那个流程：每生成一个 token，都要把整个模型的所有层从磁盘依次读一遍、算一遍、放一遍。也就是说，<strong>每吐一个 token，都要把上百 GB 的权重从硬盘搬进显存</strong>。瓶颈根本不在 GPU 算力，而在磁盘到显存的传输带宽。</p>
+<p>真实速度数据是这样的：</p>
+<ul>
+<li>第三方评测显示，从"较快硬件上约 0.7 token/秒"到"慢机器上每个 token 要等好几分钟"不等。</li>
+<li>社区在 oobabooga 的 issue 里实测，用 Mistral-7B 生成单个 token 大约要 <strong>40 秒</strong>，并直言当前"不适合生产用途"。</li>
+</ul>
+<p>这个数量级意味着什么？一段几百字的回答，可能要等上几分钟甚至更久。所以它和 <a href="../posts/llm-inference-framework-comparison-2026.html">主流推理框架选型</a> 里那些追求高吞吐的方案（vLLM、TGI 等）根本不在一个赛道——后者是"多快好省地服务大量请求"，AirLLM 是"在本来跑不起来的机器上，让它至少能跑起来"。</p>
+<p>因为瓶颈在存储 I/O，<strong>用 NVMe SSD 还是机械硬盘，体验会有数量级的差别</strong>。想用 AirLLM，快速固态盘几乎是刚需。</p>
+<h2 id="airllm">AirLLM 该和谁比、什么时候用</h2>
+<p>"小显存跑大模型"其实有好几条路，取舍各不相同。下面这张图把主流的三条路放在一起对比：</p>
+<p><img alt="AirLLM、量化、多卡切分三种低显存方案对比：AirLLM 保精度换速度，量化压精度换速度，多卡切分靠堆硬件" src="../images/airllm-vs-alternatives.png" /></p>
+<p>简单说：</p>
+<ul>
+<li><strong>量化路线（如 GGUF Q4，配合 llama.cpp / Ollama）</strong>：把权重压到 4bit 甚至更低，显存和速度都改善，代价是<strong>精度有损</strong>。这是目前本地跑大模型最主流、体验最好的方案。</li>
+<li><strong>多卡 / 张量并行</strong>：靠堆显存硬解，速度快、精度全，但<strong>要花钱买卡</strong>。</li>
+<li><strong>AirLLM（逐层流式）</strong>：<strong>精度全保留、显存需求极低</strong>，代价是<strong>慢</strong>，且强依赖磁盘速度。</li>
+</ul>
+<p>所以 AirLLM 的甜区其实很清楚：</p>
+<ul>
+<li>手头只有一张小显存卡（甚至只有 CPU），但<strong>必须跑原始精度的大模型</strong>做研究、做实验、做精度对照</li>
+<li>离线批处理、不在乎延迟的场景（比如夜里跑一批评测、生成一批数据）</li>
+<li>学生 / 个人开发者想在自己的机器上"摸一摸"那些平时碰不到的超大模型</li>
+<li>想在正式上量化前，先用全精度版本建立一个精度基线</li>
+</ul>
+<p>反过来，如果你要做在线服务、要交互式对话、要吞吐量，那 AirLLM 不是你要的工具，老老实实上量化或多卡。关于本地 / 端侧部署的更多选择，可以看 <a href="../posts/on-device-llm-2026-gemma4-minicpm-qwen.html">端侧 LLM 2026 盘点</a> 和 <a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference 私有化推理实践</a>。</p>
+<h2 id="_6">实战避坑清单</h2>
+<p>从官方 FAQ 和社区反馈里，整理出几个最容易踩的坑：</p>
+<ul>
+<li><strong>磁盘空间要留足</strong>。首次运行会把模型按层拆开重存，这个过程极其消耗磁盘。最常见的报错 <code>MetadataIncompleteBuffer</code>（safetensors 反序列化失败）绝大多数就是磁盘满了导致的。解决办法是扩容、清理 Hugging Face 的 <code>.cache</code>，然后重跑。</li>
+<li><strong>磁盘不够又想省空间</strong>，初始化时设 <code>delete_original=True</code>，删掉原始下载的模型、只保留转换后的分层版本，能省掉约一半磁盘占用。</li>
+<li><strong>加载 Qwen / ChatGLM 报 <code>max() arg is an empty sequence</code></strong>，通常是误用了 Llama2 的类去加载。统一改用 <code>AutoModel.from_pretrained(...)</code> 自动识别即可。</li>
+<li><strong>门控模型（gated model）报 401</strong>，比如 Llama 系列，需要传 <code>hf_token='你的token'</code>。</li>
+<li><strong>tokenizer 没有 padding token 报错</strong>，把 <code>padding=False</code> 关掉填充即可。</li>
+<li><strong>想再快一点</strong>，默认已开启 prefetching（把"下一层加载"和"当前层计算"重叠，约 10% 提速）；再不够就叠加 <code>compression='4bit'</code> 的块级压缩。但要清醒：这些优化改变不了"慢"的基本盘。</li>
+<li><strong>Kimi K3 有额外依赖</strong>：需要 <code>pip install compressed-tensors flash-attn</code>、CUDA 12 版的 torch，以及 <code>transformers</code> 4.56.x（它的远程代码在 5.x 上加载不了）。</li>
+</ul>
+<h2 id="_7">小结</h2>
+<p>AirLLM 的价值，不在于它"快"——它很慢，慢到不能用于生产。它的价值在于<strong>把一条原以为是硬约束的边界，重新定义成了一个软约束</strong>：跑一个大模型需要多少显存，过去等于模型总大小，现在等于单层大小。</p>
+<p>这个转变背后的洞察其实很朴素：既然 Transformer 一次只算一层，那就一次只加载一层。稀疏 MoE 更进一步，一次只加载几个用得到的专家。于是参数量这个数字，从"显存的诅咒"变成了"只和硬盘容量有关"。</p>
+<p>它不会取代量化，也不会取代多卡。但它在"显存实在不够、又不想动精度"这个特定角落里，提供了一个别人给不了的选项——哪怕代价是你得泡杯咖啡，等它慢慢把权重从硬盘里一层层搬出来。对研究者、学生和预算有限的开发者来说，"能跑"本身，有时就已经足够。</p>
+<h2 id="_8">免责声明</h2>
+<p>本文所述性能数据（显存占用、token 速度等）来自官方文档与第三方评测，实际表现高度依赖你的磁盘速度、模型版本和硬件配置，可能与文中数字有明显出入。文中代码示例仅供参考，请以 AirLLM 官方仓库的最新文档为准。本文不构成任何投资或采购建议。</p>
+<h2 id="_9">参考来源</h2>
+<ul>
+<li><a href="https://github.com/lyogavin/airllm">AirLLM 官方 GitHub 仓库与 README</a></li>
+<li><a href="https://pypi.org/project/airllm/">AirLLM · PyPI</a></li>
+<li><a href="https://huggingface.co/blog/lyogavin/airllm">作者 Gavin Li 的 Hugging Face 博客：Run 70B LLM Inference on a Single 4GB GPU</a></li>
+<li><a href="https://github.com/oobabooga/text-generation-webui/issues/4754">社区实测与讨论：oobabooga/text-generation-webui issue #4754</a></li>
+<li><a href="https://nerdleveltech.com/airllm-run-70b-llm-single-4gb-gpu">第三方评测：AirLLM Tested — Run a 70B LLM on a 4GB GPU</a></li>
+<li><a href="https://dev.to/arshtechpro/airllm-runs-a-70b-model-on-a-4gb-gpu-its-true-and-thats-not-the-interesting-part-hha">深度分析：AirLLM Runs a 70B Model on a 4GB GPU</a></li>
+</ul>
+<h2 id="_10">延伸阅读</h2>
+<ul>
+<li><a href="../posts/on-device-llm-2026-gemma4-minicpm-qwen.html">端侧 LLM 2026 盘点：Gemma4、MiniCPM、Qwen</a></li>
+<li><a href="../posts/llm-inference-framework-comparison-2026.html">LLM 推理框架选型对比 2026</a></li>
+<li><a href="../posts/1-bit-llm-quantization-guide-model-selection-2026.html">1-bit 量化选型指南</a></li>
+<li><a href="../posts/moe-post-training-acceleration-nemo-automodel-2026.html">MoE 训练后加速实践</a></li>
+<li><a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference 私有化推理实践</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(A组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HgBm8rE" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝电脑办公精选</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91%E5%8A%9E%E5%85%AC&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=airllm-layer-wise-streaming-low-vram-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=airllm-layer-wise-streaming-low-vram-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="740" viewBox="0 0 1160 740">
+  <rect width="1160" height="740" fill="#ffffff"/>
+
+  <text x="48" y="52" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="bold" fill="#111827">OCR 方案选型决策路径：六类场景的落地边界</text>
+  <text x="48" y="80" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">先判断场景类型，再判断合规与量级约束，最后才看模型榜单</text>
+
+  <!-- root -->
+  <rect x="440" y="106" width="280" height="58" rx="10" fill="#f1f5f9" stroke="#111827" stroke-width="1.8"/>
+  <text x="580" y="132" font-family="Microsoft YaHei, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle">你的核心诉求是什么？</text>
+  <text x="580" y="152" font-family="Microsoft YaHei, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="middle">不是「哪个模型分最高」，而是「哪个结果能交付」</text>
+
+  <!-- connectors from root -->
+  <line x1="580" y1="164" x2="580" y2="188" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="152" y1="188" x2="1008" y2="188" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="152" y1="188" x2="152" y2="212" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="437" y1="188" x2="437" y2="212" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="723" y1="188" x2="723" y2="212" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="1008" y1="188" x2="1008" y2="212" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Branch 1: RAG -->
+  <rect x="48" y="212" width="208" height="188" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="152" y="238" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8" text-anchor="middle">知识库 / RAG 入库</text>
+  <line x1="66" y1="250" x2="238" y2="250" stroke="#1d4ed8" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="66" y="272" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">推荐</text>
+  <text x="66" y="292" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">MinerU / GLM-OCR 自建</text>
+  <text x="66" y="310" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">或 TextIn / LlamaParse</text>
+  <text x="66" y="336" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">边界</text>
+  <text x="66" y="356" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">纯文本 Word 与网页</text>
+  <text x="66" y="374" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">别上 VLM，走 Docling</text>
+  <text x="66" y="392" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">CPU 路径快一个量级</text>
+
+  <!-- Branch 2: 票据 -->
+  <rect x="333" y="212" width="208" height="188" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+  <text x="437" y="238" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b45309" text-anchor="middle">财务票据 / 单据自动化</text>
+  <line x1="351" y1="250" x2="523" y2="250" stroke="#b45309" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="351" y="272" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">推荐</text>
+  <text x="351" y="292" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">商业 IDP 平台</text>
+  <text x="351" y="310" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">Reducto / TextIn / 三大云</text>
+  <text x="351" y="336" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">边界</text>
+  <text x="351" y="356" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">版式固定且量大时，</text>
+  <text x="351" y="374" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">自建小模型 + 规则引擎</text>
+  <text x="351" y="392" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">反而更准更便宜</text>
+
+  <!-- Branch 3: 长文档 -->
+  <rect x="619" y="212" width="208" height="188" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="723" y="238" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#6d28d9" text-anchor="middle">长文档 / 合同 / 招股书</text>
+  <line x1="637" y1="250" x2="809" y2="250" stroke="#6d28d9" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="637" y="272" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9">推荐</text>
+  <text x="637" y="292" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">Unlimited-OCR（一次成型）</text>
+  <text x="637" y="310" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">或 Reducto（要 SLA）</text>
+  <text x="637" y="336" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">边界</text>
+  <text x="637" y="356" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">单份超过 100 页仍需</text>
+  <text x="637" y="374" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">分段策略，别指望一次</text>
+  <text x="637" y="392" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">前向解决一切</text>
+
+  <!-- Branch 4: 边端 -->
+  <rect x="904" y="212" width="208" height="188" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="1008" y="238" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#15803d" text-anchor="middle">移动端 / 边端实时</text>
+  <line x1="922" y1="250" x2="1094" y2="250" stroke="#15803d" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="922" y="272" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">推荐</text>
+  <text x="922" y="292" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">PP-OCRv6 tiny（1.5M）</text>
+  <text x="922" y="310" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">或 small（7.7M）</text>
+  <text x="922" y="336" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">边界</text>
+  <text x="922" y="356" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">tiny 档在复杂版面与</text>
+  <text x="922" y="374" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">手写上明显退化，只适</text>
+  <text x="922" y="392" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">合单行短文本固定版式</text>
+
+  <!-- second row connectors -->
+  <line x1="295" y1="424" x2="865" y2="424" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4"/>
+  <line x1="295" y1="424" x2="295" y2="448" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="865" y1="424" x2="865" y2="448" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Branch 5: 手写 -->
+  <rect x="191" y="448" width="208" height="164" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="295" y="474" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c" text-anchor="middle">手写体 / 历史档案</text>
+  <line x1="209" y1="486" x2="381" y2="486" stroke="#b91c1c" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="209" y="508" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">推荐</text>
+  <text x="209" y="528" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">先做 POC，别做假设</text>
+  <text x="209" y="546" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">专精厂商 + GLM-OCR 同测</text>
+  <text x="209" y="572" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">边界</text>
+  <text x="209" y="592" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">唯一建议多方案并行 +</text>
+  <text x="209" y="606" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">人工复核兜底的场景</text>
+
+  <!-- Branch 6: Agent -->
+  <rect x="761" y="448" width="208" height="164" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="865" y="474" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#0e7490" text-anchor="middle">Agent 工具链里的 OCR</text>
+  <line x1="779" y1="486" x2="951" y2="486" stroke="#0e7490" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="779" y="508" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#0e7490">推荐</text>
+  <text x="779" y="528" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">GLM-OCR（已有 Skill 封装）</text>
+  <text x="779" y="546" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">或 PaddleOCR（生态最广）</text>
+  <text x="779" y="572" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">边界</text>
+  <text x="779" y="592" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">要的是调用简单、部署轻、</text>
+  <text x="779" y="606" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">错误可控，不是极致精度</text>
+
+  <!-- center gate -->
+  <rect x="440" y="448" width="280" height="164" rx="10" fill="#f8fafc" stroke="#111827" stroke-width="1.5"/>
+  <text x="580" y="474" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">两道必过闸门（POC 之前）</text>
+  <line x1="458" y1="486" x2="702" y2="486" stroke="#111827" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="458" y="510" font-family="Microsoft YaHei, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c">1. 许可协议</text>
+  <text x="458" y="530" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">MinerU 是 AGPL，做 SaaS 会被法务拦；</text>
+  <text x="458" y="548" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">PaddleOCR / Docling 为 Apache 2.0，</text>
+  <text x="458" y="566" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">Unlimited-OCR 为 MIT</text>
+  <text x="458" y="590" font-family="Microsoft YaHei, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c">2. 自建评测集</text>
+  <text x="458" y="606" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">200-500 页真实文档，按难度分层</text>
+
+  <!-- bottom callout -->
+  <rect x="48" y="636" width="1064" height="76" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.4"/>
+  <text x="72" y="664" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b45309">保持解析层可替换</text>
+  <text x="72" y="688" font-family="Microsoft YaHei, sans-serif" font-size="12.5" fill="#4b5563">2026 年上半年就出现了 DeepSeek-OCR、GLM-OCR、Unlimited-OCR、dots.mocr、Mistral OCR 4 五次重要发布。不要做重度定制。</text>
+  <text x="72" y="706" font-family="Microsoft YaHei, sans-serif" font-size="12.5" fill="#4b5563">把工程投入放在评测集、质检流程和业务规则上，这些才是不会被下个月新模型作废的资产。</text>
+</svg>

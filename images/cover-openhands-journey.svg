@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="33%" style="stop-color:#8b5cf6"/>
+      <stop offset="66%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="33%" style="stop-color:#06b6d4"/>
+      <stop offset="66%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#f97316"/>
+    </linearGradient>
+    <linearGradient id="subtitleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="40" x2="900" y2="40"/>
+    <line x1="0" y1="80" x2="900" y2="80"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="160" x2="900" y2="160"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="280" x2="900" y2="280"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="100" y1="0" x2="100" y2="383"/>
+    <line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/>
+    <line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+  <!-- Bottom accent bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label -->
+  <rect x="28" y="22" width="230" height="26" rx="4" fill="none" stroke="#f97316" stroke-width="1" opacity="0.85"/>
+  <text x="40" y="40" font-family="system-ui, sans-serif" font-size="12" fill="#f97316" font-weight="500">AI 行业观察 · 开源编程 Agent</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="18" width="40" height="28" rx="6" fill="none" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="860" y="37" font-family="system-ui, sans-serif" font-size="14" fill="#8b5cf6" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- Main title -->
+  <text x="40" y="92" font-family="system-ui, sans-serif" font-size="29" fill="#ffffff" font-weight="800">OpenHands 深度调研</text>
+  <text x="40" y="128" font-family="system-ui, sans-serif" font-size="26" fill="#ffffff" font-weight="800">从 OpenDevin 到 80K Star 的两年</text>
+
+  <!-- Subtitle -->
+  <text x="40" y="162" font-family="system-ui, sans-serif" font-size="18" fill="url(#subtitleGrad)" font-weight="500">一个致敬项目如何长成开源 Agent 平台</text>
+
+  <!-- Key highlights -->
+  <text x="40" y="202" font-family="system-ui, sans-serif" font-size="13" fill="#f97316">◆ GitHub 80K+ Stars · 900万+ 下载 · ICLR 2025 论文</text>
+  <text x="40" y="225" font-family="system-ui, sans-serif" font-size="13" fill="#06b6d4">◆ 累计融资 $23.8M · Madrona 领投 A 轮</text>
+  <text x="40" y="248" font-family="system-ui, sans-serif" font-size="13" fill="#22c55e">◆ SWE-bench Verified 72.8% · V0→V1 架构重写</text>
+
+  <!-- Right side: timeline illustration -->
+  <line x1="640" y1="200" x2="640" y2="320" stroke="#374151" stroke-width="1.5"/>
+  <circle cx="640" cy="200" r="5" fill="#f97316"/>
+  <text x="655" y="204" font-family="system-ui, sans-serif" font-size="10" fill="#e5e7eb">2024.03 OpenDevin</text>
+  <circle cx="640" cy="235" r="5" fill="#8b5cf6"/>
+  <text x="655" y="239" font-family="system-ui, sans-serif" font-size="10" fill="#e5e7eb">2024.08 改名 OpenHands</text>
+  <circle cx="640" cy="270" r="5" fill="#06b6d4"/>
+  <text x="655" y="274" font-family="system-ui, sans-serif" font-size="10" fill="#e5e7eb">2025.03 一周年 · ICLR</text>
+  <circle cx="640" cy="305" r="5" fill="#22c55e"/>
+  <text x="655" y="309" font-family="system-ui, sans-serif" font-size="10" fill="#e5e7eb">2025.11 A轮 $18.8M</text>
+
+  <!-- Tags bar -->
+  <rect x="40" y="278" width="68" height="22" rx="11" fill="none" stroke="#f97316" stroke-width="0.8"/>
+  <text x="52" y="293" font-family="system-ui, sans-serif" font-size="10" fill="#fdba74">开源</text>
+  <rect x="118" y="278" width="90" height="22" rx="11" fill="none" stroke="#8b5cf6" stroke-width="0.8"/>
+  <text x="128" y="293" font-family="system-ui, sans-serif" font-size="10" fill="#c4b5fd">Agent SDK</text>
+  <rect x="218" y="278" width="88" height="22" rx="11" fill="none" stroke="#06b6d4" stroke-width="0.8"/>
+  <text x="228" y="293" font-family="system-ui, sans-serif" font-size="10" fill="#67e8f9">SWE-bench</text>
+  <rect x="316" y="278" width="88" height="22" rx="11" fill="none" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="326" y="293" font-family="system-ui, sans-serif" font-size="10" fill="#86efac">模型无关</text>
+
+  <!-- Bottom divider -->
+  <line x1="40" y1="335" x2="860" y2="335" stroke="#374151" stroke-width="0.5"/>
+
+  <!-- Bottom text -->
+  <text x="40" y="356" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">全文 16 分钟 · 起源 + 融资 + 架构演进 + 横向对比</text>
+  <text x="750" y="356" font-family="system-ui, sans-serif" font-size="10" fill="#4b5563" opacity="0.6">xiaoi.ai</text>
+</svg>

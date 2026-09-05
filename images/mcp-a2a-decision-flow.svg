@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="500" viewBox="0 0 700 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#3a7bd5"/>
+    </marker>
+  </defs>
+  <rect width="700" height="500" fill="url(#bg)" rx="8"/>
+  <text x="350" y="30" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">实战选型决策流程</text>
+  <line x1="200" y1="42" x2="500" y2="42" stroke="#3a7bd5" stroke-width="1" opacity="0.5"/>
+  <rect x="275" y="60" width="150" height="40" rx="8" fill="#0a2a4a" stroke="#00d2ff" stroke-width="1.5" opacity="0.8"/>
+  <text x="350" y="85" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="13" fill="#00d2ff" text-anchor="middle">你的 Agent 需要什么？</text>
+  <line x1="350" y1="100" x2="190" y2="135" stroke="#3a7bd5" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="350" y1="100" x2="510" y2="135" stroke="#3a7bd5" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="240" y="120" font-family="Arial,sans-serif" font-size="10" fill="#666" text-anchor="middle">接入工具</text>
+  <text x="460" y="120" font-family="Arial,sans-serif" font-size="10" fill="#666" text-anchor="middle">Agent间协作</text>
+  <rect x="80" y="140" width="220" height="55" rx="8" fill="#0a2a4a" stroke="#00d2ff" stroke-width="1.5" opacity="0.8"/>
+  <text x="190" y="162" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="12" fill="#00d2ff" text-anchor="middle">需要接入外部工具</text>
+  <text x="190" y="183" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">数据库 / API / 文件 / SaaS</text>
+  <line x1="190" y1="195" x2="190" y2="215" stroke="#3a7bd5" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="80" y="220" width="220" height="55" rx="8" fill="#0a3a1a" stroke="#00f260" stroke-width="1.5" opacity="0.8"/>
+  <text x="190" y="242" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="13" fill="#00f260" text-anchor="middle">简单：仅用 MCP</text>
+  <text x="190" y="263" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">构建 MCP Server，标准化接口</text>
+  <line x1="190" y1="275" x2="190" y2="305" stroke="#3a7bd5" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="80" y="310" width="220" height="70" rx="8" fill="#0a3a1a" stroke="#00f260" stroke-width="1" opacity="0.6"/>
+  <text x="190" y="332" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="12" fill="#00f260" text-anchor="middle">✓ MCP 足够</text>
+  <text x="190" y="352" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">成熟度高，生态丰富</text>
+  <text x="190" y="368" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">10000+ Server / 9700万月下载</text>
+  <rect x="400" y="140" width="220" height="55" rx="8" fill="#3a2a0a" stroke="#f7c948" stroke-width="1.5" opacity="0.8"/>
+  <text x="510" y="162" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="12" fill="#f7c948" text-anchor="middle">需要 Agent间协作</text>
+  <text x="510" y="183" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">多 Agent / 跨组织通信</text>
+  <line x1="510" y1="195" x2="510" y2="215" stroke="#3a7bd5" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="400" y="220" width="220" height="55" rx="8" fill="#3a2a0a" stroke="#f7c948" stroke-width="1.5" opacity="0.8"/>
+  <text x="510" y="242" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="13" fill="#f7c948" text-anchor="middle">简单：仅用 A2A</text>
+  <text x="510" y="263" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">Agent Card 发现 + Task 委派</text>
+  <line x1="510" y1="275" x2="510" y2="305" stroke="#3a7bd5" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="400" y="310" width="220" height="70" rx="8" fill="#3a2a0a" stroke="#f7c948" stroke-width="1" opacity="0.6"/>
+  <text x="510" y="332" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="12" fill="#f7c948" text-anchor="middle">✓ A2A 足够</text>
+  <text x="510" y="352" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">v1.0 / 150+ 组织支持</text>
+  <text x="510" y="368" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">三大云厂商原生集成</text>
+  <line x1="300" y1="345" x2="300" y2="380" stroke="#3a7bd5" stroke-width="0.8" marker-end="url(#arr)" opacity="0.4"/>
+  <line x1="510" y1="345" x2="400" y2="380" stroke="#3a7bd5" stroke-width="0.8" marker-end="url(#arr)" opacity="0.4"/>
+  <line x1="350" y1="380" x2="350" y2="410" stroke="#ff6b35" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="300" y="370" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ff6b35" text-anchor="middle">两者都需？</text>
+  <rect x="215" y="415" width="270" height="60" rx="8" fill="#4a1a0a" stroke="#ff6b35" stroke-width="2" opacity="0.8"/>
+  <text x="350" y="438" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#ff6b35" text-anchor="middle">组合 MCP + A2A</text>
+  <text x="350" y="458" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc" text-anchor="middle">内部 MCP 调工具 + 外部 A2A 通信</text>
+  <text x="350" y="472" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc" text-anchor="middle">生产级多 Agent 系统标配</text>
+  <text x="350" y="495" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">核心原则：先 MCP 后 A2A，两者兼得是王道</text>
+</svg>

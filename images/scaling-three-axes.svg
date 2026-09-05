@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="ax-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0f1f"/><stop offset="1" stop-color="#15193a"/></linearGradient>
+    <linearGradient id="c1" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+    <linearGradient id="c2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6d28d9"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+    <linearGradient id="c3" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#be185d"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+    <pattern id="g3" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="860" height="380" rx="12" fill="url(#ax-bg)"/>
+  <rect width="860" height="380" rx="12" fill="url(#g3)"/>
+  <rect x="1" y="1" width="858" height="378" rx="12" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="430" y="42" fill="#ffffff" font-size="22" font-weight="700" text-anchor="middle">三条 Scaling Law：从一条主轴到多轴并行</text>
+  <text x="430" y="68" fill="#94a3b8" font-size="14" text-anchor="middle">黄仁勋框架：预训练 · 后训练 · 推理时扩展</text>
+
+  <!-- axes -->
+  <g transform="translate(80,300)">
+    <line x1="0" y1="0" x2="700" y2="0" stroke="#475569" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="0" y2="-210" stroke="#475569" stroke-width="1.5"/>
+    <text x="350" y="40" fill="#64748b" font-size="12" text-anchor="middle">投入算力 →</text>
+    <text x="-30" y="-100" fill="#64748b" font-size="12" text-anchor="middle" transform="rotate(-90 -30 -100)">能力 →</text>
+
+    <!-- pretraining curve: flattening -->
+    <path d="M0 -10 C 80 -110, 150 -150, 230 -158 C 300 -164, 360 -166, 430 -167" fill="none" stroke="url(#c1)" stroke-width="3.5"/>
+    <circle cx="430" cy="-167" r="4" fill="#60a5fa"/>
+    <text x="445" y="-160" fill="#93c5fd" font-size="13" font-weight="600">预训练（趋于平缓）</text>
+
+    <!-- post-training curve -->
+    <path d="M230 -158 C 320 -180, 400 -195, 500 -200" fill="none" stroke="url(#c2)" stroke-width="3.5" stroke-dasharray="2 0"/>
+    <circle cx="500" cy="-200" r="4" fill="#a78bfa"/>
+    <text x="430" y="-210" fill="#c4b5fd" font-size="13" font-weight="600">后训练 / RL</text>
+
+    <!-- test-time curve still rising -->
+    <path d="M430 -167 C 520 -200, 600 -230, 690 -205" fill="none" stroke="url(#c3)" stroke-width="3.5"/>
+    <circle cx="690" cy="-205" r="4" fill="#f472b6"/>
+    <text x="560" y="-185" fill="#f9a8d4" font-size="13" font-weight="600">推理时计算（新增量）</text>
+  </g>
+
+  <text x="430" y="362" fill="#64748b" font-size="12" text-anchor="middle">预训练红利递减，新轴线接力——没有任何单一轴能独自抵达 AGI</text>
+</svg>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当 Agent 拥有自己的密钥对：Block 的 Buzz 如何重新定义"团队协作"</title>
+    <meta name="description" content="深度拆解 Block 开源的 Buzz——基于 Nostr 协议的人机协作工作空间。Agent 不再是 Bot，而是拥有密钥对、审计记录和频道成员资格的正式队友。含架构解析、国内自托管方案和竞品对比。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">当 Agent 拥有自己的密钥对：Block 的 Buzz 如何重新定义"团队协作"</h1>
+            <div class="post-meta">
+                <span class="cat">AI 工具</span>
+                <span>2026-08-12 · 16 分钟</span>
+            </div>
+            <p>2026 年 7 月 21 日，Jack Dorsey 的 Block 公司（原 Square）开源了一个名为 Buzz 的项目。三周内，GitHub 星标突破 26,000，Fork 超过 3,200。112 个 Release 版本密集迭代，101 位贡献者（包括 Claude 的 GitHub 账号——没看错，AI Agent 也在给这个项目提 PR）。</p>
+<p>这不是又一个 Slack 克隆。Buzz 的核心假设只有一句话：<strong>如果 AI Agent 和人类在同一个工作空间里拥有相同的密码学身份、相同的审计记录、相同的操作权限，团队协作会变成什么样？</strong></p>
+<h2 id="_1">一句话定位</h2>
+<p>Buzz 是一个<strong>自托管的团队工作空间</strong>，底层基于 Nostr 协议。它把频道聊天、Git 代码托管、自动化工作流和 AI Agent 协作统一在一个事件日志里。每条消息——无论来自人还是 Agent——都是一个密码学签名事件。</p>
+<p>如果你用过 Slack + GitHub + CI/CD + Bot 框架这套组合，Buzz 想用一个 relay 把它们全替掉。</p>
+<h2 id="nostr">为什么用 Nostr？</h2>
+<p>要理解 Buzz 的设计决策，先花 30 秒理解 Nostr。</p>
+<p>Nostr（Notes and Other Stuff Transmitted by Relays）是一个去中心化通信协议，核心只有两件事：</p>
+<ol>
+<li><strong>身份 = 密钥对</strong>：你的身份是一对公私钥（secp256k1 曲线，和比特币一样）。没有注册、没有邮箱、没有中心化账号系统。</li>
+<li><strong>消息 = 签名事件</strong>：所有内容（文字、反应、文件、Git patch）都是一个 JSON 事件，用私钥签名后发布到 relay。任何人拿到公钥就能验证"这条消息确实是这个身份发出的"。</li>
+</ol>
+<p>Buzz 在 Nostr 之上做了一件关键的事：<strong>把 AI Agent 视为和人类一样的 Nostr 身份</strong>。Agent 有自己的密钥对，用自己的私钥签署每一个操作。这意味着：</p>
+<ul>
+<li>你能以密码学证据证明"这段代码是 Agent A 写的，不是人类 B"</li>
+<li>Agent 的权限通过频道成员资格控制，和限制一个新同事的访问范围一模一样</li>
+<li>六个月后回查审计日志，Agent 的每一步都有签名可追溯</li>
+</ul>
+<p>这不是 Slack 里给 Bot 分配一个 token——token 可以泄露、共享、被冒用。密钥对不行。</p>
+<p><img alt="Bot Token 与 Agent 密钥对的身份模型对比" src="../images/buzz-block-identity.png" /></p>
+<p>差别不在功能多少，而在信任的根基在哪里：Bot Token 回答的是"平台允许它做什么"，密钥对回答的是"这件事究竟是谁做的"。当团队里同时跑着五个以上 Agent，后者才撑得住责任归属和合规审计。</p>
+<h2 id="_2">核心能力拆解</h2>
+<h3 id="1-dm">1. 频道、线程、DM、语音——完整通信层</h3>
+<p>Buzz 的日常体验和 Slack 相似：频道列表在左侧栏，支持线程回复、Emoji 反应、私信、语音 Huddle、媒体共享和画布（Canvas）。差别在于这些全是 Nostr 签名事件，存在你自己的 relay 里。</p>
+<h3 id="2-git-nip-34">2. 内置 Git 托管（NIP-34）</h3>
+<p>Buzz 直接在 relay 里托管 Git 仓库。代码变更以 NIP-34 Patch 事件的形式发布——和聊天消息在同一个事件流里。这意味着：</p>
+<ul>
+<li>开一个 feature branch，Buzz 自动创建一个对应频道</li>
+<li>Patch 落入频道，CI 结果也落入频道</li>
+<li>Agent 做 code review，评论落入频道</li>
+<li>合并决策和证据都在同一个地方</li>
+</ul>
+<p>"Branch as Room"——这是 Buzz 最独特的工作流。代码审查不再是"去另一个 Tab 看 PR"，而是"在对话里看到 patch，直接反应"。</p>
+<p><img alt="Branch as Room：从割裂工具链到统一签名事件流" src="../images/buzz-block-event-stream.png" /></p>
+<p>传统工具链里，同一个分支的上下文散落在聊天、代码托管、CI、看板、Bot 五个系统中，每个系统一套身份、一份历史。Buzz 把这些全部收敛成同一种签名事件，按时间排在一个频道里——讨论、patch、CI 结果、Agent 审查、审批合并，前后相邻。</p>
+<h3 id="3-agent">3. Agent 即成员</h3>
+<p>在 Buzz 里添加一个 Agent 的体验和添加一个人类同事一样：邀请进频道，设置权限范围。Agent 能做的事包括：</p>
+<ul>
+<li>在频道里发消息、回答问题</li>
+<li>搜索六个月历史记录，给出带出处的回答</li>
+<li>提交代码 patch、运行 code review</li>
+<li>创建频道、编辑画布</li>
+<li>编排其他 Agent</li>
+<li>参加语音 huddle</li>
+<li>触发和执行自动化工作流</li>
+</ul>
+<p>支持的 Agent 框架（通过 Agent Client Protocol / ACP 适配）：</p>
+<ul>
+<li>Claude Code</li>
+<li>OpenAI Codex</li>
+<li>Goose（Block 自己的开源 Agent 框架）</li>
+<li>任何支持 ACP 协议的 Agent</li>
+</ul>
+<p>模型可换、框架可换，但项目的身份、权限和历史记录不变。</p>
+<h3 id="4-yaml">4. YAML 工作流自动化</h3>
+<p>Buzz 内置工作流引擎，用 YAML 定义触发器和动作：</p>
+<ul>
+<li>消息触发（某人在频道里说了什么）</li>
+<li>反应触发（收到 👍 就执行下一步）</li>
+<li>定时触发（Cron 表达式）</li>
+<li>Webhook 触发</li>
+</ul>
+<p>典型场景：打 tag → Agent 读取合并的 PR → 自动起草 Release Notes → 发到频道等人审核 → 收到 👍 → 自动发布。每一步都有签名、可搜索、可审计。</p>
+<h3 id="5">5. 全文搜索</h3>
+<p>所有事件（消息、代码、工作流、审批记录）进入同一个 PostgreSQL 全文搜索索引。"我们之前遇到过这个错误吗？"——Agent 会搜六个月的历史，贴出相关线程。</p>
+<h2 id="rust">架构：一个 Rust 二进制搞定一切</h2>
+<p><img alt="Buzz 架构：客户端层、buzz-relay 与三个依赖服务" src="../images/buzz-block-architecture.png" /></p>
+<p>Buzz 的部署形态比想象的简单：一个 Rust 二进制（buzz-relay）同时承载 WebSocket 中继、REST API 和 Web UI，对外只暴露 3000 一个端口。它下面挂三个标准依赖——PostgreSQL 存事件和搜索索引，Redis 做实时广播，S3 兼容存储放媒体和 Git 对象。</p>
+<p>关键数据：</p>
+<ul>
+<li><strong>技术栈</strong>：Rust 46.8% + TypeScript 32.9% + Dart 8.9%（移动端 Flutter）</li>
+<li><strong>Relay 依赖</strong>：PostgreSQL（事件存储 + FTS 搜索）、Redis（pub/sub + 在线状态）、S3 兼容存储（MinIO 即可）</li>
+<li><strong>硬件要求</strong>：2 核 CPU + 4GB RAM 即可运行</li>
+<li><strong>客户端</strong>：桌面端（Tauri，macOS/Linux/Windows）、移动端（iOS + Android，Flutter）、Web 端（仓库浏览器）</li>
+<li><strong>协议端口</strong>：单端口 3000 承载 WebSocket + REST</li>
+</ul>
+<p>所有数据存在你的 relay 里。Block 不运行任何中心化服务器。你的消息、代码、Agent 记录，全在你控制的基础设施上。</p>
+<h2 id="slack">国内部署：比 Slack 更适合</h2>
+<p>Slack 被墙。Buzz 是自托管——没有这个问题。</p>
+<h3 id="_3">部署路径</h3>
+<pre><code class="language-bash"># 克隆仓库
+git clone https://github.com/block/buzz.git &amp;&amp; cd buzz
+
+# 启动依赖服务（Postgres + Redis + MinIO）
+docker compose up -d
+
+# 编译并启动 relay（需要 Rust 1.88+）
+just setup &amp;&amp; just build
+just relay   # ws://localhost:3000
+</code></pre>
+<p>或者一步到位用生产级 Docker Compose：</p>
+<pre><code class="language-bash">cd deploy/compose/
+docker compose up -d
+# 配合 Caddy/Nginx 反代 + TLS → wss://buzz.yourcompany.cn
+</code></pre>
+<h3 id="_4">国内注意事项</h3>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>问题</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拉取 Docker 镜像 <code>ghcr.io/block/buzz</code></td>
+<td>GitHub Container Registry 可能慢</td>
+<td>国内镜像加速或离线 <code>docker save/load</code></td>
+</tr>
+<tr>
+<td>桌面端下载</td>
+<td>GitHub Releases 偶尔不稳</td>
+<td>提前下载后内网分发</td>
+</tr>
+<tr>
+<td>Agent 调用 LLM</td>
+<td>OpenAI/Anthropic 需代理</td>
+<td>改用 DeepSeek、Qwen、Ollama 本地模型</td>
+</tr>
+<tr>
+<td>日常使用</td>
+<td>无任何外部依赖</td>
+<td>✅ 纯内网运行</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键优势</strong>：LLM 的选择和 Buzz 本身解耦。Agent 通过 ACP 协议接入，底层模型随意换。国内团队完全可以用 DeepSeek-V3 或通义千问作为 Agent 的大脑，Buzz 只负责协作通信和身份管理。</p>
+<h2 id="_5">竞品对比</h2>
+<h3 id="_6">与通信平台对比</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Buzz</th>
+<th>Slack</th>
+<th>Zenzap</th>
+<th>Microsoft Teams</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开源</td>
+<td>✅ Apache 2.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>自托管</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>国内可用</td>
+<td>✅（自托管）</td>
+<td>❌（被墙）</td>
+<td>✅（SaaS）</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Agent 身份</td>
+<td>密钥对签名</td>
+<td>Bot token</td>
+<td>内置预设</td>
+<td>Bot Framework</td>
+</tr>
+<tr>
+<td>内置 Git</td>
+<td>✅ NIP-34</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>数据主权</td>
+<td>完全自控</td>
+<td>美国</td>
+<td>第三方</td>
+<td>微软租户</td>
+</tr>
+<tr>
+<td>Agent 支持</td>
+<td>Claude Code/Codex/Goose/ACP</td>
+<td>Agentforce 集成</td>
+<td>内置 Agent</td>
+<td>Copilot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agent">与 Agent 管理平台对比</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Buzz</th>
+<th>Multica</th>
+<th>Dust.tt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心问题</td>
+<td>Agent 如何和人在同一个房间协作</td>
+<td>如何调度管理多个编码 Agent</td>
+<td>如何让 Agent 跨 SaaS 工具做事</td>
+</tr>
+<tr>
+<td>Agent 角色</td>
+<td>频道成员（和人平等）</td>
+<td>被分配任务的执行者</td>
+<td>跨工具的中间层</td>
+</tr>
+<tr>
+<td>通信能力</td>
+<td>频道/DM/语音/画布</td>
+<td>仅看板评论</td>
+<td>无（连接 Slack）</td>
+</tr>
+<tr>
+<td>Git 集成</td>
+<td>内置 Git 托管</td>
+<td>依赖外部</td>
+<td>依赖外部</td>
+</tr>
+<tr>
+<td>技能复用</td>
+<td>工作流 YAML</td>
+<td>Skill 向量存储</td>
+<td>Agent 模板</td>
+</tr>
+<tr>
+<td>适合场景</td>
+<td>工程团队日常协作</td>
+<td>多 Agent 批量任务调度</td>
+<td>企业跨部门知识工作</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：Multica 回答的是"谁来管 Agent"，Buzz 回答的是"Agent 在哪里和人一起工作"。它们是互补关系，不是竞品。</p>
+<h3 id="cloudflare-os">与 Cloudflare OS 对比</h3>
+<p>Cloudflare 在 2026 年 8 月发布的 Cloudflare OS 也是开源 AI 工作空间，但定位完全不同：</p>
+<ul>
+<li><strong>Cloudflare OS</strong>：面向非技术员工，浏览器里用 AI 造微应用。没有频道、没有 Git、没有通信。</li>
+<li><strong>Buzz</strong>：面向工程团队，频道聊天 + Git + Agent 全在一个事件流里。</li>
+</ul>
+<h2 id="_7">三个真实场景</h2>
+<h3 id="_8">场景一：事故响应记忆</h3>
+<p>凌晨 2 点，你在频道里打字："我们之前见过这个错误吗？"Agent 搜索六个月历史，贴出三条相关线程、根因分析和修复方案，然后问你要不要 page 上次负责的那位同事。整个过程——问题、搜索、证据、下一步——都在频道里，签名可查。</p>
+<h3 id="branch-as-room">场景二：Branch as Room</h3>
+<p>你推了一个 feature branch。Buzz 自动开了对应频道。Patch 以 NIP-34 事件落进来，CI 跑完结果也进来，Agent 跑了一轮 first-pass review 贴评论，你的同事对关键段落加了 emoji 反应。合并决策和理由都在同一个房间。</p>
+<h3 id="release">场景三：Release 自动起草</h3>
+<p>你打了一个 tag。YAML 工作流触发：Agent 读取从上次 tag 到现在的所有 merge commit → 从对应的项目频道提取讨论上下文 → 起草 Release Notes → 发到 #releases 频道等待审核 → 有人给了 👍 → 自动发布。每一步都签名，搜索即审计。</p>
+<h2 id="_9">当前局限</h2>
+<p>诚实列出：</p>
+<ul>
+<li><strong>Pre-1.0</strong>：Block 自己说"early stages"，桌面端 v0.5.x，功能还在快速迭代。不建议立刻把生产团队迁过来</li>
+<li><strong>Windows 桌面端未签名</strong>：SmartScreen 会拦截，需要手动放行</li>
+<li><strong>Agent 设置门槛</strong>：需要安装 buzz-cli + 配置 ACP 适配器，对非技术用户不友好</li>
+<li><strong>移动端功能不完整</strong>：iOS/Android 客户端是 Flutter 写的，部分功能（如 Agent 启动）只在桌面端可用</li>
+<li><strong>中文本地化缺失</strong>：UI 全英文，暂无国际化支持</li>
+<li><strong>社区生态早期</strong>：没有类似 Slack App Directory 的插件市场</li>
+</ul>
+<h2 id="_10">谁适合现在就试？</h2>
+<p><strong>适合</strong>：</p>
+<ul>
+<li>3-10 人技术团队，对 Slack 被墙或数据主权有焦虑</li>
+<li>已经在用 Claude Code / Codex / Goose 等 Agent 工具，想让 Agent 从"命令行工具"升级为"团队成员"</li>
+<li>对 Nostr 协议感兴趣，想看看去中心化身份在企业协作中能走多远</li>
+<li>喜欢折腾自托管基础设施的工程师</li>
+</ul>
+<p><strong>不适合</strong>：</p>
+<ul>
+<li>需要稳定商业产品、不想踩坑的团队（等 1.0 正式版）</li>
+<li>非技术团队（目前部署和 Agent 配置有门槛）</li>
+<li>需要大量第三方集成（CRM/财务/HR）的企业——Buzz 没有 Slack 那样的生态</li>
+</ul>
+<h2 id="_11">小结</h2>
+<p>Buzz 提出了一个清晰的赌注：<strong>当每条消息、每行代码、每个工作流步骤都是同一种签名事件，当 Agent 的身份不再是一个可泄露的 token 而是一个密钥对——团队协作的底层范式会改变。</strong></p>
+<p>这不是一个成熟产品的评测——它是 0.5.x 版本，Block 自己都说"not finished"。但 26,000+ Stars 和密集的 Release 节奏说明方向有共鸣。Rust 单二进制、自托管、Nostr 协议这套组合，让它天然适合国内团队：不过墙、数据自控、模型可换。</p>
+<p>如果你的团队已经有 Agent 在跑日常任务，Buzz 给了它们一个"家"——一个和人类同事一样被看见、被追踪、被信任的协作空间。不是发一条命令等结果，而是真的"在同一个房间里一起工作"。</p>
+<p>试试在 VPS 上 <code>docker compose up</code>，拉个 Agent 进来，发条消息看看它签名的样子。体验 30 分钟，你就知道它适不适合你的工作流。</p>
+<hr />
+<p><strong>免责声明</strong>：本文基于公开资料和社区实践整理，不构成任何投资或采购建议。Buzz 目前为 pre-1.0 版本，生产环境使用请自行评估风险。</p>
+<h2 id="_12">参考来源</h2>
+<ul>
+<li><a href="https://github.com/block/buzz">block/buzz - GitHub</a></li>
+<li><a href="https://engineering.block.xyz/blog/buzz">Block Engineering Blog: Buzz</a></li>
+<li><a href="https://engineering.block.xyz/blog/run-your-own-buzz-relay">Run your own Buzz relay - Block Engineering</a></li>
+<li><a href="https://4geeks.com/en/blog/ai-powered-learning/what-is-buzz-jack-dorsey-slack-alternative">What Is Buzz? Jack Dorsey's Open Source Slack Alternative - 4Geeks</a></li>
+<li><a href="https://www.techtimes.com/articles/321242/20260722/block-launches-buzz-open-source-workspace-where-ai-agents-sign-their-own-work.htm">Block Launches Buzz Open-Source Workspace - TechTimes</a></li>
+<li><a href="https://quasa.io/media/buzz-by-block-how-the-nostr-based-ai-workspace-works-for-beginners">Buzz: Nostr AI Workspace for Beginners - Quasa</a></li>
+<li><a href="https://yanxbt.substack.com/p/hermes-agent-buzz-by-jack-dorsey">Hermes Agent + Buzz - Substack</a></li>
+<li><a href="https://www.bitdoze.com/buzz-block-docker-setup/">Self-Host Buzz with Docker - Bitdoze</a></li>
+<li><a href="https://gist.github.com/mrx-arafat/5a16a85cdb8b23fbb6f9edaf8856f290">Buzz Self-Host Complete Guide - GitHub Gist</a></li>
+<li><a href="https://www.cnblogs.com/itech/p/22189002">Buzz：2 万 Star 的 Nostr 协作平台 - 博客园</a></li>
+</ul>
+<h2 id="_13">相关阅读</h2>
+<ul>
+<li><a href="../posts/multica-managed-agents-open-source-platform-2026.html">开源 Multica 全解析：Managed Agents 平台如何让编码 Agent 变成你的正式队友</a></li>
+<li><a href="../posts/hermes-agent-autoreason-deep-dive.html">hermes-agent 深度解析：AutoReason 自我进化</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 通信协议深度拆解</a></li>
+<li><a href="../posts/multi-agent-collaboration-framework-guide-2026.html">多 Agent 协作框架选型指南 2026</a></li>
+<li><a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent：ChatGPT 聊天已死？</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署实战手册</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=buzz-block-nostr-agent-workspace-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=buzz-block-nostr-agent-workspace-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

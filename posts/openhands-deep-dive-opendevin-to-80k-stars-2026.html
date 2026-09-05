@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenHands 深度调研：从 OpenDevin 到 80K Star 开源编程 Agent 的两年进化</title>
+    <meta name="description" content="OpenHands（原 OpenDevin）两年内从一个致敬 Devin 的开源项目，成长为 80K+ Star、$23.8M 融资的编程 Agent 平台。本文梳理其起源、融资、V0到V1的架构重构，以及与 Devin、Claude Code、OpenCode 的实力对比。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">OpenHands 深度调研：从 OpenDevin 到 80K Star 开源编程 Agent 的两年进化</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-08-14 · 19 分钟</span>
+            </div>
+            <p>2024 年 3 月 12 日，一个致敬闭源产品 Devin 的开源项目在 GitHub 上悄悄发布，名字叫 OpenDevin。两年后的今天，它改名为 OpenHands，累计拿到 GitHub 80,000+ Star、900 万+下载量，背后的公司 All Hands AI 完成了两轮融资，最新一轮是 2025 年 11 月由 Madrona 领投的 $1880 万美元 A 轮。它的核心团队论文登上了 ICLR 2025，它的 SDK 在 arXiv 上被拿来和 OpenAI、Anthropic、Google 三家的 Agent SDK 逐项对比。</p>
+<p>这不是一个靠营销堆出来的故事。OpenHands 的每一步演进——从命令行小工具到有沙箱执行、模型路由、安全分析器的完整 Agent 平台——都有对应的技术论文和架构重构记录可查。这篇文章按时间线拆解它是怎么走到今天的，再把它放进 Devin、Claude Code、OpenCode 这些同类产品中做实力对比，帮你判断它是否值得放进你的工具箱。</p>
+<h2 id="_1">起源：一个"致敬"项目的自我进化</h2>
+<p>OpenHands 的第一行代码来自 Qwen 团队的两位成员 Binyuan Hui 和 Junyang Lin。他们当时想做一个开源版的 Devin——Cognition AI 在 2024 年初推出的那个引发全网讨论的"AI 软件工程师"。项目最初起名 OpenDevin，意图很直白：把闭源 Devin 展示的能力，用开源的方式还原出来。</p>
+<p>项目发布后很快聚集起社区，CMU 教授 Graham Neubig、有开源公司产品/工程背景的 Robert Brennan，以及 UIUC 博士生 Xingyao Wang 相继加入核心贡献者行列。三人随后联合创立了 All Hands AI 公司，专门支撑项目的长期发展。2024 年 8 月，项目正式改名为 OpenHands——团队的解释是，项目的范围已经远超"复刻 Devin"，"OpenHands"这个名字既呼应了开源社区的开放姿态,也暗示"给开发者多一双手"的定位。项目 Logo 也换成了 🙌（双手举起庆祝）这个 emoji。</p>
+<p>2025 年 3 月，OpenHands 迎来一周年，团队公开的数据是：超过 50,000 GitHub Star、3,500+ 次提交、250+ 独立贡献者、每日数千次应用下载。同年，团队将 OpenHands 的系统设计整理成论文，发表在 ICLR 2025（国际学习表征会议）上，论文标题是《OpenHands: An Open Platform for AI Software Developers as Generalist Agents》，作者名单里能看到 UIUC、CMU、Yale、UC Berkeley、阿里巴巴等多个机构的名字——这本质上是一个学术圈和工业界共同驱动的项目。</p>
+<h2 id="madrona-a">两轮融资：从种子轮到 Madrona 领投的 A 轮</h2>
+<ul>
+<li>
+<p>2024 年 9 月，All Hands AI 完成 500 万美元种子轮融资，由 Menlo Ventures 领投，Pillar Companies、Betaworks、Rebellion 等跟投。这是项目改名后不久拿到的第一笔机构资金，用于把开源项目转化为可持续运营的公司。</p>
+</li>
+<li>
+<p>2025 年 11 月 18 日，All Hands AI 宣布完成 1880 万美元 A 轮融资，由 Madrona 领投，Menlo Ventures、Obvious Ventures、Fujitsu Ventures、Alumni Ventures 跟投。公司同时把总部信息更新为美国波士顿，融资新闻稿的标题直接点明用途：把开源云端编程 Agent 带进企业市场（"Bring Open-Source Cloud Coding Agents to Enterprises"）。</p>
+</li>
+</ul>
+<p>两轮相加，All Hands AI 累计融资约 $23.8M。对比同期其他编程 Agent 公司（Cognition 的 Devin 融资规模在数亿美元级别），OpenHands 走的是一条"轻资本、重社区"的路线——真正撑起它估值和影响力的,是开源社区贡献出的 Star 数、下载量和论文引用,而不是烧钱铺量。</p>
+<h2 id="_2">产品版图：从一个命令行工具到完整平台</h2>
+<p>两年时间里，OpenHands 的产品形态经历了明显的扩张。今天它至少包含这几层：</p>
+<ul>
+<li><strong>开源核心</strong>：MIT 协议，可自由自托管，这是项目的信任基础</li>
+<li><strong>Agent Canvas</strong>：本地优先的可视化工作台（Web GUI），可以运行 OpenHands 自身的 Agent，也可以通过 ACP（Agent Client Protocol）接入 Claude Code、OpenAI Codex、Gemini CLI 等第三方 Agent，统一管理</li>
+<li><strong>OpenHands Software Agent SDK</strong>：面向开发者的编程接口，支持从几行代码的最简 Agent，扩展到带自定义工具、内存管理的复杂 Agent</li>
+<li><strong>OpenHands Cloud</strong>：托管的云端沙箱执行环境，免去自己搭建 Docker/K8s 的成本</li>
+<li><strong>企业控制平面</strong>：RBAC、SAML 单点登录、审计日志、预算管控，支持部署到客户自己的 VPC 中</li>
+</ul>
+<p>从自动化场景来看，官方模板已经覆盖 Slack @提及监听、Linear 工单自动分类、Jira 事故分诊、GitHub PR 审查、CI 失败自动修复、安全漏洞修复等开箱即用的工作流。也就是说,今天的 OpenHands 已经不满足于"帮你写代码"，而是想成为软件开发生命周期（SDLC）里可以调度的自动化基础设施——这一点和团队自己的定位陈述一致："不只是帮助开发者写代码，而是运行软件生命周期中有意义的部分"。</p>
+<h2 id="v0-v1">架构进化：V0 到 V1 的一次彻底重写</h2>
+<p>如果只看表面的功能列表，容易低估 OpenHands 在工程上做的事情。2025 年 11 月发布的论文《The OpenHands Software Agent SDK: A Composable and Extensible Foundation for Production Agents》记录了一次完整的架构重写，从 V0 到 V1。</p>
+<p><strong>V0 的问题</strong>：最早的架构是单体仓库（monorepo），Agent 核心逻辑、评测代码、前后端应用全部耦合在一起。当时假设所有工具调用都必须在沙箱容器里执行，这个假设后来带来了连锁问题——一旦要支持本地直接执行（比如给 CLI 场景用），团队只能给 MCP（Model Context Protocol）和工具系统写一套本地专用的重复实现，绕开原有沙箱路径。配置系统同样在失控：140+ 个配置字段、15 个配置类、2800 行配置代码，不同入口（CLI、Web UI、GitHub App、SaaS）各自维护一套覆盖规则，同样的参数在不同入口跑出来的结果可能不一致。</p>
+<p><strong>V1 的四条设计原则</strong>：</p>
+<ul>
+<li><strong>沙箱可选，非强制</strong>：默认在同一进程内执行 Agent 和工具调用，符合 MCP 的设计假设；需要隔离时再透明切换到容器化沙箱</li>
+<li><strong>无状态为默认，状态只有一个真源</strong>：Agent、工具、LLM 全部设计为不可变的 Pydantic 模型，唯一可变的是 ConversationState 这个统一状态对象，支持确定性回放和长期恢复</li>
+<li><strong>严格的关注点分离</strong>：把 Agent 核心逻辑拆成独立的 SDK，CLI、Web UI、GitHub App 等下游应用作为共享库来消费，而不是各自复制逻辑</li>
+<li><strong>两层可组合性</strong>：部署层面拆成 SDK、Tools、Workspace、Agent Server 四个独立 Python 包；能力层面暴露类型化的组件模型，开发者可以声明式地扩展或替换工具、Agent</li>
+</ul>
+<p>四个包各司其职：<code>openhands.sdk</code> 提供核心抽象（Agent、Conversation、LLM、Tool、事件系统）；<code>openhands.tools</code> 是具体工具实现；<code>openhands.workspace</code> 提供 Docker、托管 API 等执行环境；<code>openhands.agent_server</code> 暴露 REST/WebSocket 接口用于远程执行。这套设计让同一份 Agent 代码可以"本地起步、随处部署"——从笔记本上的交互式调试，到切换一个 Workspace 类型就能扩展成容器化的多租户生产部署，中间不需要改动业务代码。</p>
+<p>论文里还系统对比了 OpenHands SDK 与 OpenAI Agents SDK、Claude Agent SDK、Google ADK 在 31 项特性上的差异，OpenHands 独有的能力包括：</p>
+<ul>
+<li>原生远程执行 + 安全沙箱（OpenAI 需要外部 Temporal 编排，Claude/Google 只支持本地执行）</li>
+<li>内置 REST+WebSocket 生产服务器（其他三家只是纯库，开发者要自己搭服务层）</li>
+<li>LLM 驱动的动作级安全分析器（给每个工具调用打风险等级：低/中/高，高风险动作会暂停等待人工确认）</li>
+<li>100+ 模型的模型无关多 LLM 路由（通过 LiteLLM），且对不支持原生 function calling 的模型也有兼容方案</li>
+<li>VNC 桌面、浏览器内 VSCode、内置 Chromium 浏览器三种交互式工作区访问方式，让 Agent 不再是"黑箱进程"</li>
+</ul>
+<p><img alt="OpenHands 从 OpenDevin 到 80K Star 的关键节点时间线" src="../images/openhands-journey-timeline.png" /></p>
+<h2 id="swe-bench-gaia">性能实力：SWE-bench 和 GAIA 上的数字</h2>
+<p>数字比叙事更有说服力。根据 2025 年 11 月的 SDK 论文，OpenHands Software Agent SDK 在两个标准学术基准上的表现：</p>
+<ul>
+<li><strong>SWE-Bench Verified</strong>（衡量 Agent 解决真实 GitHub issue 的能力）：Claude Sonnet 4.5 + 扩展思考模式下达到 <strong>72.8%</strong>，Claude Sonnet 4 为 68.0%，GPT-5（高推理强度）为 68.8%，开源模型 Qwen3 Coder 480B A35B 为 65.2%</li>
+<li><strong>GAIA</strong>（衡量 Agent 通用任务解决能力）：Claude Sonnet 4.5 达到 67.9%，GPT-5 为 62.4%，Qwen3 Coder 为 41.2%</li>
+</ul>
+<p>这些结果略优于此前的研究系统 OpenHands-Versa，验证了 V1 架构重构没有牺牲 Agent 能力,反而在保持研究级性能的同时获得了生产级的工程稳定性。</p>
+<p>团队还维护着一个独立的模型评测榜单 <strong>OpenHands Index</strong>，覆盖 issue 解决、从零构建应用、前端开发、软件测试、信息收集五类任务，同时统计成本和耗时。2026 年 5 月的更新显示：综合性价比上 Claude Opus 4.7 排名第一，GPT-5.5 紧随其后；DeepSeek-3.2-Thinker 用 1/10 的价格跑出了很有竞争力的成绩;响应速度上 Claude 和 GPT 系列凭借并行工具调用占优;软件测试类任务上 Claude 是断层式的第一,显示出很强的调试能力。这个榜单某种程度上也说明了 OpenHands 的一个战略定位——它不绑定任何单一模型厂商，而是把自己变成"哪个模型好用就接入哪个"的中立测试场。</p>
+<h2 id="openhands-agent">横向对比：OpenHands 在编程 Agent 生态中的位置</h2>
+<p>编程 Agent 赛道到 2026 年已经足够拥挤，有必要把 OpenHands 放进坐标系里看清楚它和谁在竞争、和谁互补。</p>
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>性质</th>
+<th>核心定位</th>
+<th>与 OpenHands 的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Devin / Devin Desktop</strong></td>
+<td>闭源，Cognition AI</td>
+<td>全自主云端 AI 软件工程师，任务从描述到 PR 全自动完成</td>
+<td>直接竞品，闭源对开源的正面对抗</td>
+</tr>
+<tr>
+<td><strong>Claude Code</strong></td>
+<td>闭源，Anthropic</td>
+<td>终端优先的交互式编程 Agent</td>
+<td>既是竞品也是被集成对象（可通过 ACP 接入 Agent Canvas）</td>
+</tr>
+<tr>
+<td><strong>OpenCode</strong></td>
+<td>开源，MIT</td>
+<td>终端优先的"内循环"交互式编码工具，75+ 模型供应商</td>
+<td>互补关系，OpenHands 官方博客将其定位为"内循环 vs 外循环"分工</td>
+</tr>
+<tr>
+<td><strong>OpenAI Agents SDK / Google ADK</strong></td>
+<td>半开源框架</td>
+<td>通用 Agent 编排框架,非专注软件工程</td>
+<td>技术对标对象，论文中逐项对比特性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vs Devin</strong>：Devin 的核心叙事是"全自主 AI 工程师"，走订阅制商业模式（Free / Pro $20 / Max $200 / Teams $80+$40 每席位 / Enterprise 定制）。2025 年底 Cognition 收购 Windsurf 并于 2026 年 6 月改名 Devin Desktop，进一步把 IDE 体验和自主 Agent 整合到同一账户体系下。OpenHands 走的是相反路线——核心永远开源可自托管，商业化只发生在企业治理层。选 Devin 意味着买断整套体验和支持,选 OpenHands 意味着自己承担部署成本但换来完全的代码和数据主权,这是本质的路线分歧,不是简单的功能对比。</p>
+<p><strong>vs Claude Code</strong>：Claude Code 是终端里跑的单一 Agent，深度绑定 Anthropic 自家模型（Claude Agent SDK 论文里明确写着"locked to Anthropic's Claude models only"）。OpenHands 则通过 LiteLLM 做到 100+ 模型自由切换，同时把 Claude Code 当作可以被 Agent Canvas 接入的"外部 Runtime"之一——你完全可以一边用 Claude Code 写代码,一边让它的会话被 OpenHands 平台统一记录和调度。二者不是完全的替代关系,更像是"引擎"和"车身"的关系。</p>
+<p><strong>vs OpenCode</strong>：这两个项目都是开源、MIT 协议、模型无关,但分工不同。OpenCode 定位是"终端里的交互式内循环"——你坐在键盘前，一步步和 Agent 对话式协作;OpenHands 定位是"外循环里的委托式工作"——Agent 拿到任务后独立读代码、改文件、跑测试、开 PR，不需要你实时盯着。OpenHands 官方博客甚至专门写过一篇《OpenCode vs OpenHands》的对比文章，结论是两者可以搭配使用:OpenHands 负责后台自动化并产出 PR，OpenCode 负责后续的本地调试和精修。如果你想了解更偏"团队协作管理"维度的选择，也可以参考我们之前写过的<a href="../posts/multica-managed-agents-open-source-platform-2026.html">开源 Multica 平台深度拆解</a>——它是坐在 OpenCode/Claude Code 之上的看板式协调层，和 OpenHands 面对的问题类似但解法不同。</p>
+<h2 id="_3">无法回避的风险案例</h2>
+<p>2025 年 4 月，《Wired》杂志报道称，一名为美国退伍军人事务部（VA）工作的顾问提议用 OpenHands 为该部门编写代码。报道中被采访的部门员工表达了明确担忧：在没有完成既定安全审查流程的情况下，让一个自主 Agent 接触涉及敏感系统和信息的代码仓库，风险敞口过大。</p>
+<p>这个案例值得单独拿出来说,因为它精准指出了所有"能自主读写代码、执行命令"的 Agent 平台都要面对的现实问题——技术上能做到自动化,不代表组织流程上已经准备好承接这种自动化。OpenHands 在企业层提供的 RBAC、审计日志、VPC 私有化部署,本质上就是在回应这类担忧,但工具本身解决不了流程和审批文化的问题,这需要使用方自己补齐。</p>
+<h2 id="openhands">谁适合用 OpenHands</h2>
+<p><strong>适合</strong>：</p>
+<ul>
+<li>需要模型自由切换、不想被单一厂商锁定的团队（100+ 模型通过 LiteLLM 接入）</li>
+<li>已经在用 Claude Code / Codex / Gemini CLI，想要一个统一工作台管理多个 Agent 会话的开发者</li>
+<li>需要把"外循环"自动化——工单分诊、PR 审查、CI 修复、安全漏洞修复——沉淀为可复用工作流的工程团队</li>
+<li>对数据主权敏感、需要自托管到自己 VPC 的企业</li>
+</ul>
+<p><strong>不太适合</strong>：</p>
+<ul>
+<li>只想要一个开箱即用、无需自己承担运维成本的全自主编程助手（更适合看 Devin 或 Claude Code）</li>
+<li>团队规模很小、日常只需要终端里交互式改代码,没有"批量任务外包给 Agent"的需求（更适合直接用 <a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode</a>）</li>
+<li>需要把多个 Agent 编排成看板任务、做技能沉淀管理的团队,可能更适合直接看 <a href="../posts/multica-managed-agents-open-source-platform-2026.html">Multica 这类协调层平台</a></li>
+</ul>
+<h2 id="_4">小结</h2>
+<p>OpenHands 两年走过的路径,是开源 AI 项目里少见的"技术叙事驱动商业化"的案例:先有致敬 Devin 的一行代码，再有社区聚拢起来的贡献者，再有支撑长期发展的公司和两轮融资，再有登上 ICLR 的系统论文，再有从 V0 到 V1 的彻底架构重写。80,000+ Star、900 万+下载量、72.8% 的 SWE-bench Verified 成绩,这些数字背后是持续两年的工程投入,不是一次性的营销爆发。</p>
+<p>对于正在纠结"该不该在编程工作流里引入 Agent 平台"的团队,OpenHands 提供的不是唯一答案,而是一个特定坐标——如果你在意模型自由、数据主权、以及把重复性工程工作外包给可审计的自动化流程，它值得放进候选清单;如果你只是想要一个立即能用、不操心运维的助手，闭源产品在体验打磨上目前仍有优势。选型的关键不是"哪个更强"，而是"你愿意用多少运维成本换多少控制权"。</p>
+<hr />
+<p><strong>免责声明</strong>：本文基于公开资料整理,不构成任何投资、采购或安全合规建议。涉及企业数据和敏感系统的 Agent 部署,请务必结合自身安全审查流程评估。</p>
+<h2 id="_5">参考来源</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/OpenHands">OpenHands - Wikipedia</a></li>
+<li><a href="https://www.openhands.dev/blog/one-year-of-openhands-a-journey-of-open-source-ai-development">One Year of OpenHands: A Journey of Open Source AI Development - OpenHands Blog</a></li>
+<li><a href="https://techcrunch.com/2024/09/05/all-hands-ai-raises-5m-to-build-open-source-agents-for-developers/">All Hands AI raises $5M to build open source agents for developers - TechCrunch</a></li>
+<li><a href="https://www.finsmes.com/2025/11/openhands-raises-18-8m-in-series-a-funding.html">OpenHands Raises $18.8M in Series A Funding - FinSMEs</a></li>
+<li><a href="https://arxiv.org/abs/2511.03690">The OpenHands Software Agent SDK: A Composable and Extensible Foundation for Production Agents - arXiv</a></li>
+<li><a href="https://www.openhands.dev/blog/openhands-index-3-months-out">The OpenHands Index: 3 Months Out - OpenHands Blog</a></li>
+<li><a href="https://www.wired.com/story/doge-department-of-veterans-affairs-ai/">Inside DOGE's AI Push at the Department of Veterans Affairs - Wired</a></li>
+<li><a href="https://www.openhands.dev/blog/opencode-vs-openhands">OpenCode vs OpenHands: AI Coding Agents Compared - OpenHands Blog</a></li>
+<li><a href="https://www.openhands.dev/">OpenHands 官网</a></li>
+</ul>
+<h2 id="_6">相关阅读</h2>
+<ul>
+<li><a href="../posts/multica-managed-agents-open-source-platform-2026.html">开源 Multica 全解析：Managed Agents 平台深度拆解</a></li>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 实战指南：免费 AI 编程 Agent</a></li>
+<li><a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">闭源 AI 编程工具横评 2026</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署实战手册</a></li>
+<li><a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性的隐藏成本</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding 的隐藏代价与安全风险</a></li>
+<li><a href="../posts/ohmypi-fork-ide-in-terminal-2026.html">oh-my-pi 深度调研</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 海尔净水选购会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpsSTO" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝开发工具专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=openhands-deep-dive-opendevin-to-80k-stars-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=openhands-deep-dive-opendevin-to-80k-stars-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

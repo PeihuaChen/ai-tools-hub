@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="660" viewBox="0 0 1160 660">
+  <defs>
+    <linearGradient id="lbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1160" height="660" fill="#ffffff"/>
+  <rect width="1160" height="660" fill="url(#lbg)"/>
+
+  <text x="48" y="52" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="bold" fill="#111827">OCR 技术栈四层结构：哪层在贬值，哪层在升值</text>
+  <text x="48" y="80" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">多数选型踩坑，起因是把四个不同层次的东西混在一起比价</text>
+
+  <!-- Layer 4 -->
+  <rect x="48" y="106" width="800" height="106" rx="12" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <rect x="48" y="106" width="8" height="106" rx="4" fill="#6d28d9"/>
+  <text x="76" y="138" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#6d28d9">第四层 · Agent 工作流</text>
+  <text x="76" y="164" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">自动派单、自动入账、自动生成对账差异报告。价值最高，最难标准化</text>
+  <text x="76" y="192" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表：Dify / RAGFlow / n8n / 自研业务编排</text>
+
+  <!-- Layer 3 -->
+  <rect x="48" y="228" width="800" height="106" rx="12" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="48" y="228" width="8" height="106" rx="4" fill="#b45309"/>
+  <text x="76" y="260" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#b45309">第三层 · 信息抽取与业务校验（IDP）</text>
+  <text x="76" y="286" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">输出业务字段 + 交叉校验：金额加总是否对得上、日期是否合法、印章是否齐全</text>
+  <text x="76" y="314" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表：Reducto / LandingAI ADE / 合合信息 TextIn / 三大云结构化抽取接口</text>
+
+  <!-- Layer 2 -->
+  <rect x="48" y="350" width="800" height="106" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="48" y="350" width="8" height="106" rx="4" fill="#1d4ed8"/>
+  <text x="76" y="382" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#1d4ed8">第二层 · 文档解析（2026 年的主战场）</text>
+  <text x="76" y="408" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">输出保留阅读顺序、表格行列、公式 LaTeX、图文关联的 Markdown / JSON</text>
+  <text x="76" y="436" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表：PaddleOCR-VL / GLM-OCR / MinerU / dots.ocr / Unlimited-OCR / Docling</text>
+
+  <!-- Layer 1 -->
+  <rect x="48" y="472" width="800" height="106" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <rect x="48" y="472" width="8" height="106" rx="4" fill="#15803d"/>
+  <text x="76" y="504" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#15803d">第一层 · OCR 引擎（已商品化）</text>
+  <text x="76" y="530" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">输入图片，输出文字与坐标。不关心这段文字是标题还是表格单元格</text>
+  <text x="76" y="558" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表：PP-OCRv6 / Tesseract / 三大云纯文本提取接口</text>
+
+  <!-- Right side value axis -->
+  <rect x="880" y="106" width="232" height="472" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="996" y="136" font-family="Microsoft YaHei, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle">市场信号（2026）</text>
+
+  <line x1="912" y1="156" x2="912" y2="548" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M907 156 L912 146 L917 156 Z" fill="#94a3b8"/>
+  <text x="928" y="176" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9">价值最高</text>
+
+  <rect x="928" y="196" width="168" height="72" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="942" y="218" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#b45309">IDP 市场</text>
+  <text x="942" y="238" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">2026 年 39 亿美元</text>
+  <text x="942" y="257" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#15803d">CAGR 33.8% ↑</text>
+
+  <rect x="928" y="288" width="168" height="72" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="942" y="310" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">解析层</text>
+  <text x="942" y="330" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">被开源迅速填平</text>
+  <text x="942" y="349" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">0.9B 模型已达商业水准</text>
+
+  <rect x="928" y="380" width="168" height="72" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="942" y="402" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#15803d">OCR 大盘</text>
+  <text x="942" y="422" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">2026 年 168-198 亿美元</text>
+  <text x="942" y="441" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">CAGR 13-17% →</text>
+
+  <rect x="928" y="472" width="168" height="60" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="942" y="494" font-family="Microsoft YaHei, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c">纯文本提取已趋零</text>
+  <text x="942" y="515" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">约 1.5 美元 / 千页</text>
+
+  <text x="48" y="618" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#111827">选型策略：不要在第一层花钱，不要在第二层做自研，把预算和人力压在第三第四层的业务逻辑上。</text>
+  <text x="48" y="642" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">数据来源：Grand View Research（OCR 与 IDP 市场报告，2026）；不同机构对 IDP 口径差异巨大，此处仅取趋势方向</text>
+</svg>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xinference部署与应用实战2026：一个平台搞定LLM+Embedding+Rerank的私有化推理</title>
+    <meta name="description" content="Xinference（Xorbits Inference）实战指南：从pip、Docker、K8s四种部署方式，到WebUI/CLI/Python三种调用方式，再到对接Dify/RAGFlow搭建私有化RAG知识库。一个OpenAI兼容平台统一管理LLM、Embedding、Rerank与多模态模型，附选型建议与避坑清">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Xinference部署与应用实战2026：一个平台搞定LLM+Embedding+Rerank的私有化推理</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-06-09 · 13 分钟</span>
+            </div>
+            <h2 id="xinference">一、为什么是 Xinference</h2>
+<p>如果你做过私有化大模型落地，大概率踩过这样的坑：用 vLLM 跑通了一个 LLM，结果发现 RAG 还需要 Embedding 模型，知识库召回质量差又得加 Rerank 模型，语音场景还要 ASR/TTS——于是你同时维护了三四套不同的推理服务，端口、显存、API 格式各不相同，运维直接崩溃。</p>
+<p><strong>Xinference（全称 Xorbits Inference）就是来解决这个问题的。</strong> 它由 Xprobe 团队开源，定位是一个<strong>大模型推理服务平台</strong>：用一个 OpenAI 兼容的 API，统一管理和服务各类开源模型。它最吸引人的一句话承诺是——<strong>在你的应用里只改一行代码（换掉 base_url），就能把 OpenAI GPT 替换成任意开源模型。</strong>（来源：<a href="https://github.com/xorbitsai/inference">Xinference GitHub</a>）</p>
+<p>要分清一个概念：<strong>Xinference 不是推理引擎，而是推理引擎之上的编排平台。</strong> vLLM、llama.cpp 这些是"引擎"，负责把单个模型跑得快；Xinference 把这些引擎封装在底层，对上提供统一的模型管理、API、WebUI 和集群能力。简单说：<strong>vLLM 让一个模型跑得快，Xinference 让一堆模型管得省心。</strong></p>
+<hr />
+<h2 id="vllm">二、核心能力：它到底比裸用 vLLM 强在哪</h2>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>一键部署</strong></td>
+<td>单条命令拉起内置的前沿开源模型，无需手写启动参数</td>
+</tr>
+<tr>
+<td><strong>全模型类型</strong></td>
+<td>不止 LLM，还涵盖 Embedding、Rerank、语音识别(ASR)、TTS、图像生成、多模态视觉模型</td>
+</tr>
+<tr>
+<td><strong>OpenAI 兼容 API</strong></td>
+<td>RESTful API 兼容 OpenAI（含 Function Calling），应用零成本迁移</td>
+</tr>
+<tr>
+<td><strong>多引擎可选</strong></td>
+<td>后端支持 vLLM、llama.cpp（自研 Xllamacpp 绑定）、Transformers、GGML、TensorRT 等</td>
+</tr>
+<tr>
+<td><strong>异构硬件</strong></td>
+<td>GPU / CPU / Apple Metal 都能跑，从笔记本到生产集群通吃</td>
+</tr>
+<tr>
+<td><strong>分布式部署</strong></td>
+<td>多机多卡集群、跨 worker 分布式推理、多副本共享 KV cache</td>
+</tr>
+<tr>
+<td><strong>多种接口</strong></td>
+<td>WebUI、CLI、Python 客户端、RPC 任你选</td>
+</tr>
+</tbody>
+</table>
+<p>官方给出的横向对比里，相比 FastChat、OpenLLM、RayLLM，Xinference 在 <strong>Embedding、Rerank、多模态、音频、图像、Function Calling、多节点集群</strong> 上覆盖最全。</p>
+<p>这正是它的核心差异化：<strong>搭一套 RAG 所需的全部模型（LLM + Embedding + Rerank），一个平台就够了。</strong></p>
+<hr />
+<h2 id="2026">三、2026 年的新进展</h2>
+<p>从官方近期动态看，Xinference 的演进方向和整个行业的"Agent 化"高度同步：</p>
+<ul>
+<li><strong>Agent 原生服务</strong>：集成自研 <code>Xagent</code>，支持动态规划、工具调用、自主多步推理，从"静态推理管道"升级为 Agent 能力。</li>
+<li><strong>Auto batch 自动批处理</strong>：并发请求自动合批，显著提升吞吐。</li>
+<li><strong>Xllamacpp</strong>：团队自研的 llama.cpp Python 绑定，支持 continuous batching，更适合生产环境。</li>
+<li><strong>分布式增强</strong>：多副本之间共享 KV cache，进一步省显存、提并发。</li>
+<li><strong>内置最新模型</strong>：DeepSeek V4、MiniMax-M2.7、GLM-5.1 / GLM-5、Qwen3.6 / Qwen-3.5、Gemma-4、Qwen3-TTS 等都已开箱支持。</li>
+<li><strong>三种版本</strong>：社区版（开源免费）、企业版、云版。</li>
+</ul>
+<hr />
+<h2 id="_1">四、部署实战：四种方式任选</h2>
+<h3 id="pip">方式一：pip 本地安装（最快上手）</h3>
+<pre><code class="language-bash"># 全量安装（包含各推理后端，体积较大）
+pip install &quot;xinference[all]&quot;
+
+# 启动本地实例，默认监听 9997 端口
+xinference-local
+</code></pre>
+<p><code>[all]</code> 会把所有后端依赖一起装上，适合快速体验。<strong>生产环境建议按需精简</strong>，比如只要 vLLM 后端：</p>
+<pre><code class="language-bash">pip install &quot;xinference[vllm]&quot;
+</code></pre>
+<h3 id="dockergpu">方式二：Docker（GPU 环境推荐）</h3>
+<p>前提：宿主机已安装 Docker、CUDA 和 NVIDIA Container Toolkit。</p>
+<pre><code class="language-bash">docker run --name xinference -d -p 9997:9997 \
+  -e XINFERENCE_HOME=/data \
+  -v /your/host/path:/data \
+  --gpus all \
+  xprobe/xinference:latest xinference-local -H 0.0.0.0
+</code></pre>
+<p>关键参数说明：
+- <code>-v /your/host/path:/data</code>：挂载宿主机目录做模型缓存持久化，<strong>避免容器重启后重复下载几十 GB 的模型</strong>
+- <code>--gpus all</code>：放开全部 GPU
+- <code>-H 0.0.0.0</code>：监听所有网卡，容器外才能访问</p>
+<h3 id="kuberneteshelm">方式三：Kubernetes（Helm，生产集群）</h3>
+<p>要求 K8s 集群已具备 GPU 支持：</p>
+<pre><code class="language-bash"># 添加 helm 仓库
+helm repo add xinference https://xorbitsai.github.io/xinference-helm-charts
+
+# 更新并查询可用版本
+helm repo update xinference
+helm search repo xinference/xinference --devel --versions
+
+# 安装
+helm install xinference xinference/xinference -n xinference --version 0.0.1-v&lt;版本号&gt;
+</code></pre>
+<h3 id="railway">方式四：云托管 / Railway 一键部署</h3>
+<p>不想自己折腾硬件的团队，可在 Railway 等平台一键拉起一个 OpenAI 兼容的推理服务，适合快速验证。</p>
+<blockquote>
+<p>⚠️ 安全提示：<code>-H 0.0.0.0</code> 会把服务暴露在所有网卡上，且 Xinference 默认不带鉴权。请勿直接暴露到公网——务必放在内网，或前置带认证的反向代理（如 Nginx + Token 校验），否则任何人都能调用你的算力和模型。</p>
+</blockquote>
+<hr />
+<h2 id="_2">五、三种调用方式</h2>
+<p>服务启动后，访问 <strong>WebUI（http://localhost:9997）</strong> 是最直观的入口：在界面里选择模型、配置引擎和参数、点击 launch 即可上线模型。</p>
+<p><img alt="Xinference WebUI「启动模型」界面：左侧导航可在启动模型、运行模型、集群信息间切换，主区域按语言/嵌入/重排序等分类展示内置模型卡片，单击 launch 即可上线" src="../images/xinference-webui-launch-models.png" /></p>
+<p><em>▲ Xinference WebUI 的「启动模型」页面：内置 DeepSeek-V3.2、GLM-4.6、Qwen3、gpt-oss、Qwen3-VL 等前沿模型，每张卡片标注了模型能力（chat / reasoning / vision / tools）、语言和上下文长度，无需手写启动参数即可一键拉起。</em></p>
+<h3 id="cli">CLI 方式</h3>
+<pre><code class="language-bash"># 启动一个模型
+xinference launch --model-name qwen3.6 --model-engine vllm --size-in-billions 7
+
+# 查看正在运行的模型
+xinference list
+</code></pre>
+<h3 id="python">Python 客户端方式</h3>
+<pre><code class="language-python">from xinference.client import Client
+
+client = Client(&quot;http://localhost:9997&quot;)
+
+# 启动模型，拿到 model_uid
+model_uid = client.launch_model(
+    model_name=&quot;qwen3.6&quot;,
+    model_engine=&quot;vllm&quot;,
+)
+
+# 对话
+model = client.get_model(model_uid)
+print(model.chat(
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;用一句话解释什么是 RAG&quot;}]
+))
+</code></pre>
+<p>Embedding 调用同样简单：</p>
+<pre><code class="language-python">emb_uid = client.launch_model(model_name=&quot;bge-m3&quot;, model_type=&quot;embedding&quot;)
+emb_model = client.get_model(emb_uid)
+emb_model.create_embedding(&quot;中国的首都是哪里？&quot;)
+</code></pre>
+<h3 id="openai">OpenAI 兼容方式（迁移成本最低）</h3>
+<p>这是 Xinference 最实用的能力——<strong>已有的 OpenAI 代码只改 base_url</strong>：</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url=&quot;http://localhost:9997/v1&quot;,
+    api_key=&quot;not-needed&quot;,  # 本地服务无需真实 key
+)
+
+resp = client.chat.completions.create(
+    model=&quot;qwen3.6&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;你好&quot;}],
+)
+print(resp.choices[0].message.content)
+</code></pre>
+<hr />
+<h2 id="rag">六、实战场景：搭一套私有化 RAG 知识库</h2>
+<p>这是 Xinference 最主流、最能体现价值的用法。一个 Xinference 实例同时部署 <strong>LLM + Embedding + Rerank</strong> 三件套，对接 Dify / FastGPT / RAGFlow / MaxKB，即可搭出数据不出内网的企业知识库。</p>
+<p>典型的模型组合：</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>推荐模型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生成（LLM）</td>
+<td>Qwen3.6 / DeepSeek V4 / GLM-5</td>
+<td>根据召回内容生成答案</td>
+</tr>
+<tr>
+<td>向量化（Embedding）</td>
+<td>bge-m3 / bge-large-zh</td>
+<td>把文档和问题转成向量</td>
+</tr>
+<tr>
+<td>重排序（Rerank）</td>
+<td>bge-reranker-v2-m3</td>
+<td>对召回结果精排，显著提升准确率</td>
+</tr>
+</tbody>
+</table>
+<p>落地步骤概览：
+1. 在 Xinference 中分别 launch 上述三个模型，各自获得一个 model_uid / 模型名
+2. 进入 Dify → 模型供应商 → 选择 <strong>Xinference</strong>，填入服务地址 <code>http://&lt;ip&gt;:9997</code> 和模型名
+3. 在 Dify 的知识库中，Embedding 选 bge-m3、Rerank 选 bge-reranker，对话应用的推理模型选 Qwen3.6
+4. 上传文档、构建知识库，即可得到一个全本地化的 RAG 问答系统</p>
+<blockquote>
+<p>很多团队最初只用 Xinference 跑 LLM，后来发现它真正不可替代的价值是<strong>把 Rerank 这种"配角模型"也一键管起来了</strong>——而 Rerank 恰恰是 RAG 召回质量的关键。</p>
+</blockquote>
+<p>其他常见场景：
+- <strong>替换 OpenAI API</strong>：应用改一行 base_url，GPT 换成开源模型，数据合规
+- <strong>多模态服务</strong>：ASR 语音转写、TTS 合成、文生图、视觉理解
+- <strong>接入 LangChain / LlamaIndex</strong>：作为本地模型 provider 嵌入 Agent / RAG 链路</p>
+<hr />
+<h2 id="_3">七、选型建议与避坑清单</h2>
+<h3 id="xinference_1">什么时候该选 Xinference</h3>
+<ul>
+<li>需要<strong>一站式</strong>管理多种类型模型，尤其是 RAG 的 LLM + Embedding + Rerank 组合</li>
+<li>要私有化部署、数据合规、从 OpenAI 平滑迁移</li>
+<li>希望有 WebUI 管理，不想纯命令行运维多个 vLLM 进程</li>
+</ul>
+<h3 id="vllm_1">什么时候直接用 vLLM 更合适</h3>
+<ul>
+<li>只跑<strong>单个 LLM</strong>、追求极致吞吐和最低延迟，不需要多模型管理和多模态</li>
+<li>这种情况下直接上 vLLM 更轻量，毕竟 Xinference 本质是在引擎之上加了一层编排</li>
+</ul>
+<h3 id="_4">避坑清单</h3>
+<ol>
+<li><strong>安装依赖重</strong>：<code>[all]</code> 体积很大，生产环境按需精简后端（如只装 <code>[vllm]</code>）</li>
+<li><strong>国内下载慢</strong>：配置 <strong>ModelScope（魔搭）镜像</strong> 作为模型源，避免 HuggingFace 网络问题。可设环境变量 <code>XINFERENCE_MODEL_SRC=modelscope</code></li>
+<li><strong>显存规划</strong>：同时跑 LLM + Embedding + Rerank 要预留好显存，多卡注意 tensor parallel 配置</li>
+<li><strong>不要裸奔公网</strong>：默认无鉴权，务必内网部署或前置带认证的反向代理</li>
+<li><strong>缓存要持久化</strong>：Docker 部署务必挂载 <code>-v</code> 卷，否则重启后几十 GB 模型重新下载</li>
+<li><strong>企业级特性需付费</strong>：高级集群管理等部分能力在企业版</li>
+</ol>
+<hr />
+<h2 id="_5">八、小结</h2>
+<p>Xinference 的定位非常清晰：<strong>它不跟 vLLM 抢"谁跑得更快"，而是解决"一堆不同类型的模型怎么统一管起来"的工程问题。</strong> 对于要做私有化 RAG、要数据合规、要平滑替换 OpenAI 的团队来说，它把原本散落的 LLM、Embedding、Rerank、多模态模型收进了一个 OpenAI 兼容的平台里，再配上 WebUI 和集群能力，工程效率提升是实打实的。</p>
+<p>如果你正在搭企业知识库，或者想把现有的 OpenAI 应用换成开源模型私有化部署，Xinference 值得作为推理服务层的第一选择去尝试。先用 <code>pip install "xinference[all]"</code> 在本地跑通一个 Qwen，再逐步扩展到 Embedding 和 Rerank，你会很快体会到"一个平台搞定全部模型"的顺畅。</p>
+<blockquote>
+<p>⚠️ 免责声明：本文为部署实战整理，命令与模型支持情况随版本更新可能变化，请以 <a href="https://inference.readthedocs.io/">Xinference 官方文档</a> 最新说明为准。</p>
+</blockquote>
+<hr />
+<h2 id="_6">参考来源</h2>
+<ol>
+<li>Xinference GitHub 官方仓库. https://github.com/xorbitsai/inference</li>
+<li>Xinference 官方文档. https://inference.readthedocs.io/en/latest/index.html</li>
+<li>Xinference Docker 部署文档. https://inference.readthedocs.io/en/latest/getting_started/using_docker_image.html</li>
+<li>Xinference PyPI. https://pypi.org/project/xinference/</li>
+<li>LangChain - Xorbits inference (Xinference) integrations. https://docs.langchain.com/oss/python/integrations/providers/xinference</li>
+<li>百度智能云, "如何高效部署 Xinference：为知识库接入本地 Rerank 模型全攻略". https://cloud.baidu.com/article/4831542</li>
+<li>Railway, "Deploy Xinference (Xorbits Inference)". https://railway.com/deploy/xinference</li>
+</ol>
+<hr />
+<p><em>相关阅读：<a href="../posts/open-source-llm-comparison-2026.html">2026开源大模型选型指南</a> | <a href="../posts/on-device-llm-2026-gemma4-minicpm-qwen.html">2026端侧大模型全景</a> | <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：给AI Agent装上黑匣子</a></em></p>
+<p><em>延伸阅读：<a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业AI Agent部署实战</a> | <a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从LLM到Agent的范式跃迁</a></em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 心动购物季主会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpdGZu" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝电脑办公精选</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91%E5%8A%9E%E5%85%AC&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=xinference-deployment-practice-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=xinference-deployment-practice-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

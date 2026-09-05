@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>让 Agent 学会上网：Firecrawl 的五大能力与四类应用（RAG、Dify、MCP、深度研究）</title>
+    <meta name="description" content="Firecrawl 把任意网页变成 LLM 可直接消费的干净 Markdown。本文拆解它的 scrape/crawl/map/extract/search 五大能力，以及在 RAG 知识库、Dify 数据源、MCP 工具、深度研究 Agent 四类场景的落地方式，附自建部署与竞品取舍。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">让 Agent 学会上网：Firecrawl 的五大能力与四类应用（RAG、Dify、MCP、深度研究）</h1>
+            <div class="post-meta">
+                <span class="cat">开源工具</span>
+                <span>2026-09-04 · 17 分钟</span>
+            </div>
+            <p>大模型的知识停在训练截止那一刻，可互联网每天都在往前跑。让一个 Agent「上网查一下」听起来简单，真正做起来却要处理一堆脏活：JS 渲染、反爬、代理、限流、把满屏导航广告里的正文抠出来、再压成不浪费 token 的格式。Firecrawl 把这些活儿收进一个 API 里——给它一个 URL，还你一段干净的 Markdown。</p>
+<p>官方给这件事起了个精炼的名字：Web Context API，工作流四步——Find（找到来源）→ Extract（抽取内容）→ Clean（清洗）→ Use（喂给模型）。到 2026 年，它已经被 35 万+ 开发者用在生产里，客户名单上有 Shopify、Zapier、Replit 这样的公司。更关键的是，它开源、能自建，也已经被 Dify、Cursor、Claude 这些平台原生接了进去。</p>
+<p>这篇文章不谈"网页抓取有多难"这种老生常谈，而是把 Firecrawl 拆成两层来看：<strong>它能做什么（五大能力）</strong>，以及<strong>它被用在哪里（四类应用）</strong>。看完你应该能判断：自己的场景该不该用它，用云版还是自建，以及它和 Crawl4AI、Jina Reader 之间怎么选。</p>
+<h2 id="firecrawl">一、先搞清楚：Firecrawl 到底是什么</h2>
+<p>Firecrawl 由 Mendable.ai 团队开发（项目现已独立为 Firecrawl），定位是<strong>面向 AI 应用的网页数据 API</strong>。和传统爬虫框架（Scrapy 那类）最大的区别在于输出目标不同：传统爬虫吐给你的是原始 HTML 或需要你自己写规则解析的数据，而 Firecrawl 默认吐给你的是<strong>已经剥掉导航、广告、页脚样板、只留正文的 Markdown</strong>——也就是所谓「LLM-ready」。</p>
+<p>它替你扛下了这些复杂度：</p>
+<ul>
+<li>代理池、缓存、限流、被 JS 挡住的内容</li>
+<li>动态渲染站点、SPA、PDF、图片（含 OCR）</li>
+<li>整站抓取时的链接发现、去重、并发调度</li>
+</ul>
+<p>换句话说，它把「拿到一段能让模型直接读的网页正文」这件事做成了一次 API 调用。项目服务端以 AGPL-3.0 开源，同时提供托管云服务——这个「开源 + 托管」的双轨模式，后面讲选型时很重要。</p>
+<h2 id="scrape-crawl-map-extract-search">二、五大能力：scrape / crawl / map / extract / search</h2>
+<p>Firecrawl v2 把功能收敛成五个核心端点，理解了这五个，就理解了它的全部能力边界。</p>
+<p><img alt="Firecrawl 的 Web Context 工作流与五大端点" src="../images/firecrawl-pipeline.png" /></p>
+<h3 id="1-scrape-markdown">1. scrape：单页 → 干净 Markdown</h3>
+<p>最基础也最常用的能力。传一个 URL，返回该页的干净 Markdown。除了 Markdown，<code>/scrape</code> 一次调用还能同时返回 HTML、页面链接、截图、摘要、结构化 JSON 等多种格式，由 <code>formats</code> 参数控制。它默认剥离样板内容，是「把一个网页喂给模型」最省心的方式。</p>
+<p>一个最小示例（Python SDK）：</p>
+<pre><code class="language-python">from firecrawl import Firecrawl
+
+app = Firecrawl(api_key=&quot;fc-YOUR_KEY&quot;)
+doc = app.scrape(&quot;https://example.com/blog/post&quot;, formats=[&quot;markdown&quot;])
+print(doc.markdown)
+</code></pre>
+<h3 id="2-crawl">2. crawl：整站爬取</h3>
+<p><code>/scrape</code> 一次只处理一页，但真实需求往往是「把整个文档站/产品目录/博客归档都抓下来」。<code>/crawl</code> 接受一个起始 URL，自动发现并抓取可访问的子页面（不需要 sitemap），把每一页都转成干净 Markdown。想做训练集、想灌一个知识库时，一个 crawl 任务就能搞定成千上万页。</p>
+<p>它是异步的：提交任务拿到 job id，再轮询结果。常用控制项包括：是否抓子页、页数上限、最大爬取深度、排除路径、只包含路径——这些参数在 Dify 集成里你会原样看到。</p>
+<h3 id="3-map-url">3. map：快速发现站点所有 URL</h3>
+<p><code>/map</code> 不抓正文，只做一件事：给一个域名，秒级返回这个站点下能发现的所有 URL 列表。适合先「摸清一个站有哪些页」，再挑需要的页去 scrape，避免盲目全站爬浪费额度。</p>
+<h3 id="4-extractai">4. extract：AI 驱动的结构化抽取</h3>
+<p>前面几个端点给的是正文文本，而 <code>/extract</code> 更进一步：你给一个 schema（比如「我要产品名、价格、库存」），它用 LLM 从页面里把这些字段抽成结构化 JSON。适合做比价、招聘信息聚合、榜单采集这类「要的是字段不是全文」的场景。注意云版里结构化抽取通常是<strong>单独计费</strong>的。</p>
+<h3 id="5-search">5. search：搜索 + 抓正文，一次搞定</h3>
+<p>传统做法是「先调搜索 API 拿链接，再逐个抓正文」两步走。<code>/search</code> 把这两步合并：传一个查询词，直接返回每条结果的标题、URL 和<strong>完整页面正文</strong>。v2 还支持 <code>sources</code> 参数在 web 之外搜 news 和 images。这个端点是搭「研究型 Agent」的地基——模型自己知识不够时，调一次 search 就把「查 + 读」都做了。</p>
+<p>除了这五个，Firecrawl 近期还上了一个 <strong>Research Index</strong>：一个专为 AI/ML 研究做的索引，可以检索 300 万+ arXiv 论文以及它们背后的 GitHub 代码（issue、合并的 PR、README，每日刷新），并对照全文核查论点。这让它从「通用抓取」往「研究基础设施」延伸了一步。</p>
+<h2 id="_1">三、四类应用：它到底被用在哪</h2>
+<p>能力清单是一回事，落地形态是另一回事。Firecrawl 在实践中主要出现在四类场景里。</p>
+<h3 id="rag">应用一：RAG 知识库的数据源</h3>
+<p>这是最直接的用法。RAG 的第一步永远是「把数据搞进来」，而互联网上的内容——文档站、帮助中心、行业博客——恰恰是最有价值也最难处理的一类。</p>
+<p>流程很清晰：<code>crawl</code> 整站 → 得到一批干净 Markdown → 切块（chunking）→ 向量化 → 存进向量库。因为 Firecrawl 的输出已经是干净正文，省掉了自己写 HTML 清洗规则的大量脏活，chunk 质量也更高（没有导航噪声混进去污染检索）。</p>
+<p>如果你正在选型 RAG 的各个环节，可以对照着看：向量库怎么挑见 <a href="../posts/open-source-vector-database-comparison-2026.html">开源向量数据库怎么选</a>，检索策略见 <a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 与向量混合检索</a>，而数据进库后的安全边界见 <a href="../posts/rag-data-leakage-four-chains-defense-2026.html">RAG 数据泄露的四条链路与防御</a>。Firecrawl 解决的是这条链路最上游的「数据获取」。</p>
+<h3 id="dify">应用二：Dify 集成</h3>
+<p>Dify 是国内外都很流行的开源 LLM 应用开发平台，它和 Firecrawl 的集成有<strong>两个入口</strong>，容易搞混，这里讲清楚。</p>
+<p><strong>入口 A：知识库「从网站同步」的数据源</strong></p>
+<p>在 Dify 创建知识库时，选择「从网站同步（Sync from website）」，Provider 选 Firecrawl，填入要抓的目标 URL 即可。配置项和 Firecrawl 的 crawl 参数一一对应：</p>
+<ul>
+<li>是否抓取子页面</li>
+<li>页面抓取数量上限</li>
+<li>页面抓取最大深度</li>
+<li>排除路径 / 只包含路径</li>
+<li>内容提取范围</li>
+</ul>
+<p>Dify 会用 Firecrawl 把网页抓成 Markdown，解析后直接进知识库——这条路适合「我想把某个网站变成一个可问答的知识库」的纯配置场景，不用写一行代码。</p>
+<p><img alt="Dify + Firecrawl 构建网页知识库的数据流" src="../images/firecrawl-dify-flow.png" /></p>
+<p><strong>入口 B：插件市场的 Firecrawl 工具插件</strong></p>
+<p>Dify 插件市场里有官方的 Firecrawl 插件，把 Crawl、Crawl Job、Map、Scrape 等做成了可以在<strong>工作流（Workflow）</strong>里拖拽调用的节点。这条路更灵活：你可以在一个 Agent 流程里，先用 Scrape 抓某个页面，再把正文丢给 LLM 节点做舆情分析、摘要、翻译，最后按需输出。相比入口 A 的「一次性建库」，入口 B 是「把抓取变成流程中的一个可编排步骤」。</p>
+<p>实践中一个常见组合是<strong>本地自建 Firecrawl + 本地 Dify</strong>：Firecrawl 自建后 API 跑在 <code>http://localhost:3002</code>，Dify 里把 Firecrawl 的 base url 指向本地实例，数据全程不出内网——这对有数据合规要求的团队很关键。想深入了解 Dify 本身以及它和同类平台的差异，可以看 <a href="../posts/dify-vs-coze-ragflow-n8n-fastgpt-comparison.html">Dify vs Coze/RAGFlow/n8n/FastGPT 横评</a> 和 <a href="../posts/weknora-vs-dify-ragflow-fastgpt-comparison.html">WeKnora vs Dify/RAGFlow/FastGPT</a>。</p>
+<h3 id="mcp-server-agent">应用三：MCP Server，给编程 Agent 装上「联网抓取」</h3>
+<p>Firecrawl 官方提供了 MCP（Model Context Protocol）Server，能把 scrape / search / extract / map 等能力以标准工具的形式暴露给 Cursor、Claude、Claude Code 等客户端。配好之后，你在 Cursor 里写代码时，AI 可以实时去抓某个库的最新文档、搜一个报错的解法、抽某个页面的结构化数据——而不用你手动复制粘贴文档进去。</p>
+<p>MCP 正在成为 AI 编程工具的「联网上下文层」：模型自身知识不够时调用的那个工具。想理解 MCP 这个协议本身以及它和 A2A 的定位差异，可以看 <a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 协议深度对比</a>。</p>
+<h3 id="agent">应用四：深度研究 Agent</h3>
+<p>把 <code>/search</code>（查 + 读一步到位）和 <code>/extract</code>（结构化抽取）组合起来，就是一个研究型 Agent 的核心引擎：给一个研究问题 → search 拉回相关页面正文 → LLM 阅读、提炼、交叉验证 → extract 把关键数据结构化 → 生成带引用的报告。配合前面提到的 Research Index，还能直接检索论文和对应代码库。这类 Agent 和「AI 自己上网做调研」的需求高度契合。</p>
+<h2 id="_2">四、自建部署：数据不出内网</h2>
+<p>如果你对数据主权或成本敏感，Firecrawl 支持用 Docker Compose 自建。官方自建指南把流程收敛得很清楚：clone 仓库 → 用 Docker Compose 起服务 → 本地 API 默认监听 <code>http://localhost:3002</code> → 用一次 <code>POST /v2/scrape</code> 验证能拿到 Markdown 就算成功。</p>
+<p>自建的价值主要有三点：</p>
+<ul>
+<li><strong>数据主权</strong>：抓取的内容和请求全程留在自己基础设施里，满足严格的安全合规要求</li>
+<li><strong>延迟</strong>：Agent 调本地端点，延迟以毫秒计，省掉往返公网的时间</li>
+<li><strong>成本</strong>：抓取量大时，自建长期成本可能低于云版的按量计费</li>
+</ul>
+<p>代价是要自己运维——Chrome/Playwright 依赖、代理配置、扩容都得自己扛。强反爬的目标站点上，自建版和云版一样会遇到成功率问题（下面详说）。</p>
+<h2 id="firecrawlcrawl4aijina-reader">五、竞品取舍：Firecrawl、Crawl4AI、Jina Reader 怎么选</h2>
+<p>同一赛道里最常被拿来比较的是这三个，它们其实站在不同位置。</p>
+<ul>
+<li><strong>Firecrawl</strong>：API 优先，「买而不建」。scrape/crawl/map/extract/search 一套齐全，生态最好（Dify、MCP、各语言 SDK），也支持自建。适合想少写代码、快速上线、又保留私有化选项的团队。协议是服务端 AGPL-3.0，商用集成时要注意其传染性。</li>
+<li><strong>Crawl4AI</strong>：Apache-2.0 的纯自托管 Python 库，零成本，但一切自己运维。适合工程能力强、愿意自己搭建和维护整条抓取链路、且在意协议宽松度的团队。</li>
+<li><strong>Jina Reader</strong>：轻量，对静态文档站尤其友好（一个 URL 前缀就能读）。但在整站爬取、JS 渲染、结构化抽取这些重活上不如 Firecrawl 全面。</li>
+</ul>
+<p>一个需要如实说明的短板：在第三方独立评测（Proxyway 于 2025 年底、由 Zyte 汇总的基准）中，Firecrawl 在 15 个有反爬保护的站点、每站 6000 页的测试里，2 req/s 时成功率约 33.69%，10 req/s 时降到 26.69%，而榜首选手达到 93.14%，差距接近三倍。也就是说，<strong>面对强反爬的目标站点，Firecrawl 的成功率并不突出</strong>——它的强项在「常规网页转 LLM-ready 数据」的易用性和生态，而非硬刚顶级反爬。如果你的核心需求就是攻克重度反爬站点，需要另做评估。</p>
+<p>选型上给个简单判断：想快速接入、要 Dify/MCP 生态、能接受按量付费或愿意自建 → Firecrawl；想完全零成本自己掌控、协议要宽松 → Crawl4AI；只是偶尔把静态文档转 Markdown → Jina Reader 够用。</p>
+<h2 id="_3">六、成本参考</h2>
+<p>云版免费额度为每月 1000 credits（近期还推出了无需 API key 即可使用的免费模式，每个开发者每月自动获得 1000 免费 credits）。付费分 Hobby / Standard / Growth / Scale 多档，credits 数和速率上限逐档提升。</p>
+<p>需要注意两点：一是 credits <strong>不结转</strong>，当月用不完就过期；二是结构化抽取（extract）通常另计费。据第三方汇总，Standard 档约 $83/月对应 10 万 credits，叠加抽取后实际常来到 $172–188/月起。抓取量稳定且较大时，自建往往更划算——这也是很多团队最终走向自建的原因。</p>
+<h2 id="_4">小结</h2>
+<p>Firecrawl 的价值不在于「能抓网页」——能抓网页的工具很多——而在于它把「网页 → LLM 可直接消费的干净数据」这条链路做成了一次 API 调用，并围绕这个能力长出了 Dify、MCP、各类 SDK 的完整生态。</p>
+<p>回到最初的判断：</p>
+<ul>
+<li>你的场景是<strong>给 RAG 灌网页数据</strong>、<strong>在 Dify 里建网页知识库</strong>、<strong>给编程 Agent 装联网能力</strong>，或<strong>搭研究型 Agent</strong> → Firecrawl 是当前最省心的选择之一，尤其 Dify 的双入口集成让「配置即可用」和「工作流可编排」两种需求都被覆盖。</li>
+<li>你在意<strong>数据主权或大规模成本</strong> → 自建 Docker Compose，把 API 留在内网。</li>
+<li>你要硬刚<strong>重度反爬站点</strong> → 它不是最强的，另做评估。</li>
+</ul>
+<p>一句话：Firecrawl 让 Agent「学会上网」这件事，从一堆脏活变成了一个端点。剩下的问题，是你想把这个端点接在 RAG、Dify、MCP，还是研究 Agent 上。</p>
+<h2 id="_5">免责声明</h2>
+<p>本文基于 2026 年 9 月公开资料整理，Firecrawl 的功能、端点、定价及第三方评测数据可能随版本更新而变化，具体请以官方文档与实际测试为准。文中提及的成功率基准来自第三方独立评测，不代表所有场景下的表现。技术选型请结合自身数据合规要求、目标站点特征和团队工程能力综合判断。</p>
+<h2 id="_6">参考来源</h2>
+<ul>
+<li><a href="https://www.firecrawl.dev/">Firecrawl 官网</a></li>
+<li><a href="https://github.com/firecrawl/firecrawl">Firecrawl GitHub 仓库</a></li>
+<li><a href="https://docs.firecrawl.dev/features/scrape">Firecrawl 文档 - Scrape 功能</a></li>
+<li><a href="https://docs.firecrawl.dev/features/search">Firecrawl 文档 - Search 功能</a></li>
+<li><a href="https://docs.firecrawl.dev/features/llm-extract">Firecrawl 文档 - JSON mode / LLM Extract</a></li>
+<li><a href="https://docs.firecrawl.dev/contributing/self-host">Firecrawl 文档 - 自建部署指南</a></li>
+<li><a href="https://docs.firecrawl.dev/integrations/dify">Firecrawl 文档 - Dify 集成</a></li>
+<li><a href="https://github.com/firecrawl/firecrawl/releases">Firecrawl Releases（含 Research Index）</a></li>
+<li><a href="https://docs.dify.ai/en/guides/knowledge-base/create-knowledge-and-upload-documents/import-content-data/sync-from-website">Dify 文档 - 从网站导入数据</a></li>
+<li><a href="https://marketplace.dify.ai/plugins/langgenius/firecrawl_datasource">Dify Marketplace - Firecrawl 数据源插件</a></li>
+<li><a href="https://dify.ai/ko/blog/dify-ai-blog-integrated-with-firecrawl">Dify.AI x Firecrawl 博客</a></li>
+<li><a href="https://scrappey.com/qa/web-scraping-apis/crawl4ai-vs-firecrawl">Crawl4AI vs Firecrawl（Scrappey）</a></li>
+<li><a href="https://prospeo.io/s/firecrawl-alternatives">Best Firecrawl Alternatives 2026（含 Proxyway 基准汇总）</a></li>
+<li><a href="https://www.firecrawl.dev/blog/firecrawl-keyless-launch">Firecrawl 无 key 免费使用发布公告</a></li>
+<li><a href="https://railway.com/deploy/firecrawl-api-updated-aug-26--firecrawl-api">Deploy &amp; Host Firecrawl API（Railway，含定价参考）</a></li>
+</ul>
+<h2 id="_7">延伸阅读</h2>
+<ul>
+<li><a href="../posts/dify-vs-coze-ragflow-n8n-fastgpt-comparison.html">Dify vs Coze/RAGFlow/n8n/FastGPT 横评</a></li>
+<li><a href="../posts/weknora-vs-dify-ragflow-fastgpt-comparison.html">WeKnora vs Dify/RAGFlow/FastGPT</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 协议深度对比</a></li>
+<li><a href="../posts/open-source-vector-database-comparison-2026.html">开源向量数据库怎么选</a></li>
+<li><a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 与向量混合检索</a></li>
+<li><a href="../posts/rag-data-leakage-four-chains-defense-2026.html">RAG 数据泄露的四条链路与防御</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 尊尼获加&元气森林</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/Hrps3pr" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=firecrawl-web-context-api-rag-dify-mcp-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=firecrawl-web-context-api-rag-dify-mcp-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

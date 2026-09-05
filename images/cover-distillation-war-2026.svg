@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5470"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#3aa0ff"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3aa0ff"/>
+      <stop offset="0.5" stop-color="#36d1dc"/>
+      <stop offset="1" stop-color="#ffd166"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff9aa8"/>
+      <stop offset="1" stop-color="#a9c2ff"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- 标签框 -->
+  <rect x="44" y="42" width="240" height="32" rx="6" fill="#a855f722" stroke="#a855f7" stroke-opacity="0.6"/>
+  <text x="60" y="64" fill="#d4b3ff" font-size="15" font-weight="600">AI 行业观察 · 蒸馏与地缘</text>
+
+  <!-- 主标题 -->
+  <text x="44" y="134" fill="#ffffff" font-size="30" font-weight="700">AI 蒸馏之战</text>
+  <text x="44" y="174" fill="url(#sub)" font-size="18" font-weight="600">美国为何封锁「蒸馏」，国产模型如何「青出于蓝」</text>
+
+  <!-- 关键亮点 -->
+  <text x="44" y="218" fill="#ff9aa8" font-size="13" font-weight="500">• 1600万次查询、2.4万账户：工业级蒸馏指控</text>
+  <text x="44" y="242" fill="#ffd166" font-size="13" font-weight="500">• 合同纠纷还是国家安全？封锁逻辑的法律软肋</text>
+  <text x="44" y="266" fill="#8fe9f0" font-size="13" font-weight="500">• 强化学习 · 自蒸馏 · 合成数据：原创突破路线</text>
+
+  <!-- 标签栏 pill -->
+  <g font-size="12" font-weight="500">
+    <rect x="44" y="296" width="68" height="26" rx="13" fill="none" stroke="#ff5470" stroke-opacity="0.55"/>
+    <text x="58" y="313" fill="#ff9aa8">AI蒸馏</text>
+    <rect x="122" y="296" width="84" height="26" rx="13" fill="none" stroke="#a855f7" stroke-opacity="0.55"/>
+    <text x="136" y="313" fill="#d4b3ff">知识蒸馏</text>
+    <rect x="216" y="296" width="84" height="26" rx="13" fill="none" stroke="#3aa0ff" stroke-opacity="0.55"/>
+    <text x="230" y="313" fill="#9ccaff">DeepSeek</text>
+    <rect x="310" y="296" width="84" height="26" rx="13" fill="none" stroke="#36d1dc" stroke-opacity="0.55"/>
+    <text x="324" y="313" fill="#8fe9f0">出口管制</text>
+    <rect x="404" y="296" width="84" height="26" rx="13" fill="none" stroke="#ffd166" stroke-opacity="0.55"/>
+    <text x="418" y="313" fill="#ffe6a3">国产模型</text>
+  </g>
+
+  <!-- 年份徽章 -->
+  <circle cx="824" cy="58" r="30" fill="none" stroke="#a855f7" stroke-opacity="0.6" stroke-width="2"/>
+  <text x="824" y="67" fill="#d4b3ff" font-size="26" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- 右侧示意图：老师->学生 蒸馏，带阻断 -->
+  <g stroke-width="2" fill="none">
+    <!-- Teacher 大模型 -->
+    <rect x="690" y="110" width="74" height="40" rx="7" fill="#3aa0ff33" stroke="#3aa0ff"/>
+    <text x="727" y="134" fill="#9ccaff" font-size="12" text-anchor="middle" stroke="none">Teacher</text>
+    <!-- Student 小模型 -->
+    <rect x="790" y="200" width="66" height="32" rx="6" fill="#ffd16622" stroke="#ffd166"/>
+    <text x="823" y="220" fill="#ffe6a3" font-size="11" text-anchor="middle" stroke="none">Student</text>
+    <!-- 蒸馏箭头 -->
+    <line x1="745" y1="150" x2="810" y2="200" stroke="#36d1dc" stroke-opacity="0.7" stroke-dasharray="5 4"/>
+    <polygon points="810,200 800,196 803,206" fill="#36d1dc" stroke="none"/>
+    <!-- 封锁红叉 -->
+    <g stroke="#ff5470" stroke-width="3">
+      <line x1="766" y1="166" x2="786" y2="186"/>
+      <line x1="786" y1="166" x2="766" y2="186"/>
+    </g>
+    <circle cx="776" cy="176" r="17" stroke="#ff5470" stroke-opacity="0.7" stroke-width="2"/>
+  </g>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="44" y1="344" x2="856" y2="344" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="44" y="366" fill="#8a8aa8" font-size="12">技术原理 · 争议焦点 · 法律边界 · 地缘逻辑 · 国产突破</text>
+  <text x="856" y="366" fill="#5a5a7a" font-size="12" text-anchor="end">AI工具箱</text>
+</svg>

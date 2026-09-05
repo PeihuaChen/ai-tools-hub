@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oh-my-pi 深度调研：从「反 Claude Code」到把 IDE 塞进终端的疯狂 Fork</title>
+    <meta name="description" content="oh-my-pi是Mario Zechner极简编程Agent Pi的一个反向重装fork——把LSP语义重构、DAP真调试器、Hashline哈希锚定编辑、角色化模型路由统统焊进终端。本文调研它的技术谱系，并与Pi、Claude Code、Cursor、OpenCode做全面对比。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">oh-my-pi 深度调研：从「反 Claude Code」到把 IDE 塞进终端的疯狂 Fork</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-08-13 · 17 分钟</span>
+            </div>
+            <h2 id="_1">一个"叫不出名字"的项目，怎么长成了这样</h2>
+<p>Mario Zechner——libGDX的作者——2025年底做了一个决定：不再用Claude Code了。他曾经是Claude Code的重度用户，重度到专门写过一个叫<code>cchistory</code>的工具去追踪它系统提示词的每次变化，甚至反编译了二进制文件去给它加官方没做的功能。但他最后受不了的，不是Claude Code不好用，而是它总在变——系统提示词和工具定义每次更新都在变，模型行为跟着漂移，他搭的工作流一次次被破坏。</p>
+<p>于是他自己写了一个agent。四个工具（read、write、edit、bash），一个只有几百token的系统提示词，没有MCP，没有权限审批。他给它取名"Pi"，理由很直接：这样没人能Google到它。</p>
+<p>这个项目现在被maintained under Earendil（Mario在2026年4月加入该公司，他自己写博客调侃"我卖身了"，核心代码仍保持MIT协议）。而故事的另一条线，是一个叫<strong>can1357</strong>（Can Boluk）的开发者，把Pi fork了出去，取名<strong>oh-my-pi</strong>——却干了一件几乎跟Mario哲学完全相反的事：往这个极简核心里塞进了LSP语言服务器集成、DAP真调试器、哈希锚定编辑格式、角色化模型路由……活生生把它变成了"终端里的一整个IDE"。</p>
+<p>这篇文章想把oh-my-pi这个项目本身讲清楚：它从哪来、技术上到底做了什么、和原版Pi的哲学分歧在哪，以及放到Claude Code、Cursor、OpenCode这些主流编程Agent里，它处在什么位置。</p>
+<h2 id="oh-my-pi">oh-my-pi是什么</h2>
+<p>oh-my-pi（命令行别名<code>omp</code>，也有分支叫<code>ompk</code>）是GitHub用户can1357维护的开源终端AI编程Agent，仓库地址是<code>github.com/can1357/oh-my-pi</code>，官网<code>ohmypi.xyz</code>。它的定位很直接：<strong>一个专为终端打造的AI编程Agent——具备哈希锚定编辑、经过优化的工具harness、LSP语言服务器集成、Python运行环境、浏览器操作能力、子agent协同，以及更多</strong>。</p>
+<p>一些基础数据：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Stars</td>
+<td>24.4k</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>语言构成</td>
+<td>TypeScript 81.2%、Rust 10.0%、Python 7.7%、JavaScript 0.6%</td>
+</tr>
+<tr>
+<td>核心代码量</td>
+<td>约5.5万行Rust</td>
+</tr>
+<tr>
+<td>内置工具数</td>
+<td>32个</td>
+</tr>
+<tr>
+<td>LSP操作</td>
+<td>14种</td>
+</tr>
+<tr>
+<td>DAP操作</td>
+<td>28种</td>
+</tr>
+<tr>
+<td>模型Provider支持</td>
+<td>40+</td>
+</tr>
+</tbody>
+</table>
+<p>值得一提的是，oh-my-pi的生态本身也在快速裂变——GitHub上能找到多个平行fork，比如<code>oh-my-pk</code>、<code>saki-oh-my-pi</code>、<code>oh-my-pi-agent</code>、<code>oh-omp</code>等，说明这条"极简核心+重度扩展"的路子吸引了相当多开发者跟进，但也意味着生态比较碎片化，选型时得认准是哪个仓库、哪个维护者。</p>
+<h2 id="_2">四个技术支点</h2>
+<p>多数终端编程Agent对文件的"编辑"能力，本质上还是字符串搜索替换加行号定位。oh-my-pi选择了一条更硬核的路：直接把IDE和调试器的核心能力搬进agent的工具集。</p>
+<p><img alt="oh-my-pi四个核心技术支点：Hashline编辑、LSP语义重构、DAP真调试器、角色化模型路由" src="../images/ohmypi-four-pillars.png" /></p>
+<h3 id="hashline-edits">Hashline Edits：不靠行号，靠内容哈希</h3>
+<p>标准的AI文件编辑方式是把完整原文件和完整修改后版本一起发给模型，或者靠行号定位要改的地方。这两种方式在大文件上都费token，而且一旦多个编辑操作接连发生，行号会漂移——Agent A改了第50行,后面所有行号都往下挪,Agent B原本瞄准"第60行"的编辑这时候就打在了错误的位置上。</p>
+<p>oh-my-pi的Hashline Edits用内容哈希做锚点：一小段从具体行内容派生出的短哈希标识符，编辑操作引用这个哈希，而不是行号或整段原文。好处是两个：一是省token（在Grok 4 Fast上输出token能减少约61%，在Claude Opus上大约省一半）；二是对行号漂移天然免疫——即便文件在编辑过程中发生了位移，只要目标内容还在，哈希锚点依然能找到它。有实测提到，在Claude Code里跑并行子agent编辑同一文件时会因为行号漂移而编辑失败，换到oh-my-pi后并发编辑变得可靠。</p>
+<h3 id="lsp">LSP集成：语义级重构，不是字符串替换</h3>
+<p>当你让一个Agent"重命名一个模块"，多数终端Agent的做法是搜索这个字符串然后替换——这会漏掉别名导入、漏掉barrel文件（统一导出文件）里的re-export，还可能因为替换不彻底产生语法错误。</p>
+<p>oh-my-pi直接对接项目的语言服务器（TypeScript、Go、Python等），发出工作区级别的重构指令。语言服务器理解代码的语义结构，所以重命名操作能正确传播到所有引用、barrel文件和re-export上，落盘之前就是结构正确的，而不是"字符串匹配出来大概率正确"。</p>
+<h3 id="dapprint">DAP：真调试器，不是print大法</h3>
+<p>多数Agent调试bug的方式是插入<code>print()</code>或<code>console.log()</code>重新运行——这对并发问题、竞态条件、段错误这类需要观察程序实时运行状态才能定位的问题基本无效。</p>
+<p>oh-my-pi支持Debug Adapter Protocol（DAP），能把真实调试器attach到运行中的进程上。支持的调试器包括Go的<code>dlv</code>、Python的<code>debugpy</code>、C/C++的<code>lldb-dap</code>。接入之后，它能设断点、单步执行、查看调用栈、检查实时变量状态——靠观察而不是靠推断源代码来定位运行时bug。</p>
+<h3 id="_3">角色化模型路由：不同活儿分给不同模型</h3>
+<p>oh-my-pi连接Anthropic、OpenAI、Grok等多家provider，而且不是"选一个模型跑所有任务"，是给不同任务类型分配不同的模型配置：</p>
+<ul>
+<li><strong>PLAN/ARCHITECT角色</strong>：分配高推理能力模型，负责架构规划</li>
+<li><strong>TASK/SUBTASK角色</strong>：分配更快更便宜的模型，负责日常实现</li>
+<li><strong>VISION角色</strong>：分配有视觉能力的模型，负责图片分析</li>
+<li><strong>COMMIT角色</strong>：专门为生成commit信息调优的模型</li>
+</ul>
+<p>这样贵的模型调用只花在真正值得的任务上，日常琐碎工作走性价比更高的选项。有实测提到，把规划任务切到GLM-5、执行任务切到Qwen之后，API成本下降了约40%。另外，如果你已经登录了Claude Code账号，oh-my-pi还能自动导入其设置和插件。</p>
+<p>其他值得一提的能力：<code>review</code>命令能分析PR、给出合并结论并按严重程度排优先级，还能批量扫多个分支或并行审查未提交的改动；子agent可以把复杂任务拆到并行的隔离环境里跑，完成后合并结果；把GitHub的issue、PR、diff当成本地文件一样读取；"Hindsight Memory"会把每次会话压缩成项目的持久心智模型，让跨会话的长期上下文延续下去。</p>
+<h2 id="vs-pi">vs. Pi（它的亲爹）：一场哲学倒转</h2>
+<p>理解oh-my-pi绕不开先理解Pi本身在拒绝什么。Mario Zechner的论点很直白：前沿模型已经被强化学习训练到对"什么是编程agent的标准行为"有极深理解，不需要一万多token的系统提示词去反复提醒。需要ripgrep？让模型自己调<code>rg</code>。需要GitHub？调<code>gh</code>。需要浏览器？让Pi给自己写个浏览器工具。</p>
+<p>Pi因此故意不做的事情：没有MCP、没有内置子agent（推荐用tmux开新的Pi实例）、没有plan mode（推荐写plan markdown文件）、没有后台bash执行（tmux提供）、没有内置待办列表。会话以<strong>树结构</strong>存储而不是线性对话记录，<code>/tree</code>能跳回任意历史节点，<code>/fork</code>能从任意历史消息分叉出新会话。</p>
+<p>Pi的极简没有牺牲能力——在TerminalBench基准上，用Claude Opus 4.5跑分，Pi排名第二，仅次于Terminus，而且是在没有MCP支持、没有子agent、没有plan mode、没有后台bash、没有内置待办的情况下拿到的成绩，当时甚至还没实现上下文压缩逻辑。</p>
+<p>oh-my-pi则是相反方向的答案：既然模型不需要传统意义上"喂指令的系统提示词"，那把节省下来的空间用来接入真正能提升agent能力的基础设施（LSP、DAP）不是更好？两边的分歧本质是同一个问题的两种回答——"agent到底需要多少harness"，Pi说越少越好，oh-my-pi说该重的地方要重。</p>
+<h2 id="vs-claude-code-vs">vs. Claude Code：电池全家桶 vs 自己拼装</h2>
+<p>Claude Code是Anthropic官方的编程agent，走的是完全相反的产品哲学——10+内置工具、Sub Agents、Agent Teams、Plan Mode、MCP（客户端+服务端）、Agent Skills、插件、Hooks、检查点回滚、5种权限模式外加OS级沙箱，覆盖终端、VS Code、JetBrains、桌面应用、浏览器和手机端。系统提示词曾经达到1万到1.4万token，2026年针对Claude 5代模型砍掉了80%以上——这个"删harness"的动作本身，某种程度上是对Pi那套极简论点最有力的验证。</p>
+<p>两者的核心差异点：</p>
+<p><strong>模型选择</strong>：Claude Code只跑Claude系列（Opus/Sonnet/Haiku），垂直整合程度高，模型本身就是在这套harness里训练出来的行为习惯；oh-my-pi/Pi系是model-agnostic，能接40+ providers，同一会话内可以中途切换模型。</p>
+<p><strong>订阅与计费</strong>：Claude Code走订阅制（Pro每月20美元起，Max档100-200美元），账单可预测；oh-my-pi/Pi免费开源，按API调用量付费。这里有个关键限制——Anthropic在2026年1月到4月逐步切断了第三方harness使用Claude订阅OAuth的能力，OpenCode、Cline、Pi系工具全部被断开，现在只能用API Key的价格跑Claude模型（比订阅贵不少）。OpenAI Codex团队则走了反方向，公开鼓励第三方harness接入。</p>
+<p><strong>权限模型</strong>：Claude Code默认拒绝高风险操作，需要用户审批，还有OS级sandbox；oh-my-pi/Pi默认没有权限系统，第一条prompt就是完整用户权限，安全边界靠容器化隔离（Docker、microVM）实现。Mario本人的论点是"权限审批大多是安全剧场，代码能被执行的那一刻游戏已经结束了"。</p>
+<p>有一份第三方实测（Composio，用同一个模型DeepSeek V4 Flash分别接入不同harness跑30道agentic任务）给出的数字是：Pi通过率20/30、单次成功成本0.028美元；Claude Code通过率16/30、单次成功成本0.195美元。需要注意这个测试跑的是<strong>Pi本体</strong>而非oh-my-pi，且用的是非Claude模型（等于给Claude Code卸了它专门优化的那个引擎），所以不能直接当成"oh-my-pi比Claude Code强"的证据，只能说明"轻harness+便宜模型"这条路径在特定基准下有成本优势。多篇文章的共识结论是：功能表格上Pi系工具赢在便宜、灵活、透明，但日常打开率上，即便是Pi的粉丝也大多把Claude Code当主力，Pi/oh-my-pi留给需要多provider、需要本地模型、需要深度定制的场景。</p>
+<h2 id="vs-cursor-vs-ide">vs. Cursor：终端派 vs IDE派</h2>
+<p>Cursor是VS Code的fork，图形化编辑器，强项是行内Tab补全、实时编辑反馈、全仓库索引式的上下文理解——本质是"贴着代码写"的心流工具，2026年ARR突破10亿美元，是开发者工具史上增长最快的产品之一。它和oh-my-pi代表的是完全不同的交互范式：Cursor让你留在编辑器里被AI辅助，oh-my-pi/Claude Code让你把整个任务丢给终端里的agent自主执行完再看结果。</p>
+<p>oh-my-pi的宣传语直接把话说穿了——"把整个IDE塞进终端"。它想证明：只要接入了LSP和DAP这两个IDE最核心的能力，终端agent在代码理解深度上完全能够对标图形化IDE，不需要牺牲终端agent的自主性和可编排性。这是"终端派 vs GUI派"路线之争里，终端阵营目前打得最激进的一张牌。</p>
+<h2 id="vs-opencode">vs. OpenCode：两种"开源牌"打法不同</h2>
+<p>OpenCode是另一个MIT开源的编程Agent，Go编写，单二进制文件，走的是"开箱即用的开源替代品"路线——plan mode、subagent、MCP都是内置的，权限式沙箱，10+ providers，配置驱动。它跟Claude Code更像是同一类产品的开源版，跟Pi/oh-my-pi的"可编程平台"定位不完全重合。有一份aimultiple的编程基准测试里，OpenCode综合分排第一（0.816），高于Claude Code（0.789）和Cursor（0.751）——但要注意这类基准结果和跑分方法、任务集选择强相关，横向比较时最好看具体任务类型是否匹配你的场景。</p>
+<h2 id="_4">五方对照表</h2>
+<p><img alt="oh-my-pi、Pi、Claude Code、OpenCode、Cursor五方对照表：形态、开源协议、独家技术、模型支持、权限安全、系统提示词、适用人群" src="../images/ohmypi-five-way-comparison.png" /></p>
+<h2 id="_5">值得注意的风险</h2>
+<p>选oh-my-pi或者Pi系工具之前，有两点值得提前知道：</p>
+<p><strong>扩展的信任边界模糊</strong>。oh-my-pi/Pi的插件/扩展模型是TypeScript代码，直接运行在agent进程里，拥有和agent本体一样的系统权限——一旦某个社区扩展被攻破，攻破的就是agent自己，没有沙箱可以逃逸。社区里已经有对这个生态提出批评的声音（thevinter的"Bad Vibes From Pi"一文），核心担忧是不少社区扩展本身也是"vibe coding"出来的产物，质量参差不齐。官方的建议是把扩展当依赖项一样审查，并且把整个agent运行环境容器化。</p>
+<p><strong>Anthropic订阅锁定带来的成本不确定性</strong>。如果你的工作流重度依赖Claude模型，用oh-my-pi/Pi系工具就意味着放弃订阅制的可预测账单，转向按token计费——这在重度使用场景下账单可能明显更贵，也可能因为角色化路由和更省token的编辑格式而更便宜，具体取决于你的任务类型和模型选择策略。</p>
+<h2 id="oh-my-pi_1">该不该选oh-my-pi</h2>
+<p>结合前面的对比，几种典型场景：</p>
+<ul>
+<li><strong>想要IDE级的语义理解和真调试器，又不想被锁定在单一模型厂商</strong>：oh-my-pi是目前这个交集里技术上最激进的选项。</li>
+<li><strong>想要极简、透明、完全自己拼装harness的实验田</strong>：选原版Pi，享受更干净的核心和会话树的设计。</li>
+<li><strong>想要开箱即用、有官方支持和护栏、已经是Claude订阅用户</strong>：Claude Code仍然是更稳妥的日常主力。</li>
+<li><strong>更习惯留在图形化编辑器里、要行内实时补全</strong>：Cursor这类IDE派工具解决的是不同的问题，不是oh-my-pi的直接对手。</li>
+</ul>
+<p>值得强调的是，这几类工具并不互斥。多篇实测文章都提到同一个模式：把Claude Code当日常主力，把Pi系工具留给需要多provider切换、本地模型、或者深度自定义工作流的场景，两边并行使用，按任务类型切换。</p>
+<h2 id="_6">小结</h2>
+<p>oh-my-pi这个项目最有意思的地方，不是它做了什么功能，而是它在"agent到底需要多少外围工程"这个2026年最核心的争论里，选择了一个和自己出身完全相反的答案。它的母项目Pi用一场"删繁就简"的实验证明了轻量harness也能跑出高分，而oh-my-pi则用LSP、DAP、Hashline编辑证明了往harness里加真正硬核的基础设施（而不是啰嗦的提示词）同样能换来实打实的能力提升。两条路径都在往前走，谁也没能一劳永逸地证明自己是唯一正解——这大概正是当下终端编程Agent领域最真实的状态：industry仍处在"messing around and finding out"的阶段，没有定论,只有不断被验证或推翻的架构假设。</p>
+<hr />
+<p><em>本文数据截至2026年8月13日。开源项目的功能、性能和生态都在快速变化，建议以GitHub仓库最新README和官方文档为准。</em></p>
+<hr />
+<h2 id="_7">参考来源</h2>
+<ol>
+<li>can1357/oh-my-pi GitHub仓库. https://github.com/can1357/oh-my-pi</li>
+<li>oh-my-pi官网. https://ohmypi.xyz/</li>
+<li>OMP (Oh My Pi): AI Coding Agent with LSP, DAP Debugger, and Hashline Edits, betterstack.com. https://betterstack.com/community/guides/ai/oh-my-pi-ai-coding-agent/</li>
+<li>Building Pi: A Minimal, Extensible Coding Agent Framework, zenml.io LLMOps Database. https://www.zenml.io/llmops-database/building-pi-a-minimal-extensible-coding-agent-framework</li>
+<li>Pi Agent vs Claude Code After 100 Hours of Real Use, Composio (dev.to). https://dev.to/composiodev/pi-agent-vs-claude-code-after-100-hours-of-real-use-1dfp</li>
+<li>oh-my-pi vs Claude Code: Which AI Coding Harness Should You Use?, docs.bswen.com. https://docs.bswen.com/blog/2026-04-20-oh-my-pi-vs-claude-code/</li>
+<li>Pi vs Claude Code vs Codex vs OpenCode: Which Coding Agent Should You Use in 2026?, docs.bswen.com. https://docs.bswen.com/blog/2026-08-10-pi-vs-claude-code-vs-codex-vs-opencode</li>
+<li>Claude Code vs Cursor benchmark comparison, aimultiple.com. https://www.research.aimultiple.com/ai-coding-benchmark/</li>
+</ol>
+<h2 id="_8">相关阅读</h2>
+<ul>
+<li><a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">2026年最全闭源AI编程工具横评：Claude Code vs Cursor vs Copilot vs Codex vs Windsurf</a></li>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode实战指南：免费AI编程Agent + 免费大模型，零成本搞定代码开发</a></li>
+<li><a href="../posts/harness-engineering-invisible-half-of-ai-agents-2026.html">Harness 工程：当模型趋同，决定 AI Agent 成败的「看不见的一半」</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：那些没人告诉你的安全风险</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=ohmypi-fork-ide-in-terminal-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=ohmypi-fork-ide-in-terminal-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

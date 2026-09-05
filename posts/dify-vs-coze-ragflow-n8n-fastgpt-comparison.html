@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dify vs Coze vs RAGFlow vs N8N vs FastGPT：2026年低代码AI平台深度对比 - AI知识宇宙 - 用AI采集，用AI生成</title>
+    <meta name="description" content="深度对比五大低代码AI平台——Dify（142K⭐开源LLM平台）、Coze（字节跳动无代码Bot工具）、RAGFlow（80K⭐专业RAG引擎）、N8N（188K⭐工作流自动化）、FastGPT（26K⭐知识库问答），从定位、功能、部署、定价到选型建议，帮你找到最适合的AI应用构建平台">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Dify vs Coze vs RAGFlow vs N8N vs FastGPT：2026年低代码AI平台深度对比 - AI知识宇宙 - 用AI采集，用AI生成</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-05-21 · 8 分钟</span>
+            </div>
+            <blockquote>
+<p><strong>数据来源</strong>：本文数据采集于 2026 年 5 月 21 日，涵盖各平台 GitHub 仓库、官方文档、定价页面及社区讨论。</p>
+</blockquote>
+<h2 id="ai">引言：低代码 AI 平台为何爆发？</h2>
+<p>2025–2026 年，AI 应用开发正经历一场「基础设施民主化」运动。Dify、Coze、RAGFlow、N8N、FastGPT 等平台让非技术用户和开发者无需从零搭建 LLM 基础设施，就能快速构建 RAG 知识库、AI Agent 和自动化工作流。</p>
+<p>但五款平台定位各异，没有「最好」，只有「最合适」。本文从<strong>一句话定位、核心能力、部署方式、适用场景</strong>四大维度，逐层深入对比。</p>
+<p><img alt="Dify vs Coze vs RAGFlow vs N8N vs FastGPT 五款低代码AI平台概览" src="https://img2024.cnblogs.com/blog/3674498/202605/3674498-20260518154148556-2014253524.png" /></p>
+<hr />
+<h2 id="_1">一、一句话定位：五款平台分别是做什么的？</h2>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>一句话定位</th>
+<th>开源</th>
+<th>GitHub ⭐</th>
+<th>最新版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dify</strong></td>
+<td>LLM 应用全栈开发平台（Workflow + RAG + Agent + LLMOps）</td>
+<td>✅ 开源</td>
+<td>142,000</td>
+<td>v1.14.2 (2026-05-19)</td>
+</tr>
+<tr>
+<td><strong>Coze（扣子）</strong></td>
+<td>字节跳动无代码 AI Bot/Agent 构建工具</td>
+<td>❌ 闭源 SaaS</td>
+<td>—</td>
+<td>云服务</td>
+</tr>
+<tr>
+<td><strong>RAGFlow</strong></td>
+<td>专注深度文档理解的开源 RAG 引擎</td>
+<td>✅ 开源</td>
+<td>80,700</td>
+<td>v0.25.4 (2026-05-14)</td>
+</tr>
+<tr>
+<td><strong>N8N</strong></td>
+<td>技术团队首选的工作流自动化 + AI Agent 平台</td>
+<td>⚠️ fair-code</td>
+<td>188,000</td>
+<td>stable (2026-05-15)</td>
+</tr>
+<tr>
+<td><strong>FastGPT</strong></td>
+<td>轻量级开源 AI 知识库问答平台</td>
+<td>✅ 开源</td>
+<td>26,100</td>
+<td>云服务 / 自部署</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">二、各平台深度解析</h2>
+<h3 id="21-difyllm">2.1 Dify：开发团队的「LLM 应用瑞士军刀」</h3>
+<p><img alt="Dify Studio 概览界面" src="https://mintcdn.com/dify-6c0370d8/Z6MqdkI3dck9_1H6/images/use-dify/get-started/dify-studio-overview.png?fit=max&amp;auto=format&amp;n=Z6MqdkI3dck9_1H6&amp;q=85&amp;s=c9f83a84f15135bf832b41230ca0d9e6" /></p>
+<p>Dify 是目前 GitHub 热度最高的开源 LLM 应用开发平台（<strong>142,000⭐</strong>），定位为 "Production-ready platform for agentic workflow development"。</p>
+<p><strong>核心能力：</strong>
+- <strong>可视化 Workflow</strong>：在画布上拖拽节点构建 AI 工作流，支持条件分支、循环、并行
+- <strong>RAG Pipeline</strong>：文档导入 → 分块 → 向量化 → 检索，支持 PDF、PPT、Word 等格式
+- <strong>Agent</strong>：内置 Function Calling 和 ReAct 两种模式，50+ 开箱即用工具
+- <strong>Prompt IDE</strong>：在线调试 Prompt，多模型横向对比
+- <strong>LLMOps</strong>：日志追踪、性能分析、A/B 测试
+- <strong>MCP 支持</strong>：最新版本已集成 MCP 协议，扩展工具生态</p>
+<p><strong>模型接入：</strong> 支持数百个 LLM，包括 GPT、Mistral、Llama3 及所有兼容 OpenAI 协议的模型。可通过自定义端点接入 DeepSeek、Claude、Kimi 等。</p>
+<p><strong>部署方式：</strong> Docker Compose 一键部署，最低配置 <strong>2 核 4G</strong>。</p>
+<p><strong>许可证：</strong> Dify Open Source License（基于 Apache 2.0，附加商业限制——禁止基于 Dify 提供多租户 SaaS）。</p>
+<p><strong>适合场景：</strong>
+- 企业级 AI 应用开发（RAG + 前端一体构建）
+- 需要快速迭代 Prompt 和工作流的研发团队
+- 需要完整 LLMOps 监控的线上应用</p>
+<hr />
+<h3 id="22-coze-bot">2.2 Coze（扣子）：零代码最快的 Bot 构建工具</h3>
+<p>Coze 是字节跳动推出的 AI Agent 构建平台，提供中国版（coze.cn）和国际版（coze.com）。</p>
+<p><strong>核心能力：</strong>
+- <strong>拖拽式 Bot 构建</strong>：配置角色、技能、记忆，无需代码
+- <strong>工作流</strong>：可视化节点连接，支持条件、循环、API 调用
+- <strong>丰富插件生态</strong>：搜索、代码执行、图像生成、自定义 API
+- <strong>多渠道发布</strong>：一键发布到微信、飞书、抖音、Telegram 等
+- <strong>代码插件</strong>：支持零代码小程序、Web 页面、定时任务</p>
+<p><strong>核心差异：</strong> Coze 的门槛是五款平台中最低的——<strong>注册即用，无需部署任何基础设施</strong>。但灵活性最受限：模型选择绑定平台内置选项，无法自由替换底层 LLM。</p>
+<p><strong>数据安全：</strong> coze.cn 由字节跳动运营，数据存储在国内。有私有化部署需求的企业需注意。</p>
+<p><strong>适合场景：</strong>
+- 快速验证 AI Bot 产品原型
+- 非技术用户构建个人助手或内容工具
+- 需要快速对接飞书/微信等协作平台
+- ❌ 不适合需要私有部署或完全控制数据的场景</p>
+<hr />
+<h3 id="23-ragflow-rag">2.3 RAGFlow：文档理解最深的 RAG 专项引擎</h3>
+<p>RAGFlow 是专为企业级知识库设计的开源 RAG 引擎（<strong>80,700⭐</strong>），核心差异点在于「深度文档理解」。</p>
+<p><strong>核心能力：</strong>
+- <strong>DeepDoc 文档解析</strong>：集成 DeepDoc、MinerU、Docling 等解析方案，处理复杂版式 PDF、表格、图片
+- <strong>模板化分块</strong>：可视化展示分块结果，溯源引用定位到原文位置，降低幻觉风险
+- <strong>双向量引擎</strong>：支持 Elasticsearch 和 Infinity（高性能专用向量引擎）切换
+- <strong>异构数据源</strong>：Confluence、Google Drive、Notion、S3、Discord、网页等
+- <strong>Agentic 工作流</strong>：内置 MCP 支持，多路召回与融合重排
+- <strong>知识图谱</strong>：支持实体关系提取，增强检索理解</p>
+<p><strong>部署要求：</strong> 需要 <strong>4 核 16G</strong> 以上配置，是五款平台中最重的。</p>
+<p><strong>RAGFlow vs Dify RAG 模块：</strong></p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>RAGFlow</th>
+<th>Dify RAG 模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档解析深度</td>
+<td>专业级，多解析引擎</td>
+<td>通用级，主流格式</td>
+</tr>
+<tr>
+<td>引用溯源</td>
+<td>可视化定位到原文片段</td>
+<td>文档级引用</td>
+</tr>
+<tr>
+<td>向量引擎选择</td>
+<td>Elasticsearch / Infinity</td>
+<td>多种向量库支持</td>
+</tr>
+<tr>
+<td>独立部署</td>
+<td>专用服务</td>
+<td>内嵌于 Dify</td>
+</tr>
+<tr>
+<td>适合规模</td>
+<td>大规模企业知识库</td>
+<td>中小型 RAG 应用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适合场景：</strong>
+- 法律、金融、医疗等对文档精准度要求高的行业
+- 企业内部多来源知识库（PDF + 网页 + 数据库混合）
+- 需要引用溯源的合规场景</p>
+<hr />
+<h3 id="24-n8n">2.4 N8N：工作流自动化的「乐高积木」</h3>
+<p>N8N 是 GitHub 上最受欢迎的工作流自动化平台之一（<strong>188,000⭐</strong>），定位为「给技术团队代码的灵活性与无代码的速度」。</p>
+<p><strong>核心能力：</strong>
+- <strong>400+ 集成</strong>：Slack、GitHub、Notion、数据库、HTTP 等
+- <strong>900+ 现成模板</strong>：快速复用自动化方案
+- <strong>代码节点</strong>：在可视化流程中插入 JavaScript/Python 自定义逻辑
+- <strong>AI Agent 节点</strong>：基于 LangChain 构建多步骤 AI 推理，内置记忆和工具调用
+- <strong>MCP 支持</strong>：最新版本已集成 MCP 协议支持
+- <strong>自托管优先</strong>：数据不经第三方，适合隐私要求高的企业</p>
+<p><strong>部署要求：</strong> 极其轻量，<strong>1 核 1G</strong> 即可运行。</p>
+<p><strong>许可证：</strong> fair-code 双许可证——社区版（Sustainable Use License）允许内部自用，但<strong>禁止将 N8N 本身作为 SaaS 对外商业化</strong>。</p>
+<p><strong>适合场景：</strong>
+- 把 AI 接入现有业务系统（CRM、ERP、数据库）
+- 运营自动化：定时任务、数据同步、通知推送
+- 需要在工作流节点中写自定义代码的技术团队
+- ❌ 纯知识库问答场景（RAGFlow 更专业）
+- ❌ 零代码非技术用户（Coze 门槛更低）</p>
+<hr />
+<h3 id="25-fastgpt">2.5 FastGPT：最轻量的知识库小能手</h3>
+<p>FastGPT 是开源 AI 知识库平台（<strong>26,100⭐</strong>），由 Sealos 团队（labring）维护，专注「快速构建知识库问答系统」。</p>
+<p><strong>核心能力：</strong>
+- <strong>数据处理</strong>：自动文本预处理、向量化、QA 分割
+- <strong>RAG 检索</strong>：支持多种嵌入模型和检索策略
+- <strong>可视化工作流</strong>：Flow 模块拖拽编排，支持条件判断、循环
+- <strong>OpenAI 兼容 API</strong>：方便集成到现有应用
+- <strong>多模型兼容</strong>：支持 GPT、Claude、国产大模型等</p>
+<p><strong>FastGPT vs RAGFlow：</strong>
+- FastGPT 更轻量：2 核 4G 即可运行，RAGFlow 需要 4 核 16G
+- FastGPT 上手更快：界面简洁，文档清晰
+- RAGFlow 文档理解更强：复杂 PDF、表格解析能力优于 FastGPT
+- FastGPT 知识库效果已经很好，适合绝大多数场景</p>
+<p><strong>商业版功能：</strong> 社区版免费，商业版提供飞书/公众号发布、运行日志看板、多租户、SSO 等企业功能，<strong>10,000 元/月起</strong>。</p>
+<p><strong>适合场景：</strong>
+- 快速构建企业内部知识库或 AI 客服
+- 需要轻量 RAG 解决方案的个人开发者或中小企业
+- 希望集成 OpenAI 兼容 API 到现有系统的团队</p>
+<hr />
+<h2 id="_3">三、五大平台横向对比总表</h2>
+<p><img alt="Dify、RAGFlow、N8N GitHub Star 增长趋势对比" src="https://api.star-history.com/svg?repos=langgenius/dify,infiniflow/ragflow,n8n-io/n8n,labring/FastGPT&amp;type=Date&amp;theme=dark" /></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Dify</th>
+<th>Coze</th>
+<th>RAGFlow</th>
+<th>N8N</th>
+<th>FastGPT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub ⭐</strong></td>
+<td>142,000</td>
+<td>闭源</td>
+<td>80,700</td>
+<td>188,000</td>
+<td>26,100</td>
+</tr>
+<tr>
+<td><strong>开源协议</strong></td>
+<td>类 Apache 2.0</td>
+<td>闭源 SaaS</td>
+<td>Apache 2.0</td>
+<td>fair-code</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><strong>部署方式</strong></td>
+<td>Docker</td>
+<td>注册即用</td>
+<td>Docker</td>
+<td>Docker / npm</td>
+<td>Docker</td>
+</tr>
+<tr>
+<td><strong>最低配置</strong></td>
+<td>2核4G</td>
+<td>无需</td>
+<td>4核16G</td>
+<td>1核1G</td>
+<td>2核4G</td>
+</tr>
+<tr>
+<td><strong>RAG 能力</strong></td>
+<td>★★★★</td>
+<td>★★★</td>
+<td>★★★★★</td>
+<td>★★</td>
+<td>★★★★</td>
+</tr>
+<tr>
+<td><strong>Agent 能力</strong></td>
+<td>★★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>★★★★</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><strong>工作流</strong></td>
+<td>★★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>★★★★★</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><strong>集成数量</strong></td>
+<td>中等（50+工具）</td>
+<td>中等（插件市场）</td>
+<td>中等（数据源）</td>
+<td><strong>400+</strong>（最多）</td>
+<td>中等</td>
+</tr>
+<tr>
+<td><strong>代码灵活性</strong></td>
+<td>高</td>
+<td>低</td>
+<td>中</td>
+<td><strong>最高</strong></td>
+<td>中</td>
+</tr>
+<tr>
+<td><strong>上手难度</strong></td>
+<td>中</td>
+<td><strong>低</strong></td>
+<td>中-高</td>
+<td>高</td>
+<td>低-中</td>
+</tr>
+<tr>
+<td><strong>适合技术水平</strong></td>
+<td>初中级开发者</td>
+<td>非技术用户</td>
+<td>初级开发者</td>
+<td>中高级开发者</td>
+<td>初中级开发者</td>
+</tr>
+<tr>
+<td><strong>多模型支持</strong></td>
+<td>✅ 数百个</td>
+<td>❌ 内置限定</td>
+<td>✅ 自定义</td>
+<td>✅ 自定义</td>
+<td>✅ 自定义</td>
+</tr>
+<tr>
+<td><strong>私有化部署</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>LLMOps 监控</strong></td>
+<td>✅ 完善</td>
+<td>❌ 有限</td>
+<td>❌ 有限</td>
+<td>❌ 有限</td>
+<td>⚠️ 商业版有</td>
+</tr>
+<tr>
+<td><strong>多渠道发布</strong></td>
+<td>⚠️ 需自行开发</td>
+<td>✅ 一键发布</td>
+<td>❌ 专注后端</td>
+<td>⚠️ 需自行开发</td>
+<td>⚠️ 商业版支持</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_4">四、核心场景测试：谁最适合你的需求</h2>
+<h3 id="1">场景 1：我想搭一个企业内部知识库</h3>
+<ul>
+<li><strong>优先推荐</strong>：RAGFlow（文档解析最强）&gt; FastGPT（轻量快速）&gt; Dify（全套件）</li>
+<li><strong>简单说</strong>：文档复杂选 RAGFlow，快速上线选 FastGPT，需要全套件选 Dify</li>
+</ul>
+<h3 id="2-bot">场景 2：我想做一个智能客服 Bot</h3>
+<ul>
+<li><strong>优先推荐</strong>：Coze（最快上线）&gt; Dify（可控性强）&gt; FastGPT（轻量可选）</li>
+<li><strong>简单说</strong>：非技术人员选 Coze，需要数据私有化选 Dify</li>
+</ul>
+<h3 id="3-ai">场景 3：我想把 AI 集成到现有业务系统</h3>
+<ul>
+<li><strong>优先推荐</strong>：N8N（400+集成）&gt; Dify（BaaS API）&gt; FastGPT（OpenAI 兼容 API）</li>
+<li><strong>简单说</strong>：需要连接各种系统选 N8N，需要 LLM 业务逻辑选 Dify</li>
+</ul>
+<h3 id="4-llm">场景 4：我需要完整的 LLM 应用开发平台</h3>
+<ul>
+<li><strong>优先推荐</strong>：Dify &gt; Coze &gt; N8N</li>
+<li><strong>简单说</strong>：Dify 是唯一集 Workflow + RAG + Agent + LLMOps 的全栈平台</li>
+</ul>
+<h3 id="5-ai">场景 5：零代码快速验证 AI 产品</h3>
+<ul>
+<li><strong>优先推荐</strong>：Coze &gt; FastGPT &gt; Dify</li>
+<li><strong>简单说</strong>：Coze 无需部署，注册即用，最适合快速试错</li>
+</ul>
+<hr />
+<h2 id="_5">五、选型决策树</h2>
+<pre><code>你的需求是什么？
+├── 需要构建知识库/文档问答？
+│   ├── 文档复杂（PDF/表格/扫描件多）→ RAGFlow
+│   ├── 轻量快速上线 → FastGPT
+│   └── 需要全套件（前端+后端+监控）→ Dify
+│
+├── 需要快速构建 Bot/Agent？
+│   ├── 非技术用户，不想部署 → Coze
+│   ├── 需要私有部署和数据掌控 → Dify
+│   └── 需要集成微信/飞书 → Coze
+│
+├── 需要连接业务系统做自动化？
+│   ├── 连接 CRM/ERP/数据库 → N8N
+│   ├── AI 自动化 + 系统集成混合 → N8N + Dify 组合
+│   └── 纯 AI 工作流 → Dify
+│
+└── 追求极致性价比？
+    ├── 开源自部署 → Dify / FastGPT（免费）
+    ├── 零成本试用 → Coze（注册即用）
+    └── 大规模生产 → Dify（LLMOps 完善）
+</code></pre>
+<hr />
+<h2 id="faq">六、常见问题 FAQ</h2>
+<p><strong>Q：Dify 和 N8N 可以组合使用吗？</strong>
+A：可以，且是常见的企业架构。N8N 负责外部系统集成（触发条件、数据同步），通过 HTTP 节点调用 Dify 的 API；Dify 专注 LLM 应用逻辑（RAG、Prompt 管理、Agent）。两者分工明确，互不重叠。</p>
+<p><strong>Q：RAGFlow 能替代 Dify 的 RAG 模块吗？</strong>
+A：RAGFlow 的文档解析能力更强（尤其是复杂 PDF、表格、多版式文档），但它是专用 RAG 引擎，缺少 Dify 的 Prompt IDE 和完整 Agent 框架。复杂文档场景下可用 RAGFlow 做知识库后端，再由 Dify 调用其 API 完成 LLM 交互层。</p>
+<p><strong>Q：Coze 的数据安全性如何？国内企业能用吗？</strong>
+A：coze.cn 是字节跳动运营的国内服务，数据存储在国内。对于敏感数据，需核实平台的数据协议。有私有化部署需求的企业建议选择 Dify、RAGFlow 或 FastGPT 自托管方案。</p>
+<p><strong>Q：FastGPT 和 RAGFlow 哪个更好？</strong>
+A：没有绝对的好，只有场景匹配。FastGPT 更轻量、上手更快，适合常规知识库场景；RAGFlow 文档解析更深，适合复杂文档和高精度要求场景。如果服务器资源有限（2核4G），选 FastGPT；如果文档质量要求极高且服务器资源充足（4核16G），选 RAGFlow。</p>
+<p><strong>Q：N8N 社区版可以商用吗？</strong>
+A：N8N 社区版（Sustainable Use License）允许内部自用，但<strong>禁止将 N8N 本身作为 SaaS 产品对外商业化</strong>。内部流程自动化不受限制，对外售卖基于 N8N 的服务需购买企业许可证。</p>
+<p><strong>Q：这些平台怎么接入国内大模型？</strong>
+A：Dify、RAGFlow、N8N、FastGPT 均支持通过 OpenAI 兼容协议配置自定义模型端点，填写对应的 base_url 和 API Key 即可接入 DeepSeek、Claude、Kimi 等模型。Coze 模型选择由平台控制，不支持自定义端点。</p>
+<hr />
+<h2 id="_6">七、总结</h2>
+<p>五个平台没有绝对优劣，只有场景匹配度：</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>一句话总结</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Coze</strong></td>
+<td>最快上手，零门槛构建 Bot，适合非技术用户快速验证</td>
+</tr>
+<tr>
+<td><strong>FastGPT</strong></td>
+<td>最轻量知识库方案，适合常规 RAG 场景快速落地</td>
+</tr>
+<tr>
+<td><strong>RAGFlow</strong></td>
+<td>文档理解王者，适合法律、金融等高精度文档问答</td>
+</tr>
+<tr>
+<td><strong>Dify</strong></td>
+<td>功能最全面的 LLM 全栈平台，适合企业级 AI 应用开发</td>
+</tr>
+<tr>
+<td><strong>N8N</strong></td>
+<td>集成生态最强，适合需要连接复杂业务系统的技术团队</td>
+</tr>
+</tbody>
+</table>
+<p><strong>技术团队首选组合</strong>：Dify（LLM 应用逻辑）+ N8N（系统自动化集成）
+<strong>非技术用户首选</strong>：Coze
+<strong>知识库首选</strong>：常规场景 FastGPT，复杂文档场景 RAGFlow</p>
+<hr />
+<h2 id="_7">数据来源</h2>
+<p>本文数据采集于 2026 年 5 月 21 日：</p>
+<ul>
+<li><strong>Dify 仓库</strong>：<a href="https://github.com/langgenius/dify">https://github.com/langgenius/dify</a>（142,000⭐，v1.14.2）</li>
+<li><strong>Dify 文档</strong>：<a href="https://docs.dify.ai">https://docs.dify.ai</a></li>
+<li><strong>RAGFlow 仓库</strong>：<a href="https://github.com/infiniflow/ragflow">https://github.com/infiniflow/ragflow</a>（80,700⭐，v0.25.4）</li>
+<li><strong>N8N 仓库</strong>：<a href="https://github.com/n8n-io/n8n">https://github.com/n8n-io/n8n</a>（188,000⭐）</li>
+<li><strong>FastGPT 仓库</strong>：<a href="https://github.com/labring/FastGPT">https://github.com/labring/FastGPT</a>（26,100⭐）</li>
+<li><strong>FastGPT 官网</strong>：<a href="https://fastgpt.io">https://fastgpt.io</a></li>
+<li><strong>Coze 官网</strong>：<a href="https://coze.cn">https://coze.cn</a> / <a href="https://coze.com">https://coze.com</a></li>
+<li><strong>参考文章</strong>：<a href="https://www.cnblogs.com/qiniushanghai/p/20071425">Dify vs Coze vs RAGflow vs n8n：低代码 AI 平台怎么选？2026 深度对比</a></li>
+<li><strong>参考文章</strong>：<a href="https://ai-bot.cn/ai-tutorials-selection-dify-n8n-coze-fastgpt-ragflow/">Dify、n8n、Coze、Fastgpt和Ragflow对比分析，如何选择？</a></li>
+</ul>
+<blockquote>
+<p><em>各平台迭代极快，建议定期关注官方更新。本文基于 2026 年 5 月最新数据撰写，评分和定价会随版本更新而变化。</em></p>
+</blockquote>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(A组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HgBm8rE" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝开发工具专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="cta-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center;">
+  <h3 style="margin: 0 0 10px 0; color: #e94560; font-size: 18px;">🚀 立即体验 ChatGPT Plus</h3>
+  <p style="color: #aaa; margin: 0 0 15px 0;">点击直达 ChatGPT Plus 官方网站，获取最新定价与功能</p>
+  <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fchat.openai.com&platform=saas&article=dify-vs-coze-ragflow-n8n-fastgpt-comparison" target="_blank" rel="nofollow" style="display: inline-block; background: linear-gradient(135deg, #e94560, #0f3460); color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s;">👉 访问官方网站</a>
+  <p style="color: #555; font-size: 12px; margin-top: 12px;">💎 通过此链接注册可获得 $20/Plus月费</p>
+</div>
+
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=dify-vs-coze-ragflow-n8n-fastgpt-comparison" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=dify-vs-coze-ragflow-n8n-fastgpt-comparison" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

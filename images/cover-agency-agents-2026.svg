@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#f43f5e"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- top-left tag box -->
+  <rect x="44" y="42" width="242" height="30" rx="6" fill="none" stroke="#22d3ee" stroke-opacity="0.65" stroke-width="1.4"/>
+  <text x="60" y="62" font-size="14" fill="#67e8f9" letter-spacing="0.5">AI 工具评测 · 开源项目</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="26" fill="none" stroke="#f43f5e" stroke-width="2.2"/>
+  <text x="838" y="66" font-size="22" font-weight="700" fill="#fb7185" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="46" y="126" font-size="30" font-weight="700" fill="#ffffff">别被"232 个 AI 专家"唬住</text>
+  <text x="46" y="166" font-size="28" font-weight="700" fill="#ffffff">Agency-Agents 到底是什么？</text>
+
+  <!-- subtitle: neon "神器 or 大礼包" -->
+  <text x="46" y="204" font-size="19" font-weight="600" fill="url(#sub)">神器，还是包装精美的提示词大礼包？</text>
+
+  <!-- three highlight lines -->
+  <text x="46" y="242" font-size="13" fill="#67e8f9">▸ 起于一条 Reddit 帖，攒到 12.7 万 Star</text>
+  <text x="46" y="266" font-size="13" fill="#c084fc">▸ 232 个人格化专家 · 16 个部门 · 全家桶通吃</text>
+  <text x="46" y="290" font-size="13" fill="#fb7185">▸ 一个被回避的问题：它真能提效吗？</text>
+
+  <!-- concept diagram right: agent grid -->
+  <g opacity="0.9">
+    <rect x="690" y="120" width="26" height="26" rx="5" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="724" y="120" width="26" height="26" rx="5" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+    <rect x="758" y="120" width="26" height="26" rx="5" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
+    <rect x="792" y="120" width="26" height="26" rx="5" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="690" y="154" width="26" height="26" rx="5" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+    <rect x="724" y="154" width="26" height="26" rx="5" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.5"/>
+    <rect x="758" y="154" width="26" height="26" rx="5" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="792" y="154" width="26" height="26" rx="5" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
+    <rect x="690" y="188" width="26" height="26" rx="5" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
+    <rect x="724" y="188" width="26" height="26" rx="5" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="758" y="188" width="26" height="26" rx="5" fill="#22d3ee" fill-opacity="0.18" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="792" y="188" width="26" height="26" rx="5" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="754" y="236" font-size="11" fill="#94a3b8" text-anchor="middle">16 divisions</text>
+  </g>
+
+  <!-- tag pills -->
+  <g font-size="12">
+    <rect x="46" y="312" width="96" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.55"/>
+    <text x="94" y="329" fill="#a5f3fc" text-anchor="middle">Claude Code</text>
+    <rect x="150" y="312" width="72" height="26" rx="13" fill="none" stroke="#a855f7" stroke-opacity="0.55"/>
+    <text x="186" y="329" fill="#e9d5ff" text-anchor="middle">Cursor</text>
+    <rect x="230" y="312" width="80" height="26" rx="13" fill="none" stroke="#f43f5e" stroke-opacity="0.55"/>
+    <text x="270" y="329" fill="#fecdd3" text-anchor="middle">Copilot</text>
+    <rect x="318" y="312" width="96" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.55"/>
+    <text x="366" y="329" fill="#a5f3fc" text-anchor="middle">提示词工程</text>
+    <rect x="422" y="312" width="96" height="26" rx="13" fill="none" stroke="#a855f7" stroke-opacity="0.55"/>
+    <text x="470" y="329" fill="#e9d5ff" text-anchor="middle">中文版 266</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="46" y1="352" x2="854" y2="352" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="46" y="370" font-size="11" fill="#64748b">不吹不黑：一次冷静的开源项目拆解</text>
+  <text x="854" y="370" font-size="11" fill="#475569" text-anchor="end">公众号 · AI 工具评测</text>
+</svg>

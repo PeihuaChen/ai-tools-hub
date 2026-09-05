@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="55%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0 L0 0 0 30" fill="none" stroke="#2a2a55" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)" opacity="0.5"/>
+
+  <rect x="0" y="0" width="300" height="4" fill="#38bdf8"/>
+  <rect x="300" y="0" width="300" height="4" fill="#a78bfa"/>
+  <rect x="600" y="0" width="300" height="4" fill="#f472b6"/>
+  <rect x="0" y="379" width="360" height="4" fill="#22d3ee"/>
+  <rect x="360" y="379" width="270" height="4" fill="#818cf8"/>
+  <rect x="630" y="379" width="270" height="4" fill="#fb7185"/>
+
+  <rect x="44" y="34" width="238" height="28" rx="6" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="1.2"/>
+  <text x="60" y="53" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#7dd3fc">AI 工程实践 · 内容标识与溯源</text>
+
+  <circle cx="836" cy="48" r="21" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="1.4"/>
+  <text x="836" y="54" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#c4b5fd" text-anchor="middle">26</text>
+
+  <text x="44" y="112" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">给 AI 生成内容加水印并校验</text>
+  <text x="44" y="148" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="url(#sub)">GB 45438 · C2PA · SynthID · AudioSeal 工程落地手册</text>
+
+  <text x="44" y="192" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#7dd3fc">◆ 显式标识 / 元数据溯源 / 隐形水印：三层为什么必须都要</text>
+  <text x="44" y="216" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#c4b5fd">◆ 文本、图像、音频、视频四模态的嵌入与校验实现路径</text>
+  <text x="44" y="240" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#fda4af">◆ 无单一技术满足监管四项要求，分层是唯一诚实的架构</text>
+
+  <g transform="translate(636,168)">
+    <rect x="0" y="0" width="222" height="132" rx="10" fill="rgba(56,189,248,0.05)" stroke="#334166" stroke-width="1"/>
+    <rect x="16" y="16" width="190" height="26" rx="5" fill="rgba(244,114,182,0.10)" stroke="#f472b6" stroke-width="1"/>
+    <text x="111" y="34" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#fbcfe8" text-anchor="middle">可见标识 · 人能感知</text>
+    <rect x="16" y="53" width="190" height="26" rx="5" fill="rgba(167,139,250,0.10)" stroke="#a78bfa" stroke-width="1"/>
+    <text x="111" y="71" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#ddd6fe" text-anchor="middle">C2PA 元数据 · 可验签</text>
+    <rect x="16" y="90" width="190" height="26" rx="5" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="1"/>
+    <text x="111" y="108" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#bae6fd" text-anchor="middle">隐形水印 · 抗剥离</text>
+    <path d="M111 42 L111 53" stroke="#64748b" stroke-width="1" stroke-dasharray="3"/>
+    <path d="M111 79 L111 90" stroke="#64748b" stroke-width="1" stroke-dasharray="3"/>
+  </g>
+
+  <g font-family="Microsoft YaHei, sans-serif" font-size="11">
+    <rect x="44" y="266" width="88" height="24" rx="12" fill="none" stroke="#38bdf8" stroke-width="1"/>
+    <text x="88" y="282" fill="#bae6fd" text-anchor="middle">GB 45438</text>
+    <rect x="140" y="266" width="74" height="24" rx="12" fill="none" stroke="#a78bfa" stroke-width="1"/>
+    <text x="177" y="282" fill="#ddd6fe" text-anchor="middle">C2PA</text>
+    <rect x="222" y="266" width="80" height="24" rx="12" fill="none" stroke="#f472b6" stroke-width="1"/>
+    <text x="262" y="282" fill="#fbcfe8" text-anchor="middle">SynthID</text>
+    <rect x="310" y="266" width="90" height="24" rx="12" fill="none" stroke="#34d399" stroke-width="1"/>
+    <text x="355" y="282" fill="#a7f3d0" text-anchor="middle">AudioSeal</text>
+    <rect x="408" y="266" width="104" height="24" rx="12" fill="none" stroke="#fbbf24" stroke-width="1"/>
+    <text x="460" y="282" fill="#fde68a" text-anchor="middle">AI Act 第 50 条</text>
+  </g>
+
+  <line x1="44" y1="316" x2="856" y2="316" stroke="#2f3b5c" stroke-width="1"/>
+  <text x="44" y="344" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#8b93b5">合规基线 · 四模态实现 · 移除攻击现状 · 软绑定恢复 · 校验服务设计 · 落地清单</text>
+  <text x="856" y="344" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#5c6488" text-anchor="end">公众号：AI 行业观察</text>
+</svg>

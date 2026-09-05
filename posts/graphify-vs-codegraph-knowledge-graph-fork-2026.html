@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两个代码知识图谱的分岔路：CodeGraph 押注 Rust 性能，Graphify 押注全语料语义</title>
+    <meta name="description" content="Graphify 冲到 97.3k 星拿下 YC S26，CodeGraph 翻倍到 62.9k 星并换上 Rust 内核。同一个痛点长出了两条完全不同的技术路线：确定性 AST 快查层 vs LLM 语义汇聚层。本文拆开两家的 benchmark、覆盖率、风险清单与选型逻辑。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">两个代码知识图谱的分岔路：CodeGraph 押注 Rust 性能，Graphify 押注全语料语义</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-07-28 · 56 分钟</span>
+            </div>
+            <h2 id="_1">序言：同一个痛点，长出了两棵不一样的树</h2>
+<p>2026 年 5 月，我们写过一篇 <a href="../posts/codegraph-ai-coding-knowledge-graph-review.html">CodeGraph 深度评测</a>。那时它 31.2k 星、v0.9.6 Beta、GitHub Trending 月榜第一。文章的结论很简单：AI 编码工具把太多钱花在"找代码"上，而一个预索引的本地图谱能把这笔钱省下来。</p>
+<p>两个月过去，两件事同时发生了。</p>
+<p><strong>第一件事</strong>：CodeGraph 自己往前跑了一大截——<strong>62.9k 星</strong>（翻倍），版本从 v0.9.6 Beta 干到 <strong>v1.5.0</strong>，解析引擎整个换成了<strong>原生 Rust 内核</strong>。它在 2 核 6GB 的 VPS 上把 Linux 内核（7 万文件、200 万符号、640 万关系）索引到底，用了不到 12 分钟。同期的 benchmark 重测数据也从"省 35% 费用"跳到了"<strong>省 60% 费用、减 69% token、减 89% 工具调用，7 个测试仓库文件读取全部为 0</strong>"。</p>
+<p><strong>第二件事</strong>：一个叫 Graphify 的项目从后面追上来，然后越过去了——<strong>97.3k 星、9.4k fork、192 位贡献者、174 个 release</strong>，公司 Graphify Labs 进了 <strong>YC S26</strong> 批次。</p>
+<p>如果只看这两个数字，你会以为这是一场"后浪拍前浪"的替代故事。但把两个项目的 README、BENCHMARKS.md、issue 列表和源码结构都翻完之后，我的结论恰恰相反：</p>
+<blockquote>
+<p>它们看起来在解同一个问题，实际上已经走到了两条不同的路上。CodeGraph 在把"代码结构的确定性快查"这件事做到物理极限；Graphify 在把"整个项目的知识"（代码之外的文档、PDF、会议、schema）汇聚成一张可遍历的语义图。硬比谁强，是个伪问题。</p>
+</blockquote>
+<p>这篇文章拆的就是这个分岔口——它在技术上具体分在哪里、两家的 benchmark 各自能证明什么和不能证明什么、各自的风险清单是什么，以及一个正在天天用 AI 写代码的人到底该怎么选。</p>
+<hr />
+<h2 id="graphify-karpathy-48">一、Graphify 的来路：一条 Karpathy 推文的 48 小时</h2>
+<p>要理解 Graphify 为什么长成现在这样，得先知道它是怎么来的——<strong>它的起点根本不是一个代码工具。</strong></p>
+<p>2026 年 4 月 1 日，<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Andrej Karpathy</a>（OpenAI 联合创始人、前特斯拉 AI 总监）在 X 上描述了一个他想要但没有的工作流。他有个叫 <code>/raw</code> 的文件夹，论文、推文、截图、手写笔记、白板照片全往里丢，然后他想要一个能跨这一切查询、而不必读每个文件的东西。配套的 GitHub Gist 标题就叫 "LLM Wiki"，核心比喻是<strong>把原始资料当源码、把 wiki 当编译产物</strong>：</p>
+<blockquote>
+<p>知识被编译一次然后保持更新，而不是每次查询时重新推导。</p>
+</blockquote>
+<p><strong>48 小时后，Safi Shamsi 把 Graphify 发在了 GitHub 上</strong>，初版日期 2026 年 4 月 3 日。</p>
+<p>这个响应速度不是运气。Shamsi 是常驻伦敦的 AI 工程师，伯明翰大学数据科学硕士（Distinction），而他的<strong>硕士论文做的就是"基于知识图谱的混合 RAG 用于学术检索"</strong>；创业前在 Valent 做 AI 工程师，方向是知识图谱、检索增强生成、可解释 AI 和多模态深度学习。也就是说，Karpathy 描述的那个概念，恰好落在他已经系统训练过的技术区间里——他不需要想清楚要做什么，只需要把已有的知识翻译成代码。</p>
+<p>之后的增长曲线相当极端：</p>
+<ul>
+<li><strong>发布 10 天</strong>：22,000 stars</li>
+<li><strong>2026 年 6 月</strong>：58,300 stars、6,100 forks、120 万 PyPI 下载</li>
+<li><strong>2026 年 7 月初</strong>：83,000 stars、v0.9.13、1,079+ commits、240 万下载、77 位贡献者</li>
+<li><strong>2026 年 7 月 28 日（今天）</strong>：97,300 stars、v0.9.28、174 个 release、192 位贡献者</li>
+</ul>
+<p>节奏大约是<strong>每两天一个 release</strong>。中途进了 YC S26 批次，周末项目变成了公司 Graphify Labs，企业产品层取名 <strong>Penpax</strong>——把同样的本地图谱方法扩展到用户的整个工作生活：会议、邮件、浏览历史、工作文件。据报道，Graphify Labs 在 2026 年中期称有 21 家 Fortune 500 公司在其企业管道中。</p>
+<p><strong>这段来路解释了本文后面的三个观察，所以值得单独讲：</strong></p>
+<p><strong>第一，它解释了范围差异的根源。</strong> Graphify 的祖先是 Karpathy 那个装着论文和白板照片的 <code>/raw</code> 文件夹，代码是后来才成为主战场的。CodeGraph 从第一行就是代码工具（2026 年 1 月上线）。所以"一边只吃代码、一边什么都吃"不是两个团队的产品决策分歧，<strong>是出身不同</strong>。Graphify 至今仍能 <code>graphify add &lt;arxiv-url&gt;</code> 把一篇论文拉进图里，这个功能在一个纯代码工具的路线图上根本不会出现。</p>
+<p><strong>第二，它解释了那套置信度标注为什么存在。</strong> 作者的学术训练就在"知识图谱 + 混合 RAG"上，而给检索结果分层标注可信度是那个领域的标准动作，不是产品经理拍出来的功能。这也是为什么它做得比一般工程实现细致（离散量规、逐条标注、报告里单列 AMBIGUOUS）。</p>
+<p><strong>第三，它也解释了 304 个 open issue。</strong> 48 小时从零到发布、之后每两天一个 release、三个月冲到 8 万星——这个速度不可能不欠技术债。我们在第五节会看到具体债务长什么样。</p>
+<p>顺便一个有意思的呼应：Karpathy 那个 gist 的核心比喻是"编译"，而 Graphify 的早期传播里最出圈的一句自我定位正是"<strong>它是个编译器，不是检索系统</strong>"。RAG 把代码切块、嵌入、查询时检索，每个会话重读同一批文件；Graphify 把结构编译一次，之后查图。这个框架是从 Karpathy 那条推文里直接继承的。</p>
+<blockquote>
+<p>📌 关于这段历史的可靠性：起源时间线主要整理自 <a href="https://ai.miraheze.org/wiki/Graphify">Learn AI 社区维基的 Graphify 条目</a>（Miraheze 托管，CC BY-SA 4.0）。这是社区编纂内容而非权威一手来源，但"Karpathy 4 月 1 日发帖、48 小时后 Graphify 发布"这条已被多家独立报道交叉印证，Karpathy 的 gist 本身也是公开可查的。需要注意该维基页面最后编辑于 2026 年 7 月 13 日，所以里面"MIT 许可证""83,000 stars"这些数据<strong>已经过时</strong>（7 月 22 日已改 Apache-2.0，星数已到 97.3k），文中涉及现状的数字均以仓库当前状态为准。</p>
+</blockquote>
+<hr />
+<h2 id="_2">二、两个项目的当前坐标</h2>
+<p>先把事实摊平。以下数据抓取自 2026 年 7 月 28 日的仓库页面。</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>CodeGraph</th>
+<th>Graphify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仓库</td>
+<td><a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a></td>
+<td><a href="https://github.com/Graphify-Labs/graphify">Graphify-Labs/graphify</a></td>
+</tr>
+<tr>
+<td>Stars / Forks</td>
+<td>62.9k / 3.9k</td>
+<td><strong>97.3k / 9.4k</strong></td>
+</tr>
+<tr>
+<td>Contributors</td>
+<td>49</td>
+<td><strong>192</strong></td>
+</tr>
+<tr>
+<td>Release 数</td>
+<td>30（v1.5.0）</td>
+<td><strong>174</strong>（v0.9.28）</td>
+</tr>
+<tr>
+<td>实现语言</td>
+<td>TypeScript + 原生 Rust kernel</td>
+<td><strong>Python 100%</strong></td>
+</tr>
+<tr>
+<td>存储</td>
+<td>SQLite + FTS5 全文索引</td>
+<td>NetworkX node-link <code>graph.json</code></td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+<td><strong>Apache-2.0</strong>（7 月 22 日刚从 MIT 改）</td>
+</tr>
+<tr>
+<td>分发</td>
+<td>一行安装脚本 / npm <code>@colbymchenry/codegraph</code></td>
+<td>PyPI <code>graphifyy</code>（<strong>双 y</strong>）/ <code>uv tool install</code></td>
+</tr>
+<tr>
+<td>主要交付形态</td>
+<td><strong>MCP Server</strong>（常驻）</td>
+<td><strong>Skill</strong>（<code>/graphify</code>，产出文件），MCP 可选</td>
+</tr>
+<tr>
+<td>Open issues / PRs</td>
+<td>118 / 244</td>
+<td>304 / 376</td>
+</tr>
+<tr>
+<td>商业化</td>
+<td>getcodegraph.com 内测 waitlist</td>
+<td>graphify.com 企业版 waitlist，<strong>YC S26</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Star 数上 Graphify 领先 55%，但这两个数字不完全可比——Graphify 的传播节奏是"每天一个 release + 大量社交媒体二次创作"，<code>augmentcode.com</code> 一家站点就在两个月里写了六篇不同 star 数节点的稿子（58.3k、63.2k、68.9k、74.8k、79.5k、97.1k）。CodeGraph 走的是相对安静的工程路线。星标能说明关注度，不能说明工程质量，这一点我们后面用具体数据说。</p>
+<hr />
+<h2 id="_3">三、分岔口在哪：范围、形态、成本三个维度同时分开</h2>
+<p><img alt="Graphify 与 CodeGraph 的流水线对比" src="../images/graphify-vs-codegraph-pipeline.svg" /></p>
+<h3 id="31-vs">3.1 范围：代码图 vs 全语料图</h3>
+<p>这是最根本的一条分界线。</p>
+<p><strong>CodeGraph 只处理代码。</strong> 30+ 种语言的源文件，抽出函数、类、方法作为节点，调用、导入、继承、实现作为边，再加上 17 种 Web 框架的路由识别和 iOS / React Native 的跨语言桥接。你的 ADR 文档、需求文档、数据库设计说明、会议纪要，它一概不看。</p>
+<p><strong>Graphify 处理你项目文件夹里的一切。</strong> 它的文件清单长得离谱：</p>
+<ul>
+<li><strong>代码</strong>：36 个 tree-sitter 语法，覆盖 <code>.py .ts .go .rs .java .swift .kt .zig .ex .jl .dm .f90 .pas</code> 等等</li>
+<li><strong>基础设施</strong>：Terraform / HCL、Salesforce Apex、SQL（表、视图、外键、JOIN 关系都确定性抽取）</li>
+<li><strong>配置元数据</strong>：<code>.mcp.json</code> 等 MCP 配置（抽出 server 节点、包引用、环境变量需求）、<code>pyproject.toml</code> / <code>go.mod</code> / <code>pom.xml</code> 包清单（同名包在多处引用时收敛成一个 hub 节点）</li>
+<li><strong>文档</strong>：Markdown（<code>[text](./other.md)</code> 链接和 <code>[[wikilinks]]</code> 变成 references 边）、reST、HTML、YAML</li>
+<li><strong>办公文件</strong>：<code>.docx</code> / <code>.xlsx</code>，以及 Google Docs / Sheets / Slides（需 <code>gws</code> CLI 授权）</li>
+<li><strong>PDF、图片</strong>（<code>.png .jpg .webp .gif</code>）</li>
+<li><strong>视频音频</strong>：本地 faster-whisper 转写，甚至能 <code>graphify add &lt;youtube-url&gt;</code> 把一个视频拉进图里</li>
+<li><strong>论文</strong>：<code>graphify add https://arxiv.org/abs/1706.03762</code> 直接抓下来入图</li>
+</ul>
+<p>差别不在"支持的文件类型多"这种功能表层面。差别在<strong>图的语义层级</strong>。CodeGraph 的图上，节点是符号，边是编译器意义上的关系。Graphify 的图上，节点可以是一个概念、一段设计理由、一篇论文里的一个方法，边可以是 <code>semantically_similar_to</code>。它还会专门把 <code># NOTE:</code> / <code># WHY:</code> / <code># HACK:</code> 这类注释和 ADR / RFC 引用<strong>提成一等公民节点</strong>，链回它们解释的代码——这就是 CodeGraph 结构上不可能表达的东西："这段代码为什么长这样"。</p>
+<h3 id="32-mcp-vs">3.2 形态：常驻 MCP vs 一次性产物</h3>
+<p><strong>CodeGraph 是个常驻进程。</strong> <code>codegraph install</code> 把 MCP server 写进你 8 个 agent 的配置（Claude Code、Cursor、Codex CLI、opencode、Hermes Agent、Gemini CLI、Antigravity IDE、Kiro），<code>codegraph init</code> 建索引，然后<strong>它就消失在背景里了</strong>。文件监听用原生 OS 事件（FSEvents / inotify / ReadDirectoryChangesW），300ms debounce，保存一个文件后亚秒级增量更新。你不需要再运行任何命令。</p>
+<p>这里有个值得单独讲的设计变化：<strong>v1.5 把默认暴露的 MCP 工具从 10 个砍到了 1 个</strong>。</p>
+<p>我们 5 月那篇文章列了 CodeGraph 的十个工具（search / context / trace / callers / callees / impact / explore / files / node / status）。现在默认只暴露 <code>codegraph_explore</code> 一个，其余全部保留但不列出，要靠 <code>CODEGRAPH_MCP_TOOLS=explore,node,search,callers</code> 环境变量手动打开。官方给的理由很有意思：</p>
+<blockquote>
+<p>实测 agent 行为显示，一个强工具比一堆窄工具更能引导 agent——更少选错，而且每个会话都省 context。</p>
+</blockquote>
+<p>这是个反直觉但很对的判断。给 agent 十个工具，它会在选择上浪费 token 和判断力；给它一个能一次返回"相关符号的逐字源码 + 调用路径 + 影响半径"的工具，它就直接答题了。<strong>做 MCP server 的人应该抄这个设计。</strong></p>
+<p><strong>Graphify 是个 Skill，产出三个文件。</strong> 你在 AI 助手里敲 <code>/graphify .</code>，它跑完给你：</p>
+<ul>
+<li><code>graph.html</code> — 浏览器打开就是力导向图，能点节点、筛选、搜索，社区用颜色区分</li>
+<li><code>GRAPH_REPORT.md</code> — 人读的报告：god nodes、意外连接、"为什么"、4-5 个图能独家回答的建议问题</li>
+<li><code>graph.json</code> — 完整图，之后所有查询都打这个文件，不再读源文件</li>
+</ul>
+<p>查询走 CLI：<code>graphify query "什么把 auth 和数据库连起来了"</code>、<code>graphify path "UserService" "DatabasePool"</code>、<code>graphify explain "RateLimiter"</code>。</p>
+<p>它也<strong>可以</strong>变成 MCP server（<code>python -m graphify.serve</code>，暴露 <code>query_graph</code> / <code>get_node</code> / <code>get_neighbors</code> / <code>shortest_path</code> / <code>list_prs</code> / <code>get_pr_impact</code> / <code>triage_prs</code>），但这是可选路径，不是默认姿势。想理解 MCP 这类协议在 agent 生态里的位置，可以看 <a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A 协议深度解析</a>。</p>
+<p>形态差异带来一个很实际的后果：<strong>Graphify 的图是文件，所以能进 Git。</strong></p>
+<h3 id="33">3.3 成本：一边是纯粹零成本，一边是分段计费</h3>
+<p><strong>CodeGraph 全程零 LLM 花费。</strong> 纯 tree-sitter 解析 + SQLite 存储 + 引用解析，没有 API key，没有外部服务，没有一个 token 花在建图上。</p>
+<p><strong>Graphify 是分段的</strong>，这一点很多二次传播的文章讲糊了：</p>
+<ul>
+<li><strong>代码部分零成本</strong>：tree-sitter AST，确定性，本地，不出机器。纯代码语料的话 <code>graphify extract</code> 完全离线，Pass 3 整个跳过。</li>
+<li><strong>文档 / PDF / 图片部分要花模型 token</strong>：走你 IDE session 的模型（用 <code>/graphify</code> skill 时不需要额外 key），或者 headless 时配一个 backend（Gemini / Claude / OpenAI / DeepSeek / Kimi / Azure / Bedrock / Ollama 都支持，Ollama 全本地）。</li>
+<li><strong>音视频零成本</strong>：本地 faster-whisper。</li>
+</ul>
+<p>想只吃免费那部分，加 <code>--code-only</code>。</p>
+<p>所以"Graphify 建图零 LLM 花费"这个说法只在纯代码仓库上成立。一旦你把 <code>docs/</code> 也扫进去——而这恰恰是 Graphify 存在的理由——就开始产生 token 成本了。这不是缺点，是它换范围付的价。</p>
+<hr />
+<h2 id="benchmark">四、两家的 Benchmark：各自证明了什么，各自没证明什么</h2>
+<p>这一节可能是全文最有价值的部分，因为传播链上被扭曲得最厉害的就是这些数字。</p>
+<h3 id="41-codegraph7-7">4.1 CodeGraph：7 仓库、7 语言、代码赛道</h3>
+<p>2026-07-21 用 Claude Opus 4.8 对当前构建（Rust 内核 + 本轮解析大改）重测，7 个真实开源仓库，每组 4 次取中位数，比较"同一个架构问题，有图 vs 无图"：</p>
+<table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>语言 · 规模</th>
+<th>工具调用</th>
+<th>时间</th>
+<th>文件读取</th>
+<th>Token</th>
+<th>成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS Code</td>
+<td>TypeScript · ~11k 文件</td>
+<td>2 vs 40</td>
+<td>5× 更快（41s vs 3m24s）</td>
+<td><strong>0 vs 17</strong></td>
+<td>83% 更少</td>
+<td>75% 更省</td>
+</tr>
+<tr>
+<td>Excalidraw</td>
+<td>TypeScript · ~640</td>
+<td>3 vs 55</td>
+<td>36s vs 23s ¹</td>
+<td><strong>0 vs 24</strong></td>
+<td>89% 更少</td>
+<td>78% 更省</td>
+</tr>
+<tr>
+<td>Django</td>
+<td>Python · ~3k</td>
+<td>2 vs 29</td>
+<td>38% 更快</td>
+<td><strong>0 vs 16</strong></td>
+<td>78% 更少</td>
+<td>69% 更省</td>
+</tr>
+<tr>
+<td>Tokio</td>
+<td>Rust · ~790</td>
+<td>3 vs 57</td>
+<td>65% 更快</td>
+<td><strong>0 vs 15</strong></td>
+<td>91% 更少</td>
+<td>86% 更省</td>
+</tr>
+<tr>
+<td>OkHttp</td>
+<td>Java · ~645</td>
+<td>1 vs 5</td>
+<td>10% 更快</td>
+<td><strong>0 vs 1</strong></td>
+<td>33% 更少</td>
+<td>基本打平 ²</td>
+</tr>
+<tr>
+<td>Gin</td>
+<td>Go · ~110</td>
+<td>3 vs 10</td>
+<td>57% 更快</td>
+<td><strong>0 vs 4</strong></td>
+<td>18% 更少</td>
+<td>41% 更省</td>
+</tr>
+<tr>
+<td>Alamofire</td>
+<td>Swift · ~110</td>
+<td>3 vs 53</td>
+<td>49s vs 31s ¹</td>
+<td><strong>0 vs 18</strong></td>
+<td>90% 更少</td>
+<td>86% 更省</td>
+</tr>
+</tbody>
+</table>
+<p>¹ 小仓库地板效应：Opus 4.8 grep 小树够快，wall-clock 能赢，但要多花约 5-10 倍 token、4-7 倍钱。</p>
+<p>² OkHttp 的无图组运气好，5 次调用就答上了；有图组 1 次调用，多花约 $0.03。</p>
+<p>平均：<strong>89% 更少工具调用、60% 更便宜、69% 更少 token、20% 更快</strong>。</p>
+<p><strong>这套数据的诚实之处</strong>：它把自己输的格子标出来了（OkHttp 成本打平、两个小仓库 wall-clock 输），并且主动提醒<strong>时间是这几列里噪声最大的指标</strong>——wall-clock 受网络延迟、模型当时负载、agent 恰好选了哪条探索路径影响，跑几次能差出一倍，所以"平均快 20%"这个数字别太当真。相比之下 token 数、工具调用次数、文件读取数都是确定性计数，重复跑基本稳定。</p>
+<p>文件读取那一列是最硬的——<strong>7 个仓库全部为 0</strong>，意味着 agent 在有图的情况下一次源文件都没打开过。这个指标没法靠运气刷出来。</p>
+<p><strong>这套数据不能证明的</strong>：每个仓库只测了<strong>一个</strong>架构问题。7 个数据点、每个 4 次取中位数，样本小到不足以支撑"你的项目也会省 60%"这个推断。而且它对比的基线是"裸 agent"，不是"其他索引方案"。</p>
+<h3 id="42-codegraph">4.2 CodeGraph 独有的两块硬数据</h3>
+<p>比 benchmark 更有说服力的是这两块，因为它们是<strong>可审计的能力边界</strong>而不是效果宣传。</p>
+<p><strong>一是分语言跨文件覆盖率实测</strong>。定义很严格："有符号的源文件中，至少有一个被解析出来的跨文件依赖者（import / call / reference / 框架路由）的占比"，每种语言挑一个真实基准仓库测：</p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>基准仓库</th>
+<th>覆盖率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python</td>
+<td>psf/requests</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>guzzle/guzzle</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>sidekiq/sidekiq</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>gin-gonic/gin</td>
+<td>96.6%</td>
+</tr>
+<tr>
+<td>Kotlin</td>
+<td>square/okhttp</td>
+<td>96.2%</td>
+</tr>
+<tr>
+<td>TypeScript / JavaScript</td>
+<td>自身仓库</td>
+<td>95.8%</td>
+</tr>
+<tr>
+<td>Swift</td>
+<td>Alamofire</td>
+<td>95.3%</td>
+</tr>
+<tr>
+<td>C++</td>
+<td>google/leveldb</td>
+<td>94.8%</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>google/gson</td>
+<td>93.3%</td>
+</tr>
+<tr>
+<td>C</td>
+<td>redis/redis</td>
+<td>92.2%</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>BurntSushi/ripgrep</td>
+<td>86.7%</td>
+</tr>
+<tr>
+<td>C#</td>
+<td>jbogard/MediatR</td>
+<td>85.2%</td>
+</tr>
+<tr>
+<td>Lua</td>
+<td>telescope.nvim</td>
+<td>84.2%</td>
+</tr>
+<tr>
+<td>Pascal / Delphi</td>
+<td>PascalCoin</td>
+<td>77.4%</td>
+</tr>
+<tr>
+<td>Liquid</td>
+<td>Shopify/dawn</td>
+<td>73.8%</td>
+</tr>
+</tbody>
+</table>
+<p>关键在残差的处理方式：README 明确说残差"永远是真实的静态分析前沿——运行时动态派发、反射 / DI 容器、框架约定入口、vendored 第三方代码，绝不通过操作分母来掩盖"。框架路由也是同样测法：Express 100%、FastAPI 98%、Flask 100%、NestJS 96.8%，而约定和反射重的那几个就老实报天花板——ASP.NET 83.9%、Spring 83.3%、Drupal 78.9%、Play 76.3%、<strong>Django 74.1%</strong>。</p>
+<p><strong>一个愿意公布自己 Django 路由只能覆盖 74% 的项目，比一个只公布 71x 倍数的项目更值得信任。</strong></p>
+<p><strong>二是工程性能数据</strong>，这是 Rust 内核的直接回报：</p>
+<ul>
+<li>Swift 编译器仓库（27k 文件的 Swift + C++）<strong>首次索引约 100 秒</strong>，改一个文件重同步 <strong>约 4 秒</strong></li>
+<li>Linux 内核（70k 文件、200 万符号、640 万关系）在 <strong>2 核 / 6GB 的 VPS 上 12 分钟内索引完成</strong>，而"内存优先设计的方案在跑到 1% 之前就 OOM 了"</li>
+<li>日常保存一个文件，图在<strong>远低于 1 秒</strong>内更新完（4400 文件项目约 0.3s，27000 文件的 Swift 编译器仓库约 0.4s），只同步变化部分，不重扫全树</li>
+<li>对比"最快的竞品索引器"的变更重索引：在中大型仓库上快 2-7 倍，跨 31 仓库 30 语言基准，而且<strong>仓库越大差距越大，因为对方的成本随仓库增长，它的成本随变更量增长</strong></li>
+</ul>
+<p>它还会根据机器实际情况自适应——真实核数（容器 / cgroup 感知，给了 2 核就按 2 核规划而不是按宿主的 64 核）、macOS 和 Linux 上诚实测量的可用内存、以及你项目解析工作的实测成本。这种"在 2 核 VPS 上也要跑完"的工程取向，在这个人人都假设你有 M4 Max 的时代不太常见。</p>
+<h3 id="43-graphify-benchmark">4.3 Graphify：换了赛道的 benchmark</h3>
+<p>Graphify 的 <code>BENCHMARKS.md</code>（2026-07-05 更新）主战场<strong>不是代码</strong>，是<strong>长期记忆</strong>，对手是 mem0 和 supermemory：</p>
+<table>
+<thead>
+<tr>
+<th>套件</th>
+<th>数据集 (n)</th>
+<th>指标</th>
+<th>Graphify</th>
+<th>对照</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memory</td>
+<td>LOCOMO (300)</td>
+<td>recall@10</td>
+<td><strong>0.497</strong></td>
+<td>BM25 0.362、supermemory 0.149*、mem0 0.048</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>LOCOMO (300)</td>
+<td>QA 准确率</td>
+<td>45.3%</td>
+<td>supermemory 49.7%、BM25 31.3%、mem0 27.3%</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>LongMemEval-S (50)</td>
+<td>QA 准确率</td>
+<td><strong>76%</strong></td>
+<td>dense RAG 76%（并列）、hybrid 74%、mem0 70%</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>LOCOMO 摄入</td>
+<td>USD</td>
+<td><strong>~$1.40</strong></td>
+<td>supermemory $15.67、mem0 $3.48</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>建图</td>
+<td>LLM credits</td>
+<td><strong>$0</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><code>*</code> supermemory 的 recall 被 embedder 混淆了——它自托管时锁定自己的 768 维英文 embedder，而不是共享的 BGE-m3。</p>
+<p><strong>这套 harness 的方法论确实比同行诚实</strong>，几个点值得单独表扬：</p>
+<ul>
+<li>所有 LLM 角色统一用一个模型（Kimi K2.6 via Moonshot），mem0 和 supermemory 作为 adapter 跑在同一个 harness 里，通过代理让它们的 LLM 调用也走 Kimi</li>
+<li>共享一个本地 embedder（BGE-m3，1024 维，多语言）</li>
+<li>评分用"正确答案必须包含的原子关键事实"金标集算覆盖率 <code>coverage = (covered + 0.5 * partial) / total</code>，<strong>每个判定都引用答案里的逐字原文</strong>，可审计</li>
+<li><strong>裁判做了盲验</strong>：跟第二个独立裁判在抽样集上一致率 90.6%，Cohen's kappa 0.81。README 自己点出"大多数已发表的记忆 benchmark 完全不披露裁判验证，我们把自己的公布出来，让评分本身也能被审计"</li>
+</ul>
+<p>这是很正经的实验设计。它也大方承认 supermemory 的 QA 分数比自己高 4.4 个点——但代价是约 11 倍的摄入成本和约 3 倍差的检索召回。</p>
+<p><strong>然后是代码智能那一栏，就克制多了。</strong></p>
+<p>在 ERPNext（约 100 万行的生产级 Python 仓库）上，给一个固定的编码 agent（Claude Opus 4.8，最多 14 轮，grep/read/list 保底 + 一个代码智能工具）加上 graphify 工具，关键事实覆盖率从 <strong>70.8%（grep + read 基线）提到 82.0%</strong>，每次查询约 14 万 token。同时它点出了一个真问题：把整个仓库塞进每一轮上下文的做法，<strong>大约 20 倍的 token 却换来更低的覆盖率</strong>。</p>
+<p>注意括号里那个数：<strong>n=6</strong>。六个问题。这个数字不足以支撑任何强结论，Graphify 自己也没往上加修饰。</p>
+<p>它还有个有意思的时序子套件：ERPNext 从 2011 到 2026 的 <strong>689 个周度 AST 检查点</strong>，全部无 LLM 确定性构建。2011-06-08 是 3069 节点 / 2900 边 / 1032 文件，2026-06-24 是 22620 节点 / 48710 边 / 3758 文件——<strong>节点长 7 倍，边长 17 倍</strong>。结论是：代码库长大时纯词法检索找到的答案越来越少，图和语义检索则随之扩展，而 AST 抽取本身保持稳定。这是个很漂亮的论证。</p>
+<h3 id="44-715x">4.4 那个满天飞的 71.5x 是怎么来的</h3>
+<p>社交媒体上传播最广的 Graphify 数字是"71x token 削减"。它的出处是 <code>docs/how-it-works.md</code>，而<strong>同一张表里就写着它的失效条件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>语料</th>
+<th>文件数</th>
+<th>削减倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Karpathy 仓库 + 论文 + 图片</td>
+<td>52</td>
+<td><strong>71.5x</strong></td>
+</tr>
+<tr>
+<td>graphify 源码 + Transformer 论文</td>
+<td>4</td>
+<td>5.4x</td>
+</tr>
+<tr>
+<td>httpx（合成 Python 库）</td>
+<td>6</td>
+<td><strong>~1x</strong></td>
+</tr>
+</tbody>
+</table>
+<p>官方原话是"token 削减随语料规模扩展。六个文件本来就装得进上下文窗口，图在那里的价值是结构清晰而非压缩"。</p>
+<p><strong>所以 71.5x 不是一个普适倍数，是一个 52 文件混合语料上的单点观测。</strong> 你在自己 6 个文件的小库上跑，理论收益是 1 倍——也就是零。这跟 CodeGraph 那边"Gin(110 文件) 只减 18% 工具调用"是同一个物理规律的两种表述：<strong>图谱类工具的收益是仓库规模和纠缠度的函数。</strong> 独立测评里也出现过 7.3x 这种更保守的实测数字。</p>
+<p>Learn AI 维基对这个梯度做了独立整理，大致分三档：</p>
+<ul>
+<li><strong>&lt;100 文件</strong>：收益极小，因为裸读文件本身已经快且便宜</li>
+<li><strong>100-500 文件</strong>：通常在 <strong>6-15x</strong> 范围</li>
+<li><strong>&gt;500 文件</strong>：可达 <strong>30x 以上</strong></li>
+</ul>
+<p>这和 CodeGraph 的规律完全对称：VS Code（11k 文件）省 75%，Gin（110 文件）省 41%，OkHttp（645 文件）基本打平。曲线形状是一样的，只是横轴的刻度不同——因为一边是混合语料（代码+文档+论文），另一边是纯代码。</p>
+<p>任何人跟你说"装了这个省 71 倍 token"，你就问他语料多大。</p>
+<hr />
+<h2 id="graphify">五、Graphify 的四个真差异化设计</h2>
+<p>抛开 benchmark，Graphify 有几个设计是 CodeGraph 结构上做不到的，值得单独讲。</p>
+<h3 id="51">5.1 每条边都标可信度</h3>
+<p>这是我最欣赏的一个设计。Graphify 的每条边带三种标签之一：</p>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EXTRACTED</code></td>
+<td>源码里明写的（函数调用、import），置信度恒为 1.0</td>
+</tr>
+<tr>
+<td><code>INFERRED</code></td>
+<td>由 graphify 解析推断，带 <code>confidence_score</code></td>
+</tr>
+<tr>
+<td><code>AMBIGUOUS</code></td>
+<td>不确定，在报告里单列出来供人工复核</td>
+</tr>
+</tbody>
+</table>
+<p><code>INFERRED</code> 的分数不是连续瞎给的，是一套离散量规：<strong>0.95</strong> 近乎确定（明确的跨文件引用，只有一个合理目标）、<strong>0.85</strong> 强证据（命名 + 上下文一致）、<strong>0.75</strong> 合理（有上下文但不显式）、<strong>0.65</strong> 弱（仅命名相似）、<strong>0.55</strong> 推测性。</p>
+<p>在终端里直接能看到：</p>
+<pre><code class="language-text">$ graphify explain &quot;APIRouter&quot;
+Node: APIRouter
+  Source:    routing.py L2210
+  Community: 2
+  Degree:    47
+
+Connections (47):
+  --&gt; RequestValidationError [uses] [INFERRED]
+  --&gt; Dependant [uses] [INFERRED]
+  --&gt; .get() [method] [EXTRACTED]
+  &lt;-- __init__.py [imports] [EXTRACTED]
+</code></pre>
+<p>为什么这重要？因为<strong>知识图谱最大的风险是"看起来确定的错误"</strong>。一条 agent 拿去当事实的边，如果只是基于命名相似猜的，你必须知道。CodeGraph 只在跨语言桥接边上打 <code>provenance:'heuristic'</code> 加 <code>metadata.synthesizedBy</code>（如 <code>swift-objc-bridge</code>、<code>rn-event-channel</code>、<code>fabric-native-impl</code>），粒度粗得多——不过反过来说，它的边绝大多数就是编译器意义上确定的，需要标注的本来就少。</p>
+<p>这个"可解释性"取向和 <a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性</a>是一条线上的思路：AI 系统给你的每个结论，都应该能追溯到它是怎么来的。</p>
+<h3 id="52">5.2 图是可提交的团队资产</h3>
+<p><code>graphify-out/</code> 在设计上就是要进 Git 的。为此它做了三件配套工程：</p>
+<ul>
+<li><code>manifest.json</code> 用相对路径存 key，加载时重新锚定，所以提交它是安全的，团队成员首次 checkout 不用重建全图</li>
+<li><code>graphify hook install</code> 装 post-commit / post-checkout 钩子，每次提交后自动重建（纯 AST，零 API 成本），<strong>并且顺带装一个 git merge driver，让 <code>graph.json</code> 自动 union 合并</strong>——两个人并行提交不会留下冲突标记</li>
+<li><code>--transport http</code> 起共享 MCP server，整个团队指向一个 URL（<code>--api-key</code> 鉴权、<code>--stateless</code> 支持负载均衡、可 Docker 部署），成员本地不需要装 graphify</li>
+</ul>
+<p>推荐的团队流程是：一个人跑 <code>/graphify .</code> 并提交 <code>graphify-out/</code> → 所有人 pull，助手立即读到图 → 装 hook 自动增量 → 文档变了跑 <code>--update</code>。</p>
+<p><strong>CodeGraph 这边没有对等能力。</strong> <code>.codegraph/</code> 是纯本机私有索引，团队 10 个人就索引 10 遍。它甚至明确警告不要让 Windows 和 WSL 共用一个 <code>.codegraph/</code>（后台服务锁和 SQLite 索引跟写它的 OS 绑定），得用 <code>CODEGRAPH_DIR=.codegraph-win</code> 给两边各一份。</p>
+<p>不过说句公道话：CodeGraph 的索引重建成本极低（Swift 编译器仓库 100 秒），所以"每人索引一遍"的代价没那么痛。而 Graphify 需要共享，一部分原因恰恰是它的文档语义 pass 要花钱——<strong>你不希望团队 10 个人各花一次 LLM 的钱去抽同一批 PDF。</strong></p>
+<blockquote>
+<p>⚠️ 安全提醒：如果你用 <code>--transport http --host 0.0.0.0</code> 把图暴露到局域网外，<strong>务必同时设 <code>--api-key</code></strong>。默认绑定是 <code>127.0.0.1</code> 仅回环，改成 <code>0.0.0.0</code> 而不加鉴权，等于把整个代码库的结构图对全网公开。README 也强调了这一点。</p>
+</blockquote>
+<h3 id="53-agent">5.3 强制 agent 用图</h3>
+<p>装完不代表 agent 会用。这是所有这类工具的共同软肋——<strong>你装了图，agent 还是习惯性地 grep</strong>。</p>
+<p>两家的解法不一样。</p>
+<p><strong>CodeGraph</strong> 靠 MCP server 自带的使用引导，加上在 agent 的指令文件（<code>CLAUDE.md</code> / <code>AGENTS.md</code> / <code>GEMINI.md</code>）里写一段标记围栏的 CodeGraph 章节——因为 MCP server 自己的引导只能触达主 agent，subagent 和非 MCP agent 得靠指令文件学会 <code>codegraph explore</code> 命令。</p>
+<p><strong>Graphify</strong> 分平台三档，其中最激进的一档很有意思：</p>
+<ul>
+<li><strong>Hook 平台</strong>（Claude Code、Gemini CLI）：在搜索类工具调用前触发钩子，把 agent 往图上推</li>
+<li><strong>指令文件平台</strong>（Codex、OpenCode、Cursor 等）：持久指令文件（<code>AGENTS.md</code>、<code>.cursor/rules/graphify.mdc</code> 带 <code>alwaysApply: true</code>）</li>
+<li><strong>Strict 模式</strong>（Claude Code）：<code>graphify install --project --strict</code> — <strong>直接拦截会话里第一次原始源文件读取，重定向到图</strong>，之后退回软提示（所以每会话最多触发一次，不会卡死）。运行时可用 <code>GRAPHIFY_HOOK_STRICT=1/0</code> 切换</li>
+</ul>
+<p>Codex 那段的说明尤其见功力：<code>graphify codex install</code> 也会在 <code>.codex/hooks.json</code> 注册 <code>PreToolUse</code> 钩子，但<strong>这个钩子故意是空操作</strong>——因为 Codex Desktop 拒绝 <code>PreToolUse</code> 上的 <code>hookSpecificOutput.additionalContext</code>，在那里发提示会直接搞坏 Bash 工具调用。所以在 Codex 上真正起作用的是 <code>AGENTS.md</code>。这种"我知道这个平台的坑在哪，所以我这里故意不做事"的说明，是有人真的在每个平台上踩过。</p>
+<p>Graphify 支持的平台名单也确实更长（22 个，含 Kiro：<code>graphify kiro install</code> 会写 <code>.kiro/skills/</code> 和 <code>.kiro/steering/graphify.md</code>），CodeGraph 是 8 个。想了解这些编程 Agent 本身怎么选，参考<a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">闭源 AI 编程工具横评</a>和 <a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 免费编程 Agent 指南</a>。</p>
+<h3 id="54-leiden-god-nodes">5.4 Leiden 社区 + god nodes + 工作记忆</h3>
+<p>Graphify 用 <a href="https://www.nature.com/articles/s41598-019-41695-z">Leiden 算法</a>把图切成子系统并起名（<code>--resolution 1.5</code> 调粒度，<code>--exclude-hubs 99</code> 把工具类超级枢纽从 god node 排名里剔掉），并排出 god nodes——"什么东西都从这儿过"的最高连接度概念。</p>
+<p>关键在于<strong>它不需要 embedding</strong>：Claude 抽出的 <code>semantically_similar_to</code> 边本身就在图里，直接影响社区形状，图结构就是相似度信号。README 明确宣称"不是向量索引，没有 embedding，没有向量库，是一张你能遍历的真图"。（想对比向量库路线，看<a href="../posts/open-source-vector-database-comparison-2026.html">开源向量数据库横评</a>。）</p>
+<p>在这之上还搭了一层"工作记忆"，这是 CodeGraph 完全没有的方向：</p>
+<ul>
+<li><code>graphify save-result --question "Q" --answer "A" --nodes Foo Bar --outcome useful</code> — 记录一次问答的结局（<code>useful</code> / <code>dead_end</code> / <code>corrected</code>）</li>
+<li><code>graphify reflect</code> — 把 <code>graphify-out/memory/</code> 的结局聚合成 <code>reflections/LESSONS.md</code>，<code>--if-stale</code> 时是空操作（每个会话跑一下很便宜）</li>
+<li>带 <code>--graph</code> 时按社区分组，并写一个学习覆盖层（<code>.graphify_learning.json</code>），给节点打 <strong>preferred / tentative / contested</strong> 标签（按时近性加权，带出处）</li>
+<li>之后 <code>graphify explain</code> / <code>query</code> 会显示 "Lesson:" 提示，<strong>当源码已经变过时标注 "code changed — re-verify"</strong></li>
+</ul>
+<p>以及一个 PR 工作流：<code>graphify prs</code> 是 PR 看板（CI 状态、review 状态、worktree 映射），<code>graphify prs 42</code> 深入单个 PR 加图影响分析，<code>--triage</code> 让模型排 review 队列，<strong><code>--conflicts</code> 用图社区算出哪些 PR 共享社区、也就是有合并顺序风险</strong>。</p>
+<p>最后是跨项目全局图：<code>graphify global add graphify-out/graph.json --as myrepo</code> 把多个仓库注册进 <code>~/.graphify/global-graph.json</code>。CodeGraph 的对应能力是 MCP 工具的 <code>projectPath</code> 参数（同一会话里查任意已索引项目，monorepo 里的子服务或第二个仓库），但那是"分别查"，不是"合成一张图"。</p>
+<p>导出生态上 Graphify 也开放得多：Neo4j（<code>--neo4j-push bolt://...</code>）、FalkorDB、GraphML（Gephi / yEd）、Obsidian vault、markdown wiki、Mermaid 架构 / 调用流 HTML、SVG。CodeGraph 走的是另一条路——npm 包直接当库嵌入（<code>CodeGraph.init()</code> / <code>indexAll()</code> / <code>buildContext()</code> / <code>getImpactRadius()</code>，适合塞进 Electron 主进程之类）。</p>
+<hr />
+<h2 id="_4">六、风险清单：两边都得看</h2>
+<p>选型只看优点是要吃亏的。这一节是两个项目各自的真实代价。</p>
+<h3 id="61-graphify">6.1 Graphify 的风险</h3>
+<p><strong>最严重的一条：LLM 语义 pass 会静默丢数据。</strong></p>
+<p><a href="https://github.com/Graphify-Labs/graphify/issues/1890">Issue #1890</a> 报告：<code>graphify extract</code> 把每个检测到的文档派发给 LLM，但<strong>从不校验每个文档是否有节点回来</strong>。模型静默省略的文档就这么从图里消失了——没有告警、没有计数不匹配、没有报错。报告者实测<strong>即便用 gpt-5，也丢了 53% 的文档</strong>。</p>
+<p>这个 bug 的性质比它的严重度更值得警惕：它不是"图不准"，是"<strong>图缺了一半而你不知道</strong>"。一张沉默地少了一半文档的知识图谱，比没有图谱更危险——因为你会信任它。这也正好反证了 4.1 节那套 EXTRACTED/INFERRED 标签的价值边界：<strong>它能告诉你一条边的可信度，但不能告诉你有一条边根本没进来。</strong></p>
+<p>其他工程债：</p>
+<ul>
+<li><a href="https://github.com/Graphify-Labs/graphify/issues/423">Issue #423</a>：<code>/graphify --update</code> 会丢掉已有的图节点（Step 4 读的是合并前的抽取结果）</li>
+<li><a href="https://github.com/Graphify-Labs/graphify/issues/1859">Issue #1859</a>：增量检测的 legacy-manifest 分支漏掉 mtime 倒退（<code>git checkout</code>、tar 恢复），导致存储的图相对磁盘上的内容变陈旧</li>
+<li><strong>304 个 open issue 对 174 个 release</strong>——这是典型的"高速迭代 + 高技术债"形态。README 里的 Troubleshooting 章节长得像一本书（PATH 问题、<code>uvx</code> 包名陷阱、<code>uv run --with</code> 静默跑旧版、ghost 重复节点、Ollama VRAM 溢出、LLM 返回非法 JSON、<code>graph.json</code> 冲突标记……），信息很有用，但它也是问题密度的诚实指标</li>
+</ul>
+<p><strong>隐私细节</strong>：查询日志（每次 <code>query</code> / <code>path</code> / <code>explain</code> / MCP <code>query_graph</code>，含时间戳、问题、语料路径、返回节点、耗时）曾经默认写到 <code>~/.cache/graphify-queries.log</code>，现已改为 <strong>opt-in</strong>（#1797）。跑老版本的用户值得检查一下这个文件。完整响应默认不存。项目声明无遥测、无使用追踪、无分析。</p>
+<p><strong>合规</strong>：许可证 <strong>5 天前（7 月 22 日）刚从 MIT 改成 Apache-2.0</strong>。Apache-2.0 本身是很友好的许可证（还带专利授权），但企业法务通常要重新走一遍审批，而且这种"一个 YC 公司在开源项目上换许可证"的动作，历史上常常是商业化收紧的前奏。仓库里同时保留了 <code>LICENSE</code> 和 <code>LICENSE-MIT</code> 加 <code>NOTICE</code>。</p>
+<p><strong>规模上限</strong>：<code>graph.json</code> 有 512 MiB 硬上限（可用 <code>GRAPHIFY_MAX_GRAPH_BYTES</code> 覆盖），超过 5000 节点的 <code>graph.html</code> 浏览器打不开（得 <code>--no-viz</code> 直接用 JSON）。</p>
+<p><strong>Windows 体验</strong>：<code>/graphify .</code> 在 PowerShell 里会因为前导斜杠被当成路径分隔符而失败，得写 <code>graphify .</code>。另外 <code>pip install</code> 在 Mac/Windows 上容易踩到"skill 从 <code>graphify-out/.graphify_python</code> 解析 Python 时指向另一个环境"，官方建议一律用 <code>uv tool install</code> 或 <code>pipx install</code>。</p>
+<p><strong>一个容易踩的坑</strong>：PyPI 上的官方包叫 <strong><code>graphifyy</code>（双 y）</strong>，其他 <code>graphify*</code> 包都不是官方的，CLI 命令仍然是 <code>graphify</code>。<code>uvx graphify ...</code> 会失败（<code>uv tool run</code> 把第一个词当包名），得写 <code>uvx --from graphifyy graphify install</code>。</p>
+<p><strong>还有个 Claude Code 特有的成本陷阱</strong>：Graphify 往工作区写 <code>graph.json</code> 和 <code>graphify-out/</code>，如果不忽略这些路径，<strong>每次写入都会让 Claude Code 的 prompt cache 失效</strong>，下一轮按 cache-write 费率全量重传。得加进 <code>.claudeignore</code>。这个坑很隐蔽，因为它省下的 token 会从另一个口子流回去。</p>
+<h3 id="62-codegraph">6.2 CodeGraph 的风险</h3>
+<p><strong>它只懂代码。</strong> 这不是 bug 是设计，但如果你的问题是"我们当初为什么选了这个消息队列"，CodeGraph 帮不上任何忙——答案在某个 ADR 或者一次会议录音里，而那是 Graphify 的地盘。</p>
+<p><strong>小仓库收益薄。</strong> 从它自己的 benchmark 就能看出来：Gin（110 文件）只减 18% 工具调用，OkHttp 成本基本打平。README 自己承认小仓库上 Opus 4.8 裸 grep 反而 wall-clock 更快（虽然烧 5-10 倍 token 和 4-7 倍钱）。<strong>收益随仓库规模和纠缠度放大，在 VS Code 级别的树上惊人，在 100 文件的项目上很温和。</strong></p>
+<p><strong>没有团队共享通道。</strong> 每台机器一份索引，且明确不建议 Windows / WSL 共用。</p>
+<p><strong>新增了匿名遥测。</strong> 5 月那篇文章写的时候还没有。现在会收集"哪些工具和命令被用、哪些语言被索引"来指导语言和 agent 支持的投入方向。声明从不收集代码、路径、文件或符号名、查询、IP，本地聚合成日总量再发送，ingest 端点是仓库里的公开代码。安装器会主动询问，随时可关：<code>codegraph telemetry off</code>、<code>CODEGRAPH_TELEMETRY=0</code> 或 <code>DO_NOT_TRACK=1</code>。<code>TELEMETRY.md</code> 列了每个字段。<strong>这是个合理的实现，但"100% 本地"这句宣传语现在需要加个脚注。</strong></p>
+<p><strong>残留的环境坑</strong>：SQLite 锁问题在自带 Node runtime + WAL 模式后基本解决，但网络盘和 WSL2 <code>/mnt</code> 上 WAL 启用不了，读会阻塞在写上（<code>codegraph status</code> 显示 <code>Journal:</code> 不是 <code>wal</code> 就是这种情况，得把项目移到本地盘）。WSL2 + Windows 盘路径下 MCP 工具调用可能 <code>Transport closed</code>，现在会退化成进程内服务，还不行就设 <code>CODEGRAPH_NO_DAEMON=1</code>。</p>
+<p><strong>它的加分项</strong>：供应链安全做得比 Graphify 扎实——npm 包走 trusted publishing（OIDC，不存在可被盗的长期 token）+ provenance attestation，GitHub Release bundle 带签名的构建证明（SLSA v1.0 Build Level 2），<code>npm audit signatures</code> 和 <code>gh attestation verify</code> 都能验。Rust 内核的每种语言都是<strong>图跟参考引擎字节级一致才放行</strong>，从小库一直验到 Linux 内核，没有预编译二进制的平台和有语法错误的文件自动逐文件回退，图不变。</p>
+<p>关于 AI 编程工具的隐藏代价，<a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding 的隐藏成本与安全风险</a>那篇讲得更系统。</p>
+<hr />
+<h2 id="_5">七、怎么选：一张决策图</h2>
+<p><img alt="CodeGraph 与 Graphify 选型决策" src="../images/graphify-vs-codegraph-decision.svg" /></p>
+<h3 id="71-codegraph">7.1 装 CodeGraph，如果你</h3>
+<ul>
+<li>每天在一个<strong>中大型代码仓库</strong>里改代码，用 Claude Code / Cursor / Codex / Kiro 之类的 agent</li>
+<li>要的是"<strong>改这个函数会炸哪里</strong>"、"请求怎么走到数据库的"这类结构问题的秒级答案</li>
+<li>在意<strong>零 LLM 成本</strong>和<strong>确定性</strong>——同样的代码永远得到同样的图</li>
+<li>需要<strong>亚秒级增量</strong>，因为 agent 在不停改文件，图不能有一秒钟是过时的</li>
+<li>用 iOS / React Native / Expo 混合栈（Swift↔ObjC、legacy bridge、TurboModules、Fabric 视图、Expo Modules 桥接，这块 CodeGraph 明显更深，每种桥都在小/中/大三个真实仓库上验过）</li>
+<li>在 CI 里想只跑受影响的测试（<code>git diff --name-only | codegraph affected --stdin</code>）</li>
+<li>机器很弱（2 核 VPS 也能跑完）或者仓库巨大（Linux 内核级别）</li>
+</ul>
+<h3 id="72-graphify">7.2 装 Graphify，如果你</h3>
+<ul>
+<li>项目的知识<strong>不只在代码里</strong>——有大量 ADR、RFC、设计文档、PDF 论文、SQL schema 说明、甚至会议录音</li>
+<li>在<strong>接手一个陌生项目</strong>，需要的第一件事是"这个系统由哪几个子系统组成、枢纽在哪、有哪些意外的耦合"（god nodes + Leiden 社区 + <code>GRAPH_REPORT.md</code> 正是干这个的）</li>
+<li>做<strong>架构考古</strong>——想知道"为什么"，而 <code># WHY:</code> 注释和 ADR 引用被提成了图上的一等公民</li>
+<li>团队要<strong>共享一张图</strong>（进 Git，或者起共享 HTTP MCP server）</li>
+<li>需要把图<strong>导出到别的地方</strong>（Neo4j、Obsidian、Gephi、wiki）</li>
+<li>想要<strong>跨仓库的全局图</strong></li>
+<li>在做 <strong>PR 流程优化</strong>（<code>prs --conflicts</code> 的合并顺序风险预判很实用）</li>
+<li>你的 agent 不在 CodeGraph 支持的 8 个之列（Graphify 支持 22 个）</li>
+</ul>
+<h3 id="73">7.3 两个一起装</h3>
+<p>这不是和事佬式的结论，是技术上确实成立的分层：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>工具</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构快查层</td>
+<td>CodeGraph</td>
+<td>确定性、零成本、亚秒增量、每次改代码都在用</td>
+</tr>
+<tr>
+<td>知识汇聚层</td>
+<td>Graphify</td>
+<td>语义、跨模态、可共享、接手项目和架构决策时用</td>
+</tr>
+</tbody>
+</table>
+<p>两者的产物路径不冲突（<code>.codegraph/</code> vs <code>graphify-out/</code>），MCP 工具名不冲突，都能被同一个 agent 同时看到。唯一要注意的是<strong>别让两套 hook / 指令文件互相打架</strong>——比如 Graphify 的 strict 模式会拦截第一次源文件读取，而 CodeGraph 的引导是推向 <code>codegraph_explore</code>，两个都装的话建议 Graphify 用默认软提示而不是 strict。</p>
+<p>坦白说，我们这个仓库自己就跑着 CodeGraph（<code>.codegraph/codegraph.db</code> 一直在那儿增量同步）。加 Graphify 的动机会是另一件事：把 <code>.kiro/steering/</code> 下那堆工作流文档、<code>data/reports/</code> 里的分析报告，和代码放进同一张图。<strong>这两件事本来就是两件事。</strong></p>
+<hr />
+<h2 id="_6">八、更大的图景：这个赛道正在发生什么</h2>
+<p>跳出选型看三个趋势。</p>
+<p><strong>第一，"上下文工程"正在从提示词转向索引。</strong> 2025 年大家还在琢磨怎么写提示词，2026 年的答案变成了"别让模型自己找，提前把结构建好"。CodeGraph 和 Graphify 是同一个转向的两个切片。CodeGraph 那个"把 10 个 MCP 工具砍到 1 个"的决定尤其说明问题——<strong>优化对象已经不是模型能力，而是模型的注意力预算</strong>。</p>
+<p><strong>第二，两家都在做同一件商业化。</strong> CodeGraph 的 hosted 平台（getcodegraph.com）主打"每个 PR 都知道该测什么、什么可能坏、哪些流程受影响、业务逻辑有没有被破坏"；Graphify 的企业版（graphify.com）主打"always-on，在后台持续更新你的代码、文档、会议"。开源 CLI 是入口，真正的生意是<strong>团队级的持续图谱</strong>。这也解释了 Graphify 为什么这么在意"图能进 Git、能起共享 server"——那是企业版的产品雏形。Graphify Labs 还有个叫 Penpax 的 Rust 企业图引擎（带形式化验证），路线更明确。</p>
+<p><strong>第三，benchmark 的军备竞赛开始了，而且开始出现自律。</strong> 两家都自建 harness、自家赢，这本来是最没意思的一种数据。但今年出现了两个正向信号：Graphify 公布了<strong>裁判盲验数据</strong>（90.6% 一致率、kappa 0.81）并主动指出同行不披露这个；CodeGraph 公布了<strong>分语言覆盖率</strong>并明确拒绝操作分母。这两件事都是给自己上枷锁的动作。<strong>在一个人人都能编一个倍数的领域里，愿意公布自己的天花板是最强的可信度信号。</strong></p>
+<p>顺着这条线，可观测性在 agent 时代的重要性只会上升，参考 <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse LLM/Agent 可观测性实践</a>。</p>
+<hr />
+<h2 id="_7">九、小结</h2>
+<p>回到开头那个分岔口。</p>
+<p><strong>CodeGraph 押的是确定性和速度。</strong> Rust 内核、SQLite、零 LLM、亚秒增量、分语言覆盖率可审计、签名发布。它的世界观是：代码结构是一个有精确答案的问题，那就把它算准、算快、算到不要钱。62.9k 星、v1.5.0、7 个基准仓库上文件读取全为 0。</p>
+<p><strong>Graphify 押的是范围和语义。</strong> 36 种语言 + 文档 + PDF + 图片 + 视频 + schema，Leiden 社区、god nodes、每条边标可信度、图进 Git、22 个平台、跨仓库全局图、工作记忆。它的世界观是：项目的知识远不止代码，而把它们放进同一张可遍历的图里，值得付一点 LLM 的钱和一些工程债。97.3k 星、YC S26、174 个 release、304 个 open issue。</p>
+<p>选择其实很好判断：<strong>你的下一个问题是"改这里会炸哪儿"，还是"我们当初为什么这么设计"？</strong> 前者装 CodeGraph，后者装 Graphify。两个问题你都天天遇到，那就两个都装——它们不冲突，因为它们本来就在回答不同的问题。</p>
+<p>至于那些满天飞的倍数，记住一条：<strong>图谱工具的收益是仓库规模和纠缠度的函数，不是常数。</strong> 52 个文件混合语料上 71.5x，6 个文件上 1x；VS Code 上省 75%，Gin 上省 41%，OkHttp 上打平。你自己的项目落在这条曲线的哪个位置，只有你自己测得出来——而好消息是，两个工具都是本地的、免费的、一行命令装完、一行命令卸干净。</p>
+<hr />
+<h2 id="_8">免责声明</h2>
+<p>本文基于 2026 年 7 月 28 日两个项目的公开仓库信息、官方 README、<code>BENCHMARKS.md</code>、<code>docs/how-it-works.md</code> 和 issue 列表整理。两个项目迭代都极快（Graphify 平均每天不止一个 release），文中的版本号、star 数、功能清单和已知问题状态可能很快过时，请以仓库最新状态为准。文中引用的所有 benchmark 数据均为<strong>项目方自测</strong>，两家都使用自建 harness，样本量偏小（CodeGraph 每仓库 1 个问题 × 4 次；Graphify 代码套件 n=6），不构成对你的项目的性能承诺。生产环境引入前请在自己的代码库上实测。文中不构成任何投资建议。</p>
+<hr />
+<h2 id="_9">参考来源</h2>
+<ol>
+<li>
+<p>Graphify-Labs. <em>graphify — Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph</em>. <a href="https://github.com/Graphify-Labs/graphify">GitHub 仓库</a></p>
+</li>
+<li>
+<p>Graphify-Labs. <em>graphify Benchmarks</em>（2026-07-05 更新，LOCOMO / LongMemEval-S / ERPNext 代码智能与时序套件）。<a href="https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md">BENCHMARKS.md</a></p>
+</li>
+<li>
+<p>Graphify-Labs. <em>How graphify works</em>（三段式流水线、Leiden 社区检测、置信度量规、71.5x token 基准）。<a href="https://github.com/Graphify-Labs/graphify/blob/v8/docs/how-it-works.md">docs/how-it-works.md</a></p>
+</li>
+<li>
+<p>Graphify-Labs. <em>ARCHITECTURE.md — 模块拆解与如何新增语言</em>。<a href="https://github.com/Graphify-Labs/graphify/blob/v8/ARCHITECTURE.md">ARCHITECTURE.md</a></p>
+</li>
+<li>
+<p>Graphify-Labs. <em>Issue #1890: LLM-omitted documents vanish silently</em>（即便用 gpt-5 也丢失 53% 文档）。<a href="https://github.com/Graphify-Labs/graphify/issues/1890">Issue 链接</a></p>
+</li>
+<li>
+<p>Graphify-Labs. <em>Issue #1859: detect_incremental legacy-manifest branch misses backwards-moving mtimes</em>。<a href="https://github.com/Graphify-Labs/graphify/issues/1859">Issue 链接</a></p>
+</li>
+<li>
+<p>Y Combinator. <em>Graphify Labs: On-device knowledge graph engine for enterprises</em>（S26 批次公司页）。<a href="https://www.ycombinator.com/companies/graphify-labs">YC 公司页</a></p>
+</li>
+<li>
+<p>University of Birmingham. <em>Meet our students: Safi Shamsi</em>（Graphify Labs 创始人背景、Penpax 项目）。<a href="https://www.birmingham.ac.uk/study/student-experience/meet-our-students/safi-shamsi">页面链接</a></p>
+</li>
+<li>
+<p>Colby McHenry. <em>CodeGraph — Pre-indexed code knowledge graph for AI coding agents</em>（v1.5.0，含 2026-07-21 重测 benchmark、分语言覆盖率、Rust 内核性能数据）。<a href="https://github.com/colbymchenry/codegraph">GitHub 仓库</a> | <a href="https://colbymchenry.github.io/codegraph/">官方文档站</a></p>
+</li>
+<li>
+<p>Traag, Waltman &amp; van Eck. <em>From Louvain to Leiden: guaranteeing well-connected communities</em>, Scientific Reports (2019)。<a href="https://www.nature.com/articles/s41598-019-41695-z">论文链接</a></p>
+</li>
+<li>
+<p>Learn AI 社区维基. <em>Graphify</em>（CC BY-SA 4.0，2026-07-13 最后编辑，详述起源、技术架构与竞争格局）。<a href="https://ai.miraheze.org/wiki/Graphify">维基页面</a></p>
+</li>
+<li>
+<p>Prototypr.io. <em>Graphify: Turn Any Folder Into a Knowledge Graph</em>（确认 Karpathy 4 月 1 日描述问题、Graphify 48 小时后上线）。<a href="https://blog.prototypr.io/graphify-one-command-turns-any-folder-into-a-knowledge-graph-7b0602b09bee">文章链接</a></p>
+</li>
+<li>
+<p>Augment Code. <em>Graphify ships v0.9.28 and relicenses to Apache-2.0</em>（star 数与许可证变更时间线）。<a href="https://www.augmentcode.com/learn/graphify-v0928-strict-mode-apache-relicense">文章链接</a></p>
+</li>
+<li>
+<p>Exchangepedia. <em>Graphify Honest Benchmark: 7.3x on a Real Python Codebase</em>（对 71.5x 传播数字的独立复测）。<a href="https://exchangepedia.com/articles/graphify-honest-benchmark-real-codebase.html">文章链接</a></p>
+</li>
+<li>
+<p>Betterstack. <em>Graphify: Building a Knowledge Graph of Your Codebase for AI Assistants</em>。<a href="https://betterstack.com/community/guides/ai/ai-development/graphify-codebase/">文章链接</a></p>
+</li>
+</ol>
+<hr />
+<h2 id="_10">延伸阅读</h2>
+<ul>
+<li><a href="../posts/codegraph-ai-coding-knowledge-graph-review.html">CodeGraph 深度评测：让 AI 编码省 35% 费用的代码知识图谱</a> — 本文的前作，2026 年 5 月版本，可对照看两个月的演进</li>
+<li><a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">闭源 AI 编程工具横评 2026</a> — Cursor / Copilot / Claude Code 这一层怎么选</li>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode 免费 AI 编程 Agent 完全指南</a> — 开源 agent 侧的选择</li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding 的隐藏代价与安全风险</a> — AI 写代码的账单和风险另一面</li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 协议深度解析</a> — 理解 MCP 在 agent 生态里的位置</li>
+<li><a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性的隐藏成本</a> — 可解释性与可追溯性为什么值钱</li>
+<li><a href="../posts/open-source-vector-database-comparison-2026.html">开源向量数据库横评 2026</a> — 与"图 vs 向量"路线之争的对照</li>
+<li><a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse LLM/Agent 可观测性实践指南</a> — 把 agent 行为变成可观测数据</li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(B组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6p6mzd" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝开发工具专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的效率体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DiPad%252520Air%252520M2%252520%2525E5%2525B9%2525B3%2525E6%25259D%2525BF%2526enc%253Dutf-8&platform=jd&article=graphify-vs-codegraph-knowledge-graph-fork-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">📋</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">iPad Air M2</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI笔记+画布工具最佳终端</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥4000-5500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E5%25B0%258F%25E7%25B1%25B3%25E5%25B9%25B3%25E6%259D%25BF6S%2520Pro%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=graphify-vs-codegraph-knowledge-graph-fork-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">📋</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">小米平板6S Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">高性价比AI笔记终端，3K触控屏</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥3000-4000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

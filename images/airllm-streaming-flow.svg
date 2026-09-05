@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640">
+  <defs>
+    <linearGradient id="bgf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <rect width="1200" height="640" fill="url(#bgf)"/>
+
+  <text x="600" y="52" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="26" font-weight="bold" fill="#111827">AirLLM 逐层流式加载工作流</text>
+  <text x="600" y="82" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#6b7280">任意时刻显存里只有一层：加载 → 计算 → 释放 → 下一层</text>
+
+  <!-- Disk box (left) -->
+  <rect x="60" y="140" width="260" height="420" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="190" y="170" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#0e7490">磁盘（分层权重）</text>
+  <text x="190" y="192" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">首次运行按层拆分保存 · 130GB 全在此</text>
+
+  <g font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#0e7490">
+    <rect x="90" y="212" width="200" height="34" rx="6" fill="#ecfeff" stroke="#0e7490"/>
+    <text x="190" y="234" text-anchor="middle">Layer 1  ·  ~1.75GB</text>
+    <rect x="90" y="256" width="200" height="34" rx="6" fill="#ecfeff" stroke="#0e7490"/>
+    <text x="190" y="278" text-anchor="middle">Layer 2  ·  ~1.75GB</text>
+    <rect x="90" y="300" width="200" height="34" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="190" y="322" text-anchor="middle" fill="#1d4ed8" font-weight="bold">Layer k  ← 当前加载</text>
+    <rect x="90" y="344" width="200" height="34" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="190" y="366" text-anchor="middle" fill="#6b7280">Layer k+1  （等待）</text>
+    <text x="190" y="404" text-anchor="middle" fill="#9ca3af" font-size="18">⋮</text>
+    <rect x="90" y="416" width="200" height="34" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="190" y="438" text-anchor="middle" fill="#6b7280">Layer 80  （等待）</text>
+  </g>
+  <text x="190" y="500" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">MoE 模型：只加载 token 路由到的少数专家</text>
+  <text x="190" y="522" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">→ 2.8T 参数也能压到几个 GB</text>
+
+  <!-- arrow disk -> gpu -->
+  <path d="M320 320 L470 320" stroke="#1d4ed8" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <text x="395" y="308" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">加载一层</text>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0 0 L7 3 L0 6 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="ahg" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0 0 L7 3 L0 6 z" fill="#15803d"/>
+    </marker>
+    <marker id="ahr" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0 0 L7 3 L0 6 z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+
+  <!-- GPU box (center) -->
+  <rect x="470" y="220" width="280" height="200" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="610" y="252" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8">GPU 显存（如 4GB）</text>
+  <rect x="510" y="272" width="200" height="60" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="610" y="300" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8">当前层：计算</text>
+  <text x="610" y="320" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563">上一层输出 → 本层输入</text>
+  <text x="610" y="360" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">峰值显存 ≈ 单层大小</text>
+  <text x="610" y="380" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">与模型总大小无关</text>
+
+  <!-- release arrow (down/back) -->
+  <path d="M610 420 L610 470 L395 470 L395 344" stroke="#b91c1c" stroke-width="2" stroke-dasharray="5" fill="none" marker-end="url(#ahr)"/>
+  <text x="500" y="490" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">算完立即释放该层显存，再取下一层</text>
+
+  <!-- output arrow -->
+  <path d="M750 320 L890 320" stroke="#15803d" stroke-width="2.5" fill="none" marker-end="url(#ahg)"/>
+  <text x="820" y="308" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">逐层前向</text>
+
+  <!-- output box -->
+  <rect x="890" y="240" width="250" height="160" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="1015" y="272" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#15803d">生成 1 个 token</text>
+  <text x="1015" y="300" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">走完全部 80 层</text>
+  <text x="1015" y="322" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">= 把整个模型从磁盘</text>
+  <text x="1015" y="342" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">搬进显存跑一遍</text>
+  <text x="1015" y="372" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309" font-weight="bold">瓶颈：磁盘 → 显存带宽</text>
+
+  <!-- prefetch note -->
+  <rect x="470" y="530" width="670" height="70" rx="10" fill="#f5f3ff" stroke="#6d28d9"/>
+  <text x="490" y="558" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#6d28d9">预取重叠（prefetching，默认开启）</text>
+  <text x="490" y="582" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">在计算当前层的同时，提前加载下一层权重，隐藏部分 I/O 延迟，约 10% 提速。</text>
+
+  <text x="1140" y="628" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#9ca3af">AI 行业观察</text>
+</svg>

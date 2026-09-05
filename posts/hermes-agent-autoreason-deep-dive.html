@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Agent 最新论文 Autoreason 深度解读：自我精炼终于学会了「适可而止」 - AI知识宇宙</title>
+    <meta name="description" content="深度解读 Nous Research 最新论文 Autoreason，揭示 AI Agent 如何通过三方竞争+盲审投票机制实现自我精炼，以及为什么「什么都不改」才是最难学会的能力">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Hermes Agent 最新论文 Autoreason 深度解读：自我精炼终于学会了「适可而止」 - AI知识宇宙</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-05-26 · 15分钟</span>
+            </div>
+            <h2 id="_1">一、为什么你需要关注这篇论文？</h2>
+<p>如果你用过 ChatGPT 或 Claude 帮你改文案、优化代码，一定遇到过这个问题：</p>
+<blockquote>
+<p>你让 AI 改了一版，觉得不太对，再改一版，越改越离谱，最后发现第一版其实最好。</p>
+</blockquote>
+<p>这不是你的错——这是 LLM <strong>迭代自我精炼（Iterative Self-Refinement）</strong> 的结构性缺陷。Nous Research（Hermes Agent 背后的团队）在 2026 年发布的论文 <strong>Autoreason: Self-Refinement That Knows When to Stop</strong> 正面解决了这个问题。</p>
+<p><img alt="Autoreason 核心流程图" src="../images/autoreason-workflow.svg" /></p>
+<p>论文的核心洞察只有一句话：<strong>让「什么都不改」成为每一轮竞争中的合法选项，并用盲审投票来决定是否真的需要改。</strong></p>
+<hr />
+<h2 id="_2">二、传统自我精炼为什么会失败？</h2>
+<p>论文指出了三个结构性原因：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>表现</th>
+<th>根因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>提示偏差（Prompt Bias）</strong></td>
+<td>让模型"找问题"，它就一定会"发明"问题</td>
+<td>对抗性提示导致幻觉</td>
+</tr>
+<tr>
+<td><strong>范围蔓延（Scope Creep）</strong></td>
+<td>每改一轮，文档就膨胀一圈</td>
+<td>没有约束机制</td>
+</tr>
+<tr>
+<td><strong>缺乏克制（Lack of Restraint）</strong></td>
+<td>模型永远不会说"不需要改"</td>
+<td>讨好型人格</td>
+</tr>
+</tbody>
+</table>
+<p>这三个问题叠加的结果是：<strong>越精炼越差</strong>。论文实验显示，标准的 Critique-and-Revise 方法在 15 轮迭代后，Haiku 3.5 的输出质量下降了 59-70%（以字数衡量）。</p>
+<blockquote>
+<p>💡 <strong>类比理解</strong>：这就像让一个永远不会说"够了"的编辑反复修改你的文章——每一轮都在"改进"，但整体在退化。</p>
+</blockquote>
+<hr />
+<h2 id="autoreason">三、Autoreason 的核心方法</h2>
+<h3 id="31">3.1 三方竞争机制</h3>
+<p>每一轮迭代产生三个竞争版本：</p>
+<pre><code>任务提示 → 当前版本 A（不变的擂主）
+                ↓
+    ┌─── 批评者（全新 Agent）───→ 批评意见
+    │
+    ├─── 作者 B（全新 Agent）──→ 对抗性修订版（B）
+    │
+    └─── 综合者（全新 Agent）───→ 综合版（AB）
+                ↓
+        评审团（3个全新 Agent，Borda 计数投票）
+                ↓
+            胜者 → 新擂主（或连续2次 A 获胜则收敛停止）
+</code></pre>
+<p>关键设计：
+- <strong>A 版本永远参赛</strong>：「什么都不改」是一等公民
+- <strong>每个角色都是全新 Agent</strong>：没有共享上下文，杜绝偏见传播
+- <strong>盲审</strong>：评委不知道哪个是原版、哪个是修改版</p>
+<h3 id="32-borda">3.2 Borda 计数投票</h3>
+<p>评审团使用 <a href="https://en.wikipedia.org/wiki/Borda_count">Borda 计数法</a> 而非简单多数投票：</p>
+<p>$$d_{t+1} = \arg\max_{c \in {A, B, AB}} \sum_{i=1}^{n} (3 - r_i(c))$$</p>
+<p>其中 $r_i(c)$ 是第 $i$ 个评委给候选 $c$ 的排名。这确保了：
+- 接近的比赛不会退化为抛硬币
+- 每个位置都贡献分数
+- 平局时倾向擂主（保守策略）</p>
+<h3 id="33">3.3 收敛条件</h3>
+<p><strong>当擂主 A 连续赢得 k=2 轮时，循环停止。</strong></p>
+<p>这是整个方法最优雅的部分——停止条件不是"Agent 累了"或"达到最大轮数"，而是两组独立的盲审评委一致认为当前版本已经是最好的。</p>
+<hr />
+<h2 id="_3">四、实验结果深度解析</h2>
+<h3 id="41">4.1 写作任务：完美横扫</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>方法</th>
+<th>Borda 得分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Haiku 3.5</td>
+<td>Autoreason</td>
+<td><strong>42/42（满分）</strong></td>
+</tr>
+<tr>
+<td>Haiku 3.5</td>
+<td>Critique-and-Revise</td>
+<td>低于单次生成</td>
+</tr>
+<tr>
+<td>Haiku 3.5</td>
+<td>单次生成</td>
+<td>基线</td>
+</tr>
+</tbody>
+</table>
+<p>Haiku 3.5 配合 Autoreason 在 3 个任务上取得了完美的 Borda 分数，而标准精炼方法反而让同一模型的输出质量<strong>低于不精炼的单次生成</strong>。</p>
+<h3 id="42">4.2 竞赛编程：显著提升</h3>
+<p>在 150 道 CodeContests 题目上：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Autoreason</th>
+<th>单次生成</th>
+<th>提升</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sonnet 4.6</td>
+<td><strong>77%</strong></td>
+<td>73%</td>
+<td>+4pp</td>
+</tr>
+<tr>
+<td>Haiku 3.5</td>
+<td><strong>40%</strong></td>
+<td>31%（best-of-6）</td>
+<td>+9pp</td>
+</tr>
+</tbody>
+</table>
+<p>注意 Haiku 3.5 的对比是 <strong>best-of-6 采样</strong>（匹配计算量），Autoreason 仍然胜出 9 个百分点。</p>
+<h3 id="43">4.3 模型缩放曲线</h3>
+<p>论文测试了 5 个模型层级：</p>
+<pre><code>Llama 8B → Gemini Flash → Haiku 3.5 → Haiku 4.5 → Sonnet 4 → Sonnet 4.6
+</code></pre>
+<p><img alt="模型缩放效果示意" src="../images/autoreason-scaling.svg" /></p>
+<p>核心发现：
+- <strong>太弱的模型（Llama 8B）</strong>：无法生成足够多样的候选，Autoreason 无效
+- <strong>中等模型（Haiku 3.5）</strong>：效果最大，生成能力 &gt; 自我评估能力
+- <strong>强模型（Sonnet 4.6）</strong>：生成-评估差距已关闭，Autoreason 增益消失</p>
+<blockquote>
+<p>💡 <strong>关键洞察</strong>：Autoreason 的价值在于弥合模型的「生成能力」和「自我评估能力」之间的差距。当模型足够强到能准确评估自己的输出时，外部评审机制就不再必要。</p>
+</blockquote>
+<h3 id="44">4.4 消融实验</h3>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 个评委 vs 3 个评委</td>
+<td>7 个评委收敛速度快 3 倍</td>
+</tr>
+<tr>
+<td>1 个评委</td>
+<td>噪声大、收敛慢</td>
+</tr>
+<tr>
+<td>去掉 B（对抗版）</td>
+<td>锦标赛崩溃，2-3 轮就收敛</td>
+</tr>
+<tr>
+<td>去掉 AB（综合版）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>长度控制评估</td>
+<td>21/28 场胜利，排除了"写得多就赢"的可能</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="autoreason-hermes-agent">五、Autoreason 与 Hermes Agent 生态的关系</h2>
+<p>Autoreason 不是一个独立的学术论文——它是 Hermes Agent 自我进化体系的核心组件：</p>
+<pre><code>Hermes Agent 生态系统
+├── hermes-agent（核心代理框架）
+├── hermes-agent-self-evolution（DSPy + GEPA 进化优化）
+└── autoreason（自我精炼方法论）
+         ↑ 你在这里
+</code></pre>
+<h3 id="hermes-agent">在 Hermes Agent 中的实际应用</h3>
+<ol>
+<li><strong>技能优化</strong>：Agent 的技能文件通过 Autoreason 循环迭代优化</li>
+<li><strong>提示进化</strong>：系统提示通过三方竞争不断改进</li>
+<li><strong>代码生成</strong>：复杂代码任务使用 Autoreason 确保质量</li>
+<li><strong>内容创作</strong>：主观性任务（文案、文档）的自动精炼</li>
+</ol>
+<p>Hermes Agent 的 <a href="https://github.com/NousResearch/hermes-agent-self-evolution">Self-Evolution 仓库</a> 使用 DSPy + GEPA（遗传-帕累托提示进化）来自动进化技能、工具描述和系统提示，而 Autoreason 提供了底层的精炼方法论。</p>
+<hr />
+<h2 id="_4">六、实际使用场景与代码示例</h2>
+<h3 id="_5">场景一：优化营销文案</h3>
+<pre><code class="language-python"># 使用 Autoreason 优化一段产品描述
+from autoreason import Tournament
+
+tournament = Tournament(
+    task_prompt=&quot;写一段 50 字以内的 AI 编程工具推广文案&quot;,
+    initial_draft=&quot;AI 帮你写代码，效率翻倍&quot;,
+    model=&quot;claude-haiku-3.5&quot;,
+    max_passes=15,
+    convergence_k=2,
+    num_judges=3
+)
+
+result = tournament.run()
+print(f&quot;最终版本: {result.winner}&quot;)
+print(f&quot;收敛轮次: {result.converged_at}&quot;)
+print(f&quot;A 获胜次数: {result.incumbent_wins}&quot;)
+</code></pre>
+<h3 id="_6">场景二：代码精炼</h3>
+<pre><code class="language-python"># 在 Hermes Agent 中使用 Autoreason 优化代码
+from autoreason import CodeTournament
+
+tournament = CodeTournament(
+    problem=&quot;实现一个高效的 LRU Cache&quot;,
+    test_cases=load_test_cases(&quot;lru_cache_tests.json&quot;),
+    model=&quot;claude-sonnet-4&quot;,
+    eval_metric=&quot;private_test_pass_rate&quot;
+)
+
+best_solution = tournament.run()
+</code></pre>
+<h3 id="hermes-agent_1">场景三：集成到 Hermes Agent 工作流</h3>
+<pre><code class="language-bash"># 在 Hermes Agent 中直接使用
+hermes chat -q &quot;用 autoreason 模式优化我的 README.md&quot;
+
+# 或者在技能进化中使用
+python -m evolution.skills.evolve_skill \
+    --skill code-review \
+    --iterations 10 \
+    --refinement-method autoreason
+</code></pre>
+<hr />
+<h2 id="_7">七、与其他自我精炼方法的对比</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>停止条件</th>
+<th>偏见隔离</th>
+<th>「不改」选项</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Autoreason</strong></td>
+<td>擂主连赢 2 轮</td>
+<td>✅ 全新 Agent</td>
+<td>✅ 一等公民</td>
+<td>主观+客观</td>
+</tr>
+<tr>
+<td>Critique-and-Revise</td>
+<td>固定轮数</td>
+<td>❌ 同一 Agent</td>
+<td>❌ 无</td>
+<td>简单修正</td>
+</tr>
+<tr>
+<td>Self-Refine</td>
+<td>固定轮数</td>
+<td>❌ 同一 Agent</td>
+<td>❌ 无</td>
+<td>简单修正</td>
+</tr>
+<tr>
+<td>Best-of-N</td>
+<td>N 次采样</td>
+<td>✅ 独立采样</td>
+<td>N/A</td>
+<td>有明确指标</td>
+</tr>
+<tr>
+<td>Constitutional AI</td>
+<td>原则检查</td>
+<td>⚠️ 部分</td>
+<td>❌ 无</td>
+<td>安全对齐</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_8">八、论文的局限性与未来方向</h2>
+<h3 id="_9">已知局限</h3>
+<ol>
+<li><strong>成本</strong>：每轮需要多次 API 调用（约 40 次/完整运行），适合高价值任务</li>
+<li><strong>跨轮累积</strong>：单轮内的"不改"保护有效，但用户可能反复重启循环导致过度优化</li>
+<li><strong>极弱模型无效</strong>：Llama 8B 级别的模型无法生成足够多样的候选</li>
+<li><strong>极强模型无需</strong>：Sonnet 4.6 级别的模型自身评估能力已足够</li>
+</ol>
+<h3 id="_10">未来方向</h3>
+<ul>
+<li><strong>自适应评委数量</strong>：根据任务复杂度动态调整</li>
+<li><strong>跨轮记忆</strong>：防止用户反复重启导致的漂移</li>
+<li><strong>成本优化</strong>：在保持质量的前提下减少 API 调用</li>
+<li><strong>与 RLHF 结合</strong>：将 Autoreason 的偏好信号用于模型训练</li>
+</ul>
+<hr />
+<h2 id="_11">九、总结：为什么这篇论文重要？</h2>
+<p>Autoreason 的贡献不在于让 AI 写得更好——而在于让 AI <strong>知道什么时候该停下来</strong>。</p>
+<p>在 AI Agent 越来越自主的今天，「克制」比「能力」更稀缺。一个永远在"改进"的 Agent 和一个知道"够了"的 Agent，后者才是你真正想要的同事。</p>
+<p>这也是 Hermes Agent 区别于其他 AI Agent 框架的哲学：不是追求单次输出的极致，而是构建一个<strong>越用越聪明、知道何时行动何时克制</strong>的系统。</p>
+<hr />
+<h2 id="_12">参考文献</h2>
+<ol>
+<li>
+<p>SHL0MS &amp; Hermes Agent. (2026). <em>Autoreason: Self-Refinement That Knows When to Stop</em>. Nous Research. <a href="https://github.com/NousResearch/autoreason">GitHub</a> | <a href="https://github.com/NousResearch/autoreason/blob/main/paper/autoreason.pdf">论文 PDF</a></p>
+</li>
+<li>
+<p>Nous Research. (2026). <em>Hermes Agent Self-Evolution: Evolutionary self-improvement using DSPy + GEPA</em>. <a href="https://github.com/NousResearch/hermes-agent-self-evolution">GitHub</a></p>
+</li>
+<li>
+<p>Nous Research. (2026). <em>Hermes Agent: The Agent That Grows With You</em>. <a href="https://hermes-agent.nousresearch.com/docs/">官方文档</a> | <a href="https://github.com/NousResearch/hermes-agent">GitHub</a></p>
+</li>
+<li>
+<p>Ospanov, A. et al. (2025). <em>HERMES: Towards Efficient and Verifiable Mathematical Reasoning in LLMs</em>. <a href="https://arxiv.org/abs/2511.18760">arXiv:2511.18760</a></p>
+</li>
+<li>
+<p>Turing Post. (2026). <em>AI 101: Hermes vs OpenClaw: Local AI Agents Compared</em>. <a href="https://www.turingpost.com/p/hermes">文章链接</a></p>
+</li>
+<li>
+<p>NVIDIA Blog. (2026). <em>Hermes Unlocks Self-Improving AI Agents, Powered by NVIDIA RTX PCs and DGX Spark</em>. <a href="https://blogs.nvidia.com/blog/rtx-ai-garage-hermes-agent-dgx-spark/">文章链接</a></p>
+</li>
+</ol>
+<hr />
+<h2 id="_13">🛒 相关硬件推荐</h2>
+<blockquote>
+<p>运行 Hermes Agent 和 Autoreason 实验需要稳定的开发环境，以下是我们精选的硬件推荐：</p>
+</blockquote>
+<h3 id="_14">京东精选</h3>
+<blockquote>
+<p>💡 以下商品来自京东联盟精选，点击链接直达京东购买页面</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>商品推荐</th>
+<th>推荐理由</th>
+<th>参考价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/oo2CPmNFHyPA9qQZpHPtQdhn7r_3YU2CPmNFHoPtikiUP.html">胜为六类网线 千兆高速 电脑路由器 2米</a></td>
+<td>开发环境有线网络必备，稳定低延迟</td>
+<td>¥4.5</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/ffKaEZLxNbH8AU7MPrHDTrxeHA_3OPKaEZLxNfHPhqAgE.html">宏碁掠夺者 512G SSD M.2 NVMe PCIe 4.0</a></td>
+<td>AI 模型存储扩容，高速读写</td>
+<td>¥669</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/ddq5CFSCYe7a7Y4agy745wIKlY_3PAq5CFSCYd78yYH5N.html">华硕 27英寸 2K 240Hz 显示器</a></td>
+<td>程序员双屏标配，高刷护眼</td>
+<td>¥1,369</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/iiApHcAN25q9bxPzfbqok4WEsJ_3ERApHcAN2iq6EXRd6.html">雷神 电脑显示器屏幕挂灯 护眼</a></td>
+<td>夜间编码护眼神器，无屏幕反光</td>
+<td>¥119</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/880UEpkTohVu6x2B0RVOmBvd0m_3BN0UEpkTo8VIwSJXW.html">Bose QC消噪耳机Ultra 头戴式降噪</a></td>
+<td>沉浸式编码，顶级主动降噪</td>
+<td>¥1,943</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <a href="https://u.jd.com/HOpdGZu">更多京东数码精选 →</a></p>
+<h3 id="_15">淘宝优选</h3>
+<table>
+<thead>
+<tr>
+<th>商品</th>
+<th>推荐理由</th>
+<th>参考价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://s.taobao.com/search?q=%E8%81%94%E6%83%B3%20%E6%8B%AF%E6%95%91%E8%80%85%20Y9000P&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">联想拯救者 Y9000P 2026</a></td>
+<td>i9+RTX4070，本地跑模型无压力</td>
+<td>¥9,000-12,000</td>
+</tr>
+<tr>
+<td><a href="https://s.taobao.com/search?q=Dell%20U2723QE%204K&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">Dell U2723QE 4K显示器</a></td>
+<td>USB-C 一线连，90W 供电</td>
+<td>¥3,000-4,000</td>
+</tr>
+<tr>
+<td><a href="https://s.taobao.com/search?q=%E7%BD%97%E6%8A%80%20MX%20Keys%20Mini&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">罗技 MX Keys Mini</a></td>
+<td>紧凑键盘，多设备无缝切换</td>
+<td>¥500-700</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <a href="https://s.taobao.com/search?q=AI%E7%BC%96%E7%A8%8B&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">更多淘宝开发者装备 →</a></p>
+<hr />
+<p><em>本文基于 Autoreason 论文公开版本及 Nous Research 官方仓库编写。如需获取论文完整 PDF，请访问 <a href="https://github.com/NousResearch/autoreason">GitHub 仓库</a>。</em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 海尔净水选购会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpsSTO" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝教育学习会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E5%AD%A6%E4%B9%A0&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的编程体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DDell%252520U2724D%2525204K%2525E6%252598%2525BE%2525E7%2525A4%2525BA%2525E5%252599%2525A8%2526enc%253Dutf-8&platform=jd&article=hermes-agent-autoreason-deep-dive" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">4K显示器 - Dell U2724D</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">程序员双屏标配，27寸4K，护眼不疲劳</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥2500-3500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DMacBook%2520Pro%2520M4%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=hermes-agent-autoreason-deep-dive" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发首选，M4芯片神经网络引擎极强</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥14000-19000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>
