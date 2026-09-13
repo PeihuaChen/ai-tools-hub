@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="50%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <linearGradient id="bottomBarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="50%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c7d2fe"/>
+      <stop offset="100%" style="stop-color:#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="subtitleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a5b4fc"/>
+      <stop offset="100%" style="stop-color:#c4b5fd"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="900" height="383" fill="url(#bgGradient)"/>
+  
+  <!-- 网格背景 -->
+  <g opacity="0.1">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366f1" stroke-width="0.5"/>
+    </pattern>
+    <rect width="900" height="383" fill="url(#grid)"/>
+  </g>
+  
+  <!-- 顶部彩色渐变条 -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBarGradient)"/>
+  
+  <!-- 底部彩色渐变条 -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBarGradient)"/>
+  
+  <!-- 左上角标签框 -->
+  <rect x="30" y="30" width="220" height="32" rx="6" fill="none" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="140" y="52" font-family="Arial, sans-serif" font-size="13" fill="#a5b4fc" text-anchor="middle" font-weight="500">AI 行业观察 · 开源项目</text>
+  
+  <!-- 右上角年份徽章 -->
+  <rect x="820" y="30" width="50" height="50" rx="25" fill="none" stroke="#22d3ee" stroke-width="2"/>
+  <text x="845" y="62" font-family="Arial, sans-serif" font-size="20" fill="#22d3ee" text-anchor="middle" font-weight="bold">26</text>
+  
+  <!-- 主标题 -->
+  <text x="50" y="110" font-family="Arial, sans-serif" font-size="31" fill="#ffffff" font-weight="bold">100+可运行AI模板</text>
+  
+  <!-- 副标题 -->
+  <text x="50" y="150" font-family="Arial, sans-serif" font-size="19" fill="url(#subtitleGradient)" font-weight="600">awesome-llm-apps重新定义LLM应用开发</text>
+  
+  <!-- 3行关键亮点 -->
+  <text x="50" y="195" font-family="Arial, sans-serif" font-size="13" fill="#94a3b8">132,000+ GitHub Stars · Apache-2.0开源协议 · 15大分类全覆盖</text>
+  <text x="50" y="220" font-family="Arial, sans-serif" font-size="13" fill="#a78bfa">支持Claude/Gemini/GPT/DeepSeek/Llama/Qwen等主流模型</text>
+  <text x="50" y="245" font-family="Arial, sans-serif" font-size="13" fill="#22d3ee">从入门到生产级，覆盖AI Agent、RAG、多智能体、语音交互全栈</text>
+  
+  <!-- 标签栏 -->
+  <g transform="translate(50, 270)">
+    <rect x="0" y="0" width="100" height="28" rx="14" fill="none" stroke="#4f46e5" stroke-width="1"/>
+    <text x="50" y="18" font-family="Arial, sans-serif" font-size="11" fill="#a5b4fc" text-anchor="middle">AI Agent</text>
+    
+    <rect x="110" y="0" width="60" height="28" rx="14" fill="none" stroke="#7c3aed" stroke-width="1"/>
+    <text x="140" y="18" font-family="Arial, sans-serif" font-size="11" fill="#c4b5fd" text-anchor="middle">RAG</text>
+    
+    <rect x="180" y="0" width="100" height="28" rx="14" fill="none" stroke="#0891b2" stroke-width="1"/>
+    <text x="230" y="18" font-family="Arial, sans-serif" font-size="11" fill="#67e8f9" text-anchor="middle">Multi-Agent</text>
+    
+    <rect x="290" y="0" width="70" height="28" rx="14" fill="none" stroke="#0284c7" stroke-width="1"/>
+    <text x="325" y="18" font-family="Arial, sans-serif" font-size="11" fill="#7dd3fc" text-anchor="middle">MCP</text>
+    
+    <rect x="370" y="0" width="70" height="28" rx="14" fill="none" stroke="#059669" stroke-width="1"/>
+    <text x="405" y="18" font-family="Arial, sans-serif" font-size="11" fill="#6ee7b7" text-anchor="middle">Voice</text>
+    
+    <rect x="450" y="0" width="80" height="28" rx="14" fill="none" stroke="#d97706" stroke-width="1"/>
+    <text x="490" y="18" font-family="Arial, sans-serif" font-size="11" fill="#fcd34d" text-anchor="middle">Open Source</text>
+  </g>
+  
+  <!-- 右侧概念示意图 -->
+  <g transform="translate(650, 80)">
+    <!-- Agent图标 -->
+    <rect x="0" y="0" width="80" height="80" rx="12" fill="#1e1b4b" stroke="#4f46e5" stroke-width="1.5"/>
+    <text x="40" y="35" font-family="Arial, sans-serif" font-size="24" fill="#818cf8" text-anchor="middle">🤖</text>
+    <text x="40" y="55" font-family="Arial, sans-serif" font-size="10" fill="#a5b4fc" text-anchor="middle">Agent</text>
+    
+    <!-- RAG图标 -->
+    <rect x="100" y="0" width="80" height="80" rx="12" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="140" y="35" font-family="Arial, sans-serif" font-size="24" fill="#c4b5fd" text-anchor="middle">🔍</text>
+    <text x="140" y="55" font-family="Arial, sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">RAG</text>
+    
+    <!-- 连接线 -->
+    <line x1="80" y1="40" x2="100" y2="40" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4"/>
+    
+    <!-- 底部说明 -->
+    <text x="90" y="110" font-family="Arial, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">100+ Production-Ready</text>
+    <text x="90" y="125" font-family="Arial, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">AI Application Templates</text>
+  </g>
+  
+  <!-- 底部区域 -->
+  <line x1="50" y1="340" x2="850" y2="340" stroke="#334155" stroke-width="1"/>
+  
+  <!-- 章节提示 -->
+  <text x="50" y="360" font-family="Arial, sans-serif" font-size="11" fill="#475569">📌 项目概览 · 15大分类 · 技术栈解析 · 实战指南 · 社区生态</text>
+  
+  <!-- 公众号水印 -->
+  <text x="850" y="360" font-family="Arial, sans-serif" font-size="10" fill="#334155" text-anchor="end">AI行业观察</text>
+</svg>

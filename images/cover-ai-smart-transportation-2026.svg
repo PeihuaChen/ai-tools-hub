@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#161638"/>
+      <stop offset="100%" stop-color="#0d0d25"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/><line x1="0" y1="192" x2="900" y2="192"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="225" height="4" fill="url(#cyan)"/>
+  <rect x="225" y="0" width="225" height="4" fill="url(#green)"/>
+  <rect x="450" y="0" width="225" height="4" fill="url(#blue)"/>
+  <rect x="675" y="0" width="225" height="4" fill="url(#orange)"/>
+  <rect x="0" y="379" width="225" height="4" fill="url(#cyan)"/>
+  <rect x="225" y="379" width="225" height="4" fill="url(#green)"/>
+  <rect x="450" y="379" width="225" height="4" fill="url(#blue)"/>
+  <rect x="675" y="379" width="225" height="4" fill="url(#orange)"/>
+
+  <!-- Right: Road/intersection illustration -->
+  <g transform="translate(590, 55)">
+    <!-- Road intersection cross -->
+    <rect x="80" y="0" width="60" height="200" rx="2" fill="#1a1a2e" stroke="#334155" stroke-width="1"/>
+    <rect x="0" y="70" width="220" height="60" rx="2" fill="#1a1a2e" stroke="#334155" stroke-width="1"/>
+    <!-- Center dashes -->
+    <g stroke="#4a5568" stroke-width="1" stroke-dasharray="8,6">
+      <line x1="110" y1="0" x2="110" y2="70"/>
+      <line x1="110" y1="130" x2="110" y2="200"/>
+      <line x1="0" y1="100" x2="80" y2="100"/>
+      <line x1="140" y1="100" x2="220" y2="100"/>
+    </g>
+
+    <!-- Traffic light -->
+    <g transform="translate(145, 45)">
+      <rect x="0" y="0" width="16" height="38" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <circle cx="8" cy="10" r="4" fill="#ef4444" opacity="0.4"/>
+      <circle cx="8" cy="20" r="4" fill="#fbbf24" opacity="0.4"/>
+      <circle cx="8" cy="30" r="4" fill="#22c55e"/>
+    </g>
+
+    <!-- Car 1 (moving up) -->
+    <g transform="translate(90, 145)">
+      <rect x="0" y="0" width="16" height="28" rx="4" fill="#22d3ee" opacity="0.9"/>
+      <text x="8" y="18" font-family="Arial" font-size="8" fill="#0a0a1e" text-anchor="middle">AI</text>
+    </g>
+
+    <!-- Car 2 (moving right) -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="28" height="16" rx="4" fill="#34d399" opacity="0.9"/>
+    </g>
+
+    <!-- AI vision cone from traffic light -->
+    <g opacity="0.15">
+      <polygon points="153,83 90,130 140,130" fill="#22d3ee"/>
+    </g>
+
+    <!-- Label -->
+    <text x="110" y="220" font-family="'Courier New',monospace" font-size="9" fill="#64748b" text-anchor="middle">AI 信号控制 + 违法检测</text>
+  </g>
+
+  <!-- Tag -->
+  <g transform="translate(50, 28)">
+    <rect x="0" y="0" width="210" height="30" rx="4" fill="#0a1a20" stroke="url(#cyan)" stroke-width="1"/>
+    <text x="105" y="20" font-family="'Courier New',monospace" font-weight="bold" font-size="13" fill="#22d3ee" text-anchor="middle">AI 行业观察 · 智能交通</text>
+  </g>
+
+  <text x="50" y="112" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="28" font-weight="bold" fill="#ffffff">AI 大模型重塑智能交通 2026</text>
+  <text x="50" y="150" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="17" font-weight="bold" fill="url(#cyan)">端到端自动驾驶 → 城市交通治理 · 七大场景全景</text>
+
+  <!-- Key highlights -->
+  <g transform="translate(50, 178)">
+    <text x="0" y="0" font-family="'Courier New',monospace" font-size="12" fill="#22d3ee">Waymo 100万次/周 · 小马智行 544% 增长</text>
+    <text x="0" y="20" font-family="'Courier New',monospace" font-size="12" fill="#34d399">AI信号优化降延误40% · AI执法预防1190起事故/年</text>
+    <text x="0" y="40" font-family="'Courier New',monospace" font-size="12" fill="#f59e0b">世界模型 · 数字孪生 · 座舱Agent · 车路协同</text>
+  </g>
+
+  <!-- Tags -->
+  <g transform="translate(50, 248)">
+    <rect x="0" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#06b6d4" stroke-width="0.8"/>
+    <text x="32" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#a5f3fc" text-anchor="middle">自动驾驶</text>
+
+    <rect x="72" y="0" width="56" height="24" rx="12" fill="#1e1e3a" stroke="#10b981" stroke-width="0.8"/>
+    <text x="100" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#6ee7b7" text-anchor="middle">Robotaxi</text>
+
+    <rect x="136" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#3b82f6" stroke-width="0.8"/>
+    <text x="168" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#93c5fd" text-anchor="middle">信号控制</text>
+
+    <rect x="208" y="0" width="56" height="24" rx="12" fill="#1e1e3a" stroke="#f59e0b" stroke-width="0.8"/>
+    <text x="236" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fde047" text-anchor="middle">AI执法</text>
+
+    <rect x="272" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="304" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">世界模型</text>
+
+    <rect x="344" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#ef4444" stroke-width="0.8"/>
+    <text x="376" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fca5a5" text-anchor="middle">中美对比</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="50" y="290" width="460" height="1" fill="#fff" opacity="0.06"/>
+  <text x="50" y="314" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4a4f70">七大场景 · 关键数据 · 中美对比 · 趋势展望</text>
+  <text x="50" y="349" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#33385a">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 30)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#cyan)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#22d3ee" text-anchor="middle">26</text>
+  </g>
+</svg>

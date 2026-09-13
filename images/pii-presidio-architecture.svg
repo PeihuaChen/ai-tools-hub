@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560">
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <rect width="1200" height="560" fill="#f8fafc" opacity="0.5"/>
+
+  <text x="600" y="46" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">Presidio 架构与数据流</text>
+  <text x="600" y="74" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6b7280">检测 → 匿名化 → 可逆还原，三大模块解耦，Recognizer 可插拔</text>
+
+  <!-- Input -->
+  <rect x="40" y="150" width="150" height="90" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="115" y="188" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#111827">原始输入</text>
+  <text x="115" y="212" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4b5563">文本 / 图像 /</text>
+  <text x="115" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4b5563">结构化数据</text>
+
+  <!-- Analyzer -->
+  <rect x="270" y="120" width="270" height="270" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="405" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="bold" fill="#1d4ed8">Analyzer 识别引擎</text>
+
+  <rect x="290" y="168" width="230" height="46" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="405" y="190" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#1e3a8a">规则 Recognizer</text>
+  <text x="405" y="206" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">正则 + Luhn 校验（卡号/邮箱/身份证）</text>
+
+  <rect x="290" y="222" width="230" height="46" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="405" y="244" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#1e3a8a">NLP / NER Recognizer</text>
+  <text x="405" y="260" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">spaCy / transformers（人名/地名）</text>
+
+  <rect x="290" y="276" width="230" height="46" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="405" y="298" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#1e3a8a">上下文增强 + 置信度</text>
+  <text x="405" y="314" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">关键词调分 + 阈值过滤</text>
+
+  <text x="405" y="352" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#6b7280">输出：实体类型 + 区间 + 分数</text>
+
+  <!-- Anonymizer -->
+  <rect x="620" y="120" width="270" height="270" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="755" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="bold" fill="#15803d">Anonymizer 匿名化引擎</text>
+
+  <rect x="640" y="168" width="230" height="40" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="755" y="193" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#166534">replace → &lt;PERSON&gt; 占位符</text>
+
+  <rect x="640" y="216" width="230" height="40" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="755" y="241" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#166534">mask / redact 打码删除</text>
+
+  <rect x="640" y="264" width="230" height="40" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="755" y="289" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#166534">hash / encrypt 加密</text>
+
+  <rect x="640" y="312" width="230" height="40" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+  <text x="755" y="337" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="#b45309">deanonymize 可逆还原</text>
+
+  <!-- Output -->
+  <rect x="970" y="150" width="180" height="90" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="1060" y="188" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#111827">脱敏后输出</text>
+  <text x="1060" y="212" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4b5563">安全交给下游</text>
+  <text x="1060" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4b5563">模型 / 存储 / 日志</text>
+
+  <!-- Image Redactor note -->
+  <rect x="270" y="420" width="620" height="70" rx="10" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="580" y="450" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#6d28d9">Image Redactor（图像脱敏 · beta）</text>
+  <text x="580" y="473" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4b5563">OCR 提取文字 → 送 Analyzer 识别 → 在图上涂抹命中区域（证件照/截图）</text>
+
+  <!-- arrows -->
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0 0 L8 3 L0 6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <line x1="190" y1="195" x2="265" y2="195" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="540" y1="255" x2="615" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="890" y1="195" x2="965" y2="195" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah)"/>
+
+  <text x="40" y="530" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#6b7280">注：中文人名/身份证/手机号需自定义 Recognizer 或换中文 NLP 模型（参考 zh_PII 扩展）。</text>
+</svg>

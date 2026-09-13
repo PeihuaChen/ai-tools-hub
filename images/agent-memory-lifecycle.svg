@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500">
+  <defs>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1d4ed8"/>
+      <stop offset="100%" style="stop-color:#0e7490"/>
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1d4ed8"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <text x="600" y="45" font-family="Arial, Microsoft YaHei, sans-serif" font-size="22" font-weight="bold" fill="#111827" text-anchor="middle">Agent 记忆系统：写入-存储-检索-遗忘 全生命周期</text>
+  <text x="600" y="70" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">对话产生 → LLM 抽取结构化记忆 → 决策写入 → 按形态存储 → 混合检索 → 遗忘与巩固</text>
+
+  <g transform="translate(60, 120)">
+    <rect x="0" y="0" width="140" height="90" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="70" y="30" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8" text-anchor="middle">① 对话产生</text>
+    <text x="70" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">用户与 Agent</text>
+    <text x="70" y="68" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">交互产生原始文本</text>
+    <rect x="48" y="78" width="44" height="8" rx="4" fill="#1d4ed8" opacity="0.3"/>
+  </g>
+
+  <line x1="210" y1="165" x2="250" y2="165" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(260, 120)">
+    <rect x="0" y="0" width="140" height="90" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+    <text x="70" y="30" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#15803d" text-anchor="middle">② LLM 抽取</text>
+    <text x="70" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">提取实体、关系</text>
+    <text x="70" y="68" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">生成结构化记忆条目</text>
+    <rect x="48" y="78" width="44" height="8" rx="4" fill="#15803d" opacity="0.3"/>
+  </g>
+
+  <line x1="410" y1="165" x2="450" y2="165" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(460, 120)">
+    <rect x="0" y="0" width="140" height="90" rx="10" fill="#fefce8" stroke="#b45309" stroke-width="1.5"/>
+    <text x="70" y="30" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b45309" text-anchor="middle">③ 决策写入</text>
+    <text x="70" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">ADD / UPDATE</text>
+    <text x="70" y="68" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">DELETE / NOOP</text>
+    <rect x="48" y="78" width="44" height="8" rx="4" fill="#b45309" opacity="0.3"/>
+  </g>
+
+  <line x1="610" y1="165" x2="650" y2="165" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(660, 120)">
+    <rect x="0" y="0" width="140" height="90" rx="10" fill="#fdf4ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="70" y="30" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#6d28d9" text-anchor="middle">④ 形态存储</text>
+    <text x="70" y="50" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">明文 / 激活(KV)</text>
+    <text x="70" y="64" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">参数(LoRA) / 图</text>
+    <text x="70" y="78" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">可相互转化</text>
+  </g>
+
+  <line x1="810" y1="165" x2="850" y2="165" stroke="url(#arrowGrad)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(860, 120)">
+    <rect x="0" y="0" width="140" height="90" rx="10" fill="#ecfdf5" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="70" y="30" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#0e7490" text-anchor="middle">⑤ 混合检索</text>
+    <text x="70" y="50" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">向量语义 + BM25</text>
+    <text x="70" y="64" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">图遍历 + Reranker</text>
+    <text x="70" y="78" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">多信号融合排序</text>
+  </g>
+
+  <g transform="translate(430, 280)">
+    <rect x="0" y="0" width="340" height="80" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+    <text x="170" y="28" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c" text-anchor="middle">⑥ 遗忘与巩固</text>
+    <text x="170" y="48" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">艾宾浩斯衰减 · 双时态失效 · 仿生巩固机制</text>
+    <text x="170" y="64" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#4b5563" text-anchor="middle">只增不减 → 检索噪声膨胀，学会遗忘同样重要</text>
+  </g>
+
+  <path d="M930,210 L930,250 L770,250 L770,280" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowGray)"/>
+  <path d="M430,320 L430,250 L660,250 L660,210" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowGray)"/>
+
+  <g transform="translate(60, 400)">
+    <text x="0" y="15" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" font-weight="bold" fill="#374151">存储后端：</text>
+    <rect x="90" y="0" width="80" height="24" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="130" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#1d4ed8" text-anchor="middle">向量库</text>
+    <rect x="180" y="0" width="80" height="24" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+    <text x="220" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">图数据库</text>
+    <rect x="270" y="0" width="80" height="24" rx="12" fill="#fefce8" stroke="#b45309" stroke-width="1"/>
+    <text x="310" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#b45309" text-anchor="middle">KV 缓存</text>
+    <rect x="360" y="0" width="80" height="24" rx="12" fill="#fdf4ff" stroke="#6d28d9" stroke-width="1"/>
+    <text x="400" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#6d28d9" text-anchor="middle">模型权重</text>
+  </g>
+
+  <g transform="translate(560, 400)">
+    <text x="0" y="15" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" font-weight="bold" fill="#374151">检索方式：</text>
+    <rect x="90" y="0" width="100" height="24" rx="12" fill="#ecfdf5" stroke="#0e7490" stroke-width="1"/>
+    <text x="140" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#0e7490" text-anchor="middle">语义+关键词</text>
+    <rect x="200" y="0" width="80" height="24" rx="12" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="240" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#b91c1c" text-anchor="middle">图遍历</text>
+    <rect x="290" y="0" width="100" height="24" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+    <text x="340" y="16" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">重排模型</text>
+  </g>
+
+  <g transform="translate(60, 450)">
+    <text x="0" y="12" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#9ca3af">图来源：AI Agent 记忆系统全解析 | AI知识宇宙 2026</text>
+  </g>
+</svg>

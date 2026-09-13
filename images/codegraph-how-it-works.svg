@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8" fill="#4a90d9"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8" fill="#2ecc71"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" fill="#e0e0e0" font-size="16" font-weight="700">CodeGraph 工作原理</text>
+
+  <!-- Layer 1: AI Agent -->
+  <rect x="200" y="50" width="400" height="70" rx="10" fill="rgba(52,152,219,0.1)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="400" y="75" text-anchor="middle" fill="#3498db" font-size="14" font-weight="700">AI Agent（Claude Code / Cursor / Kiro）</text>
+  <text x="400" y="100" text-anchor="middle" fill="#7ec8e3" font-size="11">"请求是怎么到达数据库的？"</text>
+
+  <!-- Arrow down -->
+  <path d="M400 120 L400 150" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="140" fill="#888" font-size="9">调用 MCP 工具</text>
+
+  <!-- Layer 2: CodeGraph MCP Server -->
+  <rect x="150" y="155" width="500" height="90" rx="10" fill="rgba(46,204,113,0.08)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="400" y="180" text-anchor="middle" fill="#2ecc71" font-size="13" font-weight="700">CodeGraph MCP Server</text>
+
+  <!-- Tool boxes -->
+  <rect x="175" y="192" width="75" height="24" rx="4" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="0.5"/>
+  <text x="212" y="208" text-anchor="middle" fill="#2ecc71" font-size="9">context</text>
+
+  <rect x="260" y="192" width="65" height="24" rx="4" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="0.5"/>
+  <text x="292" y="208" text-anchor="middle" fill="#2ecc71" font-size="9">trace</text>
+
+  <rect x="335" y="192" width="75" height="24" rx="4" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="0.5"/>
+  <text x="372" y="208" text-anchor="middle" fill="#2ecc71" font-size="9">explore</text>
+
+  <rect x="420" y="192" width="70" height="24" rx="4" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="0.5"/>
+  <text x="455" y="208" text-anchor="middle" fill="#2ecc71" font-size="9">callers</text>
+
+  <rect x="500" y="192" width="70" height="24" rx="4" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="0.5"/>
+  <text x="535" y="208" text-anchor="middle" fill="#2ecc71" font-size="9">callees</text>
+
+  <rect x="580" y="192" width="60" height="24" rx="4" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="0.5"/>
+  <text x="610" y="208" text-anchor="middle" fill="#2ecc71" font-size="9">impact</text>
+
+  <!-- Arrow down -->
+  <path d="M400 245 L400 275" stroke="#2ecc71" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="420" y="265" fill="#888" font-size="9">查询图谱</text>
+
+  <!-- Layer 3: SQLite Knowledge Graph -->
+  <rect x="150" y="280" width="500" height="70" rx="10" fill="rgba(155,89,182,0.08)" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="400" y="305" text-anchor="middle" fill="#9b59b6" font-size="13" font-weight="700">SQLite 知识图谱（本地 .codegraph/codegraph.db）</text>
+
+  <!-- Data types -->
+  <rect x="195" y="315" width="80" height="22" rx="4" fill="rgba(155,89,182,0.12)" stroke="#9b59b6" stroke-width="0.5"/>
+  <text x="235" y="330" text-anchor="middle" fill="#bb8fce" font-size="9">symbols</text>
+
+  <rect x="290" y="315" width="70" height="22" rx="4" fill="rgba(155,89,182,0.12)" stroke="#9b59b6" stroke-width="0.5"/>
+  <text x="325" y="330" text-anchor="middle" fill="#bb8fce" font-size="9">edges</text>
+
+  <rect x="375" y="315" width="60" height="22" rx="4" fill="rgba(155,89,182,0.12)" stroke="#9b59b6" stroke-width="0.5"/>
+  <text x="405" y="330" text-anchor="middle" fill="#bb8fce" font-size="9">files</text>
+
+  <rect x="450" y="315" width="90" height="22" rx="4" fill="rgba(155,89,182,0.12)" stroke="#9b59b6" stroke-width="0.5"/>
+  <text x="495" y="330" text-anchor="middle" fill="#bb8fce" font-size="9">FTS5 全文搜索</text>
+
+  <rect x="555" y="315" width="70" height="22" rx="4" fill="rgba(155,89,182,0.12)" stroke="#9b59b6" stroke-width="0.5"/>
+  <text x="590" y="330" text-anchor="middle" fill="#bb8fce" font-size="9">routes</text>
+
+  <!-- Bottom: 4 stages -->
+  <text x="400" y="380" text-anchor="middle" fill="#aaa" font-size="11" font-weight="600">构建流程（四阶段）</text>
+
+  <!-- Stage 1 -->
+  <rect x="60" y="400" width="150" height="60" rx="8" fill="rgba(243,156,18,0.1)" stroke="#f39c12" stroke-width="1"/>
+  <text x="135" y="420" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="600">① 提取</text>
+  <text x="135" y="438" text-anchor="middle" fill="#888" font-size="9">tree-sitter 解析 AST</text>
+  <text x="135" y="452" text-anchor="middle" fill="#888" font-size="9">提取节点 + 边</text>
+
+  <!-- Arrow -->
+  <path d="M210 430 L240 430" stroke="#f39c12" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 -->
+  <rect x="245" y="400" width="150" height="60" rx="8" fill="rgba(52,152,219,0.1)" stroke="#3498db" stroke-width="1"/>
+  <text x="320" y="420" text-anchor="middle" fill="#3498db" font-size="11" font-weight="600">② 存储</text>
+  <text x="320" y="438" text-anchor="middle" fill="#888" font-size="9">写入 SQLite</text>
+  <text x="320" y="452" text-anchor="middle" fill="#888" font-size="9">建立 FTS5 索引</text>
+
+  <!-- Arrow -->
+  <path d="M395 430 L425 430" stroke="#3498db" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <rect x="430" y="400" width="150" height="60" rx="8" fill="rgba(155,89,182,0.1)" stroke="#9b59b6" stroke-width="1"/>
+  <text x="505" y="420" text-anchor="middle" fill="#9b59b6" font-size="11" font-weight="600">③ 解析</text>
+  <text x="505" y="438" text-anchor="middle" fill="#888" font-size="9">调用→定义 解析</text>
+  <text x="505" y="452" text-anchor="middle" fill="#888" font-size="9">框架路由识别</text>
+
+  <!-- Arrow -->
+  <path d="M580 430 L610 430" stroke="#9b59b6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4 -->
+  <rect x="615" y="400" width="150" height="60" rx="8" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="1"/>
+  <text x="690" y="420" text-anchor="middle" fill="#2ecc71" font-size="11" font-weight="600">④ 自动同步</text>
+  <text x="690" y="438" text-anchor="middle" fill="#888" font-size="9">OS 文件事件监听</text>
+  <text x="690" y="452" text-anchor="middle" fill="#888" font-size="9">2秒防抖增量更新</text>
+</svg>

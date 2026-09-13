@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+  <defs>
+    <linearGradient id="bgLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- White background (explicit) -->
+  <rect width="1200" height="680" fill="url(#bgLight)"/>
+
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#111827" text-anchor="middle">BitChat 双传输层架构</text>
+  <text x="600" y="62" font-family="Arial, sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">BLE Mesh（离线层） + Nostr Protocol（互联网层） + Store-and-Forward（存储转发）</text>
+
+  <!-- === Left Section: BLE Mesh === -->
+  <rect x="30" y="90" width="360" height="540" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="210" y="120" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">BLE Mesh 层（离线）</text>
+
+  <!-- Device nodes -->
+  <g>
+    <!-- Device A -->
+    <rect x="70" y="150" width="100" height="50" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="120" y="172" font-family="Arial, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">设备 A</text>
+    <text x="120" y="188" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">GATT C + P</text>
+
+    <!-- Device B -->
+    <rect x="240" y="150" width="100" height="50" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="290" y="172" font-family="Arial, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">设备 B</text>
+    <text x="290" y="188" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">GATT C + P</text>
+
+    <!-- Device C -->
+    <rect x="155" y="240" width="100" height="50" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="205" y="262" font-family="Arial, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">设备 C</text>
+    <text x="205" y="278" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">中继节点</text>
+
+    <!-- Connections -->
+    <line x1="170" y1="175" x2="240" y2="175" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+    <line x1="120" y1="200" x2="155" y2="240" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+    <line x1="290" y1="200" x2="255" y2="240" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+
+    <!-- BLE label -->
+    <text x="205" y="220" font-family="Arial, sans-serif" font-size="9" fill="#6b7280" text-anchor="middle">BLE 100m</text>
+  </g>
+
+  <!-- Flood control box -->
+  <rect x="50" y="320" width="320" height="110" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="210" y="342" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#111827" text-anchor="middle">受控洪泛机制</text>
+  <text x="70" y="365" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• TTL 7 跳（密集网络自动降至 5）</text>
+  <text x="70" y="385" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• LRU 去重（1000 条 / 5 分钟过期）</text>
+  <text x="70" y="405" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• 随机抖动 10-220ms</text>
+  <text x="70" y="425" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• Fanout 子集广播（log₂ degree）</text>
+
+  <!-- Encryption box -->
+  <rect x="50" y="450" width="320" height="80" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="210" y="475" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Noise XX 加密（在线）</text>
+  <text x="70" y="498" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">Curve25519 / ChaCha20-Poly1305 / SHA-256</text>
+  <text x="70" y="518" font-family="Arial, sans-serif" font-size="11" fill="#15803d">✓ 双向认证 ✓ 前向安全</text>
+
+  <!-- Presence -->
+  <rect x="50" y="545" width="320" height="55" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="210" y="567" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#111827" text-anchor="middle">设备发现（Announce）</text>
+  <text x="70" y="590" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">签名公告 4s→15-30s · Ed25519 签名 · 60s 有效</text>
+
+  <!-- === Middle Section: MessageRouter === -->
+  <rect x="420" y="90" width="360" height="540" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="600" y="120" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#6d28d9" text-anchor="middle">MessageRouter + 存储转发</text>
+
+  <!-- Router priority -->
+  <rect x="440" y="140" width="320" height="90" rx="8" fill="#faf5ff" stroke="#6d28d9" stroke-width="1"/>
+  <text x="600" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#6d28d9" text-anchor="middle">路由优先级</text>
+  <text x="460" y="188" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">1. BLE Mesh 直连（优先）</text>
+  <text x="460" y="208" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">2. Nostr 中继（互联网可用时）</text>
+  <text x="460" y="228" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">3. 信使系统（两者都不可达时）</text>
+
+  <!-- Outbox -->
+  <rect x="440" y="250" width="150" height="70" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+  <text x="515" y="275" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">发件箱</text>
+  <text x="515" y="295" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">100 条/联系人</text>
+  <text x="515" y="310" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">24h TTL · 8 次重试</text>
+
+  <!-- Courier -->
+  <rect x="610" y="250" width="150" height="70" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1"/>
+  <text x="685" y="275" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#b45309" text-anchor="middle">信使系统</text>
+  <text x="685" y="295" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">Spray-and-Wait</text>
+  <text x="685" y="310" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">3 信使 · 日轮换标签</text>
+
+  <!-- Gossip -->
+  <rect x="440" y="340" width="150" height="70" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+  <text x="515" y="365" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">Gossip 同步</text>
+  <text x="515" y="385" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">GCS 过滤器 · 15s 周期</text>
+  <text x="515" y="400" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">1000 条缓存 · 6h 有效</text>
+
+  <!-- Nostr Mailbox -->
+  <rect x="610" y="340" width="150" height="70" rx="8" fill="#faf5ff" stroke="#6d28d9" stroke-width="1"/>
+  <text x="685" y="365" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">Nostr 邮箱</text>
+  <text x="685" y="385" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">24h 回看</text>
+  <text x="685" y="400" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" text-anchor="middle">双方离线覆盖</text>
+
+  <!-- Identity section -->
+  <rect x="440" y="430" width="320" height="80" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="600" y="455" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#111827" text-anchor="middle">身份体系</text>
+  <text x="460" y="478" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• Curve25519 静态密钥 → SHA-256 指纹（Peer ID）</text>
+  <text x="460" y="498" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• Ed25519 签名密钥（验证 Announce）</text>
+
+  <!-- Panic wipe -->
+  <rect x="440" y="530" width="320" height="55" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+  <text x="600" y="555" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c" text-anchor="middle">恐慌擦除（Panic Wipe）</text>
+  <text x="460" y="578" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">一键清除：密钥 + 收藏 + 邮件 + 历史 + 度量</text>
+
+  <!-- === Right Section: Nostr === -->
+  <rect x="810" y="90" width="360" height="540" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="990" y="120" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0e7490" text-anchor="middle">Nostr 层（互联网）</text>
+
+  <!-- Triple encryption -->
+  <rect x="830" y="150" width="320" height="160" rx="8" fill="#ecfeff" stroke="#0e7490" stroke-width="1"/>
+  <text x="990" y="175" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0e7490" text-anchor="middle">三层嵌套加密</text>
+
+  <!-- Layer 1 -->
+  <rect x="850" y="190" width="280" height="30" rx="6" fill="#ffffff" stroke="#0e7490" stroke-width="0.8"/>
+  <text x="990" y="210" font-family="Arial, sans-serif" font-size="10" fill="#0e7490" text-anchor="middle">外层 Envelope（kind 1059）— 一次性密钥签名</text>
+
+  <!-- Layer 2 -->
+  <rect x="870" y="228" width="240" height="30" rx="6" fill="#ffffff" stroke="#6d28d9" stroke-width="0.8"/>
+  <text x="990" y="248" font-family="Arial, sans-serif" font-size="10" fill="#6d28d9" text-anchor="middle">中层 Seal（kind 13）— 发送者签名</text>
+
+  <!-- Layer 3 -->
+  <rect x="890" y="266" width="200" height="30" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="0.8"/>
+  <text x="990" y="286" font-family="Arial, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">内层 Message（kind 14）</text>
+
+  <!-- Nostr features -->
+  <rect x="830" y="330" width="320" height="100" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="990" y="355" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#111827" text-anchor="middle">Nostr 传输特性</text>
+  <text x="850" y="378" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• XChaCha20-Poly1305 + secp256k1 ECDH</text>
+  <text x="850" y="398" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• 时间戳随机偏移 ±15 分钟</text>
+  <text x="850" y="418" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">• 仅互相收藏用户可用 · 可选 Tor 路由</text>
+
+  <!-- Noise X box -->
+  <rect x="830" y="450" width="320" height="70" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1"/>
+  <text x="990" y="475" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#b45309" text-anchor="middle">Noise X 加密（离线密封）</text>
+  <text x="850" y="498" font-family="Arial, sans-serif" font-size="11" fill="#4b5563">单向认证 · 密封到接收者静态公钥</text>
+  <text x="850" y="515" font-family="Arial, sans-serif" font-size="11" fill="#b91c1c">⚠ 无前向安全</text>
+
+  <!-- Relay diagram -->
+  <rect x="830" y="540" width="320" height="60" rx="8" fill="#ecfeff" stroke="#0e7490" stroke-width="1"/>
+  <text x="990" y="565" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0e7490" text-anchor="middle">Nostr Relay（公共中继）</text>
+  <text x="850" y="588" font-family="Arial, sans-serif" font-size="10" fill="#4b5563">中继仅见外层信封 · 不知发送者身份和内容</text>
+
+  <!-- Bottom legend -->
+  <text x="600" y="660" font-family="Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">数据来源：BitChat Protocol Whitepaper v2.0（2026-07-06）· github.com/permissionlesstech/bitchat</text>
+</svg>

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="50" y="48" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827">Buzz 架构：一个 Rust 二进制 + 三个依赖服务</text>
+  <text x="50" y="76" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#4b5563">buzz-relay 单进程同时承载 WebSocket 中继、REST API 与 Web UI；所有数据留在你自己的基础设施上</text>
+
+  <!-- ===== Clients layer ===== -->
+  <rect x="50" y="105" width="1100" height="135" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="70" y="132" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#4b5563">客户端层</text>
+
+  <!-- Client box 1: Desktop -->
+  <rect x="80" y="145" width="300" height="76" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="230" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">桌面端 / 移动端</text>
+  <text x="230" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">Tauri + React · Flutter</text>
+  <text x="230" y="211" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">人类用户：频道 / DM / 语音 / 画布</text>
+
+  <!-- Client box 2: Agent -->
+  <rect x="450" y="145" width="300" height="76" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="600" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#6d28d9" text-anchor="middle">AI Agent</text>
+  <text x="600" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">buzz-acp（ACP ↔ MCP 桥接）</text>
+  <text x="600" y="211" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Claude Code / Codex / Goose</text>
+
+  <!-- Client box 3: CLI -->
+  <rect x="820" y="145" width="300" height="76" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+  <text x="970" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#15803d" text-anchor="middle">CLI / 脚本</text>
+  <text x="970" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">buzz-cli（JSON in / JSON out）</text>
+  <text x="970" y="211" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">为 LLM 工具调用设计</text>
+
+  <!-- Arrows: clients -> relay -->
+  <line x1="230" y1="240" x2="230" y2="292" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="224,292 236,292 230,302" fill="#94a3b8"/>
+  <text x="242" y="270" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280">WebSocket</text>
+
+  <line x1="600" y1="240" x2="600" y2="292" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="594,292 606,292 600,302" fill="#94a3b8"/>
+  <text x="612" y="270" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280">WS + REST</text>
+
+  <line x1="970" y1="240" x2="970" y2="292" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="964,292 976,292 970,302" fill="#94a3b8"/>
+  <text x="982" y="270" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280">WS + REST</text>
+
+  <!-- ===== Relay layer ===== -->
+  <rect x="50" y="305" width="1100" height="140" rx="12" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="600" y="340" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="20" font-weight="bold" fill="#b45309" text-anchor="middle">buzz-relay（单个 Rust 二进制 · Axum）</text>
+
+  <rect x="90" y="358" width="235" height="62" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="207" y="380" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">Nostr 协议</text>
+  <text x="207" y="401" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">NIP-01 事件 · NIP-42 认证</text>
+
+  <rect x="345" y="358" width="235" height="62" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="462" y="380" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">REST 接口</text>
+  <text x="462" y="401" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">频道 / DM / 媒体 / 工作流</text>
+
+  <rect x="600" y="358" width="235" height="62" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="717" y="380" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">Git 托管</text>
+  <text x="717" y="401" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">NIP-34 patch / 仓库公告</text>
+
+  <rect x="855" y="358" width="235" height="62" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="972" y="380" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">审计日志</text>
+  <text x="972" y="401" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">全部事件签名可追溯</text>
+
+  <!-- Port badge -->
+  <rect x="905" y="313" width="200" height="26" rx="13" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+  <text x="1005" y="331" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">对外仅开放端口 3000</text>
+
+  <!-- Arrows: relay -> storage -->
+  <line x1="240" y1="445" x2="240" y2="500" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="234,500 246,500 240,510" fill="#94a3b8"/>
+
+  <line x1="600" y1="445" x2="600" y2="500" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="594,500 606,500 600,510" fill="#94a3b8"/>
+
+  <line x1="960" y1="445" x2="960" y2="500" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="954,500 966,500 960,510" fill="#94a3b8"/>
+
+  <!-- ===== Storage layer ===== -->
+  <rect x="120" y="513" width="240" height="96" rx="10" fill="#f0f9ff" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="240" y="542" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0e7490" text-anchor="middle">PostgreSQL</text>
+  <text x="240" y="566" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">事件存储 + 全文搜索</text>
+  <text x="240" y="588" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">消息 / 代码 / 审批同一索引</text>
+
+  <rect x="480" y="513" width="240" height="96" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="600" y="542" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c" text-anchor="middle">Redis</text>
+  <text x="600" y="566" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">pub/sub + 在线状态</text>
+  <text x="600" y="588" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">实时消息广播</text>
+
+  <rect x="840" y="513" width="240" height="96" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="960" y="542" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#6d28d9" text-anchor="middle">S3 / MinIO</text>
+  <text x="960" y="566" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">媒体 + Git 对象</text>
+  <text x="960" y="588" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Blossom 协议</text>
+
+  <!-- Bottom divider + note -->
+  <line x1="50" y1="640" x2="1150" y2="640" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="50" y="666" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563">最低配置 2 核 CPU + 4GB 内存即可运行 · 技术栈 Rust 46.8% / TypeScript 32.9% / Dart 8.9%</text>
+  <text x="50" y="686" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#6b7280">Block 不运行任何中心化服务器——relay 部署在哪，数据就在哪</text>
+</svg>

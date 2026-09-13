@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect width="1200" height="620" fill="#f8fafc" opacity="0.5"/>
+
+  <text x="600" y="46" font-family="'Microsoft YaHei',sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle">Firecrawl 的 Web Context 工作流与五大端点</text>
+  <text x="600" y="74" font-family="'Microsoft YaHei',sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">Find → Extract → Clean → Use：把任意网页变成 LLM 可直接消费的上下文</text>
+
+  <!-- top pipeline -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="70" y="110" width="200" height="64" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="170" y="140" font-size="17" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Find</text>
+    <text x="170" y="160" font-size="12" fill="#4b5563" text-anchor="middle">找到来源（搜索/发现）</text>
+
+    <rect x="340" y="110" width="200" height="64" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+    <text x="440" y="140" font-size="17" font-weight="bold" fill="#15803d" text-anchor="middle">Extract</text>
+    <text x="440" y="160" font-size="12" fill="#4b5563" text-anchor="middle">抓取页面内容</text>
+
+    <rect x="610" y="110" width="200" height="64" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+    <text x="710" y="140" font-size="17" font-weight="bold" fill="#b45309" text-anchor="middle">Clean</text>
+    <text x="710" y="160" font-size="12" fill="#4b5563" text-anchor="middle">剥离广告/导航样板</text>
+
+    <rect x="880" y="110" width="200" height="64" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="980" y="140" font-size="17" font-weight="bold" fill="#6d28d9" text-anchor="middle">Use</text>
+    <text x="980" y="160" font-size="12" fill="#4b5563" text-anchor="middle">喂给 LLM / Agent</text>
+
+    <g stroke="#94a3b8" stroke-width="2" fill="none">
+      <path d="M270 142 L338 142" marker-end="url(#arr)"/>
+      <path d="M540 142 L608 142" marker-end="url(#arr)"/>
+      <path d="M810 142 L878 142" marker-end="url(#arr)"/>
+    </g>
+  </g>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- divider -->
+  <line x1="70" y1="212" x2="1130" y2="212" stroke="#d9e2ec" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="70" y="248" font-family="'Microsoft YaHei',sans-serif" font-size="16" font-weight="bold" fill="#111827">五大核心端点</text>
+
+  <!-- five endpoints -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <!-- scrape -->
+    <rect x="70" y="270" width="200" height="120" rx="10" fill="#f8fafc" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="90" y="300" font-size="16" font-weight="bold" fill="#1d4ed8">/scrape</text>
+    <text x="90" y="326" font-size="12.5" fill="#374151">单页 → 干净 Markdown</text>
+    <text x="90" y="348" font-size="12" fill="#6b7280">可选 HTML/截图/JSON</text>
+    <text x="90" y="370" font-size="12" fill="#6b7280">最基础的一次调用</text>
+
+    <!-- crawl -->
+    <rect x="290" y="270" width="200" height="120" rx="10" fill="#f8fafc" stroke="#15803d" stroke-width="1.5"/>
+    <text x="310" y="300" font-size="16" font-weight="bold" fill="#15803d">/crawl</text>
+    <text x="310" y="326" font-size="12.5" fill="#374151">整站爬取（异步）</text>
+    <text x="310" y="348" font-size="12" fill="#6b7280">自动发现子页，无需 sitemap</text>
+    <text x="310" y="370" font-size="12" fill="#6b7280">建库/训练集首选</text>
+
+    <!-- map -->
+    <rect x="510" y="270" width="180" height="120" rx="10" fill="#f8fafc" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="530" y="300" font-size="16" font-weight="bold" fill="#0e7490">/map</text>
+    <text x="530" y="326" font-size="12.5" fill="#374151">秒级列出全站 URL</text>
+    <text x="530" y="348" font-size="12" fill="#6b7280">先摸清有哪些页</text>
+    <text x="530" y="370" font-size="12" fill="#6b7280">再挑需要的去抓</text>
+
+    <!-- extract -->
+    <rect x="710" y="270" width="200" height="120" rx="10" fill="#f8fafc" stroke="#b45309" stroke-width="1.5"/>
+    <text x="730" y="300" font-size="16" font-weight="bold" fill="#b45309">/extract</text>
+    <text x="730" y="326" font-size="12.5" fill="#374151">按 schema 抽结构化 JSON</text>
+    <text x="730" y="348" font-size="12" fill="#6b7280">LLM 驱动的字段抽取</text>
+    <text x="730" y="370" font-size="12" fill="#6b7280">云版通常单独计费</text>
+
+    <!-- search -->
+    <rect x="930" y="270" width="200" height="120" rx="10" fill="#f8fafc" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="950" y="300" font-size="16" font-weight="bold" fill="#6d28d9">/search</text>
+    <text x="950" y="326" font-size="12.5" fill="#374151">搜索 + 抓正文一步到位</text>
+    <text x="950" y="348" font-size="12" fill="#6b7280">支持 web/news/images</text>
+    <text x="950" y="370" font-size="12" fill="#6b7280">研究型 Agent 的地基</text>
+  </g>
+
+  <!-- capabilities note -->
+  <rect x="70" y="430" width="1060" height="130" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="94" y="462" font-family="'Microsoft YaHei',sans-serif" font-size="15" font-weight="bold" fill="#1d4ed8">Firecrawl 替你扛下的复杂度</text>
+  <g font-family="'Microsoft YaHei',sans-serif" font-size="13" fill="#374151">
+    <text x="94" y="492">· 代理池 / 缓存 / 限流 / 被 JS 挡住的内容</text>
+    <text x="94" y="518">· 动态渲染 SPA、PDF、图片（含 OCR）</text>
+    <text x="94" y="544">· 整站抓取的链接发现、去重、并发调度</text>
+    <text x="620" y="492">· 默认输出剥离样板的 LLM-ready Markdown</text>
+    <text x="620" y="518">· 服务端 AGPL-3.0 开源，支持 Docker 自建</text>
+    <text x="620" y="544">· 提供托管云服务 + 各语言 SDK + MCP Server</text>
+  </g>
+
+  <text x="600" y="596" font-family="'Microsoft YaHei',sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">数据来源：Firecrawl 官方文档（docs.firecrawl.dev） · 制图：AI 行业观察</text>
+</svg>

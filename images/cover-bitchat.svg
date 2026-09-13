@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="33%" stop-color="#8b5cf6"/>
+      <stop offset="66%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="33%" stop-color="#f59e0b"/>
+      <stop offset="66%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="40" x2="900" y2="40"/>
+    <line x1="0" y1="80" x2="900" y2="80"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="160" x2="900" y2="160"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="280" x2="900" y2="280"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="100" y1="0" x2="100" y2="383"/>
+    <line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/>
+    <line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label box -->
+  <rect x="30" y="24" width="240" height="28" rx="4" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.8"/>
+  <text x="42" y="43" font-family="Arial, sans-serif" font-size="12" fill="#06b6d4">去中心化通信 · 技术原理与实战</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="20" width="40" height="40" rx="6" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.7"/>
+  <text x="848" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#8b5cf6">26</text>
+
+  <!-- Main title -->
+  <text x="30" y="105" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">BitChat 从技术原理到实战</text>
+  <text x="30" y="140" font-family="Arial, sans-serif" font-size="18" fill="url(#subtitle)">无网络环境下的加密通信指南</text>
+
+  <!-- Key highlights -->
+  <text x="30" y="180" font-family="Arial, sans-serif" font-size="12" fill="#10b981">▸ BLE Mesh 多跳转发 · 7 跳 ≈ 700 米覆盖 · 无需互联网</text>
+  <text x="30" y="202" font-family="Arial, sans-serif" font-size="12" fill="#f59e0b">▸ Noise XX/X 端到端加密 · Nostr 全球桥接 · Spray-and-Wait 信使</text>
+  <text x="30" y="224" font-family="Arial, sans-serif" font-size="12" fill="#06b6d4">▸ Jack Dorsey 出品 · 33.4k Star · iOS/Android/TUI 全平台</text>
+
+  <!-- Tags -->
+  <g font-family="Arial, sans-serif" font-size="11">
+    <rect x="30" y="252" width="72" height="22" rx="11" fill="none" stroke="#06b6d4" stroke-width="0.8"/>
+    <text x="42" y="267" fill="#06b6d4">BLE Mesh</text>
+
+    <rect x="112" y="252" width="52" height="22" rx="11" fill="none" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="122" y="267" fill="#8b5cf6">Nostr</text>
+
+    <rect x="174" y="252" width="92" height="22" rx="11" fill="none" stroke="#10b981" stroke-width="0.8"/>
+    <text x="184" y="267" fill="#10b981">Noise 加密</text>
+
+    <rect x="276" y="252" width="50" height="22" rx="11" fill="none" stroke="#f59e0b" stroke-width="0.8"/>
+    <text x="288" y="267" fill="#f59e0b">P2P</text>
+
+    <rect x="336" y="252" width="68" height="22" rx="11" fill="none" stroke="#ec4899" stroke-width="0.8"/>
+    <text x="346" y="267" fill="#ec4899">抗审查</text>
+
+    <rect x="414" y="252" width="62" height="22" rx="11" fill="none" stroke="#06b6d4" stroke-width="0.8"/>
+    <text x="424" y="267" fill="#06b6d4">开源</text>
+  </g>
+
+  <!-- Right side: mesh network diagram -->
+  <g opacity="0.7">
+    <!-- Nodes -->
+    <circle cx="650" cy="100" r="10" fill="none" stroke="#06b6d4" stroke-width="1.5"/>
+    <circle cx="720" cy="70" r="8" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+    <circle cx="790" cy="110" r="10" fill="none" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="680" cy="170" r="8" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+    <circle cx="760" cy="180" r="10" fill="none" stroke="#06b6d4" stroke-width="1.5"/>
+    <circle cx="830" cy="160" r="7" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+    <circle cx="700" cy="240" r="9" fill="none" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="810" cy="240" r="8" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+
+    <!-- Connections -->
+    <line x1="650" y1="100" x2="720" y2="70" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+    <line x1="720" y1="70" x2="790" y2="110" stroke="#8b5cf6" stroke-width="0.8" opacity="0.5"/>
+    <line x1="650" y1="100" x2="680" y2="170" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+    <line x1="680" y1="170" x2="760" y2="180" stroke="#f59e0b" stroke-width="0.8" opacity="0.5"/>
+    <line x1="790" y1="110" x2="830" y2="160" stroke="#10b981" stroke-width="0.8" opacity="0.5"/>
+    <line x1="760" y1="180" x2="830" y2="160" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+    <line x1="680" y1="170" x2="700" y2="240" stroke="#10b981" stroke-width="0.8" opacity="0.5"/>
+    <line x1="760" y1="180" x2="810" y2="240" stroke="#f59e0b" stroke-width="0.8" opacity="0.5"/>
+    <line x1="700" y1="240" x2="810" y2="240" stroke="#8b5cf6" stroke-width="0.8" opacity="0.5"/>
+    <line x1="790" y1="110" x2="760" y2="180" stroke="#06b6d4" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Phone icons in nodes -->
+    <rect x="645" y="95" width="10" height="12" rx="2" fill="none" stroke="#06b6d4" stroke-width="0.8"/>
+    <rect x="785" y="105" width="10" height="12" rx="2" fill="none" stroke="#10b981" stroke-width="0.8"/>
+    <rect x="755" y="175" width="10" height="12" rx="2" fill="none" stroke="#06b6d4" stroke-width="0.8"/>
+
+    <!-- Signal waves -->
+    <path d="M 660 92 Q 665 88, 670 92" fill="none" stroke="#06b6d4" stroke-width="0.6" opacity="0.6"/>
+    <path d="M 658 88 Q 665 82, 672 88" fill="none" stroke="#06b6d4" stroke-width="0.6" opacity="0.4"/>
+  </g>
+
+  <!-- Diagram label -->
+  <text x="700" y="275" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">BLE Mesh Network Topology</text>
+
+  <!-- Bottom separator and section hint -->
+  <line x1="30" y1="310" x2="870" y2="310" stroke="#2d2d5e" stroke-width="0.5"/>
+  <text x="30" y="335" font-family="Arial, sans-serif" font-size="11" fill="#6b7280">协议架构 → 加密原理 → 存储转发 → 安装实战 → 场景应用 → 印度事件</text>
+
+  <!-- Watermark -->
+  <text x="30" y="362" font-family="Arial, sans-serif" font-size="10" fill="#4b5563" opacity="0.6">VXI · AI 技术前沿</text>
+</svg>

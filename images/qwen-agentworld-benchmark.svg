@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="420" viewBox="0 0 860 420" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="win" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+    <linearGradient id="base" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#64748b"/></linearGradient>
+  </defs>
+  <rect width="860" height="420" fill="url(#bbg)"/>
+  <rect width="860" height="3" fill="#22d3ee"/>
+
+  <text x="40" y="44" font-size="20" font-weight="700" fill="#ffffff">AgentWorldBench 总分对比（满分 100）</text>
+  <text x="40" y="68" font-size="13" fill="#8a90b8">2170 个回合级样本 · 五维评分 · 紫青色为 Qwen-AgentWorld</text>
+
+  <!-- baseline axis -->
+  <!-- bars: scale so 46->y, 60->top. baseline value range 46..59. We'll map score-44 to pixel height *  (px per point) -->
+  <!-- chart area: x from 60, baseline y=360, each point = 18px; min shown 46 -->
+  <g font-size="12">
+    <!-- gridlines -->
+    <line x1="60" y1="360" x2="820" y2="360" stroke="#ffffff" stroke-opacity="0.12"/>
+    <line x1="60" y1="306" x2="820" y2="306" stroke="#ffffff" stroke-opacity="0.05"/>
+    <line x1="60" y1="252" x2="820" y2="252" stroke="#ffffff" stroke-opacity="0.05"/>
+    <line x1="60" y1="198" x2="820" y2="198" stroke="#ffffff" stroke-opacity="0.05"/>
+    <text x="36" y="364" fill="#6a7099" text-anchor="end">47</text>
+    <text x="36" y="310" fill="#6a7099" text-anchor="end">50</text>
+    <text x="36" y="256" fill="#6a7099" text-anchor="end">53</text>
+    <text x="36" y="202" fill="#6a7099" text-anchor="end">56</text>
+    <text x="36" y="148" fill="#6a7099" text-anchor="end">59</text>
+  </g>
+
+  <!-- Bars. baseline y=360 corresponds to 47. 18px per point. height = (score-47)*18 -->
+  <!-- AgentWorld-397B 58.71 -> h=210.78 ; GPT-5.4 58.25 ->202.5 ; Opus4.6 57.80->194.4 ; Opus4.8 56.59->172.6 ; AW-35B 56.39->169 ; Sonnet4.6 56.04->162.7 ; Gemini3.1 54.57->136.3 ; Kimi 53.42->115.6 ; DeepSeekV4 52.97->107.5 ; Qwen3.5-35B base 47.73->13.1 -->
+  <g>
+    <rect x="70"  y="149.2" width="60" height="210.8" rx="4" fill="url(#win)"/>
+    <rect x="145" y="157.5" width="60" height="202.5" rx="4" fill="#ef4444" fill-opacity="0.8"/>
+    <rect x="220" y="165.6" width="60" height="194.4" rx="4" fill="#f59e0b" fill-opacity="0.8"/>
+    <rect x="295" y="187.4" width="60" height="172.6" rx="4" fill="#f59e0b" fill-opacity="0.65"/>
+    <rect x="370" y="191.0" width="60" height="169.0" rx="4" fill="url(#win)" opacity="0.78"/>
+    <rect x="445" y="197.3" width="60" height="162.7" rx="4" fill="#f59e0b" fill-opacity="0.5"/>
+    <rect x="520" y="223.7" width="60" height="136.3" rx="4" fill="#10b981" fill-opacity="0.7"/>
+    <rect x="595" y="244.4" width="60" height="115.6" rx="4" fill="url(#base)"/>
+    <rect x="670" y="252.5" width="60" height="107.5" rx="4" fill="url(#base)"/>
+    <rect x="745" y="346.9" width="60" height="13.1" rx="4" fill="url(#base)"/>
+  </g>
+
+  <!-- value labels -->
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <text x="100" y="141" fill="#7dd3fc">58.71</text>
+    <text x="175" y="150" fill="#fca5a5">58.25</text>
+    <text x="250" y="158" fill="#fbbf72">57.80</text>
+    <text x="325" y="180" fill="#fbbf72">56.59</text>
+    <text x="400" y="184" fill="#c8a8ff">56.39</text>
+    <text x="475" y="190" fill="#fbbf72">56.04</text>
+    <text x="550" y="216" fill="#6ee7b7">54.57</text>
+    <text x="625" y="237" fill="#94a3b8">53.42</text>
+    <text x="700" y="245" fill="#94a3b8">52.97</text>
+    <text x="775" y="339" fill="#94a3b8">47.73</text>
+  </g>
+
+  <!-- x labels -->
+  <g font-size="10.5" fill="#aeb4d8" text-anchor="middle">
+    <text x="100" y="378">AgentWorld</text><text x="100" y="391" fill="#7dd3fc">397B-A17B</text>
+    <text x="175" y="378">GPT-5.4</text>
+    <text x="250" y="378">Opus 4.6</text>
+    <text x="325" y="378">Opus 4.8</text>
+    <text x="400" y="378">AgentWorld</text><text x="400" y="391" fill="#c8a8ff">35B-A3B</text>
+    <text x="475" y="378">Sonnet 4.6</text>
+    <text x="550" y="378">Gemini 3.1</text>
+    <text x="625" y="378">Kimi K2.6</text>
+    <text x="700" y="378">DeepSeek V4</text>
+    <text x="775" y="378">Qwen3.5</text><text x="775" y="391" fill="#94a3b8">35B(基座)</text>
+  </g>
+
+  <text x="40" y="412" font-size="11" fill="#5a6080">注：基座 Qwen3.5-35B-A3B 经世界模型训练后总分由 47.73 → 56.39，提升 8.66 分</text>
+</svg>

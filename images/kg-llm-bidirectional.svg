@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f5f7fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- full white background -->
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <rect width="1200" height="560" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="600" y="46" font-family="Arial, Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle">大模型与知识图谱的双向关系</text>
+  <text x="600" y="74" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">GraphRAG 是两个方向的交汇点：既用 LLM 建图，又用图喂 LLM</text>
+
+  <!-- Left: LLM card -->
+  <g transform="translate(90, 150)">
+    <rect x="0" y="0" width="260" height="260" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="130" y="42" font-family="Arial, Microsoft YaHei, sans-serif" font-size="20" font-weight="bold" fill="#1d4ed8" text-anchor="middle">大语言模型 LLM</text>
+    <line x1="24" y1="58" x2="236" y2="58" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="24" y="90" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#1e3a5f">✓ 语言理解与泛化</text>
+    <text x="24" y="120" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#1e3a5f">✓ 自然语言生成</text>
+    <text x="24" y="150" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#1e3a5f">✓ 从文本抽取实体关系</text>
+    <line x1="24" y1="168" x2="236" y2="168" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="24" y="198" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#b91c1c">✗ 幻觉 · 知识糊在权重里</text>
+    <text x="24" y="226" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#b91c1c">✗ 多跳推理弱</text>
+    <text x="24" y="250" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#b91c1c">✗ 事实难以精确更新</text>
+  </g>
+
+  <!-- Right: KG card -->
+  <g transform="translate(850, 150)">
+    <rect x="0" y="0" width="260" height="260" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+    <text x="130" y="42" font-family="Arial, Microsoft YaHei, sans-serif" font-size="20" font-weight="bold" fill="#15803d" text-anchor="middle">知识图谱 KG</text>
+    <line x1="24" y1="58" x2="236" y2="58" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="24" y="90" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#14532d">✓ 精确 · 可验证</text>
+    <text x="24" y="120" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#14532d">✓ 可追溯的推理路径</text>
+    <text x="24" y="150" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" fill="#14532d">✓ 关系遍历 · 增量更新</text>
+    <line x1="24" y1="168" x2="236" y2="168" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="24" y="198" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#b45309">✗ 不理解自然语言</text>
+    <text x="24" y="226" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#b45309">✗ 传统构建成本极高</text>
+    <text x="24" y="250" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#b45309">✗ 不擅长模糊表达</text>
+  </g>
+
+  <!-- Center: GraphRAG hub -->
+  <g transform="translate(505, 235)">
+    <rect x="0" y="0" width="190" height="90" rx="10" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="95" y="38" font-family="Arial, Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#6d28d9" text-anchor="middle">GraphRAG</text>
+    <text x="95" y="64" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#7c3aed" text-anchor="middle">建图 + 喂图 交汇点</text>
+  </g>
+
+  <!-- Arrow: LLM -> KG (build, top) -->
+  <path d="M 350 210 C 470 175, 730 175, 850 210" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+  <polygon points="850,210 836,201 838,214" fill="#1d4ed8"/>
+  <rect x="520" y="150" width="160" height="30" rx="15" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="600" y="170" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#1d4ed8" text-anchor="middle" font-weight="bold">① LLM 建图谱（抽取）</text>
+
+  <!-- Arrow: KG -> LLM (grounding, bottom) -->
+  <path d="M 850 350 C 730 385, 470 385, 350 350" fill="none" stroke="#15803d" stroke-width="2.5"/>
+  <polygon points="350,350 364,341 362,354" fill="#15803d"/>
+  <rect x="510" y="380" width="180" height="30" rx="15" fill="#ecfdf5" stroke="#15803d" stroke-width="1"/>
+  <text x="600" y="400" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#15803d" text-anchor="middle" font-weight="bold">② 图谱喂 LLM（接地）</text>
+
+  <!-- Bottom note -->
+  <rect x="150" y="470" width="900" height="60" rx="10" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="600" y="497" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#374151" text-anchor="middle">① 大模型把最贵的实体关系抽取自动化，让"人人都能建图谱"成为现实</text>
+  <text x="600" y="519" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" fill="#374151" text-anchor="middle">② 图谱给生成过程提供可验证接地，多跳推理准确率拉开数量级差距，并成为 Agent 记忆底座</text>
+</svg>

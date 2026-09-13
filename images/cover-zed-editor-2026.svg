@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="0.5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#555584" stroke-opacity=".25"/></pattern>
+  </defs>
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect x="0" y="0" width="225" height="4" fill="#22d3ee"/><rect x="225" y="0" width="225" height="4" fill="#818cf8"/><rect x="450" y="0" width="225" height="4" fill="#a78bfa"/><rect x="675" y="0" width="225" height="4" fill="#f472b6"/>
+  <rect x="0" y="379" width="300" height="4" fill="#34d399"/><rect x="300" y="379" width="300" height="4" fill="#22d3ee"/><rect x="600" y="379" width="300" height="4" fill="#818cf8"/>
+  <rect x="48" y="38" width="255" height="34" rx="6" fill="#1e1e44" stroke="#6366f1" stroke-opacity=".8"/>
+  <text x="64" y="61" font-size="15" fill="#c4b5fd" font-weight="650">AI 编程观察 · 工具选型</text>
+  <circle cx="840" cy="57" r="26" fill="#1e1e44" stroke="#f472b6" stroke-width="1.5"/><text x="840" y="65" font-size="22" fill="#fbcfe8" font-weight="800" text-anchor="middle">26</text>
+  <text x="48" y="131" font-size="30" fill="#ffffff" font-weight="800">Zed 编辑器深度调研</text>
+  <text x="48" y="169" font-size="29" fill="#ffffff" font-weight="800">Rust 原生 AI IDE 的挑战</text>
+  <text x="48" y="204" font-size="18" fill="url(#sub)" font-weight="700">能否挑战 Cursor · VS Code · JetBrains？</text>
+  <text x="48" y="244" font-size="13" fill="#67e8f9">▸ Rust + GPU 渲染：不从 Electron 编辑器继续加层</text>
+  <text x="48" y="267" font-size="13" fill="#a5b4fc">▸ 开源核心 + 可组合 AI：速度、控制权与协作如何取舍</text>
+  <text x="48" y="290" font-size="13" fill="#f9a8d4">▸ Windows / WSL 已可用：生态、插件与迁移成本仍是关键</text>
+  <g font-size="12" font-weight="650"><rect x="48" y="313" width="55" height="26" rx="13" fill="none" stroke="#22d3ee"/><text x="75" y="331" fill="#67e8f9" text-anchor="middle">Zed</text><rect x="111" y="313" width="68" height="26" rx="13" fill="none" stroke="#818cf8"/><text x="145" y="331" fill="#c4b5fd" text-anchor="middle">Cursor</text><rect x="187" y="313" width="76" height="26" rx="13" fill="none" stroke="#34d399"/><text x="225" y="331" fill="#6ee7b7" text-anchor="middle">VS Code</text><rect x="271" y="313" width="82" height="26" rx="13" fill="none" stroke="#f472b6"/><text x="312" y="331" fill="#f9a8d4" text-anchor="middle">JetBrains</text></g>
+  <g transform="translate(654 116)"><rect x="0" y="0" width="130" height="45" rx="9" fill="#1e1e44" stroke="#22d3ee" stroke-width="1.5"/><text x="65" y="27" font-size="14" fill="#67e8f9" text-anchor="middle" font-weight="700">原生编辑器</text><line x1="65" y1="47" x2="65" y2="82" stroke="#818cf8" stroke-width="2"/><path d="M65 87l-6-9h12z" fill="#818cf8"/><rect x="0" y="92" width="130" height="45" rx="9" fill="#1e1e44" stroke="#a78bfa" stroke-width="1.5"/><text x="65" y="120" font-size="14" fill="#c4b5fd" text-anchor="middle" font-weight="700">人类 + Agent</text><path d="M-14 116C-53 116-53 22-14 22" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="5 4"/><path d="M-14 22l-9-5v10z" fill="#34d399"/><text x="-45" y="72" font-size="11" fill="#6ee7b7" text-anchor="middle">协作</text></g>
+  <line x1="48" y1="354" x2="852" y2="354" stroke="#51517d" stroke-opacity=".7"/>
+  <text x="48" y="372" font-size="11" fill="#a0a0bd">架构拆解 · AI 工作流 · 开闭源对比 · 团队选型</text><text x="852" y="372" font-size="11" fill="#8585a7" text-anchor="end">公众号：AI工具箱</text>
+</svg>

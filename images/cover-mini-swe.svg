@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="accent" x1="0" x2="1"><stop stop-color="#00d4ff"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#59618e" stroke-opacity=".16"/></pattern>
+  </defs>
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="300" height="4" fill="#00d4ff"/><rect x="300" width="300" height="4" fill="#a78bfa"/><rect x="600" width="300" height="4" fill="#f472b6"/>
+  <rect y="379" width="300" height="4" fill="#00d4ff"/><rect x="300" y="379" width="300" height="4" fill="#a78bfa"/><rect x="600" y="379" width="300" height="4" fill="#f472b6"/>
+  <rect x="42" y="34" width="278" height="30" rx="5" fill="#161d43" stroke="#4965bd"/>
+  <text x="56" y="54" fill="#8cb8ff" font-family="Microsoft YaHei,Arial" font-size="13" font-weight="700">AI 编程 Agent · 技术拆解</text>
+  <text x="42" y="111" fill="#fff" font-family="Microsoft YaHei,Arial" font-size="30" font-weight="700">Mini-SWE-Agent</text>
+  <text x="42" y="142" fill="url(#accent)" font-family="Microsoft YaHei,Arial" font-size="18" font-weight="700">Bash-first ReAct：代码模型的评测底座</text>
+  <circle cx="51" cy="179" r="4" fill="#00d4ff"/><text x="64" y="184" fill="#d6e4ff" font-family="Microsoft YaHei,Arial" font-size="13">约 100 行核心循环，剥离厚重脚手架</text>
+  <circle cx="51" cy="207" r="4" fill="#a78bfa"/><text x="64" y="212" fill="#d6e4ff" font-family="Microsoft YaHei,Arial" font-size="13">统一 Bash 环境，横评模型真实解题能力</text>
+  <circle cx="51" cy="235" r="4" fill="#f472b6"/><text x="64" y="240" fill="#d6e4ff" font-family="Microsoft YaHei,Arial" font-size="13">SWE-bench Verified：高分不等于生产交付</text>
+  <g font-family="Microsoft YaHei,Arial" font-size="11" fill="#c7d2fe"><rect x="42" y="267" width="67" height="25" rx="12" fill="#1d2756" stroke="#4663bd"/><text x="55" y="284">SWE-bench</text><rect x="118" y="267" width="52" height="25" rx="12" fill="#292052" stroke="#7c5cce"/><text x="130" y="284">ReAct</text><rect x="179" y="267" width="49" height="25" rx="12" fill="#183854" stroke="#177aa7"/><text x="191" y="284">Bash</text><rect x="237" y="267" width="54" height="25" rx="12" fill="#48203f" stroke="#b84c9d"/><text x="249" y="284">Agent</text></g>
+  <g transform="translate(582 70)"><rect width="245" height="194" rx="14" fill="#101432" stroke="#515b96"/><text x="19" y="28" fill="#98a6e8" font-family="Consolas,Arial" font-size="12">TASK → MODEL → SHELL</text><rect x="25" y="48" width="89" height="35" rx="7" fill="#173657" stroke="#00a9d6"/><text x="42" y="70" fill="#aeeeff" font-family="Arial" font-size="13" font-weight="700">THINK</text><path d="M116 65H142" stroke="#70dff5" stroke-width="2"/><path d="M138 60l8 5-8 5" fill="#70dff5"/><rect x="145" y="48" width="75" height="35" rx="7" fill="#332551" stroke="#a78bfa"/><text x="160" y="70" fill="#e2d7ff" font-family="Arial" font-size="13" font-weight="700">ACT</text><path d="M182 85V107" stroke="#b39cff" stroke-width="2"/><path d="M177 103l5 8 5-8" fill="#b39cff"/><rect x="72" y="112" width="116" height="37" rx="7" fill="#4b213e" stroke="#f472b6"/><text x="91" y="135" fill="#ffd3eb" font-family="Arial" font-size="13" font-weight="700">OBSERVE</text><path d="M72 130H43V66H22" fill="none" stroke="#6ed4ef" stroke-width="2" stroke-dasharray="4 4"/><rect x="34" y="164" width="177" height="13" rx="6" fill="#242955"/><rect x="34" y="164" width="112" height="13" rx="6" fill="url(#accent)"/></g>
+  <rect x="824" y="28" width="45" height="45" rx="22" fill="#232952" stroke="#a78bfa"/><text x="835" y="58" fill="#fff" font-family="Arial" font-size="23" font-weight="700">26</text>
+  <line x1="42" y1="328" x2="858" y2="328" stroke="#4a507f"/><text x="42" y="352" fill="#8b96c9" font-family="Microsoft YaHei,Arial" font-size="12">核心循环 · 评测意义 · 工程边界</text><text x="735" y="352" fill="#8b96c9" font-family="Microsoft YaHei,Arial" font-size="12">AI技术观察</text>
+</svg>

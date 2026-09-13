@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="480" viewBox="0 0 1100 480">
+  <rect width="1100" height="480" fill="#ffffff"/>
+
+  <text x="550" y="42" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="bold" fill="#111827" text-anchor="middle">oh-my-pi 的四个技术支点</text>
+  <text x="550" y="66" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">相比大多数终端 Agent 只做"字符串替换"，oh-my-pi 把 IDE 的能力直接焊进了 harness</text>
+
+  <!-- Card 1: Hashline -->
+  <g transform="translate(40,96)">
+    <rect x="0" y="0" width="500" height="150" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+    <rect x="20" y="18" width="130" height="26" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="85" y="36" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8" text-anchor="middle">Hashline 编辑</text>
+    <text x="20" y="70" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#111827">内容哈希锚定，而不是行号</text>
+    <text x="20" y="96" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">编辑指令引用一小段内容的哈希值，不引用行号</text>
+    <text x="20" y="116" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">并发多 Agent 编辑同一文件时，行号漂移不会打断后续编辑</text>
+    <text x="20" y="136" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">Grok 4 Fast 上省 ~61% 输出 token，Opus 上约省一半</text>
+  </g>
+
+  <!-- Card 2: LSP -->
+  <g transform="translate(560,96)">
+    <rect x="0" y="0" width="500" height="150" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.4"/>
+    <rect x="20" y="18" width="110" height="26" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1"/>
+    <text x="75" y="36" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d" text-anchor="middle">LSP 语义重构</text>
+    <text x="20" y="70" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#111827">直接调用语言服务器做工作区级重命名</text>
+    <text x="20" y="96" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">而不是靠字符串搜索替换，容易漏掉别名导入</text>
+    <text x="20" y="116" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">barrel 文件、re-export 都能正确联动更新</text>
+    <text x="20" y="136" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">支持 TypeScript / Go / Python 等，14 种 LSP 操作</text>
+  </g>
+
+  <!-- Card 3: DAP -->
+  <g transform="translate(40,262)">
+    <rect x="0" y="0" width="500" height="150" rx="12" fill="#fff7ed" stroke="#b45309" stroke-width="1.4"/>
+    <rect x="20" y="18" width="120" height="26" rx="6" fill="#ffffff" stroke="#b45309" stroke-width="1"/>
+    <text x="80" y="36" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309" text-anchor="middle">DAP 真调试器</text>
+    <text x="20" y="70" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#111827">接入真实调试器观察运行时状态</text>
+    <text x="20" y="96" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">支持 dlv（Go）、debugpy（Python）、lldb-dap（C/C++）</text>
+    <text x="20" y="116" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">能设断点、单步执行、查看堆栈和变量</text>
+    <text x="20" y="136" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">解决并发 bug、竞态、段错误等无法靠 print 推断的问题</text>
+  </g>
+
+  <!-- Card 4: Role Routing -->
+  <g transform="translate(560,262)">
+    <rect x="0" y="0" width="500" height="150" rx="12" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.4"/>
+    <rect x="20" y="18" width="140" height="26" rx="6" fill="#ffffff" stroke="#6d28d9" stroke-width="1"/>
+    <text x="90" y="36" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9" text-anchor="middle">角色化模型路由</text>
+    <text x="20" y="70" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#111827">不同任务类型分配不同模型</text>
+    <text x="20" y="96" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">PLAN/规划用强推理模型，TASK/执行用便宜快速模型</text>
+    <text x="20" y="116" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">还可单独配置 VISION、COMMIT 角色模型</text>
+    <text x="20" y="136" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9">实测案例：规划用 GLM-5 + 执行用 Qwen，API 成本降约 40%</text>
+  </g>
+
+  <text x="550" y="450" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">数据来源：betterstack.com OMP 技术解析、docs.bswen.com oh-my-pi vs Claude Code 对比（2026）</text>
+</svg>

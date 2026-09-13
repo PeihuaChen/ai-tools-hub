@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="0.5" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#ff5ca8"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <linearGradient id="curveBM" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- subtle grid -->
+  <g stroke="#2a2a55" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top / bottom gradient bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="42" width="248" height="30" rx="6" fill="none" stroke="#00e5ff" stroke-width="1.4" opacity="0.9"/>
+  <text x="64" y="62" fill="#7fefff" font-size="14" letter-spacing="1">AI 技术解析 · 信息检索 · RAG</text>
+
+  <!-- year badge -->
+  <circle cx="836" cy="58" r="24" fill="none" stroke="#7c5cff" stroke-width="1.6"/>
+  <text x="836" y="65" fill="#b8a6ff" font-size="20" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="132" fill="#ffffff" font-size="31" font-weight="700">BM25 没有过时，</text>
+  <text x="48" y="172" fill="#ffffff" font-size="31" font-weight="700">反而在大规模 RAG 里赢了</text>
+
+  <!-- subtitle -->
+  <text x="48" y="206" fill="url(#sub)" font-size="18" font-weight="600">原理 · 混合检索 · 最新规模研究</text>
+
+  <!-- three highlight lines -->
+  <text x="48" y="242" fill="#4ade80" font-size="13">▹ 词频饱和 + IDF + 长度归一化：三信号打分原理</text>
+  <text x="48" y="264" fill="#00e5ff" font-size="13">▹ BM25 × 向量 × RRF 融合：Dify + Weaviate 落地</text>
+  <text x="48" y="286" fill="#ff9ecb" font-size="13">▹ 语料破千万 token，BM25 反超近 20 分（arXiv 2607.26497）</text>
+
+  <!-- tag pills -->
+  <g font-size="12" fill="#c7d2fe">
+    <rect x="48" y="306" width="70" height="24" rx="12" fill="none" stroke="#3b3b73"/>
+    <text x="83" y="322" text-anchor="middle">BM25</text>
+    <rect x="126" y="306" width="58" height="24" rx="12" fill="none" stroke="#3b3b73"/>
+    <text x="155" y="322" text-anchor="middle">RAG</text>
+    <rect x="192" y="306" width="86" height="24" rx="12" fill="none" stroke="#3b3b73"/>
+    <text x="235" y="322" text-anchor="middle">混合检索</text>
+    <rect x="286" y="306" width="98" height="24" rx="12" fill="none" stroke="#3b3b73"/>
+    <text x="335" y="322" text-anchor="middle">向量数据库</text>
+    <rect x="392" y="306" width="72" height="24" rx="12" fill="none" stroke="#3b3b73"/>
+    <text x="428" y="322" text-anchor="middle">RRF</text>
+  </g>
+
+  <!-- concept chart: scaling crossover -->
+  <g transform="translate(560,120)">
+    <rect x="0" y="0" width="290" height="150" rx="10" fill="#12122e" stroke="#2f2f5e"/>
+    <!-- axes -->
+    <line x1="24" y1="16" x2="24" y2="126" stroke="#4a4a80" stroke-width="1.2"/>
+    <line x1="24" y1="126" x2="270" y2="126" stroke="#4a4a80" stroke-width="1.2"/>
+    <text x="30" y="26" fill="#8a8ab5" font-size="9">accuracy</text>
+    <text x="210" y="140" fill="#8a8ab5" font-size="9">corpus size →</text>
+    <!-- agent curve: starts high then drops -->
+    <path d="M24 40 C 90 44, 130 78, 270 110" fill="none" stroke="#ff5ca8" stroke-width="2.4"/>
+    <!-- BM25 curve: starts lower then rises above -->
+    <path d="M24 96 C 100 86, 150 60, 270 34" fill="none" stroke="url(#curveBM)" stroke-width="2.6"/>
+    <!-- crossover marker (placed on the actual intersection of the two curves) -->
+    <circle cx="134" cy="70" r="4" fill="#ffffff"/>
+    <line x1="134" y1="50" x2="134" y2="126" stroke="#ffffff" stroke-width="0.8" stroke-dasharray="3"/>
+    <text x="134" y="46" fill="#ffffff" font-size="9" text-anchor="middle">交叉点</text>
+    <text x="196" y="44" fill="#7bf7a8" font-size="10" font-weight="700">BM25</text>
+    <text x="196" y="104" fill="#ff9ecb" font-size="10">Agent</text>
+  </g>
+
+  <!-- divider + footer -->
+  <line x1="48" y1="348" x2="852" y2="348" stroke="#2f2f5e" stroke-width="1"/>
+  <text x="48" y="368" fill="#6f6fa0" font-size="12">从打分公式到工程落地，读懂关键词检索为何仍是 RAG 半壁江山</text>
+  <text x="852" y="368" fill="#6f6fa0" font-size="12" text-anchor="end">公众号：AI 行业观察</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="oab" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0f1f"/><stop offset="1" stop-color="#15193a"/></linearGradient>
+    <pattern id="oag" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="860" height="380" rx="12" fill="url(#oab)"/>
+  <rect width="860" height="380" rx="12" fill="url(#oag)"/>
+  <rect x="1" y="1" width="858" height="378" rx="12" fill="none" stroke="#334155" stroke-width="2"/>
+
+  <text x="430" y="38" fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle">Oak 架构：内容寻址存储 + 惰性挂载</text>
+
+  <!-- CLI layer -->
+  <rect x="80" y="64" width="700" height="40" rx="10" fill="#1e293b" stroke="#84cc16" stroke-width="2"/>
+  <text x="430" y="89" fill="#a3e635" font-size="14" font-weight="700" text-anchor="middle">Oak CLI（oak init / switch / mount / merge / export）</text>
+
+  <line x1="430" y1="104" x2="430" y2="122" stroke="#475569" stroke-width="2"/>
+
+  <!-- data model layer -->
+  <rect x="80" y="122" width="700" height="80" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <text x="430" y="144" fill="#34d399" font-size="13" font-weight="700" text-anchor="middle">数据模型（与 Git 概念对齐）</text>
+  <g font-size="12">
+    <rect x="120" y="156" width="130" height="34" rx="6" fill="#0f172a" stroke="#10b981" stroke-opacity="0.6"/>
+    <text x="185" y="178" fill="#6ee7b7" text-anchor="middle">Blob（块）</text>
+    <rect x="285" y="156" width="130" height="34" rx="6" fill="#0f172a" stroke="#10b981" stroke-opacity="0.6"/>
+    <text x="350" y="178" fill="#6ee7b7" text-anchor="middle">Manifest（清单）</text>
+    <rect x="450" y="156" width="130" height="34" rx="6" fill="#0f172a" stroke="#10b981" stroke-opacity="0.6"/>
+    <text x="515" y="178" fill="#6ee7b7" text-anchor="middle">Commit（提交）</text>
+    <rect x="615" y="156" width="130" height="34" rx="6" fill="#0f172a" stroke="#10b981" stroke-opacity="0.6"/>
+    <text x="680" y="178" fill="#6ee7b7" text-anchor="middle">Tree（目录）</text>
+  </g>
+
+  <line x1="430" y1="202" x2="430" y2="220" stroke="#475569" stroke-width="2"/>
+
+  <!-- storage engine layer -->
+  <rect x="80" y="220" width="700" height="80" rx="10" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+  <text x="430" y="242" fill="#67e8f9" font-size="13" font-weight="700" text-anchor="middle">存储引擎（Rust 内核 oakvcs-core）</text>
+  <g font-size="12">
+    <rect x="120" y="254" width="180" height="34" rx="6" fill="#0f172a" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="210" y="276" fill="#a5f3fc" text-anchor="middle">BLAKE3 内容哈希</text>
+    <rect x="335" y="254" width="190" height="34" rx="6" fill="#0f172a" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="430" y="276" fill="#a5f3fc" text-anchor="middle">内容定义分块 FastCDC</text>
+    <rect x="560" y="254" width="180" height="34" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.6"/>
+    <text x="650" y="276" fill="#fcd34d" text-anchor="middle">惰性挂载 Lazy Mount</text>
+  </g>
+
+  <line x1="430" y1="300" x2="430" y2="318" stroke="#475569" stroke-width="2"/>
+
+  <!-- backend -->
+  <rect x="240" y="318" width="380" height="40" rx="10" fill="#0f172a" stroke="#64748b"/>
+  <text x="430" y="343" fill="#94a3b8" font-size="13" text-anchor="middle">后端：内容寻址存储（可选 SQLite / git 后端）</text>
+</svg>

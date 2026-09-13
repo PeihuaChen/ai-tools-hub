@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI知识宇宙 - 用AI采集，用AI生成 | AI 领域知识聚合</title>
+    <meta name="description" content="每天更新AI领域新技术及新进展，让你永不落伍！">
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/theme.css">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="./">
+                <img src="./assets/logo.png" alt="AI 知识宇宙 Logo" class="site-logo">
+                🌌 AI知识宇宙 - 用AI采集，用AI生成
+            </a></h1>
+            <div class="desc">每天更新AI领域新技术及新进展，让你永不落伍！</div>
+            <nav>
+                <a href="./">首页</a>
+                <a href="./archive.html">全部文章</a>
+                <a href="./about.html">关于</a>
+            </nav>
+        </header>
+
+        <div class="hero">
+            <h2>🧠 每天探索 AI 领域新边界</h2>
+            <p>AI 知识宇宙 — 用 AI 采集全球最新技术动态，用 AI 生成深度解读内容。每天更新，让你永不落伍</p>
+            <div class="stats">
+                <a href="./archive.html"><strong id="stats-posts">0</strong> 篇文章</a>
+                <a href="./archive.html"><strong id="stats-cats">0</strong> 个分类</a>
+            </div>
+        </div>
+
+        <div id="post-list"></div>
+
+        <div class="load-more" id="load-more-trigger">
+            <span class="spinner" id="load-spinner"></span>
+            <span id="load-status">正在加载文章数据...</span>
+        </div>
+
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        function updateIcon(theme) { icon.textContent = theme === 'light' ? '🌙' : '☀️'; }
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+
+    <script>
+    (function() {
+        var PAGE_SIZE = 10;
+        var allPosts = [];
+        var currentIndex = 0;
+
+        var listEl = document.getElementById('post-list');
+        var trigger = document.getElementById('load-more-trigger');
+        var statusEl = document.getElementById('load-status');
+        var spinnerEl = document.getElementById('load-spinner');
+        var statsPosts = document.getElementById('stats-posts');
+        var statsCats = document.getElementById('stats-cats');
+
+        function renderCards(posts) {
+            var html = '';
+            for (var i = 0; i < posts.length; i++) {
+                var p = posts[i];
+                var desc = p.description || '';
+                var shortDesc = desc.length > 150 ? desc.slice(0, 150) + '...' : desc;
+                var views = p.view_count > 0 ? ' · ' + p.view_count + ' 次阅读' : '';
+                html += '<div class="post-card">'
+                    + '<a href="./archive.html?cat=' + encodeURIComponent(p.category) + '" class="cat">' + escHtml(p.category) + '</a>'
+                    + '<h3><a href="./posts/' + p.slug + '.html">' + escHtml(p.title) + '</a></h3>'
+                    + '<div class="meta">' + p.date + ' · ' + (p.read_time || '5 分钟') + views + '</div>'
+                    + '<p>' + escHtml(shortDesc) + '</p>'
+                    + '<a href="./posts/' + p.slug + '.html" class="readmore">阅读全文 →</a>'
+                    + '</div>';
+            }
+            return html;
+        }
+
+        function escHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        function loadNextBatch() {
+            var next = Math.min(currentIndex + PAGE_SIZE, allPosts.length);
+            var batch = allPosts.slice(currentIndex, next);
+            listEl.insertAdjacentHTML('beforeend', renderCards(batch));
+            currentIndex = next;
+            updateStatus();
+        }
+
+        function updateStatus() {
+            if (currentIndex >= allPosts.length) {
+                spinnerEl.style.display = 'none';
+                statusEl.textContent = '全部 ' + allPosts.length + ' 篇文章已加载完成';
+                return;
+            }
+            statusEl.textContent = '已加载 ' + currentIndex + ' / ' + allPosts.length + ' 篇';
+            spinnerEl.style.display = '';
+        }
+
+        function init() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', './data/posts.json', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        allPosts = data.posts || [];
+                        if (statsPosts) statsPosts.textContent = data.total;
+                        if (statsCats) {
+                            var cats = {};
+                            allPosts.forEach(function(p) { cats[p.category] = true; });
+                            statsCats.textContent = Object.keys(cats).length;
+                        }
+                        loadNextBatch();
+                        setupObserver();
+                    } catch(e) {
+                        statusEl.textContent = '数据解析失败: ' + e.message;
+                        spinnerEl.style.display = 'none';
+                    }
+                } else {
+                    statusEl.textContent = '请求失败 (状态 ' + xhr.status + '): ' + xhr.statusText;
+                    spinnerEl.style.display = 'none';
+                }
+            };
+            xhr.onerror = function() {
+                statusEl.textContent = '无法加载数据，请确认 ./data/posts.json 可访问';
+                spinnerEl.style.display = 'none';
+            };
+            xhr.send();
+        }
+
+        function setupObserver() {
+            if (allPosts.length <= PAGE_SIZE) {
+                spinnerEl.style.display = 'none';
+                statusEl.textContent = '全部 ' + allPosts.length + ' 篇文章已加载完成';
+                return;
+            }
+            var observer = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && currentIndex < allPosts.length) {
+                    statusEl.textContent = '加载中...';
+                    spinnerEl.style.display = '';
+                    setTimeout(loadNextBatch, 100);
+                }
+            }, { rootMargin: '200px' });
+            observer.observe(trigger);
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>

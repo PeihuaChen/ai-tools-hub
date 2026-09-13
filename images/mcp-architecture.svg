@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="100%" stop-color="#24243e"/>
+    </linearGradient>
+    <linearGradient id="boxBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a3a6a"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <linearGradient id="boxGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d4a2a"/>
+      <stop offset="100%" stop-color="#082418"/>
+    </linearGradient>
+    <linearGradient id="boxOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5a2d0a"/>
+      <stop offset="100%" stop-color="#2d1605"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#3a7bd5"/>
+    </linearGradient>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#00d2ff"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#00f260"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)" rx="8"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="20" fill="#00d2ff" text-anchor="middle">MCP 架构图：Host-Client-Server 三层模型</text>
+  <line x1="200" y1="48" x2="600" y2="48" stroke="url(#accent)" stroke-width="1" opacity="0.5"/>
+
+  <!-- Layer 1: Host -->
+  <g transform="translate(50, 70)">
+    <rect x="0" y="0" width="700" height="90" rx="8" fill="url(#boxBlue)" stroke="#00d2ff" stroke-width="1.5" opacity="0.8"/>
+    <text x="20" y="28" font-family="'Courier New',monospace" font-weight="700" font-size="14" fill="#00d2ff">Host 应用层</text>
+    <text x="20" y="50" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#aaa">AI 客户端应用（Claude Desktop / Cursor / VS Code / ChatGPT）</text>
+
+    <!-- Sub boxes -->
+    <rect x="30" y="60" width="130" height="22" rx="4" fill="#1a4a7a" opacity="0.6"/>
+    <text x="95" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">LLM 推理引擎</text>
+    <rect x="175" y="60" width="130" height="22" rx="4" fill="#1a4a7a" opacity="0.6"/>
+    <text x="240" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">会话管理</text>
+    <rect x="320" y="60" width="130" height="22" rx="4" fill="#1a4a7a" opacity="0.6"/>
+    <text x="385" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">工具调用调度</text>
+    <rect x="465" y="60" width="130" height="22" rx="4" fill="#1a4a7a" opacity="0.6"/>
+    <text x="530" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">资源管理</text>
+  </g>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="160" x2="400" y2="180" stroke="#00d2ff" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="420" y="174" font-family="Arial,sans-serif" font-size="10" fill="#00d2ff" opacity="0.7">JSON-RPC 2.0 (Streamable HTTP / stdio)</text>
+
+  <!-- Layer 2: Client -->
+  <g transform="translate(50, 185)">
+    <rect x="0" y="0" width="700" height="80" rx="8" fill="url(#boxGreen)" stroke="#00f260" stroke-width="1.5" opacity="0.8"/>
+    <text x="20" y="25" font-family="'Courier New',monospace" font-weight="700" font-size="14" fill="#00f260">MCP Client 客户端层</text>
+    <text x="20" y="45" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#aaa">每个 Host 维护一个到 MCP Server 的专用连接</text>
+
+    <rect x="30" y="52" width="150" height="22" rx="4" fill="#0a5a2a" opacity="0.6"/>
+    <text x="105" y="67" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">能力协商 (Capability)</text>
+    <rect x="195" y="52" width="150" height="22" rx="4" fill="#0a5a2a" opacity="0.6"/>
+    <text x="270" y="67" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">请求路由</text>
+    <rect x="360" y="52" width="150" height="22" rx="4" fill="#0a5a2a" opacity="0.6"/>
+    <text x="435" y="67" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">状态管理</text>
+  </g>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="265" x2="400" y2="285" stroke="#00d2ff" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="420" y="279" font-family="Arial,sans-serif" font-size="10" fill="#00d2ff" opacity="0.7">工具/资源/提示 调用</text>
+
+  <!-- Layer 3: Server -->
+  <g transform="translate(50, 290)">
+    <rect x="0" y="0" width="700" height="140" rx="8" fill="url(#boxOrange)" stroke="#ff7600" stroke-width="1.5" opacity="0.8"/>
+    <text x="20" y="25" font-family="'Courier New',monospace" font-weight="700" font-size="14" fill="#ff7600">MCP Server 服务层</text>
+    <text x="20" y="45" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#aaa">暴露工具(Tools)、资源(Resources)、提示(Prompts) 的统一接口</text>
+
+    <!-- Tool boxes -->
+    <rect x="25" y="55" width="155" height="75" rx="6" fill="#3a1a05" stroke="#ff7600" stroke-width="0.5" opacity="0.6"/>
+    <text x="102" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#fc0" text-anchor="middle">🔧 Tools</text>
+    <text x="102" y="92" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">tools/list</text>
+    <text x="102" y="106" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">tools/call</text>
+    <text x="102" y="120" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">可执行函数</text>
+
+    <rect x="195" y="55" width="155" height="75" rx="6" fill="#3a1a05" stroke="#ff7600" stroke-width="0.5" opacity="0.6"/>
+    <text x="272" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#fc0" text-anchor="middle">📄 Resources</text>
+    <text x="272" y="92" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">resources/list</text>
+    <text x="272" y="106" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">resources/read</text>
+    <text x="272" y="120" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">文件/数据/上下文</text>
+
+    <rect x="365" y="55" width="155" height="75" rx="6" fill="#3a1a05" stroke="#ff7600" stroke-width="0.5" opacity="0.6"/>
+    <text x="442" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#fc0" text-anchor="middle">📝 Prompts</text>
+    <text x="442" y="92" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">prompts/list</text>
+    <text x="442" y="106" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">prompts/get</text>
+    <text x="442" y="120" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">模板化提示</text>
+
+    <rect x="535" y="55" width="155" height="75" rx="6" fill="#3a1a05" stroke="#ff7600" stroke-width="0.5" opacity="0.6"/>
+    <text x="612" y="75" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#fc0" text-anchor="middle">⚡ Tasks</text>
+    <text x="612" y="92" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">tasks/schedule</text>
+    <text x="612" y="106" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">tasks/cancel</text>
+    <text x="612" y="120" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">长时异步任务</text>
+  </g>
+
+  <!-- Bottom labels -->
+  <g transform="translate(0, 0)">
+    <text x="400" y="440" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">数据来源：MCP 官方规范 · Illustrations by AI知识宇宙</text>
+  </g>
+</svg>

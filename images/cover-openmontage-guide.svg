@@ -1,0 +1,115 @@
+<svg width="900" height="383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="25%" style="stop-color:#feca57"/>
+      <stop offset="50%" style="stop-color:#48dbfb"/>
+      <stop offset="75%" style="stop-color:#ff9ff3"/>
+      <stop offset="100%" style="stop-color:#54a0ff"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#54a0ff"/>
+      <stop offset="33%" style="stop-color:#5f27cd"/>
+      <stop offset="66%" style="stop-color:#00d2d3"/>
+      <stop offset="100%" style="stop-color:#ff6b6b"/>
+    </linearGradient>
+    <linearGradient id="subtitleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#48dbfb"/>
+      <stop offset="100%" style="stop-color:#a29bfe"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label box -->
+  <rect x="30" y="25" width="240" height="28" rx="4" fill="none" stroke="rgba(72,219,251,0.6)" stroke-width="1"/>
+  <text x="42" y="44" font-family="Arial, sans-serif" font-size="12" fill="#48dbfb">AI 工具评测 · 视频制作</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="22" width="36" height="36" rx="6" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="847" y="46" font-family="Arial Black, sans-serif" font-size="16" fill="rgba(255,255,255,0.4)" font-weight="bold">26</text>
+
+  <!-- Main title -->
+  <text x="30" y="105" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" font-weight="bold">OpenMontage 开源视频制作指南</text>
+  <text x="30" y="142" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" font-weight="bold">与竞品横评</text>
+
+  <!-- Subtitle -->
+  <text x="30" y="178" font-family="Arial, sans-serif" font-size="17" fill="url(#subtitleGrad)">开源能否打败月费百刀的闭源产品？</text>
+
+  <!-- Key highlights -->
+  <text x="30" y="218" font-family="Arial, sans-serif" font-size="12" fill="#feca57">★ 42.6k Stars · 12条Pipeline · 100+工具 · 700+ Agent技能文件</text>
+  <text x="30" y="240" font-family="Arial, sans-serif" font-size="12" fill="#48dbfb">★ 零API Key出片 · 纪录片蒙太奇 · CLIP语义检索真实素材</text>
+  <text x="30" y="262" font-family="Arial, sans-serif" font-size="12" fill="#ff9ff3">★ 对比 InVideo AI / HeyGen / Descript / Runway / video-use</text>
+
+  <!-- Right side: concept diagram -->
+  <!-- Agent icon -->
+  <rect x="620" y="90" width="120" height="40" rx="6" fill="none" stroke="rgba(72,219,251,0.5)" stroke-width="1"/>
+  <text x="645" y="115" font-family="Arial, sans-serif" font-size="11" fill="#48dbfb">AI Agent</text>
+
+  <!-- Arrow down -->
+  <line x1="680" y1="130" x2="680" y2="150" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <polygon points="675,150 680,160 685,150" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Pipeline box -->
+  <rect x="620" y="165" width="120" height="40" rx="6" fill="none" stroke="rgba(254,202,87,0.5)" stroke-width="1"/>
+  <text x="638" y="190" font-family="Arial, sans-serif" font-size="11" fill="#feca57">12 Pipelines</text>
+
+  <!-- Arrow down -->
+  <line x1="680" y1="205" x2="680" y2="225" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <polygon points="675,225 680,235 685,225" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Tools box -->
+  <rect x="620" y="240" width="120" height="40" rx="6" fill="none" stroke="rgba(255,159,243,0.5)" stroke-width="1"/>
+  <text x="641" y="265" font-family="Arial, sans-serif" font-size="11" fill="#ff9ff3">100+ Tools</text>
+
+  <!-- Right side labels -->
+  <rect x="770" y="100" width="90" height="24" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="780" y="116" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">Claude Code</text>
+
+  <rect x="770" y="135" width="90" height="24" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="790" y="151" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">Cursor</text>
+
+  <rect x="770" y="170" width="90" height="24" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="787" y="186" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">Copilot</text>
+
+  <!-- Tags bar -->
+  <rect x="30" y="295" width="78" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="40" y="311" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">Agentic AI</text>
+
+  <rect x="118" y="295" width="85" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="128" y="311" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">视频制作</text>
+
+  <rect x="213" y="295" width="70" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="225" y="311" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">开源</text>
+
+  <rect x="293" y="295" width="85" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="303" y="311" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">竞品横评</text>
+
+  <rect x="388" y="295" width="60" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="398" y="311" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">零成本</text>
+
+  <rect x="458" y="295" width="80" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="468" y="311" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">Agent技能</text>
+
+  <!-- Bottom separator & chapter hint -->
+  <line x1="30" y1="340" x2="870" y2="340" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="30" y="360" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.35)">架构拆解 · 竞品对比 · 实战成本 · 上手指南</text>
+
+  <!-- Watermark -->
+  <text x="750" y="360" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.2)">AI深度观察</text>
+</svg>
