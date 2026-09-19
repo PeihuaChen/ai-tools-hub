@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+
+  <text x="40" y="40" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="23" font-weight="bold" fill="#111827">Smart Turn 的投机启动与回滚：级联架构怎么处理「话还没说完」</text>
+  <text x="40" y="66" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" fill="#4b5563">Silero 判定结束后不立即提交输出，而是先投机开算；若用户在宽限期内续说，旧轮次被重开为新版本，上一版的计算结果在到达用户前丢弃</text>
+
+  <!-- 时间轴 -->
+  <line x1="150" y1="100" x2="1120" y2="100" stroke="#94a3b8" stroke-width="1.5"/>
+  <g font-family="'Consolas',monospace" font-size="10.5" fill="#6b7280">
+    <line x1="150" y1="96" x2="150" y2="104" stroke="#94a3b8"/><text x="150" y="90" text-anchor="middle">0</text>
+    <line x1="312" y1="96" x2="312" y2="104" stroke="#94a3b8"/><text x="312" y="90" text-anchor="middle">500ms</text>
+    <line x1="473" y1="96" x2="473" y2="104" stroke="#94a3b8"/><text x="473" y="90" text-anchor="middle">1000</text>
+    <line x1="635" y1="96" x2="635" y2="104" stroke="#94a3b8"/><text x="635" y="90" text-anchor="middle">1500</text>
+    <line x1="797" y1="96" x2="797" y2="104" stroke="#94a3b8"/><text x="797" y="90" text-anchor="middle">2000</text>
+    <line x1="958" y1="96" x2="958" y2="104" stroke="#94a3b8"/><text x="958" y="90" text-anchor="middle">2500</text>
+    <line x1="1120" y1="96" x2="1120" y2="104" stroke="#94a3b8"/><text x="1120" y="90" text-anchor="middle">3000</text>
+  </g>
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="312" y1="108" x2="312" y2="508"/><line x1="473" y1="108" x2="473" y2="508"/>
+    <line x1="635" y1="108" x2="635" y2="508"/><line x1="797" y1="108" x2="797" y2="508"/>
+    <line x1="958" y1="108" x2="958" y2="508"/>
+  </g>
+
+  <!-- 场景 A -->
+  <text x="40" y="130" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" font-weight="bold" fill="#15803d">场景 A｜判定为完整句</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10.5" fill="#6b7280">
+    <text x="40" y="156">用户音频</text><text x="40" y="184">管道工作</text><text x="40" y="212">助手输出</text>
+  </g>
+  <rect x="150" y="142" width="259" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="279" y="156" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#1d4ed8">用户说话</text>
+  <line x1="409" y1="138" x2="409" y2="220" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="409" y="170" width="258" height="20" rx="4" fill="#fffbeb" stroke="#b45309" stroke-width="1.2"/>
+  <text x="538" y="184" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#b45309">投机执行 STT + LLM</text>
+  <rect x="667" y="198" width="291" height="20" rx="4" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="812" y="212" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#15803d">TTS 音频流式回传</text>
+  <text x="415" y="134" font-family="'Microsoft YaHei',sans-serif" font-size="10.5" fill="#6d28d9">Silero 软结束</text>
+  <path d="M409 226 L667 226" stroke="#b45309" stroke-width="1" stroke-dasharray="3"/>
+  <text x="538" y="240" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="10.5" fill="#b45309">speculative_reopen_ms = 800ms 宽限期，期满才提交</text>
+
+  <line x1="40" y1="256" x2="1160" y2="256" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- 场景 B -->
+  <text x="40" y="282" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" font-weight="bold" fill="#b45309">场景 B｜判定为不完整句</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10.5" fill="#6b7280">
+    <text x="40" y="308">用户音频</text><text x="40" y="336">管道工作</text><text x="40" y="364">助手输出</text>
+  </g>
+  <rect x="150" y="294" width="259" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="279" y="308" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#1d4ed8">用户说话</text>
+  <line x1="409" y1="290" x2="409" y2="372" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="409" y="322" width="194" height="20" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+  <text x="506" y="336" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#6b7280">按住不动 600ms</text>
+  <rect x="603" y="322" width="258" height="20" rx="4" fill="#fffbeb" stroke="#b45309" stroke-width="1.2"/>
+  <text x="732" y="336" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#b45309">才开始 STT + LLM</text>
+  <rect x="861" y="350" width="194" height="20" rx="4" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="958" y="364" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#15803d">输出</text>
+  <line x1="1055" y1="290" x2="1055" y2="372" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="1050" y="286" text-anchor="end" font-family="'Microsoft YaHei',sans-serif" font-size="10.5" fill="#b91c1c">max_wait 2s 上限</text>
+  <text x="415" y="286" font-family="'Microsoft YaHei',sans-serif" font-size="10.5" fill="#6d28d9">Silero 软结束</text>
+
+  <line x1="40" y1="388" x2="1160" y2="388" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- 场景 C -->
+  <text x="40" y="414" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13.5" font-weight="bold" fill="#b91c1c">场景 C｜宽限期内用户又说话，触发回滚</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10.5" fill="#6b7280">
+    <text x="40" y="440">rev1 音频</text><text x="40" y="468">rev1 工作</text><text x="40" y="496">rev2 重放</text>
+  </g>
+  <rect x="150" y="426" width="259" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="279" y="440" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#1d4ed8">用户说话（第一段）</text>
+  <line x1="409" y1="422" x2="409" y2="452" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="538" y="426" width="226" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="651" y="440" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#1d4ed8">用户续说（宽限期内）</text>
+
+  <rect x="409" y="454" width="129" height="20" rx="4" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="473" y="468" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#b91c1c">已开算</text>
+  <path d="M546 456 L562 472 M562 456 L546 472" stroke="#b91c1c" stroke-width="2"/>
+  <text x="574" y="468" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#b91c1c">结果丢弃，从未到达用户</text>
+  <rect x="150" y="482" width="614" height="20" rx="4" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="457" y="496" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#6d28d9">累积音频作为 rev2 整段重新提交</text>
+  <line x1="764" y1="478" x2="764" y2="506" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="764" y="482" width="259" height="20" rx="4" fill="#fffbeb" stroke="#b45309" stroke-width="1.2"/>
+  <text x="893" y="496" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#b45309">rev2 投机执行</text>
+  <rect x="1023" y="482" width="97" height="20" rx="4" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="1071" y="496" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="11" fill="#15803d">输出</text>
+
+  <!-- 底部说明 -->
+  <rect x="40" y="528" width="545" height="80" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.3"/>
+  <text x="58" y="550" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="bold" fill="#15803d">这套机制换来了什么</text>
+  <text x="58" y="572" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5" fill="#111827">完整句几乎零等待就开算；用户中途停顿不会被抢话；</text>
+  <text x="58" y="592" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5" fill="#111827">错判的代价只是浪费算力，用户侧感知不到错误输出。</text>
+
+  <rect x="605" y="528" width="555" height="80" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+  <text x="623" y="550" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c">代价：这是级联架构的补丁</text>
+  <text x="623" y="572" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5" fill="#111827">四个可调超参、投机算力浪费、版本回滚状态机——</text>
+  <text x="623" y="592" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5" fill="#111827">全双工端到端语音模型在架构上并不需要这一层。</text>
+</svg>

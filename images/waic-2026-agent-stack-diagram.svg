@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="layer1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(109,40,217,0.12)"/>
+      <stop offset="100%" stop-color="rgba(109,40,217,0.04)"/>
+    </linearGradient>
+    <linearGradient id="layer2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(217,119,6,0.12)"/>
+      <stop offset="100%" stop-color="rgba(217,119,6,0.04)"/>
+    </linearGradient>
+    <linearGradient id="layer3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(5,150,105,0.12)"/>
+      <stop offset="100%" stop-color="rgba(5,150,105,0.04)"/>
+    </linearGradient>
+    <linearGradient id="layer4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(37,99,235,0.12)"/>
+      <stop offset="100%" stop-color="rgba(37,99,235,0.04)"/>
+    </linearGradient>
+    <linearGradient id="layer5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(220,38,38,0.12)"/>
+      <stop offset="100%" stop-color="rgba(220,38,38,0.04)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- White background -->
+  <rect width="800" height="520" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="bold" fill="#1a1a2e" text-anchor="middle" letter-spacing="0.5">AI 智能体产业链全栈架构（自底向上）</text>
+  <text x="400" y="56" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">WAIC 2026 展出生态映射 | VirxACT</text>
+
+  <!-- Left side arrow -->
+  <line x1="42" y1="490" x2="42" y2="80" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrowUp)"/>
+  <defs>
+    <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto">
+      <path d="M0,8 L4,0 L8,8" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
+    </marker>
+  </defs>
+  <text x="38" y="290" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af" text-anchor="middle" transform="rotate(-90,38,290)">价值链方向 →  从基础设施到应用</text>
+
+  <!-- === Layer 1: 算力基建 === -->
+  <rect x="70" y="410" width="700" height="76" rx="8" fill="url(#layer1)" stroke="#7c3aed" stroke-width="1.2"/>
+  <text x="88" y="432" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#6d28d9">第1层 · 算力基础设施</text>
+  <text x="88" y="452" font-family="system-ui, sans-serif" font-size="11" fill="#374151">华为 Atlas 950 (8192 NPU) │ 曙光 8000 登峰 (10万卡) │ Atlas 850E 风冷推理节点</text>
+  <text x="88" y="472" font-family="system-ui, sans-serif" font-size="11" fill="#374151">燧原+中兴异构超节点 │ 壁仞 · 沐曦集群 │ 国家超算互联网</text>
+
+  <!-- === Layer 2: 端侧硬件 === -->
+  <rect x="70" y="322" width="700" height="76" rx="8" fill="url(#layer2)" stroke="#d97706" stroke-width="1.2"/>
+  <text x="88" y="344" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#b45309">第2层 · 端侧智能体硬件</text>
+  <text x="88" y="364" font-family="system-ui, sans-serif" font-size="11" fill="#374151">阶跃 STEPX Neo (L3 Agent手机) │ 努比亚 AI 智能体手机 │ 阿里+荣耀 AI OS</text>
+  <text x="88" y="384" font-family="system-ui, sans-serif" font-size="11" fill="#374151">汽车智能座舱 Agent │ AR翻译眼镜 │ 脑机接口终端 (BrainCo)</text>
+
+  <!-- === Layer 3: 具身智能 === -->
+  <rect x="70" y="234" width="700" height="76" rx="8" fill="url(#layer3)" stroke="#059669" stroke-width="1.2"/>
+  <text x="88" y="256" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#047857">第3层 · 具身智能本体</text>
+  <text x="88" y="276" font-family="system-ui, sans-serif" font-size="11" fill="#374151">傲意 OmniHand 3 灵巧手 (20 DOF) │ 智元 Genie G2 Max (50kg负载) │ 200+厂商参展</text>
+  <text x="88" y="296" font-family="system-ui, sans-serif" font-size="11" fill="#374151">商汤 SenseMart Go 无人店 │ 人形机器人整车产线 │ 单臂/双臂/轮式/双足全构型</text>
+
+  <!-- === Layer 4: 模型 & 智能体平台 === -->
+  <rect x="70" y="146" width="700" height="76" rx="8" fill="url(#layer4)" stroke="#2563eb" stroke-width="1.2"/>
+  <text x="88" y="168" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">第4层 · 模型与智能体平台</text>
+  <text x="88" y="188" font-family="system-ui, sans-serif" font-size="11" fill="#374151">MiniMax M3 (100万token) │ 蚂蚁灵波 LingBot-VLA2.0 (一脑多机·17厂商20+构型)</text>
+  <text x="88" y="208" font-family="system-ui, sans-serif" font-size="11" fill="#374151">Step AOS + Amoo Agent │ 西门子工程智能体 │ FieldQuantum 量子AI Agent</text>
+
+  <!-- === Layer 5: 落地应用 === -->
+  <rect x="70" y="68" width="700" height="66" rx="8" fill="url(#layer5)" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="88" y="90" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">第5层 · 行业落地场景</text>
+  <text x="88" y="110" font-family="system-ui, sans-serif" font-size="11" fill="#374151">智能制造 │ 医疗零售(智能药房) │ 物流仓储 │ 金融(智能投研/风控) │ 汽车座舱</text>
+  <text x="88" y="126" font-family="system-ui, sans-serif" font-size="11" fill="#374151">教育养老 │ 科研(新材料/新药) │ 消费终端(Agent手机/AR眼镜)</text>
+
+  <!-- Connecting arrows between layers -->
+  <path d="M400,410 L400,400" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <path d="M400,322 L400,312" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <path d="M400,234 L400,224" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <path d="M400,146 L400,136" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- Right-side data callout -->
+  <rect x="610" y="494" width="160" height="20" rx="10" fill="rgba(109,40,217,0.08)" stroke="#7c3aed" stroke-width="0.8"/>
+  <text x="690" y="508" font-family="system-ui, sans-serif" font-size="9.5" fill="#6d28d9" text-anchor="middle">IDC: CAGR 139% (2025-30)</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="512" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af" text-anchor="middle">数据来源：WAIC 2026 官方发布 / IDC / 企业公开声明 · 图表仅供参考</text>
+</svg>

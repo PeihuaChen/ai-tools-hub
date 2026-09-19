@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f43f5e"/>
+      <stop offset="0.4" stop-color="#a855f7"/>
+      <stop offset="0.7" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#2a2a55" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="75" y1="0" x2="75" y2="383"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="225" y1="0" x2="225" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="375" y1="0" x2="375" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="525" y1="0" x2="525" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="675" y1="0" x2="675" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+    <line x1="825" y1="0" x2="825" y2="383"/>
+  </g>
+
+  <!-- top / bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- label box -->
+  <rect x="48" y="42" width="252" height="34" rx="6" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="64" y="65" font-size="16" fill="#7dd3fc">AI 行业观察 · 服贸会 2026</text>
+
+  <!-- main title -->
+  <text x="48" y="140" font-size="40" font-weight="bold" fill="#ffffff">服贸会 2026：AI 转向</text>
+  <!-- subtitle -->
+  <text x="48" y="178" font-size="18" font-weight="bold" fill="url(#sub)">1200 项成果背后的中国服务贸易升级</text>
+
+  <!-- highlights -->
+  <text x="48" y="222" font-size="13" fill="#fca5a5">● 核心展区近四成创新案例聚焦 AI · 大模型 · 智能体</text>
+  <text x="48" y="246" font-size="13" fill="#93c5fd">● 具身智能推拿机器人全球首发 · 数字人民币落地</text>
+  <text x="48" y="270" font-size="13" fill="#86efac">● 90 国参与 · 470+ 世界 500 强 · 参观量同比 +36.6%</text>
+
+  <!-- tags -->
+  <g font-size="12">
+    <rect x="48" y="298" width="96" height="26" rx="13" fill="none" stroke="#64748b"/>
+    <text x="60" y="315" fill="#cbd5e1">服务贸易</text>
+    <rect x="152" y="298" width="84" height="26" rx="13" fill="none" stroke="#64748b"/>
+    <text x="164" y="315" fill="#cbd5e1">大模型</text>
+    <rect x="244" y="298" width="84" height="26" rx="13" fill="none" stroke="#64748b"/>
+    <text x="256" y="315" fill="#cbd5e1">智能体</text>
+    <rect x="336" y="298" width="96" height="26" rx="13" fill="none" stroke="#64748b"/>
+    <text x="348" y="315" fill="#cbd5e1">具身智能</text>
+    <rect x="440" y="298" width="112" height="26" rx="13" fill="none" stroke="#64748b"/>
+    <text x="452" y="315" fill="#cbd5e1">数字人民币</text>
+  </g>
+
+  <!-- year badge -->
+  <circle cx="812" cy="62" r="26" fill="none" stroke="#a855f7" stroke-width="2"/>
+  <text x="812" y="70" font-size="24" font-weight="bold" fill="#c4b5fd" text-anchor="middle">26</text>
+
+  <!-- right concept: service->AI nodes -->
+  <g>
+    <circle cx="720" cy="200" r="52" fill="none" stroke="url(#ring)" stroke-width="2"/>
+    <circle cx="720" cy="200" r="34" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.6"/>
+    <text x="720" y="196" font-size="15" font-weight="bold" fill="#e0f2fe" text-anchor="middle">服务</text>
+    <text x="720" y="214" font-size="15" font-weight="bold" fill="#e0f2fe" text-anchor="middle">贸易</text>
+    <circle cx="640" cy="150" r="6" fill="#f43f5e"/>
+    <circle cx="812" cy="160" r="6" fill="#22d3ee"/>
+    <circle cx="640" cy="252" r="6" fill="#a855f7"/>
+    <circle cx="808" cy="248" r="6" fill="#4ade80"/>
+    <g stroke="#475569" stroke-width="1.2" stroke-dasharray="5">
+      <line x1="646" y1="153" x2="676" y2="180"/>
+      <line x1="806" y1="162" x2="758" y2="184"/>
+      <line x1="646" y1="249" x2="678" y2="222"/>
+      <line x1="802" y1="246" x2="756" y2="220"/>
+    </g>
+    <text x="640" y="140" font-size="11" fill="#fca5a5" text-anchor="middle">大模型</text>
+    <text x="828" y="150" font-size="11" fill="#67e8f9" text-anchor="middle">智能体</text>
+    <text x="632" y="272" font-size="11" fill="#c4b5fd" text-anchor="middle">具身智能</text>
+    <text x="812" y="268" font-size="11" fill="#86efac" text-anchor="middle">AI 金融</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="346" x2="852" y2="346" stroke="#2a2a55" stroke-width="1"/>
+  <text x="48" y="367" font-size="12" fill="#64748b">从卖产品到卖技术 · 服务贸易的结构性转向</text>
+  <text x="852" y="367" font-size="12" fill="#475569" text-anchor="end">AI 行业观察</text>
+</svg>

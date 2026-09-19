@@ -1,0 +1,96 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#a5b4fc"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e2a5a"/>
+      <stop offset="1" stop-color="#2a2a55"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="120" y1="0" x2="120" y2="383"/>
+    <line x1="240" y1="0" x2="240" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="480" y1="0" x2="480" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- top/bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- label box -->
+  <rect x="48" y="40" width="238" height="34" rx="8" fill="none" stroke="#38bdf8" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="64" y="63" font-size="16" fill="#7dd3fc" font-weight="bold">AI 开发平台 · 知识库</text>
+
+  <!-- year badge -->
+  <circle cx="852" cy="57" r="22" fill="none" stroke="#818cf8" stroke-opacity="0.7" stroke-width="2"/>
+  <text x="852" y="64" font-size="20" fill="#a5b4fc" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="150" font-size="40" fill="#ffffff" font-weight="bold">FastGPT 搭企业知识库</text>
+  <!-- subtitle -->
+  <text x="48" y="190" font-size="19" fill="url(#sub)" font-weight="bold">能力边界 · 部署形态 · 合规细节全梳理</text>
+
+  <!-- highlights -->
+  <text x="48" y="232" font-size="14" fill="#38bdf8">● 知识库 / 工作流 / 双向 MCP 三层能力</text>
+  <text x="48" y="258" font-size="14" fill="#818cf8">● v4.16 用户级沙箱 + 知识库元数据</text>
+  <text x="48" y="284" font-size="14" fill="#22d3ee">● 数据留存与许可证的坑一次讲清</text>
+
+  <!-- tags -->
+  <g font-size="12">
+    <rect x="48" y="304" width="86" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="91" y="321" fill="#7dd3fc" text-anchor="middle">RAG 知识库</text>
+    <rect x="144" y="304" width="78" height="26" rx="13" fill="none" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="183" y="321" fill="#a5b4fc" text-anchor="middle">私有化部署</text>
+    <rect x="232" y="304" width="72" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <text x="268" y="321" fill="#67e8f9" text-anchor="middle">可视化工作流</text>
+    <rect x="314" y="304" width="58" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="343" y="321" fill="#7dd3fc" text-anchor="middle">v4.16</text>
+  </g>
+
+  <!-- right side concept: pipeline nodes -->
+  <g>
+    <rect x="612" y="120" width="104" height="44" rx="10" fill="url(#node)" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="664" y="147" font-size="14" fill="#7dd3fc" text-anchor="middle">文档</text>
+    <rect x="612" y="184" width="104" height="44" rx="10" fill="url(#node)" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="664" y="211" font-size="14" fill="#a5b4fc" text-anchor="middle">检索</text>
+    <rect x="612" y="248" width="104" height="44" rx="10" fill="url(#node)" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <text x="664" y="275" font-size="14" fill="#67e8f9" text-anchor="middle">生成</text>
+
+    <rect x="756" y="184" width="96" height="44" rx="10" fill="url(#node)" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="804" y="211" font-size="14" fill="#7dd3fc" text-anchor="middle">应用</text>
+
+    <line x1="664" y1="164" x2="664" y2="184" stroke="#818cf8" stroke-opacity="0.6" stroke-width="2"/>
+    <line x1="664" y1="228" x2="664" y2="248" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="2"/>
+    <line x1="716" y1="206" x2="756" y2="206" stroke="#38bdf8" stroke-opacity="0.6" stroke-width="2"/>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="350" x2="852" y2="350" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="48" y="370" font-size="12" fill="#64748b">开箱即用的 RAG 与工作流编排</text>
+  <text x="852" y="370" font-size="12" fill="#64748b" text-anchor="end">AI知识宇宙</text>
+</svg>

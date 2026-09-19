@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="50" y="48" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827">Bot Token 与 Agent 密钥对：两种身份模型的差别</text>
+  <text x="50" y="76" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#4b5563">这是 Buzz 与"在 Slack 里加个 Bot"最本质的区别，不是功能多少的问题</text>
+
+  <!-- ===== LEFT: Traditional Bot Token ===== -->
+  <rect x="50" y="105" width="520" height="390" rx="12" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+
+  <rect x="50" y="105" width="520" height="48" rx="12" fill="#fee2e2"/>
+  <rect x="50" y="141" width="520" height="12" fill="#fee2e2"/>
+  <text x="310" y="136" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#b91c1c" text-anchor="middle">传统模式：Bot Token（Slack / Teams）</text>
+
+  <!-- Diagram: platform holds token -->
+  <rect x="85" y="175" width="140" height="58" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="155" y="199" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">平台</text>
+  <text x="155" y="219" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">签发 token</text>
+
+  <line x1="225" y1="204" x2="272" y2="204" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+  <polygon points="272,198 272,210 282,204" fill="#94a3b8"/>
+
+  <rect x="285" y="175" width="140" height="58" rx="8" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+  <text x="355" y="199" font-family="monospace" font-size="12" font-weight="bold" fill="#b45309" text-anchor="middle">xoxb-4f2a...</text>
+  <text x="355" y="219" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">共享密文字符串</text>
+
+  <line x1="425" y1="204" x2="472" y2="204" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+  <polygon points="472,198 472,210 482,204" fill="#94a3b8"/>
+
+  <rect x="470" y="175" width="70" height="58" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="505" y="209" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">Bot</text>
+
+  <!-- Pain points -->
+  <text x="85" y="272" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">存在的问题</text>
+
+  <text x="85" y="302" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#b91c1c">✕</text>
+  <text x="108" y="302" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">Token 可复制、可泄露、可被多方共用</text>
+
+  <text x="85" y="332" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#b91c1c">✕</text>
+  <text x="108" y="332" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">无法证明"这条消息一定来自这个 Bot"</text>
+
+  <text x="85" y="362" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#b91c1c">✕</text>
+  <text x="108" y="362" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">权限靠平台的 scope 开关，颗粒度粗</text>
+
+  <text x="85" y="392" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#b91c1c">✕</text>
+  <text x="108" y="392" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">Bot 是"外挂集成"，不是频道成员</text>
+
+  <text x="85" y="422" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#b91c1c">✕</text>
+  <text x="108" y="422" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">审计要信平台日志，无独立验证手段</text>
+
+  <text x="85" y="452" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#b91c1c">✕</text>
+  <text x="108" y="452" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">换平台等于身份和历史全部作废</text>
+
+  <rect x="85" y="465" width="450" height="1" fill="#fecaca"/>
+  <text x="85" y="486" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#b91c1c">信任的根：平台说它是谁，它就是谁</text>
+
+  <!-- ===== RIGHT: Buzz keypair ===== -->
+  <rect x="630" y="105" width="520" height="390" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+
+  <rect x="630" y="105" width="520" height="48" rx="12" fill="#d1fae5"/>
+  <rect x="630" y="141" width="520" height="12" fill="#d1fae5"/>
+  <text x="890" y="136" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#15803d" text-anchor="middle">Buzz 模式：Agent 自持密钥对（Nostr）</text>
+
+  <!-- Diagram: agent holds private key, signs event -->
+  <rect x="665" y="175" width="140" height="58" rx="8" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+  <text x="735" y="197" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#15803d" text-anchor="middle">Agent</text>
+  <text x="735" y="217" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">私钥仅自己持有</text>
+
+  <line x1="805" y1="204" x2="852" y2="204" stroke="#15803d" stroke-width="1.2"/>
+  <polygon points="852,198 852,210 862,204" fill="#15803d"/>
+  <text x="833" y="196" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">签名</text>
+
+  <rect x="865" y="168" width="150" height="72" rx="8" fill="#ffffff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="940" y="190" font-family="monospace" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">signed_event</text>
+  <text x="940" y="208" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">pubkey: 8f3c...</text>
+  <text x="940" y="224" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">sig: 3f8a...c2d1</text>
+
+  <line x1="1015" y1="204" x2="1062" y2="204" stroke="#15803d" stroke-width="1.2"/>
+  <polygon points="1062,198 1062,210 1072,204" fill="#15803d"/>
+
+  <rect x="1060" y="175" width="60" height="58" rx="8" fill="#ffffff" stroke="#0e7490" stroke-width="1.2"/>
+  <text x="1090" y="199" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#0e7490" text-anchor="middle">Relay</text>
+  <text x="1090" y="217" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">验签</text>
+
+  <!-- Benefits -->
+  <text x="665" y="272" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#15803d">带来的变化</text>
+
+  <text x="665" y="302" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#15803d">✓</text>
+  <text x="688" y="302" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">私钥不出 Agent，签名无法伪造</text>
+
+  <text x="665" y="332" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#15803d">✓</text>
+  <text x="688" y="332" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">任何人拿公钥即可独立验证作者</text>
+
+  <text x="665" y="362" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#15803d">✓</text>
+  <text x="688" y="362" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">权限 = 频道成员资格，和管人一样管</text>
+
+  <text x="665" y="392" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#15803d">✓</text>
+  <text x="688" y="392" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">Agent 是正式成员，与人类同等能力</text>
+
+  <text x="665" y="422" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#15803d">✓</text>
+  <text x="688" y="422" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">审计无需信任平台，事件自带证据</text>
+
+  <text x="665" y="452" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#15803d">✓</text>
+  <text x="688" y="452" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="13" fill="#4b5563">换模型换框架，身份与历史都不丢</text>
+
+  <rect x="665" y="465" width="450" height="1" fill="#a7f3d0"/>
+  <text x="665" y="486" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#15803d">信任的根：数学上可验证，与平台无关</text>
+
+  <!-- Bottom conclusion band -->
+  <rect x="50" y="520" width="1100" height="52" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="600" y="543" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8" text-anchor="middle">核心差异：Bot Token 回答"平台允许它做什么"，密钥对回答"这件事究竟是谁做的"</text>
+  <text x="600" y="563" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563" text-anchor="middle">当团队里跑着 5 个以上 Agent 时，后者才撑得住责任归属与合规审计</text>
+</svg>

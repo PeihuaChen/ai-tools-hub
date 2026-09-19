@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="42%" r="45%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#glow)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.04">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top / bottom gradient bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- right concept graph: nodes + community clusters -->
+  <g stroke="#64748b" stroke-opacity="0.55" stroke-width="1.5">
+    <line x1="705" y1="120" x2="770" y2="95"/>
+    <line x1="705" y1="120" x2="775" y2="165"/>
+    <line x1="770" y1="95" x2="775" y2="165"/>
+    <line x1="775" y1="165" x2="720" y2="210"/>
+    <line x1="720" y1="210" x2="800" y2="230"/>
+    <line x1="770" y1="95" x2="830" y2="130"/>
+    <line x1="800" y1="230" x2="840" y2="185"/>
+  </g>
+  <g>
+    <circle cx="705" cy="120" r="11" fill="#38bdf8" fill-opacity="0.85"/>
+    <circle cx="770" cy="95" r="9" fill="#818cf8" fill-opacity="0.85"/>
+    <circle cx="775" cy="165" r="13" fill="#f472b6" fill-opacity="0.85"/>
+    <circle cx="720" cy="210" r="8" fill="#34d399" fill-opacity="0.85"/>
+    <circle cx="800" cy="230" r="10" fill="#38bdf8" fill-opacity="0.85"/>
+    <circle cx="830" cy="130" r="8" fill="#818cf8" fill-opacity="0.85"/>
+    <circle cx="840" cy="185" r="7" fill="#fbbf24" fill-opacity="0.85"/>
+  </g>
+  <!-- community dashed rings -->
+  <ellipse cx="748" cy="128" rx="60" ry="52" fill="none" stroke="#818cf8" stroke-opacity="0.35" stroke-dasharray="5 4"/>
+  <ellipse cx="805" cy="205" rx="52" ry="42" fill="none" stroke="#34d399" stroke-opacity="0.35" stroke-dasharray="5 4"/>
+
+  <!-- year badge -->
+  <circle cx="852" cy="40" r="19" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.6"/>
+  <text x="852" y="46" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700" fill="#38bdf8" text-anchor="middle">26</text>
+
+  <!-- tag box -->
+  <rect x="48" y="44" width="230" height="30" rx="6" fill="#1e293b" fill-opacity="0.7" stroke="#38bdf8" stroke-opacity="0.5"/>
+  <text x="63" y="64" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="14" fill="#7dd3fc">AI 行业观察 · 知识图谱 RAG</text>
+
+  <!-- main title -->
+  <text x="48" y="128" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#ffffff">你真的需要 GraphRAG 吗？</text>
+  <text x="48" y="168" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" font-weight="600" fill="url(#sub)">微软开源方案的原理、成本与选型指南</text>
+
+  <!-- highlights -->
+  <text x="48" y="210" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#93c5fd">▸ 知识图谱 + 社区摘要，攻克向量检索的全局盲区</text>
+  <text x="48" y="234" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#fca5a5">▸ 索引成本一度高达 20-100 倍，LazyGraphRAG 砍到 0.1%</text>
+  <text x="48" y="258" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#86efac">▸ 对照腾讯 WeKnora，三个问题帮你做选型决策</text>
+
+  <!-- tag pills -->
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12">
+    <rect x="48" y="284" width="86" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.6"/>
+    <text x="91" y="301" fill="#7dd3fc" text-anchor="middle">GraphRAG</text>
+    <rect x="142" y="284" width="96" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-opacity="0.6"/>
+    <text x="190" y="301" fill="#c4b5fd" text-anchor="middle">LazyGraphRAG</text>
+    <rect x="246" y="284" width="78" height="26" rx="13" fill="none" stroke="#f472b6" stroke-opacity="0.6"/>
+    <text x="285" y="301" fill="#f9a8d4" text-anchor="middle">WeKnora</text>
+    <rect x="332" y="284" width="66" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.6"/>
+    <text x="365" y="301" fill="#86efac" text-anchor="middle">选型</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="336" x2="852" y2="336" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="48" y="360" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12" fill="#64748b">原理拆解 · 成本真相 · 开源生态 · WeKnora 源码级对比 · 决策速查表</text>
+  <text x="852" y="360" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12" fill="#475569" text-anchor="end">公众号 · AI 行业观察</text>
+</svg>

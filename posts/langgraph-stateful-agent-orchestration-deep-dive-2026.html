@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangGraph 深度解析：从状态图原理到 Klarna 8500 万用户的生产落地</title>
+    <meta name="description" content="从状态图原理、检查点持久化到 1.0 GA 后的架构反转，一篇讲清 LangGraph 为什么成为大厂 Agent 的底座，以及 Klarna、Uber 们用它做了什么。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">LangGraph 深度解析：从状态图原理到 Klarna 8500 万用户的生产落地</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-09-17 · 13 分钟</span>
+            </div>
+            <p>Klarna 的 AI 客服助手服务着 8500 万活跃用户，把客户问题的平均解决时长压低了 80%。这套系统的底座，是一个叫 LangGraph 的开源框架。</p>
+<p>同样在生产环境里跑着 LangGraph 的，还有 LinkedIn、Uber、Replit、Elastic 和摩根大通。2025 年 10 月 22 日，它发布了 1.0 GA，GitHub 星标突破 3 万。</p>
+<p>一个耐人寻味的信号是：曾经风头很盛的 AutoGen 进入了维护模式，OpenAI 的 Swarm 项目被归档，而 LangGraph 却把 LangChain 自己的 Agent 也收编到了自己脚下。这篇文章把 LangGraph 讲透：它的图结构原理是什么、四大核心能力从哪来、1.0 之后发生了什么、大厂拿它做什么，以及你到底该不该选它。</p>
+<hr />
+<h2 id="agent">一、为什么 Agent 需要「图」</h2>
+<p>要理解 LangGraph，得先理解它想解决的问题。</p>
+<p>早期的 LangChain 用「链（Chain）」把步骤串起来：检索 → 拼提示词 → 调大模型 → 输出。这是一条直线，本质是有向无环图（DAG），走完就结束。</p>
+<p>但真正的 Agent 不是直线。它要反复思考、调用工具、根据结果决定下一步，可能循环很多轮才收敛。它还要能中途暂停，等人确认再继续；要能记住上一轮说了什么；出错了要能从断点恢复，而不是从头再来。</p>
+<p>这些需求，线性的链都满足不了。LangGraph 的答案是把工作流建模成一张<strong>有向图</strong>，并且这张图<strong>允许有环</strong>。节点是处理步骤，边决定状态怎么流动，环让 Agent 可以「想不清楚就再想一轮」。</p>
+<p>官方对它的定位很克制：一个<strong>底层的 Agent 编排框架与运行时</strong>，只专注编排本身，不替你做太多封装。控制权尽量交还给开发者。</p>
+<hr />
+<h2 id="_1">二、状态图的五个核心零件</h2>
+<p>LangGraph 的心脏是 <code>StateGraph</code>，一个声明式的工作流引擎。理解它，只需要理解五个零件。</p>
+<p><img alt="LangGraph 状态图核心结构" src="../images/langgraph-stategraph-architecture.png" /></p>
+<p>如上图，一次执行由「状态」贯穿始终，节点读写状态、边决定走向，检查点在每一步存下快照。下面逐个拆开。</p>
+<h3 id="21-state">2.1 State（状态）</h3>
+<p>用 <code>TypedDict</code> 定义的一份共享可变数据，是整张图的「记忆总线」。每个节点都读它、改它，再把新状态传给下一个节点。状态里通常装着对话历史、中间结果、工具返回值等。</p>
+<h3 id="22-node">2.2 Node（节点）</h3>
+<p>一个节点就是一步处理：可能是一次大模型调用、一次工具调用、一次检索、一次人工审核，或一个纯粹的控制决策。节点接收当前状态，返回对状态的更新。</p>
+<h3 id="23-edge">2.3 Edge（边）</h3>
+<p>边决定状态从一个节点流向哪里。分两种：</p>
+<ul>
+<li>普通边：固定地从 A 走到 B。</li>
+<li>条件边：根据当前状态动态选择下一个节点。分支和循环都靠它实现。</li>
+</ul>
+<h3 id="24-checkpointer">2.4 Checkpointer（检查点）</h3>
+<p>这是 LangGraph 区别于普通工作流引擎的关键。编译图时挂上一个 checkpointer，它就会在<strong>每个 super-step</strong>（超步）把整张图的状态存成快照，按 thread（会话线程）组织。</p>
+<p>检查点有三种常见实现，按用途区分：</p>
+<table>
+<thead>
+<tr>
+<th>实现</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MemorySaver</td>
+<td>单元测试</td>
+</tr>
+<tr>
+<td>SqliteSaver</td>
+<td>本地开发</td>
+</tr>
+<tr>
+<td>PostgresSaver</td>
+<td>生产环境</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-runtime">2.5 Runtime（运行时）</h3>
+<p>底层运行时借鉴了谷歌的 <strong>Pregel</strong> 消息传递计算模型。它把执行切分成一个个超步，每个超步内多个节点可以并行推进，超步之间统一同步状态。这套模型让 LangGraph 天然支持并行分支和可靠的状态演进。</p>
+<hr />
+<h2 id="_2">三、检查点带来的四大能力</h2>
+<p>检查点不只是「存个进度」。因为状态被逐步持久化，四个生产级能力自然长了出来。</p>
+<h3 id="31-human-in-the-loop">3.1 人机协同（Human-in-the-loop）</h3>
+<p>当模型打算做一件有风险的事——比如写文件、执行 SQL、发起支付——可以用 <code>interrupt()</code> 把执行<strong>暂停</strong>，交给人审核。人点了确认，再从断点<strong>恢复</strong>。这对高风险场景至关重要，也是纯提示词工程做不到的。</p>
+<h3 id="32">3.2 时间旅行调试</h3>
+<p>因为每一步都有快照，你可以回到任意一个历史检查点，修改当时的状态，然后从那个点<strong>重新执行</strong>。调 Agent 逻辑时，这比反复从头跑一遍省太多时间。</p>
+<h3 id="33">3.3 容错恢复</h3>
+<p>长任务跑到一半崩了，不必从零开始。从最近的检查点恢复即可，中间已完成的昂贵调用不会白费。</p>
+<h3 id="34">3.4 对话记忆</h3>
+<p>短期记忆本质就是持久化的状态：会话线程可以随时挂起、随时续上。跨会话的长期记忆则交给 Store 组件。子图会自动继承父图的 checkpointer，不用重复配置。</p>
+<hr />
+<h2 id="10-ga">四、1.0 GA 之后的「架构反转」</h2>
+<p>2025-10-22 的 1.0 GA 是个分水岭。官方称它是「持久化 Agent 框架领域的第一个稳定大版本」。</p>
+<p>更值得注意的是版本之后的结构变化：<strong>LangChain 自己的 Agent 现在也跑在 LangGraph 之上</strong>。老的 <code>create_react_agent</code> 正在迁移到新的 <code>create_agent</code>。换句话说，LangGraph 从 LangChain 的一个子库，变成了整个生态的运行时底座。</p>
+<p>配套的还有几个变化：</p>
+<ul>
+<li>新增 <code>Command</code> API 和 <code>interrupt()</code>，让「中断—确认—恢复」写起来更顺。</li>
+<li>推出 Functional API，用更传统的编程范式也能用上持久化、记忆、流式这些能力，不必都画成图。</li>
+<li>原来的 LangGraph Platform 在 2025 年 10 月改名为「LangSmith Deployment」，把托管部署和可观测收进了 LangSmith 体系。</li>
+</ul>
+<p>一个信息务必在这里说清：托管的 Agent Server 会自动帮你处理检查点持久化，不用手写 checkpointer；但如果你自建部署，就得自己选 Postgres 还是 SQLite。</p>
+<hr />
+<h2 id="_3">五、大厂拿它做了什么</h2>
+<p>抽象讲原理没有说服力，看真实落地。</p>
+<p><strong>Klarna</strong> 是最亮的样本。它的 AI 助手用 LangGraph 加 LangSmith 搭成，覆盖 8500 万活跃用户的客服场景，把平均解决时长降低了 80%。客服是典型的多轮、要查工具、要按状态分支的场景，正好吃到状态图的红利。</p>
+<p><strong>LinkedIn、Uber、Replit、Elastic</strong> 都在生产环境用它构建实际业务。Replit 用它做代码 Agent，Uber 的场景则更偏内部工具链。摩根大通这样的金融机构也进入了官方公开的信任名单——金融场景对「可审计、可中断、可恢复」的要求极高，恰是 LangGraph 的强项。</p>
+<p>这些案例的共性很清楚：<strong>任务复杂、多步、需要人工兜底、出错代价高</strong>。越是这种场景，图结构和检查点的价值越大。</p>
+<hr />
+<h2 id="2026">六、2026 年的框架格局</h2>
+<p>LangGraph 不是唯一选择。2026 年的 Agent 框架格局已经分化，各有各的甜区。</p>
+<p><img alt="2026 主流 Agent 框架定位对比" src="../images/langgraph-frameworks-landscape.png" /></p>
+<p>如上图，不同框架的定位差异很大，LangGraph 占据的是「复杂有状态、要精细控制流」这一格。一个常被引用的效率数据是：完成同类复杂任务，平均大模型调用次数 LangGraph 约 4.2 次、CrewAI 约 6.1 次、AutoGen 超过 20 次——调用次数直接换算成 token 成本，差距很实在。</p>
+<p>各框架的一句话定位：</p>
+<ul>
+<li>LangGraph：复杂有状态 Agent，控制流最细。</li>
+<li>CrewAI 1.0：角色制团队协作，上手快。</li>
+<li>Microsoft Agent Framework：2026 年 4 月合并 Semantic Kernel 与 AutoGen。</li>
+<li>OpenAI Agents SDK：轻量、托管工具调用。</li>
+<li>Google ADK：多语言企业级。</li>
+</ul>
+<p>需要提醒的是格局仍在动：AutoGen 已进入维护模式，Swarm 被归档，Pydantic AI V2 和 LlamaIndex Workflows 1.0 都在 2026 年年中转稳。选型时别只看一时热度。</p>
+<hr />
+<h2 id="_4">七、上手路径：三步跑通第一个状态图</h2>
+<p>原理讲完，很多人卡在「怎么开始」。LangGraph 的最小闭环其实只有三步。</p>
+<p>第一步，<strong>定义状态</strong>。用 <code>TypedDict</code> 声明这张图要传递什么数据，这是所有节点共享的契约。</p>
+<p>第二步，<strong>写节点函数</strong>。每个节点是一个普通 Python 函数，接收状态、返回要更新的字段。一个最小的图大概长这样：</p>
+<pre><code class="language-python">graph = StateGraph(State)
+graph.add_node(&quot;chat&quot;, call_model)
+graph.add_edge(START, &quot;chat&quot;)
+graph.add_edge(&quot;chat&quot;, END)
+app = graph.compile()
+</code></pre>
+<p>第三步，<strong>加边和检查点</strong>。用 <code>add_edge</code> 连固定流转，用 <code>add_conditional_edges</code> 做分支，编译时传入 checkpointer 就获得了持久化。开发期用 SqliteSaver，上生产换 PostgresSaver，代码几乎不用改。</p>
+<p>想要人机协同，就在需要卡点的节点里调 <code>interrupt()</code>；系统会在此暂停，等外部传入决策再从断点恢复。这套「先跑通最小图，再逐步加边、加工具、加卡点」的渐进路径，是官方推荐的落地方式，比一开始就设计复杂拓扑要稳得多。</p>
+<p>如果连图都不想画，1.0 之后的 Functional API 允许你用装饰器把普通函数标成任务，同样能用上持久化、记忆和流式，适合从传统代码平滑迁移。</p>
+<hr />
+<h2 id="_5">八、什么时候该选，什么时候别选</h2>
+<p>框架没有银弹，LangGraph 也有明确的边界。</p>
+<p><strong>适合选它的情况</strong>：</p>
+<ul>
+<li>任务多步、要循环、要按中间结果动态分支。</li>
+<li>需要人工审核卡点，或需要从断点恢复的长任务。</li>
+<li>对可观测、可审计要求高，愿意配 LangSmith。</li>
+<li>团队能接受底层 API 带来的学习成本。</li>
+</ul>
+<p><strong>不建议选它的情况</strong>：</p>
+<ul>
+<li>只是一次性的问答或简单的 RAG，用链甚至直接调 API 就够了，上状态图是过度设计。</li>
+<li>想快速拼一个多角色协作 Demo，CrewAI 这类更省事。</li>
+<li>团队没有工程化能力承接样板代码和持久化基础设施。</li>
+</ul>
+<p>一句话：LangGraph 的成本是学习曲线和样板代码，收益是控制力和生产可靠性。<strong>场景越复杂、越接近生产，这笔账越划算</strong>；场景越简单，它越显得重。</p>
+<hr />
+<h2 id="_6">小结</h2>
+<p>LangGraph 把 Agent 从「一条走完就结束的链」升级成「可循环、可分支、可持久化的状态图」。五个零件——状态、节点、边、检查点、Pregel 运行时——撑起了人机协同、时间旅行、容错恢复、对话记忆四大能力。</p>
+<p>1.0 GA 之后它成了 LangChain 生态的运行时底座，Klarna 8500 万用户、80% 提速这样的数据，证明了它在复杂生产场景里的价值。但它不是万能钥匙：简单场景用它是负担，复杂场景用它才划算。选型的关键，永远是先看清自己的场景复杂度，再决定要不要为控制力付出这份工程成本。</p>
+<hr />
+<h2 id="_7">免责声明</h2>
+<p>本文内容基于公开资料整理，仅供技术学习与选型参考，不构成任何投资、采购或商业决策建议。文中提及的框架版本、企业案例与数据均来自公开来源，可能随时间变化，请以官方最新信息为准。</p>
+<hr />
+<h2 id="_8">参考来源</h2>
+<ul>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/overview">LangChain 官方文档 —— LangGraph overview</a></li>
+<li><a href="https://www.langchain.com/blog/building-langgraph">LangChain 官方博客 —— Designing an Agent Runtime from first principles</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/checkpointers">LangChain 官方文档 —— Checkpointers</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/persistence">LangChain 官方文档 —— Persistence</a></li>
+<li><a href="https://www.langchain.com/built-with-langgraph">LangChain 官方页面 —— Built with LangGraph（Klarna 案例）</a></li>
+<li><a href="https://atlan.com/know/ai-agent/ai-agent-memory/what-is-langgraph/">Atlan —— What Is LangGraph? State, Agents &amp; Production Use Cases 2026</a></li>
+<li><a href="https://www.metacto.com/blogs/a-developer-s-guide-to-langgraph-building-stateful-controllable-llm-applications">MetaCTO —— A Developer's Guide to LangGraph</a></li>
+<li><a href="https://ecorpit.hashnode.dev/2026-ai-agent-frameworks-compared-langgraph-vs-crewai-vs-microsoft-agent-framework-vs-pydantic-ai">Hashnode —— 2026 AI Agent Frameworks Compared: LangGraph vs CrewAI vs MS Agent Framework vs Pydantic AI</a></li>
+<li><a href="https://note.com/bright_jacana710/n/ne413bde036fe">note.com —— AI Agent Development Framework Comparison（调用次数数据）</a></li>
+</ul>
+<hr />
+<h2 id="_9">相关阅读</h2>
+<ul>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署指南 2026</a></li>
+<li><a href="../posts/multi-agent-collaboration-framework-guide-2026.html">多智能体协作框架指南 2026</a></li>
+<li><a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse LLM 与 Agent 可观测性指南</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：AI Agent 协议深度对比 2026</a></li>
+<li><a href="../posts/ai-customer-service-agent-landscape-2026.html">智能客服 Agent 全景 2026</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(B组)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H6p6mzd" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=langgraph-stateful-agent-orchestration-deep-dive-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=langgraph-stateful-agent-orchestration-deep-dive-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

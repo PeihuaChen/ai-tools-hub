@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="530" viewBox="0 0 800 530">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="530" fill="url(#bg)" rx="8"/>
+  <text x="400" y="35" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="20" fill="#fff" text-anchor="middle">MCP vs A2A：全方位对比</text>
+  <line x1="250" y1="48" x2="550" y2="48" stroke="#3a7bd5" stroke-width="1" opacity="0.5"/>
+  <g transform="translate(15, 65)">
+    <rect x="0" y="0" width="770" height="28" rx="4" fill="#1a2a4a" opacity="0.8"/>
+    <text x="130" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="11" fill="#aaa" text-anchor="middle">对比维度</text>
+    <line x1="250" y1="4" x2="250" y2="24" stroke="#333" stroke-width="1"/>
+    <text x="380" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="11" fill="#00d2ff" text-anchor="middle">MCP</text>
+    <line x1="510" y1="4" x2="510" y2="24" stroke="#333" stroke-width="1"/>
+    <text x="640" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="11" fill="#f7c948" text-anchor="middle">A2A</text>
+  </g>
+    <rect x="15" y="97" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="115" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">创建者</text>
+    <line x1="250" y1="99" x2="250" y2="121" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="115" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">Anthropic (2024.11)</text>
+    <line x1="510" y1="99" x2="510" y2="121" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="115" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">Google (2025.04)</text>
+    <rect x="15" y="125" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="143" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">治理方</text>
+    <line x1="250" y1="127" x2="250" y2="149" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="143" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">AAIF / Linux Foundation</text>
+    <line x1="510" y1="127" x2="510" y2="149" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="143" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">AAIF / Linux Foundation</text>
+    <rect x="15" y="153" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="171" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">目标方向</text>
+    <line x1="250" y1="155" x2="250" y2="177" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="171" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">Agent → 工具（垂直）</text>
+    <line x1="510" y1="155" x2="510" y2="177" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="171" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">Agent ↔ Agent（水平）</text>
+    <rect x="15" y="181" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="199" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">架构模型</text>
+    <line x1="250" y1="183" x2="250" y2="205" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="199" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">客户端-服务器</text>
+    <line x1="510" y1="183" x2="510" y2="205" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="199" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">客户端-远程（对等）</text>
+    <rect x="15" y="209" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="227" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">发现机制</text>
+    <line x1="250" y1="211" x2="250" y2="233" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="227" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">Server 配置暴露 tools</text>
+    <line x1="510" y1="211" x2="510" y2="233" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="227" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">Agent Card /.well-known/</text>
+    <rect x="15" y="237" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="255" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">通信协议</text>
+    <line x1="250" y1="239" x2="250" y2="261" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="255" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">JSON-RPC 2.0</text>
+    <line x1="510" y1="239" x2="510" y2="261" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="255" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">JSON-RPC 2.0 + gRPC</text>
+    <rect x="15" y="265" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="283" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">传输方式</text>
+    <line x1="250" y1="267" x2="250" y2="289" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="283" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">stdio / SSE / Streamable HTTP</text>
+    <line x1="510" y1="267" x2="510" y2="289" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="283" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">HTTP / SSE / Webhook / gRPC</text>
+    <rect x="15" y="293" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="311" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">状态模型</text>
+    <line x1="250" y1="295" x2="250" y2="317" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="311" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">无状态函数调用</text>
+    <line x1="510" y1="295" x2="510" y2="317" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="311" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">有状态任务生命周期</text>
+    <rect x="15" y="321" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="339" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">授权认证</text>
+    <line x1="250" y1="323" x2="250" y2="345" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="339" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">Server 自定义（OAuth 2.1）</text>
+    <line x1="510" y1="323" x2="510" y2="345" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="339" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">OAuth 2.1 规范内置</text>
+    <rect x="15" y="349" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="367" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">长时任务</text>
+    <line x1="250" y1="351" x2="250" y2="373" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="367" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">Tasks 扩展（2025.11）</text>
+    <line x1="510" y1="351" x2="510" y2="373" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="367" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">一等公民，原生支持</text>
+    <rect x="15" y="377" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="395" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">推送通知</text>
+    <line x1="250" y1="379" x2="250" y2="401" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="395" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">不支持（需轮询）</text>
+    <line x1="510" y1="379" x2="510" y2="401" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="395" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">Webhook 原生支持</text>
+    <rect x="15" y="405" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="423" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">Human-in-loop</text>
+    <line x1="250" y1="407" x2="250" y2="429" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="423" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">不支持</text>
+    <line x1="510" y1="407" x2="510" y2="429" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="423" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">input-required 状态</text>
+    <rect x="15" y="433" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="451" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">多 Agent 协作</text>
+    <line x1="250" y1="435" x2="250" y2="457" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="451" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">核心规范不支持</text>
+    <line x1="510" y1="435" x2="510" y2="457" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="451" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">核心设计目标</text>
+    <rect x="15" y="461" width="770" height="26" rx="2" fill="#111122" opacity="0.5"/>
+    <text x="130" y="479" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">生态成熟度</text>
+    <line x1="250" y1="463" x2="250" y2="485" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="479" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">9700 万月下载 / 10000+ Server</text>
+    <line x1="510" y1="463" x2="510" y2="485" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="479" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">v1.0 / 150+ 组织</text>
+    <rect x="15" y="489" width="770" height="26" rx="2" fill="#15152a" opacity="0.5"/>
+    <text x="130" y="507" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#ccc" text-anchor="middle">最佳比喻</text>
+    <line x1="250" y1="491" x2="250" y2="513" stroke="#333" stroke-width="0.5"/>
+    <text x="380" y="507" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8cf" text-anchor="middle">USB-C 接口</text>
+    <line x1="510" y1="491" x2="510" y2="513" stroke="#333" stroke-width="0.5"/>
+    <text x="640" y="507" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">电话线</text>
+  <text x="400" y="525" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">数据来源：MCP 规范 v1.0 · A2A v1.0 规范</text>
+</svg>

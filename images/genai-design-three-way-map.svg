@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <linearGradient id="bgw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect width="1200" height="620" fill="url(#bgw)"/>
+
+  <text x="60" y="58" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">三条路线，一个战场：生成式设计工具怎么分</text>
+  <text x="60" y="88" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#4b5563">同样是"一句话生成设计"，出发点、部署方式和取舍完全不同</text>
+
+  <!-- Column 1: Claude Design -->
+  <g>
+    <rect x="60" y="120" width="340" height="450" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <rect x="60" y="120" width="340" height="46" rx="12" fill="#1d4ed8"/>
+    <rect x="60" y="150" width="340" height="16" fill="#1d4ed8"/>
+    <text x="230" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">闭源顺滑体验</text>
+
+    <text x="84" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#1d4ed8">Claude Design</text>
+    <text x="84" y="224" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#4b5563">Anthropic · 对话式设计</text>
+    <text x="84" y="252" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">从对话出发，画布生成</text>
+    <text x="84" y="276" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">品牌 token 提取 + anti-slop</text>
+    <text x="84" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#b45309">痛点：极度吃 token 额度</text>
+
+    <line x1="84" y1="322" x2="376" y2="322" stroke="#bfdbfe" stroke-width="1"/>
+
+    <text x="84" y="352" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0e7490">Figma Make</text>
+    <text x="84" y="376" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#4b5563">Figma · 设计工具加装 AI</text>
+    <text x="84" y="404" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">从设计文件出发</text>
+    <text x="84" y="428" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">直出 React + TypeScript</text>
+    <text x="84" y="452" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">协作 + Dev Mode 成熟</text>
+
+    <rect x="84" y="478" width="292" height="70" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-opacity="0.4"/>
+    <text x="98" y="504" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#1d4ed8">最适合</text>
+    <text x="98" y="528" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#374151">品牌方 / 非设计师 / 已在 Figma</text>
+  </g>
+
+  <!-- Column 2: Full-stack -->
+  <g>
+    <rect x="430" y="120" width="340" height="450" rx="12" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+    <rect x="430" y="120" width="340" height="46" rx="12" fill="#0e7490"/>
+    <rect x="430" y="150" width="340" height="16" fill="#0e7490"/>
+    <text x="600" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">AI 全栈生成</text>
+
+    <text x="454" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#0e7490">想法直接变产品（红海）</text>
+
+    <text x="454" y="236" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Lovable</text>
+    <text x="454" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">最全栈：auth + Supabase + 支付</text>
+
+    <text x="454" y="292" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">v0（Vercel）</text>
+    <text x="454" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">前端最干净：Tailwind + shadcn/ui</text>
+
+    <text x="454" y="348" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Bolt.new</text>
+    <text x="454" y="370" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">开发者最自由：浏览器内任意栈</text>
+
+    <text x="454" y="404" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Google Stitch</text>
+    <text x="454" y="426" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">设计到代码 · vibe design</text>
+
+    <text x="454" y="460" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Uizard（Miro Labs）</text>
+    <text x="454" y="482" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">早期 wireframe / 白板</text>
+
+    <rect x="454" y="498" width="292" height="50" rx="8" fill="#cffafe" stroke="#0e7490" stroke-opacity="0.4"/>
+    <text x="468" y="520" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#0e7490">最适合</text>
+    <text x="468" y="540" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#374151">要"能上线的产品"而非纯设计</text>
+  </g>
+
+  <!-- Column 3: Open source -->
+  <g>
+    <rect x="800" y="120" width="340" height="450" rx="12" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <rect x="800" y="120" width="340" height="46" rx="12" fill="#6d28d9"/>
+    <rect x="800" y="150" width="340" height="16" fill="#6d28d9"/>
+    <text x="970" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">开源开放掌控</text>
+
+    <text x="824" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#6d28d9">Open Design</text>
+    <text x="824" y="224" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#4b5563">Apache-2.0 · 本地优先</text>
+    <text x="824" y="252" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">编程 Agent 变设计引擎</text>
+    <text x="824" y="276" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">模型无关 BYOK · 数据本地</text>
+
+    <line x1="824" y1="298" x2="1116" y2="298" stroke="#ddd6fe" stroke-width="1"/>
+
+    <text x="824" y="328" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Onlook</text>
+    <text x="824" y="350" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">给设计师的 Cursor · 改实时 DOM</text>
+
+    <text x="824" y="384" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Superdesign</text>
+    <text x="824" y="406" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">跑在编程 Agent 内的设计 Agent</text>
+
+    <text x="824" y="440" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#374151">Penpot（AI）</text>
+    <text x="824" y="462" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4b5563">开源 Figma · MCP 接任意 Agent</text>
+
+    <rect x="824" y="478" width="292" height="70" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-opacity="0.4"/>
+    <text x="838" y="504" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#6d28d9">最适合</text>
+    <text x="838" y="528" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" fill="#374151">重掌控 / 数据本地 / 已用编程 Agent</text>
+  </g>
+
+  <text x="60" y="602" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#6b7280">数据基于 2026 年 7 月公开资料整理 · 公众号：AI 行业观察</text>
+</svg>

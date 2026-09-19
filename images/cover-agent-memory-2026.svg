@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="covBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="50%" style="stop-color:#12123a"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="33%" style="stop-color:#764ba2"/>
+      <stop offset="66%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <linearGradient id="botBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="50%" style="stop-color:#00f2fe"/>
+      <stop offset="100%" style="stop-color:#43e97b"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#covBg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03" stroke="#fff" stroke-width="0.5" fill="none">
+    <line x1="0" y1="50" x2="900" y2="50"/>
+    <line x1="0" y1="100" x2="900" y2="100"/>
+    <line x1="0" y1="150" x2="900" y2="150"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="250" x2="900" y2="250"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="0" y1="350" x2="900" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="383"/>
+    <line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/>
+    <line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#botBar)"/>
+
+  <!-- Left label box -->
+  <rect x="55" y="55" width="220" height="32" rx="6" fill="#667eea" opacity="0.15" stroke="#667eea" stroke-width="1"/>
+  <text x="165" y="76" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#a8b4ff" text-anchor="middle">AI 行业观察 · Agent 记忆</text>
+
+  <!-- Main title -->
+  <text x="55" y="140" font-family="Arial, Microsoft YaHei, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">AI Agent 记忆系统全解析</text>
+
+  <!-- Subtitle -->
+  <text x="55" y="180" font-family="Arial, Microsoft YaHei, sans-serif" font-size="18" fill="url(#titleGrad)">原理拆解 · 五大开源方案 · 真实应用场景</text>
+
+  <!-- Key highlights -->
+  <g transform="translate(55, 210)">
+    <rect x="0" y="0" width="180" height="30" rx="6" fill="#667eea" opacity="0.12"/>
+    <text x="12" y="20" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#a8b4ff">🧠 写入-存储-检索-遗忘全链路</text>
+
+    <rect x="195" y="0" width="175" height="30" rx="6" fill="#764ba2" opacity="0.12"/>
+    <text x="207" y="20" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#c9a0ff">📊 Mem0/Letta/Zep/MemOS对比</text>
+
+    <rect x="385" y="0" width="150" height="30" rx="6" fill="#f093fb" opacity="0.12"/>
+    <text x="397" y="20" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#f5b0fc">🛡️ 记忆投毒安全隐患</text>
+  </g>
+
+  <!-- Tags -->
+  <g transform="translate(55, 265)">
+    <rect x="0" y="0" width="80" height="26" rx="13" fill="none" stroke="#667eea" stroke-width="1"/>
+    <text x="40" y="17" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#a8b4ff" text-anchor="middle">Mem0</text>
+
+    <rect x="90" y="0" width="80" height="26" rx="13" fill="none" stroke="#764ba2" stroke-width="1"/>
+    <text x="130" y="17" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#c9a0ff" text-anchor="middle">Letta</text>
+
+    <rect x="180" y="0" width="80" height="26" rx="13" fill="none" stroke="#f093fb" stroke-width="1"/>
+    <text x="220" y="17" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#f5b0fc" text-anchor="middle">Zep</text>
+
+    <rect x="270" y="0" width="80" height="26" rx="13" fill="none" stroke="#4facfe" stroke-width="1"/>
+    <text x="310" y="17" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#7fc4ff" text-anchor="middle">LangMem</text>
+
+    <rect x="360" y="0" width="80" height="26" rx="13" fill="none" stroke="#43e97b" stroke-width="1"/>
+    <text x="400" y="17" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#7fffb0" text-anchor="middle">MemOS</text>
+  </g>
+
+  <!-- Right side: Memory concept illustration -->
+  <g transform="translate(680, 120)">
+    <!-- Brain outline -->
+    <ellipse cx="0" cy="0" rx="70" ry="65" fill="none" stroke="#667eea" stroke-width="1.5" opacity="0.4"/>
+    <!-- Memory layers (concentric) -->
+    <ellipse cx="0" cy="0" rx="50" ry="46" fill="#667eea" opacity="0.08" stroke="#764ba2" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="32" ry="30" fill="#764ba2" opacity="0.1" stroke="#f093fb" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="16" ry="15" fill="#f093fb" opacity="0.15" stroke="#f5576c" stroke-width="1"/>
+    <!-- Center node -->
+    <circle cx="0" cy="0" r="6" fill="#f5576c" opacity="0.8"/>
+    <!-- Connection lines -->
+    <line x1="0" y1="-6" x2="0" y2="-30" stroke="#667eea" stroke-width="1" opacity="0.5" stroke-dasharray="3"/>
+    <line x1="6" y1="0" x2="32" y2="0" stroke="#764ba2" stroke-width="1" opacity="0.5" stroke-dasharray="3"/>
+    <line x1="-6" y1="0" x2="-32" y2="0" stroke="#f093fb" stroke-width="1" opacity="0.5" stroke-dasharray="3"/>
+    <line x1="0" y1="6" x2="0" y2="30" stroke="#f5576c" stroke-width="1" opacity="0.5" stroke-dasharray="3"/>
+    <!-- Outer nodes -->
+    <circle cx="0" cy="-35" r="4" fill="#667eea" opacity="0.7"/>
+    <circle cx="37" cy="0" r="4" fill="#764ba2" opacity="0.7"/>
+    <circle cx="-37" cy="0" r="4" fill="#f093fb" opacity="0.7"/>
+    <circle cx="0" cy="35" r="4" fill="#f5576c" opacity="0.7"/>
+    <!-- Labels -->
+    <text x="0" y="-46" font-family="Arial, Microsoft YaHei, sans-serif" font-size="9" fill="#a8b4ff" text-anchor="middle">工作记忆</text>
+    <text x="52" y="4" font-family="Arial, Microsoft YaHei, sans-serif" font-size="9" fill="#c9a0ff" text-anchor="start">短期记忆</text>
+    <text x="-52" y="4" font-family="Arial, Microsoft YaHei, sans-serif" font-size="9" fill="#f5b0fc" text-anchor="end">长期记忆</text>
+    <text x="0" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="9" fill="#ff8090" text-anchor="middle">参数记忆</text>
+  </g>
+
+  <!-- Year badge -->
+  <g transform="translate(810, 55)">
+    <rect x="0" y="0" width="36" height="36" rx="8" fill="#667eea" opacity="0.2" stroke="#667eea" stroke-width="1"/>
+    <text x="18" y="25" font-family="Arial, Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#a8b4ff" text-anchor="middle">26</text>
+  </g>
+
+  <!-- Bottom info -->
+  <rect x="55" y="310" width="500" height="1" fill="#fff" opacity="0.06"/>
+  <text x="55" y="335" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#506070">记忆分层原理 · 写入检索机制 · 五大方案横评 · 安全隐患解读</text>
+  <text x="55" y="358" font-family="Arial, Microsoft YaHei, sans-serif" font-size="10" fill="#404060">AI知识宇宙 | 2026.08</text>
+</svg>
