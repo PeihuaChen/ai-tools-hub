@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent 上生产，先过治理这道门：2026 治理工具链为何集中爆发</title>
+    <meta name="description" content="2026年，治理工具链集中落地：WSO2 Agent Manager GA、Dynatrace 9.15亿美元收购Arize、LangSmith推出运行时网关。本文拆解爆发的四条战线、中美欧监管推力与生产选型要点。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Agent 上生产，先过治理这道门：2026 治理工具链为何集中爆发</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-09-24 · 25 分钟</span>
+            </div>
+            <h2 id="915">一个 9.15 亿美元的并购，和一扇刚装上的门</h2>
+<p>2026 年 8 月 13 日，Dynatrace 宣布以 9.15 亿美元收购 AI 可观测性公司 Arize（约 8.15 亿美元现金加替换股权）。一个月后，WSO2 宣布 Agent Manager 正式 GA，主打「跨框架、跨模型、跨部署的开源控制面」。</p>
+<p>再往前翻半年：LangSmith 在 5 月推出运行时治理网关 LLM Gateway；Cisco 4 月把 Galileo 拖进 Splunk；Braintrust 在 2 月完成 8000 万美元 B 轮；Geordie AI 同月宣布 3000 万美元 A 轮，五个月 ARR 增长 1300%；NIST 在 2 月启动 AI Agent Standards Initiative……</p>
+<p>这不是零散的产品更新，而是<strong>生产级 Agent 治理工具链在 2026 年的集中涌现</strong>。Gartner 2026 技术成熟度曲线首次把「agentic AI 治理」「agentic AI 安全」「FinOps for agentic AI」列为独立条目——监管、并购、融资、开源发布，在同一个时间窗口撞到了一起。</p>
+<p>为什么是现在？这道「治理之门」里到底装了什么？企业又该怎么选？</p>
+<hr />
+<h2 id="2026">一、三股推力：为什么治理工具链在 2026 爆发</h2>
+<h3 id="11">1.1 需求侧：能力已到生产，信任没跟上</h3>
+<p>IDC 2026 年智能体调研给出两个扎眼的数字：</p>
+<ul>
+<li><strong>62%</strong> 的企业把数据权限与安全合规列为智能体跨系统执行的首要障碍</li>
+<li><strong>58.7%</strong> 的企业把治理与合规放在引入智能体平台目标的首位</li>
+</ul>
+<p>供给侧那边，Agent 已经能制订计划、调用工具、读写业务系统；需求侧却卡在「我怎么知道它干了什么」。安全内参引用的真实案例很典型：某中型电商团队用 Agent 做 K8s 告警响应，因误判目标 Pod 导致服务中断 15 分钟，只能人工回滚。</p>
+<p>能力释放与信任缺失之间的落差，就是治理工具的市场空间。AWS 在 2026 年台北 Summit 上把话说得更直白：企业 AI 竞争已从模型能力走向 Agent 落地，而阻碍规模化部署的不是模型，是「能否安全、可靠且大规模投入企业营运」。</p>
+<h3 id="12">1.2 监管侧：从「管模型」转向「管行动」</h3>
+<p>三个法域在 2026 年几乎同时动了：</p>
+<ul>
+<li><strong>美国</strong>：NIST CAISI 于 2 月 17 日启动 AI Agent Standards Initiative，三根支柱分别是行业主导标准、社区开放协议、Agent 身份与认证研究；NCCoE 同步发布 Agent 身份授权概念论文，探索用 OAuth 2.0、SPIFFE/SPIRE 和 MCP 给 Agent 发「工号」</li>
+<li><strong>中国</strong>：2026 年 5 月，国家网信办等三部门联合印发《智能体规范应用与创新发展实施意见》，首次将 Agent 作为独立监管对象——治理对象从静态模型转向动态执行流程</li>
+<li><strong>欧盟</strong>：AI Act 第 14 条要求高风险系统具备人工监督机制，高风险合规节点落在 2026 年 8 月</li>
+</ul>
+<p>监管锚点一确立，企业采购清单上的「治理能力」就从加分项变成准入项。</p>
+<h3 id="13">1.3 供给侧：部署量到了，工具缺口藏不住</h3>
+<p>Gartner 2026 年 CIO 调查显示：只有 <strong>17%</strong> 的组织真正部署了 AI Agent，但超过 <strong>60%</strong> 计划两年内部署——这是所有被测新兴技术中最激进的采用曲线。微软 2026 年 2 月披露，80% 的 Fortune 500 已在使用活跃 AI Agent。</p>
+<p>部署量上来了，治理工具却长期靠拼凑：一个网关、一套护栏、一个可观测面板，出问题时在三个控制台之间对不上号。LangSmith 团队在发布网关时直接点破现状：过去想同时拿到观测和拦截，得自己缝合网关、护栏平台和可观测栈三套东西。</p>
+<p>拼图时代结束了。2026 年，四条战线上的玩家同时交卷。</p>
+<p><img alt="2026 年生产级 Agent 治理工具链集中涌现的四条战线" src="../images/agent-gov-toolchain-four-fronts.png" /></p>
+<p>图中四条战线就是下文的展开结构：可观测平台向上生长、并购整合加速、初创公司密集成立、云与中间件大厂补齐控制面。</p>
+<hr />
+<h2 id="_1">二、四条战线：工具链如何「集中」涌现</h2>
+<h3 id="21">2.1 战线一：可观测平台升级成治理平台</h3>
+<p>2025 年，LangSmith、Arize、Braintrust 的主叙事还是「给 LLM 应用装黑匣子」。2026 年画风变了：</p>
+<ul>
+<li><strong>LangSmith LLM Gateway</strong>（2026 年 5 月，私有 Beta）：坐在 Agent 与模型供应商之间，在请求到达模型<strong>之前</strong>执行花费限额、脱敏 PII；策略违规直接以可追踪事件流回 LangSmith，从「被拦截的请求」跳到「触发它的 trace」再跳到「修复」，不用换工具。后续路线图是把 Agent Gateway 做成所有运行时策略的中央控制面</li>
+<li><strong>Arize Signal / LangSmith Engine / Braintrust Topics</strong>：三家在 2026 年先后上线「自动读生产 trace」的能力。当 Agent 每周产生 5 万条 trace，没有工程师能靠肉眼读出失败模式——平台开始替人做「检测 → 定位 → 修复 → 验证」闭环</li>
+<li><strong>Credo AI</strong> 发布的《Agentic AI Governance Field Guide》把治理系统拆成六大组件：Agent 注册表、Agent Card、宪法、部署前门、运行时验证、工具网关——等于给「可观测 → 治理」的升级画了张施工图</li>
+</ul>
+<p>可观测回答「发生了什么」，治理网关回答「允不允许发生」。2026 年的关键变化是：<strong>两者进了同一个产品</strong>。</p>
+<h3 id="22">2.2 战线二：并购整合，赛道开始结算</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>交易</th>
+<th>金额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-04</td>
+<td>Cisco 收购 Galileo</td>
+<td>未披露</td>
+</tr>
+<tr>
+<td>2026-08</td>
+<td>Dynatrace 收购 Arize</td>
+<td>9.15 亿美元</td>
+</tr>
+</tbody>
+</table>
+<p>Cisco 把 Galileo 拖进 Splunk，补的是「Agent 行为、表现与风险」的开发到生产全周期可见性；Dynatrace 拿下 Arize，则是要把应用性能监控与 AI 评估拼成端到端可观测。传统可观测巨头不再观望，直接买票入场——这意味着独立治理小工具的窗口期在缩短。</p>
+<h3 id="23">2.3 战线三：初创公司密集成立</h3>
+<p>Tracxn 上一批 2026 年注册的公司，几乎清一色贴着 GRC / Agent 治理标签，且多处于未融资或早期状态：</p>
+<ul>
+<li><strong>Geordie AI</strong>：2026 年 5 月完成 3000 万美元 A 轮，自称五个月 ARR 增长 1300%，覆盖发现、运行时、修复、合规全链路</li>
+<li><strong>MintMCP</strong>（2 月发布）：MCP Gateway + Agent Monitor + 智能护栏，口号是「EDR 为员工笔记本做的事，AI Agent 也需要」</li>
+<li><strong>GovAgent</strong>：REST 形式的治理 sidecar，做阶段门控与失败模式检测，不阻塞主链路</li>
+<li><strong>RunAgents / AI Control / Agent G8</strong>：分别主打身份感知访问、OPA 策略拦截、MCP 注册表与 API 白名单</li>
+</ul>
+<p>配套资金面也在同步升温：Braintrust 2 月融 8000 万美元 B 轮；Coralogix 6 月融 2 亿美元 F 轮（累计 5.5 亿）；OpenObserve、Respan 各拿 1000 万 / 500 万美元。钱和公司一起涌进来，赛道拥挤已成事实。</p>
+<h3 id="24">2.4 战线四：云与中间件大厂补齐控制面</h3>
+<p>大厂的打法不是做单点工具，而是把治理嵌进已有控制面：</p>
+<ul>
+<li><strong>WSO2 Agent Manager</strong>（2026 年 9 月 GA，Apache 2.0）：框架无关的联邦控制面，统一 Agent 清单、可验证身份与即时吊销、40+ 内置护栏（PII 掩码、限流等）、Kubernetes 原生沙箱运行时与一键挂起</li>
+<li><strong>AWS Bedrock AgentCore + Continuum</strong>：AgentCore 管记忆、工具调用、API 访问与身份；Continuum 把威胁建模、代码审查、渗透测试打包进安全家族</li>
+<li><strong>Red Hat</strong>：MCP 网关前置策略检查点，按调用分三层风险——低危自动执行并记录，中危限流审计，高危（凭据、破坏性操作）挂起等人工批准</li>
+<li><strong>Kong AI Gateway 2.0</strong>（2026 年 9 月 GA）：A2A 与 MCP 指标可观测，把工具调用纳入流量治理</li>
+</ul>
+<p>一句话概括四条战线的合流：<strong>治理从「外挂的审计报表」变成了「Agent 流量必经的闸机」。</strong></p>
+<hr />
+<h2 id="_2">三、这道门里有什么：生产级治理栈的五层</h2>
+<p>综合 LangChain 官方治理页、MLflow 生产实践清单、Credo AI 六大组件与 Red Hat 三层模型，2026 年公认的生产级治理栈大致长这样（自下而上）：</p>
+<h3 id="31-agent">3.1 身份与权限：给 Agent 发工号</h3>
+<p>Agent 不能借用员工账号跑任务。NCCoE 概念论文点名两种反模式：Agent 继承用户全部权限（过宽），或共享静态密钥（无法追责）。方向是 OAuth 2.0 委托授权 + SPIFFE 工作负载身份，让每次调用都绑定「谁的委托、哪个 Agent、多大范围」。国内产品如派拉软件 AgIM、数犀 MCP 鉴权也在做同一件事：一 Agent 一 ID，影子 Agent 可发现、可清理。</p>
+<h3 id="32-mcp">3.2 工具网关：MCP 时代的闸机</h3>
+<p>Agent 的能力经 MCP Server 扩展，攻击面也跟着扩大。网关层做三件事：工具注册与白名单、每次调用的 schema/策略校验、凭证隔离（密钥只存在私有 worker，不进模型上下文）。MintMCP、Agent G8、腾讯云 Agent 网关、Kong 都在这一层。</p>
+<h3 id="33">3.3 运行时策略：分级拦截与人工闸口</h3>
+<p>低危自动跑、中危限流审计、高危人工批准——这是 Red Hat 与国内「行为围栏」共识的最大公约数。LangSmith LLM Gateway 补的是成本与 PII 维度：策略在请求打到模型之前生效，而不是事后在日志里发现。</p>
+<h3 id="34">3.4 可观测与审计：全轨迹留痕</h3>
+<p>唯一 TraceID 串联意图、推理、拆解、工具调用与结果；日志要可检索、可告警，高危场景还要防篡改。MLflow 给出的生产底线值得记：每个已识别失败模式至少 <strong>50 条评估用例</strong>才允许上线；步数、耗时、token、工具调用次数都要有预算，超限即停并升级人工。</p>
+<h3 id="35">3.5 部署前门与持续评估</h3>
+<p>Credo AI 把「部署前门」列为六组件之一：上线前用系统评估验证策略真的拦得住。Braintrust 的定位很典型——「用评估控制什么能进生产」；LangSmith 则把生产 trace 反灌回数据集，让修复变成回归覆盖。</p>
+<p><img alt="生产级 Agent 治理栈的五层结构：身份、网关、运行时策略、可观测审计、部署前门" src="../images/agent-gov-stack-five-layers.png" /></p>
+<p>五层里缺任何一层，都会在真实事故里露馅：没有身份追不到人，没有网关拦不住越权，没有运行时策略只能事后复盘，没有审计过不了合规，没有部署前门则策略形同虚设。</p>
+<hr />
+<h2 id="_3">四、最大的坑：统一治理必然失败</h2>
+<p>工具多了，新问题也来了。Gartner 2026 年 5 月的预警标题很重：《对所有 AI Agent 施加统一治理将导致企业 Agent 失败》，并预测<strong>到 2027 年，40% 的企业将因生产事故后才暴露的治理缺陷，降级或退役自主 Agent</strong>。</p>
+<p>核心论点是：把治理做成二元开关——要么锁死、要么全信——两头都会出事。对简单只读 Agent 过度限制，会拖慢交付并催生影子开发；对高自主 Agent 约束不足，则直接放大运营、安全与合规风险。</p>
+<p>Gartner 给出的替代方案是按自主级别做比例治理：</p>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>含义</th>
+<th>治理要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 观察</td>
+<td>只读，输出仅给请求者</td>
+<td>轻量、防数据外泄</td>
+</tr>
+<tr>
+<td>L2 建议</td>
+<td>给建议，人来执行</td>
+<td>评准确率与幻觉</td>
+</tr>
+<tr>
+<td>L3 审批后行动</td>
+<td>每步动作先过人</td>
+<td>审批必须真实有效</td>
+</tr>
+<tr>
+<td>L4 自主行动</td>
+<td>速率可超人力监督</td>
+<td>熔断、回滚、归属</td>
+</tr>
+</tbody>
+</table>
+<p>另一个清醒的声音来自 Credo AI 的开篇判断：<strong>Agentic AI 的扩张速度快于史上任何企业技术，而与之匹配的治理基础设施尚不存在。</strong> 当下这批工具是第一代补位者，不是成品。</p>
+<hr />
+<h2 id="_4">五、国内视角：围栏、网关与身份台账</h2>
+<p>国内工具链与海外几乎同步成型，但切入点不同——更强调网关收敛、身份台账与全链路留痕。</p>
+<ul>
+<li><strong>平台侧</strong>：腾讯云推出 Agent 网关服务（多模型统一接入、MCP 管理、A2A 路由）与统一治理平台（动态权限、凭据沙箱、模型路由）；阿里云在云采用框架中补齐 AI 全生命周期合规审计（事前 IaC 扫描、事中管控拦截、事后配置审计）</li>
+<li><strong>安全侧</strong>：奇安信智能体安全监测平台主打流量审计与行为合规；深信服以安全 GPT 做检测；CNCERT 已就智能体默认权限过高、提示注入等风险发布提示</li>
+<li><strong>身份侧</strong>：派拉软件 AgIM 管 Agent 全生命周期与影子治理；数犀做 MCP 网关 + 用户/Agent 双身份鉴权</li>
+<li><strong>方法论侧</strong>：中移智库与安全内参提出的「行为围栏」框架收敛为三条——<strong>行为可观测、操作可审计、风险可干预</strong>；信通院与三六零联合报告要求全链路审计追踪与动态沙箱熔断</li>
+</ul>
+<p>与海外对比，国内更早把「治理与合规」写进平台选型第一位（IDC 58.7%），海外更早把治理做进可观测产品的默认路径。殊途同归：Agent 上生产，都得先过这道门。</p>
+<hr />
+<h2 id="_5">六、企业怎么选：四条务实建议</h2>
+<p>结合 Northflank 的四阶段落地路径、MLflow 生产清单与上述工具格局，给正在选型的团队四条建议：</p>
+<h3 id="_6">建议一：先分级，再选型</h3>
+<p>先给每个用例标 L1–L4 自主级别，再对照工具能力。只读知识问答（L1）不需要和资金审批流（L3/L4）共用同一套审批链。Gartner 的警告翻译成选型动作就是：<strong>不要买一个「治理一切」的平台，要买一套能按级别组合的控制</strong>。</p>
+<h3 id="_7">建议二：网关与身份优先于仪表盘</h3>
+<p>审计出问题时，最先被问的是「谁授权的、调了什么」。身份（一 Agent 一 ID、最小权限、可吊销）和网关（白名单、凭证隔离）没铺好之前，可视化仪表盘只是好看的空转。这与既有调研结论一致：出了 AI 安全事件的组织，几乎都没做好访问控制。</p>
+<h3 id="_8">建议三：治理数据要能闭环回评估</h3>
+<p>只告警不闭环的治理会越用越吵。优先选能把生产 trace 反灌成评估集、把拦截事件关联到具体 trace 的工具（LangSmith、Arize AX、Langfuse 这类观测底座都可作闭环起点，详见 <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse 实战指南</a>）。</p>
+<h3 id="_9">建议四：预留并购与标准的不确定性</h3>
+<p>赛道还在结算期（Arize 已入 Dynatrace、Galileo 已入 Splunk），标准也在成形（NIST 三支柱、中国智能体实施意见、MCP 规范演进）。策略上：<strong>协议层优先开放标准（MCP、OpenTelemetry），数据层要求可导出，避免把审计日志锁死在单一厂商</strong>。协议本身的理解可参考 <a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A 深度对比</a>。</p>
+<hr />
+<h2 id="_10">小结</h2>
+<p>三个最该记住的事实：</p>
+<ul>
+<li><strong>爆发是三股推力叠加的结果</strong>：62% 企业卡在权限合规、中美欧监管在 2026 年密集落子、17% 部署率对上 60% 的两年计划——需求、规则、缺口同时到位，治理工具链才在四条战线上一起交卷</li>
+<li><strong>治理栈已收敛出五层共识</strong>：身份、工具网关、运行时分级拦截、全轨迹审计、部署前门；核心转变是从「事后记日志」到「事前和事中拦得住」</li>
+<li><strong>别把治理做成二元开关</strong>：Gartner 预测 40% 企业将因治理失败退役 Agent，但那是「统一治理」的失败，不是「分级治理」的失败——先标级别，再装闸机</li>
+</ul>
+<p>一句话概括当下：<strong>Agent 的能力已经过了生产门槛，治理工具链是 2026 年才补装的那道门。门要装，但别装成一扇所有 Agent 都挤不过去的窄门。</strong></p>
+<hr />
+<h2 id="_11">免责声明</h2>
+<p>本文内容基于公开可查的资料整理，包含厂商官方公告、行业媒体报道和第三方研究机构数据，仅供参考和学习交流。Agent 治理领域发展极快，产品能力、融资并购状态、监管要求和标准版本可能在本文发布后发生变化，请以各厂商官方文档和最新监管规定为准。文中引用的市场预测与调查数据来自不同机构、口径各异，不构成任何投资建议或商业决策依据。企业在部署生产级 Agent 前，应结合自身行业监管要求独立评估合规义务。</p>
+<hr />
+<h2 id="_12">参考来源</h2>
+<ul>
+<li><a href="https://www.gartner.com/en/articles/hype-cycle-for-agentic-ai">Gartner — 2026 Hype Cycle for Agentic AI</a></li>
+<li><a href="http://gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure">Gartner — Applying Uniform Governance Across AI Agents Will Lead to Enterprise AI Agent Failure</a></li>
+<li><a href="http://gartner.com/en/newsroom/press-releases/2026-05-19-gartner-forecasts-worldwide-ai-spending-to-grow-47-percent-in-2026">Gartner — Forecasts Worldwide AI Spending to Grow 47% in 2026</a></li>
+<li><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST — AI Agent Standards Initiative</a></li>
+<li><a href="https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure">NIST — Announcing the AI Agent Standards Initiative for Interoperable and Secure Innovation</a></li>
+<li><a href="https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd">NIST NCCoE — Accelerating the Adoption of Software and AI Agent Identity and Authorization</a></li>
+<li><a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-nist-ai-agent-standards-initiative-governa/">Cloud Security Alliance — NIST AI Agent Standards: Enterprise Governance Implications</a></li>
+<li><a href="https://marketchameleon.com/PressReleases/i/2357708/DT/dynatrace-to-acquire-ai-observability-leader-arize">Dynatrace — Dynatrace to Acquire AI Observability Leader Arize</a></li>
+<li><a href="https://siliconangle.com/2026/09/11/observability-ai-agents-dynatrace-arize-appdevangle/">SiliconANGLE — Observability shifts as AI agents reshape operations</a></li>
+<li><a href="https://www.crn.com/news/networking/2026/cisco-to-snap-up-ai-observability-startup-galileo-technologies-to-expand-splunk-platform">CRN — Cisco To Snap Up AI Observability Startup Galileo Technologies</a></li>
+<li><a href="https://www.globenewswire.com/news-release/2026/09/15/3362114/0/en/wso2-agent-manager-brings-sovereign-ai-governance-to-enterprise-agent-sprawl.html">WSO2 — WSO2 Agent Manager Brings Sovereign AI Governance to Enterprise Agent Sprawl</a></li>
+<li><a href="http://langchain.com/blog/introducing-llm-gateway">LangChain — LangSmith LLM Gateway: runtime governance built into the agent lifecycle</a></li>
+<li><a href="https://info.langchain.com/agent-governance">LangChain — AI Agent Governance Platform</a></li>
+<li><a href="https://arize.com/compare/signal-vs-langsmith-engine-vs-braintrust-topics">Arize — Arize Signal vs. LangSmith Engine vs. Braintrust Topics: a technical comparison (2026)</a></li>
+<li><a href="https://www.credo.ai/downloadsopen/agentic-ai-governance-the-field-guide-for-enterprise-leaders">Credo AI — Agentic AI Governance: The 2026 Field Guide for Leaders</a></li>
+<li><a href="https://www.finsmes.com/2026/02/braintrust-raises-80m-in-series-b-funding.html">Braintrust Raises $80M in Series B Funding — FinSMEs</a></li>
+<li><a href="https://www.geordie.ai/resources/">Geordie AI — Geordie AI Raises $30M Series A as Enterprises Race to Govern Autonomous AI Agents</a></li>
+<li><a href="https://www.businesswire.com/news/home/20260205079173/en/MintMCP-Launches-Enterprise-Governance-Platform-for-AI-Agents-and-MCP-Servers">MintMCP Launches Enterprise Governance Platform for AI Agents and MCP Servers — Business Wire</a></li>
+<li><a href="https://developers.redhat.com/articles/2026/09/16/constraining-ai-agents-with-red-hat-ai-containment-identity-and-governance">Red Hat Developer — Constraining AI agents with Red Hat AI: Containment, identity, and governance</a></li>
+<li><a href="https://mlflow.org/articles/building-production-ready-ai-agents-in-2026">MLflow — Building Production-Ready AI Agents in 2026</a></li>
+<li><a href="https://www.ithome.com.tw/news/177348">iThome — AWS宣布2026進入Agent AI元年，打造從開發、資安到知識管理的企業AI代理平臺</a></li>
+<li><a href="https://www.secrss.com/articles/94121">安全内参 — 智能体行为围栏：Agent治理框架与实践路径</a></li>
+<li><a href="https://cloud.tencent.cn/product/agw">腾讯云 — Agent 网关服务：多模型统一接入与 AI 智能体治理平台</a></li>
+<li><a href="https://help.aliyun.com/zh/caf/compliance-audit-ai">阿里云 — AI全生命周期合规审计治理</a></li>
+<li><a href="https://www.thinkingai.cn/hub/adoption/enterprise-agent-security-governance">ThinkingAI — 企业级 AI Agent 安全与治理指南（2026）：权限、审计与可信决策</a></li>
+<li><a href="https://www.globenewswire.com/news-release/2026/06/03/3306135/0/en/Coralogix-Raises-200M-to-Scale-the-Observability-Backbone-for-the-Age-of-AI.html">Coralogix Raises $200M to Scale the Observability Backbone for the Age of AI — GlobeNewswire</a></li>
+<li><a href="https://www.morningstar.com/news/business-wire/20260429840147/openobserve-raises-10-million-series-a-to-accelerate-ai-native-observability">OpenObserve Raises $10 Million Series A to Accelerate AI-native Observability — Morningstar</a></li>
+<li><a href="https://siliconangle.com/2026/03/18/respan-raises-5m-bring-proactive-observability-ai-agents">Respan raises $5M to bring proactive observability to AI agents — SiliconANGLE</a></li>
+<li><a href="https://konghq.com/blog/product-releases/enterprise-grade-mcp-access-control">Kong — Enterprise-Grade MCP Access Control Is Here</a></li>
+<li><a href="https://factory.ai/news/agent-readiness">Factory — Introducing Agent Readiness</a></li>
+</ul>
+<hr />
+<h2 id="_13">相关阅读</h2>
+<ul>
+<li><a href="../posts/agent-governance-observability-hidden-costs.html">Agent 治理与可观测性：企业落地的隐藏成本</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署实战：从0到1600个Agent的落地路径</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：两大 AI Agent 协议深度对比</a></li>
+<li><a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse实战：给AI Agent装上黑匣子——开源LLM可观测性平台完全指南</a></li>
+<li><a href="../posts/ai-hallucination-liability-chain-2026.html">AI 幻觉责任链：谁该为错误答案负责</a></li>
+<li><a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从 LLM 到 Agent：ChatGPT 的范式转移</a></li>
+<li><a href="../posts/code-sandbox-ai-agent-guide-2026.html">代码沙箱实战指南：给 AI Agent 关进笼子</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding 的隐藏代价与安全风险</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=agent-production-governance-toolchain-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=agent-production-governance-toolchain-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

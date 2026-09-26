@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用 FastGPT 搭企业知识库：能力边界、部署形态与合规细节全梳理</title>
+    <meta name="description" content="从定位、核心能力、部署形态到 v4.16 新特性与数据留存细节，一篇讲清 FastGPT 适合搭什么样的企业知识库，以及它的边界在哪。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">用 FastGPT 搭企业知识库：能力边界、部署形态与合规细节全梳理</h1>
+            <div class="post-meta">
+                <span class="cat">AI开发平台</span>
+                <span>2026-09-16 · 14 分钟</span>
+            </div>
+            <p>一个被反复问到的问题是：想给公司文档做个能问答的知识库，用哪个开源平台？</p>
+<p>FastGPT 常被列进候选。它的 GitHub 仓库 <code>labring/FastGPT</code> 截至 2026 年 9 月初约有 2.95 万 star、7297 个 fork、275 个 release，官方称已服务 1000 多家企业客户。最新版本是 2026-09-03 发布的 v4.16.2。</p>
+<p>但「能不能用」和「适不适合你」是两回事。这篇不做多平台横评，只把 FastGPT 一个平台讲透：它擅长什么、边界在哪、三种部署怎么选、最新版本改了什么、以及采购和合规最关心的数据留存细节。</p>
+<hr />
+<h2 id="fastgpt">一、FastGPT 到底是什么</h2>
+<p>官方现在的定位是「AI Agent 构建平台」，提供开箱即用的数据处理与模型调用能力，并通过 Flow 可视化做工作流编排。</p>
+<p>拆开看，它其实是三层能力叠在一起：</p>
+<ul>
+<li><strong>知识库层</strong>：把文档灌进去，切块、向量化、检索。</li>
+<li><strong>工作流层</strong>：用可视化画布把「检索 + 大模型 + 逻辑判断」串起来。</li>
+<li><strong>发布层</strong>：把搭好的应用发成对话窗口、Iframe 嵌入或 API。</li>
+</ul>
+<p>和 RAGFlow 这类「纯检索引擎」相比，FastGPT 更偏应用组装；和 Dify 这类「全栈 LLM 平台」相比，它的重心又更靠近知识库问答。这个定位决定了它的甜区，也决定了它的边界。</p>
+<p><img alt="FastGPT 企业知识库数据流" src="../images/fastgpt-kb-pipeline.png" /></p>
+<p>如上图，一次问答在 FastGPT 里要经过「文档导入 → 分块 → 向量化入库 → 混合检索重排 → 大模型生成」五个环节。回答质量高度依赖中间的检索环节：检索片段不准，后面的大模型再强也救不回来。这一点后面会展开。</p>
+<hr />
+<h2 id="_1">二、核心能力拆解</h2>
+<h3 id="21">2.1 知识库：能力最成熟的部分</h3>
+<p>这是 FastGPT 最扎实的模块，README 里已勾选的能力包括：</p>
+<ul>
+<li>多知识库复用与混合检索</li>
+<li>chunk 记录的增、删、改</li>
+<li>支持手动录入、直接分段、QA 拆分三种导入</li>
+<li>支持 txt、md、html、pdf、docx、pptx、csv、xlsx，以及 URL 读取</li>
+<li>混合检索加重排（rerank）</li>
+<li>API 知识库（把外部数据源当知识库接进来）</li>
+</ul>
+<p>对大多数「文档问答」场景，这套能力够用。它的分块支持自定义分隔符和更大的分块尺寸，能按业务文档的结构来切。</p>
+<h3 id="22">2.2 工作流：可视化编排</h3>
+<p>工作流是 FastGPT 从「知识库问答」走向「Agent」的关键。画布上把节点连起来，就能做出带条件判断、多轮交互的应用。</p>
+<p><img alt="FastGPT 工作流编辑器界面" src="https://cdn.jsdelivr.net/gh/labring/fastgpt-img@main/flow-intro1.png" />
+<em>图片来源：<a href="https://doc.fastgpt.io/zh-CN/guide/build/workflow/intro">FastGPT 官方文档 —— 工作流&amp;插件</a></em></p>
+<p><img alt="FastGPT 工作流节点连接示意图" src="https://cdn.jsdelivr.net/gh/labring/fastgpt-img@main/flow-intro2.png" />
+<em>图片来源：<a href="https://doc.fastgpt.io/zh-CN/guide/build/workflow/intro">FastGPT 官方文档 —— 工作流&amp;插件</a></em></p>
+<p>v4.16 系列在工作流上加了几样实用能力：</p>
+<ul>
+<li>拖动节点自动对齐、居中</li>
+<li>用户选择节点：用「确认/取消」做条件分支</li>
+<li>本地编辑历史，支持撤销、重做快捷键</li>
+<li>工作流版本重命名</li>
+<li>HTTP 节点支持 text/plain 模式与超时设置</li>
+</ul>
+<p>需要注意：用户选择节点只能用在工作流里，不兼容插件和工具调用，也不支持 Debug 模式。这类限制在动手前要先确认。</p>
+<h3 id="23-agent-skill-mcp">2.3 Agent 与生态：Skill 与双向 MCP</h3>
+<p>FastGPT 支持 Agent Skill 编排和<strong>双向 MCP</strong>——既能作为 MCP 客户端调外部工具，也能把自己的能力暴露成 MCP 服务给别的系统调。这让它更容易嵌进已有的 Agent 体系里。想了解协议本身，可参考 <a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP 与 A2A：AI Agent 协议深度解析</a>。</p>
+<p><img alt="FastGPT 技能列表界面" src="https://doc.fastgpt.io/imgs/skill_list_intro.png" />
+<em>图片来源：<a href="https://doc.fastgpt.io/zh-CN/guide/build/skill/intro">FastGPT 官方文档 —— 技能基础介绍</a></em></p>
+<p><img alt="FastGPT MCP Server 管理界面" src="https://doc.fastgpt.io/imgs/mcp_server1.png" />
+<em>图片来源：<a href="https://doc.fastgpt.io/zh-CN/guide/build/publish/mcp_server">FastGPT 官方文档 —— MCP 发布</a></em></p>
+<hr />
+<h2 id="_2">三、能力边界：别拿它做什么</h2>
+<p>调研里最值得强调的，其实是它的边界。</p>
+<p><strong>检索质量强依赖 chunk。</strong> 官方文档自己也承认，RAG 的表现完全取决于检索到的片段质量。文档没切好、召回不准，问答就会答非所问，跨领域的模糊问题尤其明显。想上生产，检索调优是绕不开的功课，可以配合 <a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 与向量混合检索的规模化实践</a> 一起看。</p>
+<p><strong>文档偏中文生态。</strong> 海外评测普遍反映，FastGPT 的文档高度面向国内市场，是国际化团队上手的主要摩擦点。</p>
+<p><strong>部分功能依赖特定部署环境。</strong> 一些能力在云版、自托管、商业版之间并不完全一致，社区还反馈过 loop 节点终止失败、部分群晖内核上代码沙箱启动报错等问题，且未在最近一轮更新里修复。</p>
+<p><strong>它不是深度文档解析引擎。</strong> 需要版面识别、OCR、复杂表格抽取的场景，RAGFlow 这类专门引擎更合适；FastGPT 的强项是把检索结果组装成可用的问答应用，而不是把扫描件解析到极致。</p>
+<hr />
+<h2 id="_3">四、三种部署形态怎么选</h2>
+<p>FastGPT 提供三种形态，对应三类需求：</p>
+<table>
+<thead>
+<tr>
+<th>形态</th>
+<th>适合谁</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>云服务</td>
+<td>快速试用</td>
+<td>免运维，数据在云端</td>
+</tr>
+<tr>
+<td>社区自托管</td>
+<td>有运维能力</td>
+<td>Docker 或 Sealos</td>
+</tr>
+<tr>
+<td>商业私有化</td>
+<td>强合规诉求</td>
+<td>完整功能加支持</td>
+</tr>
+</tbody>
+</table>
+<p>自托管最快的路径是 Docker。官方提供一键拉取配置的脚本，核心命令是这样：</p>
+<pre><code class="language-bash">bash &lt;(curl -fsSL \
+  https://doc.fastgpt.io/deploy/install.sh)
+docker compose up -d
+</code></pre>
+<p>启动后访问 3000 端口，默认账号 root、密码 1234，记得第一时间改掉。</p>
+<p>这里有一个<strong>许可证的坑必须讲清楚</strong>：FastGPT 用的是自定义的「FastGPT 开源协议」，允许作为后端服务商用，但<strong>明确禁止用它对外提供 SaaS 服务</strong>。也就是说，你能用它给自己公司搭内部系统，但不能包装成多租户产品卖给别人。这不是标准的 OSI 开源许可，选型时务必看清 LICENSE。</p>
+<hr />
+<h2 id="v416">五、v4.16 系列改了什么</h2>
+<p>2026-08-16 的 v4.16.0 是近期分量最重的一次更新，改动集中在三块。</p>
+<h3 id="51">5.1 代码沙箱：从会话级改到用户级</h3>
+<p>以前沙箱绑在单次对话上，现在绑到「应用 + 用户」。同一用户在同一应用里的多次对话，复用一个沙箱实例，文件按会话目录隔离。沙箱里的 HTML 和文件能通过短时只读链接预览，省掉一轮往对象存储的上传。</p>
+<p>CPU、内存、存储、自动挂起、自动归档这些限制，现在都能用环境变量配。默认值大致是：1 核 CPU、2048 MiB 内存、1 GiB 存储、闲置 60 分钟自动挂起、7 天自动归档。想了解沙箱本身的价值，可参考 <a href="../posts/code-sandbox-ai-agent-guide-2026.html">AI Agent 代码沙箱指南</a>。</p>
+<p>一个迁移提醒：<strong>E2B 沙箱方案已被移除</strong>，老部署要迁到 OpenSandbox 或 Sealos Devbox，且有强制迁移脚本。</p>
+<h3 id="52">5.2 知识库自定义元数据</h3>
+<p>知识库条目现在能带自定义元数据，可以用 JSON、CSV、Excel 模板导入。关键在于：检索结果和备份导出都会保留这个字段。这意味着来源、版本、密级这些标签能跟着检索到的答案一起回流到业务系统，对做权限和审计的团队很有用。</p>
+<h3 id="53">5.3 安全加固</h3>
+<ul>
+<li>审计日志到期后转冷归档，不再直接删除</li>
+<li>管理员配置的工具密钥做了静态加密</li>
+<li>系统初始化接口不再返回模型 API Key、请求地址和内部配置</li>
+</ul>
+<p>官方也划了一条部署红线：沙箱预览代理应该用和主站不同的源（origin）。同源部署会把预览脚本放进主站的安全边界里，而系统目前<strong>不强制做源隔离校验</strong>，这块要靠部署方自己守住。</p>
+<hr />
+<h2 id="_4">六、合规与数据留存细节</h2>
+<p>越来越多的采购评审会问一句：数据是怎么删的、留多久？FastGPT 把这些散落在隐私政策、升级说明和 API 文档里的口径做了整合，几个默认值值得记下。</p>
+<ul>
+<li>模型调用链路（短期调试用）默认留存 6 小时，由 <code>LLM_REQUEST_TRACKING_RETENTION_HOURS</code> 控制</li>
+<li>挂起的沙箱按闲置天数归档，默认 7 天，由 <code>AGENT_SANDBOX_ARCHIVE_INACTIVE_DAYS</code> 控制</li>
+<li>审计日志到期转冷归档，因为这类数据留存是为了可追溯，而不是为了删</li>
+</ul>
+<p>还有三条边界要特别注意：</p>
+<ul>
+<li>清空会话的那个 API，只影响用 API Key 创建的会话，<strong>不会清 Web 端和分享链接产生的会话</strong></li>
+<li>自动清理依赖后台任务，任务可能失败（历史上修过两个相关缺陷），所以「请求删除」和「确认已删」要分开验证</li>
+<li>自托管和私有化部署下，留存与清理由部署方自己管，环境变量只是可调的开关，不等于合规结论</li>
+</ul>
+<p>想把可观测性和审计做扎实的团队，可以搭配 <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：LLM 与 Agent 可观测性实战</a> 一起建设。</p>
+<hr />
+<h2 id="_5">七、选型建议</h2>
+<p>综合下来，给几类团队的判断：</p>
+<p><strong>适合用 FastGPT 的：</strong></p>
+<ul>
+<li>想快速搭一个「文档问答」内部系统，团队有基本运维能力</li>
+<li>需要可视化工作流把检索和大模型串起来，但不想写太多代码</li>
+<li>有私有化和数据不出域的诉求，愿意上自托管或商业版</li>
+<li>已经在用 MCP 体系，想把知识库能力接进去</li>
+</ul>
+<p><strong>建议绕开或另选的：</strong></p>
+<ul>
+<li>想把它包装成多租户 SaaS 对外卖——许可证不允许</li>
+<li>核心诉求是扫描件、复杂表格的深度解析——RAGFlow 更专业</li>
+<li>需要完整 LLMOps、大规模应用编排的研发团队——Dify 的全栈能力更全</li>
+<li>完全没有运维投入、又要求高度定制——门槛会偏高</li>
+</ul>
+<p>一句话：<strong>FastGPT 是「快速搭知识库问答」这条窄赛道上很称手的工具，但它不是万能的应用平台，也不是任你商业化的自由软件。</strong> 想看它和其他平台的横向站位，可参考 <a href="../posts/dify-vs-coze-ragflow-n8n-fastgpt-comparison.html">Dify、Coze、RAGFlow、N8N、FastGPT 五平台深度对比</a>。</p>
+<hr />
+<h2 id="_6">小结</h2>
+<p>FastGPT 的价值集中在知识库问答的快速落地：知识库模块成熟、工作流可视化、支持双向 MCP，v4.16 又补齐了用户级沙箱、知识库元数据和一批安全加固。它的边界同样清晰：检索质量吃 chunk、文档偏中文、许可证禁止 SaaS、深度文档解析非其所长。</p>
+<p>选型的关键不是「它好不好」，而是「你的场景落在它的甜区里没有」。把本文的能力边界、部署形态和合规细节对着自己的需求过一遍，答案自然就清楚了。</p>
+<hr />
+<h2 id="_7">免责声明</h2>
+<p>本文基于 2026 年 9 月公开资料整理，涉及的版本号、默认参数与许可条款可能随官方更新而变化，实际部署请以官方文档和 LICENSE 为准。文中不构成任何采购或投资建议。</p>
+<hr />
+<h2 id="_8">参考来源</h2>
+<ul>
+<li><a href="https://github.com/labring/FastGPT/blob/main/README_en.md">GitHub —— labring/FastGPT 官方仓库 README</a></li>
+<li><a href="https://doc.fastgpt.io/zh-CN/guide/build/workflow/intro">FastGPT 官方文档 —— 工作流&amp;插件</a></li>
+<li><a href="https://doc.fastgpt.io/zh-CN/guide/build/skill/intro">FastGPT 官方文档 —— 技能基础介绍</a></li>
+<li><a href="https://doc.fastgpt.io/zh-CN/guide/build/publish/mcp_server">FastGPT 官方文档 —— MCP 发布</a></li>
+<li><a href="https://www.prnewswire.com/news-releases/open-source-enterprise-ai-platform-fastgpt-releases-v4-16-0-with-user-level-code-sandboxes-and-knowledge-base-metadata-302856075.html">PR Newswire —— FastGPT 发布 v4.16.0：用户级沙箱与知识库元数据</a></li>
+<li><a href="https://www.prnewswire.com/news-releases/new-workflow-and-deployment-enhancements-released-for-open-source-ai-orchestration-tool-302869009.html">PR Newswire —— 开源 AI 编排工具发布工作流与部署增强</a></li>
+<li><a href="https://www.prnewswire.com/news-releases/procurement-reviews-now-ask-how-ai-platform-data-is-deleted-fastgpt-publishes-retention-periods-and-deletion-semantics-302869833.html">PR Newswire —— FastGPT 公布数据留存周期与删除语义</a></li>
+<li><a href="https://finance.yahoo.com/technology/ai/articles/updated-agent-sandbox-runtime-upgrade-111100140.html">Yahoo Finance —— FastGPT 更新 Agent 沙箱运行时与升级指引</a></li>
+<li><a href="https://fastgpt.io/tutorial/fastgpt-rag-limitations-optimization">fastgpt.io —— FastGPT RAG 局限性与优化</a></li>
+</ul>
+<hr />
+<h2 id="_9">延伸阅读</h2>
+<ul>
+<li><a href="../posts/dify-vs-coze-ragflow-n8n-fastgpt-comparison.html">Dify、Coze、RAGFlow、N8N、FastGPT 五平台深度对比</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP 与 A2A：AI Agent 协议深度解析</a></li>
+<li><a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 与向量混合检索的规模化实践</a></li>
+<li><a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse：LLM 与 Agent 可观测性实战</a></li>
+<li><a href="../posts/code-sandbox-ai-agent-guide-2026.html">AI Agent 代码沙箱指南</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 海尔净水选购会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpsSTO" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="cta-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center;">
+  <h3 style="margin: 0 0 10px 0; color: #e94560; font-size: 18px;">🚀 立即体验 ChatGPT Plus</h3>
+  <p style="color: #aaa; margin: 0 0 15px 0;">点击直达 ChatGPT Plus 官方网站，获取最新定价与功能</p>
+  <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fchat.openai.com&platform=saas&article=fastgpt-enterprise-knowledge-base-guide-2026" target="_blank" rel="nofollow" style="display: inline-block; background: linear-gradient(135deg, #e94560, #0f3460); color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s;">👉 访问官方网站</a>
+  <p style="color: #555; font-size: 12px; margin-top: 12px;">💎 通过此链接注册可获得 $20/Plus月费</p>
+</div>
+
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的效率体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DiPad%252520Air%252520M2%252520%2525E5%2525B9%2525B3%2525E6%25259D%2525BF%2526enc%253Dutf-8&platform=jd&article=fastgpt-enterprise-knowledge-base-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">📋</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">iPad Air M2</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI笔记+画布工具最佳终端</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥4000-5500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E5%25B0%258F%25E7%25B1%25B3%25E5%25B9%25B3%25E6%259D%25BF6S%2520Pro%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=fastgpt-enterprise-knowledge-base-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">📋</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">小米平板6S Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">高性价比AI笔记终端，3K触控屏</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥3000-4000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

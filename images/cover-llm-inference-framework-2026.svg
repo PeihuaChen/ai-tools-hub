@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#161638"/>
+      <stop offset="100%" stop-color="#0d0d25"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/><line x1="0" y1="192" x2="900" y2="192"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="180" height="4" fill="url(#cyan)"/>
+  <rect x="180" y="0" width="180" height="4" fill="url(#green)"/>
+  <rect x="360" y="0" width="180" height="4" fill="url(#purple)"/>
+  <rect x="540" y="0" width="180" height="4" fill="url(#orange)"/>
+  <rect x="720" y="0" width="180" height="4" fill="url(#red)"/>
+  <rect x="0" y="379" width="180" height="4" fill="url(#cyan)"/>
+  <rect x="180" y="379" width="180" height="4" fill="url(#green)"/>
+  <rect x="360" y="379" width="180" height="4" fill="url(#purple)"/>
+  <rect x="540" y="379" width="180" height="4" fill="url(#orange)"/>
+  <rect x="720" y="379" width="180" height="4" fill="url(#red)"/>
+
+  <!-- Right: Framework stack cards -->
+  <g transform="translate(580, 60)">
+    <!-- vLLM -->
+    <g>
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1e1e3a" stroke="url(#cyan)" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="6" fill="#22d3ee"/>
+      <text x="32" y="23" font-family="'Courier New',monospace" font-size="12" font-weight="bold" fill="#e2e8f0">vLLM</text>
+      <text x="82" y="23" font-family="'Courier New',monospace" font-size="9" fill="#64748b">生产标准</text>
+    </g>
+    <!-- SGLang -->
+    <g transform="translate(140, 0)">
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1e1e3a" stroke="url(#green)" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="6" fill="#34d399"/>
+      <text x="32" y="23" font-family="'Courier New',monospace" font-size="12" font-weight="bold" fill="#e2e8f0">SGLang</text>
+      <text x="92" y="23" font-family="'Courier New',monospace" font-size="9" fill="#64748b">Agent</text>
+    </g>
+    <!-- TensorRT-LLM -->
+    <g transform="translate(0, 48)">
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1e1e3a" stroke="url(#purple)" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="6" fill="#a78bfa"/>
+      <text x="32" y="23" font-family="'Courier New',monospace" font-size="11" font-weight="bold" fill="#e2e8f0">TRT-LLM</text>
+      <text x="94" y="23" font-family="'Courier New',monospace" font-size="9" fill="#64748b">极致</text>
+    </g>
+    <!-- Ollama -->
+    <g transform="translate(140, 48)">
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1e1e3a" stroke="url(#orange)" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="6" fill="#fbbf24"/>
+      <text x="32" y="23" font-family="'Courier New',monospace" font-size="12" font-weight="bold" fill="#e2e8f0">Ollama</text>
+      <text x="90" y="23" font-family="'Courier New',monospace" font-size="9" fill="#64748b">本地</text>
+    </g>
+    <!-- Xinference -->
+    <g transform="translate(0, 96)">
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1e1e3a" stroke="url(#red)" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="6" fill="#f97316"/>
+      <text x="32" y="23" font-family="'Courier New',monospace" font-size="11" font-weight="bold" fill="#e2e8f0">Xinference</text>
+      <text x="106" y="23" font-family="'Courier New',monospace" font-size="9" fill="#64748b">平台</text>
+    </g>
+    <!-- llama.cpp -->
+    <g transform="translate(140, 96)">
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1e1e3a" stroke="#64748b" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="6" fill="#94a3b8"/>
+      <text x="32" y="23" font-family="'Courier New',monospace" font-size="11" font-weight="bold" fill="#e2e8f0">llama.cpp</text>
+      <text x="102" y="23" font-family="'Courier New',monospace" font-size="9" fill="#64748b">边缘</text>
+    </g>
+
+    <!-- Layer label -->
+    <g transform="translate(0, 155)">
+      <rect x="0" y="0" width="270" height="50" rx="8" fill="#161636" stroke="#334155" stroke-width="1"/>
+      <text x="14" y="18" font-family="'Courier New',monospace" font-size="10" fill="#94a3b8">引擎层: PagedAttention vs RadixAttention</text>
+      <text x="14" y="38" font-family="'Courier New',monospace" font-size="10" fill="#94a3b8">平台层: 多模型编排 + 统一 API</text>
+    </g>
+  </g>
+
+  <!-- Tag -->
+  <g transform="translate(50, 28)">
+    <rect x="0" y="0" width="200" height="30" rx="4" fill="#0a1a20" stroke="url(#cyan)" stroke-width="1"/>
+    <text x="100" y="20" font-family="'Courier New',monospace" font-weight="bold" font-size="13" fill="#22d3ee" text-anchor="middle">AI 开发平台 · 推理框架</text>
+  </g>
+
+  <text x="50" y="112" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="28" font-weight="bold" fill="#ffffff">大模型推理框架选型 2026</text>
+  <text x="50" y="150" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="18" font-weight="bold" fill="url(#cyan)">vLLM · SGLang · TensorRT-LLM · Ollama · Xinference</text>
+
+  <!-- Key highlights -->
+  <g transform="translate(50, 178)">
+    <text x="0" y="0" font-family="'Courier New',monospace" font-size="12" fill="#22d3ee">PagedAttention vs RadixAttention 核心技术拆解</text>
+    <text x="0" y="20" font-family="'Courier New',monospace" font-size="12" fill="#34d399">引擎层 vs 平台层 · 五种场景明确推荐</text>
+    <text x="0" y="40" font-family="'Courier New',monospace" font-size="12" fill="#f59e0b">H100 benchmark · SGLang 延迟低35% · 2.3x吞吐差</text>
+  </g>
+
+  <!-- Tags -->
+  <g transform="translate(50, 248)">
+    <rect x="0" y="0" width="48" height="24" rx="12" fill="#1e1e3a" stroke="#06b6d4" stroke-width="0.8"/>
+    <text x="24" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#a5f3fc" text-anchor="middle">vLLM</text>
+
+    <rect x="56" y="0" width="52" height="24" rx="12" fill="#1e1e3a" stroke="#10b981" stroke-width="0.8"/>
+    <text x="82" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#6ee7b7" text-anchor="middle">SGLang</text>
+
+    <rect x="116" y="0" width="52" height="24" rx="12" fill="#1e1e3a" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="142" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">TRT-LLM</text>
+
+    <rect x="176" y="0" width="52" height="24" rx="12" fill="#1e1e3a" stroke="#f59e0b" stroke-width="0.8"/>
+    <text x="202" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fde047" text-anchor="middle">Ollama</text>
+
+    <rect x="236" y="0" width="68" height="24" rx="12" fill="#1e1e3a" stroke="#ef4444" stroke-width="0.8"/>
+    <text x="270" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fca5a5" text-anchor="middle">Xinference</text>
+
+    <rect x="312" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#64748b" stroke-width="0.8"/>
+    <text x="344" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">llama.cpp</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="50" y="290" width="460" height="1" fill="#fff" opacity="0.06"/>
+  <text x="50" y="314" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4a4f70">核心技术 · 性能对比 · 场景推荐 · 2026趋势</text>
+  <text x="50" y="349" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#33385a">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 30)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#cyan)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#22d3ee" text-anchor="middle">26</text>
+  </g>
+</svg>

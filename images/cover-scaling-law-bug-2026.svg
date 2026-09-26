@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f43f5e"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="subt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f43f5e"/>
+    </linearGradient>
+    <linearGradient id="curveWrong" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f43f5e"/>
+      <stop offset="1" stop-color="#fb7185"/>
+    </linearGradient>
+    <linearGradient id="curveRight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- label box -->
+  <rect x="40" y="34" width="248" height="30" rx="6" fill="#1e1e46" stroke="#a855f7" stroke-opacity="0.6"/>
+  <text x="56" y="54" font-size="14" fill="#c4b5fd" letter-spacing="1">AI 行业观察 · 缩放定律</text>
+
+  <!-- year badge -->
+  <circle cx="840" cy="52" r="24" fill="#1e1e46" stroke="#38bdf8" stroke-opacity="0.7"/>
+  <text x="840" y="59" font-size="20" fill="#7dd3fc" text-anchor="middle" font-weight="700">26</text>
+
+  <!-- main title -->
+  <text x="44" y="126" font-size="31" fill="#ffffff" font-weight="800">缩放定律的 Bug 与真相</text>
+  <text x="44" y="164" font-size="18" fill="url(#subt)" font-weight="600">当前大模型训练方式到底对不对？</text>
+
+  <!-- highlights -->
+  <text x="44" y="205" font-size="13" fill="#fca5a5">◆ Kaplan 2020 缩放定律竟藏着一个训练配置 Bug</text>
+  <text x="44" y="228" font-size="13" fill="#fcd34d">◆ 又大又欠训练：GPT-3 / Gopher 烧掉的算力真相</text>
+  <text x="44" y="251" font-size="13" fill="#7dd3fc">◆ 参数与数据到底怎么配 · 20 tokens/参数够不够</text>
+
+  <!-- concept mini-chart: log-log scaling curves -->
+  <g transform="translate(600,150)">
+    <rect x="0" y="0" width="250" height="150" rx="8" fill="#12122e" stroke="#ffffff" stroke-opacity="0.08"/>
+    <line x1="24" y1="18" x2="24" y2="126" stroke="#64748b" stroke-width="1.2"/>
+    <line x1="24" y1="126" x2="226" y2="126" stroke="#64748b" stroke-width="1.2"/>
+    <text x="8" y="16" font-size="9" fill="#94a3b8">Loss</text>
+    <text x="188" y="142" font-size="9" fill="#94a3b8">Compute</text>
+    <!-- wrong (Kaplan) -->
+    <path d="M32 34 C 90 70, 150 92, 218 108" fill="none" stroke="url(#curveWrong)" stroke-width="2.6" stroke-dasharray="6 4"/>
+    <!-- right (Chinchilla) -->
+    <path d="M32 46 C 100 78, 160 104, 218 122" fill="none" stroke="url(#curveRight)" stroke-width="2.6"/>
+    <circle cx="150" cy="92" r="4" fill="#f43f5e"/>
+    <circle cx="150" cy="105" r="4" fill="#34d399"/>
+    <text x="70" y="30" font-size="9" fill="#fb7185">Kaplan (buggy)</text>
+    <text x="118" y="140" font-size="9" fill="#34d399">Chinchilla</text>
+  </g>
+
+  <!-- tag pills -->
+  <g font-size="12">
+    <rect x="44" y="300" width="96" height="26" rx="13" fill="none" stroke="#f43f5e" stroke-opacity="0.6"/>
+    <text x="92" y="317" fill="#fca5a5" text-anchor="middle">Scaling Law</text>
+    <rect x="150" y="300" width="86" height="26" rx="13" fill="none" stroke="#a855f7" stroke-opacity="0.6"/>
+    <text x="193" y="317" fill="#c4b5fd" text-anchor="middle">Chinchilla</text>
+    <rect x="246" y="300" width="78" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.6"/>
+    <text x="285" y="317" fill="#7dd3fc" text-anchor="middle">算力最优</text>
+    <rect x="334" y="300" width="86" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.6"/>
+    <text x="377" y="317" fill="#6ee7b7" text-anchor="middle">数据墙</text>
+    <rect x="430" y="300" width="98" height="26" rx="13" fill="none" stroke="#fbbf24" stroke-opacity="0.6"/>
+    <text x="479" y="317" fill="#fcd34d" text-anchor="middle">训练方法论</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="44" y1="348" x2="856" y2="348" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="44" y="368" font-size="11" fill="#64748b">从 Kaplan 到 Chinchilla：一个 Bug 引发的路线之争与训练真相</text>
+  <text x="856" y="368" font-size="11" fill="#475569" text-anchor="end">公众号：AI行业观察</text>
+</svg>

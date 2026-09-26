@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="90" y1="0" x2="90" y2="383"/>
+    <line x1="180" y1="0" x2="180" y2="383"/>
+    <line x1="270" y1="0" x2="270" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/>
+    <line x1="630" y1="0" x2="630" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/>
+    <line x1="810" y1="0" x2="810" y2="383"/>
+  </g>
+
+  <!-- top / bottom color bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="46" width="256" height="34" rx="6" fill="none" stroke="#38bdf8" stroke-opacity="0.7" stroke-width="1.5"/>
+  <text x="64" y="69" fill="#7dd3fc" font-size="16" font-weight="bold">AI 行业观察 · 具身智能</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="62" r="26" fill="none" stroke="#f472b6" stroke-opacity="0.6" stroke-width="2"/>
+  <text x="838" y="71" fill="#f9a8d4" font-size="24" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- title -->
+  <text x="48" y="150" fill="#ffffff" font-size="44" font-weight="bold">VLA 模型深度调研</text>
+  <text x="48" y="192" fill="url(#sub)" font-size="20" font-weight="bold">主流架构 · 训练范式 · 产业落地</text>
+
+  <!-- highlight lines -->
+  <text x="48" y="238" fill="#7dd3fc" font-size="15">从 RT-2 到 π0.7：视觉-语言-动作模型演进脉络</text>
+  <text x="48" y="264" fill="#c4b5fd" font-size="15">自回归 / 流匹配 / 双系统：三大架构范式对比</text>
+  <text x="48" y="290" fill="#f9a8d4" font-size="15">量产元年：中美玩家格局与落地挑战</text>
+
+  <!-- right concept: nodes -->
+  <g stroke="#818cf8" stroke-opacity="0.5" stroke-width="2" fill="none">
+    <line x1="700" y1="150" x2="780" y2="120"/>
+    <line x1="700" y1="150" x2="780" y2="190"/>
+    <line x1="780" y1="120" x2="820" y2="255"/>
+    <line x1="780" y1="190" x2="820" y2="255"/>
+  </g>
+  <circle cx="700" cy="150" r="16" fill="#0ea5e9" fill-opacity="0.25" stroke="#38bdf8" stroke-width="2"/>
+  <circle cx="780" cy="120" r="13" fill="#6366f1" fill-opacity="0.25" stroke="#818cf8" stroke-width="2"/>
+  <circle cx="780" cy="190" r="13" fill="#6366f1" fill-opacity="0.25" stroke="#818cf8" stroke-width="2"/>
+  <circle cx="820" cy="255" r="18" fill="#db2777" fill-opacity="0.25" stroke="#f472b6" stroke-width="2"/>
+  <text x="672" y="155" fill="#7dd3fc" font-size="12">V</text>
+  <text x="754" y="125" fill="#c4b5fd" font-size="12">L</text>
+  <text x="810" y="260" fill="#f9a8d4" font-size="12">A</text>
+
+  <!-- bottom divider + watermark -->
+  <line x1="48" y1="330" x2="852" y2="330" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <text x="48" y="356" fill="#64748b" font-size="13">RT-2 · OpenVLA · π0 · Helix · Gemini Robotics · GR00T</text>
+  <text x="852" y="356" fill="#475569" font-size="13" text-anchor="end">AI 行业观察</text>
+</svg>

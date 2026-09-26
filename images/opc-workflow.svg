@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)" rx="8"/>
+  <text x="400" y="30" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="20" fill="#fff" text-anchor="middle">一人公司 AI 工作流：六阶段从零到一</text>
+  <line x1="200" y1="42" x2="600" y2="42" stroke="#3a7bd5" stroke-width="1" opacity="0.5"/>
+  <!-- 阶段1: 需求收敛 -->
+  <g transform="translate(50, 52)">
+    <rect x="0" y="0" width="130" height="48" rx="8" fill="#0a2a4a" stroke="#00d2ff" stroke-width="1.5" opacity="0.8"/>
+    <text x="65" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#00d2ff" text-anchor="middle">需求收敛</text>
+    <text x="65" y="38" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">模糊想法→PRD</text>
+  </g>
+  <g transform="translate(195, 64)">
+    <rect x="0" y="0" width="530" height="26" rx="6" fill="#1a1a2a" stroke="#00d2ff" stroke-width="1" opacity="0.5"/>
+    <text x="10" y="17" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc">Claude/ChatGPT 对话收敛想法 → 1 页 PRD：定位 + 3 核心功能 + 用户画像 + 技术选型</text>
+  </g>
+  <polygon points="115,106 111,112 119,112" fill="#00d2ff" opacity="0.5"/>
+  <!-- 阶段2: 原型设计 -->
+  <g transform="translate(50, 118)">
+    <rect x="0" y="0" width="130" height="48" rx="8" fill="#0a3a1a" stroke="#00f260" stroke-width="1.5" opacity="0.8"/>
+    <text x="65" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#00f260" text-anchor="middle">原型设计</text>
+    <text x="65" y="38" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">PRD→可交互UI</text>
+  </g>
+  <g transform="translate(195, 130)">
+    <rect x="0" y="0" width="530" height="26" rx="6" fill="#1a1a2a" stroke="#00f260" stroke-width="1" opacity="0.5"/>
+    <text x="10" y="17" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc">Lovable(全栈) / v0(UI组件) / Bolt.new(开发者控制) → 30分钟可交互原型</text>
+  </g>
+  <polygon points="115,172 111,178 119,178" fill="#00f260" opacity="0.5"/>
+  <!-- 阶段3: 核心开发 -->
+  <g transform="translate(50, 184)">
+    <rect x="0" y="0" width="130" height="48" rx="8" fill="#3a2a0a" stroke="#f7c948" stroke-width="1.5" opacity="0.8"/>
+    <text x="65" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#f7c948" text-anchor="middle">核心开发</text>
+    <text x="65" y="38" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">Claude Code + Cursor</text>
+  </g>
+  <g transform="translate(195, 196)">
+    <rect x="0" y="0" width="530" height="26" rx="6" fill="#1a1a2a" stroke="#f7c948" stroke-width="1" opacity="0.5"/>
+    <text x="10" y="17" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc">Claude Code(架构+Schema+API) + Cursor(UI+业务) + Next.js + Supabase + Vercel</text>
+  </g>
+  <polygon points="115,238 111,244 119,244" fill="#f7c948" opacity="0.5"/>
+  <!-- 阶段4: 测试迭代 -->
+  <g transform="translate(50, 250)">
+    <rect x="0" y="0" width="130" height="48" rx="8" fill="#4a1a0a" stroke="#ff6b35" stroke-width="1.5" opacity="0.8"/>
+    <text x="65" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#ff6b35" text-anchor="middle">测试迭代</text>
+    <text x="65" y="38" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">AI 自动化测试</text>
+  </g>
+  <g transform="translate(195, 262)">
+    <rect x="0" y="0" width="530" height="26" rx="6" fill="#1a1a2a" stroke="#ff6b35" stroke-width="1" opacity="0.5"/>
+    <text x="10" y="17" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc">Claude Code + Playwright E2E测试 + AI单元测试 + CI/CD自动验证</text>
+  </g>
+  <polygon points="115,304 111,310 119,310" fill="#ff6b35" opacity="0.5"/>
+  <!-- 阶段5: 部署上线 -->
+  <g transform="translate(50, 316)">
+    <rect x="0" y="0" width="130" height="48" rx="8" fill="#4a0a0a" stroke="#ff4444" stroke-width="1.5" opacity="0.8"/>
+    <text x="65" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#ff4444" text-anchor="middle">部署上线</text>
+    <text x="65" y="38" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">Push → 自动发布</text>
+  </g>
+  <g transform="translate(195, 328)">
+    <rect x="0" y="0" width="530" height="26" rx="6" fill="#1a1a2a" stroke="#ff4444" stroke-width="1" opacity="0.5"/>
+    <text x="10" y="17" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc">Vercel + GitHub: Push→Build→Preview→Merge→Production / Lovable一键部署</text>
+  </g>
+  <polygon points="115,370 111,376 119,376" fill="#ff4444" opacity="0.5"/>
+  <!-- 阶段6: 运营增长 -->
+  <g transform="translate(50, 382)">
+    <rect x="0" y="0" width="130" height="48" rx="8" fill="#2a0a4a" stroke="#aa66ff" stroke-width="1.5" opacity="0.8"/>
+    <text x="65" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="13" fill="#aa66ff" text-anchor="middle">运营增长</text>
+    <text x="65" y="38" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="9" fill="#aaa" text-anchor="middle">客服+营销+收款</text>
+  </g>
+  <g transform="translate(195, 394)">
+    <rect x="0" y="0" width="530" height="26" rx="6" fill="#1a1a2a" stroke="#aa66ff" stroke-width="1" opacity="0.5"/>
+    <text x="10" y="17" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#ccc">AI客服(Intercom Fin) + n8n自动化 + Polar.sh/Stripe收款 + GEO优化获客</text>
+  </g>
+  <text x="400" y="472" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">数据来源：北京大学 Agentic Coding 报告 · 清华大学 OPC 报告</text>
+</svg>

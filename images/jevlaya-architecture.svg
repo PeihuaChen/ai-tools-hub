@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="620" viewBox="0 0 1080 620">
+  <rect width="1080" height="620" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">生成式调用 vs 决策式调用</text>
+
+  <text x="48" y="176" font-size="44" font-weight="bold" fill="#b45309">生成式模型：输出可能不合法</text>
+
+  <g>
+    <rect x="48" y="204" width="225" height="96" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="160" y="263" font-size="32" fill="#b45309" text-anchor="middle">读输入</text>
+    <rect x="301" y="204" width="225" height="96" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="413" y="263" font-size="32" fill="#b45309" text-anchor="middle">生成 JSON</text>
+    <rect x="554" y="204" width="225" height="96" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="666" y="263" font-size="32" fill="#b45309" text-anchor="middle">解析校验</text>
+    <rect x="807" y="204" width="225" height="96" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="919" y="263" font-size="32" fill="#b45309" text-anchor="middle">失败重试</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="2.5" fill="none">
+    <line x1="279" y1="252" x2="292" y2="252"/>
+    <line x1="532" y1="252" x2="545" y2="252"/>
+    <line x1="785" y1="252" x2="798" y2="252"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M292 245 L301 252 L292 259 Z"/>
+    <path d="M545 245 L554 252 L545 259 Z"/>
+    <path d="M798 245 L807 252 L798 259 Z"/>
+  </g>
+  <text x="48" y="338" font-size="32" fill="#6b7280">任一环出错就要整条回炉重跑</text>
+
+  <line x1="48" y1="372" x2="1032" y2="372" stroke="#d9e2ec" stroke-width="2"/>
+
+  <text x="48" y="424" font-size="44" font-weight="bold" fill="#15803d">决策模型：输出在构造上合法</text>
+
+  <g>
+    <rect x="48" y="452" width="309" height="96" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="202" y="511" font-size="32" fill="#15803d" text-anchor="middle">读输入一次</text>
+    <rect x="385" y="452" width="309" height="96" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="539" y="511" font-size="32" fill="#15803d" text-anchor="middle">给每个选项打分</text>
+    <rect x="722" y="452" width="309" height="96" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="876" y="511" font-size="32" fill="#15803d" text-anchor="middle">softmax 归一化</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="2.5" fill="none">
+    <line x1="363" y1="500" x2="376" y2="500"/>
+    <line x1="700" y1="500" x2="713" y2="500"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M376 493 L385 500 L376 507 Z"/>
+    <path d="M713 493 L722 500 L713 507 Z"/>
+  </g>
+  <text x="48" y="586" font-size="32" fill="#6b7280">省掉解析、校验与重试整条链路</text>
+</svg>

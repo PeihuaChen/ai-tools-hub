@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0V30" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- label box -->
+  <rect x="60" y="42" width="248" height="30" rx="6" fill="none" stroke="#6366f1" stroke-opacity="0.7" stroke-width="1.5"/>
+  <text x="76" y="63" font-size="15" fill="#a5b4fc" letter-spacing="1">AI 行业观察 · 大模型微调</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="26" fill="none" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="838" y="66" font-size="22" fill="#67e8f9" text-anchor="middle" font-weight="bold">26</text>
+
+  <!-- title -->
+  <text x="60" y="132" font-size="31" fill="#ffffff" font-weight="bold">大模型微调框架，到底怎么选？</text>
+  <text x="60" y="170" font-size="18" fill="url(#sub)" font-weight="600">LLaMA-Factory · ms-swift · Unsloth · Axolotl · TRL · TorchTune</text>
+
+  <!-- highlights -->
+  <text x="60" y="212" font-size="13" fill="#67e8f9">▎零代码 WebUI，100+ 模型，Day-0 跟进前沿</text>
+  <text x="60" y="236" font-size="13" fill="#f9a8d4">▎600+ 模型 / 400+ 多模态，Megatron 大规模并行</text>
+  <text x="60" y="260" font-size="13" fill="#fcd34d">▎单卡 4090 微调 70B，显存降 60-80%，六强横评</text>
+
+  <!-- tag pills -->
+  <g font-size="12">
+    <rect x="60" y="292" width="86" height="26" rx="13" fill="none" stroke="#6366f1" stroke-opacity="0.6"/>
+    <text x="103" y="309" fill="#c7d2fe" text-anchor="middle">LoRA/QLoRA</text>
+    <rect x="156" y="292" width="70" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="191" y="309" fill="#a5f3fc" text-anchor="middle">RLHF/DPO</text>
+    <rect x="236" y="292" width="70" height="26" rx="13" fill="none" stroke="#f472b6" stroke-opacity="0.6"/>
+    <text x="271" y="309" fill="#fbcfe8" text-anchor="middle">多模态</text>
+    <rect x="316" y="292" width="78" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.6"/>
+    <text x="355" y="309" fill="#a7f3d0" text-anchor="middle">选型指南</text>
+  </g>
+
+  <!-- right concept diagram: framework nodes -->
+  <g stroke-width="1.5" fill="none">
+    <line x1="700" y1="150" x2="760" y2="110" stroke="#6366f1" stroke-opacity="0.5"/>
+    <line x1="700" y1="150" x2="775" y2="160" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <line x1="700" y1="150" x2="758" y2="210" stroke="#f472b6" stroke-opacity="0.5"/>
+    <line x1="700" y1="150" x2="640" y2="200" stroke="#34d399" stroke-opacity="0.5"/>
+    <line x1="700" y1="150" x2="638" y2="105" stroke="#fcd34d" stroke-opacity="0.5"/>
+  </g>
+  <g>
+    <circle cx="700" cy="150" r="20" fill="#6366f1" fill-opacity="0.2" stroke="#818cf8" stroke-width="1.5"/>
+    <text x="700" y="155" font-size="12" fill="#c7d2fe" text-anchor="middle">LLM</text>
+    <circle cx="762" cy="106" r="13" fill="#22d3ee" fill-opacity="0.15" stroke="#22d3ee" stroke-width="1.2"/>
+    <circle cx="779" cy="162" r="13" fill="#22d3ee" fill-opacity="0.15" stroke="#22d3ee" stroke-width="1.2"/>
+    <circle cx="760" cy="214" r="13" fill="#f472b6" fill-opacity="0.15" stroke="#f472b6" stroke-width="1.2"/>
+    <circle cx="636" cy="204" r="13" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.2"/>
+    <circle cx="634" cy="101" r="13" fill="#fcd34d" fill-opacity="0.15" stroke="#fcd34d" stroke-width="1.2"/>
+  </g>
+
+  <!-- footer -->
+  <line x1="60" y1="344" x2="840" y2="344" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="60" y="366" font-size="12" fill="#94a3b8">定位 · 强项 · 短板 · 场景化选型建议 · 国产双雄对比</text>
+  <text x="840" y="366" font-size="12" fill="#64748b" text-anchor="end">公众号：AI 行业观察</text>
+</svg>

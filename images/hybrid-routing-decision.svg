@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1318" viewBox="0 0 1080 1318">
+  <rect x="0" y="0" width="1080" height="1318" fill="#f7f8fa"/>
+
+  <text x="48" y="90" font-size="64" font-weight="bold" fill="#111827">谁来决定这个请求走哪条路</text>
+  <text x="48" y="190" font-size="34" fill="#4b5563">三类判据 + 两种决策位置</text>
+
+  <g>
+    <rect x="48" y="240" width="309" height="180" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="76" y="298" font-size="40" font-weight="bold" fill="#1d4ed8">网络延迟</text>
+    <text x="76" y="358" font-size="32" fill="#4b5563">读系统状态即可</text>
+  </g>
+  <g>
+    <rect x="385" y="240" width="309" height="180" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="413" y="298" font-size="40" font-weight="bold" fill="#0e7490">设备健康度</text>
+    <text x="413" y="358" font-size="32" fill="#4b5563">电量与负载</text>
+  </g>
+  <g>
+    <rect x="722" y="240" width="309" height="180" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="750" y="298" font-size="40" font-weight="bold" fill="#b91c1c">查询复杂度</text>
+    <text x="750" y="358" font-size="32" fill="#4b5563">真正的难点</text>
+  </g>
+
+  <g>
+    <rect x="48" y="450" width="984" height="400" rx="16" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="512" font-size="48" font-weight="bold" fill="#111827">方案 A：外部路由器</text>
+
+    <rect x="76" y="583" width="220" height="80" rx="12" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="186" y="634" font-size="34" fill="#111827" text-anchor="middle">用户请求</text>
+
+    <rect x="336" y="583" width="300" height="80" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="486" y="634" font-size="34" fill="#1d4ed8" text-anchor="middle">外部路由器</text>
+
+    <rect x="716" y="527" width="316" height="80" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="874" y="578" font-size="32" fill="#15803d" text-anchor="middle">端侧模型执行</text>
+
+    <rect x="716" y="639" width="316" height="80" rx="12" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="874" y="690" font-size="32" fill="#b45309" text-anchor="middle">云端模型执行</text>
+
+    <g stroke="#94a3b8" stroke-width="2.5" fill="none">
+      <path d="M296 623 H320"/>
+      <path d="M636 623 H676 V567 H704"/>
+      <path d="M636 623 H676 V679 H704"/>
+    </g>
+    <polygon points="320,615 332,623 320,631" fill="#94a3b8"/>
+    <polygon points="704,559 716,567 704,575" fill="#94a3b8"/>
+    <polygon points="704,671 716,679 704,687" fill="#94a3b8"/>
+
+    <text x="76" y="760" font-size="32" fill="#15803d">优点：两侧模型可独立替换</text>
+    <text x="76" y="810" font-size="32" fill="#b91c1c">局限：仅凭 prompt 难判断难度</text>
+  </g>
+
+  <g>
+    <rect x="48" y="878" width="984" height="400" rx="16" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="940" font-size="48" font-weight="bold" fill="#111827">方案 B：模型自决路由</text>
+
+    <rect x="76" y="1011" width="220" height="80" rx="12" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="186" y="1062" font-size="34" fill="#111827" text-anchor="middle">用户请求</text>
+
+    <rect x="336" y="1011" width="340" height="80" rx="12" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="506" y="1062" font-size="34" fill="#6d28d9" text-anchor="middle">端侧模型自决</text>
+
+    <rect x="756" y="955" width="276" height="80" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="894" y="1006" font-size="32" fill="#15803d" text-anchor="middle">本地直接作答</text>
+
+    <rect x="756" y="1067" width="276" height="80" rx="12" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="894" y="1118" font-size="32" fill="#b45309" text-anchor="middle">请求云端协助</text>
+
+    <g stroke="#94a3b8" stroke-width="2.5" fill="none">
+      <path d="M296 1051 H320"/>
+      <path d="M676 1051 H716 V995 H744"/>
+      <path d="M676 1051 H716 V1107 H744"/>
+    </g>
+    <polygon points="320,1043 332,1051 320,1059" fill="#94a3b8"/>
+    <polygon points="744,987 756,995 744,1003" fill="#94a3b8"/>
+    <polygon points="744,1099 756,1107 744,1115" fill="#94a3b8"/>
+
+    <text x="76" y="1188" font-size="32" fill="#15803d">机制：强化学习后训练与分层奖励</text>
+    <text x="76" y="1238" font-size="32" fill="#b91c1c">风险：策略崩塌为全本地或全云端</text>
+  </g>
+</svg>

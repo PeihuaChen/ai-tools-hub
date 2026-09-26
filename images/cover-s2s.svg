@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="55%" stop-color="#101030"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="34%" stop-color="#7b6cff"/>
+      <stop offset="67%" stop-color="#ff4d9d"/>
+      <stop offset="100%" stop-color="#ffb020"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffb020"/>
+      <stop offset="50%" stop-color="#7b6cff"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <linearGradient id="subt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#8b7cff"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <circle cx="812" cy="86" r="120" fill="#7b6cff" opacity="0.07"/>
+  <circle cx="700" cy="300" r="90" fill="#00d4ff" opacity="0.05"/>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <rect x="48" y="38" width="248" height="28" rx="5" fill="#00d4ff" fill-opacity="0.1" stroke="#00d4ff" stroke-opacity="0.55" stroke-width="1"/>
+  <text x="62" y="57" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#5fe3ff">AI 工程实践 · 自建语音 Agent</text>
+
+  <text x="48" y="112" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="31" font-weight="bold" fill="#ffffff">自建语音 Agent 实战指南</text>
+  <text x="48" y="150" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="url(#subt)">speech-to-speech：从部署到中文适配</text>
+
+  <text x="48" y="192" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#8ce8ff">VAD → STT → LLM → TTS 四段级联，兼容 OpenAI Realtime 协议</text>
+  <text x="48" y="215" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#ffa8d0">RTX 4090 单流实测：首音 152ms，RTF 5.56（附数据核对）</text>
+  <text x="48" y="238" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#ffd27a">中文栈：Paraformer + vLLM/Qwen3 + Qwen3-TTS / CosyVoice 3</text>
+
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5">
+    <rect x="48" y="264" width="84" height="24" rx="12" fill="none" stroke="#00d4ff" stroke-opacity="0.5"/>
+    <text x="62" y="280" fill="#7fdcf0">Realtime API</text>
+    <rect x="140" y="264" width="80" height="24" rx="12" fill="none" stroke="#7b6cff" stroke-opacity="0.5"/>
+    <text x="154" y="280" fill="#b0a6ff">Smart Turn</text>
+    <rect x="228" y="264" width="64" height="24" rx="12" fill="none" stroke="#ff4d9d" stroke-opacity="0.5"/>
+    <text x="242" y="280" fill="#ff9ec4">FunASR</text>
+    <rect x="300" y="264" width="76" height="24" rx="12" fill="none" stroke="#ffb020" stroke-opacity="0.5"/>
+    <text x="314" y="280" fill="#ffcf7d">CosyVoice</text>
+    <rect x="384" y="264" width="56" height="24" rx="12" fill="none" stroke="#3ddc97" stroke-opacity="0.5"/>
+    <text x="398" y="280" fill="#8ce8bd">vLLM</text>
+    <rect x="448" y="264" width="64" height="24" rx="12" fill="none" stroke="#8899aa" stroke-opacity="0.5"/>
+    <text x="462" y="280" fill="#b9c6d2">自托管</text>
+  </g>
+
+  <g opacity="0.92">
+    <rect x="636" y="96" width="196" height="34" rx="6" fill="#00d4ff" fill-opacity="0.13" stroke="#00d4ff" stroke-opacity="0.6"/>
+    <text x="734" y="118" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#7fe6ff">VAD  语音活动检测</text>
+    <path d="M734 130 L734 146" stroke="#5566aa" stroke-width="1.5"/>
+    <path d="M730 141 L734 147 L738 141" fill="none" stroke="#5566aa" stroke-width="1.5"/>
+
+    <rect x="636" y="147" width="196" height="34" rx="6" fill="#7b6cff" fill-opacity="0.13" stroke="#7b6cff" stroke-opacity="0.6"/>
+    <text x="734" y="169" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#b6adff">STT  语音转文字</text>
+    <path d="M734 181 L734 197" stroke="#5566aa" stroke-width="1.5"/>
+    <path d="M730 192 L734 198 L738 192" fill="none" stroke="#5566aa" stroke-width="1.5"/>
+
+    <rect x="636" y="198" width="196" height="34" rx="6" fill="#ff4d9d" fill-opacity="0.13" stroke="#ff4d9d" stroke-opacity="0.6"/>
+    <text x="734" y="220" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#ffa3c8">LLM  语言模型</text>
+    <path d="M734 232 L734 248" stroke="#5566aa" stroke-width="1.5"/>
+    <path d="M730 243 L734 249 L738 243" fill="none" stroke="#5566aa" stroke-width="1.5"/>
+
+    <rect x="636" y="249" width="196" height="34" rx="6" fill="#ffb020" fill-opacity="0.13" stroke="#ffb020" stroke-opacity="0.6"/>
+    <text x="734" y="271" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#ffd28a">TTS  语音合成</text>
+  </g>
+
+  <circle cx="852" cy="48" r="21" fill="none" stroke="#ff4d9d" stroke-opacity="0.65" stroke-width="1.5"/>
+  <text x="852" y="55" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="17" font-weight="bold" fill="#ff8fbb">26</text>
+
+  <line x1="48" y1="316" x2="852" y2="316" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <text x="48" y="345" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#7d8aa5">协议兼容 · 组件可换 · 成本拐点 · Smart Turn 投机回滚 · 中文栈落地 · 性能数据核对</text>
+  <text x="852" y="345" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11.5" fill="#5d6a85">公众号：AI 界的小学生</text>
+</svg>

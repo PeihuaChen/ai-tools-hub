@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="dbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <pattern id="dgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0V30" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0 0 L6 3 L0 6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="560" fill="url(#dbg)"/>
+  <rect width="900" height="560" fill="url(#dgrid)"/>
+
+  <text x="40" y="46" font-size="20" fill="#ffffff" font-weight="bold">微调框架选型决策图</text>
+  <text x="40" y="70" font-size="13" fill="#94a3b8">先问自己三个问题：易用性 · 资源 · 覆盖广度</text>
+
+  <!-- Start node -->
+  <rect x="360" y="92" width="180" height="46" rx="10" fill="#6366f1" fill-opacity="0.18" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="450" y="120" font-size="15" fill="#c7d2fe" text-anchor="middle" font-weight="600">我要微调一个大模型</text>
+
+  <!-- connectors from start to 5 question rows -->
+  <g stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#arr)">
+    <path d="M450 138 L450 158 L150 158 L150 176"/>
+    <path d="M450 138 L450 158 L300 158 L300 176"/>
+    <path d="M450 158 L450 176"/>
+    <path d="M450 138 L450 158 L600 158 L600 176"/>
+    <path d="M450 138 L450 158 L760 158 L760 176"/>
+  </g>
+
+  <!-- Question nodes (row y=178, h=88 w=150) centered at x -->
+  <!-- Q1 -->
+  <rect x="55" y="178" width="190" height="86" rx="9" fill="#0f172a" stroke="#22d3ee" stroke-opacity="0.55" stroke-width="1.3"/>
+  <text x="150" y="208" font-size="13" fill="#67e8f9" text-anchor="middle" font-weight="600">新手 / 最快</text>
+  <text x="150" y="228" font-size="13" fill="#67e8f9" text-anchor="middle" font-weight="600">跑通第一个任务？</text>
+  <text x="150" y="250" font-size="11" fill="#94a3b8" text-anchor="middle">不想写代码</text>
+
+  <!-- Q2 -->
+  <rect x="255" y="178" width="150" height="86" rx="9" fill="#0f172a" stroke="#f472b6" stroke-opacity="0.55" stroke-width="1.3"/>
+  <text x="330" y="208" font-size="13" fill="#f9a8d4" text-anchor="middle" font-weight="600">只有一张卡 /</text>
+  <text x="330" y="228" font-size="13" fill="#f9a8d4" text-anchor="middle" font-weight="600">预算有限？</text>
+  <text x="330" y="250" font-size="11" fill="#94a3b8" text-anchor="middle">如 4090 24GB</text>
+
+  <!-- Q3 -->
+  <rect x="415" y="178" width="150" height="86" rx="9" fill="#0f172a" stroke="#fcd34d" stroke-opacity="0.55" stroke-width="1.3"/>
+  <text x="490" y="208" font-size="13" fill="#fcd34d" text-anchor="middle" font-weight="600">多模态 / 超大</text>
+  <text x="490" y="228" font-size="13" fill="#fcd34d" text-anchor="middle" font-weight="600">模型 + 并行？</text>
+  <text x="490" y="250" font-size="11" fill="#94a3b8" text-anchor="middle">图文/视频/MoE</text>
+
+  <!-- Q4 -->
+  <rect x="575" y="178" width="150" height="86" rx="9" fill="#0f172a" stroke="#34d399" stroke-opacity="0.55" stroke-width="1.3"/>
+  <text x="650" y="208" font-size="13" fill="#a7f3d0" text-anchor="middle" font-weight="600">多卡集群 +</text>
+  <text x="650" y="228" font-size="13" fill="#a7f3d0" text-anchor="middle" font-weight="600">完整 RLHF？</text>
+  <text x="650" y="250" font-size="11" fill="#94a3b8" text-anchor="middle">分布式流水线</text>
+
+  <!-- Q5 -->
+  <rect x="735" y="178" width="150" height="86" rx="9" fill="#0f172a" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="1.3"/>
+  <text x="810" y="208" font-size="13" fill="#c4b5fd" text-anchor="middle" font-weight="600">研究者 / 要</text>
+  <text x="810" y="228" font-size="13" fill="#c4b5fd" text-anchor="middle" font-weight="600">最大灵活性？</text>
+  <text x="810" y="250" font-size="11" fill="#94a3b8" text-anchor="middle">自己写脚本</text>
+
+  <!-- arrows down to answers -->
+  <g stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#arr)">
+    <path d="M150 264 L150 300"/>
+    <path d="M330 264 L330 300"/>
+    <path d="M490 264 L490 300"/>
+    <path d="M650 264 L650 300"/>
+    <path d="M810 264 L810 300"/>
+  </g>
+
+  <!-- Answer nodes (y=302, h=54) -->
+  <rect x="60" y="302" width="180" height="54" rx="10" fill="#22d3ee" fill-opacity="0.14" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="150" y="326" font-size="15" fill="#a5f3fc" text-anchor="middle" font-weight="bold">LLaMA-Factory</text>
+  <text x="150" y="345" font-size="11" fill="#94a3b8" text-anchor="middle">零代码 LLaMA Board</text>
+
+  <rect x="255" y="302" width="150" height="54" rx="10" fill="#f472b6" fill-opacity="0.14" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="330" y="326" font-size="15" fill="#fbcfe8" text-anchor="middle" font-weight="bold">Unsloth</text>
+  <text x="330" y="345" font-size="11" fill="#94a3b8" text-anchor="middle">省显存 · 提速 2-5x</text>
+
+  <rect x="415" y="302" width="150" height="54" rx="10" fill="#fcd34d" fill-opacity="0.14" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="490" y="326" font-size="15" fill="#fde68a" text-anchor="middle" font-weight="bold">ms-swift</text>
+  <text x="490" y="345" font-size="11" fill="#94a3b8" text-anchor="middle">Megatron-SWIFT</text>
+
+  <rect x="575" y="302" width="150" height="54" rx="10" fill="#34d399" fill-opacity="0.14" stroke="#34d399" stroke-width="1.5"/>
+  <text x="650" y="326" font-size="15" fill="#a7f3d0" text-anchor="middle" font-weight="bold">Axolotl</text>
+  <text x="650" y="345" font-size="11" fill="#94a3b8" text-anchor="middle">FSDP / DeepSpeed</text>
+
+  <rect x="735" y="302" width="150" height="54" rx="10" fill="#a78bfa" fill-opacity="0.14" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="810" y="322" font-size="14" fill="#ddd6fe" text-anchor="middle" font-weight="bold">TRL / TorchTune</text>
+  <text x="810" y="343" font-size="11" fill="#94a3b8" text-anchor="middle">底座 · PyTorch 原生</text>
+
+  <!-- ecosystem note box -->
+  <rect x="60" y="392" width="780" height="58" rx="10" fill="#1e293b" fill-opacity="0.5" stroke="#475569" stroke-width="1.2"/>
+  <text x="80" y="416" font-size="13" fill="#e2e8f0" font-weight="600">生态倾向 ▸</text>
+  <text x="185" y="416" font-size="12" fill="#94a3b8">阿里云 / 通义 / ModelScope 体系 → ms-swift 更顺手</text>
+  <text x="80" y="438" font-size="12" fill="#94a3b8">要中立 + 大厂集成背书（AWS SageMaker · NVIDIA RTX AI Toolkit · 阿里云 PAI）→ LLaMA-Factory</text>
+
+  <!-- combo strategy -->
+  <rect x="60" y="470" width="780" height="66" rx="10" fill="#6366f1" fill-opacity="0.12" stroke="#818cf8" stroke-width="1.3"/>
+  <text x="80" y="494" font-size="13" fill="#c7d2fe" font-weight="600">务实组合拳（三者并非互斥）</text>
+  <text x="80" y="516" font-size="12" fill="#a5b4fc">主力平台用 LLaMA-Factory / ms-swift  →  单卡吃紧切 Unsloth 加速  →  大规模训练上 Axolotl / Megatron-SWIFT</text>
+  <text x="80" y="532" font-size="11" fill="#64748b">它们是工具箱里的不同扳手，按项目切换即可</text>
+</svg>

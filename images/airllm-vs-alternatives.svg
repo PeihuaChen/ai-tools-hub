@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <rect width="1200" height="600" fill="url(#bg2)"/>
+
+  <text x="600" y="52" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="26" font-weight="bold" fill="#111827">三种"小显存跑大模型"方案的取舍</text>
+  <text x="600" y="82" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#6b7280">同一目标，不同代价：精度、速度、成本，只能取其二</text>
+
+  <!-- Card 1: AirLLM -->
+  <rect x="60" y="120" width="340" height="380" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="230" y="158" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#1d4ed8">AirLLM 逐层流式</text>
+  <line x1="90" y1="174" x2="370" y2="174" stroke="#bfdbfe"/>
+  <g font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#1f2937">
+    <text x="90" y="208">做法：一次只加载一层</text>
+    <text x="90" y="238">权重留在磁盘，流式过 GPU</text>
+  </g>
+  <g font-family="Microsoft YaHei, sans-serif" font-size="14">
+    <text x="90" y="280" fill="#15803d">✓ 精度：全保留（不改权重）</text>
+    <text x="90" y="312" fill="#15803d">✓ 显存：极低（看单层）</text>
+    <text x="90" y="344" fill="#15803d">✓ 成本：一张小卡即可</text>
+    <text x="90" y="376" fill="#b91c1c">✗ 速度：很慢，约 0.7 tok/s 或更低</text>
+    <text x="90" y="408" fill="#b91c1c">✗ 强依赖 NVMe SSD 速度</text>
+  </g>
+  <rect x="90" y="432" width="280" height="46" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="230" y="461" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#1d4ed8">适合：研究/实验/离线批处理/精度基线</text>
+
+  <!-- Card 2: Quantization -->
+  <rect x="430" y="120" width="340" height="380" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="600" y="158" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#15803d">量化（GGUF Q4 等）</text>
+  <line x1="460" y1="174" x2="740" y2="174" stroke="#bbf7d0"/>
+  <g font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#1f2937">
+    <text x="460" y="208">做法：权重压到 4bit / 更低</text>
+    <text x="460" y="238">配 llama.cpp / Ollama 运行</text>
+  </g>
+  <g font-family="Microsoft YaHei, sans-serif" font-size="14">
+    <text x="460" y="280" fill="#15803d">✓ 速度：快，可交互</text>
+    <text x="460" y="312" fill="#15803d">✓ 显存：显著降低</text>
+    <text x="460" y="344" fill="#15803d">✓ 生态成熟、体验最好</text>
+    <text x="460" y="376" fill="#b91c1c">✗ 精度：有损（压得越狠越明显）</text>
+    <text x="460" y="408" fill="#6b7280">— 超大模型仍需一定显存</text>
+  </g>
+  <rect x="460" y="432" width="280" height="46" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="600" y="461" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#15803d">适合：本地日常使用/交互对话（主流选择）</text>
+
+  <!-- Card 3: Multi-GPU -->
+  <rect x="800" y="120" width="340" height="380" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="970" y="158" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="#b91c1c">多卡 / 张量并行</text>
+  <line x1="830" y1="174" x2="1110" y2="174" stroke="#fecaca"/>
+  <g font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#1f2937">
+    <text x="830" y="208">做法：堆显存硬解</text>
+    <text x="830" y="238">模型切分到多张大卡</text>
+  </g>
+  <g font-family="Microsoft YaHei, sans-serif" font-size="14">
+    <text x="830" y="280" fill="#15803d">✓ 速度：最快，可上生产</text>
+    <text x="830" y="312" fill="#15803d">✓ 精度：全保留</text>
+    <text x="830" y="344" fill="#15803d">✓ 高吞吐、高并发</text>
+    <text x="830" y="376" fill="#b91c1c">✗ 成本：贵，要买/租多张卡</text>
+    <text x="830" y="408" fill="#6b7280">— 个人/学生门槛高</text>
+  </g>
+  <rect x="830" y="432" width="280" height="46" rx="8" fill="#fee2e2" stroke="#b91c1c"/>
+  <text x="970" y="461" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#b91c1c">适合：在线服务/高并发/生产环境</text>
+
+  <text x="600" y="548" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">一句话记忆：AirLLM 保精度换速度 · 量化压精度换速度 · 多卡砸成本换速度和精度</text>
+  <text x="1140" y="584" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#9ca3af">AI 行业观察</text>
+</svg>

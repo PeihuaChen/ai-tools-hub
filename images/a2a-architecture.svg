@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#1a0a2a"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="100%" stop-color="#f7c948"/>
+    </linearGradient>
+    <linearGradient id="boxAgent1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1a3a"/>
+      <stop offset="100%" stop-color="#1a0a2a"/>
+    </linearGradient>
+    <linearGradient id="boxAgent2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a3a2a"/>
+      <stop offset="100%" stop-color="#0a1a12"/>
+    </linearGradient>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#ff6b35"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#f7c948"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#bg)" rx="8"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="20" fill="#f7c948" text-anchor="middle">A2A 架构图：Agent 对等协作模型</text>
+  <line x1="200" y1="48" x2="600" y2="48" stroke="url(#accent1)" stroke-width="1" opacity="0.5"/>
+
+  <!-- Agent Card Registry -->
+  <g transform="translate(250, 65)">
+    <rect x="0" y="0" width="300" height="40" rx="20" fill="#2a1a3a" stroke="#f7c948" stroke-width="1" opacity="0.8"/>
+    <text x="150" y="25" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="12" fill="#f7c948" text-anchor="middle">🌐 Agent Card 注册中心</text>
+  </g>
+
+  <!-- Arrow from registry down -->
+  <line x1="400" y1="105" x2="400" y2="125" stroke="#f7c948" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <text x="420" y="120" font-family="Arial,sans-serif" font-size="9" fill="#f7c948" opacity="0.7">/.well-known/agent.json 发现</text>
+
+  <!-- Agent A (Client) -->
+  <g transform="translate(50, 135)">
+    <rect x="0" y="0" width="300" height="160" rx="8" fill="url(#boxAgent1)" stroke="#f7c948" stroke-width="1.5" opacity="0.8"/>
+    <text x="15" y="25" font-family="'Courier New',monospace" font-weight="700" font-size="14" fill="#f7c948">Agent A （请求方）</text>
+    <line x1="15" y1="35" x2="285" y2="35" stroke="#f7c948" stroke-width="0.5" opacity="0.3"/>
+
+    <rect x="15" y="45" width="270" height="22" rx="4" fill="#3a2a4a" opacity="0.6"/>
+    <text x="150" y="60" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#d9b8ff" text-anchor="middle">① 读取 Agent Card → 了解 B 的能力</text>
+
+    <rect x="15" y="73" width="270" height="22" rx="4" fill="#3a2a4a" opacity="0.6"/>
+    <text x="150" y="88" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#d9b8ff" text-anchor="middle">② 发送 tasks/send 请求</text>
+
+    <rect x="15" y="101" width="270" height="22" rx="4" fill="#3a2a4a" opacity="0.6"/>
+    <text x="150" y="116" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#d9b8ff" text-anchor="middle">③ 接收 task 状态更新</text>
+
+    <rect x="15" y="129" width="270" height="22" rx="4" fill="#3a2a4a" opacity="0.6"/>
+    <text x="150" y="144" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#d9b8ff" text-anchor="middle">④ 接收最终结果 (Artifacts)</text>
+  </g>
+
+  <!-- Arrow A ↔ B -->
+  <line x1="350" y1="195" x2="420" y2="195" stroke="#ff6b35" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="420" y1="205" x2="350" y2="205" stroke="#ff6b35" stroke-width="1.5" marker-end="url(#arrowOrange)" opacity="0.5"/>
+  <text x="385" y="175" font-family="Arial,sans-serif" font-size="9" fill="#ff6b35" text-anchor="middle">任务流</text>
+  <text x="385" y="230" font-family="Arial,sans-serif" font-size="9" fill="#ff6b35" text-anchor="middle" opacity="0.6">状态回调</text>
+
+  <!-- Agent B (Remote) -->
+  <g transform="translate(450, 135)">
+    <rect x="0" y="0" width="300" height="160" rx="8" fill="url(#boxAgent2)" stroke="#00f260" stroke-width="1.5" opacity="0.8"/>
+    <text x="15" y="25" font-family="'Courier New',monospace" font-weight="700" font-size="14" fill="#00f260">Agent B （远程方）</text>
+    <line x1="15" y1="35" x2="285" y2="35" stroke="#00f260" stroke-width="0.5" opacity="0.3"/>
+
+    <rect x="15" y="45" width="270" height="22" rx="4" fill="#1a3a2a" opacity="0.6"/>
+    <text x="150" y="60" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">① 发布 Agent Card</text>
+
+    <rect x="15" y="73" width="270" height="22" rx="4" fill="#1a3a2a" opacity="0.6"/>
+    <text x="150" y="88" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">② 接收 tasks/send</text>
+
+    <rect x="15" y="101" width="270" height="22" rx="4" fill="#1a3a2a" opacity="0.6"/>
+    <text x="150" y="116" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">③ 执行任务（可数分钟/小时）</text>
+
+    <rect x="15" y="129" width="270" height="22" rx="4" fill="#1a3a2a" opacity="0.6"/>
+    <text x="150" y="144" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#8f8" text-anchor="middle">④ 推送结果 (Push Notification)</text>
+  </g>
+
+  <!-- Task lifecycle -->
+  <g transform="translate(50, 320)">
+    <rect x="0" y="0" width="700" height="70" rx="8" fill="#1a1a2a" stroke="#ff6b35" stroke-width="1" opacity="0.6"/>
+    <text x="20" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="12" fill="#ff6b35">Task 生命周期</text>
+    <g transform="translate(20, 35)">
+      <rect x="0" y="0" width="90" height="24" rx="12" fill="#2a1a0a" stroke="#ff6b35" stroke-width="0.5"/>
+      <text x="45" y="16" font-family="Arial,sans-serif" font-size="10" fill="#ff6b35" text-anchor="middle">submitted</text>
+      <text x="100" y="16" font-family="Arial,sans-serif" font-size="10" fill="#666" text-anchor="middle">→</text>
+      <rect x="115" y="0" width="85" height="24" rx="12" fill="#1a2a0a" stroke="#00f260" stroke-width="0.5"/>
+      <text x="157" y="16" font-family="Arial,sans-serif" font-size="10" fill="#00f260" text-anchor="middle">working</text>
+      <text x="212" y="16" font-family="Arial,sans-serif" font-size="10" fill="#666" text-anchor="middle">→</text>
+      <rect x="227" y="0" width="100" height="24" rx="12" fill="#2a1a0a" stroke="#f7c948" stroke-width="0.5"/>
+      <text x="277" y="16" font-family="Arial,sans-serif" font-size="10" fill="#f7c948" text-anchor="middle">input-required</text>
+      <text x="340" y="16" font-family="Arial,sans-serif" font-size="10" fill="#666" text-anchor="middle">→</text>
+      <rect x="355" y="0" width="100" height="24" rx="12" fill="#0a2a1a" stroke="#00f260" stroke-width="0.5"/>
+      <text x="405" y="16" font-family="Arial,sans-serif" font-size="10" fill="#00f260" text-anchor="middle">completed</text>
+      <text x="468" y="16" font-family="Arial,sans-serif" font-size="10" fill="#666" text-anchor="middle">或</text>
+      <rect x="485" y="0" width="70" height="24" rx="12" fill="#2a0a0a" stroke="#ff4444" stroke-width="0.5"/>
+      <text x="520" y="16" font-family="Arial,sans-serif" font-size="10" fill="#ff4444" text-anchor="middle">failed</text>
+    </g>
+  </g>
+
+  <!-- Key features -->
+  <g transform="translate(50, 410)">
+    <text x="0" y="0" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#666">关键特性：Agent Card 发现 · OAuth 2.1 认证 · 多轮消息 · 文件/数据/文本多格式 · Webhook 推送 · Human-in-the-loop</text>
+  </g>
+
+  <g transform="translate(0, 0)">
+    <text x="400" y="470" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">数据来源：A2A v1.0 规范 · Illustrations by AI知识宇宙</text>
+  </g>
+</svg>

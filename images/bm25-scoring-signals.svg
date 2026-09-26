@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <rect width="1100" height="560" fill="#ffffff"/>
+  <rect width="1100" height="560" fill="#f8fafc" opacity="0"/>
+
+  <text x="40" y="46" fill="#111827" font-size="26" font-weight="700">BM25 打分的三个信号</text>
+  <text x="40" y="74" fill="#4b5563" font-size="15">对查询里的每个词，各算一份贡献并相加：词出现得多不多 · 词稀不稀有 · 文档长不长</text>
+
+  <!-- Signal 1: TF saturation -->
+  <g transform="translate(40,110)">
+    <rect x="0" y="0" width="320" height="380" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+    <text x="20" y="34" fill="#1d4ed8" font-size="17" font-weight="700">① 词频饱和</text>
+    <text x="20" y="56" fill="#4b5563" font-size="12">Term Frequency Saturation</text>
+    <!-- mini chart -->
+    <line x1="30" y1="240" x2="30" y2="90" stroke="#94a3b8" stroke-width="1.2"/>
+    <line x1="30" y1="240" x2="290" y2="240" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="36" y="100" fill="#6b7280" font-size="10">score</text>
+    <text x="240" y="256" fill="#6b7280" font-size="10">词频 →</text>
+    <!-- saturating curve -->
+    <path d="M30 240 C 90 130, 170 108, 290 102" fill="none" stroke="#1d4ed8" stroke-width="2.6"/>
+    <!-- linear (TF-IDF) dashed for contrast -->
+    <path d="M30 240 L 250 96" fill="none" stroke="#b45309" stroke-width="1.6" stroke-dasharray="5"/>
+    <!-- legend placed below the plot, clear of the curves -->
+    <line x1="30" y1="266" x2="52" y2="266" stroke="#1d4ed8" stroke-width="2.6"/>
+    <text x="58" y="270" fill="#1d4ed8" font-size="10.5" font-weight="700">BM25（有天花板）</text>
+    <line x1="176" y1="266" x2="198" y2="266" stroke="#b45309" stroke-width="1.6" stroke-dasharray="4"/>
+    <text x="204" y="270" fill="#b45309" font-size="10.5">TF-IDF（线性）</text>
+    <text x="20" y="300" fill="#374151" font-size="12.5">出现越多越相关，但边际递减，</text>
+    <text x="20" y="322" fill="#374151" font-size="12.5">防止关键词堆砌霸榜。</text>
+    <text x="20" y="352" fill="#0e7490" font-size="12.5" font-weight="700">参数 k1 控制饱和速度</text>
+  </g>
+
+  <!-- Signal 2: IDF -->
+  <g transform="translate(390,110)">
+    <rect x="0" y="0" width="320" height="380" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.4"/>
+    <text x="20" y="34" fill="#15803d" font-size="17" font-weight="700">② 逆文档频率 IDF</text>
+    <text x="20" y="56" fill="#4b5563" font-size="12">Inverse Document Frequency</text>
+    <!-- bars -->
+    <g transform="translate(20,90)">
+      <text x="0" y="14" fill="#374151" font-size="12">"的 / the"（到处都有）</text>
+      <rect x="0" y="22" width="40" height="16" rx="3" fill="#bbf7d0" stroke="#15803d"/>
+      <text x="50" y="35" fill="#15803d" font-size="11">低权重</text>
+
+      <text x="0" y="74" fill="#374151" font-size="12">"检索 / search"（较常见）</text>
+      <rect x="0" y="82" width="120" height="16" rx="3" fill="#86efac" stroke="#15803d"/>
+      <text x="130" y="95" fill="#15803d" font-size="11">中权重</text>
+
+      <text x="0" y="134" fill="#374151" font-size="12">"relativeScoreFusion"（稀有）</text>
+      <rect x="0" y="142" width="240" height="16" rx="3" fill="#4ade80" stroke="#15803d"/>
+      <text x="250" y="155" fill="#15803d" font-size="11" font-weight="700">高</text>
+    </g>
+    <text x="20" y="300" fill="#374151" font-size="12.5">词越稀有，命中越值钱；</text>
+    <text x="20" y="322" fill="#374151" font-size="12.5">常见词几乎不贡献分数。</text>
+    <text x="20" y="352" fill="#0e7490" font-size="12.5" font-weight="700">越罕见 → 权重越高</text>
+  </g>
+
+  <!-- Signal 3: length norm -->
+  <g transform="translate(740,110)">
+    <rect x="0" y="0" width="320" height="380" rx="12" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+    <text x="20" y="34" fill="#b91c1c" font-size="17" font-weight="700">③ 文档长度归一化</text>
+    <text x="20" y="56" fill="#4b5563" font-size="12">Document Length Normalization</text>
+    <!-- short doc -->
+    <rect x="20" y="90" width="90" height="60" rx="6" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="65" y="124" fill="#b91c1c" font-size="12" text-anchor="middle">短文</text>
+    <text x="20" y="170" fill="#374151" font-size="11">命中 3 次</text>
+    <!-- long doc -->
+    <rect x="150" y="90" width="150" height="150" rx="6" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="225" y="170" fill="#b91c1c" font-size="12" text-anchor="middle">长文</text>
+    <text x="150" y="258" fill="#374151" font-size="11">命中 3 次（词多易中）</text>
+    <text x="20" y="300" fill="#374151" font-size="12.5">长文档词多、天然易命中，</text>
+    <text x="20" y="322" fill="#374151" font-size="12.5">按长度归一化后公平竞争。</text>
+    <text x="20" y="352" fill="#0e7490" font-size="12.5" font-weight="700">参数 b 控制惩罚强度（0~1）</text>
+  </g>
+
+  <text x="40" y="536" fill="#6b7280" font-size="12">默认 k1=1.2、b=0.75；无训练、无 GPU，全靠倒排索引 + 算术，这是 BM25 极快极省的根源。</text>
+</svg>

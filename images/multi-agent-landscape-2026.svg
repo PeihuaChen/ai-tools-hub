@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="340" viewBox="0 0 860 340" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="lb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e1b4b"/></linearGradient>
+    <pattern id="lg" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="860" height="340" rx="12" fill="url(#lb)"/>
+  <rect width="860" height="340" rx="12" fill="url(#lg)"/>
+  <rect x="1" y="1" width="858" height="338" rx="12" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="430" y="38" fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle">2026 多智能体框架版图：两极分化</text>
+
+  <!-- left: open source -->
+  <rect x="30" y="64" width="380" height="240" rx="12" fill="#0f172a" stroke="#3b82f6" stroke-opacity="0.5"/>
+  <text x="220" y="92" fill="#93c5fd" font-size="15" font-weight="700" text-anchor="middle">独立开源派（模型无关）</text>
+  <g font-size="13" fill="#cbd5e1">
+    <circle cx="60" cy="126" r="6" fill="#3b82f6"/><text x="76" y="131">LangGraph 1.0 GA — 显式状态图引擎</text>
+    <circle cx="60" cy="158" r="6" fill="#8b5cf6"/><text x="76" y="163">CrewAI 1.0 GA — 角色扮演式协作</text>
+    <circle cx="60" cy="190" r="6" fill="#10b981"/><text x="76" y="195">Smolagents — 极简代码优先</text>
+    <circle cx="60" cy="222" r="6" fill="#f59e0b"/><text x="76" y="227">Agno / Mastra / Pydantic AI</text>
+  </g>
+  <text x="220" y="272" fill="#64748b" font-size="12" text-anchor="middle">✓ 模型自由  ✓ MIT/Apache  ✓ MCP 支持</text>
+
+  <!-- right: vendor -->
+  <rect x="450" y="64" width="380" height="240" rx="12" fill="#0f172a" stroke="#ec4899" stroke-opacity="0.5"/>
+  <text x="640" y="92" fill="#f9a8d4" font-size="15" font-weight="700" text-anchor="middle">一方云派（绑定生态）</text>
+  <g font-size="13" fill="#cbd5e1">
+    <circle cx="480" cy="126" r="6" fill="#10b981"/><text x="496" y="131">OpenAI Agents SDK — GPT 原生</text>
+    <circle cx="480" cy="158" r="6" fill="#3b82f6"/><text x="496" y="163">Google ADK — GCP + Gemini</text>
+    <circle cx="480" cy="190" r="6" fill="#8b5cf6"/><text x="496" y="195">Microsoft Agent Framework — Azure</text>
+  </g>
+  <line x1="480" y1="218" x2="800" y2="218" stroke="#475569" stroke-width="1" stroke-dasharray="4 4"/>
+  <g font-size="12" fill="#94a3b8">
+    <text x="496" y="240">⚰️ AutoGen → 维护模式（已合并入 MS AF）</text>
+    <text x="496" y="262">⚰️ Swarm → 归档（理念进入 Agents SDK）</text>
+  </g>
+  <text x="640" y="292" fill="#64748b" font-size="12" text-anchor="middle">✓ 快速集成  ✗ 平台锁定  ✓/✗ A2A 支持</text>
+</svg>

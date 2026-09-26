@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="33%" style="stop-color:#ffa726"/>
+      <stop offset="66%" style="stop-color:#26c6da"/>
+      <stop offset="100%" style="stop-color:#66bb6a"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#66bb6a"/>
+      <stop offset="33%" style="stop-color:#26c6da"/>
+      <stop offset="66%" style="stop-color:#ffa726"/>
+      <stop offset="100%" style="stop-color:#ff6b6b"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#26c6da"/>
+      <stop offset="100%" style="stop-color:#66bb6a"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#ffffff08" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label box -->
+  <rect x="30" y="24" width="240" height="28" rx="4" fill="none" stroke="#26c6da" stroke-width="1" opacity="0.8"/>
+  <text x="42" y="43" font-family="system-ui, sans-serif" font-size="12" fill="#26c6da" font-weight="500">AI 工程实践 · 安全护栏选型</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="24" width="36" height="28" rx="4" fill="none" stroke="#ffa726" stroke-width="1" opacity="0.7"/>
+  <text x="849" y="43" font-family="system-ui, sans-serif" font-size="13" fill="#ffa726" font-weight="700">26</text>
+
+  <!-- Main title -->
+  <text x="30" y="100" font-family="system-ui, sans-serif" font-size="29" fill="#ffffff" font-weight="700">从零搭建 LLM 安全护栏</text>
+  <text x="30" y="138" font-family="system-ui, sans-serif" font-size="29" fill="#ffffff" font-weight="700">开源工具选型 + 生产架构实战</text>
+
+  <!-- Subtitle -->
+  <text x="30" y="172" font-family="system-ui, sans-serif" font-size="17" fill="url(#subtitle)">13 款工具深度对比 | 六层防护体系 | 延迟 vs 召回率实测</text>
+
+  <!-- Key highlights -->
+  <text x="30" y="215" font-family="system-ui, sans-serif" font-size="12.5" fill="#ff6b6b">▸ NeMo Guardrails · Llama Guard 3 · Guardrails AI · LLM Guard · Presidio</text>
+  <text x="30" y="237" font-family="system-ui, sans-serif" font-size="12.5" fill="#ffa726">▸ Lakera Guard &lt;1ms · Azure Content Safety · OpenAI Moderation（免费）</text>
+  <text x="30" y="259" font-family="system-ui, sans-serif" font-size="12.5" fill="#66bb6a">▸ 双层架构最佳实践：规则快速过滤 + LLM 深度检测 → 绕过率 &lt; 2%</text>
+
+  <!-- Right side: Shield architecture diagram -->
+  <!-- Shield outline -->
+  <path d="M 720 90 L 770 70 L 820 90 L 820 160 C 820 200 770 230 770 230 C 770 230 720 200 720 160 Z" fill="none" stroke="#26c6da" stroke-width="1.5" opacity="0.6"/>
+  <path d="M 735 100 L 770 85 L 805 100 L 805 150 C 805 180 770 205 770 205 C 770 205 735 180 735 150 Z" fill="none" stroke="#66bb6a" stroke-width="1" opacity="0.4"/>
+
+  <!-- Layer indicators -->
+  <rect x="680" y="250" width="180" height="1" fill="#ffffff" opacity="0.1"/>
+  <text x="680" y="270" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">Layer 1</text>
+  <rect x="710" y="272" width="30" height="3" rx="1" fill="#ff6b6b" opacity="0.6"/>
+  <text x="680" y="288" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">Layer 2</text>
+  <rect x="710" y="290" width="50" height="3" rx="1" fill="#ffa726" opacity="0.6"/>
+  <text x="680" y="306" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">Layer 3</text>
+  <rect x="710" y="308" width="70" height="3" rx="1" fill="#26c6da" opacity="0.6"/>
+  <text x="680" y="324" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">Layer 4</text>
+  <rect x="710" y="326" width="90" height="3" rx="1" fill="#66bb6a" opacity="0.6"/>
+  <text x="680" y="342" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">Layer 5</text>
+  <rect x="710" y="344" width="110" height="3" rx="1" fill="#ab47bc" opacity="0.6"/>
+  <text x="680" y="360" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">Layer 6</text>
+  <rect x="710" y="362" width="130" height="3" rx="1" fill="#ef5350" opacity="0.6"/>
+
+  <!-- Tags row -->
+  <rect x="30" y="290" width="78" height="24" rx="12" fill="none" stroke="#26c6da" stroke-width="0.8" opacity="0.7"/>
+  <text x="44" y="306" font-family="system-ui, sans-serif" font-size="10.5" fill="#26c6da" opacity="0.9">Guardrails</text>
+
+  <rect x="118" y="290" width="85" height="24" rx="12" fill="none" stroke="#ffa726" stroke-width="0.8" opacity="0.7"/>
+  <text x="130" y="306" font-family="system-ui, sans-serif" font-size="10.5" fill="#ffa726" opacity="0.9">AI Security</text>
+
+  <rect x="213" y="290" width="105" height="24" rx="12" fill="none" stroke="#66bb6a" stroke-width="0.8" opacity="0.7"/>
+  <text x="224" y="306" font-family="system-ui, sans-serif" font-size="10.5" fill="#66bb6a" opacity="0.9">Prompt Injection</text>
+
+  <rect x="328" y="290" width="62" height="24" rx="12" fill="none" stroke="#ff6b6b" stroke-width="0.8" opacity="0.7"/>
+  <text x="341" y="306" font-family="system-ui, sans-serif" font-size="10.5" fill="#ff6b6b" opacity="0.9">NeMo</text>
+
+  <rect x="400" y="290" width="85" height="24" rx="12" fill="none" stroke="#ab47bc" stroke-width="0.8" opacity="0.7"/>
+  <text x="412" y="306" font-family="system-ui, sans-serif" font-size="10.5" fill="#ab47bc" opacity="0.9">Llama Guard</text>
+
+  <rect x="495" y="290" width="72" height="24" rx="12" fill="none" stroke="#26c6da" stroke-width="0.8" opacity="0.7"/>
+  <text x="510" y="306" font-family="system-ui, sans-serif" font-size="10.5" fill="#26c6da" opacity="0.9">合规审计</text>
+
+  <!-- Bottom separator and chapter hint -->
+  <rect x="30" y="340" width="600" height="1" fill="#ffffff" opacity="0.08"/>
+  <text x="30" y="362" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff" opacity="0.35">六层架构 → 7 款开源 + 6 款商业 → 生产方案 → 中文适配 → 选型矩阵</text>
+
+  <!-- Watermark -->
+  <text x="580" y="362" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.2">xiaoi.ai</text>
+</svg>

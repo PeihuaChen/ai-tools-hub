@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeGraph 深度评测：GitHub月榜第一，让AI编码省35%费用的代码知识图谱 - AI知识宇宙</title>
+    <meta name="description" content="深度评测 GitHub Trending 月榜第一的 CodeGraph：为 Claude Code、Cursor、Kiro 等 AI 编码工具提供预索引知识图谱，实测减少 70% 工具调用、节省 35% 费用">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">CodeGraph 深度评测：GitHub月榜第一，让AI编码省35%费用的代码知识图谱 - AI知识宇宙</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-05-28 · 13分钟</span>
+            </div>
+            <h2 id="ai">一、AI 编码的隐藏成本：你的钱花在了"找代码"上</h2>
+<p>用过 Claude Code 或 Cursor 的开发者一定有这个体验：</p>
+<blockquote>
+<p>你问 AI 一个关于项目架构的问题，它先花 30 秒用 grep、glob、Read 扫了一遍你的代码库，消耗了大量 token，最后才给你答案。</p>
+</blockquote>
+<p>这不是 AI 不够聪明——而是它<strong>不认识你的代码库</strong>。每次对话都从零开始"探索"，就像一个新来的同事每天早上都忘了昨天看过的代码。</p>
+<p><strong>真实数据</strong>：在一个 10k 文件的 TypeScript 项目（VS Code 级别）中，AI Agent 回答一个架构问题平均需要 85 次工具调用，其中大部分是在"找东西"。</p>
+<p>CodeGraph 的解决方案很直接：<strong>提前把代码库索引成知识图谱，让 AI 直接查图而不是扫文件。</strong></p>
+<p><img alt="CodeGraph 工作原理" src="../images/codegraph-architecture.svg" /></p>
+<hr />
+<h2 id="codegraph">二、CodeGraph 是什么？</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开发者</td>
+<td>Colby McHenry</td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a></td>
+</tr>
+<tr>
+<td>Stars</td>
+<td>31,200+（2026年5月 GitHub Trending 月榜 #1）</td>
+</tr>
+<tr>
+<td>技术栈</td>
+<td>TypeScript + tree-sitter + SQLite（FTS5）</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>v0.9.6</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>为 AI 编码 Agent 提供预索引的本地代码知识图谱</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话定义</strong>：CodeGraph 是一个 MCP Server，它用 tree-sitter 解析你的代码库，构建符号关系图谱存入本地 SQLite，然后通过 MCP 协议暴露给 Claude Code / Cursor / Codex / Kiro 等 AI 工具——让它们"查图"而不是"扫文件"。</p>
+<hr />
+<h2 id="benchmark">三、Benchmark：到底能省多少？</h2>
+<p>在 7 个真实开源项目上，对比有/无 CodeGraph 时 Claude Code 回答一个架构问题的消耗（每组 4 次取中位数）：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>语言/规模</th>
+<th>省钱</th>
+<th>减少 Token</th>
+<th>加速</th>
+<th>减少工具调用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VS Code</strong></td>
+<td>TypeScript ~10k 文件</td>
+<td>26%</td>
+<td>78%</td>
+<td>52%</td>
+<td>85%</td>
+</tr>
+<tr>
+<td><strong>Excalidraw</strong></td>
+<td>TypeScript ~640 文件</td>
+<td>52%</td>
+<td>90%</td>
+<td>73%</td>
+<td><strong>96%</strong></td>
+</tr>
+<tr>
+<td><strong>Django</strong></td>
+<td>Python ~3k 文件</td>
+<td>12%</td>
+<td>36%</td>
+<td>19%</td>
+<td>53%</td>
+</tr>
+<tr>
+<td><strong>Tokio</strong></td>
+<td>Rust ~790 文件</td>
+<td><strong>82%</strong></td>
+<td>86%</td>
+<td>71%</td>
+<td>92%</td>
+</tr>
+<tr>
+<td><strong>OkHttp</strong></td>
+<td>Java ~645 文件</td>
+<td>2%</td>
+<td>13%</td>
+<td>31%</td>
+<td>45%</td>
+</tr>
+<tr>
+<td><strong>Gin</strong></td>
+<td>Go ~110 文件</td>
+<td>21%</td>
+<td>34%</td>
+<td>27%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>Alamofire</strong></td>
+<td>Swift ~110 文件</td>
+<td>47%</td>
+<td>64%</td>
+<td>48%</td>
+<td>83%</td>
+</tr>
+<tr>
+<td><strong>平均</strong></td>
+<td>—</td>
+<td><strong>35%</strong></td>
+<td><strong>57%</strong></td>
+<td><strong>46%</strong></td>
+<td><strong>71%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>几个关键观察：</p>
+<ol>
+<li><strong>项目越大，收益越明显</strong> — VS Code（10k 文件）减少 85% 工具调用；Gin（110 文件）只减少 40%</li>
+<li><strong>Rust/TypeScript 收益最大</strong> — 这两种语言的类型系统让图谱更精确</li>
+<li><strong>小项目也有收益</strong> — 即使是 110 文件的 Gin，也能省 21% 费用</li>
+</ol>
+<blockquote>
+<p>💡 <strong>换算成钱</strong>：如果你每月 Claude Code 花费 $100，用 CodeGraph 后大约能省 $35。项目越大省越多。</p>
+</blockquote>
+<hr />
+<h2 id="_1">四、工作原理</h2>
+<p><img alt="CodeGraph 工作原理详解" src="../images/codegraph-how-it-works.svg" /></p>
+<p>四个阶段：</p>
+<ol>
+<li><strong>提取（Extraction）</strong> — tree-sitter 将源码解析为 AST，语言特定的查询提取节点（函数、类、方法）和边（调用、导入、继承、实现）</li>
+<li><strong>存储（Storage）</strong> — 所有数据存入本地 SQLite，带 FTS5 全文搜索</li>
+<li><strong>解析（Resolution）</strong> — 函数调用 → 定义、导入 → 源文件、类继承、框架特定模式</li>
+<li><strong>自动同步（Auto-Sync）</strong> — 文件保存后 2 秒自动增量更新，无需手动操作</li>
+</ol>
+<hr />
+<h2 id="5">五、5 分钟上手</h2>
+<h3 id="_2">安装（一行命令）</h3>
+<pre><code class="language-bash"># macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+
+# Windows (PowerShell)
+irm https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.ps1 | iex
+
+# 或者用 npm
+npx @colbymchenry/codegraph
+</code></pre>
+<p>安装器会自动检测你已安装的 AI Agent（Claude Code、Cursor、Codex、Kiro 等），一键配置 MCP Server。</p>
+<h3 id="_3">初始化项目</h3>
+<pre><code class="language-bash">cd your-project
+codegraph init -i
+</code></pre>
+<h3 id="_4">验证</h3>
+<pre><code class="language-bash">codegraph status
+</code></pre>
+<p>看到索引统计信息就说明成功了。之后你的 AI Agent 会自动使用 CodeGraph 的工具——无需任何额外操作。</p>
+<h3 id="_5">卸载</h3>
+<pre><code class="language-bash">codegraph uninstall   # 从所有 Agent 中移除配置
+codegraph uninit      # 删除项目索引
+</code></pre>
+<hr />
+<h2 id="mcp">六、MCP 工具一览</h2>
+<p>CodeGraph 作为 MCP Server 暴露以下工具给 AI Agent：</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>功能</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>codegraph_search</code></td>
+<td>按名称搜索符号</td>
+<td>"找到 UserService 类"</td>
+</tr>
+<tr>
+<td><code>codegraph_context</code></td>
+<td>为任务构建相关上下文</td>
+<td>"修复登录 bug 需要看哪些代码"</td>
+</tr>
+<tr>
+<td><code>codegraph_trace</code></td>
+<td>追踪两个符号间的调用路径</td>
+<td>"请求是怎么到达数据库的"</td>
+</tr>
+<tr>
+<td><code>codegraph_callers</code></td>
+<td>查找谁调用了某个函数</td>
+<td>"谁在调用 validateToken"</td>
+</tr>
+<tr>
+<td><code>codegraph_callees</code></td>
+<td>查找某个函数调用了什么</td>
+<td>"handleRequest 里面调了什么"</td>
+</tr>
+<tr>
+<td><code>codegraph_impact</code></td>
+<td>分析修改某符号的影响范围</td>
+<td>"改这个函数会影响哪些地方"</td>
+</tr>
+<tr>
+<td><code>codegraph_explore</code></td>
+<td>返回多个相关符号的源码</td>
+<td>"展示认证模块的核心代码"</td>
+</tr>
+<tr>
+<td><code>codegraph_files</code></td>
+<td>获取索引的文件结构</td>
+<td>"项目目录结构是什么"</td>
+</tr>
+<tr>
+<td><code>codegraph_node</code></td>
+<td>获取特定符号的详情</td>
+<td>"UserService 的完整定义"</td>
+</tr>
+<tr>
+<td><code>codegraph_status</code></td>
+<td>检查索引健康状态</td>
+<td>"索引是否最新"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_6">七、亮点功能</h2>
+<h3 id="71-14">7.1 框架感知路由（14 种框架）</h3>
+<p>CodeGraph 不只是解析代码结构——它还能识别 Web 框架的路由模式，将 URL 路径链接到处理函数：</p>
+<table>
+<thead>
+<tr>
+<th>框架</th>
+<th>识别模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Django</td>
+<td><code>path()</code>, <code>re_path()</code>, <code>url()</code>, <code>include()</code></td>
+</tr>
+<tr>
+<td>Flask</td>
+<td><code>@app.route('/path', methods=[...])</code></td>
+</tr>
+<tr>
+<td>FastAPI</td>
+<td><code>@app.get(...)</code>, <code>@router.post(...)</code></td>
+</tr>
+<tr>
+<td>Express</td>
+<td><code>app.get(...)</code>, <code>router.post(...)</code></td>
+</tr>
+<tr>
+<td>NestJS</td>
+<td><code>@Controller</code> + <code>@Get/@Post</code>, GraphQL <code>@Resolver</code></td>
+</tr>
+<tr>
+<td>Spring</td>
+<td><code>@GetMapping</code>, <code>@PostMapping</code>, <code>@RequestMapping</code></td>
+</tr>
+<tr>
+<td>Gin / chi / gorilla</td>
+<td><code>r.GET(...)</code>, <code>router.HandleFunc(...)</code></td>
+</tr>
+<tr>
+<td>Rails</td>
+<td><code>get '/x', to: 'users#index'</code></td>
+</tr>
+<tr>
+<td>Laravel</td>
+<td><code>Route::get()</code>, <code>Route::resource()</code></td>
+</tr>
+<tr>
+<td>更多</td>
+<td>ASP.NET、Axum、actix、Rocket、Vapor、React Router、SvelteKit</td>
+</tr>
+</tbody>
+</table>
+<p>这意味着你可以问 AI："哪个函数处理 <code>/api/users</code> 这个路由？"——CodeGraph 直接给出答案，不需要 grep。</p>
+<h3 id="72-ios-react-native-expo">7.2 跨语言桥接（iOS / React Native / Expo）</h3>
+<p>对于混合语言项目，CodeGraph 能追踪跨语言的调用关系：</p>
+<ul>
+<li><strong>Swift ↔ Objective-C</strong>：<code>@objc</code> 自动桥接</li>
+<li><strong>React Native Legacy Bridge</strong>：JS <code>NativeModules.X.fn()</code> → ObjC/Java 原生方法</li>
+<li><strong>React Native TurboModules</strong>：TypeScript spec → 原生实现</li>
+<li><strong>Expo Modules</strong>：<code>requireNativeModule('X').fn()</code> → Swift/Kotlin 实现</li>
+<li><strong>原生 → JS 事件</strong>：<code>sendEventWithName</code> → <code>NativeEventEmitter.addListener</code></li>
+</ul>
+<p>这对于做 React Native 或 iOS 混合开发的团队来说是杀手级功能。</p>
+<h3 id="73">7.3 零配置</h3>
+<p>没有配置文件。不需要写 YAML。不需要指定语言。</p>
+<ul>
+<li>自动从文件扩展名检测语言</li>
+<li>自动排除 <code>node_modules</code>、<code>dist</code>、<code>build</code>、<code>.venv</code> 等目录</li>
+<li>自动尊重 <code>.gitignore</code></li>
+<li>文件 &gt; 1MB 自动跳过</li>
+</ul>
+<h3 id="74">7.4 受影响测试文件分析</h3>
+<pre><code class="language-bash"># 找出哪些测试文件受到修改影响
+git diff --name-only | codegraph affected --stdin
+
+# CI 中只跑受影响的测试
+AFFECTED=$(git diff --name-only HEAD | codegraph affected --stdin --quiet)
+npx vitest run $AFFECTED
+</code></pre>
+<p>这个功能在 CI/CD 中特别有用——只跑受影响的测试，大幅缩短 pipeline 时间。</p>
+<hr />
+<h2 id="20">八、支持 20+ 语言</h2>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>支持程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TypeScript / JavaScript</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Java / Kotlin / Scala</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>C / C++</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Swift / Objective-C</td>
+<td>✅ 完整 / 部分支持</td>
+</tr>
+<tr>
+<td>C#</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>PHP / Ruby</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Dart</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Svelte / Vue</td>
+<td>✅ 完整支持（含路由识别）</td>
+</tr>
+<tr>
+<td>Lua / Luau</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Pascal / Delphi</td>
+<td>✅ 完整支持</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ai-agent">九、支持的 AI Agent</h2>
+<p>安装器自动检测并配置：</p>
+<ul>
+<li>✅ Claude Code</li>
+<li>✅ Cursor</li>
+<li>✅ Codex CLI</li>
+<li>✅ opencode</li>
+<li>✅ Hermes Agent</li>
+<li>✅ Gemini CLI</li>
+<li>✅ Antigravity IDE</li>
+<li>✅ <strong>Kiro</strong></li>
+</ul>
+<hr />
+<h2 id="_7">十、局限性</h2>
+<ol>
+<li><strong>小项目收益有限</strong> — 110 文件的项目，原生搜索本身就很快，CodeGraph 的优势不明显</li>
+<li><strong>仍在 Beta</strong> — v0.9.x，可能有边缘情况的 bug</li>
+<li><strong>需要初始索引时间</strong> — 大项目首次索引可能需要几分钟</li>
+<li><strong>不替代 AI 的推理能力</strong> — 它只是让 AI 更快找到代码，不会让 AI 写出更好的代码</li>
+<li><strong>SQLite 锁问题</strong> — 在网络文件系统或 WSL2 <code>/mnt</code> 下可能遇到数据库锁定</li>
+</ol>
+<hr />
+<h2 id="codegraph_1">十一、与"不用 CodeGraph"的对比</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>不用 CodeGraph</th>
+<th>用 CodeGraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 找代码方式</td>
+<td>grep + glob + Read 逐文件扫描</td>
+<td>直接查询知识图谱</td>
+</tr>
+<tr>
+<td>工具调用次数</td>
+<td>多（平均 85 次/问题）</td>
+<td>少（平均 25 次/问题）</td>
+</tr>
+<tr>
+<td>Token 消耗</td>
+<td>高</td>
+<td>低 57%</td>
+</tr>
+<tr>
+<td>响应速度</td>
+<td>慢（等待扫描）</td>
+<td>快 46%</td>
+</tr>
+<tr>
+<td>月费用（$100 基准）</td>
+<td>$100</td>
+<td>~$65</td>
+</tr>
+<tr>
+<td>数据隐私</td>
+<td>取决于 Agent</td>
+<td>100% 本地，无数据外传</td>
+</tr>
+<tr>
+<td>配置复杂度</td>
+<td>无</td>
+<td>一行命令</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_8">十二、总结</h2>
+<p>CodeGraph 解决的问题很简单但很痛：<strong>AI 编码工具花了太多时间和钱在"找代码"上</strong>。</p>
+<p>它的方案也很优雅：用 tree-sitter 提前解析代码结构，存入本地 SQLite 图谱，通过 MCP 协议暴露给 AI Agent。零配置、100% 本地、自动同步。</p>
+<p>31.2k Star、GitHub Trending 月榜第一不是没有原因的——它切中了每个用 AI 编码的开发者的痛点：<strong>省钱、提速、不泄露代码</strong>。</p>
+<p>如果你每天都在用 Claude Code 或 Cursor 写代码，花 5 分钟装一个 CodeGraph 是今年性价比最高的开发工具投资之一。</p>
+<hr />
+<h2 id="_9">参考资料</h2>
+<ol>
+<li>
+<p>Colby McHenry. (2026). <em>CodeGraph: Pre-indexed code knowledge graph for AI coding agents</em>. <a href="https://github.com/colbymchenry/codegraph">GitHub</a> | <a href="https://colbymchenry.github.io/codegraph/">文档</a></p>
+</li>
+<li>
+<p>Medium. (2026). <em>I Wasted Hours Letting AI Search My Codebase — Then CodeGraph Changed Everything</em>. <a href="https://medium.com/@shubhamchoudhary05/i-wasted-hours-letting-ai-search-my-codebase-then-codegraph-changed-everything-ade69385ff63">文章链接</a></p>
+</li>
+<li>
+<p>Knightli. (2026). <em>What is CodeGraph? A local code map for Claude Code, Codex, and Cursor</em>. <a href="https://knightli.com/en/2026/05/23/codegraph-local-code-knowledge-graph-ai-coding-agent/">文章链接</a></p>
+</li>
+</ol>
+<hr />
+<h2 id="_10">🛒 相关硬件推荐</h2>
+<blockquote>
+<p>大型代码库索引需要快速 I/O 和充足内存，以下装备能让你的开发体验更流畅：</p>
+</blockquote>
+<h3 id="_11">京东精选</h3>
+<table>
+<thead>
+<tr>
+<th>商品推荐</th>
+<th>推荐理由</th>
+<th>参考价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/ffKaEZLxNbH8AU7MPrHDTrxeHA_3OPKaEZLxNfHPhqAgE.html">宏碁掠夺者 512G SSD M.2 NVMe PCIe 4.0</a></td>
+<td>代码索引高速读写，大项目秒级完成</td>
+<td>¥669</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/ddq5CFSCYe7a7Y4agy745wIKlY_3PAq5CFSCYd78yYH5N.html">华硕 27英寸 2K 240Hz 显示器</a></td>
+<td>双屏编码标配，代码+终端同时可见</td>
+<td>¥1,369</td>
+</tr>
+<tr>
+<td><a href="https://jingfen.jd.com/detail/rrfhWQMvQdBvgSfqWLBNoRPPIk_391fhWQMvQrB4ofrTx.html">七彩虹 16GB DDR4 3200 内存条</a></td>
+<td>大项目索引需要充足内存</td>
+<td>¥509</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <a href="https://u.jd.com/HOpdGZu">更多京东数码精选 →</a></p>
+<h3 id="_12">淘宝优选</h3>
+<table>
+<thead>
+<tr>
+<th>商品推荐</th>
+<th>推荐理由</th>
+<th>参考价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://s.taobao.com/search?q=%E8%81%94%E6%83%B3%20%E6%8B%AF%E6%95%91%E8%80%85%20Y9000P&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">联想拯救者 Y9000P 2026</a></td>
+<td>高性能开发本，大项目编译+索引无压力</td>
+<td>¥9,000-12,000</td>
+</tr>
+<tr>
+<td><a href="https://s.taobao.com/search?q=Dell%20U2723QE%204K&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">Dell U2723QE 4K显示器</a></td>
+<td>USB-C 一线连，4K 看代码字体清晰</td>
+<td>¥3,000-4,000</td>
+</tr>
+<tr>
+<td><a href="https://s.taobao.com/search?q=%E4%B8%89%E6%98%9F%20T7%20Shield%202TB&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">三星 T7 Shield 2TB 移动SSD</a></td>
+<td>代码库+索引随身带，换电脑无缝衔接</td>
+<td>¥1,000-1,400</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <a href="https://s.taobao.com/search?q=AI%E5%BC%80%E5%8F%91%E8%A3%85%E5%A4%87&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=union&amp;unionId=28495695">更多淘宝开发者装备 →</a></p>
+<hr />
+<p><em>本文基于 CodeGraph v0.9.6 编写。项目迭代迅速，建议关注 <a href="https://github.com/colbymchenry/codegraph">GitHub 仓库</a> 获取最新版本。</em></p>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 尊尼获加&元气森林</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/Hrps3pr" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝电脑办公精选</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91%E5%8A%9E%E5%85%AC&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的编程体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DDell%252520U2724D%2525204K%2525E6%252598%2525BE%2525E7%2525A4%2525BA%2525E5%252599%2525A8%2526enc%253Dutf-8&platform=jd&article=codegraph-ai-coding-knowledge-graph-review" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">4K显示器 - Dell U2724D</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">程序员双屏标配，27寸4K，护眼不疲劳</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥2500-3500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DMacBook%2520Pro%2520M4%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=codegraph-ai-coding-knowledge-graph-review" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发首选，M4芯片神经网络引擎极强</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥14000-19000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

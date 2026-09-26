@@ -1,0 +1,28 @@
+<svg width="1080" height="620" viewBox="0 0 1080 620" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="620" fill="#f7f8fa"/>
+
+  <!-- title -->
+  <text x="60" y="76" font-size="42" font-weight="bold" fill="#111827">复杂任务平均大模型调用次数</text>
+  <text x="60" y="122" font-size="30" fill="#6b7280">次数越少，token 成本越低</text>
+
+  <!-- baseline -->
+  <line x1="340" y1="176" x2="340" y2="512" stroke="#d9e2ec" stroke-width="2"/>
+
+  <!-- Bar 1: LangGraph -->
+  <text x="60" y="236" font-size="34" font-weight="bold" fill="#111827">LangGraph</text>
+  <rect x="340" y="190" width="113" height="70" rx="8" fill="#15803d"/>
+  <text x="469" y="236" font-size="34" font-weight="bold" fill="#15803d">4.2 次</text>
+
+  <!-- Bar 2: CrewAI -->
+  <text x="60" y="356" font-size="34" font-weight="bold" fill="#111827">CrewAI</text>
+  <rect x="340" y="310" width="165" height="70" rx="8" fill="#b45309"/>
+  <text x="521" y="356" font-size="34" font-weight="bold" fill="#b45309">6.1 次</text>
+
+  <!-- Bar 3: AutoGen -->
+  <text x="60" y="476" font-size="34" font-weight="bold" fill="#111827">AutoGen</text>
+  <rect x="340" y="430" width="540" height="70" rx="8" fill="#b91c1c"/>
+  <text x="896" y="476" font-size="34" font-weight="bold" fill="#b91c1c">20+ 次</text>
+
+  <!-- caption -->
+  <text x="60" y="576" font-size="30" fill="#4b5563">LangGraph 定位复杂有状态 Agent，控制流最细</text>
+</svg>

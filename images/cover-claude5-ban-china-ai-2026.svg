@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#161638"/>
+      <stop offset="100%" stop-color="#0d0d25"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/><line x1="0" y1="192" x2="900" y2="192"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="450" height="4" fill="url(#red)"/>
+  <rect x="450" y="0" width="450" height="4" fill="url(#green)"/>
+  <rect x="0" y="379" width="450" height="4" fill="url(#red)"/>
+  <rect x="450" y="379" width="450" height="4" fill="url(#green)"/>
+
+  <!-- Right: Ban vs Open contrast visual -->
+  <g transform="translate(570, 65)">
+    <!-- Ban/Lock panel -->
+    <g>
+      <rect x="0" y="0" width="130" height="110" rx="10" fill="#1a1020" stroke="url(#red)" stroke-width="2"/>
+      <text x="65" y="24" font-family="'Courier New',monospace" font-size="11" fill="#ef4444" text-anchor="middle">EXPORT BANNED</text>
+      <!-- Lock icon -->
+      <rect x="50" y="38" width="30" height="24" rx="4" fill="none" stroke="#ef4444" stroke-width="2"/>
+      <path d="M55 38 V30 A10 10 0 0 1 75 30 V38" fill="none" stroke="#ef4444" stroke-width="2"/>
+      <circle cx="65" cy="52" r="3" fill="#ef4444"/>
+      <text x="65" y="82" font-family="'Courier New',monospace" font-size="10" fill="#fca5a5" text-anchor="middle">Claude Fable 5</text>
+      <text x="65" y="98" font-family="'Courier New',monospace" font-size="9" fill="#6b4040" text-anchor="middle">2026.6.12 全球断供</text>
+    </g>
+
+    <!-- Open/Unlock panel -->
+    <g transform="translate(145, 0)">
+      <rect x="0" y="0" width="130" height="110" rx="10" fill="#0a1a1a" stroke="url(#green)" stroke-width="2"/>
+      <text x="65" y="24" font-family="'Courier New',monospace" font-size="11" fill="#34d399" text-anchor="middle">MIT OPEN SOURCE</text>
+      <!-- Unlock icon -->
+      <rect x="50" y="38" width="30" height="24" rx="4" fill="none" stroke="#34d399" stroke-width="2"/>
+      <path d="M55 38 V30 A10 10 0 0 1 75 30 V33" fill="none" stroke="#34d399" stroke-width="2"/>
+      <circle cx="65" cy="52" r="3" fill="#34d399"/>
+      <text x="65" y="82" font-family="'Courier New',monospace" font-size="10" fill="#6ee7b7" text-anchor="middle">GLM-5.2</text>
+      <text x="65" y="98" font-family="'Courier New',monospace" font-size="9" fill="#2d5a4a" text-anchor="middle">2026.6.13 开源发布</text>
+    </g>
+
+    <!-- Arrow between -->
+    <g transform="translate(130, 45)">
+      <line x1="0" y1="10" x2="15" y2="10" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <polygon points="15,5 15,15 22,10" fill="#64748b"/>
+    </g>
+  </g>
+
+  <!-- Timeline strip -->
+  <g transform="translate(570, 195)">
+    <rect x="0" y="0" width="280" height="58" rx="8" fill="#161636" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="18" font-family="'Courier New',monospace" font-size="9" fill="#94a3b8">72h 时间线</text>
+    <text x="14" y="34" font-family="'Courier New',monospace" font-size="9" fill="#ef4444">6/9 发布 → 6/10 争议 → 6/12 停服</text>
+    <text x="14" y="50" font-family="'Courier New',monospace" font-size="9" fill="#34d399">6/13 GLM-5.2 开源接棒 · 1M ctx · MIT</text>
+  </g>
+
+  <!-- Tag -->
+  <g transform="translate(50, 28)">
+    <rect x="0" y="0" width="200" height="30" rx="4" fill="#1a0a0a" stroke="url(#red)" stroke-width="1"/>
+    <text x="100" y="20" font-family="'Courier New',monospace" font-weight="bold" font-size="13" fill="#ef4444" text-anchor="middle">AI 行业观察 · 出口管制</text>
+  </g>
+
+  <text x="50" y="112" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="28" font-weight="bold" fill="#ffffff">当 AI 模型成为「出口管制品」</text>
+  <text x="50" y="150" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="18" font-weight="bold" fill="url(#cyan)">Claude 5 停服事件与中国大模型的历史性窗口</text>
+
+  <!-- Key highlights -->
+  <g transform="translate(50, 178)">
+    <text x="0" y="0" font-family="'Courier New',monospace" font-size="12" fill="#ef4444">美国政府首次对公开AI模型实施出口管制</text>
+    <text x="0" y="20" font-family="'Courier New',monospace" font-size="12" fill="#34d399">GLM-5.2: MIT开源 · 1/90成本 · 华为Ascend独立训练</text>
+    <text x="0" y="40" font-family="'Courier New',monospace" font-size="12" fill="#f59e0b">SWE-bench差距仅2.5% · 开源不可剥夺</text>
+  </g>
+
+  <!-- Tags -->
+  <g transform="translate(50, 248)">
+    <rect x="0" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#ef4444" stroke-width="0.8"/>
+    <text x="32" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fca5a5" text-anchor="middle">出口管制</text>
+
+    <rect x="72" y="0" width="56" height="24" rx="12" fill="#1e1e3a" stroke="#06b6d4" stroke-width="0.8"/>
+    <text x="100" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#a5f3fc" text-anchor="middle">Claude 5</text>
+
+    <rect x="136" y="0" width="56" height="24" rx="12" fill="#1e1e3a" stroke="#10b981" stroke-width="0.8"/>
+    <text x="164" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#6ee7b7" text-anchor="middle">GLM-5.2</text>
+
+    <rect x="200" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#f59e0b" stroke-width="0.8"/>
+    <text x="232" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#fde047" text-anchor="middle">开源突围</text>
+
+    <rect x="272" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="304" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">中美博弈</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="50" y="290" width="460" height="1" fill="#fff" opacity="0.06"/>
+  <text x="50" y="314" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4a4f70">事件复盘 · 管制逻辑 · 中国机遇 · 冷静分析 · 实操建议</text>
+  <text x="50" y="349" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#33385a">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 30)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#red)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#ef4444" text-anchor="middle">26</text>
+  </g>
+</svg>

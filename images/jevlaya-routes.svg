@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="770" viewBox="0 0 1080 770">
+  <rect width="1080" height="770" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">开源决策模型的五条路线</text>
+  <text x="540" y="140" font-size="32" fill="#4b5563" text-anchor="middle">共同点：都没有复现 RLCD 的校准训练</text>
+
+  <g>
+    <rect x="48" y="180" width="984" height="88" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="48" y="180" width="10" height="88" rx="5" fill="#1d4ed8"/>
+    <text x="76" y="236" font-size="40" font-weight="bold" fill="#1d4ed8">OpenJev</text>
+    <text x="376" y="236" font-size="32" fill="#4b5563">冻结 Qwen3.5-4B 读 logits，单卡 3090</text>
+  </g>
+
+  <g>
+    <rect x="48" y="284" width="984" height="88" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="48" y="284" width="10" height="88" rx="5" fill="#1d4ed8"/>
+    <text x="76" y="340" font-size="40" font-weight="bold" fill="#1d4ed8">mini-jev</text>
+    <text x="376" y="340" font-size="32" fill="#4b5563">预注册研究：读字母与 JSON 同准</text>
+  </g>
+
+  <g>
+    <rect x="48" y="388" width="984" height="88" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="48" y="388" width="10" height="88" rx="5" fill="#6d28d9"/>
+    <text x="76" y="444" font-size="40" font-weight="bold" fill="#6d28d9">jevlike</text>
+    <text x="376" y="444" font-size="32" fill="#4b5563">从头训练打分器，需自备标注数据</text>
+  </g>
+
+  <g>
+    <rect x="48" y="492" width="984" height="88" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="48" y="492" width="10" height="88" rx="5" fill="#b45309"/>
+    <text x="76" y="548" font-size="40" font-weight="bold" fill="#b45309">MLX 引擎</text>
+    <text x="376" y="548" font-size="32" fill="#4b5563">Apple Silicon 并行约束解码</text>
+  </g>
+
+  <g>
+    <rect x="48" y="596" width="984" height="88" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="48" y="596" width="10" height="88" rx="5" fill="#15803d"/>
+    <text x="76" y="652" font-size="40" font-weight="bold" fill="#15803d">Nimble</text>
+    <text x="376" y="652" font-size="32" fill="#4b5563">Qwen3.5-9B LoRA，公开数据与配方</text>
+  </g>
+
+  <text x="48" y="728" font-size="32" fill="#6b7280">读 logits 得到的是带间隔的排序，不是校准概率</text>
+</svg>

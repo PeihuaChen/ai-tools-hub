@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#ffffff"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">Meta 开源路线的摆动：从 Llama 4 到 Muse Glimmer</text>
+  <text x="40" y="74" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#4b5563">这不是一条连续策略的自然延伸，而是一次先关门、再开门的回摆</text>
+  <line x1="40" y1="90" x2="1160" y2="90" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- axis line at y=320 -->
+  <line x1="60" y1="320" x2="1160" y2="320" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M1154 313 L1164 320 L1154 327 Z" fill="#94a3b8"/>
+
+  <!-- band labels -->
+  <text x="20" y="186" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#15803d" transform="rotate(-90 20 186)">开放权重</text>
+  <text x="20" y="470" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c" transform="rotate(-90 20 470)">闭源/未发布</text>
+
+  <!-- Node 1: Llama 2023 (open, ABOVE axis) x=130 -->
+  <circle cx="130" cy="320" r="7" fill="#15803d"/>
+  <line x1="130" y1="313" x2="130" y2="228" stroke="#15803d" stroke-width="1.3"/>
+  <rect x="55" y="140" width="150" height="86" rx="8" fill="#ecfdf5" stroke="#15803d" stroke-width="1.3"/>
+  <text x="130" y="164" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#15803d">Llama 系列</text>
+  <text x="130" y="186" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">让开放权重进入主流</text>
+  <text x="130" y="206" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">Meta 成为最大供给方</text>
+  <text x="130" y="222" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">2023</text>
+
+  <!-- Node 2: Llama 4 flop (BELOW axis) x=320 -->
+  <circle cx="320" cy="320" r="7" fill="#b91c1c"/>
+  <line x1="320" y1="327" x2="320" y2="380" stroke="#b91c1c" stroke-width="1.3"/>
+  <rect x="235" y="380" width="170" height="94" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+  <text x="320" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">Llama 4</text>
+  <text x="320" y="424" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">口碑翻车 + 刷榜争议</text>
+  <text x="320" y="444" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">Behemoth 2T MoE</text>
+  <text x="320" y="464" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">从未发布也从未取消</text>
+  <text x="320" y="346" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">2025 春</text>
+
+  <!-- Node 3: MSL restructure (ABOVE axis) x=500 -->
+  <circle cx="500" cy="320" r="7" fill="#6d28d9"/>
+  <line x1="500" y1="313" x2="500" y2="228" stroke="#6d28d9" stroke-width="1.3"/>
+  <rect x="415" y="140" width="170" height="86" rx="8" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.3"/>
+  <text x="500" y="164" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#6d28d9">大重组</text>
+  <text x="500" y="186" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">成立 Superintelligence Labs</text>
+  <text x="500" y="206" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">重金投 Scale AI + 挖人</text>
+  <text x="500" y="222" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">LeCun 离职 · 2025-2026</text>
+
+  <!-- Node 4: Muse Spark closed (BELOW axis) x=670 -->
+  <circle cx="670" cy="320" r="7" fill="#b91c1c"/>
+  <line x1="670" y1="327" x2="670" y2="380" stroke="#b91c1c" stroke-width="1.3"/>
+  <rect x="585" y="380" width="170" height="94" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+  <text x="670" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">Muse Spark</text>
+  <text x="670" y="424" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">MSL 首个前沿模型</text>
+  <text x="670" y="444" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">打破传统，不开权重</text>
+  <text x="670" y="464" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">仅作托管产品</text>
+  <text x="670" y="346" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">2026.04</text>
+
+  <!-- Node 5: Spark 1.1 API only (BELOW axis, lower) x=830 -->
+  <circle cx="830" cy="320" r="6" fill="#b45309"/>
+  <line x1="830" y1="327" x2="830" y2="500" stroke="#b45309" stroke-width="1.3"/>
+  <rect x="755" y="500" width="150" height="62" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="1.3"/>
+  <text x="830" y="524" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#b45309">Spark 1.1</text>
+  <text x="830" y="544" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">仍然只有 API</text>
+  <text x="830" y="346" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">2026.07</text>
+
+  <!-- Node 6: Glimmer open (ABOVE axis) x=990 -->
+  <circle cx="990" cy="320" r="9" fill="#15803d"/>
+  <line x1="990" y1="311" x2="990" y2="228" stroke="#15803d" stroke-width="1.6"/>
+  <rect x="893" y="126" width="194" height="100" rx="8" fill="#ecfdf5" stroke="#15803d" stroke-width="1.8"/>
+  <text x="990" y="152" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#15803d">Muse Glimmer</text>
+  <text x="990" y="174" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">30B 开权重 Apache 2.0</text>
+  <text x="990" y="194" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">Llama 4 之后第一个</text>
+  <text x="990" y="218" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#15803d">同日发布长文为蒸馏辩护</text>
+  <text x="990" y="346" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803d">2026.08.10</text>
+
+  <!-- Node 7: promised Spark 1.2 (dotted, BELOW axis to avoid overlap with Glimmer) x=1120 -->
+  <circle cx="1120" cy="320" r="7" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+  <line x1="1120" y1="327" x2="1120" y2="380" stroke="#15803d" stroke-width="1.3" stroke-dasharray="4"/>
+  <rect x="1040" y="380" width="160" height="58" rx="8" fill="#ecfdf5" stroke="#15803d" stroke-width="1.3" stroke-dasharray="4"/>
+  <text x="1120" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#15803d">Spark 1.2 承诺</text>
+  <text x="1120" y="424" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">几周内开放权重</text>
+  <text x="1120" y="346" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">未来</text>
+
+  <!-- footer -->
+  <line x1="40" y1="582" x2="1160" y2="582" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="40" y="604" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">数据来源：THE DECODER、Ars Technica、Codersera Llama 4 指南与 Meta 官方发布；Spark 1.2 开权重时间表据《华尔街日报》报道，尚未有确切日期。</text>
+  <text x="1160" y="604" text-anchor="end" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#94a3b8">AI 行业观察</text>
+</svg>
