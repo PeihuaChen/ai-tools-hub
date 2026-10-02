@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1100" width="1080" height="1100">
+  <rect x="0" y="0" width="1080" height="1100" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">审批权限：从只读到 YOLO</text>
+  <text x="540" y="160" font-size="32" fill="#4b5563" text-anchor="middle">越往下放权越多，风险越高</text>
+
+  <!-- Level 1 -->
+  <rect x="48" y="200" width="984" height="150" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <rect x="48" y="200" width="14" height="150" rx="7" fill="#15803d"/>
+  <text x="90" y="260" font-size="40" font-weight="bold" fill="#15803d">① 读取项目文件</text>
+  <text x="90" y="322" font-size="32" fill="#4b5563">官方推荐：默认只开这一项</text>
+
+  <!-- Level 2 -->
+  <rect x="48" y="372" width="984" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <rect x="48" y="372" width="14" height="150" rx="7" fill="#1d4ed8"/>
+  <text x="90" y="432" font-size="40" font-weight="bold" fill="#1d4ed8">② 编辑项目文件</text>
+  <text x="90" y="494" font-size="32" fill="#4b5563">务必配合检查点，随时回滚</text>
+
+  <!-- Level 3 -->
+  <rect x="48" y="544" width="984" height="150" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <rect x="48" y="544" width="14" height="150" rx="7" fill="#0e7490"/>
+  <text x="90" y="604" font-size="40" font-weight="bold" fill="#0e7490">③ 执行安全命令</text>
+  <text x="90" y="666" font-size="32" fill="#4b5563">是否安全由模型判断，不是白名单</text>
+
+  <!-- Level 4 -->
+  <rect x="48" y="716" width="984" height="150" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <rect x="48" y="716" width="14" height="150" rx="7" fill="#b45309"/>
+  <text x="90" y="776" font-size="40" font-weight="bold" fill="#b45309">④ 执行全部命令与 MCP</text>
+  <text x="90" y="838" font-size="32" fill="#4b5563">包括 npm install、rm -rf 等</text>
+
+  <!-- Level 5 -->
+  <rect x="48" y="888" width="984" height="150" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <rect x="48" y="888" width="14" height="150" rx="7" fill="#b91c1c"/>
+  <text x="90" y="948" font-size="40" font-weight="bold" fill="#b91c1c">⑤ YOLO 模式</text>
+  <text x="90" y="1010" font-size="32" fill="#4b5563">全部自动放行，只在沙盒里用</text>
+</svg>

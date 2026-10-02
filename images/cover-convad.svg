@@ -1,0 +1,80 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="42" width="230" height="30" rx="6" fill="#818cf8" fill-opacity="0.14" stroke="#818cf8" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="63" y="62" font-size="15" fill="#c7d2fe" font-weight="bold">AI 行业观察 · 商业化</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="57" r="24" fill="#f472b6" fill-opacity="0.14" stroke="#f472b6" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="838" y="64" font-size="22" fill="#f9a8d4" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="140" font-size="31" fill="#ffffff" font-weight="bold">Agent 商业化新范式</text>
+  <text x="48" y="182" font-size="20" fill="url(#sub)" font-weight="bold">广告不再是横幅，而是一次对话</text>
+
+  <!-- highlight lines -->
+  <text x="48" y="228" font-size="13" fill="#5eead4">◆ 赞助智能体：点广告 → 站内对话 → 再成交</text>
+  <text x="48" y="252" font-size="13" fill="#93c5fd">◆ 对话式广告收入 2033 年预测破 220 亿美元</text>
+  <text x="48" y="276" font-size="13" fill="#f9a8d4">◆ "假朋友困境"：范式转移的信任代价</text>
+
+  <!-- tag pills -->
+  <g font-size="12">
+    <rect x="48" y="300" width="96" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="96" y="317" fill="#7dd3fc" text-anchor="middle">对话式广告</text>
+    <rect x="152" y="300" width="82" height="26" rx="13" fill="none" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="193" y="317" fill="#c7d2fe" text-anchor="middle">AI Agent</text>
+    <rect x="242" y="300" width="110" height="26" rx="13" fill="none" stroke="#5eead4" stroke-opacity="0.5"/>
+    <text x="297" y="317" fill="#99f6e4" text-anchor="middle">智能代理商务</text>
+    <rect x="360" y="300" width="82" height="26" rx="13" fill="none" stroke="#f472b6" stroke-opacity="0.5"/>
+    <text x="401" y="317" fill="#f9a8d4" text-anchor="middle">OpenAI</text>
+  </g>
+
+  <!-- right concept: chat bubbles -->
+  <g>
+    <rect x="620" y="120" width="150" height="42" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-opacity="0.4"/>
+    <text x="636" y="146" font-size="13" fill="#7dd3fc">用户：帮我挑一张</text>
+    <rect x="700" y="176" width="140" height="42" rx="12" fill="#312e81" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="716" y="202" font-size="13" fill="#c7d2fe">Agent：这款适合…</text>
+    <rect x="620" y="232" width="130" height="42" rx="12" fill="#1e293b" stroke="#5eead4" stroke-opacity="0.4"/>
+    <text x="636" y="258" font-size="13" fill="#99f6e4">用户：能坐几人？</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="346" x2="852" y2="346" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="48" y="367" font-size="12" fill="#94a3b8">机制 · 市场 · 信任代价 · 中国路径</text>
+  <text x="852" y="367" font-size="12" fill="#64748b" text-anchor="end">AI 行业观察</text>
+</svg>

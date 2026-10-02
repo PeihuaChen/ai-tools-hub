@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f97316"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#2a2a55" stroke-width="1" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- 左上角标签框 -->
+  <rect x="48" y="40" width="250" height="34" rx="8" fill="#1d1d40" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="66" y="63" font-size="16" fill="#93c5fd" font-weight="bold">AI 行业观察 · 多智能体框架</text>
+
+  <!-- 右上角年份徽章 -->
+  <circle cx="838" cy="58" r="26" fill="#1d1d40" stroke="#a78bfa" stroke-width="2"/>
+  <text x="838" y="66" font-size="24" fill="#a78bfa" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- 主标题 -->
+  <text x="48" y="132" font-size="40" fill="#ffffff" font-weight="bold">CrewAI 深度拆解</text>
+  <!-- 副标题 -->
+  <text x="48" y="170" font-size="19" fill="url(#title)" font-weight="bold">5.8 万 Star 背后的能力边界与生产代价</text>
+
+  <!-- 三行关键亮点 -->
+  <text x="48" y="212" font-size="14" fill="#f97316">▪ Crews 自主协作 + Flows 确定性编排，两层抽象</text>
+  <text x="48" y="238" font-size="14" fill="#22d3ee">▪ 月执行 4.5 亿次，约 60% 财富 500 强在用</text>
+  <text x="48" y="264" font-size="14" fill="#f87171">▪ Manager 失灵、Token 叠加、429 限流三大坑</text>
+
+  <!-- 标签栏 pill -->
+  <g font-size="13">
+    <rect x="48" y="292" width="92" height="28" rx="14" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="94" y="311" fill="#93c5fd" text-anchor="middle">Multi-Agent</text>
+    <rect x="150" y="292" width="70" height="28" rx="14" fill="none" stroke="#22d3ee" stroke-width="1.2"/>
+    <text x="185" y="311" fill="#67e8f9" text-anchor="middle">Crews</text>
+    <rect x="230" y="292" width="66" height="28" rx="14" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+    <text x="263" y="311" fill="#c4b5fd" text-anchor="middle">Flows</text>
+    <rect x="306" y="292" width="66" height="28" rx="14" fill="none" stroke="#34d399" stroke-width="1.2"/>
+    <text x="339" y="311" fill="#6ee7b7" text-anchor="middle">LiteLLM</text>
+    <rect x="382" y="292" width="56" height="28" rx="14" fill="none" stroke="#fbbf24" stroke-width="1.2"/>
+    <text x="410" y="311" fill="#fcd34d" text-anchor="middle">MCP</text>
+  </g>
+
+  <!-- 右侧概念示意：manager -> workers 网络 -->
+  <g stroke="#4b5b8a" stroke-width="1.5" fill="none" opacity="0.9">
+    <line x1="700" y1="150" x2="640" y2="230"/>
+    <line x1="700" y1="150" x2="720" y2="240"/>
+    <line x1="700" y1="150" x2="800" y2="230"/>
+  </g>
+  <circle cx="700" cy="150" r="24" fill="#1d3a5f" stroke="#22d3ee" stroke-width="2"/>
+  <text x="700" y="156" font-size="13" fill="#67e8f9" text-anchor="middle">Mgr</text>
+  <circle cx="640" cy="248" r="19" fill="#2a1f4d" stroke="#a78bfa" stroke-width="2"/>
+  <text x="640" y="253" font-size="11" fill="#c4b5fd" text-anchor="middle">A1</text>
+  <circle cx="720" cy="258" r="19" fill="#3a2410" stroke="#f97316" stroke-width="2"/>
+  <text x="720" y="263" font-size="11" fill="#fdba74" text-anchor="middle">A2</text>
+  <circle cx="800" cy="248" r="19" fill="#0f3320" stroke="#34d399" stroke-width="2"/>
+  <text x="800" y="253" font-size="11" fill="#6ee7b7" text-anchor="middle">A3</text>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="48" y1="342" x2="852" y2="342" stroke="#2a2a55" stroke-width="1"/>
+  <text x="48" y="366" font-size="13" fill="#8892b0">架构原理 · 生产坑点 · 框架选型 · 国产模型接入</text>
+  <text x="852" y="366" font-size="12" fill="#5a6382" text-anchor="end">AI 行业观察</text>
+</svg>

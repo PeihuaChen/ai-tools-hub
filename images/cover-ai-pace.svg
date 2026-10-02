@@ -1,0 +1,75 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b91c1c"/>
+      <stop offset="0.5" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <g stroke="#2a2a55" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="64" x2="900" y2="64"/>
+    <line x1="0" y1="128" x2="900" y2="128"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="256" x2="900" y2="256"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <rect x="48" y="42" width="272" height="34" rx="6" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="64" y="65" font-size="16" fill="#fcd34d" font-weight="bold">AI 行业观察 · 全球博弈</text>
+
+  <circle cx="838" cy="58" r="26" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <text x="838" y="67" font-size="24" fill="#38bdf8" font-weight="bold" text-anchor="middle">26</text>
+
+  <text x="48" y="150" font-size="40" fill="#ffffff" font-weight="bold">AI 减速大博弈</text>
+  <text x="48" y="192" font-size="19" fill="url(#sub)" font-weight="bold">三巨头共识 · 为何只有一步落地</text>
+
+  <text x="48" y="240" font-size="13" fill="#fcd34d">◆ Anthropic 长文呼吁定速，OpenAI 与马斯克罕见附议</text>
+  <text x="48" y="266" font-size="13" fill="#93c5fd">◆ 白宫斥为骗局，中国称「冷战剧本」，开源骂卡特尔</text>
+  <text x="48" y="292" font-size="13" fill="#86efac">◆ 三步计划仅第一步落地，囚徒困境下无人先松油门</text>
+
+  <g opacity="0.92">
+    <path d="M 726 196 A 62 62 0 1 1 814 196" fill="none" stroke="#3a3a6a" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 726 196 A 62 62 0 0 1 742 152" fill="none" stroke="#f87171" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 742 152 A 62 62 0 0 1 782 141" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 782 141 A 62 62 0 0 1 814 196" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round"/>
+    <line x1="770" y1="196" x2="742" y2="158" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="770" cy="196" r="10" fill="#fcd34d"/>
+    <text x="770" y="238" font-size="15" fill="#93c5fd" text-anchor="middle">谁先踩刹车</text>
+    <rect x="726" y="258" width="88" height="24" rx="4" fill="none" stroke="#f87171" stroke-width="1.4"/>
+    <text x="770" y="275" font-size="12" fill="#fca5a5" text-anchor="middle">第一步已落地</text>
+  </g>
+
+  <g font-size="12">
+    <rect x="48" y="316" width="76" height="26" rx="13" fill="none" stroke="#b91c1c" stroke-width="1.2"/>
+    <text x="86" y="333" fill="#fca5a5" text-anchor="middle">AI减速</text>
+    <rect x="134" y="316" width="74" height="26" rx="13" fill="none" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="171" y="333" fill="#93c5fd" text-anchor="middle">OpenAI</text>
+    <rect x="218" y="316" width="90" height="26" rx="13" fill="none" stroke="#0e7490" stroke-width="1.2"/>
+    <text x="263" y="333" fill="#67e8f9" text-anchor="middle">Anthropic</text>
+    <rect x="318" y="316" width="98" height="26" rx="13" fill="none" stroke="#15803d" stroke-width="1.2"/>
+    <text x="367" y="333" fill="#86efac" text-anchor="middle">中美博弈</text>
+    <rect x="426" y="316" width="98" height="26" rx="13" fill="none" stroke="#b45309" stroke-width="1.2"/>
+    <text x="475" y="333" fill="#fcd34d" text-anchor="middle">囚徒困境</text>
+  </g>
+
+  <text x="852" y="336" font-size="12" fill="#4b4b7a" text-anchor="end">AI 行业观察</text>
+</svg>

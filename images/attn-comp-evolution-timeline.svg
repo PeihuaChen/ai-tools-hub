@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480">
+<rect width="1200" height="480" fill="#ffffff"/>
+<text x="40" y="38" fill="#111827" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="700">注意力机制技术演进时间线（截至 2026）</text>
+<text x="40" y="63" fill="#4b5563" font-family="Microsoft YaHei, sans-serif" font-size="14">压缩 KV · 稀疏读取 · 混合线性架构三条路线</text>
+
+<!-- Shared route axes -->
+<g font-family="Microsoft YaHei, sans-serif">
+<line x1="60" y1="135" x2="1150" y2="135" stroke="#bfdbfe" stroke-width="2"/><text x="45" y="139" fill="#6b7280" font-size="11" text-anchor="end">路线一</text>
+<line x1="60" y1="270" x2="1150" y2="270" stroke="#bbf7d0" stroke-width="2"/><text x="45" y="274" fill="#6b7280" font-size="11" text-anchor="end">路线二</text>
+<line x1="60" y1="400" x2="1150" y2="400" stroke="#ddd6fe" stroke-width="2"/><text x="45" y="404" fill="#6b7280" font-size="11" text-anchor="end">路线三</text>
+</g>
+
+<!-- Route 1: compress KV representation -->
+<g font-family="Microsoft YaHei, sans-serif">
+<circle cx="130" cy="135" r="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="130" y="100" text-anchor="middle" fill="#1d4ed8" font-size="13" font-weight="700">2017</text><text x="130" y="165" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">MHA</text><text x="130" y="183" text-anchor="middle" fill="#6b7280" font-size="10">原始多头注意力</text>
+<circle cx="340" cy="135" r="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="340" y="100" text-anchor="middle" fill="#1d4ed8" font-size="13" font-weight="700">2019</text><text x="340" y="165" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">MQA</text><text x="340" y="183" text-anchor="middle" fill="#6b7280" font-size="10">单一共享 KV 头</text>
+<circle cx="570" cy="135" r="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="570" y="100" text-anchor="middle" fill="#1d4ed8" font-size="13" font-weight="700">2023</text><text x="570" y="165" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">GQA</text><text x="570" y="183" text-anchor="middle" fill="#6b7280" font-size="10">分组共享 KV</text>
+<circle cx="780" cy="135" r="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/><text x="780" y="100" text-anchor="middle" fill="#1d4ed8" font-size="13" font-weight="700">2024</text><text x="780" y="165" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">MLA</text><text x="780" y="183" text-anchor="middle" fill="#6b7280" font-size="10">低秩潜空间压缩</text>
+<line x1="138" y1="135" x2="332" y2="135" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4"/><line x1="348" y1="135" x2="562" y2="135" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4"/><line x1="578" y1="135" x2="772" y2="135" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4"/>
+</g>
+
+<!-- Route 2: reduce or compress the read scope -->
+<g font-family="Microsoft YaHei, sans-serif">
+<circle cx="570" cy="270" r="8" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/><text x="570" y="235" text-anchor="middle" fill="#15803d" font-size="13" font-weight="700">2023</text><text x="570" y="300" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">SWA</text><text x="570" y="318" text-anchor="middle" fill="#6b7280" font-size="10">固定滑动窗口</text>
+<circle cx="850" cy="270" r="8" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/><text x="850" y="235" text-anchor="middle" fill="#15803d" font-size="13" font-weight="700">2025</text><text x="850" y="300" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">DSA</text><text x="850" y="318" text-anchor="middle" fill="#6b7280" font-size="10">学习式稀疏选择</text>
+<circle cx="1080" cy="270" r="8" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/><text x="1080" y="235" text-anchor="middle" fill="#15803d" font-size="13" font-weight="700">2026</text><text x="1080" y="300" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">CSA + HCA · MSA</text><text x="1080" y="318" text-anchor="middle" fill="#6b7280" font-size="10">DeepSeek V4 · MiniMax M3</text>
+<line x1="578" y1="270" x2="842" y2="270" stroke="#4ade80" stroke-width="2" stroke-dasharray="4"/><line x1="858" y1="270" x2="1072" y2="270" stroke="#4ade80" stroke-width="2" stroke-dasharray="4"/>
+</g>
+
+<!-- Route 3: hybrid linear architectures -->
+<g font-family="Microsoft YaHei, sans-serif">
+<circle cx="850" cy="400" r="8" fill="#faf5ff" stroke="#6d28d9" stroke-width="2"/><text x="850" y="365" text-anchor="middle" fill="#6d28d9" font-size="13" font-weight="700">2025</text><text x="850" y="430" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">Gated DeltaNet / KDA</text><text x="850" y="448" text-anchor="middle" fill="#6b7280" font-size="10">Qwen3-Next · Kimi Linear</text>
+<circle cx="1080" cy="400" r="8" fill="#faf5ff" stroke="#6d28d9" stroke-width="2"/><text x="1080" y="365" text-anchor="middle" fill="#6d28d9" font-size="13" font-weight="700">2026</text><text x="1080" y="430" text-anchor="middle" fill="#111827" font-size="13" font-weight="700">Qwen3.8 / Kimi K3</text><text x="1080" y="448" text-anchor="middle" fill="#6b7280" font-size="10">3:1 混合；K3 加入 AttnRes</text>
+<line x1="858" y1="400" x2="1072" y2="400" stroke="#a78bfa" stroke-width="2" stroke-dasharray="4"/>
+</g>
+
+<text x="1150" y="474" text-anchor="end" fill="#9ca3af" font-family="Microsoft YaHei, sans-serif" font-size="10">数据来源见文末参考</text>
+</svg>

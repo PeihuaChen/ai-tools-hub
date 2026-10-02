@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="728" viewBox="0 0 1200 728">
+  <rect width="1200" height="728" fill="#ffffff"/>
+
+  <text x="48" y="44" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="24" font-weight="bold" fill="#111827">Computer-Use Agent 开源生态的五层，与 CUA-Lite 的位置</text>
+  <text x="48" y="72" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#4b5563">Star 数为 2026-09-09 实时数据。同一层内才构成竞争；跨层多为消费关系。</text>
+
+  <!-- ============ 框架层 ============ -->
+  <rect x="48" y="108" width="1104" height="104" rx="10" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <rect x="48" y="108" width="6" height="104" rx="3" fill="#6d28d9"/>
+  <text x="72" y="142" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="bold" fill="#6d28d9">框架层</text>
+  <text x="72" y="164" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">推理侧，直接干活</text>
+  <text x="72" y="182" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">不训练模型</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12">
+    <rect x="252" y="124" width="290" height="28" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="397" y="143" text-anchor="middle" fill="#6d28d9">UI-TARS-desktop　38.9k ★</text>
+    <rect x="557" y="124" width="290" height="28" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="702" y="143" text-anchor="middle" fill="#6d28d9">OmniParser　25.4k ★</text>
+    <rect x="862" y="124" width="290" height="28" rx="6" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="1007" y="143" text-anchor="middle" font-weight="bold" fill="#6d28d9">Agent-S　12.2k ★　← 另一条路线</text>
+
+    <rect x="252" y="166" width="290" height="28" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="397" y="185" text-anchor="middle" fill="#6d28d9">Magentic-UI　10.1k ★</text>
+    <rect x="557" y="166" width="290" height="28" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="702" y="185" text-anchor="middle" fill="#6d28d9">微软 UFO　9.7k ★</text>
+    <rect x="862" y="166" width="290" height="28" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="1007" y="185" text-anchor="middle" fill="#6d28d9">阿里 MobileAgent　9.2k ★</text>
+  </g>
+
+  <!-- ============ 模型层 ============ -->
+  <rect x="48" y="226" width="1104" height="104" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+  <rect x="48" y="226" width="6" height="104" rx="3" fill="#0e7490"/>
+  <text x="72" y="260" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="bold" fill="#0e7490">模型层</text>
+  <text x="72" y="282" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">开权重 CUA 模型</text>
+  <text x="72" y="300" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">大多出自中国团队</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12">
+    <rect x="252" y="242" width="290" height="28" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="397" y="261" text-anchor="middle" fill="#0e7490">字节 UI-TARS 系列</text>
+    <rect x="557" y="242" width="290" height="28" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="702" y="261" text-anchor="middle" fill="#0e7490">OpenCUA　834 ★（含 AgentNet）</text>
+    <rect x="862" y="242" width="290" height="28" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="1007" y="261" text-anchor="middle" fill="#0e7490">ScaleCUA　1.1k ★</text>
+
+    <rect x="252" y="284" width="290" height="28" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="397" y="303" text-anchor="middle" fill="#0e7490">美团 EvoCUA　通义 MAI-UI</text>
+    <rect x="557" y="284" width="290" height="28" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="702" y="303" text-anchor="middle" fill="#0e7490">阿里 Qwen3-VL / Qwen3.5</text>
+    <rect x="862" y="284" width="290" height="28" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="1007" y="303" text-anchor="middle" fill="#0e7490">微软 Fara-7B　UI-Venus　GELab</text>
+  </g>
+
+  <!-- ============ 基建层（高亮） ============ -->
+  <rect x="48" y="344" width="1104" height="124" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="3"/>
+  <rect x="48" y="344" width="6" height="124" rx="3" fill="#b45309"/>
+  <text x="72" y="378" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="bold" fill="#b45309">基建层</text>
+  <text x="72" y="400" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#b45309" font-weight="bold">CUA-Lite 在这里</text>
+  <text x="72" y="420" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">训练与评测</text>
+  <text x="72" y="438" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">这一层最空</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12">
+    <rect x="252" y="360" width="290" height="32" rx="6" fill="#b45309" stroke="#b45309" stroke-width="1"/>
+    <text x="397" y="381" text-anchor="middle" font-weight="bold" fill="#ffffff">CUA-Lite　80 ★　无 LICENSE</text>
+    <rect x="557" y="360" width="290" height="32" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+    <text x="702" y="381" text-anchor="middle" fill="#b45309">CUA-Gym　195 ★（仅数据合成）</text>
+    <rect x="862" y="360" width="290" height="32" rx="6" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="1007" y="381" text-anchor="middle" font-weight="bold" fill="#b45309">OpenEnv　2.6k ★　← 通用版</text>
+  </g>
+  <text x="252" y="416" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">↓ 向下消费：15+ benchmark（基准层）、trycua 的 CUABench 与 xlang 的 CUA-Gym（作为 env 接入）、清华 Slime（训练后端）</text>
+  <text x="252" y="438" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">↑ 向上服务：把模型层的开权重模型拉进来评测、SFT、GRPO —— 它是聚合层，不是任何一层的替代品</text>
+
+  <!-- ============ 运行时层 ============ -->
+  <rect x="48" y="482" width="1104" height="72" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="48" y="482" width="6" height="72" rx="3" fill="#1d4ed8"/>
+  <text x="72" y="512" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8">运行时层</text>
+  <text x="72" y="534" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">给 Agent 一台电脑</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12">
+    <rect x="252" y="504" width="290" height="28" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="397" y="523" text-anchor="middle" font-weight="bold" fill="#1d4ed8">trycua/cua　22.4k ★　MIT</text>
+    <rect x="557" y="504" width="290" height="28" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="702" y="523" text-anchor="middle" fill="#1d4ed8">e2b-dev/desktop　1.5k ★</text>
+    <rect x="862" y="504" width="290" height="28" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+    <text x="1007" y="523" text-anchor="middle" fill="#6b7280">Bytebot　11.1k ★　已归档</text>
+  </g>
+
+  <!-- ============ 基准层 ============ -->
+  <rect x="48" y="568" width="1104" height="104" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <rect x="48" y="568" width="6" height="104" rx="3" fill="#15803d"/>
+  <text x="72" y="602" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="16" font-weight="bold" fill="#15803d">基准层</text>
+  <text x="72" y="624" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">题库本身</text>
+  <text x="72" y="642" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">CUA-Lite 全部接入</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12">
+    <rect x="252" y="584" width="290" height="28" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="397" y="603" text-anchor="middle" fill="#15803d">OSWorld　3.1k ★</text>
+    <rect x="557" y="584" width="290" height="28" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="702" y="603" text-anchor="middle" fill="#15803d">OSWorld-V2（长程 2.0）　289 ★</text>
+    <rect x="862" y="584" width="290" height="28" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+    <text x="1007" y="603" text-anchor="middle" fill="#6b7280">WebArena　1.6k ★　已停更</text>
+
+    <rect x="252" y="626" width="290" height="28" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="397" y="645" text-anchor="middle" fill="#15803d">AndroidWorld　877 ★</text>
+    <rect x="557" y="626" width="290" height="28" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="702" y="645" text-anchor="middle" fill="#15803d">WindowsAgentArena　895 ★</text>
+    <rect x="862" y="626" width="290" height="28" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="1007" y="645" text-anchor="middle" fill="#15803d">MobileWorld　264 ★</text>
+  </g>
+
+  <text x="48" y="700" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">虚线灰框 = 已归档或长期停更的项目。这条赛道上 star 数不代表存活，最后提交时间更有参考价值。</text>
+  <text x="1152" y="720" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">数据来源：各项目 GitHub 仓库，经 GitHub API 于 2026-09-09 实时拉取</text>
+</svg>

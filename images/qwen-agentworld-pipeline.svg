@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="s1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+    <linearGradient id="s2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <linearGradient id="s3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#ec4899"/></linearGradient>
+  </defs>
+  <rect width="860" height="360" fill="url(#pbg)"/>
+  <rect width="860" height="3" fill="#6366f1"/>
+
+  <text x="40" y="44" font-size="20" font-weight="700" fill="#ffffff">Qwen-AgentWorld 三阶段训练流水线</text>
+  <text x="40" y="68" font-size="13" fill="#8a90b8">基础模型 Qwen3.5-35B-A3B-Base / 397B-A17B ｜ 10M+ 真实环境交互轨迹</text>
+
+  <!-- Stage 1 -->
+  <rect x="40" y="96" width="240" height="150" rx="12" fill="#0e1430" stroke="url(#s1)" stroke-width="1.6"/>
+  <rect x="40" y="96" width="240" height="34" rx="12" fill="#0ea5e9" fill-opacity="0.18"/>
+  <text x="60" y="119" font-size="16" font-weight="700" fill="#7dd3fc">Stage 1 · CPT 继续预训练</text>
+  <text x="60" y="152" font-size="13" fill="#cbd2f5" font-weight="600">注入知识</text>
+  <text x="60" y="176" font-size="12" fill="#9aa2cc">学习环境状态转移动力学</text>
+  <text x="60" y="198" font-size="12" fill="#9aa2cc">+ 安全/法律/医学/金融</text>
+  <text x="60" y="220" font-size="12" fill="#9aa2cc">等专业领域语料</text>
+
+  <!-- Stage 2 -->
+  <rect x="310" y="96" width="240" height="150" rx="12" fill="#0e1430" stroke="url(#s2)" stroke-width="1.6"/>
+  <rect x="310" y="96" width="240" height="34" rx="12" fill="#7c3aed" fill-opacity="0.18"/>
+  <text x="330" y="119" font-size="16" font-weight="700" fill="#c8a8ff">Stage 2 · SFT 监督微调</text>
+  <text x="330" y="152" font-size="13" fill="#cbd2f5" font-weight="600">激活思维</text>
+  <text x="330" y="176" font-size="12" fill="#9aa2cc">用显式推理链(Long CoT)</text>
+  <text x="330" y="198" font-size="12" fill="#9aa2cc">教模型推理"下一状态"</text>
+  <text x="330" y="220" font-size="12" fill="#9aa2cc">先推演逻辑再预测</text>
+
+  <!-- Stage 3 -->
+  <rect x="580" y="96" width="240" height="150" rx="12" fill="#0e1430" stroke="url(#s3)" stroke-width="1.6"/>
+  <rect x="580" y="96" width="240" height="34" rx="12" fill="#ec4899" fill-opacity="0.18"/>
+  <text x="600" y="119" font-size="16" font-weight="700" fill="#f9a8d4">Stage 3 · RL 强化学习</text>
+  <text x="600" y="152" font-size="13" fill="#cbd2f5" font-weight="600">磨砺精度 (GSPO)</text>
+  <text x="600" y="176" font-size="12" fill="#9aa2cc">五维大模型裁判 [5,25]</text>
+  <text x="600" y="198" font-size="12" fill="#9aa2cc">+ 规则校验器 [0,25]</text>
+  <text x="600" y="220" font-size="12" fill="#9aa2cc">双信号防奖励作弊</text>
+
+  <!-- arrows -->
+  <g stroke="#6366f1" stroke-width="2" fill="#6366f1">
+    <line x1="280" y1="171" x2="306" y2="171"/><polygon points="310,171 300,166 300,176"/>
+    <line x1="550" y1="171" x2="576" y2="171"/><polygon points="580,171 570,166 570,176"/>
+  </g>
+
+  <!-- bottom highlight -->
+  <rect x="40" y="276" width="780" height="56" rx="10" fill="#11183a" stroke="#22d3ee" stroke-opacity="0.3"/>
+  <text x="60" y="300" font-size="13" font-weight="700" fill="#7dd3fc">关键技巧 · 回合级信息论损失掩码</text>
+  <text x="60" y="321" font-size="12" fill="#9aa2cc">对"动作"token 完全不计算梯度，只对"环境观测"token 算损失 → 强迫模型 100% 聚焦世界规律建模，不偷懒复述动作</text>
+</svg>

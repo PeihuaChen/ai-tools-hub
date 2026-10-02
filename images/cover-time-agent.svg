@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="64" x2="900" y2="64"/>
+    <line x1="0" y1="128" x2="900" y2="128"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="256" x2="900" y2="256"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top/bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="42" width="250" height="30" rx="6" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8" stroke-opacity="0.5" stroke-width="1"/>
+  <text x="63" y="62" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#7dd3fc">AI 行业观察 · 时间感知</text>
+
+  <!-- year badge -->
+  <circle cx="835" cy="57" r="24" fill="none" stroke="url(#ring)" stroke-width="2"/>
+  <text x="835" y="64" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="bold" fill="#e0e7ff">26</text>
+
+  <!-- main title -->
+  <text x="48" y="130" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="bold" fill="#ffffff">AI Agent 的“时间盲区”</text>
+  <text x="48" y="168" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="url(#sub)">为什么大模型不知道今天几号，如何让它拥有时间感知</text>
+
+  <!-- highlights -->
+  <text x="48" y="212" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#7dd3fc">▸ 四层缺陷：知识截止 · 不知“现在” · 日期算术 · 全局时间线</text>
+  <text x="48" y="236" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#c4b5fd">▸ 根因深挖：Tokenization 割裂日期 · Temporal Heads</text>
+  <text x="48" y="260" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#f9a8d4">▸ 四条修复路线：Prompt · 工具化 · 双时间记忆 · 训练强化</text>
+
+  <!-- pills -->
+  <g font-family="Microsoft YaHei, sans-serif" font-size="12">
+    <rect x="48" y="286" width="92" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.6"/>
+    <text x="94" y="303" text-anchor="middle" fill="#7dd3fc">时序推理</text>
+    <rect x="150" y="286" width="92" height="26" rx="13" fill="none" stroke="#818cf8" stroke-opacity="0.6"/>
+    <text x="196" y="303" text-anchor="middle" fill="#a5b4fc">Agent 记忆</text>
+    <rect x="252" y="286" width="106" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-opacity="0.6"/>
+    <text x="305" y="303" text-anchor="middle" fill="#c4b5fd">bi-temporal</text>
+    <rect x="368" y="286" width="92" height="26" rx="13" fill="none" stroke="#f472b6" stroke-opacity="0.6"/>
+    <text x="414" y="303" text-anchor="middle" fill="#f9a8d4">知识截止</text>
+  </g>
+
+  <!-- right concept: clock -->
+  <g transform="translate(720,200)">
+    <circle cx="0" cy="0" r="72" fill="none" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="2"/>
+    <circle cx="0" cy="0" r="58" fill="none" stroke="#818cf8" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4 5"/>
+    <line x1="0" y1="0" x2="0" y2="-44" stroke="#f472b6" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="34" y2="16" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="5" fill="#e0e7ff"/>
+    <circle cx="0" cy="-58" r="3" fill="#7dd3fc"/>
+    <circle cx="50" cy="29" r="3" fill="#c4b5fd"/>
+    <circle cx="-50" cy="29" r="3" fill="#f9a8d4"/>
+    <circle cx="0" cy="58" r="3" fill="#a5b4fc"/>
+  </g>
+
+  <!-- divider + footer -->
+  <line x1="48" y1="340" x2="852" y2="340" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <text x="48" y="363" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#94a3b8">缺陷 · 根因 · 评测 · 四条落地路线 · 主动长周期 Agent</text>
+  <text x="852" y="363" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#64748b">公众号：AI 行业观察</text>
+</svg>

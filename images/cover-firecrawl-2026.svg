@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff6a3d"/>
+      <stop offset="0.5" stop-color="#ff3d81"/>
+      <stop offset="1" stop-color="#f9a825"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="0.5" stop-color="#7c4dff"/>
+      <stop offset="1" stop-color="#00e676"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb74d"/>
+      <stop offset="1" stop-color="#ff8a65"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd54f"/>
+      <stop offset="0.5" stop-color="#ff7043"/>
+      <stop offset="1" stop-color="#e53935"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <!-- grid -->
+  <g stroke="#2a2a55" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top / bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="42" width="240" height="30" rx="6" fill="none" stroke="#ff6a3d" stroke-width="1.5"/>
+  <text x="64" y="62" font-family="'Microsoft YaHei',sans-serif" font-size="14" fill="#ffb74d">AI 行业观察 · 网页抓取</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="24" fill="none" stroke="#7c4dff" stroke-width="2"/>
+  <text x="838" y="65" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#b39ddb" text-anchor="middle">26</text>
+
+  <!-- title -->
+  <text x="48" y="132" font-family="'Microsoft YaHei',sans-serif" font-size="31" font-weight="bold" fill="#ffffff">让 Agent 学会上网：Firecrawl</text>
+  <text x="48" y="172" font-family="'Microsoft YaHei',sans-serif" font-size="20" font-weight="bold" fill="url(#sub)">五大能力 × 四类应用（RAG · Dify · MCP · 深度研究）</text>
+
+  <!-- highlights -->
+  <text x="48" y="214" font-family="'Microsoft YaHei',sans-serif" font-size="13" fill="#4fc3f7">◆ 一个 URL → LLM-ready 的干净 Markdown</text>
+  <text x="48" y="238" font-family="'Microsoft YaHei',sans-serif" font-size="13" fill="#81c784">◆ scrape / crawl / map / extract / search 五端点</text>
+  <text x="48" y="262" font-family="'Microsoft YaHei',sans-serif" font-size="13" fill="#ffb74d">◆ 开源可自建 · Dify 双入口 · MCP 生态</text>
+
+  <!-- pills -->
+  <g font-family="'Microsoft YaHei',sans-serif" font-size="12">
+    <rect x="48" y="292" width="86" height="26" rx="13" fill="none" stroke="#4fc3f7" stroke-width="1.2"/>
+    <text x="91" y="309" fill="#4fc3f7" text-anchor="middle">Firecrawl</text>
+    <rect x="144" y="292" width="72" height="26" rx="13" fill="none" stroke="#81c784" stroke-width="1.2"/>
+    <text x="180" y="309" fill="#81c784" text-anchor="middle">RAG</text>
+    <rect x="226" y="292" width="64" height="26" rx="13" fill="none" stroke="#ff8a65" stroke-width="1.2"/>
+    <text x="258" y="309" fill="#ff8a65" text-anchor="middle">Dify</text>
+    <rect x="300" y="292" width="64" height="26" rx="13" fill="none" stroke="#b39ddb" stroke-width="1.2"/>
+    <text x="332" y="309" fill="#b39ddb" text-anchor="middle">MCP</text>
+    <rect x="374" y="292" width="96" height="26" rx="13" fill="none" stroke="#ffd54f" stroke-width="1.2"/>
+    <text x="422" y="309" fill="#ffd54f" text-anchor="middle">深度研究</text>
+  </g>
+
+  <!-- right concept: flame + pipeline dots -->
+  <g transform="translate(690,150)">
+    <path d="M60 10 C 40 40, 30 55, 45 80 C 50 62, 60 60, 62 70 C 78 55, 80 40, 60 10 Z" fill="url(#flame)" opacity="0.9"/>
+    <g stroke="#7c4dff" stroke-width="1.5" opacity="0.7">
+      <circle cx="20" cy="120" r="5" fill="#0a0a1e" stroke="#4fc3f7"/>
+      <circle cx="60" cy="120" r="5" fill="#0a0a1e" stroke="#81c784"/>
+      <circle cx="100" cy="120" r="5" fill="#0a0a1e" stroke="#ffb74d"/>
+      <line x1="25" y1="120" x2="55" y2="120"/>
+      <line x1="65" y1="120" x2="95" y2="120"/>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="344" x2="852" y2="344" stroke="#2a2a55" stroke-width="1"/>
+  <text x="48" y="365" font-family="'Microsoft YaHei',sans-serif" font-size="12" fill="#8888aa">从 Find→Extract→Clean→Use，把网页变成 Agent 的上下文</text>
+  <text x="852" y="365" font-family="'Microsoft YaHei',sans-serif" font-size="12" fill="#666688" text-anchor="end">公众号：AI 行业观察</text>
+</svg>

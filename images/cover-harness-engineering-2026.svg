@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a855f7"/>
+      <stop offset="0.5" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#6366f1" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#2a2a55" stroke-width="0.8" stroke-opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- top / bottom color bars -->
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- right concept diagram: model core wrapped by harness ring -->
+  <g transform="translate(710,176)">
+    <circle cx="0" cy="0" r="120" fill="url(#glow)"/>
+    <!-- outer harness ring -->
+    <circle cx="0" cy="0" r="92" fill="none" stroke="#a855f7" stroke-width="2" stroke-opacity="0.55" stroke-dasharray="6 7"/>
+    <circle cx="0" cy="0" r="64" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7" stroke-dasharray="4 6"/>
+    <!-- model core -->
+    <circle cx="0" cy="0" r="34" fill="#1e1e44" stroke="#6366f1" stroke-width="2"/>
+    <text x="0" y="-2" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" fill="#e0e7ff">Model</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="#94a3ff">推理内核</text>
+    <!-- harness component nodes on ring -->
+    <g font-family="Segoe UI,Arial,sans-serif" font-size="8.5" fill="#cbd5ff" text-anchor="middle">
+      <circle cx="0" cy="-92" r="13" fill="#241b4a" stroke="#a855f7" stroke-width="1.2"/>
+      <text x="0" y="-89">工具</text>
+      <circle cx="80" cy="-46" r="13" fill="#241b4a" stroke="#ec4899" stroke-width="1.2"/>
+      <text x="80" y="-43">记忆</text>
+      <circle cx="80" cy="46" r="13" fill="#241b4a" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="80" y="49">护栏</text>
+      <circle cx="0" cy="92" r="13" fill="#241b4a" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="0" y="95">观测</text>
+      <circle cx="-80" cy="46" r="13" fill="#241b4a" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="-80" y="49">沙箱</text>
+      <circle cx="-80" cy="-46" r="13" fill="#241b4a" stroke="#6366f1" stroke-width="1.2"/>
+      <text x="-80" y="-43">编排</text>
+    </g>
+    <text x="0" y="118" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="9.5" fill="#7c83b8">Harness 包裹模型</text>
+  </g>
+
+  <!-- top-left tag box -->
+  <rect x="40" y="34" width="252" height="30" rx="6" fill="#1a1a3d" stroke="#6366f1" stroke-width="1.2"/>
+  <circle cx="58" cy="49" r="4" fill="#22d3ee"/>
+  <text x="72" y="54" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#c7d2fe">AI 行业观察 · Harness 工程</text>
+
+  <!-- year badge -->
+  <g transform="translate(836,34)">
+    <rect x="0" y="0" width="44" height="30" rx="6" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.2"/>
+    <text x="22" y="21" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#e9d5ff">26</text>
+  </g>
+
+  <!-- main title -->
+  <text x="40" y="124" font-family="Segoe UI,Arial,sans-serif" font-size="31" font-weight="700" fill="#ffffff">Harness 工程</text>
+  <text x="40" y="166" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">当模型趋同，决定 AI Agent</text>
+  <text x="40" y="198" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">成败的「看不见的一半」</text>
+
+  <!-- subtitle -->
+  <text x="40" y="230" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="600" fill="url(#subtitle)">Agent = Model + Harness</text>
+
+  <!-- 3 highlight lines -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="13">
+    <text x="40" y="258" fill="#22d3ee">▸ 同样权重，换个 Harness，基准摆动 10-20 分</text>
+    <text x="40" y="278" fill="#ec4899">▸ 核心循环仅占 5%，95% 复杂度在调优</text>
+    <text x="40" y="298" fill="#f59e0b">▸ 88% 的 Agent 项目，死在脆弱的 Harness 上</text>
+  </g>
+
+  <!-- tag pills -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#cbd5ff">
+    <rect x="40" y="312" width="86" height="22" rx="11" fill="none" stroke="#6366f1" stroke-width="1"/>
+    <text x="83" y="327" text-anchor="middle">前馈 + 反馈</text>
+    <rect x="134" y="312" width="74" height="22" rx="11" fill="none" stroke="#22d3ee" stroke-width="1"/>
+    <text x="171" y="327" text-anchor="middle">上下文工程</text>
+    <rect x="216" y="312" width="64" height="22" rx="11" fill="none" stroke="#ec4899" stroke-width="1"/>
+    <text x="248" y="327" text-anchor="middle">质量左移</text>
+    <rect x="288" y="312" width="74" height="22" rx="11" fill="none" stroke="#a855f7" stroke-width="1"/>
+    <text x="325" y="327" text-anchor="middle">编码智能体</text>
+    <rect x="370" y="312" width="64" height="22" rx="11" fill="none" stroke="#f59e0b" stroke-width="1"/>
+    <text x="402" y="327" text-anchor="middle">可观测性</text>
+  </g>
+
+  <!-- bottom divider + footer -->
+  <line x1="40" y1="350" x2="500" y2="350" stroke="#2a2a55" stroke-width="1"/>
+  <text x="40" y="368" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#7c83b8">定义 · 架构 · 基准影响 · Anthropic / OpenAI / Stripe 一线实践</text>
+  <text x="860" y="368" text-anchor="end" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#5a5f8a">公众号：AI工具箱</text>
+</svg>

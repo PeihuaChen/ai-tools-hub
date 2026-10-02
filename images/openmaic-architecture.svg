@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="740" viewBox="0 0 1080 740">
+  <rect width="1080" height="740" fill="#f7f8fa"/>
+
+  <text x="540" y="66" fill="#111827" font-size="56" font-weight="bold" text-anchor="middle">OpenMAIC 多智能体课堂流程</text>
+
+  <!-- Stage 1: 材料 -->
+  <rect x="60" y="130" width="270" height="120" rx="16" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="195" y="180" fill="#334155" font-size="40" font-weight="bold" text-anchor="middle">① 输入</text>
+  <text x="195" y="222" fill="#4b5563" font-size="30" text-anchor="middle">主题·文档·音视频</text>
+
+  <!-- Stage 2: 备课智能体 -->
+  <rect x="410" y="130" width="270" height="120" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="545" y="180" fill="#1d4ed8" font-size="40" font-weight="bold" text-anchor="middle">② 备课智能体</text>
+  <text x="545" y="222" fill="#1e40af" font-size="30" text-anchor="middle">抽取·提炼·写讲稿</text>
+
+  <!-- Stage 3: 结构化课件 -->
+  <rect x="760" y="130" width="270" height="120" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2.5"/>
+  <text x="895" y="180" fill="#15803d" font-size="40" font-weight="bold" text-anchor="middle">③ 结构化课件</text>
+  <text x="895" y="222" fill="#166534" font-size="30" text-anchor="middle">幻灯·测验·知识点</text>
+
+  <!-- top arrows -->
+  <g stroke="#94a3b8" stroke-width="3" fill="none">
+    <path d="M330 190 L405 190" marker-end="url(#ar)"/>
+    <path d="M680 190 L755 190" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- down arrow to controller -->
+  <path d="M895 250 L895 300 L545 300 L545 340" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Stage 4: 会话调度器 -->
+  <rect x="345" y="350" width="400" height="110" rx="16" fill="#faf5ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="545" y="400" fill="#6d28d9" font-size="42" font-weight="bold" text-anchor="middle">④ 会话调度器</text>
+  <text x="545" y="440" fill="#5b21b6" font-size="30" text-anchor="middle">决定下一步谁发言 · 编排节奏</text>
+
+  <!-- arrow down to classroom -->
+  <path d="M545 460 L545 510" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Stage 5: 互动课堂 -->
+  <rect x="150" y="520" width="500" height="160" rx="18" fill="#ecfeff" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="400" y="568" fill="#0e7490" font-size="42" font-weight="bold" text-anchor="middle">⑤ 互动课堂</text>
+  <text x="400" y="612" fill="#155e75" font-size="30" text-anchor="middle">AI 老师讲授 · AI 同学讨论</text>
+  <text x="400" y="652" fill="#155e75" font-size="30" text-anchor="middle">白板画图 · TTS 语音</text>
+
+  <!-- student -->
+  <circle cx="800" cy="600" r="60" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="3"/>
+  <text x="800" y="616" font-size="52" text-anchor="middle">🎓</text>
+  <text x="800" y="700" fill="#4b5563" font-size="32" font-weight="bold" text-anchor="middle">学生</text>
+
+  <!-- two-way arrow classroom <-> student -->
+  <path d="M650 600 L735 600" stroke="#0e7490" stroke-width="3.5" fill="none" marker-end="url(#ar2)" marker-start="url(#ar2s)"/>
+
+  <!-- 课后分析 side -->
+  <rect x="760" y="350" width="270" height="110" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2.5"/>
+  <text x="895" y="398" fill="#b45309" font-size="38" font-weight="bold" text-anchor="middle">课后分析</text>
+  <text x="895" y="438" fill="#92400e" font-size="30" text-anchor="middle">参与度 · 辍学预测</text>
+  <path d="M800 540 L895 465" stroke="#94a3b8" stroke-width="3" fill="none" stroke-dasharray="8" marker-end="url(#ar)"/>
+
+  <defs>
+    <marker id="ar" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ar2" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0e7490"/>
+    </marker>
+    <marker id="ar2s" markerWidth="12" markerHeight="12" refX="1" refY="5" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="#0e7490"/>
+    </marker>
+  </defs>
+</svg>

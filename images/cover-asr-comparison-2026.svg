@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="25%" stop-color="#8b5cf6"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="75%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="33%" stop-color="#8b5cf6"/>
+      <stop offset="66%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="40" x2="900" y2="40"/>
+    <line x1="0" y1="80" x2="900" y2="80"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="160" x2="900" y2="160"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="280" x2="900" y2="280"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="100" y1="0" x2="100" y2="383"/>
+    <line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/>
+    <line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label box -->
+  <rect x="24" y="20" width="240" height="28" rx="4" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.8"/>
+  <text x="36" y="39" font-family="system-ui, sans-serif" font-size="12" fill="#06b6d4">AI 工具横评 · 语音识别选型</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="20" width="40" height="28" rx="4" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.7"/>
+  <text x="848" y="39" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#8b5cf6">26</text>
+
+  <!-- Main title -->
+  <text x="40" y="100" font-family="system-ui, sans-serif" font-size="29" font-weight="bold" fill="#ffffff">2026 商用 ASR 语音识别全景选型</text>
+  <text x="40" y="138" font-family="system-ui, sans-serif" font-size="29" font-weight="bold" fill="#ffffff">国内外 12 款产品横评</text>
+
+  <!-- Subtitle -->
+  <text x="40" y="172" font-family="system-ui, sans-serif" font-size="17" fill="url(#subtitle)">中文 / 英文 / 方言 / 小语种 · 准确率 · 价格 · 部署策略</text>
+
+  <!-- Key highlights -->
+  <text x="40" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#10b981">▸ FunASR 中文 CER 3-5% vs Whisper ~20%，速度快 170x</text>
+  <text x="40" y="232" font-family="system-ui, sans-serif" font-size="12" fill="#f59e0b">▸ Qwen3-ASR 首字延迟 92ms，并发128时1秒转写2000秒音频</text>
+  <text x="40" y="254" font-family="system-ui, sans-serif" font-size="12" fill="#06b6d4">▸ 方言CER下降56%｜API价格低至$0.004/min｜自部署break-even分析</text>
+
+  <!-- Right side: conceptual diagram - waveform to text -->
+  <g transform="translate(620, 190)">
+    <!-- Audio waveform icon -->
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+    <path d="M15,30 L20,15 L25,40 L30,20 L35,35 L40,10 L45,45 L50,25 L55,38 L60,18 L65,33 L70,22 L75,35 L80,28 L85,30" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.8"/>
+    <text x="50" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#8b5cf6" opacity="0.7">Audio</text>
+
+    <!-- Arrow -->
+    <line x1="110" y1="30" x2="140" y2="30" stroke="#4ade80" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="140,26 148,30 140,34" fill="#4ade80" opacity="0.6"/>
+
+    <!-- Text output icon -->
+    <rect x="155" y="0" width="100" height="60" rx="8" fill="none" stroke="#10b981" stroke-width="1" opacity="0.5"/>
+    <text x="205" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#10b981" opacity="0.8">你好世界</text>
+    <text x="205" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#10b981" opacity="0.8">Hello World</text>
+    <text x="205" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#10b981" opacity="0.7">Text</text>
+  </g>
+
+  <!-- Provider logos/labels -->
+  <g transform="translate(630, 270)">
+    <rect x="0" y="0" width="50" height="18" rx="3" fill="none" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+    <text x="25" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#06b6d4" opacity="0.8">FunASR</text>
+    <rect x="58" y="0" width="50" height="18" rx="3" fill="none" stroke="#f59e0b" stroke-width="0.8" opacity="0.5"/>
+    <text x="83" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#f59e0b" opacity="0.8">Whisper</text>
+    <rect x="116" y="0" width="50" height="18" rx="3" fill="none" stroke="#8b5cf6" stroke-width="0.8" opacity="0.5"/>
+    <text x="141" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#8b5cf6" opacity="0.8">Azure</text>
+    <rect x="174" y="0" width="56" height="18" rx="3" fill="none" stroke="#10b981" stroke-width="0.8" opacity="0.5"/>
+    <text x="202" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#10b981" opacity="0.8">Deepgram</text>
+  </g>
+
+  <!-- Tags bar -->
+  <g transform="translate(40, 290)">
+    <rect x="0" y="0" width="56" height="22" rx="11" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+    <text x="28" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">中文ASR</text>
+    <rect x="64" y="0" width="56" height="22" rx="11" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+    <text x="92" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">英文ASR</text>
+    <rect x="128" y="0" width="56" height="22" rx="11" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+    <text x="156" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">方言识别</text>
+    <rect x="192" y="0" width="56" height="22" rx="11" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+    <text x="220" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">多语言</text>
+    <rect x="256" y="0" width="62" height="22" rx="11" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+    <text x="287" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">价格对比</text>
+    <rect x="326" y="0" width="62" height="22" rx="11" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+    <text x="357" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">选型指南</text>
+  </g>
+
+  <!-- Bottom separator & chapter hint -->
+  <line x1="40" y1="340" x2="860" y2="340" stroke="#374151" stroke-width="0.5"/>
+  <text x="40" y="360" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">全文 10 章 · 涵盖准确率/延迟/价格/部署/特殊场景 · 附选型决策树</text>
+
+  <!-- Watermark -->
+  <text x="860" y="360" text-anchor="end" font-family="system-ui, sans-serif" font-size="10" fill="#4b5563" opacity="0.5">XiaoiTMT</text>
+</svg>

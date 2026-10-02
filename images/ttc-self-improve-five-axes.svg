@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="660" viewBox="0 0 1160 660">
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1160" height="660" fill="#ffffff"/>
+  <rect width="1160" height="660" fill="url(#pageBg)"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="24" font-weight="bold" fill="#111827">推理时计算与自我学习：五条轴 + 一个调度层</text>
+  <text x="40" y="72" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" fill="#4b5563">按「到底改了什么」分类，五条轴的代价落点与失效模式各不相同</text>
+
+  <!-- 调度层 -->
+  <rect x="40" y="96" width="1080" height="56" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.4"/>
+  <text x="60" y="120" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="15" font-weight="bold" fill="#334155">调度层 · 算力花在哪</text>
+  <text x="60" y="140" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6b7280">难度分级 · 模型路由 + TTS 联合优化 · 自适应采样预算 · 思维级 beam search（固定单查询预算 = 最容易修的浪费）</text>
+  <text x="1100" y="130" text-anchor="end" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6b7280">↓ 决定下面五条轴各花多少</text>
+
+  <!-- 轴一 -->
+  <rect x="40" y="176" width="208" height="248" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <rect x="40" y="176" width="208" height="34" rx="12" fill="#dbeafe"/>
+  <rect x="40" y="198" width="208" height="12" fill="#dbeafe"/>
+  <text x="60" y="199" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8">轴一 · 延长思考</text>
+  <text x="60" y="232" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">改的对象</text>
+  <text x="60" y="250" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#111827">输出 token（序列方向）</text>
+  <line x1="60" y1="262" x2="228" y2="262" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="60" y="282" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#1d4ed8">CoT / budget forcing</text>
+  <text x="60" y="300" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#1d4ed8">s1 · SETS 自我纠错</text>
+  <line x1="60" y1="314" x2="228" y2="314" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="60" y="334" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">代价：逐 token 计费</text>
+  <text x="60" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">失效：外挂式强迫多想</text>
+  <text x="60" y="374" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">会压低表现上限</text>
+  <rect x="60" y="388" width="168" height="22" rx="11" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="144" y="403" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#1d4ed8">无需权重访问</text>
+
+  <!-- 轴二 -->
+  <rect x="264" y="176" width="208" height="248" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.4"/>
+  <rect x="264" y="176" width="208" height="34" rx="12" fill="#d1fae5"/>
+  <rect x="264" y="198" width="208" height="12" fill="#d1fae5"/>
+  <text x="284" y="199" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" font-weight="bold" fill="#15803d">轴二 · 并行采样</text>
+  <text x="284" y="232" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">改的对象</text>
+  <text x="284" y="250" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#111827">候选数量（并行方向）</text>
+  <line x1="284" y1="262" x2="452" y2="262" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="284" y="282" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#15803d">best-of-N · 自一致性</text>
+  <text x="284" y="300" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#15803d">采样式搜索 · 辩论 / MoA</text>
+  <line x1="284" y1="314" x2="452" y2="314" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="284" y="334" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">代价：20× 算力 → +7.1pt</text>
+  <text x="284" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">失效：验证器是天花板，</text>
+  <text x="284" y="374" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">前沿模型自验证能力弱</text>
+  <rect x="284" y="388" width="168" height="22" rx="11" fill="#d1fae5" stroke="#15803d" stroke-width="1"/>
+  <text x="368" y="403" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#15803d">需可靠外部验证</text>
+
+  <!-- 轴三 -->
+  <rect x="488" y="176" width="208" height="248" rx="12" fill="#fffbeb" stroke="#b45309" stroke-width="1.4"/>
+  <rect x="488" y="176" width="208" height="34" rx="12" fill="#fef3c7"/>
+  <rect x="488" y="198" width="208" height="12" fill="#fef3c7"/>
+  <text x="508" y="199" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" font-weight="bold" fill="#b45309">轴三 · 潜空间深度</text>
+  <text x="508" y="232" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">改的对象</text>
+  <text x="508" y="250" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#111827">前向计算深度</text>
+  <line x1="508" y1="262" x2="676" y2="262" stroke="#fde68a" stroke-width="1"/>
+  <text x="508" y="282" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">Recirculation（权重冻结）</text>
+  <text x="508" y="300" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">Coconut · looped transformer</text>
+  <line x1="508" y1="314" x2="676" y2="314" stroke="#fde68a" stroke-width="1"/>
+  <text x="508" y="334" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">代价：压在 prefill 阶段</text>
+  <text x="508" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#15803d">Gemma3：PPL −23%</text>
+  <text x="508" y="374" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#15803d">GSM8k +21%，免训练</text>
+  <rect x="508" y="388" width="168" height="22" rx="11" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+  <text x="592" y="403" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#b45309">生成延迟近似不增</text>
+
+  <!-- 轴四 -->
+  <rect x="712" y="176" width="208" height="248" rx="12" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.4"/>
+  <rect x="712" y="176" width="208" height="34" rx="12" fill="#ede9fe"/>
+  <rect x="712" y="198" width="208" height="12" fill="#ede9fe"/>
+  <text x="732" y="199" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" font-weight="bold" fill="#6d28d9">轴四 · 权重更新</text>
+  <text x="732" y="232" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">改的对象</text>
+  <text x="732" y="250" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#111827">模型参数</text>
+  <line x1="732" y1="262" x2="900" y2="262" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="732" y="282" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#6d28d9">TTT / TTFT · SEAL 自编辑</text>
+  <text x="732" y="300" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#6d28d9">TT-SI · LoRA 验证器驱动</text>
+  <line x1="732" y1="314" x2="900" y2="314" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="732" y="334" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">代价：真实梯度更新</text>
+  <text x="732" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#15803d">ARC 最高 6× · TT-SI 样本</text>
+  <text x="732" y="374" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#15803d">少 68×（+5.48pt）</text>
+  <rect x="732" y="388" width="168" height="22" rx="11" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+  <text x="816" y="403" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6d28d9">需权重 + GPU</text>
+
+  <!-- 轴五 -->
+  <rect x="936" y="176" width="184" height="248" rx="12" fill="#ecfeff" stroke="#0e7490" stroke-width="1.4"/>
+  <rect x="936" y="176" width="184" height="34" rx="12" fill="#cffafe"/>
+  <rect x="936" y="198" width="184" height="12" fill="#cffafe"/>
+  <text x="956" y="199" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" font-weight="bold" fill="#0e7490">轴五 · 记忆演化</text>
+  <text x="956" y="232" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">改的对象</text>
+  <text x="956" y="250" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#111827">上下文 / 记忆</text>
+  <line x1="956" y1="262" x2="1100" y2="262" stroke="#a5f3fc" stroke-width="1"/>
+  <text x="956" y="282" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#0e7490">ACE 演化手册 +10.6%</text>
+  <text x="956" y="300" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#0e7490">Dreaming · Skills · Letta</text>
+  <line x1="956" y1="314" x2="1100" y2="314" stroke="#a5f3fc" stroke-width="1"/>
+  <text x="956" y="334" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#4b5563">代价：离线整合 + 膨胀</text>
+  <text x="956" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b91c1c">失效：上下文塌缩、</text>
+  <text x="956" y="374" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b91c1c">memory rot、静默退化</text>
+  <rect x="956" y="388" width="144" height="22" rx="11" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+  <text x="1028" y="403" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#0e7490">落地门槛最低</text>
+
+  <!-- 底部对比条：代价落点 -->
+  <text x="40" y="466" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="16" font-weight="bold" fill="#111827">代价落在哪：这是选型时最先要问的问题</text>
+
+  <rect x="40" y="484" width="1080" height="82" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+
+  <text x="62" y="508" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6b7280">请求进入</text>
+  <rect x="132" y="494" width="112" height="30" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="1.2"/>
+  <text x="188" y="514" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#b45309">Prefill 阶段</text>
+  <text x="188" y="542" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6b7280">轴三代价在此（一次性）</text>
+
+  <line x1="244" y1="509" x2="286" y2="509" stroke="#94a3b8" stroke-width="1.4"/>
+  <path d="M284 505 L292 509 L284 513 Z" fill="#94a3b8"/>
+
+  <rect x="296" y="494" width="128" height="30" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="360" y="514" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#1d4ed8">解码 / 生成</text>
+  <text x="360" y="542" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6b7280">轴一轴二代价在此（逐 token）</text>
+
+  <line x1="424" y1="509" x2="466" y2="509" stroke="#94a3b8" stroke-width="1.4"/>
+  <path d="M464 505 L472 509 L464 513 Z" fill="#94a3b8"/>
+
+  <rect x="476" y="494" width="128" height="30" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="540" y="514" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6d28d9">梯度更新</text>
+  <text x="540" y="542" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6b7280">轴四代价在此（需回滚方案）</text>
+
+  <line x1="604" y1="509" x2="646" y2="509" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4"/>
+  <path d="M644 505 L652 509 L644 513 Z" fill="#94a3b8"/>
+
+  <rect x="656" y="494" width="140" height="30" rx="6" fill="#cffafe" stroke="#0e7490" stroke-width="1.2"/>
+  <text x="726" y="514" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#0e7490">离线整合（空闲期）</text>
+  <text x="726" y="542" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6b7280">轴五代价在此（长期漂移风险）</text>
+
+  <rect x="820" y="494" width="280" height="52" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="836" y="513" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" font-weight="bold" fill="#b91c1c">唯一不给报错信号的一条</text>
+  <text x="836" y="533" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#b91c1c">轴五的退化是静默的，必须做效用监控</text>
+
+  <line x1="40" y1="596" x2="1120" y2="596" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="40" y="620" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#6b7280">注：数字分别来自 Recirculation（arXiv 2608.17981）、ACE（ICLR 2026）、TT-SI（ACL 2026 Findings）、TTT for Few-Shot Learning（ICML 2025）、Multi-Agent Reasoning（arXiv 2605.01566）。</text>
+  <text x="40" y="640" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#6b7280">跨论文比较受评测设置影响，仅作量级参考。</text>
+</svg>

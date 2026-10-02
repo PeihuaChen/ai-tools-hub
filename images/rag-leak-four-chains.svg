@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f7fa"/>
+    </linearGradient>
+    <marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="660" fill="#ffffff"/>
+  <rect width="1200" height="660" fill="url(#pg)"/>
+
+  <text x="40" y="42" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#111827">RAG 系统的四条信息泄露链</text>
+  <text x="40" y="70" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#4b5563">敏感数据在流水线上变换四种形态，每种形态对应一条独立的泄露路径，防护手段几乎没有重叠</text>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="35" y="104" width="190" height="58" rx="10" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="130" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#111827">原文档</text>
+    <text x="130" y="149" text-anchor="middle" font-size="11" fill="#6b7280">对象存储 / 文件系统</text>
+
+    <rect x="270" y="104" width="190" height="58" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.3"/>
+    <text x="365" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#b45309">嵌入模型</text>
+    <text x="365" y="149" text-anchor="middle" font-size="11" fill="#b45309">文本 → 向量</text>
+
+    <rect x="505" y="104" width="190" height="58" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+    <text x="600" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#b91c1c">向量数据库</text>
+    <text x="600" y="149" text-anchor="middle" font-size="11" fill="#b91c1c">Milvus / Chroma / Qdrant</text>
+
+    <rect x="740" y="104" width="190" height="58" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <text x="835" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d4ed8">检索 / 授权</text>
+    <text x="835" y="149" text-anchor="middle" font-size="11" fill="#1d4ed8">Top-K + 权限判定</text>
+
+    <rect x="975" y="104" width="190" height="58" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.3"/>
+    <text x="1070" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#6d28d9">LLM 生成</text>
+    <text x="1070" y="149" text-anchor="middle" font-size="11" fill="#6d28d9">上下文 → 回答</text>
+
+    <line x1="225" y1="133" x2="266" y2="133" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#ar)"/>
+    <line x1="460" y1="133" x2="501" y2="133" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#ar)"/>
+    <line x1="695" y1="133" x2="736" y2="133" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#ar)"/>
+    <line x1="930" y1="133" x2="971" y2="133" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#ar)"/>
+  </g>
+
+  <g stroke-width="1.8" stroke-dasharray="5 4">
+    <line x1="365" y1="162" x2="365" y2="234" stroke="#b45309" marker-end="url(#arR)"/>
+    <line x1="600" y1="162" x2="600" y2="234" stroke="#b91c1c" marker-end="url(#arR)"/>
+    <line x1="835" y1="162" x2="835" y2="234" stroke="#1d4ed8" marker-end="url(#arR)"/>
+    <line x1="1070" y1="162" x2="1070" y2="234" stroke="#6d28d9" marker-end="url(#arR)"/>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="30" y="190" width="200" height="120" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="46" y="214" font-size="12" font-weight="bold" fill="#374151">链 ⓪ 传统存储层</text>
+    <text x="46" y="238" font-size="11" fill="#4b5563">存储桶 / 目录权限配置</text>
+    <text x="46" y="258" font-size="11" fill="#4b5563">错误导致原文直接泄露</text>
+    <text x="46" y="286" font-size="11" fill="#15803d">这一层已有成熟惯例，</text>
+    <text x="46" y="303" font-size="11" fill="#15803d">不是本文重点</text>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="255" y="240" width="220" height="248" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.4"/>
+    <text x="271" y="266" font-size="13" font-weight="bold" fill="#b45309">链 ② 表示层</text>
+    <text x="271" y="286" font-size="12" font-weight="bold" fill="#111827">嵌入反演</text>
+    <line x1="271" y1="298" x2="459" y2="298" stroke="#e6c79a" stroke-width="1"/>
+    <text x="271" y="320" font-size="10" fill="#6b7280">攻击手法</text>
+    <text x="271" y="339" font-size="11" fill="#4b5563">迭代逼近目标向量，</text>
+    <text x="271" y="356" font-size="11" fill="#4b5563">无需模型权重即可还原原文</text>
+    <text x="271" y="384" font-size="10" fill="#6b7280">代表证据</text>
+    <text x="271" y="403" font-size="11" fill="#b45309">Vec2Text 重建 92% 短文本</text>
+    <text x="271" y="421" font-size="11" fill="#b45309">Zero2Text 零训练跨域反演</text>
+    <text x="271" y="449" font-size="10" fill="#6b7280">主要防护</text>
+    <text x="271" y="468" font-size="11" fill="#15803d">校准加噪 / 向量加密存储</text>
+
+    <rect x="490" y="240" width="220" height="248" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+    <text x="506" y="266" font-size="13" font-weight="bold" fill="#b91c1c">链 ① 入口</text>
+    <text x="506" y="286" font-size="12" font-weight="bold" fill="#111827">未授权访问与 CVE</text>
+    <line x1="506" y1="298" x2="694" y2="298" stroke="#f0c2c2" stroke-width="1"/>
+    <text x="506" y="320" font-size="10" fill="#6b7280">攻击手法</text>
+    <text x="506" y="339" font-size="11" fill="#4b5563">默认无认证端口直连，</text>
+    <text x="506" y="356" font-size="11" fill="#4b5563">或伪造 header 绕过认证</text>
+    <text x="506" y="384" font-size="10" fill="#6b7280">代表证据</text>
+    <text x="506" y="403" font-size="11" fill="#b91c1c">1170 个 Chroma 公网可达</text>
+    <text x="506" y="421" font-size="11" fill="#b91c1c">Milvus CVE-2025-64513 · 9.3</text>
+    <text x="506" y="449" font-size="10" fill="#6b7280">主要防护</text>
+    <text x="506" y="468" font-size="11" fill="#15803d">认证 + TLS + 网络分段</text>
+
+    <rect x="725" y="240" width="220" height="248" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+    <text x="741" y="266" font-size="13" font-weight="bold" fill="#1d4ed8">链 ③ 检索</text>
+    <text x="741" y="286" font-size="12" font-weight="bold" fill="#111827">越权检索与图谱跳跃</text>
+    <line x1="741" y1="298" x2="929" y2="298" stroke="#bcd4f5" stroke-width="1"/>
+    <text x="741" y="320" font-size="10" fill="#6b7280">攻击手法</text>
+    <text x="741" y="339" font-size="11" fill="#4b5563">共享索引 + 检索后过滤，</text>
+    <text x="741" y="356" font-size="11" fill="#4b5563">或沿实体链接跳到敏感邻域</text>
+    <text x="741" y="384" font-size="10" fill="#6b7280">代表证据</text>
+    <text x="741" y="403" font-size="11" fill="#1d4ed8">Pinecone CVE-2024-41892</text>
+    <text x="741" y="421" font-size="11" fill="#1d4ed8">检索跳板攻击（Hybrid RAG）</text>
+    <text x="741" y="449" font-size="10" fill="#6b7280">主要防护</text>
+    <text x="741" y="468" font-size="11" fill="#15803d">权限下推到检索 / RLS</text>
+
+    <rect x="960" y="240" width="220" height="248" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.4"/>
+    <text x="976" y="266" font-size="13" font-weight="bold" fill="#6d28d9">链 ④ 生成</text>
+    <text x="976" y="286" font-size="12" font-weight="bold" fill="#111827">提示注入提取</text>
+    <line x1="976" y1="298" x2="1164" y2="298" stroke="#d6ccf5" stroke-width="1"/>
+    <text x="976" y="320" font-size="10" fill="#6b7280">攻击手法</text>
+    <text x="976" y="339" font-size="11" fill="#4b5563">利用指令跟随能力，</text>
+    <text x="976" y="356" font-size="11" fill="#4b5563">让模型逐字复述上下文</text>
+    <text x="976" y="384" font-size="10" fill="#6b7280">代表证据</text>
+    <text x="976" y="403" font-size="11" fill="#6d28d9">2 次查询泄库，成功率 100%</text>
+    <text x="976" y="421" font-size="11" fill="#6d28d9">EchoLeak 零点击外泄</text>
+    <text x="976" y="449" font-size="10" fill="#6b7280">主要防护</text>
+    <text x="976" y="468" font-size="11" fill="#15803d">限制输出通道 + 运行时检测</text>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="30" y="520" width="1150" height="98" rx="10" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="52" y="548" font-size="13" font-weight="bold" fill="#111827">为什么必须分四条看</text>
+    <text x="52" y="574" font-size="12" fill="#4b5563">给 LLM 加护栏挡不住向量库端口裸奔　·　给向量库加认证挡不住越权检索　·　把权限下推到检索挡不住模型把已授权内容逐字吐出</text>
+    <text x="52" y="600" font-size="12" fill="#b91c1c">堵住任何三条，第四条照样能把知识库抽干。四条链的负责人往往还分属不同团队——这是它最容易漏的地方</text>
+  </g>
+</svg>
