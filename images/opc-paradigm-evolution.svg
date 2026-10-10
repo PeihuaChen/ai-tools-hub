@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="300" fill="url(#bg)" rx="8"/>
+  <text x="400" y="30" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">AI 编程范式演进时间线</text>
+  <line x1="200" y1="42" x2="600" y2="42" stroke="#3a7bd5" stroke-width="1" opacity="0.5"/>
+  <!-- Timeline line -->
+  <line x1="50" y1="120" x2="750" y2="120" stroke="#3a7bd5" stroke-width="2" opacity="0.4"/>
+  <circle cx="50" cy="120" r="6" fill="#888" opacity="0.8"/>
+  <text x="50" y="100" font-family="'Courier New',Consolas,monospace" font-weight="400" font-size="12" fill="#888" text-anchor="middle">Copilot</text>
+  <text x="50" y="145" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">辅助编程</text>
+  <text x="50" y="160" font-family="Arial,sans-serif" font-size="9" fill="#666" text-anchor="middle">2021-2024</text>
+  <circle cx="210" cy="120" r="6" fill="#00d2ff" opacity="0.8"/>
+  <text x="210" y="100" font-family="'Courier New',Consolas,monospace" font-weight="400" font-size="12" fill="#00d2ff" text-anchor="middle">Vibe Coding</text>
+  <text x="210" y="145" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">氛围编码</text>
+  <text x="210" y="160" font-family="Arial,sans-serif" font-size="9" fill="#666" text-anchor="middle">2025</text>
+  <circle cx="340" cy="120" r="6" fill="#00f260" opacity="0.8"/>
+  <text x="340" y="100" font-family="'Courier New',Consolas,monospace" font-weight="400" font-size="12" fill="#00f260" text-anchor="middle">SPEC Coding</text>
+  <text x="340" y="145" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">规范编码</text>
+  <text x="340" y="160" font-family="Arial,sans-serif" font-size="9" fill="#666" text-anchor="middle">2025-2026</text>
+  <circle cx="470" cy="120" r="10" fill="#f7c948" opacity="0.8"/>
+  <circle cx="470" cy="120" r="14" fill="none" stroke="#f7c948" stroke-width="1.5" opacity="0.4"/>
+  <text x="470" y="100" font-family="'Courier New',Consolas,monospace" font-weight="700" font-size="14" fill="#f7c948" text-anchor="middle">Agentic Coding</text>
+  <text x="470" y="145" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">智能代理</text>
+  <text x="470" y="160" font-family="Arial,sans-serif" font-size="9" fill="#666" text-anchor="middle">2026 元年</text>
+  <circle cx="600" cy="120" r="6" fill="#ff6b35" opacity="0.8"/>
+  <text x="600" y="100" font-family="'Courier New',Consolas,monospace" font-weight="400" font-size="12" fill="#ff6b35" text-anchor="middle">ID Coding</text>
+  <text x="600" y="145" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">意图编程</text>
+  <text x="600" y="160" font-family="Arial,sans-serif" font-size="9" fill="#666" text-anchor="middle">未来终态</text>
+
+  <!-- Bottom description -->
+  <g transform="translate(50, 200)">
+    <rect x="0" y="0" width="700" height="55" rx="6" fill="#1a1a2a" stroke="#f7c948" stroke-width="1" opacity="0.5"/>
+    <text x="350" y="22" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="600" font-size="13" fill="#f7c948" text-anchor="middle">2026 = Agentic Coding 元年 + 一人公司 (OPC) 崛起起点</text>
+    <text x="350" y="42" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#aaa" text-anchor="middle">AI 从“被动辅助”变为“主动自主执行”，开发者从“代码编写者”变为“创意实现者”</text>
+  </g>
+  <text x="400" y="295" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">数据来源：北京大学 Agentic Coding 报告 2026.02 · 清华大学 OPC 报告 2026.02</text>
+</svg>

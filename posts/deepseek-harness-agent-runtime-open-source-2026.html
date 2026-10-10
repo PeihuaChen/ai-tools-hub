@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek 入局 Agent 基础设施：代码智能体竞争进入 Harness 时代</title>
+    <meta name="description" content="DeepSeek Harness 将模型、工具、沙箱、会话与 Agent 循环做成可替换插件。本文拆解其架构意义、评测边界、企业落地价值与治理风险。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">DeepSeek 入局 Agent 基础设施：代码智能体竞争进入 Harness 时代</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-08-17 · 9 分钟</span>
+            </div>
+            <p>当代码 Agent 开始能打开仓库、执行命令、修改文件、跑测试并根据报错继续迭代，竞争的关键便不再只是“模型会不会写一段代码”。真正决定一次任务能否稳定完成的，是谁在组织上下文、分配工具权限、隔离执行环境、控制循环何时结束。DeepSeek Harness 的出现，正把这层长期藏在产品背后的能力推到台前：代码智能体的下一场竞争，正在从模型参数和聊天界面，转向 Agent 运行时。</p>
+<p>DeepSeek 将 Harness 作为 Developer Preview 推出，并以开源项目的形式面向开发者。它不是另一个聊天机器人，也不只是为 DeepSeek 模型封装的一组工具调用 API；更准确地说，它是一套用于组装、运行和扩展 Agent 的底座。官方定义的核心理念很直接：模型、工具、技能、会话、沙箱、存储、Agent loop、调度乃至界面，都可以是插件。</p>
+<h2 id="harness-agent">Harness 到底是什么：代码 Agent 的运行时，而非一个更会聊天的模型</h2>
+<p>可以把大模型理解为发动机：它负责理解目标、生成计划、调用工具的意图与判断下一步。但发动机并不能单独让汽车上路。一个能在真实仓库中工作的 Agent，还需要方向盘、制动系统、传感器、道路规则与故障处理机制。Harness 就是把这些外围但决定成败的能力组合起来的运行时。</p>
+<p>在一次典型的修复任务中，Harness 需要把用户请求转为可追踪任务，向模型提供恰当的代码和历史上下文，允许或拒绝 shell、文件和网络工具，保存会话状态，在失败后反馈测试结果，并依据预算、权限与成功条件决定继续、暂停还是交给人。这些步骤任何一环设计不当，强模型也可能在错误目录里反复修改、因上下文膨胀而偏航，或者在没有边界的环境中做出高风险操作。</p>
+<p>因此，Harness 不是模型能力的附属品，而是模型能力在生产环境中的放大器和约束器。它既能让一般模型在合适的工具链中发挥价值，也能让强模型因安全策略、循环设计或上下文管理不佳而失去优势。对使用者来说，采购一个“模型分数”并不等同于获得一个可靠的工程 Agent。</p>
+<h2 id="deepseek-everything-is-a-plugin">DeepSeek 的答案：Everything Is a Plugin</h2>
+<p>DeepSeek Harness 建立在 Cordis 插件框架之上。Cordis 提供共享 Context、服务依赖、事件系统、配置校验和生命周期管理；开发者可把能力注册到上下文中，让其他插件按依赖关系取得服务，而不是将各模块硬编码耦合在一起。</p>
+<p>这套设计最重要的不是“插件”这个名词，而是可替换的边界被划得足够深。传统 Agent 项目往往能切换模型，却把工具协议、执行循环、会话记忆和界面流程锁在框架内部；Harness 则把这些也视为可组合模块。团队可以替换 LLM 适配器，接入自己的检索、工单、CI、代码扫描或审批系统；也可以在不推倒重来的前提下，试验不同的规划、反思、验证与收敛策略。</p>
+<p>官方教程展示了这一路径：插件可通过配置树被加载，服务可通过依赖注入使用，事件可用于广播与中断式处理，插件卸载后其注册资源可以随生命周期清理。对做平台的团队，这比“再接一个 Function Calling”更接近一套 Agent 操作系统：每项能力都有明确的装配点、依赖关系和替换成本。</p>
+<h2 id="harness">为什么模型评测越来越离不开 Harness</h2>
+<p>近年的代码 Agent 基准已不再只问“函数有没有写对”，而是要求系统探索陌生仓库、理解需求、调用终端、修改多处文件、解释失败并完成验证。这类长链路任务里，模型输出只是其中一个变量；工具描述质量、命令执行反馈、重试策略、上下文压缩和停止条件都会显著影响最终结果。</p>
+<p>DeepSeek 先前披露的部分 Agent 评测也注明使用了 DeepSeek Harness 的 minimal mode。这个事实有两层含义：第一，DeepSeek 已把 Harness 当成模型能力走向真实任务的关键一环；第二，读者不能把某个代码 Agent 分数简单归因于底座模型。模型、提示词、温度、工具集合、沙箱和循环策略共同构成了最后的成绩单。</p>
+<p>这也是行业需要更成熟评测方式的原因。未来横评应至少同步报告模型版本、Harness 版本、权限范围、可用工具、最大交互轮次、令牌和时间预算，以及是否允许联网。否则，同一个模型在不同外壳里跑出的结果，很容易被误读为纯粹的“智力差距”。</p>
+<h2 id="api-agent-deepseek">从模型 API 到 Agent 基础设施：DeepSeek 想占据哪一层</h2>
+<p>过去，模型厂商主要通过 API 价格、上下文长度和基准榜单吸引开发者；而代码 Agent 产品则通过 IDE 体验、任务编排和工具生态建立护城河。Harness 把两层连接起来：模型厂商不只提供生成能力，还提供一套让生成能力进入工作流的默认运行时。</p>
+<p>这并不意味着 DeepSeek Harness 已经是 Claude Code、Codex 或成熟 Agent 平台的直接替代品。那些产品拥有更完整的交互体验、用户习惯和工程生态。DeepSeek 的战略意义更像是开放“外壳层”：当模型、工具、沙箱与工作流都能按插件重组，开发者就有机会避免把关键生产流程永久绑定在单一闭源产品上。</p>
+<p>对国内生态而言，这尤其值得关注。企业常常需要同时面对私有化部署、国产模型、内网工具、审计要求和既有研发流程。一个模型中立、可扩展的运行时若能保持开放，可能成为连接这些约束的中间层；而差异化也将从“接入了哪个模型”转向“沉淀了哪些受控插件和领域工作流”。</p>
+<h2 id="_1">企业真正该拿走的，不是一个新框架，而是四条设计原则</h2>
+<p>第一，<strong>模型与运行时解耦</strong>。不要把业务流程写死在某个模型 SDK 或供应商私有协议中。通过适配层管理模型调用，才能按任务质量、成本、数据位置和可用性做路由。</p>
+<p>第二，<strong>工具必须有权限模型</strong>。文件编辑、终端命令、数据库查询和外部发布都不应因“模型想调用”而默认放行。应按项目、目录、环境和操作类型授予最小权限，高风险动作要求显式确认或进入隔离环境。</p>
+<p>第三，<strong>把评估接入交付链路</strong>。上线前不只评估单轮回答质量，还要在真实或脱敏仓库中测试任务成功率、失败恢复率、成本、时延和越权行为。可参考 <a href="../posts/mini-swe-agent-bash-first-react-evaluation-harness-2026.html">Mini-SWE-Agent 的 Bash-first 评测思路</a>，但生产验证应覆盖自身工具和权限边界。</p>
+<p>第四，<strong>把可观测性当作底层能力</strong>。每一次模型调用、工具输入输出、重试、人工接管和成本都要可追溯。对于复杂工作流，接入类似 <a href="../posts/langfuse-llm-agent-observability-guide-2026.html">Langfuse 的 LLM/Agent 可观测性方案</a>，比事后从聊天记录猜测错误原因更有效。</p>
+<h2 id="_2">插件化的代价：开放并不自动等于安全</h2>
+<p>“所有能力皆插件”也带来明显风险。插件越多，供应链越长；工具越强，权限滥用的后果越大；配置越灵活，错误装配的概率也越高。尤其是能够读取工作区、执行 shell、访问密钥或连接内部服务的插件，不能仅因其出现在开源市场中就被信任。</p>
+<p>企业使用 Harness 类框架时，应建立插件白名单与来源审查，锁定依赖版本，分离开发、测试与生产密钥，并给工具调用保留不可篡改的审计记录。执行代码时应采用容器、虚拟机或受限沙箱，并将网络访问、文件挂载、CPU/内存、运行时长与可写目录纳入策略。关于沙箱边界的具体取舍，可延伸阅读 <a href="../posts/code-sandbox-ai-agent-guide-2026.html">AI Agent 代码沙箱实践指南</a>。</p>
+<p>另一个风险是预览版成熟度。DeepSeek Harness 仍处在 Developer Preview 阶段，接口、默认插件和生态兼容性可能快速变化。对大多数团队，更稳妥的方式是先将其用于内部原型、受限代码库或离线评测，验证可扩展性与治理成本后，再决定是否承担生产核心依赖。</p>
+<h2 id="agent">开源竞争的下一站：谁定义 Agent 的可组合边界</h2>
+<p>DeepSeek Harness 的价值不在于宣称“一个框架解决所有 Agent 问题”，而在于它把一个行业事实公开化：模型只是 Agent 系统中的一个可替换部件。未来真正有壁垒的团队，可能不是拥有最多 Prompt 的团队，而是能以低成本组合模型、工具、记忆、执行环境、评估与审计能力的团队。</p>
+<p>从这个角度看，DeepSeek 入局 Agent 基础设施不是代码智能体竞争的终点，而是一次信号。模型性能仍然重要，但围绕模型的运行时将决定性能能否被稳定、安全、可复现地交付。对开发者而言，现在最值得投资的是建立模块边界、评测基线与治理机制；对企业而言，则是避免在热闹的 Agent 叙事里忽视那层最不显眼、却最决定生产成败的 Harness。</p>
+<h2 id="_3">免责声明</h2>
+<p>本文基于截至 2026 年 8 月 16 日可访问的官方文档和公开报道整理。DeepSeek Harness 仍为开发者预览项目，功能、接口、许可证状态和适用范围可能变化。文中对架构与企业实践的分析不构成采购、安全或合规建议；落地前请在自身环境完成技术、安全与法务评估。</p>
+<h2 id="_4">参考来源</h2>
+<ul>
+<li><a href="https://www.deepseek.com/harness/en/">DeepSeek Harness developer preview</a></li>
+<li><a href="https://deepseek-harness.github.io/deepseek-harness/en/develop/cordis-tutorial/">DeepSeek Harness：Cordis tutorial</a></li>
+<li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/development.md">DeepSeek Harness development guide（GitHub）</a></li>
+<li><a href="https://thenewstack.io/deepseek-harness-open-source-plugins/">The New Stack：DeepSeek open sources an agent harness where everything is a plugin</a></li>
+<li><a href="https://kaitchup.substack.com/p/laguna-s-21-how-agent-harnesses-and">Kaitchup：How Agent Harnesses and Inference Budgets Shape Coding Performance</a></li>
+</ul>
+<h2 id="_5">相关阅读</h2>
+<ul>
+<li><a href="../posts/harness-engineering-invisible-half-of-ai-agents-2026.html">Harness 工程：AI Agent 最容易被忽视的一半</a></li>
+<li><a href="../posts/openhands-deep-dive-opendevin-to-80k-stars-2026.html">OpenHands 深度拆解：从 OpenDevin 到开源代码智能体</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业 AI Agent 部署指南</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP 与 A2A 深度对比：Agent 协议如何分工</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 海尔净水选购会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpsSTO" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的编程体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DDell%252520U2724D%2525204K%2525E6%252598%2525BE%2525E7%2525A4%2525BA%2525E5%252599%2525A8%2526enc%253Dutf-8&platform=jd&article=deepseek-harness-agent-runtime-open-source-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">4K显示器 - Dell U2724D</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">程序员双屏标配，27寸4K，护眼不疲劳</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥2500-3500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DMacBook%2520Pro%2520M4%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=deepseek-harness-agent-runtime-open-source-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发首选，M4芯片神经网络引擎极强</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥14000-19000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

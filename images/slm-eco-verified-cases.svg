@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<defs><linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#f5f7fa"/></linearGradient></defs>
+<rect width="1200" height="760" fill="#ffffff"/><rect width="1200" height="760" fill="url(#paper)"/>
+<text x="50" y="52" font-family="Microsoft YaHei,Arial" font-size="25" font-weight="700" fill="#111827">三个可核验案例：小模型落地的同一种结构</text>
+<text x="50" y="82" font-family="Microsoft YaHei,Arial" font-size="14" fill="#4b5563">共同点不是模型更强，而是任务被收窄、事实被外置、执行权被保留在确定性系统里</text>
+
+<g font-family="Microsoft YaHei,Arial" font-size="13">
+<rect x="50" y="104" width="228" height="46" rx="8" fill="#f1f5f9" stroke="#d9e2ec"/><text x="66" y="132" font-size="14" font-weight="700" fill="#111827">对比维度</text>
+<rect x="286" y="104" width="290" height="46" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/><text x="302" y="125" font-size="15" font-weight="700" fill="#1d4ed8">医疗 · EaseHealth</text><text x="302" y="143" font-size="11.5" fill="#4b5563">乌干达乡村离线临床决策支持</text>
+<rect x="584" y="104" width="290" height="46" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/><text x="600" y="125" font-size="15" font-weight="700" fill="#15803d">农业 · AUGURY</text><text x="600" y="143" font-size="11.5" fill="#4b5563">杂草反推土壤健康指标</text>
+<rect x="882" y="104" width="268" height="46" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/><text x="898" y="125" font-size="15" font-weight="700" fill="#b45309">消费电子 · 视障导航</text><text x="898" y="143" font-size="11.5" fill="#4b5563">智能眼镜 + 手机本地推理</text>
+</g>
+
+<g font-family="Microsoft YaHei,Arial" font-size="12.5" fill="#374151">
+<rect x="50" y="160" width="1100" height="86" rx="8" fill="#ffffff" stroke="#e2e8f0"/><text x="66" y="196" font-size="13.5" font-weight="700" fill="#111827">模型与部署</text>
+<text x="302" y="187">MedGemma 4B + MedASR</text><text x="302" y="209">量化后跑 8GB 内存手机</text><text x="302" y="231" fill="#6b7280">热启动推理约 40 秒</text>
+<text x="600" y="187">MiniCPM5-1B + LoRA</text><text x="600" y="209">GGUF Q4_K_M 约 660MB</text><text x="600" y="231" fill="#6b7280">笔记本单次回答 6-12 秒</text>
+<text x="898" y="187">精简视觉语言模型 + LoRA</text><text x="898" y="209">眼镜拍摄，手机本地推理</text><text x="898" y="231" fill="#6b7280">全流程不出设备</text>
+
+<rect x="50" y="256" width="1100" height="86" rx="8" fill="#f8fafc" stroke="#e2e8f0"/><text x="66" y="292" font-size="13.5" font-weight="700" fill="#111827">事实从哪来</text>
+<text x="302" y="283">乌干达国家临床指南</text><text x="302" y="305">作为知识基础</text><text x="302" y="327" fill="#6b7280">模型不脱离指南自由作答</text>
+<text x="600" y="283">2,230 物种确定性数据库</text><text x="600" y="305">检索给出物种，库给出指标</text><text x="600" y="327" fill="#6b7280">pH 等数值模型从不生成</text>
+<text x="898" y="283">针对视障场景的微调数据</text><text x="898" y="305">描述任务被明确收窄</text><text x="898" y="327" fill="#6b7280">不承担开放式问答</text>
+
+<rect x="50" y="352" width="1100" height="86" rx="8" fill="#ffffff" stroke="#e2e8f0"/><text x="66" y="388" font-size="13.5" font-weight="700" fill="#111827">主动放弃什么</text>
+<text x="302" y="379" font-weight="700" fill="#b91c1c">不给药物剂量建议</text><text x="302" y="401">输出危险信号与把握程度</text><text x="302" y="423" fill="#6b7280">最终决策仍由医务人员做</text>
+<text x="600" y="379" font-weight="700" fill="#b91c1c">不给施肥用药建议</text><text x="600" y="401">只输出土壤指标判断</text><text x="600" y="423" fill="#6b7280">被问管理措施时拒答</text>
+<text x="898" y="379" font-weight="700" fill="#b91c1c">不做云端大模型对话</text><text x="898" y="401">专注场景图像描述</text><text x="898" y="423" fill="#6b7280">以隐私换取能力聚焦</text>
+
+<rect x="50" y="448" width="1100" height="86" rx="8" fill="#f8fafc" stroke="#e2e8f0"/><text x="66" y="484" font-size="13.5" font-weight="700" fill="#111827">已公开的结果</text>
+<text x="302" y="475">15 家机构可行性测试</text><text x="302" y="497">268 名卫生人员参与</text><text x="302" y="519" font-weight="700" fill="#15803d">幻觉再降 62%</text>
+<text x="600" y="475">188 种澳洲杂草识别</text><text x="600" y="497" font-weight="700" fill="#15803d">top-1 80.9% / top-3 88.3%</text><text x="600" y="519" fill="#6b7280">文字链路已可运行</text>
+<text x="898" y="475">微调后描述质量提升</text><text x="898" y="497" font-weight="700" fill="#15803d">部分超过更大的外部模型</text><text x="898" y="519" fill="#6b7280">验证全本地方案可行</text>
+
+<rect x="50" y="544" width="1100" height="86" rx="8" fill="#ffffff" stroke="#e2e8f0"/><text x="66" y="580" font-size="13.5" font-weight="700" fill="#111827">公开的局限</text>
+<text x="302" y="571">多数存量手机内存不足</text><text x="302" y="593">仍需临床准确性验证</text><text x="302" y="615" fill="#6b7280">属可行性测试，非规模化</text>
+<text x="600" y="571">照片识别索引仍在建设</text><text x="600" y="593">早期项目，无正式发布版</text><text x="600" y="615" fill="#6b7280">尚无田间增产数据</text>
+<text x="898" y="571">研究原型而非量产产品</text><text x="898" y="593">依赖配对手机算力</text><text x="898" y="615" fill="#6b7280">样本与场景覆盖有限</text>
+</g>
+
+<rect x="50" y="652" width="1100" height="72" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/><text x="70" y="682" font-family="Microsoft YaHei,Arial" font-size="14" font-weight="700" fill="#6d28d9">可复用的结论</text><text x="70" y="708" font-family="Microsoft YaHei,Arial" font-size="12.5" fill="#374151">三个案例的模型从 1B 到 4B 不等，但都做了同一件事：把事实交给数据库或指南，把高风险动作留给人和规则，模型只负责理解与表达。</text>
+<text x="1150" y="748" text-anchor="end" font-family="Microsoft YaHei,Arial" font-size="11" fill="#6b7280">资料整理自各项目公开文档与论文 · 2026-08</text>
+</svg>

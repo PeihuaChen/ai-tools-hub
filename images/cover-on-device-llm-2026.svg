@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071a2b"/>
+      <stop offset="50%" stop-color="#0d2f3a"/>
+      <stop offset="100%" stop-color="#05121f"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5d0"/>
+      <stop offset="100%" stop-color="#2a9df4"/>
+    </linearGradient>
+    <linearGradient id="lime" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#11998e"/>
+      <stop offset="100%" stop-color="#38ef7d"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e2c44"/>
+      <stop offset="100%" stop-color="#103a40"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.05" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- Decorative glows -->
+  <circle cx="730" cy="120" r="150" fill="#00e5d0" opacity="0.05"/>
+  <circle cx="800" cy="300" r="90" fill="#38ef7d" opacity="0.04"/>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#cyan)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#cyan)"/>
+
+  <!-- ===== Right side: device + chip illustration ===== -->
+  <g transform="translate(600, 70)">
+    <!-- Laptop -->
+    <rect x="20" y="40" width="210" height="130" rx="8" fill="url(#chip)" stroke="url(#cyan)" stroke-width="1.5"/>
+    <rect x="20" y="170" width="250" height="12" rx="4" fill="#0e2c44" stroke="#1c5a66" stroke-width="1"/>
+    <!-- Central NPU chip on screen -->
+    <rect x="95" y="78" width="60" height="60" rx="6" fill="#0a2233" stroke="url(#lime)" stroke-width="1.5"/>
+    <text x="125" y="114" font-family="'Courier New',monospace" font-size="20" font-weight="bold" fill="#38ef7d" text-anchor="middle">AI</text>
+    <!-- chip pins -->
+    <g stroke="url(#cyan)" stroke-width="1.5" opacity="0.8">
+      <line x1="95" y1="92" x2="80" y2="92"/><line x1="95" y1="108" x2="80" y2="108"/><line x1="95" y1="124" x2="80" y2="124"/>
+      <line x1="155" y1="92" x2="170" y2="92"/><line x1="155" y1="108" x2="170" y2="108"/><line x1="155" y1="124" x2="170" y2="124"/>
+      <line x1="111" y1="78" x2="111" y2="64"/><line x1="125" y1="78" x2="125" y2="64"/><line x1="139" y1="78" x2="139" y2="64"/>
+      <line x1="111" y1="138" x2="111" y2="152"/><line x1="125" y1="138" x2="125" y2="152"/><line x1="139" y1="138" x2="139" y2="152"/>
+    </g>
+
+    <!-- Phone -->
+    <rect x="245" y="55" width="70" height="125" rx="12" fill="url(#chip)" stroke="url(#lime)" stroke-width="1.5"/>
+    <rect x="254" y="70" width="52" height="88" rx="4" fill="#0a2233"/>
+    <circle cx="280" cy="170" r="4" fill="#1c5a66"/>
+    <!-- tokens streaming on phone -->
+    <g font-family="'Courier New',monospace" font-size="8" fill="#7de8a8" opacity="0.9">
+      <text x="260" y="84">▍tok</text>
+      <text x="260" y="98">▍▍</text>
+      <text x="260" y="112">▍▍▍</text>
+      <text x="260" y="126">▍▍</text>
+      <text x="260" y="140">42 t/s</text>
+    </g>
+  </g>
+
+  <!-- ===== Left side: Title ===== -->
+  <!-- Badge -->
+  <g transform="translate(50, 34)">
+    <rect x="0" y="0" width="150" height="28" rx="4" fill="url(#cyan)" opacity="0.9"/>
+    <text x="75" y="19" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="bold" font-size="13" fill="#062033" text-anchor="middle">端侧大模型全景</text>
+  </g>
+
+  <text x="50" y="115" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="33" font-weight="bold" fill="#ffffff">2026 端侧大模型</text>
+  <text x="50" y="158" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="22" font-weight="bold" fill="url(#cyan)">当多模态AI塞进手机和笔记本</text>
+
+  <!-- Subtitle -->
+  <text x="50" y="190" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="13" fill="#6fa8b8">On-Device LLM · 从演示噱头走向实用工程</text>
+
+  <!-- Model badges -->
+  <g transform="translate(50, 208)">
+    <rect x="0" y="0" width="92" height="30" rx="15" fill="#0e2c44" stroke="#00e5d0" stroke-width="0.8"/>
+    <text x="46" y="20" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="12" fill="#5fe6da" text-anchor="middle">Gemma 4</text>
+
+    <rect x="102" y="0" width="92" height="30" rx="15" fill="#0e2c44" stroke="#38ef7d" stroke-width="0.8"/>
+    <text x="148" y="20" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="12" fill="#7de8a8" text-anchor="middle">MiniCPM</text>
+
+    <rect x="204" y="0" width="92" height="30" rx="15" fill="#0e2c44" stroke="#00e5d0" stroke-width="0.8"/>
+    <text x="250" y="20" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="12" fill="#5fe6da" text-anchor="middle">Qwen3.5</text>
+  </g>
+
+  <!-- Feature line -->
+  <text x="50" y="270" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#5a8595">✓ 内存带宽瓶颈  ✓ 4-bit量化  ✓ 无编码器多模态</text>
+
+  <!-- Divider -->
+  <rect x="50" y="290" width="460" height="1" fill="#fff" opacity="0.08"/>
+  <text x="50" y="318" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4d6f7d">技术突破 · 硬件现状 · 中美模型对比 · 落地场景</text>
+
+  <!-- Credit -->
+  <text x="50" y="346" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#33505c">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(820, 34)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#cyan)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#00e5d0" text-anchor="middle">26</text>
+  </g>
+</svg>

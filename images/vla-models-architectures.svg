@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1180" viewBox="0 0 1080 1180">
+  <rect width="1080" height="1180" fill="#f7f8fa"/>
+
+  <text x="540" y="72" fill="#111827" font-size="60" font-weight="bold" text-anchor="middle">VLA 三大架构范式</text>
+  <text x="540" y="124" fill="#4b5563" font-size="34" text-anchor="middle">区别在于「动作怎么生成」</text>
+
+  <!-- Paradigm 1 -->
+  <rect x="50" y="170" width="980" height="290" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="84" y="238" fill="#1d4ed8" font-size="42" font-weight="bold">范式一 · 离散 token 自回归</text>
+  <text x="84" y="288" fill="#4b5563" font-size="32">代表：RT-2、OpenVLA</text>
+  <rect x="84" y="320" width="220" height="100" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="194" y="382" fill="#1d4ed8" font-size="32" text-anchor="middle">图像+指令</text>
+  <line x1="304" y1="370" x2="374" y2="370" stroke="#94a3b8" stroke-width="4"/>
+  <rect x="374" y="320" width="170" height="100" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="459" y="382" fill="#1d4ed8" font-size="34" text-anchor="middle">VLM</text>
+  <line x1="544" y1="370" x2="614" y2="370" stroke="#94a3b8" stroke-width="4"/>
+  <rect x="614" y="320" width="382" height="100" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="805" y="382" fill="#1d4ed8" font-size="32" text-anchor="middle">动作 token 逐个预测</text>
+
+  <!-- Paradigm 2 -->
+  <rect x="50" y="490" width="980" height="290" rx="18" fill="#f0fdf4" stroke="#15803d" stroke-width="2.5"/>
+  <text x="84" y="558" fill="#15803d" font-size="42" font-weight="bold">范式二 · 连续动作 + 流匹配</text>
+  <text x="84" y="608" fill="#4b5563" font-size="32">代表：π0、SmolVLA、GR00T</text>
+  <rect x="84" y="640" width="220" height="100" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text x="194" y="702" fill="#15803d" font-size="32" text-anchor="middle">图像+指令</text>
+  <line x1="304" y1="690" x2="374" y2="690" stroke="#94a3b8" stroke-width="4"/>
+  <rect x="374" y="640" width="170" height="100" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text x="459" y="702" fill="#15803d" font-size="34" text-anchor="middle">VLM</text>
+  <line x1="544" y1="690" x2="614" y2="690" stroke="#94a3b8" stroke-width="4"/>
+  <rect x="614" y="640" width="382" height="100" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text x="805" y="702" fill="#15803d" font-size="32" text-anchor="middle">动作专家生成轨迹</text>
+
+  <!-- Paradigm 3 -->
+  <rect x="50" y="810" width="980" height="330" rx="18" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="84" y="878" fill="#6d28d9" font-size="42" font-weight="bold">范式三 · 双系统 / 分层</text>
+  <text x="84" y="928" fill="#4b5563" font-size="32">代表：Helix、Gemini Robotics</text>
+  <rect x="84" y="960" width="420" height="150" rx="12" fill="#ede9fe" stroke="#6d28d9" stroke-width="2"/>
+  <text x="294" y="1020" fill="#6d28d9" font-size="36" font-weight="bold" text-anchor="middle">系统 2：大 VLM</text>
+  <text x="294" y="1070" fill="#4b5563" font-size="30" text-anchor="middle">7-9Hz 慢思考·规划</text>
+  <line x1="504" y1="1035" x2="576" y2="1035" stroke="#94a3b8" stroke-width="4"/>
+  <rect x="576" y="960" width="420" height="150" rx="12" fill="#ede9fe" stroke="#6d28d9" stroke-width="2"/>
+  <text x="786" y="1020" fill="#6d28d9" font-size="36" font-weight="bold" text-anchor="middle">系统 1：小网络</text>
+  <text x="786" y="1070" fill="#4b5563" font-size="30" text-anchor="middle">200Hz 快反应·控制</text>
+</svg>

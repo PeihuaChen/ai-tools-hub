@@ -1,0 +1,69 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="0.5" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="76" x2="900" y2="76"/>
+    <line x1="0" y1="152" x2="900" y2="152"/>
+    <line x1="0" y1="228" x2="900" y2="228"/>
+    <line x1="0" y1="304" x2="900" y2="304"/>
+    <line x1="180" y1="0" x2="180" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+  <rect x="0" y="0" width="900" height="4" fill="url(#bar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#bar)"/>
+
+  <rect x="40" y="34" width="268" height="34" rx="4" fill="none" stroke="#06b6d4" stroke-width="1.5"/>
+  <text x="56" y="57" font-size="17" fill="#67e8f9" font-weight="bold">AI 编程助手 · 榜单解读</text>
+
+  <rect x="812" y="34" width="48" height="34" rx="4" fill="#1d4ed8" fill-opacity="0.25" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="836" y="58" font-size="20" fill="#bfdbfe" font-weight="bold" text-anchor="middle">26</text>
+
+  <text x="40" y="124" font-size="31" fill="#ffffff" font-weight="bold">跑分第一最贵，</text>
+  <text x="40" y="164" font-size="31" fill="#ffffff" font-weight="bold">跑分第四最便宜</text>
+  <text x="40" y="204" font-size="18" fill="url(#sub)" font-weight="bold">Terminal-Bench 4.0 榜单 × 单任务成本</text>
+
+  <text x="40" y="242" font-size="13" fill="#fbbf24">64.8% 登顶 Claude Code＋Opus 5.5，同分组合却有 5 倍价差</text>
+  <text x="40" y="264" font-size="13" fill="#34d399">单任务 $1.92：Codex＋GPT-6.1 Sol，跑分第四、性价比第一</text>
+  <text x="40" y="286" font-size="13" fill="#f472b6">档位陷阱：max 只贵不强，28%–39% 溢价只买到 0.3 分</text>
+
+  <g font-size="13" fill="#cbd5e1">
+    <rect x="40" y="306" width="150" height="28" rx="14" fill="none" stroke="#475569"/>
+    <text x="115" y="325" text-anchor="middle">Terminal-Bench 4.0</text>
+    <rect x="200" y="306" width="118" height="28" rx="14" fill="none" stroke="#475569"/>
+    <text x="259" y="325" text-anchor="middle">单任务成本</text>
+    <rect x="328" y="306" width="98" height="28" rx="14" fill="none" stroke="#475569"/>
+    <text x="377" y="325" text-anchor="middle">口径陷阱</text>
+    <rect x="436" y="306" width="98" height="28" rx="14" fill="none" stroke="#475569"/>
+    <text x="485" y="325" text-anchor="middle">效能剪刀差</text>
+    <rect x="544" y="306" width="96" height="28" rx="14" fill="none" stroke="#475569"/>
+    <text x="592" y="325" text-anchor="middle">国产 41.8%</text>
+  </g>
+
+  <g transform="translate(690,96)">
+    <rect x="0" y="0" width="170" height="140" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#334155"/>
+    <polyline points="16,112 56,88 96,64 136,30" fill="none" stroke="#f87171" stroke-width="3"/>
+    <polyline points="16,40 56,60 96,64 136,116" fill="none" stroke="#4ade80" stroke-width="3"/>
+    <circle cx="96" cy="64" r="5" fill="#facc15"/>
+    <text x="85" y="134" font-size="13" fill="#94a3b8" text-anchor="middle">分数 ↑ 成本 ↓</text>
+  </g>
+
+  <line x1="40" y1="352" x2="860" y2="352" stroke="#334155" stroke-width="1"/>
+  <text x="40" y="372" font-size="13" fill="#64748b">数据截至 2026-10-06 · 编译自公开榜单</text>
+  <text x="860" y="372" font-size="13" fill="#64748b" text-anchor="end">AI知识宇宙</text>
+</svg>

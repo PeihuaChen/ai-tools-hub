@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="0.5" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- 左上角标签框 -->
+  <rect x="40" y="34" width="248" height="30" rx="6" fill="none" stroke="#22d3ee" stroke-opacity="0.55" stroke-width="1.2"/>
+  <text x="56" y="54" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="14" fill="#9beaf2" letter-spacing="1">AI 行业观察 · 语言世界模型</text>
+
+  <!-- 年份徽章 -->
+  <circle cx="838" cy="50" r="26" fill="none" stroke="#a855f7" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="838" y="58" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="22" font-weight="700" fill="#c8a8ff">26</text>
+
+  <!-- 主标题 -->
+  <text x="40" y="128" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="31" font-weight="700" fill="#ffffff">不再"模拟"环境，而是"预言"环境</text>
+  <text x="40" y="172" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="30" font-weight="700" fill="#ffffff">Qwen-AgentWorld 凭什么压过一线大模型</text>
+
+  <!-- 副标题 -->
+  <text x="40" y="208" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="600" fill="url(#sub)">业界首个原生语言世界模型 · 单模型覆盖七大智能体环境</text>
+
+  <!-- 三行亮点 -->
+  <text x="40" y="248" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#7dd3fc">▍ 基础模型 Qwen3.5-35B-A3B-Base ｜ 256 专家 MoE ｜ 256K 上下文</text>
+  <text x="40" y="272" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#fbbf72">▍ AgentWorldBench 58.71 ＞ GPT-5.4(58.25) ＞ Claude Opus 4.8(56.59)</text>
+  <text x="40" y="296" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#f9a8d4">▍ 环境模拟器 + 智能体基座 双范式 ｜ SWE-Bench / WideSearch 全面提升</text>
+
+  <!-- 标签栏 pill -->
+  <g font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12">
+    <rect x="40" y="322" width="78" height="24" rx="12" fill="none" stroke="#6366f1" stroke-opacity="0.6"/>
+    <text x="79" y="338" text-anchor="middle" fill="#b4b8ff">世界模型</text>
+    <rect x="126" y="322" width="64" height="24" rx="12" fill="none" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="158" y="338" text-anchor="middle" fill="#9beaf2">智能体</text>
+    <rect x="198" y="322" width="56" height="24" rx="12" fill="none" stroke="#a855f7" stroke-opacity="0.6"/>
+    <text x="226" y="338" text-anchor="middle" fill="#c8a8ff">Qwen</text>
+    <rect x="262" y="322" width="64" height="24" rx="12" fill="none" stroke="#f59e0b" stroke-opacity="0.6"/>
+    <text x="294" y="338" text-anchor="middle" fill="#fbbf72">强化学习</text>
+    <rect x="334" y="322" width="52" height="24" rx="12" fill="none" stroke="#ec4899" stroke-opacity="0.6"/>
+    <text x="360" y="338" text-anchor="middle" fill="#f9a8d4">开源</text>
+  </g>
+
+  <!-- 右侧概念示意图：状态->动作->预测下一状态 -->
+  <g transform="translate(620,150)" opacity="0.92">
+    <rect x="0" y="0" width="62" height="42" rx="7" fill="none" stroke="#22d3ee" stroke-opacity="0.7" stroke-width="1.4"/>
+    <text x="31" y="26" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" fill="#9beaf2">State</text>
+
+    <line x1="62" y1="21" x2="100" y2="21" stroke="#6366f1" stroke-opacity="0.7" stroke-width="1.4"/>
+    <polygon points="100,21 92,17 92,25" fill="#6366f1"/>
+
+    <rect x="102" y="0" width="62" height="42" rx="7" fill="none" stroke="#a855f7" stroke-opacity="0.7" stroke-width="1.4"/>
+    <text x="133" y="26" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" fill="#c8a8ff">Action</text>
+
+    <line x1="133" y1="42" x2="133" y2="74" stroke="#f59e0b" stroke-opacity="0.7" stroke-width="1.4"/>
+    <polygon points="133,74 129,66 137,66" fill="#f59e0b"/>
+
+    <rect x="72" y="76" width="124" height="42" rx="7" fill="none" stroke="#ec4899" stroke-opacity="0.75" stroke-width="1.6"/>
+    <text x="134" y="102" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" fill="#f9a8d4">Next State 预测</text>
+  </g>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+  <text x="40" y="375" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#5a6080">基础模型 · 性能对比 · 应用范式 · 真实落地效果</text>
+  <text x="860" y="375" text-anchor="end" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#5a6080">公众号：AI工具箱</text>
+</svg>

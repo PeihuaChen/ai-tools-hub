@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="33%" stop-color="#f59e0b"/>
+      <stop offset="33%" stop-color="#8b5cf6"/>
+      <stop offset="66%" stop-color="#8b5cf6"/>
+      <stop offset="66%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="40" x2="900" y2="40"/>
+    <line x1="0" y1="80" x2="900" y2="80"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="160" x2="900" y2="160"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="280" x2="900" y2="280"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="100" y1="0" x2="100" y2="383"/>
+    <line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/>
+    <line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+
+  <!-- Top color bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+
+  <!-- Bottom color bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label -->
+  <rect x="28" y="24" width="220" height="28" rx="4" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.8"/>
+  <text x="40" y="43" font-family="system-ui, sans-serif" font-size="12" fill="#f59e0b" opacity="0.9">AI 工具 · 团队协作</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="20" width="40" height="40" rx="6" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.7"/>
+  <text x="860" y="46" font-family="system-ui, sans-serif" font-size="16" fill="#8b5cf6" text-anchor="middle" font-weight="bold">26</text>
+
+  <!-- Main title -->
+  <text x="40" y="110" font-family="system-ui, sans-serif" font-size="29" fill="#ffffff" font-weight="bold">当 Agent 拥有自己的密钥对</text>
+  <text x="40" y="148" font-family="system-ui, sans-serif" font-size="29" fill="#ffffff" font-weight="bold">Block 的 Buzz 如何重新定义"团队协作"</text>
+
+  <!-- Subtitle -->
+  <text x="40" y="185" font-family="system-ui, sans-serif" font-size="17" fill="url(#subtitle)">Nostr 协议 · Rust Relay · NIP-34 Git · Agent 密码学身份</text>
+
+  <!-- Key highlights -->
+  <text x="40" y="225" font-family="system-ui, sans-serif" font-size="12.5" fill="#06b6d4">⬡ 26K+ Stars · 101 贡献者 · 112 Release · Apache 2.0 开源</text>
+  <text x="40" y="248" font-family="system-ui, sans-serif" font-size="12.5" fill="#f59e0b">⬡ 频道/DM/语音 + 内置 Git + 工作流引擎——一个 relay 全搞定</text>
+  <text x="40" y="271" font-family="system-ui, sans-serif" font-size="12.5" fill="#a78bfa">⬡ 自托管不过墙 · 数据完全自控 · LLM 可换为 DeepSeek/Qwen</text>
+
+  <!-- Tags -->
+  <g transform="translate(40, 295)">
+    <rect x="0" y="0" width="60" height="24" rx="12" fill="none" stroke="#6b7280" stroke-width="1"/>
+    <text x="30" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">Buzz</text>
+
+    <rect x="72" y="0" width="60" height="24" rx="12" fill="none" stroke="#6b7280" stroke-width="1"/>
+    <text x="102" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">Nostr</text>
+
+    <rect x="144" y="0" width="56" height="24" rx="12" fill="none" stroke="#6b7280" stroke-width="1"/>
+    <text x="172" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">Rust</text>
+
+    <rect x="212" y="0" width="80" height="24" rx="12" fill="none" stroke="#6b7280" stroke-width="1"/>
+    <text x="252" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">AI Agent</text>
+
+    <rect x="304" y="0" width="70" height="24" rx="12" fill="none" stroke="#6b7280" stroke-width="1"/>
+    <text x="339" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">自托管</text>
+
+    <rect x="386" y="0" width="56" height="24" rx="12" fill="none" stroke="#6b7280" stroke-width="1"/>
+    <text x="414" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">Block</text>
+  </g>
+
+  <!-- Right side: conceptual diagram - key pair icon -->
+  <g transform="translate(660, 80)">
+    <!-- Key shape -->
+    <circle cx="40" cy="40" r="18" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+    <line x1="58" y1="40" x2="110" y2="40" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+    <line x1="95" y1="40" x2="95" y2="52" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+    <line x1="105" y1="40" x2="105" y2="48" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+    <text x="40" y="44" font-family="monospace" font-size="10" fill="#f59e0b" text-anchor="middle">PUB</text>
+
+    <!-- Arrow -->
+    <line x1="70" y1="70" x2="70" y2="95" stroke="#6b7280" stroke-width="1" stroke-dasharray="3"/>
+    <polygon points="65,95 75,95 70,102" fill="#6b7280"/>
+
+    <!-- Signed event box -->
+    <rect x="15" y="108" width="110" height="50" rx="6" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.7"/>
+    <text x="70" y="128" font-family="monospace" font-size="9" fill="#8b5cf6" text-anchor="middle">signed_event</text>
+    <text x="70" y="143" font-family="monospace" font-size="8" fill="#6b7280" text-anchor="middle">kind: 1 (message)</text>
+    <text x="70" y="155" font-family="monospace" font-size="8" fill="#6b7280" text-anchor="middle">sig: 3f8a...c2d1</text>
+
+    <!-- Agent icon -->
+    <circle cx="170" cy="133" r="16" fill="none" stroke="#06b6d4" stroke-width="1.2" opacity="0.7"/>
+    <text x="170" y="137" font-family="system-ui" font-size="9" fill="#06b6d4" text-anchor="middle">Agent</text>
+    <line x1="125" y1="133" x2="154" y2="133" stroke="#06b6d4" stroke-width="1" stroke-dasharray="3" opacity="0.7"/>
+  </g>
+
+  <!-- Bottom divider -->
+  <line x1="40" y1="340" x2="860" y2="340" stroke="#333355" stroke-width="0.5"/>
+
+  <!-- Bottom text -->
+  <text x="40" y="362" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">深度拆解 · 架构解析 · 国内自托管方案 · 竞品对比</text>
+  <text x="780" y="362" font-family="system-ui, sans-serif" font-size="10" fill="#4b5563" opacity="0.6">xiaoi.ai</text>
+</svg>

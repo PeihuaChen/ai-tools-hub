@@ -1,0 +1,34 @@
+<svg width="1080" height="900" viewBox="0 0 1080 900" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="900" fill="#f7f8fa"/>
+
+  <text x="540" y="64" font-size="56" font-weight="bold" fill="#111827" text-anchor="middle">生产级 Agent 治理栈：五层</text>
+  <text x="540" y="112" font-size="32" fill="#6b7280" text-anchor="middle">自下而上搭建，缺层即在事故中露馅</text>
+
+  <!-- Layer 5: top -->
+  <rect x="80" y="150" width="920" height="120" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="120" y="205" font-size="40" font-weight="bold" fill="#1d4ed8">5 部署前门</text>
+  <text x="120" y="250" font-size="34" fill="#111827">上线前系统评估：策略拦得住才放行，修复反灌回归集</text>
+
+  <!-- Layer 4 -->
+  <rect x="80" y="290" width="920" height="120" rx="14" fill="#ecfdf5" stroke="#15803d" stroke-width="2.5"/>
+  <text x="120" y="345" font-size="40" font-weight="bold" fill="#15803d">4 可观测与审计</text>
+  <text x="120" y="390" font-size="34" fill="#111827">TraceID 全轨迹：意图、推理、工具调用、结果可查可警</text>
+
+  <!-- Layer 3 -->
+  <rect x="80" y="430" width="920" height="120" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2.5"/>
+  <text x="120" y="485" font-size="40" font-weight="bold" fill="#b45309">3 运行时策略</text>
+  <text x="120" y="530" font-size="34" fill="#111827">低危自动跑 · 中危限流审计 · 高危人工批准与熔断</text>
+
+  <!-- Layer 2 -->
+  <rect x="80" y="570" width="920" height="120" rx="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="120" y="625" font-size="40" font-weight="bold" fill="#6d28d9">2 工具网关</text>
+  <text x="120" y="670" font-size="34" fill="#111827">MCP 注册与白名单 · 调用校验 · 凭证隔离不进上下文</text>
+
+  <!-- Layer 1: bottom -->
+  <rect x="80" y="710" width="920" height="120" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2.5"/>
+  <text x="120" y="765" font-size="40" font-weight="bold" fill="#b91c1c">1 身份与权限</text>
+  <text x="120" y="810" font-size="34" fill="#111827">一 Agent 一 ID · 最小权限 · OAuth 委托 · 可吊销</text>
+
+  <!-- Side note -->
+  <text x="540" y="870" font-size="32" fill="#6b7280" text-anchor="middle">没有身份追不到人，没有网关拦不住越权，没有前门策略形同虚设</text>
+</svg>

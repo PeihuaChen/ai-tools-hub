@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="35%" stop-color="#818cf8"/>
+      <stop offset="70%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.05">
+    <line x1="0" y1="60" x2="900" y2="60"/><line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/><line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="100" y1="0" x2="100" y2="383"/><line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/><line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/><line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/><line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+  <rect x="0" y="0" width="900" height="4" fill="url(#bar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#bar)"/>
+
+  <!-- label -->
+  <rect x="40" y="28" width="230" height="30" rx="6" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-width="1"/>
+  <text x="155" y="48" font-size="14" fill="#7dd3fc" text-anchor="middle">AI 编程工具 · 实战指南</text>
+
+  <!-- year badge -->
+  <circle cx="852" cy="46" r="24" fill="none" stroke="#c084fc" stroke-width="2"/>
+  <text x="852" y="53" font-size="20" font-weight="bold" fill="#e9d5ff" text-anchor="middle">26</text>
+
+  <!-- title -->
+  <text x="40" y="114" font-size="31" font-weight="bold" fill="#ffffff">Cline 上手指南 2026</text>
+  <text x="40" y="150" font-size="18" font-weight="bold" fill="url(#sub)">Plan/Act · 自带模型 · MCP · 多 Agent</text>
+
+  <!-- highlights -->
+  <text x="40" y="190" font-size="13" fill="#7dd3fc">▸ 69.6k Stars · 1100 万+ 安装 · Apache 2.0 开源</text>
+  <text x="40" y="212" font-size="13" fill="#c4b5fd">▸ 一个 SDK 引擎驱动 IDE / CLI / 桌面 / IM</text>
+  <text x="40" y="234" font-size="13" fill="#6ee7b7">▸ 插件免费、模型自带，Cline 不抽成</text>
+
+  <!-- pills -->
+  <g font-size="12" text-anchor="middle">
+    <rect x="40" y="256" width="62" height="24" rx="12" fill="none" stroke="#38bdf8"/>
+    <text x="71" y="272" fill="#7dd3fc">Cline</text>
+    <rect x="110" y="256" width="62" height="24" rx="12" fill="none" stroke="#818cf8"/>
+    <text x="141" y="272" fill="#c7d2fe">BYOK</text>
+    <rect x="180" y="256" width="56" height="24" rx="12" fill="none" stroke="#c084fc"/>
+    <text x="208" y="272" fill="#e9d5ff">MCP</text>
+    <rect x="244" y="256" width="92" height="24" rx="12" fill="none" stroke="#34d399"/>
+    <text x="290" y="272" fill="#a7f3d0">.clinerules</text>
+    <rect x="344" y="256" width="76" height="24" rx="12" fill="none" stroke="#fbbf24"/>
+    <text x="382" y="272" fill="#fde68a">多 Agent</text>
+    <rect x="428" y="256" width="66" height="24" rx="12" fill="none" stroke="#f472b6"/>
+    <text x="461" y="272" fill="#fbcfe8">CI/CD</text>
+  </g>
+
+  <!-- right diagram: SDK core + surfaces -->
+  <g stroke="#94a3b8" stroke-width="1" opacity="0.45">
+    <line x1="710" y1="200" x2="710" y2="99"/>
+    <line x1="710" y1="200" x2="812" y2="168"/>
+    <line x1="710" y1="200" x2="776" y2="290"/>
+    <line x1="710" y1="200" x2="644" y2="290"/>
+    <line x1="710" y1="200" x2="608" y2="168"/>
+  </g>
+  <circle cx="710" cy="200" r="42" fill="#818cf8" fill-opacity="0.15" stroke="#818cf8" stroke-width="2"/>
+  <text x="710" y="196" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">SDK</text>
+  <text x="710" y="214" font-size="11" fill="#c7d2fe" text-anchor="middle">Agent 核心</text>
+  <g font-size="12" text-anchor="middle">
+    <rect x="667" y="72" width="86" height="28" rx="8" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="710" y="91" fill="#7dd3fc">VS Code</text>
+    <rect x="769" y="154" width="86" height="28" rx="8" fill="#0f172a" stroke="#c084fc"/>
+    <text x="812" y="173" fill="#e9d5ff">JetBrains</text>
+    <rect x="733" y="276" width="86" height="28" rx="8" fill="#0f172a" stroke="#34d399"/>
+    <text x="776" y="295" fill="#a7f3d0">CLI</text>
+    <rect x="601" y="276" width="86" height="28" rx="8" fill="#0f172a" stroke="#fbbf24"/>
+    <text x="644" y="295" fill="#fde68a">桌面 App</text>
+    <rect x="565" y="154" width="86" height="28" rx="8" fill="#0f172a" stroke="#f472b6"/>
+    <text x="608" y="173" fill="#fbcfe8">IM 连接</text>
+  </g>
+
+  <!-- bottom -->
+  <rect x="40" y="306" width="820" height="1" fill="#ffffff" opacity="0.12"/>
+  <text x="40" y="332" font-size="12" fill="#8b8bb0">安装 · 选模型 · 审批权限 · 规则与 MCP · 多 Agent 团队 · 安全教训</text>
+  <text x="40" y="358" font-size="11" fill="#5a5a80">AI知识宇宙 | 2026.09</text>
+</svg>

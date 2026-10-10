@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1445"/>
+      <stop offset="50%" stop-color="#1a2360"/>
+      <stop offset="100%" stop-color="#0a0e30"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="180" y1="0" x2="180" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- Decorative -->
+  <circle cx="750" cy="100" r="140" fill="#667eea" opacity="0.06"/>
+  <circle cx="800" cy="310" r="80" fill="#f7971e" opacity="0.05"/>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#gold)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#gold)"/>
+
+  <!-- Right side: graduation cap + AI symbol -->
+  <g transform="translate(620, 80)">
+    <!-- Graduation cap -->
+    <polygon points="100,30 30,65 100,100 170,65" fill="#1a2360" stroke="url(#gold)" stroke-width="2"/>
+    <rect x="95" y="10" width="10" height="22" fill="url(#gold)"/>
+    <circle cx="100" cy="8" r="6" fill="url(#gold)"/>
+    <line x1="170" y1="65" x2="185" y2="95" stroke="url(#gold)" stroke-width="2"/>
+    <circle cx="187" cy="98" r="5" fill="url(#gold)"/>
+
+    <!-- AI chip below cap -->
+    <rect x="65" y="120" width="70" height="70" rx="8" fill="#0a0e30" stroke="url(#blue)" stroke-width="2"/>
+    <text x="100" y="163" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="#667eea" text-anchor="middle">AI</text>
+    <!-- chip pins -->
+    <g stroke="url(#blue)" stroke-width="1.5" opacity="0.7">
+      <line x1="65" y1="140" x2="52" y2="140"/><line x1="65" y1="155" x2="52" y2="155"/><line x1="65" y1="170" x2="52" y2="170"/>
+      <line x1="135" y1="140" x2="148" y2="140"/><line x1="135" y1="155" x2="148" y2="155"/><line x1="135" y1="170" x2="148" y2="170"/>
+      <line x1="80" y1="120" x2="80" y2="108"/><line x1="100" y1="120" x2="100" y2="108"/><line x1="120" y1="120" x2="120" y2="108"/>
+      <line x1="80" y1="190" x2="80" y2="202"/><line x1="100" y1="190" x2="100" y2="202"/><line x1="120" y1="190" x2="120" y2="202"/>
+    </g>
+
+    <!-- Connection lines from cap to chip -->
+    <line x1="100" y1="100" x2="100" y2="120" stroke="url(#gold)" stroke-width="1.5" stroke-dasharray="4,3"/>
+  </g>
+
+  <!-- Left: Title area -->
+  <!-- Badge -->
+  <g transform="translate(50, 30)">
+    <rect x="0" y="0" width="130" height="28" rx="4" fill="url(#gold)" opacity="0.9"/>
+    <text x="65" y="19" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="bold" font-size="13" fill="#0c1445" text-anchor="middle">2026 高考季</text>
+  </g>
+
+  <text x="50" y="110" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="32" font-weight="bold" fill="#ffffff">AI时代选什么专业</text>
+  <text x="50" y="152" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="32" font-weight="bold" fill="url(#gold)">不会被淘汰？</text>
+
+  <!-- Subtitle -->
+  <text x="50" y="188" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#8890b5">高考志愿填报 · 未来四年不后悔的选择框架</text>
+
+  <!-- Category tags -->
+  <g transform="translate(50, 210)">
+    <rect x="0" y="0" width="72" height="26" rx="13" fill="#1a2360" stroke="#667eea" stroke-width="0.8"/>
+    <text x="36" y="17" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="11" fill="#a0aaf0" text-anchor="middle">医学</text>
+
+    <rect x="82" y="0" width="72" height="26" rx="13" fill="#1a2360" stroke="#667eea" stroke-width="0.8"/>
+    <text x="118" y="17" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="11" fill="#a0aaf0" text-anchor="middle">工程</text>
+
+    <rect x="164" y="0" width="72" height="26" rx="13" fill="#1a2360" stroke="url(#gold)" stroke-width="0.8"/>
+    <text x="200" y="17" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="11" fill="#ffd200" text-anchor="middle">AI+</text>
+
+    <rect x="246" y="0" width="72" height="26" rx="13" fill="#1a2360" stroke="#667eea" stroke-width="0.8"/>
+    <text x="282" y="17" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="11" fill="#a0aaf0" text-anchor="middle">蓝领</text>
+
+    <rect x="328" y="0" width="82" height="26" rx="13" fill="#1a2360" stroke="#667eea" stroke-width="0.8"/>
+    <text x="369" y="17" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="11" fill="#a0aaf0" text-anchor="middle">跨学科</text>
+  </g>
+
+  <!-- Key data point -->
+  <g transform="translate(50, 260)">
+    <text x="0" y="0" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#6a7099">CS入学率 -11.2%  ·  护理 +4.9%  ·  工程逆势增长</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="50" y="285" width="460" height="1" fill="#fff" opacity="0.06"/>
+  <text x="50" y="312" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4a5078">判断框架 · 四类方向推荐 · 避坑指南 · 决策图</text>
+
+  <!-- Credit -->
+  <text x="50" y="348" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#3a4060">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 30)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#ffd200" text-anchor="middle">26</text>
+  </g>
+</svg>

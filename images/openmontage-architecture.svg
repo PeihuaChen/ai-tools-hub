@@ -1,0 +1,131 @@
+<svg width="860" height="420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="archBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fc"/>
+      <stop offset="100%" style="stop-color:#eef1f7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="420" rx="12" fill="url(#archBg)"/>
+  <rect width="860" height="420" rx="12" fill="none" stroke="#d0d7e3" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="430" y="35" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="bold">OpenMontage Agent-First 架构：从自然语言到成品视频</text>
+
+  <!-- User prompt -->
+  <rect x="30" y="55" width="220" height="50" rx="8" fill="#fff8e6" stroke="#e6a817" stroke-width="1.5"/>
+  <text x="140" y="75" font-family="Arial, sans-serif" font-size="11" fill="#b8860b" text-anchor="middle">👤 用户输入</text>
+  <text x="140" y="93" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">"做一个60秒的黑洞解说视频"</text>
+
+  <!-- Arrow -->
+  <line x1="250" y1="80" x2="290" y2="80" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="288,75 298,80 288,85" fill="#999"/>
+
+  <!-- AI Agent box -->
+  <rect x="300" y="55" width="240" height="50" rx="8" fill="#e8f6fd" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="420" y="75" font-family="Arial, sans-serif" font-size="11" fill="#1565c0" text-anchor="middle">🤖 AI 编程助手（编排器）</text>
+  <text x="420" y="93" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">Claude Code / Cursor / Copilot / Codex</text>
+
+  <!-- Arrow -->
+  <line x1="540" y1="80" x2="580" y2="80" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="578,75 588,80 578,85" fill="#999"/>
+
+  <!-- Pipeline Selection -->
+  <rect x="590" y="55" width="240" height="50" rx="8" fill="#fce4f3" stroke="#e91e8c" stroke-width="1.5"/>
+  <text x="710" y="75" font-family="Arial, sans-serif" font-size="11" fill="#ad1457" text-anchor="middle">📋 Pipeline 选择</text>
+  <text x="710" y="93" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">→ Animated Explainer Pipeline</text>
+
+  <!-- Main pipeline stages -->
+  <text x="430" y="135" font-family="Arial, sans-serif" font-size="12" fill="#666" text-anchor="middle">▼ 结构化生产流程</text>
+
+  <!-- Stage boxes -->
+  <rect x="30" y="155" width="105" height="60" rx="6" fill="#e8f8f0" stroke="#27ae60" stroke-width="1"/>
+  <text x="82" y="178" font-family="Arial, sans-serif" font-size="10" fill="#1e8449" text-anchor="middle" font-weight="bold">🔍 Research</text>
+  <text x="82" y="195" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">15-25次网络搜索</text>
+  <text x="82" y="207" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">数据收集+事实核查</text>
+
+  <line x1="135" y1="185" x2="155" y2="185" stroke="#aaa" stroke-width="1"/>
+  <polygon points="153,181 160,185 153,189" fill="#aaa"/>
+
+  <rect x="160" y="155" width="105" height="60" rx="6" fill="#e8f0fe" stroke="#4285f4" stroke-width="1"/>
+  <text x="212" y="178" font-family="Arial, sans-serif" font-size="10" fill="#1a56db" text-anchor="middle" font-weight="bold">📝 Script</text>
+  <text x="212" y="195" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">AI编写脚本</text>
+  <text x="212" y="207" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">含语音方向标注</text>
+
+  <line x1="265" y1="185" x2="285" y2="185" stroke="#aaa" stroke-width="1"/>
+  <polygon points="283,181 290,185 283,189" fill="#aaa"/>
+
+  <rect x="290" y="155" width="105" height="60" rx="6" fill="#fde8f0" stroke="#e91e63" stroke-width="1"/>
+  <text x="342" y="178" font-family="Arial, sans-serif" font-size="10" fill="#ad1457" text-anchor="middle" font-weight="bold">🎬 Scene Plan</text>
+  <text x="342" y="195" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">分镜规划</text>
+  <text x="342" y="207" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">视觉方向+时间线</text>
+
+  <line x1="395" y1="185" x2="415" y2="185" stroke="#aaa" stroke-width="1"/>
+  <polygon points="413,181 420,185 413,189" fill="#aaa"/>
+
+  <rect x="420" y="155" width="105" height="60" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="472" y="178" font-family="Arial, sans-serif" font-size="10" fill="#b8860b" text-anchor="middle" font-weight="bold">🎨 Assets</text>
+  <text x="472" y="195" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">图片/视频/音频生成</text>
+  <text x="472" y="207" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">7维Provider评分</text>
+
+  <line x1="525" y1="185" x2="545" y2="185" stroke="#aaa" stroke-width="1"/>
+  <polygon points="543,181 550,185 543,189" fill="#aaa"/>
+
+  <rect x="550" y="155" width="105" height="60" rx="6" fill="#f0e8fe" stroke="#7c3aed" stroke-width="1"/>
+  <text x="602" y="178" font-family="Arial, sans-serif" font-size="10" fill="#5b21b6" text-anchor="middle" font-weight="bold">✂️ Edit</text>
+  <text x="602" y="195" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">时间线编排</text>
+  <text x="602" y="207" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">字幕+音乐+混音</text>
+
+  <line x1="655" y1="185" x2="675" y2="185" stroke="#aaa" stroke-width="1"/>
+  <polygon points="673,181 680,185 673,189" fill="#aaa"/>
+
+  <rect x="680" y="155" width="145" height="60" rx="6" fill="#e0f7f7" stroke="#00897b" stroke-width="1"/>
+  <text x="752" y="178" font-family="Arial, sans-serif" font-size="10" fill="#00695c" text-anchor="middle" font-weight="bold">🎥 Compose + Render</text>
+  <text x="752" y="195" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">Remotion / HyperFrames</text>
+  <text x="752" y="207" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">→ 最终 MP4 输出</text>
+
+  <!-- Quality gates section -->
+  <text x="430" y="245" font-family="Arial, sans-serif" font-size="12" fill="#666" text-anchor="middle">▼ 质量门控 + 治理层</text>
+
+  <!-- Three pillars -->
+  <rect x="50" y="260" width="230" height="70" rx="6" fill="#fff0f0" stroke="#e53935" stroke-width="1"/>
+  <text x="165" y="283" font-family="Arial, sans-serif" font-size="11" fill="#c62828" text-anchor="middle" font-weight="bold">🛡️ Pre-compose 验证</text>
+  <text x="165" y="300" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">交付承诺检查 · 幻灯片风险检测</text>
+  <text x="165" y="314" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">渲染器治理 · 资产审批门</text>
+
+  <rect x="310" y="260" width="230" height="70" rx="6" fill="#e8f8f0" stroke="#27ae60" stroke-width="1"/>
+  <text x="425" y="283" font-family="Arial, sans-serif" font-size="11" fill="#1e8449" text-anchor="middle" font-weight="bold">💰 预算治理</text>
+  <text x="425" y="300" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">执行前成本预估 · 花费上限</text>
+  <text x="425" y="314" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">单操作审批阈值 · 决策日志</text>
+
+  <rect x="570" y="260" width="240" height="70" rx="6" fill="#e8f0fe" stroke="#4285f4" stroke-width="1"/>
+  <text x="690" y="283" font-family="Arial, sans-serif" font-size="11" fill="#1a56db" text-anchor="middle" font-weight="bold">✅ Post-render 自审</text>
+  <text x="690" y="300" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">ffprobe验证 · 帧提取采样 · 音频电平</text>
+  <text x="690" y="314" font-family="Arial, sans-serif" font-size="9" fill="#555" text-anchor="middle">字幕检查 · 承诺兑现验证</text>
+
+  <!-- Tools layer -->
+  <text x="430" y="360" font-family="Arial, sans-serif" font-size="12" fill="#666" text-anchor="middle">▼ 工具层（100+ Python Tools）</text>
+
+  <!-- Tool categories -->
+  <rect x="50" y="375" width="95" height="30" rx="4" fill="#e8f6fd" stroke="#2196f3" stroke-width="1"/>
+  <text x="97" y="394" font-family="Arial, sans-serif" font-size="9" fill="#1565c0" text-anchor="middle">Video (13)</text>
+
+  <rect x="160" y="375" width="95" height="30" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="207" y="394" font-family="Arial, sans-serif" font-size="9" fill="#b8860b" text-anchor="middle">Audio (TTS+Music)</text>
+
+  <rect x="270" y="375" width="95" height="30" rx="4" fill="#fce4f3" stroke="#e91e8c" stroke-width="1"/>
+  <text x="317" y="394" font-family="Arial, sans-serif" font-size="9" fill="#ad1457" text-anchor="middle">Graphics (9)</text>
+
+  <rect x="380" y="375" width="95" height="30" rx="4" fill="#f0e8fe" stroke="#7c3aed" stroke-width="1"/>
+  <text x="427" y="394" font-family="Arial, sans-serif" font-size="9" fill="#5b21b6" text-anchor="middle">Enhancement</text>
+
+  <rect x="490" y="375" width="95" height="30" rx="4" fill="#e8f8f0" stroke="#27ae60" stroke-width="1"/>
+  <text x="537" y="394" font-family="Arial, sans-serif" font-size="9" fill="#1e8449" text-anchor="middle">Analysis</text>
+
+  <rect x="600" y="375" width="95" height="30" rx="4" fill="#e0f7f7" stroke="#00897b" stroke-width="1"/>
+  <text x="647" y="394" font-family="Arial, sans-serif" font-size="9" fill="#00695c" text-anchor="middle">Subtitle</text>
+
+  <rect x="710" y="375" width="95" height="30" rx="4" fill="#fff0f0" stroke="#e53935" stroke-width="1"/>
+  <text x="757" y="394" font-family="Arial, sans-serif" font-size="9" fill="#c62828" text-anchor="middle">Avatar</text>
+</svg>

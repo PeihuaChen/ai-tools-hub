@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- top / bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="42" width="252" height="30" rx="6" fill="none" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="1.4"/>
+  <text x="64" y="62" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="14" fill="#7dd3fc">AI 行业观察 · 生成式引擎优化</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="26" fill="none" stroke="#f472b6" stroke-opacity="0.7" stroke-width="1.6"/>
+  <text x="838" y="66" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="22" font-weight="700" fill="#f9a8d4">26</text>
+
+  <!-- title -->
+  <text x="48" y="132" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="30" font-weight="700" fill="#ffffff">8.2 亿人用 AI 找答案</text>
+  <text x="48" y="172" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="30" font-weight="700" fill="#ffffff">品牌如何被大模型<tspan fill="#a78bfa">引用</tspan></text>
+  <text x="48" y="204" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="600" fill="url(#sub)">把 GEO 变成企业增长的第二条曲线</text>
+
+  <!-- highlights -->
+  <text x="48" y="248" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#22d3ee">▸ AI 搜索入口革命：传统搜索流量下降约 25%</text>
+  <text x="48" y="272" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#f9a8d4">▸ AI 引荐流量转化率高 42%，是自然流量 4~5 倍</text>
+  <text x="48" y="296" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#c4b5fd">▸ 普林斯顿研究：GEO 可提升可见度最高 40%</text>
+
+  <!-- pill tags -->
+  <g font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12">
+    <rect x="48" y="320" width="66" height="24" rx="12" fill="none" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <text x="81" y="336" text-anchor="middle" fill="#7dd3fc">GEO</text>
+    <rect x="122" y="320" width="78" height="24" rx="12" fill="none" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="161" y="336" text-anchor="middle" fill="#a5b4fc">AI 搜索</text>
+    <rect x="208" y="320" width="90" height="24" rx="12" fill="none" stroke="#f472b6" stroke-opacity="0.5"/>
+    <text x="253" y="336" text-anchor="middle" fill="#f9a8d4">被引用</text>
+    <rect x="306" y="320" width="90" height="24" rx="12" fill="none" stroke="#34d399" stroke-opacity="0.5"/>
+    <text x="351" y="336" text-anchor="middle" fill="#6ee7b7">企业 ROI</text>
+  </g>
+
+  <!-- concept diagram: query -> engine -> cited answer -->
+  <g transform="translate(600,150)">
+    <!-- query node -->
+    <rect x="0" y="-14" width="70" height="28" rx="6" fill="none" stroke="#38bdf8" stroke-opacity="0.7"/>
+    <text x="35" y="4" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="12" fill="#7dd3fc">提问</text>
+    <!-- engine node -->
+    <circle cx="150" cy="0" r="34" fill="none" stroke="url(#node)" stroke-width="2"/>
+    <text x="150" y="-2" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#c4b5fd">AI</text>
+    <text x="150" y="14" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="10" fill="#a5b4fc">RAG</text>
+    <!-- answer nodes (cited sources) -->
+    <rect x="236" y="-44" width="60" height="24" rx="5" fill="none" stroke="#f472b6" stroke-opacity="0.7"/>
+    <text x="266" y="-27" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="11" fill="#f9a8d4">品牌</text>
+    <rect x="236" y="-12" width="60" height="24" rx="5" fill="#34d39922" stroke="#34d399" stroke-opacity="0.9"/>
+    <text x="266" y="5" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="11" fill="#6ee7b7">你</text>
+    <rect x="236" y="20" width="60" height="24" rx="5" fill="none" stroke="#818cf8" stroke-opacity="0.7"/>
+    <text x="266" y="37" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="11" fill="#a5b4fc">竞品</text>
+    <!-- links -->
+    <line x1="70" y1="0" x2="116" y2="0" stroke="#38bdf8" stroke-opacity="0.5" stroke-width="1.5"/>
+    <line x1="184" y1="0" x2="236" y2="-32" stroke="#f472b6" stroke-opacity="0.4" stroke-width="1.5"/>
+    <line x1="184" y1="0" x2="236" y2="0" stroke="#34d399" stroke-opacity="0.7" stroke-width="2"/>
+    <line x1="184" y1="0" x2="236" y2="32" stroke="#818cf8" stroke-opacity="0.4" stroke-width="1.5"/>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="356" x2="852" y2="356" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="48" y="372" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#64748b">从 SEO 到 GEO · 入口革命 · 引用份额 · ROI 度量</text>
+  <text x="852" y="372" text-anchor="end" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#475569">公众号：AI 行业观察</text>
+</svg>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部文章 - AI知识宇宙 - 用AI采集，用AI生成</title>
+    <meta name="description" content="所有 AI 工具评测文章归档">
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/theme.css">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="./">← 返回首页</a>
+            </nav>
+        </header>
+
+        <h1>📚 全部文章 <span id="total-count"></span></h1>
+
+        <div class="archive-filters" id="category-nav"></div>
+
+        <div id="archive-content"></div>
+
+        <div id="archive-empty" style="display:none;">
+            <p>😕 暂未找到该分类下的文章</p>
+            <p><a href="./archive.html">← 查看全部分类</a></p>
+        </div>
+
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        function updateIcon(theme) { icon.textContent = theme === 'light' ? '🌙' : '☀️'; }
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+
+    <script>
+    (function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var activeCat = urlParams.get('cat');
+
+        var allPosts = [];
+        var categories = {};
+        var catOrder = [];
+
+        var navEl = document.getElementById('category-nav');
+        var contentEl = document.getElementById('archive-content');
+        var totalEl = document.getElementById('total-count');
+        var emptyEl = document.getElementById('archive-empty');
+
+        function escHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        function groupByCategory(posts) {
+            var map = {};
+            var order = [];
+            posts.forEach(function(p) {
+                var cat = p.category || '未分类';
+                if (!map[cat]) {
+                    map[cat] = [];
+                    order.push(cat);
+                }
+                map[cat].push(p);
+            });
+            return { map: map, order: order };
+        }
+
+        function renderCategoryNav() {
+            var html = '<a href="./archive.html" class="active" id="filter-clear">全部分类 (' + allPosts.length + ')</a>';
+            catOrder.forEach(function(cat) {
+                var count = categories[cat].length;
+                var encoded = encodeURIComponent(cat);
+                html += '<a href="./archive.html?cat=' + encoded + '" data-cat="' + encoded + '">' + escHtml(cat) + ' (' + count + ')</a>';
+            });
+            navEl.innerHTML = html;
+        }
+
+        function renderAllCategories() {
+            var html = '';
+            catOrder.forEach(function(cat) {
+                var posts = categories[cat];
+                html += '<div class="archive-section">'
+                    + '<h2 class="archive-section-title">' + escHtml(cat) + ' <span class="cat-count">(' + posts.length + '篇)</span></h2>'
+                    + '<div class="archive-list">';
+                posts.forEach(function(p) {
+                    var views = p.view_count > 0 ? ' · ' + p.view_count + ' 次阅读' : '';
+                    html += '<div class="archive-item">'
+                        + '<div class="meta">'
+                        + '<h3><a href="./posts/' + p.slug + '.html">' + escHtml(p.title) + '</a></h3>'
+                        + '</div>'
+                        + '<div class="date">' + p.date + views + '</div>'
+                        + '</div>';
+                });
+                html += '</div></div>';
+            });
+            contentEl.innerHTML = html;
+            totalEl.textContent = allPosts.length + '篇';
+            emptyEl.style.display = 'none';
+        }
+
+        function renderSingleCategory(cat) {
+            var posts = categories[cat] || [];
+            if (posts.length === 0) {
+                contentEl.innerHTML = '';
+                totalEl.textContent = '0篇';
+                emptyEl.style.display = '';
+                return;
+            }
+            var html = '<div class="archive-section"><div class="archive-list">';
+            posts.forEach(function(p) {
+                var views = p.view_count > 0 ? ' · ' + p.view_count + ' 次阅读' : '';
+                html += '<div class="archive-item">'
+                    + '<div class="meta">'
+                    + '<h3><a href="./posts/' + p.slug + '.html">' + escHtml(p.title) + '</a></h3>'
+                    + '</div>'
+                    + '<div class="date">' + p.date + views + '</div>'
+                    + '</div>';
+            });
+            html += '</div></div>';
+            contentEl.innerHTML = html;
+            totalEl.textContent = posts.length + '篇';
+            emptyEl.style.display = 'none';
+        }
+
+        function updateNavActive(cat) {
+            var links = navEl.querySelectorAll('a[data-cat]');
+            links.forEach(function(a) {
+                a.classList.remove('active');
+                if (decodeURIComponent(a.getAttribute('data-cat')) === cat) {
+                    a.classList.add('active');
+                }
+            });
+            var clearBtn = document.getElementById('filter-clear');
+            if (clearBtn) {
+                clearBtn.classList.toggle('active', !cat);
+            }
+        }
+
+        function onHashChange() {
+            var params = new URLSearchParams(window.location.search);
+            var cat = params.get('cat');
+            activeCat = cat;
+
+            if (cat) {
+                renderSingleCategory(cat);
+                updateNavActive(cat);
+            } else {
+                renderAllCategories();
+                updateNavActive(null);
+            }
+        }
+
+        function init() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', './data/posts.json', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        allPosts = data.posts || [];
+                        var grouped = groupByCategory(allPosts);
+                        categories = grouped.map;
+                        catOrder = grouped.order;
+
+                        renderCategoryNav();
+                        onHashChange();
+
+                        navEl.addEventListener('click', function(e) {
+                            var target = e.target.closest('a');
+                            if (!target) return;
+                            if (target.id === 'filter-clear') {
+                                history.replaceState(null, '', './archive.html');
+                                onHashChange();
+                                e.preventDefault();
+                                return;
+                            }
+                            var cat = decodeURIComponent(target.getAttribute('data-cat'));
+                            if (cat) {
+                                history.replaceState(null, '', './archive.html?cat=' + encodeURIComponent(cat));
+                                onHashChange();
+                                e.preventDefault();
+                            }
+                        });
+                    } catch(e) {
+                        contentEl.innerHTML = '<p style=\"color:var(--text-secondary);\">数据解析失败: ' + e.message + '</p>';
+                    }
+                } else {
+                    contentEl.innerHTML = '<p style=\"color:var(--text-secondary);\">请求失败 (状态 ' + xhr.status + ')</p>';
+                }
+            };
+            xhr.onerror = function() {
+                contentEl.innerHTML = '<p style=\"color:var(--text-secondary);\">无法加载数据: ./data/posts.json</p>';
+            };
+            xhr.send();
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>

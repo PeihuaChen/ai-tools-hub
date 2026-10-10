@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1100" viewBox="0 0 1080 1100">
+  <rect width="1080" height="1100" fill="#f7f8fa"/>
+
+  <text x="48" y="92" font-size="56" font-weight="bold" fill="#111827">两层防护，拦两类攻击</text>
+  <text x="48" y="178" font-size="34" fill="#4b5563">Red Hat 实测：三个 Pod，两种攻击</text>
+
+  <!-- outer: isolation layer -->
+  <rect x="48" y="214" width="984" height="520" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="274" font-size="40" font-weight="bold" fill="#1d4ed8">隔离层 · Kata 微虚拟机</text>
+  <text x="76" y="320" font-size="32" fill="#4b5563">独立内核，挡内核漏洞逃逸</text>
+
+  <!-- middle: policy layer -->
+  <rect x="96" y="354" width="888" height="330" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="124" y="414" font-size="40" font-weight="bold" fill="#0e7490">策略层 · OpenShell</text>
+  <text x="124" y="460" font-size="32" fill="#4b5563">出站代理，挡数据外泄</text>
+
+  <!-- inner: agent -->
+  <rect x="144" y="494" width="792" height="160" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="174" y="554" font-size="40" font-weight="bold" fill="#111827">Agent 与它执行的代码</text>
+  <text x="174" y="614" font-size="32" fill="#4b5563">提示注入、依赖脚本、利用程序</text>
+
+  <!-- arrows from attack cards -->
+  <g stroke="#94a3b8" stroke-width="3" fill="#94a3b8">
+    <line x1="288" y1="790" x2="288" y2="704"/>
+    <polygon points="276,706 300,706 288,688" stroke="none"/>
+    <line x1="792" y1="790" x2="792" y2="754"/>
+    <polygon points="780,756 804,756 792,738" stroke="none"/>
+  </g>
+
+  <!-- attack card 1 -->
+  <rect x="48" y="790" width="480" height="270" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+  <text x="76" y="840" font-size="40" font-weight="bold" fill="#b45309">攻击一</text>
+  <text x="76" y="904" font-size="32" fill="#4b5563">提示注入外泄</text>
+  <text x="76" y="962" font-size="32" font-weight="bold" fill="#b91c1c">仅 Kata：数据泄露</text>
+  <text x="76" y="1012" font-size="32" font-weight="bold" fill="#15803d">含 OpenShell：拦截</text>
+
+  <!-- attack card 2 -->
+  <rect x="552" y="790" width="480" height="270" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="580" y="840" font-size="40" font-weight="bold" fill="#b91c1c">攻击二</text>
+  <text x="580" y="904" font-size="32" fill="#4b5563">内核漏洞逃逸</text>
+  <text x="580" y="962" font-size="32" font-weight="bold" fill="#b91c1c">仅 OpenShell：逃逸</text>
+  <text x="580" y="1012" font-size="32" font-weight="bold" fill="#15803d">含 Kata：拦截</text>
+</svg>

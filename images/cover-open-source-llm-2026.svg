@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="50%" style="stop-color:#302b63"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <linearGradient id="accent3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#00f2fe"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  
+  <!-- Grid pattern -->
+  <g opacity="0.06">
+    <line x1="0" y1="0" x2="0" y2="383" stroke="#fff" stroke-width="0.5" transform="translate(60,0)"/>
+    <line x1="0" y1="0" x2="0" y2="383" stroke="#fff" stroke-width="0.5" transform="translate(120,0)"/>
+    <line x1="0" y1="0" x2="0" y2="383" stroke="#fff" stroke-width="0.5" transform="translate(180,0)"/>
+    <line x1="0" y1="0" x2="0" y2="383" stroke="#fff" stroke-width="0.5" transform="translate(240,0)"/>
+    <line x1="0" y1="0" x2="0" y2="383" stroke="#fff" stroke-width="0.5" transform="translate(300,0)"/>
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="0.5" transform="translate(0,60)"/>
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="0.5" transform="translate(0,120)"/>
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="0.5" transform="translate(0,180)"/>
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="0.5" transform="translate(0,240)"/>
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="0.5" transform="translate(0,300)"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="750" cy="80" r="120" fill="url(#accent1)" opacity="0.08"/>
+  <circle cx="150" cy="320" r="90" fill="url(#accent2)" opacity="0.06"/>
+  <circle cx="820" cy="300" r="60" fill="url(#accent3)" opacity="0.1"/>
+
+  <!-- Model nodes (right side) -->
+  <!-- Kimi -->
+  <rect x="580" y="45" width="130" height="36" rx="18" fill="url(#accent3)" opacity="0.9"/>
+  <text x="645" y="68" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Kimi K2.6</text>
+  
+  <!-- DeepSeek -->
+  <rect x="620" y="100" width="150" height="36" rx="18" fill="url(#accent1)" opacity="0.9"/>
+  <text x="695" y="123" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">DeepSeek V4</text>
+  
+  <!-- Qwen -->
+  <rect x="590" y="155" width="130" height="36" rx="18" fill="#ff6b35" opacity="0.9"/>
+  <text x="655" y="178" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Qwen 3.6</text>
+  
+  <!-- Llama -->
+  <rect x="640" y="210" width="130" height="36" rx="18" fill="#0668E1" opacity="0.9"/>
+  <text x="705" y="233" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Llama 4</text>
+  
+  <!-- MiniMax -->
+  <rect x="600" y="265" width="145" height="36" rx="18" fill="url(#accent2)" opacity="0.9"/>
+  <text x="672" y="288" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">MiniMax M2</text>
+  
+  <!-- GLM -->
+  <rect x="620" y="320" width="130" height="36" rx="18" fill="#00b894" opacity="0.9"/>
+  <text x="685" y="343" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">GLM-5.1</text>
+
+  <!-- Connection lines from center -->
+  <g stroke="#fff" stroke-width="1" opacity="0.2">
+    <line x1="480" y1="191" x2="580" y2="63"/>
+    <line x1="480" y1="191" x2="620" y2="118"/>
+    <line x1="480" y1="191" x2="590" y2="173"/>
+    <line x1="480" y1="191" x2="640" y2="228"/>
+    <line x1="480" y1="191" x2="600" y2="283"/>
+    <line x1="480" y1="191" x2="620" y2="338"/>
+  </g>
+
+  <!-- Center decision icon -->
+  <circle cx="480" cy="191" r="28" fill="none" stroke="url(#accent3)" stroke-width="2.5" opacity="0.8"/>
+  <text x="480" y="197" font-family="Arial, sans-serif" font-size="22" fill="#4facfe" text-anchor="middle">?</text>
+
+  <!-- Left side: Title text -->
+  <text x="50" y="100" font-family="Arial, Microsoft YaHei, sans-serif" font-size="36" font-weight="bold" fill="#ffffff">开源大模型</text>
+  <text x="50" y="150" font-family="Arial, Microsoft YaHei, sans-serif" font-size="36" font-weight="bold" fill="url(#accent3)">如何选型？</text>
+  
+  <!-- Subtitle -->
+  <text x="50" y="200" font-family="Arial, Microsoft YaHei, sans-serif" font-size="15" fill="#a0a0c0">2026年六大模型深度对比</text>
+
+  <!-- Dimension tags -->
+  <rect x="50" y="230" width="56" height="24" rx="12" fill="#667eea" opacity="0.3"/>
+  <text x="78" y="246" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#a8b4ff" text-anchor="middle">编码</text>
+  
+  <rect x="115" y="230" width="56" height="24" rx="12" fill="#f093fb" opacity="0.3"/>
+  <text x="143" y="246" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#f0a0ff" text-anchor="middle">推理</text>
+  
+  <rect x="180" y="230" width="56" height="24" rx="12" fill="#4facfe" opacity="0.3"/>
+  <text x="208" y="246" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#7fc4ff" text-anchor="middle">中文</text>
+  
+  <rect x="245" y="230" width="70" height="24" rx="12" fill="#00b894" opacity="0.3"/>
+  <text x="280" y="246" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#60e8c0" text-anchor="middle">多模态</text>
+  
+  <rect x="324" y="230" width="60" height="24" rx="12" fill="#ff6b35" opacity="0.3"/>
+  <text x="354" y="246" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#ffa070" text-anchor="middle">Agent</text>
+
+  <!-- Bottom info bar -->
+  <rect x="50" y="290" width="380" height="1" fill="#fff" opacity="0.1"/>
+  <text x="50" y="320" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#707090">硬件需求 · 部署指南 · 成本对比 · 场景决策树</text>
+  <text x="50" y="350" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#505070">AI知识宇宙 | 2026.06</text>
+
+</svg>

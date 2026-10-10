@@ -1,0 +1,105 @@
+<svg width="860" height="440" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ecoBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fc"/>
+      <stop offset="100%" style="stop-color:#eef1f7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="440" rx="12" fill="url(#ecoBg)"/>
+  <rect width="860" height="440" rx="12" fill="none" stroke="#d0d7e3" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="430" y="35" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="bold">AI 视频制作生态全景图：开源 vs 商用</text>
+
+  <!-- X axis -->
+  <text x="430" y="425" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">功能覆盖度 →（后期剪辑 → 片段生成 → 端到端制作）</text>
+  <line x1="70" y1="400" x2="810" y2="400" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Y axis -->
+  <text x="20" y="225" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle" transform="rotate(-90 20 225)">可定制/可编程度 →</text>
+  <line x1="70" y1="55" x2="70" y2="400" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Quadrant labels -->
+  <text x="220" y="75" font-family="Arial, sans-serif" font-size="9" fill="#bbb" text-anchor="middle">高可编程 + 窄功能</text>
+  <text x="680" y="75" font-family="Arial, sans-serif" font-size="9" fill="#bbb" text-anchor="middle">高可编程 + 全流程</text>
+  <text x="220" y="390" font-family="Arial, sans-serif" font-size="9" fill="#bbb" text-anchor="middle">低可编程 + 窄功能</text>
+  <text x="680" y="390" font-family="Arial, sans-serif" font-size="9" fill="#bbb" text-anchor="middle">低可编程 + 全流程</text>
+
+  <!-- Dotted quadrant lines -->
+  <line x1="440" y1="55" x2="440" y2="400" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="70" y1="225" x2="810" y2="225" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- OPEN SOURCE items (circles with colored strokes) -->
+
+  <!-- OpenMontage: high customizability, full pipeline -->
+  <circle cx="720" cy="100" r="32" fill="#e8f8f0" stroke="#27ae60" stroke-width="2.5"/>
+  <text x="720" y="95" font-family="Arial, sans-serif" font-size="9" fill="#1e8449" text-anchor="middle" font-weight="bold">Open</text>
+  <text x="720" y="108" font-family="Arial, sans-serif" font-size="9" fill="#1e8449" text-anchor="middle" font-weight="bold">Montage</text>
+  <text x="720" y="140" font-family="Arial, sans-serif" font-size="8" fill="#27ae60" text-anchor="middle">42.6k ⭐</text>
+
+  <!-- video-use: high customizability, narrow -->
+  <circle cx="200" cy="120" r="22" fill="#e8f6fd" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="200" y="117" font-family="Arial, sans-serif" font-size="8" fill="#1565c0" text-anchor="middle">video-use</text>
+  <text x="200" y="130" font-family="Arial, sans-serif" font-size="7" fill="#42a5f5" text-anchor="middle">(browser-use)</text>
+
+  <!-- Remotion: high customizability, narrow -->
+  <circle cx="130" cy="160" r="22" fill="#f0e8fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="130" y="163" font-family="Arial, sans-serif" font-size="8" fill="#5b21b6" text-anchor="middle">Remotion</text>
+
+  <!-- montage-ai: medium customizability, narrow -->
+  <circle cx="250" cy="180" r="18" fill="#e8f6fd" stroke="#64b5f6" stroke-width="1"/>
+  <text x="250" y="183" font-family="Arial, sans-serif" font-size="7" fill="#1565c0" text-anchor="middle">montage-ai</text>
+
+  <!-- NarratoAI: low customizability, medium coverage -->
+  <circle cx="380" cy="280" r="20" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="380" y="283" font-family="Arial, sans-serif" font-size="8" fill="#b8860b" text-anchor="middle">NarratoAI</text>
+
+  <!-- agnes-video-generator -->
+  <circle cx="470" cy="260" r="18" fill="#e8f6fd" stroke="#64b5f6" stroke-width="1"/>
+  <text x="470" y="256" font-family="Arial, sans-serif" font-size="7" fill="#1565c0" text-anchor="middle">agnes-video</text>
+  <text x="470" y="268" font-family="Arial, sans-serif" font-size="7" fill="#1565c0" text-anchor="middle">generator</text>
+
+  <!-- mcp-video -->
+  <circle cx="120" cy="110" r="16" fill="#e0f7f7" stroke="#00897b" stroke-width="1"/>
+  <text x="120" y="113" font-family="Arial, sans-serif" font-size="7" fill="#00695c" text-anchor="middle">mcp-video</text>
+
+  <!-- COMMERCIAL items (squares with warm strokes) -->
+
+  <!-- InVideo AI -->
+  <rect x="655" y="295" width="60" height="36" rx="6" fill="#fff0f0" stroke="#e53935" stroke-width="1.5"/>
+  <text x="685" y="310" font-family="Arial, sans-serif" font-size="8" fill="#c62828" text-anchor="middle">InVideo AI</text>
+  <text x="685" y="323" font-family="Arial, sans-serif" font-size="7" fill="#e57373" text-anchor="middle">$17-85/月</text>
+
+  <!-- Atlabs AI -->
+  <rect x="605" y="265" width="55" height="32" rx="6" fill="#fce4f3" stroke="#e91e8c" stroke-width="1.5"/>
+  <text x="632" y="280" font-family="Arial, sans-serif" font-size="8" fill="#ad1457" text-anchor="middle">Atlabs</text>
+  <text x="632" y="292" font-family="Arial, sans-serif" font-size="7" fill="#ec407a" text-anchor="middle">$15/月</text>
+
+  <!-- HeyGen -->
+  <rect x="390" y="320" width="55" height="32" rx="6" fill="#fff0f0" stroke="#e53935" stroke-width="1.5"/>
+  <text x="417" y="335" font-family="Arial, sans-serif" font-size="8" fill="#c62828" text-anchor="middle">HeyGen</text>
+  <text x="417" y="347" font-family="Arial, sans-serif" font-size="7" fill="#e57373" text-anchor="middle">$24/月</text>
+
+  <!-- Descript -->
+  <rect x="275" y="270" width="55" height="32" rx="6" fill="#fff0f0" stroke="#ef5350" stroke-width="1"/>
+  <text x="302" y="285" font-family="Arial, sans-serif" font-size="8" fill="#c62828" text-anchor="middle">Descript</text>
+  <text x="302" y="297" font-family="Arial, sans-serif" font-size="7" fill="#e57373" text-anchor="middle">$0-65/月</text>
+
+  <!-- Runway -->
+  <rect x="170" y="330" width="55" height="32" rx="6" fill="#fff0f0" stroke="#ef5350" stroke-width="1"/>
+  <text x="197" y="345" font-family="Arial, sans-serif" font-size="8" fill="#c62828" text-anchor="middle">Runway</text>
+  <text x="197" y="357" font-family="Arial, sans-serif" font-size="7" fill="#e57373" text-anchor="middle">按量计费</text>
+
+  <!-- Kling -->
+  <rect x="140" y="360" width="50" height="28" rx="6" fill="#fff5f5" stroke="#ef9a9a" stroke-width="1"/>
+  <text x="165" y="378" font-family="Arial, sans-serif" font-size="8" fill="#c62828" text-anchor="middle">Kling</text>
+
+  <!-- Legend -->
+  <circle cx="90" cy="55" r="6" fill="#e8f8f0" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="103" y="59" font-family="Arial, sans-serif" font-size="9" fill="#555">开源项目</text>
+
+  <rect x="170" y="49" width="12" height="12" rx="3" fill="#fff0f0" stroke="#e53935" stroke-width="1.5"/>
+  <text x="189" y="59" font-family="Arial, sans-serif" font-size="9" fill="#555">商用产品</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1160" viewBox="0 0 1080 1160">
+  <rect x="0" y="0" width="1080" height="1160" fill="#f7f8fa"/>
+
+  <text x="540" y="110" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">从开源到商业化的时间线</text>
+
+  <!-- 行 1 -->
+  <rect x="48" y="200" width="984" height="120" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="80" y="275" font-size="40" font-weight="bold" fill="#1d4ed8">2023.06</text>
+  <text x="370" y="273" font-size="34" fill="#111827">MetaGPT 开源，SOP 多角色协作</text>
+
+  <!-- 行 2 -->
+  <rect x="48" y="344" width="984" height="120" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="80" y="419" font-size="40" font-weight="bold" fill="#1d4ed8">2024.01</text>
+  <text x="370" y="417" font-size="34" fill="#111827">论文入选 ICLR 2024 Oral</text>
+
+  <!-- 行 3 -->
+  <rect x="48" y="488" width="984" height="120" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="80" y="563" font-size="40" font-weight="bold" fill="#0e7490">2025.02</text>
+  <text x="370" y="561" font-size="34" fill="#111827">MGX 上线，一月 ARR 破百万美元</text>
+
+  <!-- 行 4 -->
+  <rect x="48" y="632" width="984" height="120" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="80" y="707" font-size="40" font-weight="bold" fill="#15803d">2025.03</text>
+  <text x="370" y="705" font-size="34" fill="#111827">OpenManus 3 小时复刻上线</text>
+
+  <!-- 行 5 -->
+  <rect x="48" y="776" width="984" height="120" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="80" y="851" font-size="40" font-weight="bold" fill="#b45309">2025 H1</text>
+  <text x="370" y="849" font-size="34" fill="#111827">两轮融资合计约 2.2 亿元</text>
+
+  <!-- 行 6 -->
+  <rect x="48" y="920" width="984" height="120" rx="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="80" y="995" font-size="40" font-weight="bold" fill="#6d28d9">2026.01</text>
+  <text x="370" y="993" font-size="34" fill="#111827">MGX 更名 Atoms，凯辉领投</text>
+
+  <text x="540" y="1110" font-size="32" fill="#4b5563" text-anchor="middle">学术声誉 → 开源流量 → 商业转化</text>
+</svg>

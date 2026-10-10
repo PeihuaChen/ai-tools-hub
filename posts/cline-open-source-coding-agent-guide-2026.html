@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开源编程工具 Cline 上手指南 2026：Plan/Act、自带模型、MCP 与多 Agent 实战</title>
+    <meta name="description" content="Cline 是 GitHub 近 7 万星、安装量超千万的开源编程 Agent，插件免费、模型自带。从安装、选模型、Plan/Act 审批、规则与 MCP，到多 Agent 团队、定时任务和 Clinejection 安全教训，一篇讲清。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">开源编程工具 Cline 上手指南 2026：Plan/Act、自带模型、MCP 与多 Agent 实战</h1>
+            <div class="post-meta">
+                <span class="cat">AI编程助手</span>
+                <span>2026-10-04 · 23 分钟</span>
+            </div>
+            <h2 id="agent-1100">一个不收订阅费的编程 Agent，装了 1100 万次</h2>
+<p>2025 年 3 月，Cline 的安装量是 100 万。到 2026 年 1 月是 500 万，8 月超过 800 万。现在官网写的是 <strong>1100 万+ 安装、69.6k GitHub Stars</strong>。</p>
+<p>它的商业模式有点反直觉：插件本身免费，Apache 2.0 开源，模型用你自己的 API Key，<strong>Cline 不从调用费里抽成</strong>。</p>
+<p>不靠卖 token 赚钱，它 2025 年却拿到了 3200 万美元融资，A 轮由 Emergence Capital 领投。</p>
+<p>下面这份指南偏实操：先讲安装和选模型，再讲 Plan/Act 审批、规则、MCP、多 Agent 团队和无头 CLI。最后聊 2026 年 2 月那次 Clinejection 供应链事件——普通用户能从中学到什么。</p>
+<hr />
+<h2 id="cline">Cline 是什么：一个引擎，五种形态</h2>
+<p>Cline 最早叫 Claude Dev，是一个 VS Code 侧边栏插件。它不做 Tab 补全，而是一个<strong>会读代码、改多个文件、跑终端命令、看报错再修</strong>的自主 Agent。</p>
+<p>2026 年 5 月，Cline 把 Agent 核心抽成了独立的 <code>@cline/sdk</code>，再在它之上重建了所有产品。官方博客的解释很直白：早期 Agent 循环长在插件内部，越做越难维护，也没法复用。</p>
+<p><img alt="Cline 架构：多个入口共享同一个 SDK 核心，底层接任意模型" src="../images/cline-guide-architecture.png" /></p>
+<p>上图的意思很简单：<strong>VS Code、JetBrains、CLI、桌面 App、IM 连接器和你自己写的应用，跑的都是同一个 Agent 核心</strong>。Plan/Act、规则、MCP、检查点在各端表现一致，底层模型随便换。</p>
+<p>目前的形态包括：</p>
+<ul>
+<li><strong>VS Code 插件</strong>：最主流的用法，编辑以 diff 呈现，可逐条审批</li>
+<li><strong>JetBrains 插件</strong>：IDEA、PyCharm、GoLand 等全家桶可用，这部分<strong>未开源</strong></li>
+<li><strong>CLI</strong>：交互式终端对话，也能完全无头跑在 CI/CD 里</li>
+<li><strong>桌面 App</strong>：macOS 和 Windows 原生应用，不依赖编辑器</li>
+<li><strong>SDK</strong>：<code>@cline/sdk</code>，拿同一个引擎搭自己的 Agent</li>
+</ul>
+<hr />
+<h2 id="_1">第一步：安装，按场景选入口</h2>
+<h3 id="vs-code">VS Code 用户</h3>
+<p>在扩展市场搜索「Cline」安装即可，Open VSX 上也有，所以 Cursor、Windsurf 这类 VS Code 系编辑器同样能装。装完左侧栏会出现 Cline 图标。</p>
+<h3 id="ci">终端与 CI 用户</h3>
+<p>CLI 通过 npm 安装：</p>
+<pre><code class="language-bash">npm i -g cline
+</code></pre>
+<p>在 CLI 里按 <code>Tab</code> 切换 Plan / Act 模式，按 <code>Shift+Tab</code> 开关自动审批，会话中途也能换模型。</p>
+<h3 id="_2">不用编辑器的人</h3>
+<p>直接下载桌面 App。它可以在任意文件夹里开 Agent 会话，还能管理模型、插件、MCP 服务器和定时任务。</p>
+<p><strong>建议</strong>：新手先用 VS Code 插件上手，可视化 diff 加逐条审批最直观。等摸熟了 Agent 的行为模式，再迁到 CLI 做自动化。</p>
+<hr />
+<h2 id="byok">第二步：接入模型，BYOK 怎么用才划算</h2>
+<p>Cline 不绑定任何模型厂商，这是它和 Claude Code、Codex CLI 最大的差别。支持的来源包括：</p>
+<ul>
+<li>Anthropic Claude、OpenAI GPT、Google Gemini</li>
+<li>OpenRouter（200+ 模型）、Vercel AI Gateway</li>
+<li>AWS Bedrock、Azure、GCP Vertex</li>
+<li>Cerebras、Groq 等高速推理服务</li>
+<li>Ollama、LM Studio 本地模型</li>
+<li>任意 OpenAI 兼容接口（vLLM、自建网关等）</li>
+</ul>
+<h3 id="plan-act">Plan 和 Act 用不同模型</h3>
+<p>这是最实用的省钱技巧。在设置里打开「Use different models for Plan and Act」，就能给两个模式各配一个模型，切换模式时模型自动跟着切。</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>Plan 模式</th>
+<th>Act 模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>质量优先</td>
+<td>Claude Opus</td>
+<td>Claude Sonnet</td>
+</tr>
+<tr>
+<td>成本优先</td>
+<td>国产开源大模型</td>
+<td>快速小模型</td>
+</tr>
+<tr>
+<td>速度优先</td>
+<td>Gemini Flash</td>
+<td>Cerebras</td>
+</tr>
+</tbody>
+</table>
+<p>思路很简单：规划阶段要的是推理深度，用贵一点的模型，token 消耗却不大；执行阶段调用多、上下文长，交给便宜、快的模型去扛。</p>
+<h3 id="_3">开源模型表现怎么样</h3>
+<p>Cline 在 SDK 发布博客里公布了 Terminal-Bench 2.0 的 pass@1 成绩。用 Claude Opus 4.7，Cline CLI 得分 74.2%，同模型下 Claude Code 是 69.4%。</p>
+<p>开源权重模型上，Cline 团队自测对比了 OpenCode：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Cline</th>
+<th>OpenCode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kimi K2.6</td>
+<td>55.1%</td>
+<td>37.1%</td>
+</tr>
+<tr>
+<td>DeepSeek V4 Pro</td>
+<td>53.9%</td>
+<td>51.7%</td>
+</tr>
+<tr>
+<td>GLM-5.1</td>
+<td>49.4%</td>
+<td>52.8%</td>
+</tr>
+</tbody>
+</table>
+<p>需要说明：这些都是 <strong>Cline 官方自测数据</strong>，OpenCode 一方没有公布同口径成绩，只能当参考。</p>
+<p>能得出的结论只有一个：国产开源模型接进 Cline 已经可以干活，Kimi 和 DeepSeek 的表现都不差。</p>
+<h3 id="_4">成本要自己算清楚</h3>
+<p>BYOK 是双刃剑。轻度使用时，按调用付费比 20 美元月费便宜得多；但重度用户一天跑几十个长任务，账单可能超过 Cursor。</p>
+<p>建议在 Provider 后台设好<strong>月度预算上限</strong>，前两周每天看一次消耗，再决定常用模型组合。</p>
+<hr />
+<h2 id="planact">第三步：Plan/Act 与审批，先想清楚再动手</h2>
+<h3 id="plan">Plan 模式：只读不写</h3>
+<p>Plan 模式下，Cline 可以读代码、搜索、和你讨论方案，但<strong>不能改文件、不能执行命令</strong>。这个限制是故意的，让对话集中在理解和规划上。</p>
+<p>适合用 Plan 的场景：</p>
+<ul>
+<li>接手陌生代码库</li>
+<li>排查原因不明的 bug</li>
+<li>影响多个文件的架构调整</li>
+<li>代码审查和安全分析</li>
+</ul>
+<h3 id="act">Act 模式：带着上下文执行</h3>
+<p>切到 Act 后，Plan 阶段的对话历史全部保留，Cline 直接按商量好的方案动手。遇到意外复杂度，随时切回 Plan 重新想。</p>
+<p>官方的建议很明确：即使能直接用 Act，也<strong>推荐先 Plan</strong>。规划阶段积累的上下文，正是执行阶段做对决策的前提。复杂任务还可以用 <code>/deep-planning</code> 斜杠命令做更深入的分析。</p>
+<h3 id="_5">审批权限：按风险逐级放开</h3>
+<p><img alt="Cline 自动审批的五级权限，越往下风险越高" src="../images/cline-guide-approval.png" /></p>
+<p>Cline 默认每次改文件、跑命令都要你点确认。打开 Auto Approve，才能按类别批量放行。</p>
+<p>上图从上到下风险递增：只读 → 编辑项目文件 → 执行安全命令 → 执行全部命令与 MCP → YOLO 全放行。</p>
+<p>几个容易踩的点：</p>
+<ul>
+<li><strong>「安全命令」不是固定白名单</strong>，而是模型自己给每条命令打 <code>requires_approval</code> 标记</li>
+<li><code>npm test</code>、<code>git status</code> 通常算安全，<code>npm install</code>、<code>rm -rf</code> 通常要审批，<strong>但这不是保证</strong></li>
+<li>「读取/编辑全部文件」只是扩展到工作区之外，前提是基础开关已开</li>
+<li><strong>YOLO 模式</strong>会连 Plan 到 Act 的切换都自动批准，官方原话就是「危险」，只适合一次性沙盒实验</li>
+</ul>
+<p>官方推荐的默认配置：<strong>只开「读取项目文件」</strong>，其他先关着，有明确需要再开。</p>
+<h3 id="_6">检查点：出错一键回滚</h3>
+<p>每次工具调用后，对话里都会出现一个 Checkpoint 标记，带 Compare 和 Restore 两个按钮。Compare 看这一步具体改了什么，Restore 回到这一步之前。</p>
+<p>如果你打开了自动编辑，检查点就是你的安全网。</p>
+<hr />
+<h2 id="rulesworkflows-skills">第四步：Rules、Workflows 与 Skills，把团队规范写进去</h2>
+<h3 id="rules">Rules：每次对话都生效的规则</h3>
+<p>Rules 是 Markdown 文件，放在项目根目录的 <code>.clinerules/</code> 或 <code>.cline/rules/</code> 下，每次对话自动加载。适合写编码规范、技术栈说明、「不要改 /legacy 目录」这类约束。</p>
+<pre><code class="language-text">your-project/
+├── .clinerules/
+│   ├── coding.md        # 编码规范
+│   ├── testing.md       # 测试要求
+│   └── architecture.md  # 架构约定
+└── src/
+</code></pre>
+<p>一个规则文件的写法示例：</p>
+<pre><code class="language-markdown"># 编码规范
+
+## 命名
+- 变量用 camelCase，类用 PascalCase
+- 常量用 UPPER_SNAKE
+
+## 约束
+- 不要修改 /legacy 目录下的文件
+- 新接口必须附带单元测试
+</code></pre>
+<p>好消息是 Cline 会<strong>自动识别其他工具的规则文件</strong>：<code>.cursorrules</code>、<code>.windsurfrules</code> 和 <code>AGENTS.md</code> 都能读。从 Cursor 迁过来不用重写规则。</p>
+<p>全局规则放在 <code>Documents\Cline\Rules</code>（Windows）或 <code>~/Documents/Cline/Rules</code>（macOS/Linux）。工作区规则和全局规则冲突时，<strong>工作区优先</strong>。</p>
+<h3 id="workflows">Workflows：按需调用的流程脚本</h3>
+<p>Rules 有个隐性成本：它是系统上下文的一部分，<strong>每条消息都要消耗 token</strong>。</p>
+<p>所以 Cline 官方专门写过一篇《别在需要 Workflow 的时候加 Rule》。Workflows 也是 Markdown 文件，定义一串步骤，只在你调用时才进入上下文。</p>
+<p>区分方法：</p>
+<ul>
+<li><strong>每次都要遵守的约束</strong> → Rules（如命名规范）</li>
+<li><strong>偶尔执行的固定流程</strong> → Workflows（如发版、生成周报）</li>
+<li><strong>特定场景才需要的领域知识</strong> → Skills，让模型按需加载</li>
+</ul>
+<h3 id="newrule-cline">用 /newrule 让 Cline 帮你写规则</h3>
+<p>发现自己在不同任务里反复说同样的话时，输入 <code>/newrule</code>，Cline 会引导你整理成规则文件，存进 <code>.clinerules/</code>。</p>
+<hr />
+<h2 id="mcp-agent">第五步：接入 MCP，让 Agent 连上外部系统</h2>
+<p>MCP（Model Context Protocol）让 Cline 能调用数据库、API、云平台等外部工具。</p>
+<p>协议本身的原理，可以参考站内的<a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：重塑 AI Agent 生态的两大协议深度解析</a>。</p>
+<h3 id="vs-code_1">在 VS Code 里配置</h3>
+<p>点 Cline 面板顶部的 MCP Servers 图标 → Configure 标签 → Configure MCP Servers，会打开 JSON 配置文件。本地 STDIO 服务器这样写：</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;local-server&quot;: {
+      &quot;command&quot;: &quot;node&quot;,
+      &quot;args&quot;: [&quot;/path/to/server.js&quot;],
+      &quot;env&quot;: { &quot;API_KEY&quot;: &quot;your_api_key&quot; },
+      &quot;disabled&quot;: false,
+      &quot;autoApprove&quot;: []
+    }
+  }
+}
+</code></pre>
+<p>远程服务器用 <code>url</code> 加 <code>"type": "streamableHttp"</code>。注意：<strong>不写 type 会默认走旧版 SSE</strong>，想用推荐的 Streamable HTTP 必须显式声明。</p>
+<h3 id="cli">在 CLI 里配置</h3>
+<p>CLI 的配置文件是 <code>~/.cline/mcp.json</code>，也可以用向导：</p>
+<pre><code class="language-bash">cline mcp                 # 交互式增删改
+cline config mcp --json   # 非交互列出
+</code></pre>
+<h3 id="mcp">MCP 安全四条</h3>
+<ul>
+<li>只装信得过的服务器</li>
+<li>密钥放环境变量，不要写死在配置里</li>
+<li><code>autoApprove</code> 只放只读类的安全工具</li>
+<li>调用前看一眼参数再批准</li>
+</ul>
+<hr />
+<h2 id="agent-cli">第六步：多 Agent 团队、定时任务与无头 CLI</h2>
+<p>这部分是 Cline 2026 年新增的能力，也是它和早期「侧边栏插件」拉开差距的地方。</p>
+<h3 id="agent">多 Agent 团队</h3>
+<p>一个协调者 Agent 把任务拆开，派给专家 Agent，最后合并结果。团队状态会持久化，下次接着干：</p>
+<pre><code class="language-bash"># 启动一个团队
+cline --team-name auth-sprint \
+  &quot;Plan and implement user auth with tests&quot;
+
+# 第二天接着做
+cline --team-name auth-sprint \
+  &quot;What's the status? Continue unfinished tasks.&quot;
+</code></pre>
+<p>团队数据存在 <code>~/.cline/data/teams/&lt;团队名&gt;/</code> 下，包含任务看板、Agent 之间的消息箱和活动日志。</p>
+<p>SDK 提供两级协作，按任务规模选：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>子 Agent</th>
+<th>团队</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>持久化</td>
+<td>仅限本次会话</td>
+<td>跨会话保留</td>
+</tr>
+<tr>
+<td>协作方式</td>
+<td>父子委派</td>
+<td>共享任务看板</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>一次性委派</td>
+<td>多天的大任务</td>
+</tr>
+</tbody>
+</table>
+<p>官方文档也提醒：<strong>团队有额外开销</strong>。任务能自然拆成独立子任务、或者要跨好几天，才值得开团队；简单任务一个 Agent 配好工具，通常更高效。</p>
+<p>想了解多 Agent 框架的一般设计，可以看<a href="../posts/crewai-multi-agent-framework-deep-dive-2026.html">CrewAI 深度拆解：5.8 万 Star 背后，Crews 与 Flows 的能力边界和生产代价</a>。</p>
+<h3 id="agent_1">定时 Agent</h3>
+<p>用 cron 表达式定时跑任务，比如工作日早上 9 点汇总 PR：</p>
+<pre><code class="language-bash">cline schedule create &quot;PR summary&quot; \
+  --cron &quot;0 9 * * MON-FRI&quot; \
+  --prompt &quot;List all open PRs and review status&quot; \
+  --workspace /path/to/repo
+</code></pre>
+<p>定时任务重启后依然保留，不依赖终端会话。适合每日 PR 摘要、每周依赖检查、代码健康报告。</p>
+<h3 id="cli-cicd">无头 CLI 接入 CI/CD</h3>
+<p>CLI 可以完全无交互运行，支持管道输入和 JSON 输出：</p>
+<pre><code class="language-bash"># 跑测试并修复失败
+cline &quot;Run tests and fix any failures&quot;
+
+# 审查当前分支的改动
+git diff origin/main | cline &quot;Review these changes&quot;
+
+# JSON 输出，交给 jq 处理
+cline --json &quot;List all TODO comments&quot; \
+  | jq -r 'select(.type == &quot;agent_event&quot;
+      and .event.text) | .event.text'
+</code></pre>
+<h3 id="im">接入 IM</h3>
+<p>还能把 Agent 接到 Telegram、Slack、Discord、WhatsApp、Linear 等平台，每个对话线程对应一个 Agent 会话：</p>
+<pre><code class="language-bash">cline connect telegram -k $BOT_TOKEN
+</code></pre>
+<p>接入 IM 时一定要配置访问控制，限制谁能和你的 Agent 对话。否则任何能给机器人发消息的人，都能让它在你的机器上干活。</p>
+<hr />
+<h2 id="clinejection">安全：Clinejection 事件给用户的教训</h2>
+<p>2026 年 2 月，Cline 自己成了 AI Agent 安全的反面教材。整条攻击链是这样的：</p>
+<ul>
+<li>Cline 仓库用一个 AI Agent 自动分诊新 Issue，这个工作流权限配置过宽</li>
+<li>安全研究员 Adnan Khan 发现，<strong>在 Issue 标题里写提示注入</strong>，就能让它执行任意命令</li>
+<li>攻击者借此投毒 CI 构建缓存，在下一次发版时窃取了 npm 发布 token</li>
+<li>2 月 17 日，恶意的 <code>cline@2.3.0</code> 被发到 npm，唯一改动是一个 postinstall 脚本：全局安装 openclaw</li>
+</ul>
+<p>这个版本在线约 8 小时，据 StepSecurity 统计被下载了约 4000 次。<strong>VS Code 和 JetBrains 插件不受影响</strong>。</p>
+<p>事后的处置也算快：Cline 发布 2.4.0、废弃 2.3.0、吊销 token，并把 npm 发布改成基于 GitHub Actions 的 OIDC 可信发布。</p>
+<p>Endor Labs 评估整体影响较低，因为 openclaw 本身不是恶意软件。</p>
+<p>对普通用户，这件事有三条实际教训：</p>
+<ul>
+<li><strong>CLI 保持更新</strong>，并检查机器上有没有来路不明的全局 npm 包</li>
+<li><strong>自动审批要克制</strong>：Agent 读到的任何外部文本（Issue、网页、文档）都可能藏着注入指令</li>
+<li><strong>给 CI 里的 Agent 最小权限</strong>：如果你也在用 Cline CLI 做自动化，别给它能碰发布凭证的权限</li>
+</ul>
+<p>想看更系统的 Agent 安全与治理思路，可以延伸阅读：</p>
+<p><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞</a></p>
+<hr />
+<h2 id="cline_1">Cline 适合谁：和主流工具怎么选</h2>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>强项</th>
+<th>短板</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cline</td>
+<td>开源、模型自由</td>
+<td>无 Tab 补全</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>终端体验成熟</td>
+<td>绑定 Claude</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td>补全快、体验顺</td>
+<td>订阅制、闭源</td>
+</tr>
+<tr>
+<td>OpenCode</td>
+<td>开源、终端优先</td>
+<td>IDE 集成弱</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cline_2">适合用 Cline 的人</h3>
+<ul>
+<li>想<strong>自由切换模型</strong>，包括用国产开源模型或本地模型的人</li>
+<li>对代码隐私敏感，需要 VPC 私有部署的团队</li>
+<li>想把同一套 Agent 同时用在 IDE、终端、CI 和 IM 里的人</li>
+<li>想基于 SDK 搭自己 Agent 产品的开发者</li>
+</ul>
+<h3 id="_7">不太适合的情况</h3>
+<ul>
+<li>重度依赖 Tab 补全：Cline 不做这个，得配合 Copilot 或 Cursor 用</li>
+<li>不想操心账单：按量计费需要自己盯成本</li>
+<li>团队要求强定制的多角色模式：社区里有人认为 Roo Code 这类分支做得更深</li>
+</ul>
+<p>Cline 社区 Issue #9174 里有一句很直白的评价：<strong>Cline 仍是前三的编程 Agent，但差距在缩小。</strong>这话说得公道。</p>
+<p>闭源工具的横向对比，看这篇：<a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">2026 年最全闭源 AI 编程工具横评：Claude Code vs Cursor vs Copilot vs Codex vs Windsurf</a></p>
+<p>开源终端方案的上手攻略，看这篇：<a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode实战指南：免费AI编程Agent + 免费大模型，零成本搞定代码开发</a></p>
+<hr />
+<h2 id="_8">小结</h2>
+<p>Cline 的核心卖点可以归结为三个词：<strong>开源、模型自由、人在回路</strong>。</p>
+<p>上手路径建议这样走：</p>
+<ul>
+<li>第 1 天：装 VS Code 插件，接一个模型，只开「读取项目文件」自动审批</li>
+<li>第 1 周：养成先 Plan 后 Act 的习惯，给 Plan 和 Act 配不同模型控成本</li>
+<li>第 2 周：把团队规范写进 <code>.clinerules/</code>，固定流程写成 Workflows</li>
+<li>之后：按需接 MCP，再把 CLI 放进 CI、定时任务和多 Agent 团队</li>
+</ul>
+<p>2026 年，它从一个 VS Code 插件长成了一个 SDK 平台。对想掌控模型、成本和数据的开发者来说，它仍然是开源阵营里最完整的选择之一。</p>
+<hr />
+<h2 id="_9">免责声明</h2>
+<p>本文基于公开资料整理，数据截至 2026 年 9 月，仅供学习参考。文中基准测试成绩来自 Cline 官方自测，不代表第三方独立评测结论。工具功能和价格可能随版本变化，请以官方文档为准。本文不构成任何投资建议。</p>
+<h2 id="_10">参考来源</h2>
+<ul>
+<li><a href="https://github.com/cline/cline">GitHub —— cline/cline 官方仓库</a></li>
+<li><a href="https://cline.bot/">Cline 官网 —— AI Coding, Open Source and Open Choice</a></li>
+<li><a href="https://cline.bot/blog/introducing-cline-sdk-the-upgraded-agent-runtime">Cline 博客 —— Introducing Cline SDK: the upgraded agent runtime</a></li>
+<li><a href="https://cline.bot/blog/introducing-cline-cli-2-0">Cline 博客 —— Introducing Cline CLI 2.0</a></li>
+<li><a href="https://cline.bot/blog/5m-installs-1m-open-source-grant-program">Cline 博客 —— 5M installs and $1M Open Source Grant program</a></li>
+<li><a href="https://cline.bot/blog/stop-adding-rules-when-you-need-workflows">Cline 博客 —— Stop Adding Rules When You Need Workflows</a></li>
+<li><a href="https://docs.cline.bot/core-workflows/plan-and-act">Cline 文档 —— Plan &amp; Act Mode</a></li>
+<li><a href="https://docs.cline.bot/features/auto-approve">Cline 文档 —— Auto Approve &amp; YOLO Mode</a></li>
+<li><a href="https://docs.cline.bot/features/cline-rules">Cline 文档 —— Rules</a></li>
+<li><a href="https://docs.cline.bot/core-workflows/checkpoints">Cline 文档 —— Checkpoints</a></li>
+<li><a href="https://docs.cline.bot/mcp/configuring-mcp-servers">Cline 文档 —— MCP 配置</a></li>
+<li><a href="https://cline-efdc8260.mintlify.app/sdk/guides/multi-agent-teams">Cline SDK 文档 —— Multi-Agent Teams</a></li>
+<li><a href="https://cline.bot/teams">Cline 官网 —— AI Coding Agent for Teams</a></li>
+<li><a href="https://sacra.com/c/cline/">Sacra —— Cline revenue, funding &amp; news</a></li>
+<li><a href="https://ai.engineer/orgs/cline">AI Engineer —— Cline: Open-Source AI Coding Agents</a></li>
+<li><a href="https://thehackernews.com/2026/02/cline-cli-230-supply-chain-attack.html">The Hacker News —— Cline CLI 2.3.0 Supply Chain Attack Installed OpenClaw</a></li>
+<li><a href="https://snyksec.hashnode.dev/cline-supply-chain-attack-prompt-injection-github-actions-1">Snyk —— How Clinejection Turned an AI Bot into a Supply Chain Attack</a></li>
+<li><a href="https://github.com/cline/cline/issues/9174">GitHub —— cline/cline Issue #9174 competitive landscape 2026</a></li>
+<li><a href="https://dev.to/jovan_chan_9500711396d4e6/cline-review-2026-is-the-best-free-ai-coding-agent-actually-free-447p">dev.to —— Cline Review 2026: Is the Best Free AI Coding Agent Actually Free?</a></li>
+</ul>
+<h2 id="_11">延伸阅读</h2>
+<ul>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode实战指南：免费AI编程Agent + 免费大模型，零成本搞定代码开发</a></li>
+<li><a href="../posts/closed-source-ai-coding-tools-comparison-2026.html">2026 年最全闭源 AI 编程工具横评：Claude Code vs Cursor vs Copilot vs Codex vs Windsurf</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞</a></li>
+<li><a href="../posts/mcp-vs-a2a-ai-agent-protocols-deep-dive-2026.html">MCP vs A2A：重塑 AI Agent 生态的两大协议深度解析</a></li>
+<li><a href="../posts/crewai-multi-agent-framework-deep-dive-2026.html">CrewAI 深度拆解：5.8 万 Star 背后，Crews 与 Flows 的能力边界和生产代价</a></li>
+<li><a href="../posts/ai-coding-agents-in-your-pocket-cursor-trae-openclaw-2026.html">随时随地指挥 AI 写代码：当 Cursor、Trae、OpenClaw 等把 Agent 塞进口袋之后</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 心动购物季主会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpdGZu" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝电脑办公精选</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91%E5%8A%9E%E5%85%AC&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的编程体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DDell%252520U2724D%2525204K%2525E6%252598%2525BE%2525E7%2525A4%2525BA%2525E5%252599%2525A8%2526enc%253Dutf-8&platform=jd&article=cline-open-source-coding-agent-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">4K显示器 - Dell U2724D</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">程序员双屏标配，27寸4K，护眼不疲劳</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥2500-3500</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DMacBook%2520Pro%2520M4%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=cline-open-source-coding-agent-guide-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⌨️</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发首选，M4芯片神经网络引擎极强</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥14000-19000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>
