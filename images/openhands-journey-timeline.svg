@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500">
+  <!-- White background, mandatory full-canvas rect -->
+  <rect x="0" y="0" width="1200" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="45" font-family="system-ui, sans-serif" font-size="22" fill="#111827" font-weight="700">OpenHands 关键节点时间线（2024.03 - 2026.05）</text>
+  <text x="40" y="70" font-family="system-ui, sans-serif" font-size="13" fill="#4b5563">从致敬 Devin 的开源项目，到 80K+ Star 的编程 Agent 平台</text>
+
+  <!-- Main timeline axis -->
+  <line x1="80" y1="250" x2="1140" y2="250" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="1140,250 1128,244 1128,256" fill="#94a3b8"/>
+
+  <!-- Node 1: 2024.03 -->
+  <circle cx="150" cy="250" r="8" fill="#1d4ed8"/>
+  <line x1="150" y1="250" x2="150" y2="180" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="70" y="120" width="160" height="58" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="90" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#1d4ed8" font-weight="700">2024.03.12</text>
+  <text x="90" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#1e3a8a">OpenDevin 发布</text>
+  <text x="90" y="174" font-family="system-ui, sans-serif" font-size="10" fill="#3b82f6">致敬 Cognition Devin</text>
+
+  <!-- Node 2: 2024.08 -->
+  <circle cx="330" cy="250" r="8" fill="#6d28d9"/>
+  <line x1="330" y1="250" x2="330" y2="320" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="250" y="322" width="160" height="58" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="270" y="344" font-family="system-ui, sans-serif" font-size="12" fill="#6d28d9" font-weight="700">2024.08</text>
+  <text x="270" y="362" font-family="system-ui, sans-serif" font-size="11" fill="#4c1d95">改名 OpenHands</text>
+  <text x="270" y="376" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">All Hands AI 成立</text>
+
+  <!-- Node 3: 2024.09 -->
+  <circle cx="470" cy="250" r="8" fill="#0e7490"/>
+  <line x1="470" y1="250" x2="470" y2="180" stroke="#0e7490" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="390" y="120" width="160" height="58" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="1.2"/>
+  <text x="410" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#0e7490" font-weight="700">2024.09</text>
+  <text x="410" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#164e63">种子轮 $5M</text>
+  <text x="410" y="174" font-family="system-ui, sans-serif" font-size="10" fill="#0891b2">Menlo Ventures 领投</text>
+
+  <!-- Node 4: 2025.03 -->
+  <circle cx="650" cy="250" r="8" fill="#15803d"/>
+  <line x1="650" y1="250" x2="650" y2="320" stroke="#15803d" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="570" y="322" width="170" height="58" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="590" y="344" font-family="system-ui, sans-serif" font-size="12" fill="#15803d" font-weight="700">2025.03</text>
+  <text x="590" y="362" font-family="system-ui, sans-serif" font-size="11" fill="#14532d">一周年 · 50K Star</text>
+  <text x="590" y="376" font-family="system-ui, sans-serif" font-size="10" fill="#16a34a">论文登上 ICLR 2025</text>
+
+  <!-- Node 5: 2025.11 -->
+  <circle cx="830" cy="250" r="8" fill="#b45309"/>
+  <line x1="830" y1="250" x2="830" y2="180" stroke="#b45309" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="750" y="120" width="170" height="58" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="1.2"/>
+  <text x="770" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#b45309" font-weight="700">2025.11</text>
+  <text x="770" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#78350f">A轮 $18.8M</text>
+  <text x="770" y="174" font-family="system-ui, sans-serif" font-size="10" fill="#d97706">Madrona 领投</text>
+
+  <!-- Node 6: 2026.05 -->
+  <circle cx="1010" cy="250" r="8" fill="#b91c1c"/>
+  <line x1="1010" y1="250" x2="1010" y2="320" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <rect x="930" y="322" width="170" height="58" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="950" y="344" font-family="system-ui, sans-serif" font-size="12" fill="#b91c1c" font-weight="700">2026.05</text>
+  <text x="950" y="362" font-family="system-ui, sans-serif" font-size="11" fill="#7f1d1d">80K+ Star</text>
+  <text x="950" y="376" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626">V1 架构 · SWE-bench 72.8%</text>
+
+  <!-- Legend -->
+  <text x="40" y="440" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">数据来源：OpenHands 官方博客、Wikipedia、arXiv 2511.03690、FinSMEs 融资报道</text>
+</svg>

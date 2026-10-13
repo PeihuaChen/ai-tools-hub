@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600">
+  <rect width="1100" height="600" fill="#ffffff"/>
+
+  <text x="48" y="44" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="23" font-weight="bold" fill="#111827">OSWorld 的「虚拟机税」，与 Lite.OSWorld 怎么把它砍掉</text>
+  <text x="48" y="72" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#4b5563">同一套任务、同一套 evaluator，换掉的只是底下的运行时</text>
+
+  <!-- LEFT: VM -->
+  <rect x="48" y="96" width="480" height="330" rx="12" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="72" y="128" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="17" font-weight="bold" fill="#b91c1c">原版 OSWorld：一任务一台虚拟机</text>
+
+  <rect x="72" y="146" width="432" height="46" rx="8" fill="#fee2e2" stroke="#b91c1c" stroke-width="1"/>
+  <text x="288" y="175" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#b91c1c">Ubuntu 桌面（LibreOffice / Chrome / VS Code）</text>
+
+  <rect x="72" y="200" width="432" height="44" rx="8" fill="#fee2e2" stroke="#b91c1c" stroke-width="1"/>
+  <text x="288" y="228" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#b91c1c">Ubuntu.qcow2 磁盘镜像</text>
+
+  <rect x="72" y="252" width="432" height="44" rx="8" fill="#fee2e2" stroke="#b91c1c" stroke-width="1"/>
+  <text x="288" y="280" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#b91c1c">QEMU / KVM 虚拟机</text>
+
+  <rect x="72" y="304" width="432" height="44" rx="8" fill="#ffffff" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="288" y="332" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">需要 /dev/kvm + 嵌套虚拟化</text>
+
+  <text x="72" y="376" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">卡在这一层：多数云主机、CI runner、容器里套容器</text>
+  <text x="72" y="396" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">都不暴露嵌套虚拟化，所以想并行几十个桌面几乎不可能</text>
+  <text x="72" y="416" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">——这是训 CUA 之前的第一道坎，且和模型能力无关</text>
+
+  <!-- ARROW -->
+  <path d="M540 260H568" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M562 253L572 260L562 267Z" fill="#94a3b8"/>
+
+  <!-- RIGHT: Docker -->
+  <rect x="580" y="96" width="472" height="330" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="604" y="128" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="17" font-weight="bold" fill="#15803d">Lite.OSWorld：一任务一个容器</text>
+
+  <rect x="604" y="146" width="424" height="46" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+  <text x="816" y="175" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#15803d">同样的桌面应用 · 同样的任务与 evaluator</text>
+
+  <rect x="604" y="200" width="424" height="44" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+  <text x="816" y="228" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#15803d">容器内 GNOME 桌面</text>
+
+  <rect x="604" y="252" width="424" height="44" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+  <text x="816" y="280" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#15803d">普通 Docker 容器</text>
+
+  <rect x="604" y="304" width="424" height="44" rx="8" fill="#ffffff" stroke="#15803d" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="816" y="332" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#15803d">任意 Docker 主机即可</text>
+
+  <text x="604" y="376" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">不再需要 /dev/kvm，所以云实例、CI runner、嵌套容器</text>
+  <text x="604" y="396" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">都能跑；同一台机器塞得下更多桌面，rollout 可以并行铺开</text>
+  <text x="604" y="416" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">官方称跨 13 个模型分数与 VM 版对齐，信号能迁回真 benchmark</text>
+
+  <!-- METRIC TABLE -->
+  <rect x="48" y="450" width="1004" height="112" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <line x1="48" y1="482" x2="1052" y2="482" stroke="#d9e2ec" stroke-width="1"/>
+  <line x1="410" y1="450" x2="410" y2="562" stroke="#d9e2ec" stroke-width="1"/>
+  <line x1="731" y1="450" x2="731" y2="562" stroke="#d9e2ec" stroke-width="1"/>
+
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" font-weight="bold">
+    <text x="72" y="472" fill="#111827">指标</text>
+    <text x="434" y="472" fill="#b91c1c">OSWorld（QEMU/KVM）</text>
+    <text x="755" y="472" fill="#15803d">Lite.OSWorld（Docker）</text>
+  </g>
+
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#4b5563">
+    <text x="72" y="506">单实例内存</text>
+    <text x="72" y="530">冷启动</text>
+    <text x="72" y="554">并行度</text>
+  </g>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13">
+    <text x="434" y="506" fill="#b91c1c">4.1 GB</text>
+    <text x="434" y="530" fill="#b91c1c">29.9 s</text>
+    <text x="434" y="554" fill="#6b7280">基线</text>
+    <text x="755" y="506" fill="#15803d" font-weight="bold">0.9 GB</text>
+    <text x="755" y="530" fill="#15803d" font-weight="bold">23.8 s</text>
+    <text x="755" y="554" fill="#15803d" font-weight="bold">约 4.6 倍实例</text>
+  </g>
+
+  <text x="1052" y="586" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">数据来源：CUA-Lite 官方博客《VM-free OS(World), at scale.》（2026-07-23），为团队自测结果</text>
+</svg>

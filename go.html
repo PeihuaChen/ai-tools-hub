@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>正在跳转...</title>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#0f172a;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+.card{text-align:center;padding:2rem}
+.spinner{width:40px;height:40px;border:3px solid #1e293b;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+h2{margin-bottom:.5rem;font-size:1.25rem}
+p{color:#94a3b8;font-size:.875rem}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="spinner"></div>
+  <h2>正在前往合作伙伴页面</h2>
+  <p>跳转中，请稍候...</p>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(location.search);
+  var target = params.get('url');
+  var article = params.get('article') || '';
+  var platform = params.get('platform') || '';
+  var ref = params.get('ref') || '';
+
+  // Store click locally for analytics
+  try {
+    var c = JSON.parse(localStorage.getItem('_aic_clicks') || '[]');
+    c.push({t:'click',p:platform,a:article,ref:ref,url:target,ts:Date.now(),_r:document.referrer});
+    // Keep last 500
+    if(c.length>500) c=c.slice(-500);
+    localStorage.setItem('_aic_clicks',JSON.stringify(c));
+  } catch(e){}
+
+  // Send beacon if possible (for future server-side collector)
+  try {
+    var data = {type:'click',platform:platform,article:article,ref:ref,target:target,ts:Date.now()};
+    var blob = new Blob([JSON.stringify(data)], {type:'application/json'});
+    navigator.sendBeacon('/_track', blob);
+  } catch(e){}
+
+  // Redirect
+  if(target) {
+    var decoded = target;
+    try { decoded = decodeURIComponent(target); } catch(e){}
+    window.location.replace(decoded);
+  } else if(platform === 'jd') {
+    window.location.replace('https://u.jd.com/H6p6mzd');
+  } else if(platform === 'tb') {
+    window.location.replace('https://s.click.taobao.com/t?e=m%3D2%26s%3D');
+  } else {
+    window.location.replace('/');
+  }
+})();
+</script>
+<noscript>
+<meta http-equiv="refresh" content="0;url=/">
+</noscript>
+</body>
+</html>

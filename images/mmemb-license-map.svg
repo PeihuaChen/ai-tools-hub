@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1190" viewBox="0 0 1080 1190">
+  <rect x="0" y="0" width="1080" height="1190" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="60" font-weight="700" fill="#111827" text-anchor="middle">协议红绿灯</text>
+  <text x="540" y="156" font-size="34" fill="#4b5563" text-anchor="middle">同一张榜单，商用条件差别很大</text>
+
+  <!-- green: commercial OK -->
+  <rect x="48" y="210" width="984" height="364" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <circle cx="90" cy="268" r="16" fill="#15803d"/>
+  <text x="124" y="274" font-size="40" font-weight="700" fill="#15803d">可商用 · 协议宽松</text>
+  <text x="76" y="334" font-size="32" fill="#111827">Qwen3-VL-Embedding · Apache 2.0</text>
+  <text x="76" y="386" font-size="32" fill="#111827">WeMM-Embedding · Apache 2.0</text>
+  <text x="76" y="438" font-size="32" fill="#111827">Ops-ColQwen3-4B · Apache 2.0</text>
+  <text x="76" y="490" font-size="32" fill="#111827">EmbeddingGemma 2 · Apache 2.0</text>
+  <text x="76" y="542" font-size="32" fill="#111827">pplx-embed-v2-late · MIT</text>
+
+  <!-- amber: verify -->
+  <rect x="48" y="604" width="984" height="208" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <circle cx="90" cy="662" r="16" fill="#b45309"/>
+  <text x="124" y="668" font-size="40" font-weight="700" fill="#b45309">商用前需核对</text>
+  <text x="76" y="728" font-size="32" fill="#111827">Nemotron-Embed-VL-1B · NVIDIA 协议</text>
+  <text x="76" y="780" font-size="32" fill="#111827">ColQwen2.5 · 标 MIT，基座限非商用</text>
+
+  <!-- red: non-commercial -->
+  <rect x="48" y="842" width="984" height="260" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <circle cx="90" cy="900" r="16" fill="#b91c1c"/>
+  <text x="124" y="906" font-size="40" font-weight="700" fill="#b91c1c">仅限研究或非商用</text>
+  <text x="76" y="966" font-size="32" fill="#111827">Nemotron ColEmbed v2 · CC-BY-NC</text>
+  <text x="76" y="1018" font-size="32" fill="#111827">Jina v5-omni · CC BY-NC</text>
+  <text x="76" y="1070" font-size="32" fill="#111827">Jina v4 · CC BY-NC</text>
+
+  <text x="540" y="1160" font-size="34" font-weight="700" fill="#b45309" text-anchor="middle">以官方 LICENSE 文件为准</text>
+</svg>

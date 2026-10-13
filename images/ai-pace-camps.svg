@@ -1,0 +1,37 @@
+<svg width="1080" height="900" viewBox="0 0 1080 900" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="900" fill="#f7f8fa"/>
+
+  <text x="540" y="86" font-size="60" fill="#111827" font-weight="bold" text-anchor="middle">全球 AI 减速议题的四方阵营</text>
+  <text x="540" y="146" font-size="34" fill="#4b5563" text-anchor="middle">同一句话，四套完全不同的诉求与底线</text>
+
+  <!-- camp 1 -->
+  <rect x="45" y="210" width="480" height="270" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="77" y="270" font-size="40" fill="#1d4ed8" font-weight="bold">美国头部实验室</text>
+  <text x="77" y="330" font-size="34" fill="#1d4ed8" font-weight="bold">立场：有护栏地放慢</text>
+  <text x="77" y="390" font-size="32" fill="#374151">要反垄断豁免与评估标准</text>
+  <text x="77" y="440" font-size="32" fill="#374151">1171 名员工联署请愿</text>
+
+  <!-- camp 2 -->
+  <rect x="555" y="210" width="480" height="270" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="587" y="270" font-size="40" fill="#b91c1c" font-weight="bold">美国政府与芯片方</text>
+  <text x="587" y="330" font-size="34" fill="#b91c1c" font-weight="bold">立场：明确反对减速</text>
+  <text x="587" y="390" font-size="32" fill="#374151">保持对华领先是前提</text>
+  <text x="587" y="440" font-size="32" fill="#374151">称风险论调是场骗局</text>
+
+  <!-- camp 3 -->
+  <rect x="45" y="510" width="480" height="270" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="77" y="570" font-size="40" fill="#b45309" font-weight="bold">开源与中小厂商</text>
+  <text x="77" y="630" font-size="34" fill="#b45309" font-weight="bold">立场：指控其为卡特尔</text>
+  <text x="77" y="690" font-size="32" fill="#374151">合规成本转嫁追赶者</text>
+  <text x="77" y="740" font-size="32" fill="#374151">要求真正独立的测试</text>
+
+  <!-- camp 4 -->
+  <rect x="555" y="510" width="480" height="270" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="587" y="570" font-size="40" fill="#15803d" font-weight="bold">中国官方与产业</text>
+  <text x="587" y="630" font-size="34" fill="#15803d" font-weight="bold">立场：不接倡议继续跑</text>
+  <text x="587" y="690" font-size="32" fill="#374151">主张多边主义与联合国</text>
+  <text x="587" y="740" font-size="32" fill="#374151">融资与参数规模同步加码</text>
+
+  <rect x="45" y="810" width="990" height="64" rx="12" fill="#eef2f7" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="853" font-size="32" fill="#1d4ed8" font-weight="bold" text-anchor="middle">四家都说要安全，但没有人愿意第一个松开油门</text>
+</svg>

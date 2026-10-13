@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1290" viewBox="0 0 1080 1290">
+  <defs>
+    <marker id="arr" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <!-- 满幅不透明底 -->
+  <rect x="0" y="0" width="1080" height="1290" fill="#f7f8fa"/>
+
+  <!-- 标题 -->
+  <text x="540" y="100" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">偏见检测的两条技术路线</text>
+  <text x="540" y="160" font-size="34" fill="#4b5563" text-anchor="middle">先看输入数据是什么，再选工具</text>
+
+  <!-- 列标题 -->
+  <rect x="40" y="210" width="480" height="100" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="280" y="276" font-size="46" font-weight="bold" fill="#1d4ed8" text-anchor="middle">表格模型路线</text>
+  <rect x="560" y="210" width="480" height="100" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="800" y="276" font-size="46" font-weight="bold" fill="#6d28d9" text-anchor="middle">大模型路线</text>
+
+  <!-- 输入 -->
+  <rect x="40" y="350" width="480" height="180" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="280" y="408" font-size="40" font-weight="bold" fill="#111827" text-anchor="middle">输入</text>
+  <text x="280" y="458" font-size="34" fill="#4b5563" text-anchor="middle">预测结果 + 真实标签</text>
+  <text x="280" y="502" font-size="34" fill="#4b5563" text-anchor="middle">+ 敏感属性</text>
+
+  <rect x="560" y="350" width="480" height="180" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="800" y="408" font-size="40" font-weight="bold" fill="#111827" text-anchor="middle">输入</text>
+  <text x="800" y="458" font-size="34" fill="#4b5563" text-anchor="middle">真实业务提示词</text>
+  <text x="800" y="502" font-size="34" fill="#4b5563" text-anchor="middle">+ 多次生成的文本</text>
+
+  <line x1="280" y1="530" x2="280" y2="572" stroke="#94a3b8" stroke-width="3" marker-end="url(#arr)"/>
+  <line x1="800" y1="530" x2="800" y2="572" stroke="#94a3b8" stroke-width="3" marker-end="url(#arr)"/>
+
+  <!-- 代表工具 -->
+  <rect x="40" y="585" width="480" height="380" rx="14" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="280" y="645" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">代表工具</text>
+  <text x="280" y="705" font-size="36" fill="#111827" text-anchor="middle">Fairlearn</text>
+  <text x="280" y="762" font-size="36" fill="#111827" text-anchor="middle">AIF360</text>
+  <text x="280" y="819" font-size="36" fill="#111827" text-anchor="middle">Aequitas</text>
+  <text x="280" y="876" font-size="36" fill="#111827" text-anchor="middle">Fairness Indicators</text>
+  <text x="280" y="933" font-size="36" fill="#111827" text-anchor="middle">HolisticAI</text>
+
+  <rect x="560" y="585" width="480" height="380" rx="14" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="800" y="645" font-size="40" font-weight="bold" fill="#6d28d9" text-anchor="middle">代表工具</text>
+  <text x="800" y="705" font-size="36" fill="#111827" text-anchor="middle">LangFair</text>
+  <text x="800" y="762" font-size="36" fill="#111827" text-anchor="middle">LangTest</text>
+  <text x="800" y="819" font-size="34" fill="#6b7280" text-anchor="middle">文生图：HoloFair</text>
+  <text x="800" y="863" font-size="32" fill="#6b7280" text-anchor="middle">（仍在研究阶段）</text>
+
+  <line x1="280" y1="965" x2="280" y2="1007" stroke="#94a3b8" stroke-width="3" marker-end="url(#arr)"/>
+  <line x1="800" y1="965" x2="800" y2="1007" stroke="#94a3b8" stroke-width="3" marker-end="url(#arr)"/>
+
+  <!-- 能力 -->
+  <rect x="40" y="1020" width="480" height="160" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="280" y="1085" font-size="44" font-weight="bold" fill="#15803d" text-anchor="middle">检测 + 缓解</text>
+  <text x="280" y="1140" font-size="32" fill="#15803d" text-anchor="middle">分组指标、调阈值、约束训练</text>
+
+  <rect x="560" y="1020" width="480" height="160" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="800" y="1085" font-size="44" font-weight="bold" fill="#b45309" text-anchor="middle">以检测为主</text>
+  <text x="800" y="1140" font-size="32" fill="#b45309" text-anchor="middle">风险度量、行为回归测试</text>
+
+  <!-- 底部说明 -->
+  <text x="540" y="1250" font-size="32" fill="#4b5563" text-anchor="middle">LLM 输出落成结构化决策后，可交给左侧工具</text>
+</svg>

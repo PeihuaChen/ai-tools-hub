@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff4d4d"/>
+      <stop offset="33%" style="stop-color:#ff9f43"/>
+      <stop offset="66%" style="stop-color:#54a0ff"/>
+      <stop offset="100%" style="stop-color:#5f27cd"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#5f27cd"/>
+      <stop offset="33%" style="stop-color:#54a0ff"/>
+      <stop offset="66%" style="stop-color:#ff9f43"/>
+      <stop offset="100%" style="stop-color:#ff4d4d"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#54a0ff"/>
+      <stop offset="100%" style="stop-color:#a29bfe"/>
+    </linearGradient>
+    <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4d4d;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ff9f43;stop-opacity:0.3"/>
+    </linearGradient>
+    <linearGradient id="fixGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d2d3;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#54a0ff;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.08">
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+    </pattern>
+    <rect width="900" height="383" fill="url(#grid)"/>
+  </g>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Left label box -->
+  <rect x="30" y="28" width="220" height="26" rx="4" fill="none" stroke="#54a0ff" stroke-width="1" opacity="0.8"/>
+  <text x="40" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#54a0ff" font-weight="500">AI 工程实践 · 推理模型修复</text>
+
+  <!-- Year badge -->
+  <rect x="840" y="28" width="36" height="26" rx="4" fill="none" stroke="#a29bfe" stroke-width="1" opacity="0.6"/>
+  <text x="846" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#a29bfe" font-weight="700">26</text>
+
+  <!-- Main title -->
+  <text x="30" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="29" fill="#ffffff" font-weight="700">你的推理模型还在原地转圈？</text>
+  <text x="30" y="145" font-family="system-ui, -apple-system, sans-serif" font-size="29" fill="#ffffff" font-weight="700">死循环修复方案实测对比 2026</text>
+
+  <!-- Subtitle -->
+  <text x="30" y="178" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="url(#subtitle)">Antidoom · 神经元手术 · LZ Penalty · Antislop · 六大方案深度拆解</text>
+
+  <!-- Key highlights -->
+  <text x="30" y="218" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" fill="#ff6b6b">⚡ Liquid AI Antidoom: 循环率 22.9% → 1%，仅需数小时 LoRA 训练</text>
+  <text x="30" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" fill="#54a0ff">🧠 Edgerunner AI: 编辑 1 个神经元即可修复 Gemma 4 死循环</text>
+  <text x="30" y="262" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" fill="#00d2d3">📊 LZ Penalty: 信息论方案让 greedy 解码实现零重复退化</text>
+
+  <!-- Right side illustration: Loop → Fix concept -->
+  <!-- Doom loop circle (red) -->
+  <circle cx="720" cy="140" r="45" fill="none" stroke="url(#loopGrad)" stroke-width="2.5" stroke-dasharray="8 4"/>
+  <path d="M 720 95 L 725 102 L 715 102 Z" fill="#ff4d4d" opacity="0.7"/>
+  <text x="702" y="145" font-family="monospace" font-size="11" fill="#ff6b6b" opacity="0.9">Loop</text>
+
+  <!-- Arrow from loop to fix -->
+  <line x1="775" y1="140" x2="810" y2="140" stroke="#ffffff" stroke-width="1" opacity="0.4" stroke-dasharray="3 2"/>
+  <path d="M 808 136 L 815 140 L 808 144" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+
+  <!-- Fix circle (blue/green) -->
+  <circle cx="850" cy="140" r="20" fill="none" stroke="url(#fixGrad)" stroke-width="2"/>
+  <path d="M 840 140 L 847 147 L 860 133" fill="none" stroke="#00d2d3" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Comparison blocks -->
+  <g transform="translate(640, 190)">
+    <rect x="0" y="0" width="90" height="28" rx="3" fill="none" stroke="#ff6b6b" stroke-width="1" opacity="0.5"/>
+    <text x="8" y="18" font-family="monospace" font-size="9" fill="#ff6b6b">Antidoom</text>
+    
+    <rect x="100" y="0" width="90" height="28" rx="3" fill="none" stroke="#54a0ff" stroke-width="1" opacity="0.5"/>
+    <text x="108" y="18" font-family="monospace" font-size="9" fill="#54a0ff">Noloop</text>
+    
+    <rect x="0" y="36" width="90" height="28" rx="3" fill="none" stroke="#00d2d3" stroke-width="1" opacity="0.5"/>
+    <text x="8" y="54" font-family="monospace" font-size="9" fill="#00d2d3">LZ Penalty</text>
+    
+    <rect x="100" y="36" width="90" height="28" rx="3" fill="none" stroke="#a29bfe" stroke-width="1" opacity="0.5"/>
+    <text x="108" y="54" font-family="monospace" font-size="9" fill="#a29bfe">Antislop</text>
+  </g>
+
+  <!-- Tags bar -->
+  <g transform="translate(30, 295)">
+    <rect x="0" y="0" width="80" height="24" rx="12" fill="none" stroke="#54a0ff" stroke-width="0.8" opacity="0.6"/>
+    <text x="12" y="16" font-family="system-ui, sans-serif" font-size="10.5" fill="#54a0ff" opacity="0.9">Doom Loop</text>
+    
+    <rect x="90" y="0" width="60" height="24" rx="12" fill="none" stroke="#ff9f43" stroke-width="0.8" opacity="0.6"/>
+    <text x="102" y="16" font-family="system-ui, sans-serif" font-size="10.5" fill="#ff9f43" opacity="0.9">FTPO</text>
+    
+    <rect x="160" y="0" width="76" height="24" rx="12" fill="none" stroke="#00d2d3" stroke-width="0.8" opacity="0.6"/>
+    <text x="172" y="16" font-family="system-ui, sans-serif" font-size="10.5" fill="#00d2d3" opacity="0.9">推理优化</text>
+    
+    <rect x="246" y="0" width="72" height="24" rx="12" fill="none" stroke="#a29bfe" stroke-width="0.8" opacity="0.6"/>
+    <text x="258" y="16" font-family="system-ui, sans-serif" font-size="10.5" fill="#a29bfe" opacity="0.9">Liquid AI</text>
+    
+    <rect x="328" y="0" width="80" height="24" rx="12" fill="none" stroke="#ff6b6b" stroke-width="0.8" opacity="0.6"/>
+    <text x="340" y="16" font-family="system-ui, sans-serif" font-size="10.5" fill="#ff6b6b" opacity="0.9">方案对比</text>
+    
+    <rect x="418" y="0" width="92" height="24" rx="12" fill="none" stroke="#feca57" stroke-width="0.8" opacity="0.6"/>
+    <text x="430" y="16" font-family="system-ui, sans-serif" font-size="10.5" fill="#feca57" opacity="0.9">神经元编辑</text>
+  </g>
+
+  <!-- Separator line -->
+  <line x1="30" y1="340" x2="870" y2="340" stroke="#ffffff" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Bottom section hints -->
+  <text x="30" y="360" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff" opacity="0.35">六大方案原理拆解 → 实测数据对比 → 选型决策矩阵 → 场景推荐</text>
+
+  <!-- Watermark -->
+  <text x="750" y="360" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.2">AI 工程实践 | virxact.com</text>
+</svg>

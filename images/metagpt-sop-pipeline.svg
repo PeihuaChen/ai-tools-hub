@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1420" viewBox="0 0 1080 1420">
+  <rect x="0" y="0" width="1080" height="1420" fill="#f7f8fa"/>
+
+  <text x="540" y="110" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">MetaGPT 的 SOP 流水线</text>
+  <text x="540" y="180" font-size="34" fill="#4b5563" text-anchor="middle">一句需求进，完整仓库出</text>
+
+  <!-- 输入 -->
+  <rect x="240" y="230" width="600" height="90" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="540" y="288" font-size="36" font-weight="bold" fill="#1d4ed8" text-anchor="middle">输入：一句话需求</text>
+
+  <!-- 箭头 -->
+  <g stroke="#94a3b8" stroke-width="3">
+    <line x1="540" y1="324" x2="540" y2="344"/>
+    <line x1="540" y1="494" x2="540" y2="514"/>
+    <line x1="540" y1="664" x2="540" y2="684"/>
+    <line x1="540" y1="834" x2="540" y2="854"/>
+    <line x1="540" y1="1004" x2="540" y2="1024"/>
+    <line x1="540" y1="1174" x2="540" y2="1194"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M528 344 L552 344 L540 358 Z"/>
+    <path d="M528 514 L552 514 L540 528 Z"/>
+    <path d="M528 684 L552 684 L540 698 Z"/>
+    <path d="M528 854 L552 854 L540 868 Z"/>
+    <path d="M528 1024 L552 1024 L540 1038 Z"/>
+    <path d="M528 1194 L552 1194 L540 1208 Z"/>
+  </g>
+
+  <!-- 角色 1 -->
+  <rect x="48" y="360" width="984" height="130" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <line x1="350" y1="384" x2="350" y2="466" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="80" y="440" font-size="44" font-weight="bold" fill="#1d4ed8">产品经理</text>
+  <text x="380" y="438" font-size="32" fill="#4b5563">PRD · 用户故事 · 竞品分析</text>
+
+  <!-- 角色 2 -->
+  <rect x="48" y="530" width="984" height="130" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <line x1="350" y1="554" x2="350" y2="636" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="80" y="610" font-size="44" font-weight="bold" fill="#6d28d9">架构师</text>
+  <text x="380" y="608" font-size="32" fill="#4b5563">系统设计 · 数据结构 · API</text>
+
+  <!-- 角色 3 -->
+  <rect x="48" y="700" width="984" height="130" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <line x1="350" y1="724" x2="350" y2="806" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="80" y="780" font-size="44" font-weight="bold" fill="#0e7490">项目经理</text>
+  <text x="380" y="778" font-size="32" fill="#4b5563">任务拆解 · 文件依赖排序</text>
+
+  <!-- 角色 4 -->
+  <rect x="48" y="870" width="984" height="130" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <line x1="350" y1="894" x2="350" y2="976" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="80" y="950" font-size="44" font-weight="bold" fill="#15803d">工程师</text>
+  <text x="380" y="948" font-size="32" fill="#4b5563">逐文件写代码 · 自我修复</text>
+
+  <!-- 角色 5 -->
+  <rect x="48" y="1040" width="984" height="130" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <line x1="350" y1="1064" x2="350" y2="1146" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="80" y="1120" font-size="44" font-weight="bold" fill="#b45309">QA 工程师</text>
+  <text x="380" y="1118" font-size="32" fill="#4b5563">写单测 · 运行 · 回传问题</text>
+
+  <!-- 输出 -->
+  <rect x="240" y="1210" width="600" height="110" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="540" y="1278" font-size="36" font-weight="bold" fill="#15803d" text-anchor="middle">输出：可运行的代码仓库</text>
+
+  <text x="540" y="1384" font-size="30" fill="#6b7280" text-anchor="middle">各角色经共享消息池订阅上游产出</text>
+</svg>

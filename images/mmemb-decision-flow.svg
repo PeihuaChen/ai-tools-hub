@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1010" viewBox="0 0 1080 1010">
+  <rect x="0" y="0" width="1080" height="1010" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="60" font-weight="700" fill="#111827" text-anchor="middle">先选路线，再选模型</text>
+  <text x="540" y="156" font-size="34" fill="#4b5563" text-anchor="middle">按数据类型走三条路</text>
+
+  <!-- row 1: documents -->
+  <rect x="48" y="210" width="380" height="200" rx="16" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="298" font-size="40" font-weight="700" fill="#111827">PDF 扫描件 PPT</text>
+  <text x="76" y="358" font-size="32" fill="#4b5563">页面当图片读</text>
+  <line x1="434" y1="310" x2="466" y2="310" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M466 300 L482 310 L466 320 Z" fill="#94a3b8"/>
+  <rect x="488" y="210" width="544" height="200" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="516" y="268" font-size="40" font-weight="700" fill="#1d4ed8">多向量 · 看细节</text>
+  <text x="516" y="328" font-size="32" fill="#111827">Ops-ColQwen3</text>
+  <text x="516" y="376" font-size="32" fill="#111827">pplx-embed-v2-late</text>
+
+  <!-- row 2: images, screenshots, video -->
+  <rect x="48" y="446" width="380" height="200" rx="16" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="534" font-size="40" font-weight="700" fill="#111827">图片 截图 视频</text>
+  <text x="76" y="594" font-size="32" fill="#4b5563">通用跨模态检索</text>
+  <line x1="434" y1="546" x2="466" y2="546" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M466 536 L482 546 L466 556 Z" fill="#94a3b8"/>
+  <rect x="488" y="446" width="544" height="200" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="516" y="504" font-size="40" font-weight="700" fill="#15803d">单向量 · 通用稳</text>
+  <text x="516" y="564" font-size="32" fill="#111827">Qwen3-VL-Embedding</text>
+  <text x="516" y="612" font-size="32" fill="#111827">WeMM-Embedding</text>
+
+  <!-- row 3: audio -->
+  <rect x="48" y="682" width="380" height="200" rx="16" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="76" y="770" font-size="40" font-weight="700" fill="#111827">含音频 全媒体</text>
+  <text x="76" y="830" font-size="32" fill="#4b5563">保留文本索引</text>
+  <line x1="434" y1="782" x2="466" y2="782" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M466 772 L482 782 L466 792 Z" fill="#94a3b8"/>
+  <rect x="488" y="682" width="544" height="200" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="516" y="740" font-size="40" font-weight="700" fill="#6d28d9">全模态 · 共享空间</text>
+  <text x="516" y="800" font-size="32" fill="#111827">Jina v5-omni</text>
+  <text x="516" y="848" font-size="32" fill="#111827">EmbeddingGemma 2</text>
+
+  <text x="540" y="956" font-size="34" font-weight="700" fill="#b45309" text-anchor="middle">商用先查协议，再看分数</text>
+</svg>

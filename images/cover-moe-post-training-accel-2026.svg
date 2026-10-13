@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#0e2018"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="grid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22c55e" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#22c55e" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="gridp" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#2f5b44" stroke-opacity="0.25" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#gridp)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- top / bottom accent bars -->
+  <rect x="0" y="0" width="300" height="4" fill="#4ade80"/>
+  <rect x="300" y="0" width="300" height="4" fill="#22d3ee"/>
+  <rect x="600" y="0" width="300" height="4" fill="#84cc16"/>
+  <rect x="0" y="379" width="450" height="4" fill="#4ade80"/>
+  <rect x="450" y="379" width="450" height="4" fill="#22d3ee"/>
+
+  <!-- tag box -->
+  <rect x="48" y="40" width="248" height="34" rx="6" fill="#13241c" stroke="#22c55e" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="64" y="62" font-size="15" fill="#86efac" font-weight="600">AI 工程实践 · MoE 训练加速</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="26" fill="#13241c" stroke="#22d3ee" stroke-opacity="0.7" stroke-width="1.5"/>
+  <text x="838" y="65" font-size="22" fill="#67e8f9" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="132" font-size="33" fill="#ffffff" font-weight="800">换一行代码，提速 3.7 倍</text>
+  <text x="48" y="170" font-size="20" font-weight="700" fill="url(#sub)">NeMo AutoModel 与 MoE 后训练</text>
+  <text x="48" y="198" font-size="20" font-weight="700" fill="url(#sub)">加速方法实测对比</text>
+
+  <!-- highlight lines -->
+  <text x="48" y="236" font-size="13" fill="#86efac">▸ 专家并行 + DeepEP + GroupedGEMM + 低精度五大流派</text>
+  <text x="48" y="258" font-size="13" fill="#7dd3fc">▸ 微调 30B MoE 提速 3.4–3.7×，显存省约三成</text>
+  <text x="48" y="280" font-size="13" fill="#bef264">▸ v5 跑不起来的 550B，EP 让它 128 卡能训</text>
+
+  <!-- pills -->
+  <g font-size="12" font-weight="600">
+    <rect x="48" y="302" width="48" height="26" rx="13" fill="none" stroke="#4ade80" stroke-opacity="0.6"/>
+    <text x="72" y="319" fill="#86efac" text-anchor="middle">MoE</text>
+    <rect x="104" y="302" width="120" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="164" y="319" fill="#67e8f9" text-anchor="middle">NeMo AutoModel</text>
+    <rect x="232" y="302" width="68" height="26" rx="13" fill="none" stroke="#84cc16" stroke-opacity="0.6"/>
+    <text x="266" y="319" fill="#bef264" text-anchor="middle">DeepEP</text>
+    <rect x="308" y="302" width="72" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-opacity="0.6"/>
+    <text x="344" y="319" fill="#c4b5fd" text-anchor="middle">专家并行</text>
+  </g>
+
+  <!-- right concept: experts sharded across GPUs -->
+  <g transform="translate(636,104)" opacity="0.95">
+    <text x="84" y="0" font-size="11" fill="#94a3b8" text-anchor="middle">Experts → GPUs (EP)</text>
+    <!-- 4 gpu columns each with expert blocks -->
+    <g>
+      <rect x="0" y="14" width="34" height="116" rx="5" fill="#13241c" stroke="#22d3ee" stroke-opacity="0.5"/>
+      <rect x="6" y="22" width="22" height="14" rx="2" fill="#4ade80" opacity="0.8"/>
+      <rect x="6" y="42" width="22" height="14" rx="2" fill="#22d3ee" opacity="0.7"/>
+      <text x="17" y="124" font-size="9" fill="#64748b" text-anchor="middle">G0</text>
+    </g>
+    <g transform="translate(44,0)">
+      <rect x="0" y="14" width="34" height="116" rx="5" fill="#13241c" stroke="#22d3ee" stroke-opacity="0.5"/>
+      <rect x="6" y="22" width="22" height="14" rx="2" fill="#84cc16" opacity="0.8"/>
+      <rect x="6" y="42" width="22" height="14" rx="2" fill="#4ade80" opacity="0.7"/>
+      <text x="17" y="124" font-size="9" fill="#64748b" text-anchor="middle">G1</text>
+    </g>
+    <g transform="translate(88,0)">
+      <rect x="0" y="14" width="34" height="116" rx="5" fill="#13241c" stroke="#22d3ee" stroke-opacity="0.5"/>
+      <rect x="6" y="22" width="22" height="14" rx="2" fill="#22d3ee" opacity="0.8"/>
+      <rect x="6" y="42" width="22" height="14" rx="2" fill="#a78bfa" opacity="0.7"/>
+      <text x="17" y="124" font-size="9" fill="#64748b" text-anchor="middle">G2</text>
+    </g>
+    <g transform="translate(132,0)">
+      <rect x="0" y="14" width="34" height="116" rx="5" fill="#13241c" stroke="#22d3ee" stroke-opacity="0.5"/>
+      <rect x="6" y="22" width="22" height="14" rx="2" fill="#bef264" opacity="0.8"/>
+      <rect x="6" y="42" width="22" height="14" rx="2" fill="#22d3ee" opacity="0.7"/>
+      <text x="17" y="124" font-size="9" fill="#64748b" text-anchor="middle">G3</text>
+    </g>
+    <!-- all-to-all arrows -->
+    <path d="M17 70 H149" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6"/>
+    <text x="84" y="148" font-size="9" fill="#86efac" text-anchor="middle">all-to-all · DeepEP</text>
+  </g>
+
+  <!-- divider + footer -->
+  <line x1="48" y1="356" x2="852" y2="356" stroke="#2f5b44" stroke-opacity="0.5" stroke-width="1"/>
+  <text x="48" y="372" font-size="11" fill="#7a8a82">五大加速流派 · 实测对比 · 选型建议 · 客观局限</text>
+  <text x="852" y="372" font-size="11" fill="#5a6a62" text-anchor="end">公众号：AI工具箱</text>
+</svg>

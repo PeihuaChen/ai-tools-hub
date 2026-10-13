@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="920" viewBox="0 0 1080 920">
+  <rect x="0" y="0" width="1080" height="920" fill="#f7f8fa"/>
+
+  <text x="540" y="78" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">一人一模型的正解：三层专属架构</text>
+  <text x="540" y="130" font-size="36" fill="#4b5563" text-anchor="middle">底座共享，记忆独享</text>
+
+  <rect x="90" y="175" width="900" height="150" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="130" y="240" font-size="44" font-weight="bold" fill="#1d4ed8">① 冻结基座</text>
+  <text x="130" y="295" font-size="34" fill="#374151">通用语言与推理 · 所有人共用一份</text>
+  <rect x="766" y="222" width="208" height="56" rx="12" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="870" y="260" font-size="32" font-weight="bold" fill="#1d4ed8" text-anchor="middle">全社会共享</text>
+
+  <line x1="540" y1="330" x2="540" y2="350" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M532 342 L540 354 L548 342" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <rect x="90" y="360" width="900" height="150" rx="16" fill="#ecfdf5" stroke="#15803d" stroke-width="2"/>
+  <text x="130" y="425" font-size="44" font-weight="bold" fill="#15803d">② 领域 LoRA</text>
+  <text x="130" y="480" font-size="34" fill="#374151">法律 · 医疗 · 代码专业知识 · 多人复用</text>
+  <rect x="766" y="407" width="208" height="56" rx="12" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+  <text x="870" y="445" font-size="32" font-weight="bold" fill="#15803d" text-anchor="middle">场景共享</text>
+
+  <line x1="540" y1="515" x2="540" y2="535" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M532 527 L540 539 L548 527" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <rect x="90" y="545" width="900" height="150" rx="16" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+  <text x="130" y="610" font-size="44" font-weight="bold" fill="#b45309">③ 用户代理</text>
+  <text x="130" y="665" font-size="34" fill="#374151">偏好 · 事实 · 交互历史 · 可删可带走</text>
+  <rect x="766" y="592" width="208" height="56" rx="12" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+  <text x="870" y="630" font-size="32" font-weight="bold" fill="#b45309" text-anchor="middle">一人一份</text>
+
+  <rect x="90" y="735" width="900" height="105" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="800" font-size="40" font-weight="bold" fill="#111827" text-anchor="middle">记忆归个人 · 能力归共享 · 删除即遗忘</text>
+
+  <text x="540" y="885" font-size="34" fill="#4b5563" text-anchor="middle">专属模型不等于重训一份权重，而是三层各自演进</text>
+</svg>

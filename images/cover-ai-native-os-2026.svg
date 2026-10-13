@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="33%" style="stop-color:#8b5cf6"/>
+      <stop offset="66%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#ef4444"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="33%" style="stop-color:#f59e0b"/>
+      <stop offset="66%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="subtitleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Category label box -->
+  <rect x="36" y="28" width="240" height="28" rx="4" fill="none" stroke="rgba(6,182,212,0.6)" stroke-width="1"/>
+  <text x="52" y="47" font-family="system-ui, sans-serif" font-size="12" fill="#06b6d4">AI 行业观察 · 操作系统变革</text>
+
+  <!-- Year badge -->
+  <text x="840" y="52" font-family="system-ui, sans-serif" font-size="28" font-weight="bold" fill="rgba(255,255,255,0.12)">26</text>
+
+  <!-- Main title -->
+  <text x="36" y="105" font-family="system-ui, sans-serif" font-size="29" font-weight="bold" fill="#ffffff">AI Native OS 群雄逐鹿</text>
+  <text x="36" y="142" font-family="system-ui, sans-serif" font-size="29" font-weight="bold" fill="#ffffff">从 Step AOS 到 HarmonyOS 7</text>
+
+  <!-- Subtitle -->
+  <text x="36" y="178" font-family="system-ui, sans-serif" font-size="17" fill="url(#subtitleGrad)">操作系统正在被重写——不是叠功能，而是重新定义"OS"</text>
+
+  <!-- Key highlights -->
+  <text x="36" y="218" font-family="system-ui, sans-serif" font-size="12.5" fill="#22d3ee">▸ 阶跃星辰发布全球首款智能体手机 StepX Neo + Step AOS 操作系统</text>
+  <text x="36" y="240" font-family="system-ui, sans-serif" font-size="12.5" fill="#a78bfa">▸ 五大路线对比：StepFun / 华为 / Google / Apple / OpenAI</text>
+  <text x="36" y="262" font-family="system-ui, sans-serif" font-size="12.5" fill="#fbbf24">▸ 2033年市场规模预计 1076 亿美元｜CAGR 30.5%</text>
+
+  <!-- Right side: conceptual diagram -->
+  <!-- OS layers diagram -->
+  <rect x="600" y="90" width="250" height="40" rx="6" fill="none" stroke="rgba(6,182,212,0.4)" stroke-width="1"/>
+  <text x="680" y="115" font-family="monospace" font-size="11" fill="#06b6d4" text-anchor="middle">Agent Layer</text>
+
+  <rect x="620" y="145" width="210" height="35" rx="6" fill="none" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+  <text x="680" y="167" font-family="monospace" font-size="11" fill="#8b5cf6" text-anchor="middle">Memory + Routing</text>
+
+  <rect x="640" y="195" width="170" height="35" rx="6" fill="none" stroke="rgba(245,158,11,0.4)" stroke-width="1"/>
+  <text x="680" y="217" font-family="monospace" font-size="11" fill="#f59e0b" text-anchor="middle">Atomic Capabilities</text>
+
+  <rect x="660" y="245" width="130" height="35" rx="6" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+  <text x="680" y="267" font-family="monospace" font-size="10" fill="#ef4444" text-anchor="middle">Android/Linux/RTOS</text>
+
+  <!-- Connecting lines -->
+  <line x1="725" y1="130" x2="725" y2="145" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="725" y1="180" x2="725" y2="195" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="725" y1="230" x2="725" y2="245" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Tags -->
+  <rect x="36" y="295" width="82" height="24" rx="12" fill="none" stroke="rgba(6,182,212,0.5)" stroke-width="1"/>
+  <text x="77" y="311" font-family="system-ui, sans-serif" font-size="10.5" fill="#06b6d4" text-anchor="middle">Step AOS</text>
+
+  <rect x="128" y="295" width="95" height="24" rx="12" fill="none" stroke="rgba(139,92,246,0.5)" stroke-width="1"/>
+  <text x="175" y="311" font-family="system-ui, sans-serif" font-size="10.5" fill="#a78bfa" text-anchor="middle">HarmonyOS 7</text>
+
+  <rect x="233" y="295" width="120" height="24" rx="12" fill="none" stroke="rgba(245,158,11,0.5)" stroke-width="1"/>
+  <text x="293" y="311" font-family="system-ui, sans-serif" font-size="10.5" fill="#fbbf24" text-anchor="middle">Gemini Intelligence</text>
+
+  <rect x="363" y="295" width="80" height="24" rx="12" fill="none" stroke="rgba(239,68,68,0.5)" stroke-width="1"/>
+  <text x="403" y="311" font-family="system-ui, sans-serif" font-size="10.5" fill="#f87171" text-anchor="middle">StepX Neo</text>
+
+  <rect x="453" y="295" width="72" height="24" rx="12" fill="none" stroke="rgba(52,211,153,0.5)" stroke-width="1"/>
+  <text x="489" y="311" font-family="system-ui, sans-serif" font-size="10.5" fill="#34d399" text-anchor="middle">智能体手机</text>
+
+  <rect x="535" y="295" width="62" height="24" rx="12" fill="none" stroke="rgba(251,191,36,0.5)" stroke-width="1"/>
+  <text x="566" y="311" font-family="system-ui, sans-serif" font-size="10.5" fill="#fbbf24" text-anchor="middle">AI Agent</text>
+
+  <!-- Divider -->
+  <line x1="36" y1="340" x2="864" y2="340" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Chapter hint -->
+  <text x="36" y="362" font-family="system-ui, sans-serif" font-size="11" fill="rgba(255,255,255,0.35)">共 7 章 · 五大路线对比 · 技术架构解析 · 市场数据 · 投资逻辑</text>
+
+  <!-- Watermark -->
+  <text x="864" y="362" font-family="system-ui, sans-serif" font-size="10" fill="rgba(255,255,255,0.2)" text-anchor="end">AI深观察</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="700" viewBox="0 0 1080 700">
+  <rect width="1080" height="700" fill="#f7f8fa"/>
+
+  <!-- header -->
+  <text x="48" y="66" font-size="44" font-weight="bold" fill="#111827">两篇顶刊 · 两条通用化路径</text>
+  <text x="48" y="112" font-size="30" fill="#4b5563">影像判别的"宽" vs 多模态决策的"深"</text>
+
+  <!-- LEFT CARD: RADAR -->
+  <rect x="48" y="150" width="480" height="470" rx="16" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <rect x="48" y="150" width="10" height="470" rx="5" fill="#1d4ed8"/>
+
+  <text x="84" y="222" font-size="40" font-weight="bold" fill="#1d4ed8">DAMO RADAR</text>
+  <text x="84" y="286" font-size="30" fill="#4b5563">达摩院 · 浙大一院</text>
+  <text x="84" y="344" font-size="30" font-weight="bold" fill="#1d4ed8">登 Science</text>
+  <line x1="84" y1="372" x2="496" y2="372" stroke="#bfdbfe" stroke-width="2"/>
+
+  <text x="84" y="426" font-size="32" fill="#374151">增强腹部 CT · 单模态</text>
+  <text x="84" y="478" font-size="32" fill="#374151">18 器官 · 146 种病症</text>
+  <text x="84" y="530" font-size="32" font-weight="bold" fill="#0e7490">AUC 0.913</text>
+  <text x="84" y="582" font-size="32" fill="#374151">胜 23/26 放射科医生</text>
+
+  <!-- RIGHT CARD: LungGPT -->
+  <rect x="552" y="150" width="480" height="470" rx="16" fill="#ecfeff" stroke="#a5f3fc" stroke-width="2"/>
+  <rect x="552" y="150" width="10" height="470" rx="5" fill="#0e7490"/>
+
+  <text x="588" y="222" font-size="40" font-weight="bold" fill="#0e7490">LungGPT</text>
+  <text x="588" y="286" font-size="30" fill="#4b5563">四川大学华西医院</text>
+  <text x="588" y="344" font-size="30" font-weight="bold" fill="#0e7490">登 Cell Rep. Med</text>
+  <line x1="588" y1="372" x2="1000" y2="372" stroke="#a5f3fc" stroke-width="2"/>
+
+  <text x="588" y="426" font-size="32" fill="#374151">多模态融合 · 深耕</text>
+  <text x="588" y="478" font-size="32" font-weight="bold" fill="#15803d">22 种呼吸疾病</text>
+  <text x="588" y="530" font-size="32" fill="#374151">可解释 + 决策支持</text>
+  <text x="588" y="582" font-size="32" fill="#374151">参与诊疗决策链</text>
+
+  <!-- bottom caption -->
+  <text x="540" y="672" font-size="30" fill="#6b7280" text-anchor="middle">共同信号：从窄专科模型 走向 通用医疗 AI</text>
+</svg>

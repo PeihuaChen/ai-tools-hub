@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)" rx="8"/>
+  <text x="400" y="30" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">一人公司技术架构：你 + 5 类 AI Agent</text>
+  <line x1="200" y1="42" x2="600" y2="42" stroke="#3a7bd5" stroke-width="1" opacity="0.5"/>
+  <!-- CEO -->
+  <ellipse cx="400" cy="85" rx="90" ry="30" fill="#1a2a4a" stroke="#00d2ff" stroke-width="2"/>
+  <text x="400" y="91" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="700" font-size="16" fill="#00d2ff" text-anchor="middle">你（CEO）</text>
+  <!-- Lines to agents -->
+  <line x1="310" y1="105" x2="120" y2="145" stroke="#3a7bd5" stroke-width="1.5" opacity="0.6"/>
+  <line x1="360" y1="110" x2="260" y2="145" stroke="#3a7bd5" stroke-width="1.5" opacity="0.6"/>
+  <line x1="400" y1="115" x2="400" y2="145" stroke="#3a7bd5" stroke-width="1.5" opacity="0.6"/>
+  <line x1="440" y1="110" x2="540" y2="145" stroke="#3a7bd5" stroke-width="1.5" opacity="0.6"/>
+  <line x1="490" y1="105" x2="680" y2="145" stroke="#3a7bd5" stroke-width="1.5" opacity="0.6"/>
+  <g transform="translate(50, 145)">
+    <rect x="0" y="0" width="140" height="65" rx="8" fill="#1a1a2a" stroke="#00f260" stroke-width="1.5" opacity="0.8"/>
+    <text x="70" y="25" font-family="'Courier New',Consolas,monospace" font-weight="600" font-size="11" fill="#00f260" text-anchor="middle">[Marketing Agent]</text>
+    <text x="70" y="42" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">内容生成 / 广告投放</text>
+  </g>
+  <g transform="translate(210, 145)">
+    <rect x="0" y="0" width="140" height="65" rx="8" fill="#1a1a2a" stroke="#f7c948" stroke-width="1.5" opacity="0.8"/>
+    <text x="70" y="25" font-family="'Courier New',Consolas,monospace" font-weight="600" font-size="11" fill="#f7c948" text-anchor="middle">[CS Agent]</text>
+    <text x="70" y="42" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">7×24 客户响应</text>
+  </g>
+  <g transform="translate(360, 145)">
+    <rect x="0" y="0" width="140" height="65" rx="8" fill="#1a1a2a" stroke="#00d2ff" stroke-width="1.5" opacity="0.8"/>
+    <text x="70" y="25" font-family="'Courier New',Consolas,monospace" font-weight="600" font-size="11" fill="#00d2ff" text-anchor="middle">[Dev Agent]</text>
+    <text x="70" y="42" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">代码维护 / 部署</text>
+  </g>
+  <g transform="translate(500, 145)">
+    <rect x="0" y="0" width="140" height="65" rx="8" fill="#1a1a2a" stroke="#ff6b35" stroke-width="1.5" opacity="0.8"/>
+    <text x="70" y="25" font-family="'Courier New',Consolas,monospace" font-weight="600" font-size="11" fill="#ff6b35" text-anchor="middle">[Finance Agent]</text>
+    <text x="70" y="42" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">记账 / 税务申报</text>
+  </g>
+  <g transform="translate(640, 145)">
+    <rect x="0" y="0" width="140" height="65" rx="8" fill="#1a1a2a" stroke="#aa66ff" stroke-width="1.5" opacity="0.8"/>
+    <text x="70" y="25" font-family="'Courier New',Consolas,monospace" font-weight="600" font-size="11" fill="#aa66ff" text-anchor="middle">[Ops Agent]</text>
+    <text x="70" y="42" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">库存 / 物流追踪</text>
+  </g>
+  <g transform="translate(120, 240)">
+    <rect x="0" y="0" width="560" height="30" rx="4" fill="#0a2a4a" stroke="#00d2ff" stroke-width="0.5" opacity="0.6"/>
+    <text x="280" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#00d2ff" text-anchor="middle">执行层：LLM Agents 负责任务拆解与执行</text>
+  </g>
+  <g transform="translate(120, 280)">
+    <rect x="0" y="0" width="560" height="30" rx="4" fill="#2a1a0a" stroke="#f7c948" stroke-width="0.5" opacity="0.6"/>
+    <text x="280" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#f7c948" text-anchor="middle">协作层：Multi-Agent 角色扮演与任务协调</text>
+  </g>
+  <g transform="translate(120, 320)">
+    <rect x="0" y="0" width="560" height="30" rx="4" fill="#0a2a1a" stroke="#00f260" stroke-width="0.5" opacity="0.6"/>
+    <text x="280" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#00f260" text-anchor="middle">连接层：Automation 连接应用与数据流</text>
+  </g>
+  <g transform="translate(120, 370)">
+    <rect x="0" y="0" width="560" height="30" rx="4" fill="#2a0a0a" stroke="#ff6b35" stroke-width="0.5" opacity="0.6"/>
+    <text x="280" y="20" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="12" fill="#ff6b35" text-anchor="middle">基础设施：API / 数据库 / 物流 / 支付</text>
+  </g>
+  <text x="400" y="445" font-family="Arial,sans-serif" font-size="10" fill="#555" text-anchor="middle">数据来源：清华大学 2026 OPC 发展研究报告</text>
+</svg>

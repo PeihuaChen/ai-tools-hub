@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="accent" x1="0" x2="1"><stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#64748b" stroke-opacity=".15"/></pattern>
+  </defs>
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="225" height="4" x="0" y="0" fill="#22d3ee"/><rect width="225" height="4" x="225" y="0" fill="#a78bfa"/><rect width="225" height="4" x="450" y="0" fill="#f472b6"/><rect width="225" height="4" x="675" y="0" fill="#fbbf24"/>
+  <rect width="225" height="4" x="0" y="379" fill="#fbbf24"/><rect width="225" height="4" x="225" y="379" fill="#f472b6"/><rect width="225" height="4" x="450" y="379" fill="#a78bfa"/><rect width="225" height="4" x="675" y="379" fill="#22d3ee"/>
+  <rect x="45" y="34" width="238" height="30" rx="7" fill="#172554" stroke="#38bdf8"/>
+  <text x="60" y="55" font-family="Microsoft YaHei, Arial" font-size="13" font-weight="700" fill="#7dd3fc">AI 基础设施 · HARNESS</text>
+  <text x="45" y="111" font-family="Microsoft YaHei, Arial" font-size="30" font-weight="700" fill="#ffffff">代码智能体竞争</text>
+  <text x="45" y="151" font-family="Microsoft YaHei, Arial" font-size="30" font-weight="700" fill="#ffffff">进入 Harness 时代</text>
+  <text x="46" y="184" font-family="Microsoft YaHei, Arial" font-size="18" font-weight="700" fill="url(#accent)">DeepSeek 如何押注 Agent 运行时</text>
+  <circle cx="52" cy="214" r="4" fill="#22d3ee"/><text x="65" y="218" font-family="Microsoft YaHei, Arial" font-size="13" fill="#bae6fd">模型、工具、沙箱、循环全部可插拔</text>
+  <circle cx="52" cy="240" r="4" fill="#c4b5fd"/><text x="65" y="244" font-family="Microsoft YaHei, Arial" font-size="13" fill="#ddd6fe">评测成绩不只属于底座模型</text>
+  <circle cx="52" cy="266" r="4" fill="#f9a8d4"/><text x="65" y="270" font-family="Microsoft YaHei, Arial" font-size="13" fill="#fbcfe8">生产落地的关键是治理与观测</text>
+  <rect x="45" y="293" width="74" height="27" rx="13" fill="#172554" stroke="#38bdf8"/><text x="61" y="311" font-family="Arial" font-size="11" fill="#bae6fd">PLUGINS</text>
+  <rect x="127" y="293" width="63" height="27" rx="13" fill="#2e1065" stroke="#a78bfa"/><text x="143" y="311" font-family="Arial" font-size="11" fill="#ddd6fe">AGENT</text>
+  <rect x="198" y="293" width="74" height="27" rx="13" fill="#4a044e" stroke="#f472b6"/><text x="214" y="311" font-family="Arial" font-size="11" fill="#fbcfe8">RUNTIME</text>
+  <rect x="821" y="30" width="44" height="44" rx="12" fill="#fbbf24"/><text x="832" y="61" font-family="Arial" font-size="25" font-weight="700" fill="#1e1b4b">26</text>
+  <g stroke="#64748b" stroke-width="1.5" fill="none" opacity=".8"><path d="M643 175L570 124M643 175L733 124M643 175L570 245M643 175L733 245"/></g>
+  <rect x="604" y="145" width="78" height="58" rx="12" fill="#312e81" stroke="#a78bfa" stroke-width="2"/><text x="617" y="172" font-family="Arial" font-size="13" font-weight="700" fill="#ffffff">PLUGIN</text><text x="622" y="189" font-family="Arial" font-size="11" fill="#c4b5fd">BUS</text>
+  <rect x="526" y="97" width="88" height="43" rx="8" fill="#164e63" stroke="#22d3ee"/><text x="546" y="123" font-family="Arial" font-size="12" fill="#cffafe">MODELS</text>
+  <rect x="691" y="97" width="84" height="43" rx="8" fill="#4c1d95" stroke="#a78bfa"/><text x="713" y="123" font-family="Arial" font-size="12" fill="#ede9fe">TOOLS</text>
+  <rect x="520" y="228" width="100" height="43" rx="8" fill="#4a044e" stroke="#f472b6"/><text x="535" y="254" font-family="Arial" font-size="12" fill="#fce7f3">SANDBOX</text>
+  <rect x="688" y="228" width="90" height="43" rx="8" fill="#713f12" stroke="#fbbf24"/><text x="709" y="254" font-family="Arial" font-size="12" fill="#fef3c7">LOOPS</text>
+  <line x1="45" y1="341" x2="855" y2="341" stroke="#475569"/>
+  <text x="45" y="362" font-family="Microsoft YaHei, Arial" font-size="11" fill="#94a3b8">模型只是引擎，Harness 决定 Agent 如何工作</text>
+  <text x="734" y="362" font-family="Microsoft YaHei, Arial" font-size="11" fill="#64748b">AI 行业观察</text>
+</svg>

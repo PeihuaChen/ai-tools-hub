@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="60" x2="900" y2="60"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top / bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="40" y="42" width="260" height="34" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-opacity="0.6"/>
+  <text x="56" y="65" fill="#93c5fd" font-size="16" font-weight="bold">AI 行业观察 · 智能教育</text>
+
+  <!-- year badge -->
+  <circle cx="835" cy="60" r="26" fill="#1e1b4b" stroke="#8b5cf6" stroke-opacity="0.7"/>
+  <text x="835" y="68" fill="#c4b5fd" font-size="22" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="40" y="150" fill="#ffffff" font-size="40" font-weight="bold">从 MOOC 到 MAIC</text>
+  <text x="40" y="200" fill="url(#sub)" font-size="26" font-weight="bold">清华开源多智能体互动课堂</text>
+
+  <!-- highlights -->
+  <text x="40" y="248" fill="#60a5fa" font-size="15">▸ N 个智能体，服务 1 个学生</text>
+  <text x="40" y="274" fill="#34d399" font-size="15">▸ 一句话生成 AI 老师 + AI 同学</text>
+  <text x="40" y="300" fill="#fbbf24" font-size="15">▸ 3.4 万 star · MIT 开源 · 模型中立</text>
+
+  <!-- concept diagram: N agents -> 1 student -->
+  <g>
+    <circle cx="720" cy="150" r="16" fill="#1e293b" stroke="#3b82f6"/>
+    <circle cx="770" cy="185" r="16" fill="#1e293b" stroke="#8b5cf6"/>
+    <circle cx="720" cy="220" r="16" fill="#1e293b" stroke="#22d3ee"/>
+    <circle cx="668" cy="185" r="16" fill="#1e293b" stroke="#34d399"/>
+    <line x1="720" y1="150" x2="800" y2="185" stroke="#475569" stroke-width="1.5"/>
+    <line x1="770" y1="185" x2="800" y2="185" stroke="#475569" stroke-width="1.5"/>
+    <line x1="720" y1="220" x2="800" y2="185" stroke="#475569" stroke-width="1.5"/>
+    <line x1="668" y1="185" x2="800" y2="185" stroke="#475569" stroke-width="1.5"/>
+    <circle cx="818" cy="185" r="20" fill="#4338ca" stroke="#a78bfa" stroke-width="2"/>
+    <text x="818" y="191" fill="#ffffff" font-size="16" text-anchor="middle">🎓</text>
+  </g>
+
+  <!-- pills -->
+  <g font-size="13">
+    <rect x="40" y="325" width="96" height="28" rx="14" fill="none" stroke="#3b82f6" stroke-opacity="0.5"/>
+    <text x="88" y="344" fill="#93c5fd" text-anchor="middle">多智能体</text>
+    <rect x="146" y="325" width="96" height="28" rx="14" fill="none" stroke="#8b5cf6" stroke-opacity="0.5"/>
+    <text x="194" y="344" fill="#c4b5fd" text-anchor="middle">AI 课堂</text>
+    <rect x="252" y="325" width="96" height="28" rx="14" fill="none" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <text x="300" y="344" fill="#67e8f9" text-anchor="middle">清华</text>
+    <rect x="358" y="325" width="110" height="28" rx="14" fill="none" stroke="#34d399" stroke-opacity="0.5"/>
+    <text x="413" y="344" fill="#6ee7b7" text-anchor="middle">开源项目</text>
+  </g>
+
+  <!-- watermark -->
+  <text x="860" y="348" fill="#64748b" font-size="12" text-anchor="end">AI 行业观察</text>
+</svg>

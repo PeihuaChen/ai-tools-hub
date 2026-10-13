@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1180" viewBox="0 0 1080 1180">
+  <!-- Full opaque background -->
+  <rect width="1080" height="1180" fill="#f7f8fa"/>
+
+  <!-- Title -->
+  <text x="540" y="80" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">确定性工程 × Agent 混合架构</text>
+  <text x="540" y="140" font-size="34" fill="#4b5563" text-anchor="middle">硬约束交给工程，判断力交给 Agent</text>
+
+  <!-- Input box -->
+  <rect x="360" y="185" width="360" height="90" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="540" y="230" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Git Diff 变更</text>
+  <text x="540" y="258" font-size="30" fill="#1d4ed8" text-anchor="middle">工作区 / 分支 / 提交</text>
+
+  <!-- Arrow down -->
+  <line x1="540" y1="275" x2="540" y2="325" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M528 315 L540 335 L552 315 Z" fill="#94a3b8"/>
+
+  <!-- Step 1: Rule-Guided Dispatch (deterministic) -->
+  <rect x="70" y="335" width="940" height="180" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+  <text x="110" y="395" font-size="42" font-weight="bold" fill="#b45309">① 规则引导调度</text>
+  <text x="110" y="440" font-size="32" fill="#4b5563">多层规则确定性选文件、匹审查标准</text>
+  <text x="110" y="482" font-size="32" fill="#4b5563">过滤 lock / 生成代码，重要改动一个不漏</text>
+  <rect x="790" y="358" width="180" height="50" rx="12" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text x="880" y="392" font-size="32" fill="#b45309" text-anchor="middle">确定性</text>
+
+  <!-- Arrow -->
+  <line x1="540" y1="515" x2="540" y2="560" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M528 550 L540 570 L552 550 Z" fill="#94a3b8"/>
+
+  <!-- Step 2: Grounded File Review (agent) -->
+  <rect x="70" y="570" width="940" height="215" rx="16" fill="#ecfdf5" stroke="#15803d" stroke-width="2"/>
+  <text x="110" y="630" font-size="42" font-weight="bold" fill="#15803d">② 受控文件审查</text>
+  <text x="110" y="675" font-size="32" fill="#4b5563">Agent 用受限工具集在 ReAct 循环里探索</text>
+  <text x="110" y="717" font-size="32" fill="#4b5563">文件级并行 SubAgent，上下文隔离</text>
+  <text x="110" y="759" font-size="32" fill="#4b5563">按需找回跨文件依赖，大变更集也稳定</text>
+  <rect x="790" y="593" width="180" height="50" rx="12" fill="#d1fae5" stroke="#15803d" stroke-width="1.5"/>
+  <text x="880" y="627" font-size="32" fill="#15803d" text-anchor="middle">Agent</text>
+
+  <!-- Arrow -->
+  <line x1="540" y1="785" x2="540" y2="830" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M528 820 L540 840 L552 820 Z" fill="#94a3b8"/>
+
+  <!-- Step 3: Independent Reflection (deterministic) -->
+  <rect x="70" y="840" width="940" height="215" rx="16" fill="#eef2ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="110" y="900" font-size="42" font-weight="bold" fill="#6d28d9">③ 独立反思过滤</text>
+  <text x="110" y="945" font-size="32" fill="#4b5563">证伪优先：反思器只看 diff，不看探索过程</text>
+  <text x="110" y="987" font-size="32" fill="#4b5563">剔除幻觉评论，不自我强化偏见</text>
+  <text x="110" y="1029" font-size="32" fill="#4b5563">提升精度的同时保住召回</text>
+  <rect x="790" y="863" width="180" height="50" rx="12" fill="#e0e7ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="880" y="897" font-size="32" fill="#6d28d9" text-anchor="middle">确定性</text>
+
+  <!-- Arrow -->
+  <line x1="540" y1="1055" x2="540" y2="1100" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M528 1090 L540 1110 L552 1090 Z" fill="#94a3b8"/>
+
+  <!-- Output -->
+  <rect x="300" y="1110" width="480" height="60" rx="14" fill="#0e7490" opacity="0.12" stroke="#0e7490" stroke-width="2"/>
+  <text x="540" y="1150" font-size="36" font-weight="bold" fill="#0e7490" text-anchor="middle">行级精度的结构化评审意见</text>
+</svg>
