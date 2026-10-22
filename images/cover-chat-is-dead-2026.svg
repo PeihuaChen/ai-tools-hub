@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#161638"/>
+      <stop offset="100%" stop-color="#0d0d25"/>
+    </linearGradient>
+    <linearGradient id="grayed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="96" x2="900" y2="96"/><line x1="0" y1="192" x2="900" y2="192"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- Top / bottom accent -->
+  <rect x="0" y="0" width="450" height="4" fill="url(#grayed)"/>
+  <rect x="450" y="0" width="450" height="4" fill="url(#green)"/>
+  <rect x="0" y="379" width="450" height="4" fill="url(#grayed)"/>
+  <rect x="450" y="379" width="450" height="4" fill="url(#green)"/>
+
+  <!-- Right side: chat bubble (dead) -> arrow -> agent gear -->
+  <g transform="translate(600, 120)">
+    <!-- Dead chat bubble (grayed + strike) -->
+    <g opacity="0.55">
+      <rect x="0" y="0" width="86" height="60" rx="14" fill="none" stroke="url(#grayed)" stroke-width="2.5"/>
+      <path d="M20 60 L20 78 L40 60 Z" fill="none" stroke="url(#grayed)" stroke-width="2.5"/>
+      <circle cx="24" cy="28" r="4" fill="#64748b"/>
+      <circle cx="43" cy="28" r="4" fill="#64748b"/>
+      <circle cx="62" cy="28" r="4" fill="#64748b"/>
+    </g>
+    <!-- strike-through -->
+    <line x1="-8" y1="70" x2="94" y2="-8" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Arrow -->
+    <g transform="translate(110, 25)">
+      <line x1="0" y1="12" x2="44" y2="12" stroke="url(#green)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M44 12 L34 5 M44 12 L34 19" stroke="url(#green)" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- Agent: gear + robot face -->
+    <g transform="translate(185, -8)">
+      <!-- gear -->
+      <g transform="translate(40, 44)" fill="none" stroke="url(#green)" stroke-width="2.5">
+        <circle cx="0" cy="0" r="42"/>
+        <g>
+          <rect x="-5" y="-54" width="10" height="14" rx="2" fill="#10b981" stroke="none"/>
+          <rect x="-5" y="40" width="10" height="14" rx="2" fill="#10b981" stroke="none"/>
+          <rect x="-54" y="-5" width="14" height="10" rx="2" fill="#10b981" stroke="none"/>
+          <rect x="40" y="-5" width="14" height="10" rx="2" fill="#10b981" stroke="none"/>
+          <rect x="-42" y="-42" width="12" height="10" rx="2" fill="#10b981" stroke="none" transform="rotate(45 -36 -37)"/>
+          <rect x="30" y="-42" width="12" height="10" rx="2" fill="#10b981" stroke="none" transform="rotate(-45 36 -37)"/>
+          <rect x="-42" y="32" width="12" height="10" rx="2" fill="#10b981" stroke="none" transform="rotate(-45 -36 37)"/>
+          <rect x="30" y="32" width="12" height="10" rx="2" fill="#10b981" stroke="none" transform="rotate(45 36 37)"/>
+        </g>
+      </g>
+      <!-- robot eyes inside gear -->
+      <circle cx="28" cy="40" r="5" fill="#22d3ee"/>
+      <circle cx="52" cy="40" r="5" fill="#22d3ee"/>
+      <rect x="30" y="54" width="20" height="3" rx="1.5" fill="#22d3ee" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- "Chat is dead" tag -->
+  <g transform="translate(50, 28)">
+    <rect x="0" y="0" width="140" height="30" rx="4" fill="#1a1020" stroke="#ef4444" stroke-width="1"/>
+    <text x="70" y="20" font-family="'Courier New',monospace" font-weight="bold" font-size="14" fill="#ef4444" text-anchor="middle">"Chat is dead"</text>
+  </g>
+
+  <text x="50" y="108" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="29" font-weight="bold" fill="#ffffff">从 LLM 到 Agent 的范式跃迁</text>
+  <text x="50" y="148" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="19" font-weight="bold" fill="url(#green)">OpenAI「去聊天化」，行业在押什么注？</text>
+
+  <!-- Key stats -->
+  <g transform="translate(50, 175)">
+    <text x="0" y="0" font-family="'Courier New',monospace" font-size="13" fill="#22d3ee">ChatGPT → 超级应用 (Aria)</text>
+    <text x="0" y="22" font-family="'Courier New',monospace" font-size="13" fill="#a78bfa">Codex 300万周活 · 企业营收40%+</text>
+    <text x="0" y="44" font-family="'Courier New',monospace" font-size="13" fill="#94a3b8">编排框架 29万+ GitHub Stars</text>
+  </g>
+
+  <!-- Tags -->
+  <g transform="translate(50, 248)">
+    <rect x="0" y="0" width="64" height="24" rx="12" fill="#1e1e3a" stroke="#10b981" stroke-width="0.8"/>
+    <text x="32" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#6ee7b7" text-anchor="middle">OpenAI</text>
+
+    <rect x="72" y="0" width="74" height="24" rx="12" fill="#1e1e3a" stroke="#10b981" stroke-width="0.8"/>
+    <text x="109" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#6ee7b7" text-anchor="middle">Anthropic</text>
+
+    <rect x="154" y="0" width="58" height="24" rx="12" fill="#1e1e3a" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="183" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">Manus</text>
+
+    <rect x="220" y="0" width="72" height="24" rx="12" fill="#1e1e3a" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="256" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#c4b5fd" text-anchor="middle">Kimi K2.6</text>
+
+    <rect x="300" y="0" width="82" height="24" rx="12" fill="#1e1e3a" stroke="#ec4899" stroke-width="0.8"/>
+    <text x="341" y="16" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" fill="#f9a8d4" text-anchor="middle">Agentic AI</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="50" y="290" width="460" height="1" fill="#fff" opacity="0.06"/>
+  <text x="50" y="315" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#4a4f70">范式演进 · 技术分水岭 · 巨头之战 · 隐忧与机会</text>
+  <text x="50" y="348" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="10" fill="#33385a">公众号 - 最新AI知识宇宙 | 2026.06</text>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 30)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#green)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#10b981" text-anchor="middle">26</text>
+  </g>
+</svg>

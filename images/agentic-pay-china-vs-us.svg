@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640">
+  <rect width="1200" height="640" fill="#ffffff"/>
+
+  <text x="600" y="42" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle">智能体支付：中美两条路径对比</text>
+  <text x="600" y="70" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#4b5563" text-anchor="middle">美国靠多方协议协商，慢但可复用；中国靠单一账户体系，快但封闭</text>
+
+  <!-- ===== US column ===== -->
+  <rect x="50" y="96" width="530" height="470" rx="14" fill="#f8fafc" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="50" y="96" width="530" height="46" rx="14" fill="#eff6ff"/>
+  <text x="315" y="126" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8" text-anchor="middle">美国：协议标准路线</text>
+
+  <text x="76" y="172" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">参与方（多方博弈）</text>
+
+  <rect x="76" y="186" width="112" height="52" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="132" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#1d4ed8" text-anchor="middle">模型厂商</text>
+  <text x="132" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">OpenAI / Google</text>
+
+  <rect x="200" y="186" width="112" height="52" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="256" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#6d28d9" text-anchor="middle">卡组织</text>
+  <text x="256" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">Visa / MA</text>
+
+  <rect x="324" y="186" width="112" height="52" rx="8" fill="#ecfeff" stroke="#0e7490" stroke-width="1.2"/>
+  <text x="380" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#0e7490" text-anchor="middle">收单/网关</text>
+  <text x="380" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">Stripe / Adyen</text>
+
+  <rect x="448" y="186" width="106" height="52" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="501" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#b45309" text-anchor="middle">商家</text>
+  <text x="501" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">Shopify / 沃尔玛</text>
+
+  <g stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4">
+    <line x1="188" y1="212" x2="200" y2="212"/>
+    <line x1="312" y1="212" x2="324" y2="212"/>
+    <line x1="436" y1="212" x2="448" y2="212"/>
+  </g>
+
+  <text x="76" y="272" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">授权机制</text>
+  <rect x="76" y="284" width="478" height="58" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="315" y="308" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12.5" fill="#1d4ed8" text-anchor="middle">AP2 加密签名 mandate：用户意图 → 购物车 → 支付授权</text>
+  <text x="315" y="330" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#4b5563" text-anchor="middle">构造可验证证据链，供事后仲裁责任</text>
+
+  <text x="76" y="374" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">真实落地结果</text>
+  <rect x="76" y="386" width="230" height="70" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="191" y="414" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#b91c1c" text-anchor="middle">~30</text>
+  <text x="191" y="436" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#4b5563" text-anchor="middle">家 Shopify 商家上线过</text>
+  <text x="191" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">Instant Checkout（已下线）</text>
+
+  <rect x="324" y="386" width="230" height="70" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="439" y="414" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#b91c1c" text-anchor="middle">1/3</text>
+  <text x="439" y="436" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#4b5563" text-anchor="middle">沃尔玛实测转化率</text>
+  <text x="439" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">对比导回官网结账</text>
+
+  <text x="76" y="490" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#4b5563">取舍</text>
+  <rect x="76" y="502" width="230" height="48" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="191" y="522" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#15803d" text-anchor="middle">优势：开放可复用</text>
+  <text x="191" y="540" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">任意 Agent 与商家可接入</text>
+
+  <rect x="324" y="502" width="230" height="48" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="439" y="522" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#b45309" text-anchor="middle">代价：协商成本极高</text>
+  <text x="439" y="540" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">责任分配至今未定</text>
+
+  <!-- ===== CN column ===== -->
+  <rect x="620" y="96" width="530" height="470" rx="14" fill="#f8fafc" stroke="#15803d" stroke-width="1.5"/>
+  <rect x="620" y="96" width="530" height="46" rx="14" fill="#f0fdf4"/>
+  <text x="885" y="126" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="bold" fill="#15803d" text-anchor="middle">中国：账户体系路线</text>
+
+  <text x="646" y="172" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#15803d">参与方（平台主导）</text>
+
+  <rect x="646" y="186" width="220" height="52" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="756" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#15803d" text-anchor="middle">超级 App 账户体系</text>
+  <text x="756" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">支付宝 / 微信支付</text>
+
+  <rect x="884" y="186" width="112" height="52" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="940" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#6d28d9" text-anchor="middle">Agent 平台</text>
+  <text x="940" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">被接入方</text>
+
+  <rect x="1008" y="186" width="116" height="52" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="1066" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#b45309" text-anchor="middle">商家</text>
+  <text x="1066" y="226" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">已在体系内</text>
+
+  <g stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4">
+    <line x1="866" y1="212" x2="884" y2="212"/>
+    <line x1="996" y1="212" x2="1008" y2="212"/>
+  </g>
+
+  <text x="646" y="272" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#15803d">授权机制</text>
+  <rect x="646" y="284" width="478" height="58" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="885" y="308" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12.5" fill="#15803d" text-anchor="middle">主动开通 + 身份核验 + 每笔用户授权 + 7×24 风控</text>
+  <text x="885" y="330" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#4b5563" text-anchor="middle">平台全额赔付，责任内部消化，绕开仲裁难题</text>
+
+  <text x="646" y="374" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#15803d">真实落地结果</text>
+  <rect x="646" y="386" width="230" height="70" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="761" y="414" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#15803d" text-anchor="middle">3 亿笔</text>
+  <text x="761" y="436" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#4b5563" text-anchor="middle">支付宝累计 Agent 支付</text>
+  <text x="761" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">覆盖 95% 主流 Agent 框架</text>
+
+  <rect x="894" y="386" width="230" height="70" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="1009" y="414" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#15803d" text-anchor="middle">700+</text>
+  <text x="1009" y="436" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#4b5563" text-anchor="middle">微信支付技能（SkillHub）</text>
+  <text x="1009" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">AI 专属卡接入 4 家平台</text>
+
+  <text x="646" y="490" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="bold" fill="#4b5563">取舍</text>
+  <rect x="646" y="502" width="230" height="48" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="761" y="522" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#15803d" text-anchor="middle">优势：不需谈判即落地</text>
+  <text x="761" y="540" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">规则单方面确定，速度快</text>
+
+  <rect x="894" y="502" width="230" height="48" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="1009" y="522" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11.5" fill="#b45309" text-anchor="middle">代价：生态封闭</text>
+  <text x="1009" y="540" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle">绑定单一 App，跨境难通</text>
+
+  <!-- bottom note -->
+  <rect x="50" y="584" width="1100" height="42" rx="8" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1.2"/>
+  <text x="600" y="610" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12.5" fill="#4b5563" text-anchor="middle">共同瓶颈：42% 商家担心欺诈与责任归属 · 41% 担心被导流给竞品 · 误拒成本约为欺诈成本的 13 倍</text>
+</svg>

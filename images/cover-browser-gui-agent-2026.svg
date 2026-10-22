@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e"/>
+      <stop offset="100%" style="stop-color:#161638"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="33%" style="stop-color:#f59e0b"/>
+      <stop offset="66%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="33%" style="stop-color:#06b6d4"/>
+      <stop offset="66%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#ff6b35"/>
+    </linearGradient>
+    <linearGradient id="subtitleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="50" x2="900" y2="50"/><line x1="0" y1="100" x2="900" y2="100"/>
+    <line x1="0" y1="150" x2="900" y2="150"/><line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="250" x2="900" y2="250"/><line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="0" y1="350" x2="900" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="383"/><line x1="200" y1="0" x2="200" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/><line x1="400" y1="0" x2="400" y2="383"/>
+    <line x1="500" y1="0" x2="500" y2="383"/><line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="700" y1="0" x2="700" y2="383"/><line x1="800" y1="0" x2="800" y2="383"/>
+  </g>
+
+  <!-- Top gradient bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+  <!-- Bottom gradient bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label box -->
+  <rect x="30" y="20" width="250" height="28" rx="4" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.8"/>
+  <text x="42" y="39" font-family="Arial, sans-serif" font-size="12" fill="#ff6b35" opacity="0.9">AI 基础设施 · 浏览器 GUI Agent 横评</text>
+
+  <!-- Year badge top-right -->
+  <rect x="840" y="20" width="36" height="28" rx="4" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="847" y="39" font-family="Arial Black, sans-serif" font-size="14" fill="#8b5cf6" font-weight="bold">26</text>
+
+  <!-- Main title -->
+  <text x="50" y="92" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" font-weight="bold">浏览器内 GUI Agent 全景拆解</text>
+  <text x="50" y="126" font-family="Arial, sans-serif" font-size="20" fill="url(#subtitleGrad)">Page Agent · browser-use · Stagehand · Skyvern</text>
+
+  <!-- Subtitle -->
+  <text x="50" y="156" font-family="Arial, sans-serif" font-size="15" fill="#9ca3af">阿里开源 Page Agent 引爆的五条技术路线之争</text>
+
+  <!-- Key highlights -->
+  <text x="50" y="192" font-family="Arial, sans-serif" font-size="12.5" fill="#ff6b35">▸ Page Agent：一行 JS 把 GUI Agent 塞进网页，DOM 脱水 + 零基建，MIT 许可</text>
+  <text x="50" y="214" font-family="Arial, sans-serif" font-size="12.5" fill="#06b6d4">▸ 三大分野：Agent 站位（外部 vs 页内）· 感知（DOM vs 视觉）· 执行方式</text>
+  <text x="50" y="236" font-family="Arial, sans-serif" font-size="12.5" fill="#f59e0b">▸ 选型真相：实验室 benchmark 90%+，真实动态环境成功率骤降至 60% 上下</text>
+
+  <!-- Right side: browser window concept -->
+  <rect x="650" y="150" width="210" height="120" rx="8" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.5"/>
+  <!-- browser top bar -->
+  <line x1="650" y1="170" x2="860" y2="170" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+  <circle cx="663" cy="160" r="3" fill="#ff6b35" opacity="0.7"/>
+  <circle cx="674" cy="160" r="3" fill="#f59e0b" opacity="0.7"/>
+  <circle cx="685" cy="160" r="3" fill="#06b6d4" opacity="0.7"/>
+  <!-- agent chip inside -->
+  <rect x="695" y="195" width="120" height="30" rx="15" fill="none" stroke="#ff6b35" stroke-width="1.2"/>
+  <text x="712" y="214" font-family="Arial, sans-serif" font-size="11" fill="#ff6b35">🤖 页内 Agent</text>
+  <!-- DOM text lines -->
+  <line x1="670" y1="240" x2="760" y2="240" stroke="#06b6d4" stroke-width="1.5" opacity="0.4"/>
+  <line x1="670" y1="250" x2="740" y2="250" stroke="#06b6d4" stroke-width="1.5" opacity="0.4"/>
+  <line x1="670" y1="260" x2="750" y2="260" stroke="#06b6d4" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Tag pills -->
+  <g transform="translate(50, 282)">
+    <rect x="0" y="0" width="76" height="22" rx="11" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.6"/>
+    <text x="10" y="15" font-family="Arial, sans-serif" font-size="10" fill="#ff6b35">GUI Agent</text>
+
+    <rect x="86" y="0" width="82" height="22" rx="11" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.6"/>
+    <text x="96" y="15" font-family="Arial, sans-serif" font-size="10" fill="#06b6d4">Page Agent</text>
+
+    <rect x="178" y="0" width="80" height="22" rx="11" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.6"/>
+    <text x="188" y="15" font-family="Arial, sans-serif" font-size="10" fill="#8b5cf6">browser-use</text>
+
+    <rect x="268" y="0" width="60" height="22" rx="11" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+    <text x="278" y="15" font-family="Arial, sans-serif" font-size="10" fill="#f59e0b">Skyvern</text>
+
+    <rect x="338" y="0" width="72" height="22" rx="11" fill="none" stroke="#10b981" stroke-width="1" opacity="0.6"/>
+    <text x="348" y="15" font-family="Arial, sans-serif" font-size="10" fill="#10b981">浏览器自动化</text>
+  </g>
+
+  <!-- Separator line -->
+  <line x1="50" y1="325" x2="850" y2="325" stroke="#ffffff" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Chapter hints -->
+  <text x="50" y="345" font-family="Arial, sans-serif" font-size="11" fill="#9ca3af" opacity="0.7">五条路线拆解 → 横向对比 → benchmark 真相 → 选型指南 → 行业趋势</text>
+
+  <!-- Watermark -->
+  <text x="50" y="368" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" opacity="0.25">vxi.ai</text>
+</svg>

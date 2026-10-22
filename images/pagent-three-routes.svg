@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1220" viewBox="0 0 1080 1220">
+  <rect x="0" y="0" width="1080" height="1220" fill="#f7f8fa"/>
+
+  <text x="540" y="110" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">个人 Agent 的三条入口路线</text>
+  <text x="540" y="170" font-size="34" fill="#4b5563" text-anchor="middle">Agent 跑在哪里，决定它能碰到什么</text>
+
+  <!-- 路线一：云端分身 -->
+  <rect x="48" y="220" width="984" height="300" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <rect x="48" y="220" width="260" height="300" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="340" font-size="44" font-weight="bold" fill="#1d4ed8">云端分身</text>
+  <text x="76" y="406" font-size="32" fill="#1d4ed8">自带云电脑</text>
+  <text x="336" y="300" font-size="32" font-weight="bold" fill="#111827">代表：Dots · Muse · Grok Bot · Cue</text>
+  <text x="336" y="370" font-size="32" fill="#4b5563">方式：授权登录 + 云电脑 7×24 常驻</text>
+  <text x="336" y="440" font-size="32" fill="#4b5563">卡点：付费意愿与账户安全</text>
+
+  <!-- 路线二：系统接管 -->
+  <rect x="48" y="548" width="984" height="300" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <rect x="48" y="548" width="260" height="300" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="76" y="668" font-size="44" font-weight="bold" fill="#b45309">系统接管</text>
+  <text x="76" y="734" font-size="32" fill="#b45309">设备端读屏</text>
+  <text x="336" y="628" font-size="32" font-weight="bold" fill="#111827">代表：豆包手机助手 · Siri AI</text>
+  <text x="336" y="698" font-size="32" fill="#4b5563">方式：系统权限读屏、模拟点击</text>
+  <text x="336" y="768" font-size="32" fill="#4b5563">卡点：超级 App 封禁与风控</text>
+
+  <!-- 路线三：生态闭环 -->
+  <rect x="48" y="876" width="984" height="300" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <rect x="48" y="876" width="260" height="300" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="996" font-size="44" font-weight="bold" fill="#15803d">生态闭环</text>
+  <text x="76" y="1062" font-size="32" fill="#15803d">自家服务直连</text>
+  <text x="336" y="956" font-size="32" font-weight="bold" fill="#111827">代表：千问 × 淘宝 / 饿了么 / 支付宝</text>
+  <text x="336" y="1026" font-size="32" fill="#4b5563">方式：接口直连自家业务</text>
+  <text x="336" y="1096" font-size="32" fill="#4b5563">卡点：生态外场景难覆盖</text>
+</svg>

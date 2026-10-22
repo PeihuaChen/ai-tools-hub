@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f7fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <rect width="1200" height="640" fill="url(#pbg)"/>
+
+  <text x="600" y="46" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="26" font-weight="700" fill="#111827" text-anchor="middle">GraphRAG：从文本到知识图谱的四阶段流程</text>
+  <text x="600" y="74" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">索引阶段做重活，查询阶段沿图与社区摘要汇总</text>
+
+  <!-- Stage 1 -->
+  <rect x="60" y="120" width="250" height="150" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="185" y="152" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#1d4ed8" text-anchor="middle">① 实体/关系抽取</text>
+  <text x="185" y="182" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">LLM 逐块抽取</text>
+  <text x="185" y="204" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">实体 · 关系 · claims</text>
+  <text x="185" y="238" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#b45309" text-anchor="middle">⚠ 每块 4-6 次 LLM 调用</text>
+  <text x="185" y="256" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#b45309" text-anchor="middle">成本大头</text>
+
+  <!-- Stage 2 -->
+  <rect x="350" y="120" width="250" height="150" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="475" y="152" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#15803d" text-anchor="middle">② 图谱 + 社区检测</text>
+  <text x="475" y="182" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">汇聚成全局知识图谱</text>
+  <text x="475" y="204" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">Leiden 算法分层聚类</text>
+  <text x="475" y="238" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">紧密实体"抱团"成社区</text>
+
+  <!-- Stage 3 -->
+  <rect x="640" y="120" width="250" height="150" rx="12" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="765" y="152" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#6d28d9" text-anchor="middle">③ 社区摘要预生成</text>
+  <text x="765" y="182" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">提问前先总结好</text>
+  <text x="765" y="204" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">每层每社区一份摘要</text>
+  <text x="765" y="238" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">数据语义结构可提前报告</text>
+
+  <!-- Stage 4 -->
+  <rect x="930" y="120" width="250" height="150" rx="12" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="1055" y="152" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#0e7490" text-anchor="middle">④ 查询检索</text>
+  <text x="1055" y="182" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">三种模式按需选择</text>
+  <text x="1055" y="204" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">面向不同粒度问题</text>
+
+  <!-- arrows between stages -->
+  <g stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)">
+    <line x1="310" y1="195" x2="348" y2="195"/>
+    <line x1="600" y1="195" x2="638" y2="195"/>
+    <line x1="890" y1="195" x2="928" y2="195"/>
+  </g>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- three query modes -->
+  <rect x="120" y="360" width="300" height="110" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="270" y="392" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#0e7490" text-anchor="middle">Global Search 全局搜索</text>
+  <text x="270" y="420" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">map-reduce 汇总社区摘要</text>
+  <text x="270" y="446" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#15803d" text-anchor="middle">★ 招牌能力：回答宏观问题</text>
+
+  <rect x="450" y="360" width="300" height="110" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="600" y="392" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#1d4ed8" text-anchor="middle">Local Search 局部搜索</text>
+  <text x="600" y="420" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">聚焦相关实体及其邻居</text>
+  <text x="600" y="446" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">回答具体实体的细节问题</text>
+
+  <rect x="780" y="360" width="300" height="110" rx="10" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="930" y="392" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="17" font-weight="700" fill="#6d28d9" text-anchor="middle">DRIFT Search</text>
+  <text x="930" y="420" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">全局 + 局部结合</text>
+  <text x="930" y="446" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">先宏观定位再下钻细节</text>
+
+  <!-- connect stage4 to modes -->
+  <g stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4" fill="none">
+    <path d="M1000 270 C 900 320, 400 320, 270 358"/>
+    <path d="M1030 270 C 900 320, 700 320, 600 358"/>
+    <path d="M1055 270 L 930 358"/>
+  </g>
+
+  <!-- cost callout -->
+  <rect x="120" y="520" width="960" height="70" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="600" y="550" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#b91c1c" text-anchor="middle">成本真相：完整 GraphRAG 索引成本是纯向量方案的 20-100 倍</text>
+  <text x="600" y="574" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="13" fill="#4b5563" text-anchor="middle">微软 LazyGraphRAG 把 LLM 调用推迟到查询时，索引成本降到完整版的 0.1%，全局查询成本降低约 700 倍</text>
+</svg>

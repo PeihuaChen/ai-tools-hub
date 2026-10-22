@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f97316"/>
+      <stop offset="0.5" stop-color="#ef4444"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- top-left tag box -->
+  <rect x="48" y="42" width="252" height="30" rx="6" fill="none" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="1.2"/>
+  <text x="64" y="62" fill="#67e8f9" font-size="14" font-weight="600" letter-spacing="0.5">AI 行业观察 · Agent 沙箱</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="57" r="24" fill="none" stroke="#a855f7" stroke-opacity="0.55" stroke-width="1.4"/>
+  <text x="838" y="64" fill="#c4b5fd" font-size="20" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="128" fill="#ffffff" font-size="31" font-weight="800">Kata 挡得住内核漏洞</text>
+  <text x="48" y="168" fill="#ffffff" font-size="31" font-weight="800">OpenShell 补上策略层</text>
+
+  <!-- subtitle -->
+  <text x="48" y="204" fill="url(#sub)" font-size="18" font-weight="600">墙管逃逸 · 规矩管外泄 · 叠加才两关全过</text>
+
+  <!-- highlights -->
+  <text x="48" y="244" fill="#fca5a5" font-size="13" font-weight="500">▸ 仅 Kata：提示注入，环境变量被外泄</text>
+  <text x="48" y="266" fill="#fdba74" font-size="13" font-weight="500">▸ 仅 OpenShell：732 字节脚本，跨容器逃逸</text>
+  <text x="48" y="288" fill="#67e8f9" font-size="13" font-weight="500">▸ 两层叠加：Red Hat 实测两关全过</text>
+
+  <!-- tag pills -->
+  <g font-size="12" font-weight="500">
+    <rect x="48" y="312" width="60" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <text x="78" y="329" fill="#a5f3fc" text-anchor="middle">Kata</text>
+    <rect x="116" y="312" width="92" height="26" rx="13" fill="none" stroke="#6366f1" stroke-opacity="0.5"/>
+    <text x="162" y="329" fill="#c7d2fe" text-anchor="middle">OpenShell</text>
+    <rect x="216" y="312" width="70" height="26" rx="13" fill="none" stroke="#a855f7" stroke-opacity="0.5"/>
+    <text x="251" y="329" fill="#e9d5ff" text-anchor="middle">gVisor</text>
+    <rect x="294" y="312" width="92" height="26" rx="13" fill="none" stroke="#f97316" stroke-opacity="0.5"/>
+    <text x="340" y="329" fill="#fed7aa" text-anchor="middle">Agent 安全</text>
+    <rect x="394" y="312" width="70" height="26" rx="13" fill="none" stroke="#ec4899" stroke-opacity="0.5"/>
+    <text x="429" y="329" fill="#fbcfe8" text-anchor="middle">双沙箱</text>
+  </g>
+
+  <!-- right conceptual diagram: wall (Kata) + rules (OpenShell) + agent -->
+  <g transform="translate(628,110)">
+    <rect x="0" y="0" width="210" height="188" rx="10" fill="none" stroke="#6366f1" stroke-opacity="0.45" stroke-width="1.4"/>
+    <text x="12" y="20" fill="#8b93f8" font-size="11">Kata 微虚拟机 · 墙</text>
+    <rect x="24" y="34" width="162" height="118" rx="8" fill="none" stroke="#22d3ee" stroke-opacity="0.5" stroke-width="1.4"/>
+    <text x="34" y="52" fill="#67e8f9" font-size="11">OpenShell · 规矩</text>
+    <rect x="50" y="66" width="110" height="70" rx="6" fill="#a855f7" fill-opacity="0.10" stroke="#a855f7" stroke-opacity="0.6" stroke-width="1.4"/>
+    <text x="105" y="96" fill="#e9d5ff" font-size="12" font-weight="600" text-anchor="middle">Agent</text>
+    <text x="105" y="114" fill="#e9d5ff" font-size="12" font-weight="600" text-anchor="middle">执行代码</text>
+    <text x="105" y="172" fill="#94a3b8" font-size="10" text-anchor="middle">两层叠加 · 两关全过</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="352" x2="852" y2="352" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="48" y="370" fill="#64748b" font-size="11">Red Hat 实测 · 策略层设计 · 双沙箱组合 · 三档落地清单</text>
+  <text x="852" y="370" fill="#475569" font-size="11" text-anchor="end">AI 行业观察</text>
+</svg>

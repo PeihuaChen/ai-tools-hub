@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#ffffff"/>
+
+  <text x="60" y="50" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" fill="#111827">C2PA 软绑定：元数据被剥离后，靠水印把溯源凭证捞回来</text>
+  <text x="60" y="78" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">水印值同时写入 manifest 的 soft binding assertion，因此可以当作查找键使用</text>
+
+  <!-- Stage 1: generation -->
+  <g transform="translate(60,106)">
+    <rect x="0" y="0" width="300" height="176" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+    <text x="18" y="28" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8">① 生成侧</text>
+    <rect x="18" y="42" width="264" height="34" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="32" y="64" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">签名 manifest（硬绑定 = 内容哈希）</text>
+    <rect x="18" y="84" width="264" height="34" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1"/>
+    <text x="32" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">打隐形水印 / 计算内容指纹</text>
+    <rect x="18" y="126" width="264" height="34" rx="6" fill="#ffffff" stroke="#6d28d9" stroke-width="1"/>
+    <text x="32" y="148" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9">水印值写入 soft binding assertion</text>
+  </g>
+
+  <path d="M366 194 L424 194" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M424 194 l-9 -5 l0 10 z" fill="#94a3b8"/>
+
+  <!-- Stage 2: repository -->
+  <g transform="translate(430,106)">
+    <rect x="0" y="0" width="300" height="176" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.4"/>
+    <text x="18" y="28" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#6d28d9">② Manifest 仓库</text>
+    <rect x="18" y="42" width="264" height="34" rx="6" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="32" y="64" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">manifest 入库，键 = 软绑定值</text>
+    <rect x="18" y="84" width="264" height="34" rx="6" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="32" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">算法名取自 softbinding-algorithm-list</text>
+    <rect x="18" y="126" width="264" height="34" rx="6" fill="#ffffff" stroke="#0e7490" stroke-width="1"/>
+    <text x="32" y="148" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#0e7490">可选：DLT（分布式账本）注册「绑定值→端点」</text>
+  </g>
+
+  <path d="M736 194 L794 194" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M794 194 l-9 -5 l0 10 z" fill="#94a3b8"/>
+
+  <!-- Stage 3: distribution strips -->
+  <g transform="translate(800,106)">
+    <rect x="0" y="0" width="340" height="176" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+    <text x="18" y="28" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">③ 传播链路（破坏发生处）</text>
+    <rect x="18" y="42" width="304" height="34" rx="6" fill="#ffffff" stroke="#b91c1c" stroke-width="1"/>
+    <text x="32" y="64" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">截图 / 平台重编码 → manifest 被剥离</text>
+    <rect x="18" y="84" width="304" height="34" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1"/>
+    <text x="32" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">水印在截图与重编码后依然存活</text>
+    <rect x="18" y="126" width="304" height="34" rx="6" fill="#ffffff" stroke="#b45309" stroke-width="1"/>
+    <text x="32" y="148" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">对应规范 UC1 / UC6：AI 生成内容标识</text>
+  </g>
+
+  <path d="M970 290 L970 320 L600 320 L600 344" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5" fill="none"/>
+  <path d="M600 344 l-5 -9 l10 0 z" fill="#94a3b8"/>
+
+  <!-- Stage 4: recovery -->
+  <g transform="translate(60,348)">
+    <rect x="0" y="0" width="1080" height="152" rx="10" fill="#f8fafc" stroke="#0e7490" stroke-width="1.4"/>
+    <text x="20" y="28" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#0e7490">④ 消费侧恢复：Soft Binding Resolution API</text>
+
+    <rect x="20" y="42" width="248" height="42" rx="6" fill="#ffffff" stroke="#0e7490" stroke-width="1"/>
+    <text x="34" y="60" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#0e7490">GET /matches/byBinding</text>
+    <text x="34" y="77" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">value(base64) + alg → manifestId + 相似度</text>
+
+    <rect x="282" y="42" width="248" height="42" rx="6" fill="#ffffff" stroke="#0e7490" stroke-width="1"/>
+    <text x="296" y="60" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#0e7490">POST /matches/byContent</text>
+    <text x="296" y="77" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">直传 image/audio/video/pdf/text 资产</text>
+
+    <rect x="544" y="42" width="248" height="42" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="558" y="60" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">GET /manifests/{manifestId}</text>
+    <text x="558" y="77" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">取回 manifest store 或 active manifest</text>
+
+    <rect x="806" y="42" width="254" height="42" rx="6" fill="#ffffff" stroke="#6d28d9" stroke-width="1"/>
+    <text x="820" y="60" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9">GET /services/supportedAlgorithms</text>
+    <text x="820" y="77" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">该服务支持哪些水印 / 指纹算法</text>
+
+    <rect x="20" y="96" width="512" height="40" rx="6" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+    <text x="34" y="113" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">防水印转移攻击：manifest 内存指纹，取回后重算并比对</text>
+    <text x="34" y="130" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">不一致 → 水印被从别的资产搬过来，判定为伪造</text>
+
+    <rect x="546" y="96" width="514" height="40" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="560" y="113" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">对照 UC2 / UC3：本地 manifest 与恢复的 manifest 交叉比对</text>
+    <text x="560" y="130" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280">签名主体不符 → 提示可能存在溯源替换，交由用户做信任决策</text>
+  </g>
+
+  <text x="60" y="540" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">仓库发现问题的解法：软绑定算法列表（SBAL）中的 softBindingResolutionApis 字段可指向智能合约，合约实现 describe() 返回 K-V 存储的访问 schema</text>
+  <text x="60" y="562" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">两种去中心化实现：resolutionMethod = smartContract（合约状态）或 eventLog（DLT 事件日志）</text>
+  <text x="60" y="592" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">工程上收益最高的一个动作：不要在你的转码流水线里剥离 C2PA 元数据——成本最低，效果最直接</text>
+</svg>

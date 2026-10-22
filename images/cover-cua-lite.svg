@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="55%" stop-color="#101028"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="barTop" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d9ff"/>
+      <stop offset="34%" stop-color="#22c55e"/>
+      <stop offset="68%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="barBot" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#00d9ff"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d9ff"/>
+      <stop offset="60%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="chip1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d9ff" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#00d9ff" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="chip2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="chip3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="chip4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.045" stroke-width="1">
+    <path d="M45 0V383M90 0V383M135 0V383M180 0V383M225 0V383M270 0V383M315 0V383M360 0V383M405 0V383M450 0V383M495 0V383M540 0V383M585 0V383M630 0V383M675 0V383M720 0V383M765 0V383M810 0V383M855 0V383"/>
+    <path d="M0 45H900M0 90H900M0 135H900M0 180H900M0 225H900M0 270H900M0 315H900M0 360H900"/>
+  </g>
+  <circle cx="748" cy="182" r="150" fill="#00d9ff" fill-opacity="0.05"/>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#barTop)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#barBot)"/>
+
+  <rect x="40" y="30" width="228" height="30" rx="6" fill="#00d9ff" fill-opacity="0.10" stroke="#00d9ff" stroke-opacity="0.55" stroke-width="1"/>
+  <text x="56" y="50" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#7dd3fc">AI 行业观察 · 开源基建</text>
+
+  <rect x="812" y="26" width="48" height="38" rx="8" fill="#a78bfa" fill-opacity="0.12" stroke="#a78bfa" stroke-opacity="0.5" stroke-width="1"/>
+  <text x="836" y="52" text-anchor="middle" font-family="'Microsoft YaHei',sans-serif" font-size="19" font-weight="bold" fill="#c4b5fd">26</text>
+
+  <text x="40" y="128" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="31" font-weight="bold" fill="#ffffff">CUA-Lite 拆解</text>
+  <text x="40" y="163" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="bold" fill="url(#sub)">沙箱 · 数据 · 评测 · 训练 —— 一个平台全收了</text>
+
+  <text x="40" y="203" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#00d9ff">内存 4.1GB → 0.9GB、并行约 4.6 倍：Docker 取代 KVM 虚拟机</text>
+  <text x="40" y="227" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#86efac">30k+ 可验证任务 · 15+ benchmark · 10+ Agent · 20+ 数据集</text>
+  <text x="40" y="251" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#fbbf24">UC Berkeley 出品，但仍是 80 stars 的早期项目，且没有 LICENSE</text>
+
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12">
+    <rect x="40" y="278" width="140" height="26" rx="13" fill="none" stroke="#00d9ff" stroke-opacity="0.45"/>
+    <text x="110" y="295" text-anchor="middle" fill="#7dd3fc">Computer-Use Agent</text>
+    <rect x="188" y="278" width="72" height="26" rx="13" fill="none" stroke="#22c55e" stroke-opacity="0.45"/>
+    <text x="224" y="295" text-anchor="middle" fill="#86efac">OSWorld</text>
+    <rect x="268" y="278" width="84" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-opacity="0.45"/>
+    <text x="310" y="295" text-anchor="middle" fill="#c4b5fd">GUI Agent</text>
+    <rect x="360" y="278" width="92" height="26" rx="13" fill="none" stroke="#f59e0b" stroke-opacity="0.45"/>
+    <text x="406" y="295" text-anchor="middle" fill="#fcd34d">SFT / GRPO</text>
+    <rect x="460" y="278" width="76" height="26" rx="13" fill="none" stroke="#94a3b8" stroke-opacity="0.45"/>
+    <text x="498" y="295" text-anchor="middle" fill="#cbd5e1">开源基建</text>
+  </g>
+
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13">
+    <rect x="630" y="104" width="230" height="34" rx="8" fill="url(#chip1)" stroke="#00d9ff" stroke-opacity="0.45"/>
+    <text x="646" y="126" fill="#7dd3fc">① 沙箱</text>
+    <text x="844" y="126" text-anchor="end" font-size="11" fill="#64748b">VM-free</text>
+
+    <rect x="630" y="146" width="230" height="34" rx="8" fill="url(#chip2)" stroke="#22c55e" stroke-opacity="0.45"/>
+    <text x="646" y="168" fill="#86efac">② 数据</text>
+    <text x="844" y="168" text-anchor="end" font-size="11" fill="#64748b">LiteSample</text>
+
+    <rect x="630" y="188" width="230" height="34" rx="8" fill="url(#chip3)" stroke="#a78bfa" stroke-opacity="0.45"/>
+    <text x="646" y="210" fill="#c4b5fd">③ 评测</text>
+    <text x="844" y="210" text-anchor="end" font-size="11" fill="#64748b">lite.gym</text>
+
+    <rect x="630" y="230" width="230" height="34" rx="8" fill="url(#chip4)" stroke="#f59e0b" stroke-opacity="0.45"/>
+    <text x="646" y="252" fill="#fcd34d">④ 训练</text>
+    <text x="844" y="252" text-anchor="end" font-size="11" fill="#64748b">SFT + RL</text>
+
+    <path d="M745 138V146M745 180V188M745 222V230" stroke="#475569" stroke-width="1.5"/>
+  </g>
+
+  <line x1="40" y1="326" x2="860" y2="326" stroke="#ffffff" stroke-opacity="0.10" stroke-width="1"/>
+  <text x="40" y="352" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#94a3b8">VM 税怎么砍 · 榜单里的中国模型 · 它在生态五层里的位置 · 三个必须先看的风险</text>
+  <text x="860" y="352" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#475569">公众号：AI 行业观察</text>
+</svg>

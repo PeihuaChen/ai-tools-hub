@@ -1,0 +1,85 @@
+<svg width="860" height="380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="costBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fc"/>
+      <stop offset="100%" style="stop-color:#eef1f7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="380" rx="12" fill="url(#costBg)"/>
+  <rect width="860" height="380" rx="12" fill="none" stroke="#d0d7e3" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="430" y="35" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="bold">制作成本对比：OpenMontage vs 商用工具（月度/单次）</text>
+
+  <!-- Y axis label -->
+  <text x="25" y="210" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle" transform="rotate(-90 25 210)">月度成本 (USD)</text>
+
+  <!-- Y axis ticks and grid -->
+  <line x1="70" y1="65" x2="70" y2="320" stroke="#ccc" stroke-width="1"/>
+  <line x1="70" y1="320" x2="820" y2="320" stroke="#ccc" stroke-width="1"/>
+
+  <!-- $0 -->
+  <text x="60" y="324" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="end">$0</text>
+  <!-- $20 -->
+  <line x1="70" y1="270" x2="820" y2="270" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="60" y="274" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="end">$20</text>
+  <!-- $40 -->
+  <line x1="70" y1="220" x2="820" y2="220" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="60" y="224" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="end">$40</text>
+  <!-- $60 -->
+  <line x1="70" y1="170" x2="820" y2="170" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="60" y="174" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="end">$60</text>
+  <!-- $85 -->
+  <line x1="70" y1="108" x2="820" y2="108" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="60" y="112" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="end">$85</text>
+
+  <!-- Bars -->
+
+  <!-- OpenMontage: $0.15 -->
+  <rect x="100" y="316" width="70" height="4" rx="2" fill="#27ae60"/>
+  <rect x="100" y="293" width="70" height="22" rx="4" fill="#e8f8f0" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="135" y="308" font-family="Arial, sans-serif" font-size="11" fill="#1e8449" text-anchor="middle" font-weight="bold">$0.15</text>
+  <text x="135" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">OpenMontage</text>
+  <text x="135" y="353" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">(单条视频)</text>
+
+  <!-- OpenMontage max: $1.33 -->
+  <rect x="200" y="314" width="70" height="6" rx="2" fill="#2196f3"/>
+  <rect x="200" y="290" width="70" height="22" rx="4" fill="#e8f0fe" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="235" y="305" font-family="Arial, sans-serif" font-size="11" fill="#1565c0" text-anchor="middle" font-weight="bold">$1.33</text>
+  <text x="235" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">OpenMontage</text>
+  <text x="235" y="353" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">(Pixar级动画)</text>
+
+  <!-- Atlabs: $15/mo -->
+  <rect x="310" y="283" width="70" height="37" rx="4" fill="#f0e8fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="345" y="306" font-family="Arial, sans-serif" font-size="11" fill="#5b21b6" text-anchor="middle" font-weight="bold">$15/月</text>
+  <text x="345" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">Atlabs AI</text>
+
+  <!-- InVideo Plus: $20/mo -->
+  <rect x="410" y="270" width="70" height="50" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="445" y="300" font-family="Arial, sans-serif" font-size="11" fill="#b8860b" text-anchor="middle" font-weight="bold">$20/月</text>
+  <text x="445" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">InVideo AI</text>
+  <text x="445" y="353" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">(Plus)</text>
+
+  <!-- HeyGen: $24/mo -->
+  <rect x="510" y="260" width="70" height="60" rx="4" fill="#fce4f3" stroke="#e91e8c" stroke-width="1.5"/>
+  <text x="545" y="295" font-family="Arial, sans-serif" font-size="11" fill="#ad1457" text-anchor="middle" font-weight="bold">$24/月</text>
+  <text x="545" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">HeyGen</text>
+
+  <!-- Descript: $30/mo -->
+  <rect x="610" y="245" width="70" height="75" rx="4" fill="#e0f7f7" stroke="#00897b" stroke-width="1.5"/>
+  <text x="645" y="287" font-family="Arial, sans-serif" font-size="11" fill="#00695c" text-anchor="middle" font-weight="bold">$30/月</text>
+  <text x="645" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">Descript</text>
+  <text x="645" y="353" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">(Pro)</text>
+
+  <!-- InVideo Max: $85/mo -->
+  <rect x="710" y="108" width="70" height="212" rx="4" fill="#fff0f0" stroke="#e53935" stroke-width="1.5"/>
+  <text x="745" y="220" font-family="Arial, sans-serif" font-size="11" fill="#c62828" text-anchor="middle" font-weight="bold">$85/月</text>
+  <text x="745" y="340" font-family="Arial, sans-serif" font-size="9" fill="#444" text-anchor="middle">InVideo AI</text>
+  <text x="745" y="353" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">(Max)</text>
+
+  <!-- Annotation -->
+  <rect x="100" y="365" width="720" height="1" fill="#ddd"/>
+  <text x="430" y="378" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">OpenMontage 按单条视频计费（API成本），商用工具按月订阅制。10条视频/月场景下 OpenMontage 成本约 $1.5-13 vs 商用 $15-85。</text>
+</svg>

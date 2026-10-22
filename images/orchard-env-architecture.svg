@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="640" viewBox="0 0 1100 640">
+  <rect width="1100" height="640" fill="#ffffff"/>
+  <rect width="1100" height="640" fill="#f8fafc" opacity="0"/>
+
+  <!-- title -->
+  <text x="40" y="44" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">Orchard Env 三层架构：把「训练环境」抽成独立服务</text>
+  <text x="40" y="70" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#4b5563">同一套环境层，被蒸馏 / 强化学习 / 评测三个阶段复用，与 harness、训练框架、任务域解耦</text>
+
+  <!-- ===== Layer 1: Recipes / consumers ===== -->
+  <rect x="40" y="96" width="1020" height="96" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="60" y="122" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d4ed8">① 训练配方 / 消费方（Recipes）</text>
+
+  <rect x="70" y="134" width="220" height="44" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="180" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">Orchard-SWE</text>
+  <text x="180" y="171" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">软件工程 · SWE-bench 73%</text>
+
+  <rect x="310" y="134" width="220" height="44" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="420" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">Orchard-GUI</text>
+  <text x="420" y="171" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">浏览器导航 · 平均 68.4%</text>
+
+  <rect x="550" y="134" width="220" height="44" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="660" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">Orchard-Claw</text>
+  <text x="660" y="171" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">个人助理 · pass@3 59.6%</text>
+
+  <rect x="790" y="134" width="250" height="44" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+  <text x="915" y="152" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4b5563">蒸馏 · RL rollout · 评测</text>
+  <text x="915" y="169" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">三阶段共用同一环境</text>
+
+  <!-- arrows down (HTTP/REST) -->
+  <g stroke="#94a3b8" stroke-width="1.5" fill="none">
+    <line x1="180" y1="192" x2="180" y2="228" marker-end="url(#arr)"/>
+    <line x1="420" y1="192" x2="420" y2="228" marker-end="url(#arr)"/>
+    <line x1="660" y1="192" x2="660" y2="228" marker-end="url(#arr)"/>
+  </g>
+  <text x="470" y="216" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#6b7280" font-style="italic">REST API / Python SDK（同步 · 异步）</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Layer 2: Orchard Env ===== -->
+  <rect x="40" y="232" width="1020" height="150" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+  <text x="60" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#15803d">② Orchard Env — 稳定的环境服务（K8s 原生）</text>
+
+  <!-- Orchestrator -->
+  <rect x="70" y="272" width="300" height="96" rx="8" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+  <text x="220" y="294" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#15803d">编排器 Orchestrator</text>
+  <text x="220" y="314" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">FastAPI 服务 · 管理 K8s Pod</text>
+  <text x="220" y="332" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">多副本 · Redis 状态 · 分布式锁</text>
+  <text x="220" y="352" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">生命周期：create / exec / files / patch / delete</text>
+
+  <!-- primitives -->
+  <rect x="390" y="272" width="300" height="96" rx="8" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+  <text x="540" y="294" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#15803d">通用原语 Primitives</text>
+  <text x="540" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">命令执行 · 文件 I/O · git patch</text>
+  <text x="540" y="335" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">网络策略（默认拒绝出网）</text>
+  <text x="540" y="355" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">CPU/内存/超时限额 · API-Key 鉴权</text>
+
+  <!-- perf -->
+  <rect x="710" y="272" width="330" height="96" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="1.2"/>
+  <text x="875" y="294" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#b45309">性能 / 成本</text>
+  <text x="875" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">命令延迟 0.28s（E2B 0.75s / Modal 2.05s）</text>
+  <text x="875" y="335" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">1000 沙箱并行 26s 全部就绪</text>
+  <text x="875" y="355" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">spot 实例成本约为托管服务的 1/10</text>
+
+  <!-- arrows down to pods -->
+  <g stroke="#94a3b8" stroke-width="1.5" fill="none">
+    <line x1="300" y1="382" x2="300" y2="418" marker-end="url(#arr)"/>
+    <line x1="550" y1="382" x2="550" y2="418" marker-end="url(#arr)"/>
+    <line x1="800" y1="382" x2="800" y2="418" marker-end="url(#arr)"/>
+  </g>
+  <text x="560" y="406" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#6b7280" font-style="italic">按需拉起数千个隔离容器 · in-pod agent 走 Pod IP 低延迟</text>
+
+  <!-- ===== Layer 3: sandboxes ===== -->
+  <rect x="40" y="422" width="1020" height="170" rx="12" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="60" y="448" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#6d28d9">③ 隔离沙箱池（K8s Pod）— harness 预装、任意镜像</text>
+
+  <!-- pod template repeated -->
+  <g>
+    <rect x="70" y="462" width="150" height="112" rx="8" fill="#ffffff" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="145" y="484" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="#6d28d9">Sandbox Pod</text>
+    <rect x="84" y="494" width="122" height="24" rx="4" fill="#f3e8ff" stroke="#6d28d9" stroke-width="0.8"/>
+    <text x="145" y="510" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6d28d9">in-pod agent（自带解释器）</text>
+    <text x="145" y="534" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9.5" fill="#4b5563">codex · claude · opencode</text>
+    <text x="145" y="550" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9.5" fill="#4b5563">pi · hermes 预装于 PATH</text>
+    <text x="145" y="566" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#6b7280">Calico 网络隔离</text>
+  </g>
+  <g>
+    <rect x="240" y="462" width="150" height="112" rx="8" fill="#ffffff" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="315" y="484" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="#6d28d9">Sandbox Pod</text>
+    <rect x="254" y="494" width="122" height="24" rx="4" fill="#f3e8ff" stroke="#6d28d9" stroke-width="0.8"/>
+    <text x="315" y="510" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6d28d9">代码库 / 浏览器 / 工具</text>
+    <text x="315" y="540" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9.5" fill="#4b5563">任意基础镜像</text>
+    <text x="315" y="558" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9.5" fill="#4b5563">init 容器注入 agent</text>
+  </g>
+  <g>
+    <rect x="410" y="462" width="150" height="112" rx="8" fill="#ffffff" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="485" y="484" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="#6d28d9">Sandbox Pod</text>
+    <rect x="424" y="494" width="122" height="24" rx="4" fill="#f3e8ff" stroke="#6d28d9" stroke-width="0.8"/>
+    <text x="485" y="510" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6d28d9">每次 rollout 独占容器</text>
+    <text x="485" y="540" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9.5" fill="#4b5563">TTL 自动回收</text>
+    <text x="485" y="558" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9.5" fill="#4b5563">互不干扰</text>
+  </g>
+
+  <!-- dots -->
+  <text x="600" y="528" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#9ca3af">· · ·</text>
+
+  <!-- scale block -->
+  <rect x="660" y="462" width="380" height="112" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+  <text x="850" y="486" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#111827">数千个并行沙箱</text>
+  <text x="850" y="510" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">同一套环境同时服务：数据蒸馏、RL 采样、模型评测</text>
+  <text x="850" y="532" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#4b5563">跨 harness / 跨任务域，无需为每个研究重建基础设施</text>
+  <text x="850" y="556" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#6b7280">这正是「环境层作为独立服务」的价值所在</text>
+
+  <!-- caption -->
+  <text x="40" y="618" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#6b7280">图：Orchard Env 采用「客户端 SDK → 编排器 → in-pod agent」三层结构，环境层与上层训练/评测解耦，因此可跨阶段、跨域、跨 harness 复用。</text>
+</svg>

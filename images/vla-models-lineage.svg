@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1000" viewBox="0 0 1080 1000">
+  <rect width="1080" height="1000" fill="#f7f8fa"/>
+
+  <text x="540" y="70" fill="#111827" font-size="60" font-weight="bold" text-anchor="middle">VLA 模型演进脉络</text>
+  <text x="540" y="120" fill="#4b5563" font-size="34" text-anchor="middle">从 RT-2 到 π0.7：五个阶段</text>
+
+  <!-- vertical timeline spine -->
+  <line x1="150" y1="170" x2="150" y2="930" stroke="#94a3b8" stroke-width="4"/>
+
+  <!-- Stage 1 -->
+  <circle cx="150" cy="230" r="18" fill="#1d4ed8"/>
+  <rect x="200" y="180" width="820" height="120" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="230" y="228" fill="#1d4ed8" font-size="40" font-weight="bold">RT-1 / RT-2（2022-2023）</text>
+  <text x="230" y="272" fill="#4b5563" font-size="32">证明 Transformer 能学动作；网络知识迁移到机器人</text>
+
+  <!-- Stage 2 -->
+  <circle cx="150" cy="390" r="18" fill="#0e7490"/>
+  <rect x="200" y="340" width="820" height="120" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="230" y="388" fill="#0e7490" font-size="40" font-weight="bold">Octo / OpenVLA（2024）</text>
+  <text x="230" y="432" fill="#4b5563" font-size="32">开源普及：7B 参数超越 55B 闭源模型</text>
+
+  <!-- Stage 3 -->
+  <circle cx="150" cy="550" r="18" fill="#15803d"/>
+  <rect x="200" y="500" width="820" height="120" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="230" y="548" fill="#15803d" font-size="40" font-weight="bold">π0 / π0.5 / π0.7（2025-2026）</text>
+  <text x="230" y="592" fill="#4b5563" font-size="32">流匹配连续动作；开放世界与组合泛化</text>
+
+  <!-- Stage 4 -->
+  <circle cx="150" cy="710" r="18" fill="#6d28d9"/>
+  <rect x="200" y="660" width="820" height="120" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="230" y="708" fill="#6d28d9" font-size="40" font-weight="bold">Gemini Robotics / Helix（2025）</text>
+  <text x="230" y="752" fill="#4b5563" font-size="32">会思考的推理编排；双系统全身高频控制</text>
+
+  <!-- Stage 5 -->
+  <circle cx="150" cy="870" r="18" fill="#b45309"/>
+  <rect x="200" y="820" width="820" height="120" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="230" y="868" fill="#b45309" font-size="40" font-weight="bold">GR00T N1.7（2026）</text>
+  <text x="230" y="912" fill="#4b5563" font-size="32">人类视频预训练；机器人灵巧度 scaling law</text>
+</svg>

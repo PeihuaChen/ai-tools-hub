@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+  <rect width="1100" height="620" fill="#ffffff"/>
+
+  <text x="550" y="46" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" fill="#111827">AI Agent 时间感知能力的四个层次</text>
+  <text x="550" y="74" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#6b7280">由浅入深，越往上越难；理想的“时间智能”需要四层协同</text>
+
+  <!-- Layer 4 (top, future) -->
+  <rect x="290" y="110" width="520" height="96" rx="12" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="316" y="146" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#6d28d9">第四层 · 对未来的推理与预测</text>
+  <text x="316" y="172" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">基于过去推演未来、生成合理未来场景</text>
+  <text x="316" y="193" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表：Time-R1（统一理解过去 + 预测未来）</text>
+
+  <!-- Layer 3 -->
+  <rect x="240" y="222" width="620" height="96" rx="12" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="266" y="258" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#b91c1c">第三层 · 对当下的实时感知</text>
+  <text x="266" y="284" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">知道“现在”是几点；在实时截止（deadline）下正确决策</text>
+  <text x="266" y="305" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">难点：实时截止压力下，多数模型时间感知会失效</text>
+
+  <!-- Layer 2 -->
+  <rect x="190" y="334" width="720" height="96" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+  <text x="216" y="370" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#15803d">第二层 · 对过去的时序推理</text>
+  <text x="216" y="396" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">事件排序 · 时序问答（TSQA）· 随时间演变的事实</text>
+  <text x="216" y="417" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表基准：EvolveBench · TIMEBENCH · TIME</text>
+
+  <!-- Layer 1 (bottom, foundation) -->
+  <rect x="140" y="446" width="820" height="96" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="166" y="482" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#1d4ed8">第一层 · 时间理解与表达（基础）</text>
+  <text x="166" y="508" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">解析日期 · 时区转换 · 时长 · 频率</text>
+  <text x="166" y="529" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">代表基准：TRAM（order / arithmetic / frequency / duration）</text>
+
+  <!-- upward arrow -->
+  <g stroke="#94a3b8" stroke-width="2" fill="none">
+    <line x1="90" y1="530" x2="90" y2="150"/>
+  </g>
+  <path d="M90 132 L84 150 L96 150 Z" fill="#94a3b8"/>
+  <text x="60" y="345" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280" transform="rotate(-90 60 345)">难度递增 · 需上层协同</text>
+
+  <!-- footer note -->
+  <text x="550" y="588" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">只会答“今天几号”仅解决第三层一小部分；真正难的是让四层协同工作</text>
+</svg>

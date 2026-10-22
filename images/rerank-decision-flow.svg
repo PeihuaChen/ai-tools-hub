@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1290" viewBox="0 0 1080 1290">
+  <rect x="0" y="0" width="1080" height="1290" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="60" font-weight="700" fill="#111827" text-anchor="middle">开源 Rerank 怎么选</text>
+  <text x="540" y="156" font-size="34" fill="#4b5563" text-anchor="middle">先问协议，再问语言，最后问延迟</text>
+
+  <!-- start -->
+  <rect x="48" y="200" width="984" height="110" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="540" y="268" font-size="44" font-weight="700" fill="#1d4ed8" text-anchor="middle">要用在商业产品里吗？</text>
+
+  <!-- connectors: start -> two cards -->
+  <g stroke="#94a3b8" stroke-width="3" fill="none">
+    <path d="M540 310 L540 335"/>
+    <path d="M198 335 L702 335"/>
+    <path d="M198 335 L198 348"/>
+    <path d="M702 335 L702 348"/>
+  </g>
+  <g fill="#94a3b8">
+    <polygon points="190,348 206,348 198,360"/>
+    <polygon points="694,348 710,348 702,360"/>
+  </g>
+
+  <!-- no: internal -->
+  <rect x="48" y="360" width="300" height="210" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="76" y="422" font-size="40" font-weight="700" fill="#b91c1c">否：内部用</text>
+  <text x="76" y="482" font-size="32" fill="#111827">Jina v3 / v3.5</text>
+  <text x="76" y="534" font-size="32" fill="#111827">Zerank 2 等</text>
+
+  <!-- yes: Apache 2.0 -->
+  <rect x="372" y="360" width="660" height="210" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="400" y="422" font-size="40" font-weight="700" fill="#15803d">是：只选 Apache 2.0 类</text>
+  <text x="400" y="482" font-size="32" fill="#111827">再按语言和场景分三路</text>
+  <text x="400" y="534" font-size="32" fill="#111827">Qwen3、BGE、gte 都在此列</text>
+
+  <!-- connectors: yes -> three branches -->
+  <g stroke="#94a3b8" stroke-width="3" fill="none">
+    <path d="M702 570 L702 595"/>
+    <path d="M204 595 L876 595"/>
+    <path d="M204 595 L204 628"/>
+    <path d="M540 595 L540 628"/>
+    <path d="M876 595 L876 628"/>
+  </g>
+  <g fill="#94a3b8">
+    <polygon points="196,628 212,628 204,640"/>
+    <polygon points="532,628 548,628 540,640"/>
+    <polygon points="868,628 884,628 876,640"/>
+  </g>
+
+  <!-- branch 1: English -->
+  <rect x="48" y="640" width="312" height="330" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="702" font-size="40" font-weight="700" fill="#1d4ed8">英文为主</text>
+  <text x="76" y="762" font-size="32" fill="#111827">低延迟首选</text>
+  <text x="76" y="814" font-size="32" fill="#111827">gte-reranker</text>
+  <text x="76" y="866" font-size="32" fill="#111827">-modernbert</text>
+  <text x="76" y="918" font-size="32" fill="#4b5563">149M · 8K 窗口</text>
+
+  <!-- branch 2: Chinese / multilingual -->
+  <rect x="384" y="640" width="312" height="330" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="412" y="702" font-size="40" font-weight="700" fill="#0e7490">中文/多语言</text>
+  <text x="412" y="762" font-size="32" fill="#111827">轻量首选</text>
+  <text x="412" y="814" font-size="32" fill="#111827">gte 多语言版</text>
+  <text x="412" y="866" font-size="32" fill="#111827">BGE-v2-m3</text>
+  <text x="412" y="918" font-size="32" fill="#4b5563">CMTEB-R 72–74</text>
+
+  <!-- branch 3: accuracy -->
+  <rect x="720" y="640" width="312" height="330" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="748" y="702" font-size="40" font-weight="700" fill="#6d28d9">精度优先</text>
+  <text x="748" y="762" font-size="32" fill="#111827">专业长文也选它</text>
+  <text x="748" y="814" font-size="32" fill="#111827">Qwen3-Reranker</text>
+  <text x="748" y="866" font-size="32" fill="#111827">4B 或 8B</text>
+  <text x="748" y="918" font-size="32" fill="#4b5563">Apache 2.0</text>
+
+  <!-- special: cross-lingual -->
+  <rect x="48" y="1000" width="984" height="160" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2" stroke-dasharray="8"/>
+  <text x="76" y="1060" font-size="40" font-weight="700" fill="#b45309">跨语言 · NVIDIA GPU</text>
+  <text x="76" y="1120" font-size="32" fill="#111827">Nemotron Rerank 1B v2（先核对协议）</text>
+
+  <text x="540" y="1230" font-size="34" font-weight="700" fill="#b45309" text-anchor="middle">上线前，用自己的数据测一遍</text>
+</svg>

@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="600" viewBox="0 0 1160 600">
+  <rect width="1160" height="600" fill="#ffffff"/>
+
+  <text x="40" y="44" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="24" font-weight="bold" fill="#111827">Recirculation vs CoT vs Looping：额外算力放在哪一层</text>
+  <text x="40" y="70" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="14" fill="#4b5563">三者都在增加计算量，但增加的位置、计费方式和部署门槛完全不同</text>
+
+  <!-- 面板一：CoT -->
+  <rect x="40" y="94" width="336" height="330" rx="12" fill="#f8fafc" stroke="#1d4ed8" stroke-width="1.4"/>
+  <rect x="40" y="94" width="336" height="38" rx="12" fill="#eff6ff"/>
+  <rect x="40" y="120" width="336" height="12" fill="#eff6ff"/>
+  <text x="62" y="120" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="15" font-weight="bold" fill="#1d4ed8">CoT · 在 token 方向延长</text>
+
+  <text x="62" y="158" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6b7280">固定深度，把中间状态写成文字</text>
+
+  <!-- 层堆叠 -->
+  <g>
+    <rect x="66" y="176" width="52" height="16" rx="3" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <rect x="66" y="196" width="52" height="16" rx="3" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <rect x="66" y="216" width="52" height="16" rx="3" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <rect x="66" y="236" width="52" height="16" rx="3" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="92" y="268" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6b7280">L 层</text>
+  </g>
+
+  <!-- token 链 -->
+  <g font-family="Arial,sans-serif" font-size="10">
+    <rect x="140" y="196" width="34" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="157" y="210" text-anchor="middle" fill="#1d4ed8">t1</text>
+    <rect x="182" y="196" width="34" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="199" y="210" text-anchor="middle" fill="#1d4ed8">t2</text>
+    <rect x="224" y="196" width="34" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="241" y="210" text-anchor="middle" fill="#1d4ed8">t3</text>
+    <rect x="266" y="196" width="34" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="283" y="210" text-anchor="middle" fill="#1d4ed8">t4</text>
+    <rect x="308" y="196" width="42" height="20" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="329" y="210" text-anchor="middle" fill="#1d4ed8">…tN</text>
+  </g>
+  <line x1="120" y1="206" x2="138" y2="206" stroke="#94a3b8" stroke-width="1.2"/>
+  <path d="M136 202 L144 206 L136 210 Z" fill="#94a3b8"/>
+  <text x="245" y="238" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6b7280">状态藏在生成的文字里</text>
+
+  <line x1="62" y1="288" x2="354" y2="288" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="62" y="310" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#4b5563">计费方式</text>
+  <text x="62" y="330" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">逐 token 付费，延迟随长度线性增长</text>
+  <text x="62" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#4b5563">适用场景</text>
+  <text x="62" y="376" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#15803d">复杂推断（多步数学、规划）</text>
+  <text x="62" y="400" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#b45309">浪费场景：拿它做基础状态追踪</text>
+
+  <!-- 面板二：Looping -->
+  <rect x="404" y="94" width="336" height="330" rx="12" fill="#f8fafc" stroke="#0e7490" stroke-width="1.4"/>
+  <rect x="404" y="94" width="336" height="38" rx="12" fill="#ecfeff"/>
+  <rect x="404" y="120" width="336" height="12" fill="#ecfeff"/>
+  <text x="426" y="120" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="15" font-weight="bold" fill="#0e7490">Looping · 在深度方向复用权重</text>
+
+  <text x="426" y="158" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6b7280">共享权重块反复迭代，展开到任意深度</text>
+
+  <g>
+    <rect x="470" y="180" width="96" height="22" rx="4" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="518" y="196" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" fill="#0e7490">shared block</text>
+    <rect x="470" y="212" width="96" height="22" rx="4" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="518" y="228" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" fill="#0e7490">shared block</text>
+    <rect x="470" y="244" width="96" height="22" rx="4" fill="#cffafe" stroke="#0e7490" stroke-width="1"/>
+    <text x="518" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" fill="#0e7490">shared block</text>
+  </g>
+  <path d="M578 191 C 616 191, 616 255, 578 255" fill="none" stroke="#0e7490" stroke-width="1.4"/>
+  <path d="M582 251 L576 256 L583 259 Z" fill="#0e7490"/>
+  <text x="628" y="228" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#0e7490">迭代 K 次</text>
+  <text x="628" y="246" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#6b7280">参数量不变</text>
+
+  <line x1="426" y1="288" x2="718" y2="288" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="426" y="310" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#4b5563">计费方式</text>
+  <text x="426" y="330" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="13" font-weight="bold" fill="#b45309">算力随迭代次数增长，需训练时配合</text>
+  <text x="426" y="356" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#4b5563">适用场景</text>
+  <text x="426" y="376" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#15803d">潜空间推理、深度外推</text>
+  <text x="426" y="400" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#b45309">门槛：现成模型不能直接套</text>
+
+  <!-- 面板三：Recirculation -->
+  <rect x="768" y="94" width="352" height="330" rx="12" fill="#f8fafc" stroke="#6d28d9" stroke-width="1.6"/>
+  <rect x="768" y="94" width="352" height="38" rx="12" fill="#f5f3ff"/>
+  <rect x="768" y="120" width="352" height="12" fill="#f5f3ff"/>
+  <text x="790" y="120" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="15" font-weight="bold" fill="#6d28d9">Recirculation · 让模型成为动力系统</text>
+
+  <text x="790" y="158" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6b7280">突破「状态更新次数受深度约束」的限制</text>
+
+  <g>
+    <rect x="810" y="176" width="60" height="16" rx="3" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <rect x="810" y="196" width="60" height="16" rx="3" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <rect x="810" y="216" width="60" height="16" rx="3" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <rect x="810" y="236" width="60" height="16" rx="3" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="840" y="268" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="10" fill="#6b7280">原模型（权重冻结）</text>
+  </g>
+
+  <!-- 再循环回路 -->
+  <path d="M884 244 C 936 258, 948 190, 896 180" fill="none" stroke="#6d28d9" stroke-width="1.6"/>
+  <path d="M900 184 L893 179 L899 174 Z" fill="#6d28d9"/>
+  <text x="954" y="200" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" font-weight="bold" fill="#6d28d9">再循环</text>
+  <text x="954" y="218" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">追踪信念状态</text>
+  <text x="954" y="236" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">belief state</text>
+
+  <rect x="790" y="250" width="306" height="26" rx="6" fill="#fef3c7" stroke="#b45309" stroke-width="1.1"/>
+  <text x="802" y="268" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#b45309">代价：prefill 需串行处理 · 生成阶段延迟近似不增</text>
+
+  <line x1="790" y1="288" x2="1098" y2="288" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="790" y="310" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#4b5563">Gemma3 上的实测（相对开箱基线）</text>
+
+  <rect x="790" y="320" width="146" height="44" rx="8" fill="#ecfdf5" stroke="#15803d" stroke-width="1.2"/>
+  <text x="863" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#15803d">−23%</text>
+  <text x="863" y="357" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#15803d">数据集困惑度</text>
+
+  <rect x="950" y="320" width="146" height="44" rx="8" fill="#ecfdf5" stroke="#15803d" stroke-width="1.2"/>
+  <text x="1023" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#15803d">+21%</text>
+  <text x="1023" y="357" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#15803d">GSM8k 准确率</text>
+
+  <text x="790" y="386" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#6d28d9">自适应变体：只需轻量调超参，权重全程不动</text>
+  <text x="790" y="406" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" fill="#4b5563">→ 不触发模型重新评审流程，是最低风险的尝试</text>
+
+  <!-- 底部：作者的三重区分 -->
+  <rect x="40" y="444" width="1080" height="118" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="62" y="470" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="15" font-weight="bold" fill="#334155">作者刻意做的三重区分，本身就是对这个领域的一次清理</text>
+
+  <rect x="62" y="484" width="330" height="58" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1.1"/>
+  <text x="78" y="504" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">≠ 思维链计算</text>
+  <text x="78" y="524" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">CoT 应留给复杂推断，而不是</text>
+  <text x="78" y="538" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">拿来做基础的状态追踪</text>
+
+  <rect x="404" y="484" width="330" height="58" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1.1"/>
+  <text x="420" y="504" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" font-weight="bold" fill="#0e7490">≠ 流行的深度循环（looping）</text>
+  <text x="420" y="524" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">引入的是特定形式的循环，让模型</text>
+  <text x="420" y="538" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">作为动力系统运转</text>
+
+  <rect x="746" y="484" width="352" height="58" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1.1"/>
+  <text x="762" y="504" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="12" font-weight="bold" fill="#6d28d9">≠ 代价高昂的循环 transformer 训练</text>
+  <text x="762" y="524" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">免训练路线：靠模型自身性质来指导架构</text>
+  <text x="762" y="538" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11" fill="#4b5563">修改，而非人为强加的设计选择</text>
+
+  <text x="40" y="584" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="11.5" fill="#6b7280">数据来源：Recirculation, Mozer et al., arXiv 2608.17981（2026-08-18）。示意图为机制简化表达，非论文原图。</text>
+</svg>

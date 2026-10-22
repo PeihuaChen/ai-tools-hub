@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="822" viewBox="0 0 1080 822">
+  <rect x="0" y="0" width="1080" height="822" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="56" font-weight="bold" fill="#111827" text-anchor="middle">开源方案怎么选</text>
+
+  <!-- 卡片 1：Nemotron 3 -->
+  <rect x="48" y="150" width="480" height="300" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="214" font-size="44" font-weight="bold" fill="#15803d">Nemotron 3</text>
+  <text x="76" y="280" font-size="32" fill="#111827">许可：可商用</text>
+  <text x="76" y="346" font-size="32" fill="#111827">上限：8 人</text>
+  <text x="76" y="412" font-size="32" fill="#4b5563">强项：实时与多人</text>
+
+  <!-- 卡片 2：pyannote Community-1 -->
+  <rect x="552" y="150" width="480" height="300" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="580" y="214" font-size="44" font-weight="bold" fill="#1d4ed8">Community-1</text>
+  <text x="580" y="280" font-size="32" fill="#111827">许可：可商用</text>
+  <text x="580" y="346" font-size="32" fill="#111827">上限：不限人数</text>
+  <text x="580" y="412" font-size="32" fill="#4b5563">强项：通用稳定</text>
+
+  <!-- 卡片 3：DiariZen -->
+  <rect x="48" y="474" width="480" height="300" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="76" y="538" font-size="44" font-weight="bold" fill="#b45309">DiariZen</text>
+  <text x="76" y="604" font-size="32" fill="#b91c1c">许可：禁止商用</text>
+  <text x="76" y="670" font-size="32" fill="#111827">精度：研究级领先</text>
+  <text x="76" y="736" font-size="32" fill="#4b5563">强项：学术对比</text>
+
+  <!-- 卡片 4：FunASR 生态 -->
+  <rect x="552" y="474" width="480" height="300" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="580" y="538" font-size="44" font-weight="bold" fill="#6d28d9">FunASR 生态</text>
+  <text x="580" y="604" font-size="32" fill="#111827">许可：可商用</text>
+  <text x="580" y="670" font-size="32" fill="#111827">语言：中文与方言</text>
+  <text x="580" y="736" font-size="32" fill="#4b5563">强项：一体化转写</text>
+</svg>
