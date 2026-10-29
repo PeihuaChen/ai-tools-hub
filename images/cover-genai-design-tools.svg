@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f97316"/>
+      <stop offset="0.33" stop-color="#e11d48"/>
+      <stop offset="0.66" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- label box -->
+  <rect x="44" y="42" width="250" height="30" rx="6" fill="#ffffff" fill-opacity="0.06" stroke="#8b5cf6" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="60" y="62" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#c4b5fd">AI 行业观察 · 生成式设计工具</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="58" r="26" fill="#ffffff" fill-opacity="0.05" stroke="#22d3ee" stroke-opacity="0.5" stroke-width="1.5"/>
+  <text x="838" y="66" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#22d3ee">26</text>
+
+  <!-- main title -->
+  <text x="46" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="700" fill="#ffffff">AI 也能当设计师了</text>
+  <text x="46" y="172" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600" fill="url(#sub)">Claude Design · Figma Make · Open Design 全景横评</text>
+
+  <!-- highlight lines -->
+  <text x="46" y="212" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#f97316">■ 闭源顺滑体验：对话式生成，品牌一致，但吃 token</text>
+  <text x="46" y="236" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#22d3ee">■ AI 全栈生成：v0 / Lovable / Bolt，想法直接变产品</text>
+  <text x="46" y="260" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#a78bfa">■ 开源开放掌控：本地优先，模型无关，数据不出机器</text>
+
+  <!-- concept diagram: three nodes -->
+  <g opacity="0.92">
+    <rect x="636" y="150" width="90" height="52" rx="8" fill="#f97316" fill-opacity="0.12" stroke="#f97316" stroke-opacity="0.7"/>
+    <text x="681" y="180" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" fill="#fdba74">Claude</text>
+    <text x="681" y="194" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" fill="#fdba74">Design</text>
+
+    <rect x="742" y="150" width="90" height="52" rx="8" fill="#22d3ee" fill-opacity="0.12" stroke="#22d3ee" stroke-opacity="0.7"/>
+    <text x="787" y="180" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" fill="#67e8f9">Figma</text>
+    <text x="787" y="194" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" fill="#67e8f9">Make</text>
+
+    <rect x="689" y="216" width="90" height="52" rx="8" fill="#a78bfa" fill-opacity="0.14" stroke="#a78bfa" stroke-opacity="0.7"/>
+    <text x="734" y="246" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" fill="#c4b5fd">Open</text>
+    <text x="734" y="260" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" fill="#c4b5fd">Design</text>
+
+    <line x1="681" y1="202" x2="734" y2="216" stroke="#8b5cf6" stroke-opacity="0.4" stroke-dasharray="4"/>
+    <line x1="787" y1="202" x2="734" y2="216" stroke="#8b5cf6" stroke-opacity="0.4" stroke-dasharray="4"/>
+  </g>
+
+  <!-- tags -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    <rect x="46" y="300" width="96" height="26" rx="13" fill="none" stroke="#f97316" stroke-opacity="0.55"/>
+    <text x="94" y="317" text-anchor="middle" fill="#fdba74">对话式设计</text>
+    <rect x="152" y="300" width="82" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.55"/>
+    <text x="193" y="317" text-anchor="middle" fill="#67e8f9">prompt-to-UI</text>
+    <rect x="244" y="300" width="70" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-opacity="0.55"/>
+    <text x="279" y="317" text-anchor="middle" fill="#c4b5fd">开源掌控</text>
+    <rect x="324" y="300" width="82" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.55"/>
+    <text x="365" y="317" text-anchor="middle" fill="#6ee7b7">本地优先</text>
+    <rect x="416" y="300" width="70" height="26" rx="13" fill="none" stroke="#e11d48" stroke-opacity="0.55"/>
+    <text x="451" y="317" text-anchor="middle" fill="#fda4af">BYOK</text>
+  </g>
+
+  <!-- divider + footer -->
+  <line x1="46" y1="348" x2="854" y2="348" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="46" y="368" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#8b8ba7">三方对决 · 闭源与开源两条路线 · 场景选型指南</text>
+  <text x="854" y="368" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#6b6b85">公众号：AI 行业观察</text>
+</svg>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多模态 RAG 选哪个向量模型？按场景、显存、协议给出的 2026 选型决策表</title>
+    <meta name="description" content="开源多模态向量模型怎么选？按数据类型、显存和开源协议，对比 Qwen3-VL-Embedding、WeMM、Jina v5-omni、Nemotron ColEmbed、pplx-embed 等 10 余款，附存储估算与验证方法。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">多模态 RAG 选哪个向量模型？按场景、显存、协议给出的 2026 选型决策表</h1>
+            <div class="post-meta">
+                <span class="cat">AI行业观察</span>
+                <span>2026-10-14 · 29 分钟</span>
+            </div>
+            <p>2026 年 1 月，Qwen3-VL-Embedding-8B 以 MMEB-V2 总分 77.8 拿下开源第一。8 月，腾讯微信的 WeMM-Embedding-9B 把这个数字推到 80.6，连 2B 小模型都做到了 77.9。</p>
+<p>但榜单上最亮眼的视觉文档检索模型，Nemotron ColEmbed v2 和 Jina 的两代产品，协议都是 CC BY-NC。企业不能直接拿去商用。</p>
+<p>所以"选哪个"早就不是挑分数最高的。这篇文章按三个问题收敛：<strong>数据是什么、显卡多大、协议能不能商用</strong>。</p>
+<p>文末有一张可以直接对照的选型决策表。文中分数几乎都是厂商或论文作者自报，用到时会标注口径。</p>
+<hr />
+<h2 id="_1">一、先选路线：单向量还是多向量</h2>
+<p>多模态向量模型分两条路线，选型要先选路线，再选模型。</p>
+<ul>
+<li><strong>单向量</strong>：一段文本、一张图、一页文档，各压成一个向量。存储小，任何向量库都能直接用。</li>
+<li><strong>多向量（晚交互）</strong>：每个 token 或图像 patch 保留一个向量，检索时用 MaxSim 逐词匹配。细节保留得好，但存储大一到两个数量级。</li>
+</ul>
+<p>原理细节见 <a href="../posts/pplx-embed-v2-late-multimodal-retrieval-no-ocr-2026.html">PDF 不用 OCR 也能搜：Perplexity pplx-embed-v2-late 原理、跑分与落地指南</a>，本文只讲选型相关的结论。</p>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>每页存储</th>
+<th>擅长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单向量</td>
+<td>约 2 到 4KB</td>
+<td>通用跨模态、视频</td>
+</tr>
+<tr>
+<td>多向量</td>
+<td>约 256KB 起</td>
+<td>表格、图表、小字页面</td>
+</tr>
+</tbody>
+</table>
+<p>上表的存储是示意估算：假设一页约 1000 个 token、fp16 存储，单向量取 1024 到 2048 维，多向量取 128 维。实际 token 数取决于页面分辨率和模型的切分方式。</p>
+<p>经验上的分界线很清晰：<strong>要在页面里"看细节"的，选多向量；其余场景优先单向量</strong>。</p>
+<p>Qwen 官方推荐的是单向量加重排的两阶段：Embedding 负责召回，Reranker 负责精排。把单向量粗召回和多向量精排组合也是常见的工程思路，效果需要在自己的数据上验证。</p>
+<hr />
+<h2 id="_2">二、通用单向量阵营</h2>
+<h3 id="qwen3-vl-embedding">Qwen3-VL-Embedding：默认起点</h3>
+<p>阿里 Qwen 团队 2026 年 1 月开源，基于 Qwen3-VL，协议 Apache 2.0。输入覆盖文本、图片、截图、视频和它们的混合。</p>
+<p>官方给出的规格如下：</p>
+<table>
+<thead>
+<tr>
+<th>型号</th>
+<th>向量维度</th>
+<th>MMEB-V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2B</td>
+<td>2048</td>
+<td>73.2</td>
+</tr>
+<tr>
+<td>8B</td>
+<td>4096</td>
+<td>77.8</td>
+</tr>
+</tbody>
+</table>
+<p>两个型号上下文都是 32K，支持 33 种语言，支持 MRL 降维、量化和指令感知。还配套 2B、8B 两档 Reranker，可以直接搭成召回加重排。</p>
+<p>8B 的分项成绩是：图像 80.1、视频 67.1、视觉文档 82.4。运行需要 vLLM 0.14.0 或更高版本。</p>
+<p>Milvus 做过一次自建基准，测 10 个模型的跨模态检索。Qwen3-VL-Embedding-2B 的 R@1 为 0.945，超过 Gemini Embedding 2 的 0.928。</p>
+<p>这个测试只用了 200 组 COCO 图文对，每组配 3 条难负例，属于小规模自测。它说明的是 2B 开源模型已经够用，不能当作权威排名。</p>
+<h3 id="wemm-embedding">WeMM-Embedding：分数最高，参数效率最好</h3>
+<p>腾讯微信视觉团队 2026 年 8 月发布，基于 Qwen3.5，有 2B、4B、9B 三档。输入覆盖文本、图片、视频、视觉文档和交错混合输入。</p>
+<table>
+<thead>
+<tr>
+<th>型号</th>
+<th>MMEB-V2 总分</th>
+<th>视频子项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2B</td>
+<td>77.9</td>
+<td>70.8</td>
+</tr>
+<tr>
+<td>4B</td>
+<td>79.2</td>
+<td>72.1</td>
+</tr>
+<tr>
+<td>9B</td>
+<td>80.6</td>
+<td>74.3</td>
+</tr>
+</tbody>
+</table>
+<p>2B 就追平了 Qwen3-VL-Embedding-8B 的 77.8。9B 的 80.6，在官方引用的榜单快照（2026 年 8 月 24 日）里排第一。</p>
+<p>几个要注意的点：</p>
+<ul>
+<li><strong>不支持音频</strong>。官方 README 写得很明确。</li>
+<li>支持 MRL。2B 降到 256 维，官方称在 MMEB-v2 上保留 98.7% 的图像与视频性能。</li>
+<li>官方建议用 transformers 5.2.0，更新版本的预处理行为可能不同。</li>
+<li>模型卡的协议字段是 other，注明 Apache 2.0，商用前请读一遍仓库里的 LICENSE 文件。</li>
+<li>分数是自报。榜单里也混着闭源提交，比如 DME-Medium 的 78.4，没有公开权重。</li>
+</ul>
+<p>在更大的 MMEB-V3（共 190 个任务，含文本、Agent、音频）上，WeMM-9B 得 59.3，Qwen3-VL-Embedding-8B 得 53.5。但音频项两者都记 0 分，因为都不支持，总分的比较要带着这个前提看。</p>
+<h3 id="jina-v5-omni">Jina v5-omni：最小的全模态，但分数不是最高</h3>
+<p>Jina 在 2026 年 5 月发布，有 small 和 nano 两档，是 v4 之后的新一代。v4 是 3.8B 的视觉文档检索模型，v5-omni 则走了完全不同的路。</p>
+<p>它的做法是"冻结加拼接"：把 Jina v5-text 的文本骨干冻住，再接上冻结的图像编码器（来自 Qwen3.5）和音频编码器（Whisper-large-v3），只训练中间的投影层，约占总权重的 0.35%。</p>
+<p>直接结果有三个：</p>
+<ul>
+<li>文本向量与 v5-text <strong>逐位一致</strong>，已有文本索引不用重建，直接用图片、音频、视频去查。</li>
+<li>模型很小：模型卡标 small 约 1.74B、1024 维，nano 约 1.04B、768 维（论文表格的口径略小，分别是 1.57B 和 0.95B）。</li>
+<li>输入覆盖文本、图片、视频、音频和 PDF，语言接近 100 种。</li>
+</ul>
+<p>但它的分数不是最高。下面是论文自己对照表里的数字：</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>v5-omni-small</th>
+<th>最强开源对照</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图像 MIEB Light</td>
+<td>55.0</td>
+<td>61.6（LCO-Omni-3B）</td>
+</tr>
+<tr>
+<td>视频 MMEB-Video</td>
+<td>39.8</td>
+<td>67.2（Qwen3-VL-8B）</td>
+</tr>
+<tr>
+<td>音频 MAEB</td>
+<td>50.0</td>
+<td>52.4（LCO-Omni-7B）</td>
+</tr>
+</tbody>
+</table>
+<p>读法很清楚：<strong>音频接近最强，图像居中，视频差距很大</strong>。它的卖点是小模型加文本兼容，不是榜单第一。</p>
+<p>协议是 CC BY-NC 4.0，两档都一样。商用需要向 Elastic 申请授权，Jina 已在 2025 年 10 月被 Elastic 收购。想省事可以用 Elastic Inference Service 的托管版本。</p>
+<h3 id="embeddinggemma-2apache-20">EmbeddingGemma 2：Apache 2.0 的轻量全模态</h3>
+<p>Google DeepMind 在 10 月 6 日开源，基于 Gemma 4，全模态版本共 740M 参数，输出 768 维单向量，Apache 2.0 协议。</p>
+<p>它是模块化的：文本和代码配置 270M，加视觉约 440M，加音频约 570M，全部加载为 740M。不同配置输出同一向量空间，小配置的查询可以去匹配大配置建的索引。</p>
+<p>更多细节见前面那篇 pplx-embed 文章的第六节。</p>
+<p>选型要注意：<strong>官方尚未公布它在 MMEB 或 ViDoRe 上的成绩，暂无同基准对比</strong>，只给了 MTEB 代码类提升。第三方小规模实测里，图片跨模态区分度尚可，音频区分度很弱。它适合轻量和端侧，不适合拿来当高精度文档检索的首选。</p>
+<h3 id="nemotron-embed-vl-1b">Nemotron-Embed-VL-1B：商用友好的文档页单向量</h3>
+<p>NVIDIA 在 2025 年 12 月发布的 llama-nemotron-embed-vl-1b-v2，约 1B 参数，是双塔单向量模型。输入可以是页面图片、文本或图文组合，支持表格、图表和信息图。</p>
+<p>协议是 NVIDIA Open Model License，并附带 Llama 3.2 社区许可，模型卡明确写着可商用。它也提供 NIM 微服务版本。</p>
+<p>它的定位是"文档页检索里最省事的商用方案"：模型小，向量是单个，不用多向量索引。具体精度请看模型卡里的 ViDoRe 成绩，并用自己的数据复测。</p>
+<hr />
+<h2 id="_3">三、视觉文档多向量阵营</h2>
+<p>这一路的代表思想来自 ColPali：把 PDF 页面渲染成图片，让视觉语言模型直接输出多向量，免去 OCR、版面分析和表格还原。</p>
+<p>评测上，ViDoRe V3 是目前最新的基准：10 个数据集、约 2.6 万页、3099 条人工校验查询，覆盖 6 种语言。</p>
+<h3 id="nemotron-colembed-v2">Nemotron ColEmbed v2：榜单第一，但只能研究用</h3>
+<p>NVIDIA 的 Nemotron ColEmbed v2 有 3B、4B、8B 三档，基于 Qwen3-VL。8B 在 ViDoRe V3 的 8 个公开任务上得分约 63.5，发布时排第一。4B 得 61.42。</p>
+<p>麻烦在协议：<strong>CC-BY-NC-4.0，模型卡明说仅限非商用或研究</strong>。基座 Qwen3-VL 是 Apache 2.0，NVIDIA 发布的衍生模型却收紧了。</p>
+<p>这给了一个重要提醒：基座协议宽松，不等于衍生模型协议宽松。</p>
+<h3 id="ops-colqwen3-4bapache-20">Ops-ColQwen3-4B：Apache 2.0 的多向量选项</h3>
+<p>阿里云 OpenSearch-AI 团队开源，基于 Qwen3-VL-4B，Apache 2.0，支持 30 多种语言，上下文 32K，每页最多 1280 个视觉 token。</p>
+<p>它的向量维度可调，最高 2560 维。官方在 ViDoRe v1+v2 上的 NDCG@5 是：2560 维 84.87，降到 128 维仍有 84.04。</p>
+<p><strong>维度砍掉 20 倍，只损失不到 1 分</strong>，这对存储很有价值。模型卡目前只列出 v1 和 v2 的数字，V3 成绩请以官方最新页面为准。</p>
+<h3 id="pplx-embed-v2-late128">pplx-embed-v2-late：128 维窄向量</h3>
+<p>Perplexity 在 10 月 7 日开源，0.6B 与 9B 两档共享向量空间，MIT 协议。每个 token 只有 128 维，比不少多向量模型窄 16 到 32 倍。</p>
+<p>官方自报 9B 在 MADQA 上 92.4%，ViDoRe v3 图像检索 9B 为 65.2%、0.6B 为 62.3%。技术报告还没发布，分数都是自报。</p>
+<h3 id="_4">对照时别踩的坑</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>ViDoRe 数据</th>
+<th>协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nemotron ColEmbed 8B</td>
+<td>V3 约 63.5</td>
+<td>CC-BY-NC</td>
+</tr>
+<tr>
+<td>pplx-embed 9B</td>
+<td>V3 图像 65.2%</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Ops-ColQwen3-4B</td>
+<td>V1+V2 84.87</td>
+<td>Apache 2.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这张表的数字不能直接比大小</strong>。Nemotron 是模型卡给出的 8 个公开任务均分，pplx 是厂商自报，Ops 的模型卡目前只列出 V1 和 V2。三家的评测口径不同，要比就得在同一套脚本上自己跑。</p>
+<h3 id="colqwen25-jina-v4">上一代：ColQwen2.5 与 Jina v4</h3>
+<p>ColQwen2.5-v0.2 是 ColPali 家族的主力，基于 Qwen2.5-VL-3B，训练数据 12.7 万条英文问页对。</p>
+<p>模型卡标的是 MIT，但它的基座 Qwen2.5-VL-3B 用的是 qwen-research 协议。商用前必须让法务确认这条链路。</p>
+<p>Jina v4 基于同一个基座，约 3.8B，支持单向量 2048 维和多向量 128 维，模型卡写的协议是 CC BY-NC 4.0。它能力不弱，但新项目已经没有理由优先选它。</p>
+<hr />
+<h2 id="_5">四、音频与视频：谁能真的覆盖</h2>
+<p>先说结论：<strong>视频看 WeMM 和 Qwen3-VL，音频看 LCO 和 Jina，商用要全覆盖只有 EmbeddingGemma 2</strong>。</p>
+<ul>
+<li><strong>视频</strong>：MMEB-Video 上 Qwen3-VL-Embedding-8B 为 67.1，WeMM-9B 为 74.3。Jina v5-omni-small 为 39.8，差距明显。</li>
+<li><strong>音频</strong>：LCO-Embedding-Omni（3B 与 7B，基于 Qwen2.5-Omni）在 Jina 论文的对照里领先，v5-omni 接近。WeMM 和 Qwen3-VL-Embedding 都不支持音频。</li>
+<li><strong>全覆盖且可商用</strong>：开源里目前只有 EmbeddingGemma 2 同时给出 Apache 2.0 和音频支持，但音频精度存疑。</li>
+</ul>
+<p>LCO-Embedding 系列的开源协议需要自行核对，使用前请查看模型卡。</p>
+<p>另外，如果你的音频主要是语音，先 ASR 转写再走文本向量，往往比直接做音频向量更稳，也更容易评测。ASR 选型可以看 <a href="../posts/commercial-asr-comparison-chinese-english-dialect-2026.html">2026 商用 ASR 语音识别全景选型：国内外 13 款产品横评，中文/英文/方言/小语种全覆盖</a>。</p>
+<p>多模态向量也还没有"通吃"的模型。一个视频嵌入基准评了 33 个模型，结论是没有任何单一模型在所有任务上领先。</p>
+<hr />
+<h2 id="_6">五、显存与存储账</h2>
+<h3 id="_7">显存：按权重估算</h3>
+<p>下面按 bf16 每参数 2 字节估算，只算权重，不含激活和推理缓存。</p>
+<ul>
+<li><strong>约 1 到 2GB</strong>：pplx-embed 0.6B、Jina v5-omni-nano、Nemotron-Embed-VL-1B。</li>
+<li><strong>约 3.5 到 4GB</strong>：Jina v5-omni-small、Qwen3-VL-Embedding-2B、WeMM-2B。</li>
+<li><strong>约 8GB</strong>：Ops-ColQwen3-4B、WeMM-4B、Nemotron ColEmbed 4B。</li>
+<li><strong>约 16 到 18GB</strong>：Qwen3-VL-Embedding-8B、WeMM-9B、Nemotron ColEmbed 8B、pplx-embed 9B。</li>
+</ul>
+<p>图片和视频输入会明显抬高实际占用。每页最多 1280 个视觉 token，视频最多采 64 帧，批大小也会放大显存。</p>
+<p>经验上的建议是：<strong>8GB 显卡跑到 2B 档比较稳；8B 到 9B 档建议 24GB 显卡，或者量化后再用</strong>。这是按权重做的估算，不是实测，请以自己的负载为准。</p>
+<h3 id="_8">存储：多向量最贵</h3>
+<p>按 100 万页、每页约 1000 个 token、fp16 存储估算：</p>
+<table>
+<thead>
+<tr>
+<th>向量形式</th>
+<th>每页</th>
+<th>100 万页</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单向量 1024 维</td>
+<td>2KB</td>
+<td>约 2GB</td>
+</tr>
+<tr>
+<td>单向量 2048 维</td>
+<td>4KB</td>
+<td>约 4GB</td>
+</tr>
+<tr>
+<td>多向量 128 维</td>
+<td>256KB</td>
+<td>约 256GB</td>
+</tr>
+<tr>
+<td>多向量 2560 维</td>
+<td>约 5MB</td>
+<td>约 5TB</td>
+</tr>
+</tbody>
+</table>
+<p>多向量的维度选择影响巨大。Ops-ColQwen3 的数据说明，128 维只损失不到 1 分，却能把存储降到 1/20。能降维的，上线前一定先测。</p>
+<p>单向量也可以降维。WeMM-2B 降到 256 维官方称保留 98.7%；但 EmbeddingGemma 2 在 128 维时，多模态约只保留 75%。<strong>降维损失因模型而异，不能互相套用</strong>。</p>
+<hr />
+<h2 id="_9">六、协议红绿灯</h2>
+<p>同一张榜单上，模型的商用条件差别很大。下图把本文涉及的模型按协议分成三档。</p>
+<p><img alt="协议红绿灯：Qwen3-VL、WeMM、Ops-ColQwen3、EmbeddingGemma 2、pplx-embed 可商用；Nemotron-Embed-VL 与 ColQwen2.5 需核对；Nemotron ColEmbed 与 Jina 系列仅限非商用" src="../images/mmemb-license-map.png" /></p>
+<p>图里的结论如下：</p>
+<ul>
+<li><strong>可商用</strong>：Qwen3-VL-Embedding、WeMM、Ops-ColQwen3、EmbeddingGemma 2 为 Apache 2.0，pplx-embed 为 MIT。</li>
+<li><strong>商用前需核对</strong>：Nemotron-Embed-VL-1B 的 NVIDIA 协议，ColQwen2.5 的基座链路。</li>
+<li><strong>仅限非商用</strong>：Nemotron ColEmbed v2、Jina v5-omni、Jina v4。</li>
+</ul>
+<p>三条经验：</p>
+<ul>
+<li><strong>读 LICENSE 文件，别只看模型卡标签</strong>。WeMM 的模型卡字段写的是 other。</li>
+<li><strong>衍生模型会改协议</strong>。Nemotron ColEmbed 的基座是 Apache 2.0，成品却是 CC-BY-NC。</li>
+<li><strong>基座有限制，衍生模型会继承</strong>。Jina v4 与 ColQwen2.5 都建立在 Qwen2.5-VL-3B 之上，而它是 qwen-research 协议。</li>
+</ul>
+<hr />
+<h2 id="_10">七、选型决策表</h2>
+<p>下图把选型拆成三条路线：文档页走多向量，通用跨模态走单向量，含音频走全模态。</p>
+<p><img alt="选型路径图：PDF 扫描件走多向量，推荐 Ops-ColQwen3 与 pplx-embed；图片截图视频走单向量，推荐 Qwen3-VL 与 WeMM；含音频走全模态，推荐 Jina v5-omni 与 EmbeddingGemma 2" src="../images/mmemb-decision-flow.png" /></p>
+<p>文字版决策表如下。首选以"协议清楚、生态成熟"为准，备选里有分数更高或需要自测的选项。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>首选</th>
+<th>备选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用 RAG，24GB 卡</td>
+<td>Qwen3-VL-8B</td>
+<td>WeMM-9B（分更高）</td>
+</tr>
+<tr>
+<td>通用 RAG，8GB 卡</td>
+<td>Qwen3-VL-2B</td>
+<td>WeMM-2B（分更高）</td>
+</tr>
+<tr>
+<td>扫描 PDF，高精度</td>
+<td>Ops-ColQwen3-4B</td>
+<td>pplx-embed-9B</td>
+</tr>
+<tr>
+<td>文档库大，存储紧</td>
+<td>Nemotron-Embed-VL-1B</td>
+<td>Qwen3-VL-2B 加重排</td>
+</tr>
+<tr>
+<td>视频检索</td>
+<td>WeMM-9B</td>
+<td>Qwen3-VL-8B</td>
+</tr>
+<tr>
+<td>含音频，可商用</td>
+<td>EmbeddingGemma 2</td>
+<td>先转写再向量</td>
+</tr>
+<tr>
+<td>含音频，仅内部用</td>
+<td>Jina v5-omni</td>
+<td>LCO-Omni</td>
+</tr>
+<tr>
+<td>端侧、笔记本</td>
+<td>EmbeddingGemma 2</td>
+<td>pplx-embed-0.6B</td>
+</tr>
+<tr>
+<td>研究与内部评测</td>
+<td>Nemotron ColEmbed 8B</td>
+<td>Jina v5-omni</td>
+</tr>
+</tbody>
+</table>
+<p>几点补充说明：</p>
+<ul>
+<li><strong>为什么 Qwen3-VL 是通用首选</strong>：Apache 2.0 协议清楚，官方配套 Reranker，vLLM 支持成熟。</li>
+<li><strong>为什么 WeMM 放备选</strong>：分数更高，但 8 月底才发布，要固定 transformers 5.2.0，也没有配套重排模型。追求精度时值得换，换之前先自测。</li>
+<li><strong>想保留现有文本索引</strong>：Jina v5-omni 的文本向量与 v5-text 完全一致，是唯一明确做到这点的开源方案，但协议是非商用。</li>
+<li><strong>文档库的预处理</strong>：如果下游模型需要读文字，仍然要 OCR 或文档解析。相关选型见 <a href="../posts/ocr-selection-guide-open-source-vs-commercial-2026.html">2026 OCR 选型手册：12 个开源模型 + 10 家商业 API 的成本、精度与落地边界</a>。</li>
+</ul>
+<hr />
+<h2 id="_11">八、上线前怎么验证</h2>
+<h3 id="_12">用自己的数据评一遍</h3>
+<p>榜单是参考，不是结论。MMEB 偏通用，ViDoRe 偏英文文档，MIEB 和 MAEB 又是另一套口径，同一个模型换个榜单排名就变了。</p>
+<p>建议做法：</p>
+<ul>
+<li>准备 200 到 500 条真实查询，每条标好正确页面或图片。</li>
+<li>同时放入相近的难负例，比如同一份报告的相邻季度。</li>
+<li>分别评中文和英文查询，跨语言也测一组。</li>
+<li>指标看 Recall@5、Recall@10 和 MRR。</li>
+</ul>
+<p>指标计算很简单：</p>
+<pre><code class="language-python">def recall_at_k(ranked, gold, k=5):
+    # ranked: 每条查询的排序结果；gold: 正确答案
+    hit = sum(g in r[:k] for r, g in zip(ranked, gold))
+    return hit / len(gold)
+</code></pre>
+<p>模型调用以 Qwen3-VL-Embedding 为例。需要先克隆官方仓库并运行环境脚本：</p>
+<pre><code class="language-python">from src.models.qwen3_vl_embedding import Qwen3VLEmbedder
+
+model = Qwen3VLEmbedder(
+    model_name_or_path=&quot;./models/Qwen3-VL-Embedding-2B&quot;,
+)
+inputs = [
+    {&quot;text&quot;: &quot;华东区第三季度毛利率&quot;},
+    {&quot;image&quot;: &quot;pages/p12.png&quot;},
+]
+emb = model.process(inputs)
+print(emb @ emb.T)  # 文本与页面图的相似度矩阵
+</code></pre>
+<h3 id="_13">五个容易踩的坑</h3>
+<ul>
+<li><strong>榜单口径不同</strong>：同一家厂商的数字也不能跨榜单比。</li>
+<li><strong>分数多为自报</strong>：WeMM、pplx-embed 的成绩没有独立复现。</li>
+<li><strong>降维要实测</strong>：MRL 截断的损失因模型而异。</li>
+<li><strong>换模型要重建索引</strong>：不同模型的向量空间不兼容。例外是共享空间的家族，比如 pplx-embed 的 0.6B 与 9B，以及 Jina v5-omni 的文本部分。</li>
+<li><strong>运行环境要对版本</strong>：Qwen3-VL-Embedding 要 vLLM 0.14.0 以上，pplx-embed 要 sentence-transformers 6.0.0 以上，Jina v5-omni 在 vLLM 0.20.1 上验证过。</li>
+</ul>
+<h3 id="_14">上线架构建议</h3>
+<p>多模态向量不必孤军作战。常见的稳妥做法是：多模态向量召回，加 BM25 做关键词补充，再用重排模型精排。</p>
+<p>关键词混合检索见 <a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 没有过时，反而在大规模 RAG 里赢了：原理、混合检索与最新规模研究</a>。向量库的选型见 <a href="../posts/open-source-vector-database-comparison-2026.html">2026 开源向量库全景对比：Milvus、Qdrant、Weaviate、pgvector 到底怎么选</a>。如果走多向量，务必先确认向量库原生支持多向量字段。</p>
+<p>要私有化部署 Embedding 和 Rerank，可以参考 <a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference部署与应用实战2026：一个平台搞定LLM+Embedding+Rerank的私有化推理</a>。</p>
+<hr />
+<h2 id="_15">小结</h2>
+<p>多模态向量模型这半年进步很快，开源已经追平甚至超过闭源 API。但选型的关键已经从"谁分数高"变成了"谁适合你的约束"。</p>
+<ul>
+<li><strong>先选路线</strong>：看页面细节选多向量，其余优先单向量。</li>
+<li><strong>通用场景</strong>：Qwen3-VL-Embedding 是稳妥起点，WeMM 是追求精度的备选。</li>
+<li><strong>视觉文档</strong>：Ops-ColQwen3 和 pplx-embed 可商用，Nemotron ColEmbed 只能研究。</li>
+<li><strong>含音频</strong>：Jina v5-omni 最小但非商用，EmbeddingGemma 2 可商用但精度存疑。</li>
+<li><strong>协议先查</strong>：榜单第一的模型，有一半不能直接商用。</li>
+</ul>
+<p>无论选哪个，都用自己的数据测一遍，再决定要不要上线。</p>
+<hr />
+<h2 id="_16">免责声明</h2>
+<p>本文基于公开的模型卡、论文与媒体报道整理，文中跑分多为厂商或作者自报，存储与显存数字为示意性估算，不构成技术选型、法律或商用授权建议。模型协议请以官方仓库最新的 LICENSE 文件为准，商用前请咨询法务。</p>
+<hr />
+<h2 id="_17">参考来源</h2>
+<ul>
+<li><a href="https://github.com/QwenLM/Qwen3-VL-Embedding">GitHub —— QwenLM/Qwen3-VL-Embedding</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B">Hugging Face —— Qwen/Qwen3-VL-Embedding-8B 模型卡</a></li>
+<li><a href="https://arxiv.org/abs/2601.04720">arXiv —— Qwen3-VL-Embedding and Qwen3-VL-Reranker 技术报告</a></li>
+<li><a href="https://arxiv.org/abs/2608.24053">arXiv —— WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report</a></li>
+<li><a href="https://github.com/Tencent/WeMM-Embedding">GitHub —— Tencent/WeMM-Embedding</a></li>
+<li><a href="https://huggingface.co/tencent/WeMM-Embedding-2B">Hugging Face —— tencent/WeMM-Embedding-2B 模型卡</a></li>
+<li><a href="https://www.elastic.co/search-labs/blog/jina-embeddings-v5-omni-all-media-one-index">Elasticsearch Labs —— One index, all media: Introducing jina-embeddings-v5-omni</a></li>
+<li><a href="https://arxiv.org/abs/2605.08384">arXiv —— jina-embeddings-v5-omni: Geometry-preserving Embeddings via Locked Aligned Towers</a></li>
+<li><a href="https://huggingface.co/jinaai/jina-embeddings-v5-omni-small">Hugging Face —— jinaai/jina-embeddings-v5-omni-small 模型卡</a></li>
+<li><a href="https://huggingface.co/jinaai/jina-embeddings-v5-omni-nano">Hugging Face —— jinaai/jina-embeddings-v5-omni-nano 模型卡</a></li>
+<li><a href="https://huggingface.co/jinaai/jina-embeddings-v4">Hugging Face —— jinaai/jina-embeddings-v4 模型卡</a></li>
+<li><a href="https://huggingface.co/jinaai/jina-embeddings-v4/blob/main/LICENSE">Hugging Face —— jina-embeddings-v4 LICENSE</a></li>
+<li><a href="https://jina.ai/models/llms.txt">Jina AI —— Search Foundation Models 模型清单与协议说明</a></li>
+<li><a href="https://huggingface.co/nvidia/nemotron-colembed-vl-8b-v2">Hugging Face —— nvidia/nemotron-colembed-vl-8b-v2 模型卡</a></li>
+<li><a href="https://huggingface.co/nvidia/nemotron-colembed-vl-4b-v2">Hugging Face —— nvidia/nemotron-colembed-vl-4b-v2 模型卡</a></li>
+<li><a href="https://arxiv.org/abs/2602.03992">arXiv —— Nemotron ColEmbed V2: Top-Performing Late Interaction Embedding Models</a></li>
+<li><a href="https://huggingface.co/nvidia/llama-nemotron-embed-vl-1b-v2">Hugging Face —— nvidia/llama-nemotron-embed-vl-1b-v2 模型卡</a></li>
+<li><a href="https://huggingface.co/OpenSearch-AI/Ops-Colqwen3-4B">Hugging Face —— OpenSearch-AI/Ops-Colqwen3-4B 模型卡</a></li>
+<li><a href="https://huggingface.co/vidore/colqwen2.5-v0.2">Hugging Face —— vidore/colqwen2.5-v0.2 模型卡</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct">Hugging Face —— Qwen/Qwen2.5-VL-3B-Instruct 模型卡</a></li>
+<li><a href="https://arxiv.org/abs/2407.01449">arXiv —— ColPali: Efficient Document Retrieval with Vision Language Models</a></li>
+<li><a href="https://arxiv.org/abs/2601.08620">arXiv —— ViDoRe V3: A Comprehensive Evaluation of Retrieval Augmented Generation</a></li>
+<li><a href="https://arxiv.org/abs/2604.23321">arXiv —— MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models</a></li>
+<li><a href="https://arxiv.org/abs/2606.14958">arXiv —— Massive Video Embedding Benchmark</a></li>
+<li><a href="https://github.com/LCO-Embedding/LCO-Embedding">GitHub —— LCO-Embedding/LCO-Embedding</a></li>
+<li><a href="https://milvus.io/blog/choose-embedding-model-rag-2026.md">Milvus 博客 —— How to Choose the Best Embedding Model for RAG in 2026</a></li>
+<li><a href="https://www.perplexity.ai/hub/blog/multimodal-embeddings-beyond-a-single-vector">Perplexity 官方博客 —— Multimodal embeddings beyond a single vector</a></li>
+<li><a href="https://huggingface.co/perplexity-ai/pplx-embed-v2-late-0.6b">Hugging Face —— perplexity-ai/pplx-embed-v2-late-0.6b 模型卡</a></li>
+<li><a href="https://www.marktechpost.com/2026/10/07/perplexity-ai-releases-pplx-embed-v2-late-a-0-6b-edge-model-and-a-9b-model-scoring-92-4-on-madqa/">MarkTechPost —— Perplexity AI Releases pplx-embed-v2-late</a></li>
+<li><a href="https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/">Google DeepMind —— EmbeddingGemma 2 官方介绍</a></li>
+<li><a href="https://www.marktechpost.com/2026/10/06/google-deepmind-releases-embeddinggemma-2-a-740m-open-multimodal-embedding-model-built-on-gemma-4/">MarkTechPost —— Google DeepMind Releases EmbeddingGemma 2</a></li>
+<li><a href="https://www.analyticsvidhya.com/blog/2026/10/embeddinggemma-2-multimodal-embeddings-guide/">Analytics Vidhya —— EmbeddingGemma 2: Text, Code, Images, Video and Audio in One Vector Space</a></li>
+</ul>
+<hr />
+<h2 id="_18">延伸阅读</h2>
+<ul>
+<li><a href="../posts/pplx-embed-v2-late-multimodal-retrieval-no-ocr-2026.html">PDF 不用 OCR 也能搜：Perplexity pplx-embed-v2-late 原理、跑分与落地指南</a></li>
+<li><a href="../posts/mineru-document-parsing-agent-rag-vlm-2026.html">MinerU 深度解析：一个 1.2B 小模型，如何成为 Agent 与 RAG 的“文档之眼”</a></li>
+<li><a href="../posts/ocr-selection-guide-open-source-vs-commercial-2026.html">2026 OCR 选型手册：12 个开源模型 + 10 家商业 API 的成本、精度与落地边界</a></li>
+<li><a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 没有过时，反而在大规模 RAG 里赢了：原理、混合检索与最新规模研究</a></li>
+<li><a href="../posts/llm-inference-framework-comparison-2026.html">大模型推理框架选型2026：vLLM、SGLang、TensorRT-LLM、Ollama、Xinference五大框架怎么选</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 海尔净水选购会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/HOpsSTO" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝百亿补贴专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E7%BC%96%E7%A8%8B&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        </article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

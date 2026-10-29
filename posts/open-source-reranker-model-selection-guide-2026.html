@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开源 Rerank 模型选型：Qwen3、Jina、BGE、mxbai 谁该进你的 RAG</title>
+    <meta name="description" content="开源 Rerank 模型怎么选？按精度口径、延迟成本和开源协议，对比 Qwen3-Reranker、Jina v3.5、mxbai、BGE、gte、Nemotron 等，附三家实测交叉印证、协议红绿灯与上线验证方法。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">开源 Rerank 模型选型：Qwen3、Jina、BGE、mxbai 谁该进你的 RAG</h1>
+            <div class="post-meta">
+                <span class="cat">AI行业观察</span>
+                <span>2026-10-19 · 27 分钟</span>
+            </div>
+            <p>在 AIMultiple 的一次测试里，检索器和 300 条查询都不变，只在后面加一个重排模型，Top-1 命中率就从 62.67% 升到 83.00%，多了 20.33 个百分点。</p>
+<p>但同一份测试里，一个 70M 的小重排模型只把命中率抬到 64.67%，差距落在噪声范围内。</p>
+<p>这就是重排模型的现状：选对了，是 RAG 里性价比最高的升级；选错了，只是多了一层延迟。更麻烦的是，榜单靠前的一批模型，协议是非商用。</p>
+<p>本文把 2026 年常见的开源 Rerank 模型放到同一张桌子上，按三件事收敛：<strong>精度口径、延迟成本、协议能不能商用</strong>。</p>
+<p>文末有一张可以直接对照的选型决策表。文中跑分大多是厂商或第三方自测，口径各不相同，会逐项标注。</p>
+<hr />
+<h2 id="rag">一、重排在 RAG 里做什么</h2>
+<p>向量检索负责"广撒网"：Embedding 模型把查询和文档各自编码成向量，比的是向量距离。速度快，但模型从没把两段文字放在一起读过。</p>
+<p>重排负责"精挑选"：把查询和候选文档拼成一对，让模型联合阅读，直接给出相关度。常见做法是先召回 50 到 100 条，再重排出 3 到 5 条交给大模型。</p>
+<p>两点要先讲清楚。</p>
+<ul>
+<li><strong>重排救不了漏掉的文档</strong>。AIMultiple 测试里，召回 250 条相比 100 条几乎没有增益，最好的几个重排模型最后都停在 87% 到 88% 的 Hit@10，天花板由检索器决定。</li>
+<li><strong>重排不一定有益</strong>。是否值得上，要在自己的数据上对比有无重排的成绩。</li>
+</ul>
+<h3 id="_1">三种常见架构</h3>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>代表</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交叉编码器</td>
+<td>BGE、gte、Nemotron</td>
+<td>单次前向，速度稳</td>
+</tr>
+<tr>
+<td>生成式打分</td>
+<td>Qwen3-Reranker</td>
+<td>yes/no 打分，较慢</td>
+</tr>
+<tr>
+<td>列表式</td>
+<td>Jina v3 系列</td>
+<td>一次处理整批候选</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>交叉编码器</strong>：输入一对文本，输出一个分数。结构最简单，部署最成熟。</li>
+<li><strong>生成式打分</strong>：把重排当成问答，读完后比较 yes 与 no 的概率。能力强，但每个候选都要过一遍大模型。</li>
+<li><strong>列表式</strong>：把查询和所有候选放进同一个上下文，一次前向就给出整批排序，候选之间还能互相参照。</li>
+</ul>
+<p>架构直接决定延迟，这一点后面还会用数据说明。</p>
+<hr />
+<h2 id="_2">二、候选模型逐个看</h2>
+<h3 id="qwen3-reranker">Qwen3-Reranker：开源重排的新默认</h3>
+<p>阿里 Qwen 团队 2025 年 6 月开源，0.6B、4B、8B 三档，协议 Apache 2.0。</p>
+<ul>
+<li>支持 100 多种语言和编程语言，上下文 32K。</li>
+<li>支持自定义指令。官方称加指令通常能提升 1% 到 5%，建议指令用英文写。</li>
+<li>默认输出是原始 logit 差值。要做阈值过滤，需要套一层 Sigmoid 转成 0 到 1 的概率。</li>
+<li>可用 Sentence Transformers 的 CrossEncoder 直接加载，Transformers 需 4.51.0 以上。</li>
+</ul>
+<p>它的短板是速度。生成式打分要走完整的大模型前向，后面的延迟账里 8B 档是最慢的一个。</p>
+<h3 id="jina-reranker-v3-v35">Jina Reranker v3 / v3.5：小而快，但不能商用</h3>
+<p>v3 在 2025 年 10 月发布，v3.5 在 2026 年 8 月 5 日发布，都是 0.6B，基于 Qwen3-0.6B，上下文 131K。</p>
+<ul>
+<li><strong>列表式打分</strong>：官方称为"last but not late"。查询和候选在同一个上下文里做因果注意力，再从每篇文档末尾取向量，用余弦相似度排序。</li>
+<li><strong>候选有上限</strong>：v3 单次最多处理 64 篇，更多要分批。v3.5 的博客也坦承，列表式模型在候选数和总长度上存在上限。</li>
+<li><strong>v3.5 的提速</strong>：大部分全局注意力层换成窗口 1024 的滑动窗口，官方称长文档重排最多快 1.56 倍。</li>
+<li><strong>协议是 CC BY-NC 4.0</strong>，v3 与 v3.5 的模型页都是如此。商用要走 Jina API，或者通过 Elastic Inference Service 使用。</li>
+<li><strong>加载需要 trust_remote_code</strong>。生产环境建议固定版本并审查代码。</li>
+</ul>
+<p>v3 的模型页已经提示，新项目优先用 v3.5。</p>
+<h3 id="mxbai-rerank-v2apache-20-15b">mxbai-rerank-v2：Apache 2.0 的 1.5B 选项</h3>
+<p>Mixedbread 在 2025 年 3 月发布，base（0.5B）与 large（1.5B）两档，协议 Apache 2.0。</p>
+<ul>
+<li>基座是 Qwen-2.5，用强化学习训练，官方称支持 100 多种语言。</li>
+<li>上下文 8K，兼容 32K，对 JSON、代码、工具检索也做了适配。</li>
+<li>官方 BEIR 成绩（BM25 做第一阶段）：large 57.49，base 55.57，高于 Cohere rerank-3.5 的 55.39 和 BGE-reranker-v2-m3 的 53.94。</li>
+</ul>
+<p>需要留意的是，在 Jina 的多语言测试里，mxbai-base 的 MIRACL 成绩是 64.90，低于同量级的 Qwen3-0.6B（67.12）和 Jina v3.5（74.11）。从数据看，它更适合英文和代码场景。</p>
+<h3 id="bge-reranker-v2">BGE-reranker-v2 系列：最广泛使用的基线</h3>
+<p>智源（BAAI）出品，协议 Apache 2.0，Hugging Face 页面显示近 30 天下载量约 1570 万，是装机量最大的开源重排模型。</p>
+<ul>
+<li><strong>bge-reranker-v2-m3</strong>：基于 bge-m3，约 568M，多语言、轻量、易部署。</li>
+<li><strong>bge-reranker-v2-gemma</strong>：约 2.5B，多语言场景下精度更高。</li>
+<li><strong>bge-reranker-v2-minicpm-layerwise</strong>：可选择输出层数（8 到 40 层），在速度和精度间调节，官方建议中英文场景使用。</li>
+</ul>
+<p>它的问题是"老"。在 Agentset 的 LLM 评审榜单里，v2-m3 排在列表末尾，和 Jina v2 并列。UsefulAI 的评测也提到，它为短段落调优，长文本默认会被截断，需要手动调高长度限制。</p>
+<h3 id="gte-149m">gte 系列：149M 的小模型也能打</h3>
+<p>阿里通义实验室的两个 Apache 2.0 模型：</p>
+<ul>
+<li><strong>gte-reranker-modernbert-base</strong>：149M，英文为主，上下文 8192，自报 BEIR 56.19。</li>
+<li><strong>gte-multilingual-reranker-base</strong>：约 0.3B，多语言。在 Qwen 官方对照表里，它的 CMTEB-R 是 74.08，高于 BGE-v2-m3 的 72.16。</li>
+</ul>
+<p>AIMultiple 的实测里，149M 的 gte-reranker-modernbert 与 1.2B 的 Nemotron 同为 83.00% 的 Hit@1。</p>
+<h3 id="llama-nemotron-rerank-1b-v2-nvidia">Llama Nemotron Rerank 1B v2：跨语言与 NVIDIA 生态</h3>
+<p>NVIDIA 开源，基于 Llama-3.2-1B，改成双向注意力，上下文 8192，在 26 种语言上评估过，强项是查询与文档语言不同的跨语言检索。</p>
+<p>协议是 OpenMDW-1.1，并附带 Llama 3.2 社区协议，模型卡写明可商用。官方支持路径依赖较新的 NVIDIA GPU。UsefulAI 的对比里，它的 8K 上下文是最短的。</p>
+<h3 id="_3">其他值得知道的</h3>
+<ul>
+<li><strong>Qwen3-VL-Reranker</strong>（2B、8B，Apache 2.0）：Qwen3-Embedding 的多模态版，输入可以是文本、图片、截图和视频。图文混合的 RAG 可以考虑，选型思路见 <a href="../posts/multimodal-embedding-model-selection-guide-2026.html">多模态 RAG 选哪个向量模型？按场景、显存、协议给出的 2026 选型决策表</a>。</li>
+<li><strong>Zerank 2</strong>（ZeroEntropy）：Agentset 榜单第一，但协议是 CC BY-NC 4.0，商用要走付费授权。同门的 Zerank 1 Small 是 Apache 2.0，偏英文。</li>
+<li><strong>Contextual AI Rerank v2</strong>：强调用指令按时效、权威度调整排序，协议同为非商用。</li>
+</ul>
+<hr />
+<h2 id="_4">三、同一批模型，三套数据三种结论</h2>
+<p>不同评测的第一阶段召回器、数据集和指标都不一样，分数不能直接横向比。先看一个典型例子：同一个 mxbai-rerank-base-v2，在三份资料里的 BEIR 成绩不同。</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>第一阶段召回</th>
+<th>BEIR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mxbai 官方</td>
+<td>BM25</td>
+<td>55.57</td>
+</tr>
+<tr>
+<td>Jina v3 发布文</td>
+<td>jina-embeddings-v3</td>
+<td>58.40</td>
+</tr>
+<tr>
+<td>Jina v3.5 发布文</td>
+<td>jina-embeddings-v5</td>
+<td>59.58</td>
+</tr>
+</tbody>
+</table>
+<p>模型没变，口径一变，差了 4 个点。下面四份数据，各自回答的是不同的问题。</p>
+<h3 id="1-qwen-qwen3">1. Qwen 官方：中英文都是 Qwen3 领先</h3>
+<p>下表来自 Qwen3-Reranker 模型卡，Qwen3-Embedding-0.6B 一行是向量检索基线。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>MTEB-R</th>
+<th>CMTEB-R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Embedding-0.6B（基线）</td>
+<td>61.82</td>
+<td>71.02</td>
+</tr>
+<tr>
+<td>BGE-reranker-v2-m3</td>
+<td>57.03</td>
+<td>72.16</td>
+</tr>
+<tr>
+<td>gte 多语言版</td>
+<td>59.51</td>
+<td>74.08</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-0.6B</td>
+<td>65.80</td>
+<td>71.31</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-4B</td>
+<td>69.76</td>
+<td>75.94</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-8B</td>
+<td>69.02</td>
+<td>77.45</td>
+</tr>
+</tbody>
+</table>
+<p>多语言 MMTEB-R 上的排序类似：Qwen3 的 0.6B、4B、8B 分别为 66.36、72.74、72.94，BGE-v2-m3 为 58.36，gte 多语言版为 59.44。</p>
+<p>三个读法：</p>
+<ul>
+<li><strong>英文差距大</strong>：Qwen3-0.6B 的 MTEB-R 比 BGE-v2-m3 高约 9 分。</li>
+<li><strong>中文差距小</strong>：CMTEB-R 上，BGE-v2-m3 和 gte 多语言版甚至高于 Qwen3-0.6B。</li>
+<li><strong>小模型增益有限</strong>：Qwen3-0.6B 的 CMTEB-R 只比基线高 0.3，4B 才拉开约 5 分。</li>
+</ul>
+<p>这是模型作者自报的成绩，口径偏向自家模型的强项，参考价值高但不是独立评测。</p>
+<h3 id="2-jina-v3506b-4b">2. Jina v3.5：0.6B 追平 4B，但只在英文通用上</h3>
+<p>下面是 Jina 团队的统一测试：所有模型都对 jina-embeddings-v5-text-small 召回的前 100 条重排，指标是 nDCG@10。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>BEIR</th>
+<th>MIRACL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一阶段召回（基线）</td>
+<td>56.26</td>
+<td>65.15</td>
+</tr>
+<tr>
+<td>jina-v3.5（0.6B）</td>
+<td>63.20</td>
+<td>74.11</td>
+</tr>
+<tr>
+<td>mxbai-large-v2（1.5B）</td>
+<td>62.45</td>
+<td>69.65</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-4B</td>
+<td>62.28</td>
+<td>76.56</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-0.6B</td>
+<td>56.94</td>
+<td>67.12</td>
+</tr>
+<tr>
+<td>mxbai-base-v2（0.5B）</td>
+<td>59.58</td>
+<td>64.90</td>
+</tr>
+</tbody>
+</table>
+<p>再看专业领域的 RTEB（法律、金融、代码、医疗）和半结构化检索的 Struct-IR：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>RTEB</th>
+<th>Struct-IR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3-Reranker-4B</td>
+<td>77.68</td>
+<td>55.6</td>
+</tr>
+<tr>
+<td>jina-v3.5</td>
+<td>70.95</td>
+<td>48.3</td>
+</tr>
+<tr>
+<td>mxbai-large-v2</td>
+<td>70.81</td>
+<td>43.0</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-0.6B</td>
+<td>68.41</td>
+<td>41.9</td>
+</tr>
+<tr>
+<td>mxbai-base-v2</td>
+<td>61.44</td>
+<td>30.4</td>
+</tr>
+</tbody>
+</table>
+<p>结论分两半：</p>
+<ul>
+<li><strong>英文通用检索</strong>：v3.5 的 63.20 超过 4B 的 Qwen3（62.28），参数少约 7 倍。</li>
+<li><strong>多语言与专业领域</strong>：Qwen3-4B 仍然领先，RTEB 差了近 7 分，Struct-IR 差 7 分以上。Jina 的博客自己也承认，剩余差距集中在法律、医疗和低资源语言。</li>
+</ul>
+<p>另外要看到，数据由 Jina 自测，召回器用的是自家 embedding。同时，<strong>两个小模型在个别榜单上低于召回基线</strong>：mxbai-base 的 RTEB 61.44 低于基线 64.60，MIRACL 64.90 也低于 65.15。</p>
+<h3 id="3-aimultiple">3. AIMultiple：英文评论检索，小模型不输大模型</h3>
+<p>AIMultiple 在 H100 上，用约 14.5 万条英文亚马逊评论、300 条查询，对 multilingual-e5-base 召回的前 100 条重排，取前 10。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Hit@1</th>
+<th>重排延迟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无重排（基线）</td>
+<td>62.67%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mxbai-xsmall（70M）</td>
+<td>64.67%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Qwen3-Reranker-4B</td>
+<td>77.67%</td>
+<td>超过 1 秒</td>
+</tr>
+<tr>
+<td>jina-reranker-v3</td>
+<td>81.33%</td>
+<td>188ms</td>
+</tr>
+<tr>
+<td>Nemotron-rerank-1B</td>
+<td>83.00%</td>
+<td>243ms</td>
+</tr>
+<tr>
+<td>gte-modernbert（149M）</td>
+<td>83.00%</td>
+<td>未单列</td>
+</tr>
+</tbody>
+</table>
+<p>这份数据给出三点：</p>
+<ul>
+<li><strong>最大的模型不一定最好</strong>：4B 的 Qwen3 排第四，延迟是 Nemotron 的 4.5 倍左右。</li>
+<li><strong>149M 追平 1.2B</strong>：gte-modernbert 与 Nemotron 的 Hit@1 同为 83.00%。</li>
+<li><strong>极小的模型可能无效</strong>：70M 的 mxbai-xsmall 只比基线高 2 个点。</li>
+</ul>
+<p>这份测试是英文、短文本、单一数据集，不能外推到中文或长文档。</p>
+<h3 id="4-agentsetllm-elo">4. Agentset：LLM 评审的 ELO 榜</h3>
+<p>Agentset 用 6 个数据集，对 bge-small-en-v1.5 召回的前 50 条重排，由 GPT-5 两两评审，算 ELO。榜单更新于 2026 年 2 月。</p>
+<ul>
+<li>开源可商用的最高是 <strong>Qwen3-Reranker-8B</strong>，ELO 1473，胜率 51%。</li>
+<li><strong>BGE-reranker-v2-m3 与 Jina v2 并列末位</strong>，ELO 1327，胜率分别是 29% 和 28%。</li>
+<li>榜单前列是 Zerank 2（1638）、Cohere Rerank 4 Pro（1629）等，前者非商用，后者闭源。</li>
+</ul>
+<p>这个榜里没有 Qwen3-4B、Jina v3 系列、mxbai v2 和 Nemotron，覆盖面有限。</p>
+<h3 id="_5">交叉起来看</h3>
+<p>四份数据口径不同，但有几处共同点：</p>
+<ul>
+<li><strong>重排确实有用</strong>：加对模型能带来几十个点的 Hit@1 提升，是性价比最高的升级之一。</li>
+<li><strong>大不等于好</strong>：英文短文本里，149M 到 1B 的模型已经追平或超过 4B 的 Qwen3。</li>
+<li><strong>召回器越强，小重排模型的边际收益越小</strong>。Jina 的表里，mxbai-base 在两个榜单上低于召回基线；Qwen 自己的表里，0.6B 档在中文上只比基线高 0.3。</li>
+<li><strong>BGE-v2-m3 已是旧基线</strong>。中文上仍有竞争力，但英文和 LLM 评审榜上都被新模型拉开。</li>
+<li><strong>专业领域和多语言，大模型仍有优势</strong>。Qwen3-4B 在 RTEB、MIRACL、Struct-IR 上稳定领先 Jina v3.5。</li>
+</ul>
+<hr />
+<h2 id="_6">四、延迟与成本账</h2>
+<p>重排是在线链路上的串行环节，延迟比精度更容易被忽视。下面的数字口径不同，请只看量级。</p>
+<ul>
+<li><strong>UsefulAI 的托管 API 延迟</strong>：Jina v3 约 167ms，Nemotron 1B 约 223ms，Qwen3-0.6B 约 445ms，BGE-v2-m3 约 2383ms，Qwen3-8B 约 4687ms。托管延迟包含网络和排队，不等于自建延迟。</li>
+<li><strong>AIMultiple 的 H100 实测</strong>：对 100 个候选打分，Jina v3 约 188ms，Nemotron 约 243ms，Qwen3-4B 超过 1 秒。</li>
+<li><strong>Jina 自测的 A100 数据</strong>：v3.5 重排 100 个候选，短文档约 305ms；平均 1900 token 的长文档约 10.3 秒，比 v3 的 16.1 秒快约 1.56 倍。</li>
+</ul>
+<p>规律很明确：<strong>延迟 ≈ 候选数 × 文档长度 × 单次推理成本</strong>。生成式大模型单次成本最高，列表式模型一次前向摊薄成本，但受候选数上限约束。</p>
+<p>几个压缩延迟的做法：</p>
+<ul>
+<li>把候选数从 100 降到 30 到 50，先看精度掉多少。</li>
+<li>把文档切到 300 到 500 个 token，避免长文本拖慢整批。</li>
+<li>使用 fp16 和 FlashAttention-2。Qwen 官方建议开启 flash_attention_2。</li>
+<li>考虑量化版本。Jina v3 与 v3.5 官方提供 GGUF 和 MLX 版，Qwen3-Reranker 在社区也有 GGUF 量化版。</li>
+<li>重排和后续生成并行流水化，避免整条链路串行等待。</li>
+</ul>
+<p>Agentset 的经验值是：多数重排器会增加 100 到 600ms 的延迟。如果你的预算低于这个量级，优先考虑 149M 到 1B 的轻量模型。</p>
+<hr />
+<h2 id="_7">五、协议红绿灯</h2>
+<p>榜单上分数高的模型，有不少不能直接商用。下图把本文涉及的模型按协议分成三档。</p>
+<p><img alt="开源 Rerank 协议红绿灯：Qwen3、mxbai、BGE、gte 等 Apache 2.0 可商用；Nemotron 需核对；Jina v3 与 v3.5、Zerank 2、Contextual AI 仅限非商用" src="../images/rerank-license-map.png" /></p>
+<p>图里的结论如下：</p>
+<ul>
+<li><strong>可商用（Apache 2.0）</strong>：Qwen3-Reranker、Qwen3-VL-Reranker、mxbai-rerank-v2、BGE-reranker-v2 系列、gte-reranker-modernbert、gte-multilingual-reranker-base。</li>
+<li><strong>商用前需核对</strong>：Nemotron Rerank 1B v2，协议是 OpenMDW-1.1 加 Llama 3.2 社区协议，模型卡写明可商用，但仍需法务确认。</li>
+<li><strong>仅限内部或研究（CC BY-NC 4.0）</strong>：jina-reranker-v3 与 v3.5、Zerank 2、Contextual AI Rerank v2。</li>
+</ul>
+<p>协议字段取自各模型 Hugging Face 页面的元数据。三条经验：</p>
+<ul>
+<li><strong>读 LICENSE 文件，别只看标签</strong>。Nemotron 的字段只写 other，要点进去看正文。</li>
+<li><strong>榜单名次和能不能商用是两回事</strong>。Agentset 前十名里，有三个是非商用权重。</li>
+<li><strong>想用非商用模型，先问清授权方式</strong>。Jina 与 Zerank 都提供付费 API，是可选路径。</li>
+</ul>
+<hr />
+<h2 id="_8">六、选型决策表</h2>
+<p>下图把选型拆成两个问题：先问协议，再问语言和场景。</p>
+<p><img alt="开源 Rerank 选型路径：不商用可选 Jina v3.5 与 Zerank 2；商用先选 Apache 2.0，英文低延迟用 gte-reranker-modernbert，中文轻量用 gte 多语言版或 BGE-v2-m3，精度优先或专业长文用 Qwen3-Reranker 4B 或 8B；跨语言且有 NVIDIA GPU 看 Nemotron" src="../images/rerank-decision-flow.png" /></p>
+<p>文字版决策表如下。首选依据上文的数据与协议整理，属于判断而不是定论。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>首选</th>
+<th>备选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用 RAG，中英混合</td>
+<td>Qwen3-Reranker-4B</td>
+<td>mxbai-large-v2</td>
+</tr>
+<tr>
+<td>精度优先，不怕慢</td>
+<td>Qwen3-Reranker-8B</td>
+<td>Qwen3-Reranker-4B</td>
+</tr>
+<tr>
+<td>中文为主，轻量</td>
+<td>gte 多语言版</td>
+<td>BGE-v2-m3</td>
+</tr>
+<tr>
+<td>英文为主，低延迟</td>
+<td>gte-modernbert</td>
+<td>Nemotron 1B v2</td>
+</tr>
+<tr>
+<td>跨语言，有 NVIDIA GPU</td>
+<td>Nemotron 1B v2</td>
+<td>Qwen3-Reranker-4B</td>
+</tr>
+<tr>
+<td>法律、医疗、金融长文</td>
+<td>Qwen3-Reranker-4B</td>
+<td>Jina v3.5（仅内部）</td>
+</tr>
+<tr>
+<td>CPU 或边缘设备</td>
+<td>BGE-v2-m3</td>
+<td>Qwen3-Reranker-0.6B</td>
+</tr>
+<tr>
+<td>图文混合 RAG</td>
+<td>Qwen3-VL-Reranker</td>
+<td>先转文本再重排</td>
+</tr>
+<tr>
+<td>仅内部使用或研究</td>
+<td>Jina v3.5</td>
+<td>Zerank 2</td>
+</tr>
+</tbody>
+</table>
+<p>几点补充说明：</p>
+<ul>
+<li><strong>为什么通用场景放 Qwen3-4B</strong>：协议清楚，在多语言和专业领域稳定领先，4B 是精度和成本之间的折中。8B 的 CMTEB-R 更高，但延迟是明显的代价。</li>
+<li><strong>为什么中文轻量放 gte 多语言版</strong>：官方表里它的 CMTEB-R 高于 BGE-v2-m3，MLDR（长文档）也高出约 7 分。BGE 的优势是生态最成熟。</li>
+<li><strong>为什么 Jina 只放内部</strong>：精度和速度都有亮点，但商用必须走付费 API。</li>
+<li><strong>极轻量场景要小心</strong>：mxbai-base 在个别榜单上低于召回基线，Qwen3-0.6B 也只比基线高零点几到几分，上线前必须对照有无重排的结果。</li>
+</ul>
+<hr />
+<h2 id="_9">七、上线前怎么验证</h2>
+<p>榜单是参考，不是结论。三家数据都说明，口径一换，名次就变。建议用自己的数据评一遍。</p>
+<h3 id="_10">最小评测流程</h3>
+<ul>
+<li>准备 200 到 500 条真实查询，标好正确文档。</li>
+<li>同时留相近的干扰文档，比如同一份制度的不同版本。</li>
+<li>中英文分开评，跨语言查询单独测一组。</li>
+<li>对比四组：无重排、0.6B 档、4B 档、候选数 30 与 100。</li>
+<li>指标看 Hit@1、nDCG@10，同时记录 p95 延迟。</li>
+</ul>
+<p>Qwen3-Reranker 的最小调用如下，用法以官方模型卡为准：</p>
+<pre><code class="language-python">from sentence_transformers import CrossEncoder
+
+model = CrossEncoder(&quot;Qwen/Qwen3-Reranker-8B&quot;)
+# 换成 0.6B 或 4B 的名字即可
+
+hits = model.rank(query, docs, top_k=5)
+for h in hits:
+    print(h[&quot;corpus_id&quot;], round(h[&quot;score&quot;], 2))
+</code></pre>
+<p>Hit@1 的计算只需要几行：</p>
+<pre><code class="language-python">def hit_at_1(ranked, gold):
+    hits = [r[0] == g for r, g in zip(ranked, gold)]
+    return sum(hits) / len(gold)
+</code></pre>
+<h3 id="_11">五个容易踩的坑</h3>
+<ul>
+<li><strong>召回不够，重排无力</strong>：先看 Hit@100，如果召回阶段就漏了，换重排模型没用。</li>
+<li><strong>分数不能跨查询比较</strong>：Qwen3 默认输出的是 logit 差值，做阈值过滤要先过 Sigmoid。</li>
+<li><strong>长文本被悄悄截断</strong>：BGE-v2-m3 默认按短段落调优，长 chunk 需要调高长度限制。</li>
+<li><strong>指令别漏</strong>：Qwen3 不加指令会掉 1% 到 5%，指令用英文写。</li>
+<li><strong>自定义代码要审查</strong>：Jina 的模型要求 trust_remote_code，生产环境应固定版本。</li>
+</ul>
+<h3 id="_12">搭配与部署</h3>
+<p>重排不必单独使用。常见组合是向量召回加 BM25 关键词召回，再统一送入重排。混合检索的原理见 <a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 没有过时，反而在大规模 RAG 里赢了：原理、混合检索与最新规模研究</a>。</p>
+<p>向量库的选型见 <a href="../posts/open-source-vector-database-comparison-2026.html">2026 开源向量库全景对比：Milvus、Qdrant、Weaviate、pgvector 到底怎么选</a>。</p>
+<p>想把 Embedding 和 Rerank 一起私有化部署，可以参考 <a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference部署与应用实战2026：一个平台搞定LLM+Embedding+Rerank的私有化推理</a>。推理引擎的取舍见 <a href="../posts/llm-inference-framework-comparison-2026.html">大模型推理框架选型2026：vLLM、SGLang、TensorRT-LLM、Ollama、Xinference五大框架怎么选</a>。</p>
+<hr />
+<h2 id="_13">小结</h2>
+<p>开源重排模型这一年进步很快，小模型追平大模型的例子越来越多。但选型的关键，已经不是谁的分数最高。</p>
+<ul>
+<li><strong>先看协议</strong>：Jina、Zerank 精度和速度都亮眼，但商用要付费授权。</li>
+<li><strong>再看语言</strong>：中文轻量用 gte 多语言版或 BGE-v2-m3，多语言和专业领域用 Qwen3-4B 或 8B。</li>
+<li><strong>再看延迟</strong>：生成式的 Qwen3 慢，列表式的 Jina 和分类式的 gte、Nemotron 快。</li>
+<li><strong>别信单一榜单</strong>：同一个模型换个口径差好几个点，召回越强，小重排模型的收益越小。</li>
+</ul>
+<p>无论选哪个，都先用自己的数据对比有无重排，再决定要不要上线。</p>
+<hr />
+<h2 id="_14">免责声明</h2>
+<p>本文基于公开的模型卡、技术博客与第三方评测整理，文中跑分多为厂商或评测方自测，口径各不相同，数值不能直接横向比较。延迟数字来自不同硬件与托管服务，仅供量级参考。协议信息取自 Hugging Face 页面元数据，商用前请以官方仓库的 LICENSE 文件为准并咨询法务。本文不构成技术选型、法律或商用授权建议。</p>
+<hr />
+<h2 id="_15">参考来源</h2>
+<ul>
+<li><a href="https://huggingface.co/Qwen/Qwen3-Reranker-8B">Hugging Face —— Qwen/Qwen3-Reranker-8B 模型卡</a></li>
+<li><a href="https://qwenlm.github.io/blog/qwen3-embedding/">Qwen 官方博客 —— Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models</a></li>
+<li><a href="https://arxiv.org/abs/2506.05176">arXiv —— Qwen3 Embedding 技术报告</a></li>
+<li><a href="https://arxiv.org/abs/2601.04720">arXiv —— Qwen3-VL-Embedding and Qwen3-VL-Reranker: A Unified Framework for Multimodal Retrieval and Ranking</a></li>
+<li><a href="https://jina.ai/news/jina-reranker-v3-0-6b-listwise-reranker-for-sota-multilingual-retrieval/">Jina AI —— Jina Reranker v3: 0.6B Listwise Reranker for SOTA Multilingual Retrieval</a></li>
+<li><a href="https://huggingface.co/blog/jinaai/jina-reranker-v3-5-faster-listwise-reranking">Hugging Face 博客 —— jina-reranker-v3.5: Faster Listwise Reranking with Hybrid Attention and Self-Distillation</a></li>
+<li><a href="https://huggingface.co/jinaai/jina-reranker-v3.5">Hugging Face —— jinaai/jina-reranker-v3.5 模型卡</a></li>
+<li><a href="https://huggingface.co/jinaai/jina-reranker-v3">Hugging Face —— jinaai/jina-reranker-v3 模型卡</a></li>
+<li><a href="https://www.elastic.co/search-labs/blog/jina-reranker-35-legal-medical-structured-data">Elastic Search Labs —— Jina Reranker v3.5: faster legal, medical and structured search</a></li>
+<li><a href="https://www.mixedbread.com/blog/mxbai-rerank-v2">Mixedbread —— Baked-in Brilliance: Reranking Meets RL with mxbai-rerank-v2</a></li>
+<li><a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">Hugging Face —— BAAI/bge-reranker-v2-m3 模型卡</a></li>
+<li><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base">Hugging Face —— Alibaba-NLP/gte-reranker-modernbert-base 模型卡</a></li>
+<li><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2">Hugging Face —— nvidia/llama-nemotron-rerank-1b-v2 模型卡</a></li>
+<li><a href="https://aimultiple.com/rerankers">AIMultiple —— Reranker Benchmark: Top 8 Models Compared</a></li>
+<li><a href="https://agentset.ai/rerankers">Agentset —— Best Rerankers for RAG 榜单</a></li>
+<li><a href="https://github.com/agentset-ai/reranker-eval">GitHub —— agentset-ai/reranker-eval</a></li>
+<li><a href="https://usefulai.com/models/reranking">UsefulAI —— Best Reranker Models for RAG in 2026</a></li>
+</ul>
+<hr />
+<h2 id="_16">延伸阅读</h2>
+<ul>
+<li><a href="../posts/multimodal-embedding-model-selection-guide-2026.html">多模态 RAG 选哪个向量模型？按场景、显存、协议给出的 2026 选型决策表</a></li>
+<li><a href="../posts/bm25-rag-hybrid-search-scaling-2026.html">BM25 没有过时，反而在大规模 RAG 里赢了：原理、混合检索与最新规模研究</a></li>
+<li><a href="../posts/open-source-vector-database-comparison-2026.html">2026 开源向量库全景对比：Milvus、Qdrant、Weaviate、pgvector 到底怎么选</a></li>
+<li><a href="../posts/xinference-deployment-practice-guide-2026.html">Xinference部署与应用实战2026：一个平台搞定LLM+Embedding+Rerank的私有化推理</a></li>
+<li><a href="../posts/mineru-document-parsing-agent-rag-vlm-2026.html">MinerU 深度解析：一个 1.2B 小模型，如何成为 Agent 与 RAG 的“文档之眼”</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝百亿补贴专场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=AI%E7%BC%96%E7%A8%8B&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        </article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

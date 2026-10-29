@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="35%" stop-color="#34d399"/>
+      <stop offset="70%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#glow)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.04">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- right concept: decision fork with license lights -->
+  <g stroke="#94a3b8" stroke-width="1.8" stroke-opacity="0.8" fill="none">
+    <path d="M668 196 C 700 196, 706 128, 738 128"/>
+    <path d="M668 196 L 738 196"/>
+    <path d="M668 196 C 700 196, 706 264, 738 264"/>
+  </g>
+  <circle cx="654" cy="196" r="14" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+  <circle cx="654" cy="196" r="5" fill="#22d3ee"/>
+
+  <g stroke-width="1.6">
+    <rect x="738" y="106" width="78" height="44" rx="8" fill="#1e293b" fill-opacity="0.75" stroke="#818cf8"/>
+    <rect x="738" y="174" width="78" height="44" rx="8" fill="#1e293b" fill-opacity="0.75" stroke="#34d399"/>
+    <rect x="738" y="242" width="78" height="44" rx="8" fill="#1e293b" fill-opacity="0.75" stroke="#f472b6"/>
+  </g>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+    <text x="777" y="134" fill="#c4b5fd">多向量</text>
+    <text x="777" y="202" fill="#86efac">单向量</text>
+    <text x="777" y="270" fill="#f9a8d4">全模态</text>
+  </g>
+
+  <!-- license legend -->
+  <circle cx="700" cy="313" r="5" fill="#34d399"/>
+  <circle cx="760" cy="313" r="5" fill="#fbbf24"/>
+  <circle cx="820" cy="313" r="5" fill="#f87171"/>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12" fill="#94a3b8">
+    <text x="711" y="317">可商用</text>
+    <text x="771" y="317">需核对</text>
+    <text x="831" y="317">非商用</text>
+  </g>
+
+  <!-- year badge -->
+  <circle cx="852" cy="40" r="19" fill="#1e293b" stroke="#22d3ee" stroke-opacity="0.6"/>
+  <text x="852" y="46" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700" fill="#22d3ee" text-anchor="middle">26</text>
+
+  <!-- tag box -->
+  <rect x="48" y="44" width="230" height="30" rx="6" fill="#1e293b" fill-opacity="0.7" stroke="#22d3ee" stroke-opacity="0.5"/>
+  <text x="63" y="64" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="14" fill="#67e8f9">AI 选型指南 · 多模态向量</text>
+
+  <!-- title -->
+  <text x="48" y="128" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#ffffff">多模态向量模型怎么选</text>
+  <text x="48" y="168" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" font-weight="600" fill="url(#sub)">按场景、显存、协议的 2026 选型决策表</text>
+
+  <!-- highlights -->
+  <text x="48" y="210" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#67e8f9">▸ 先选路线：单向量看通用，多向量看页面细节</text>
+  <text x="48" y="234" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#86efac">▸ Qwen3-VL、WeMM、Jina v5-omni 等 10 余款逐个拆</text>
+  <text x="48" y="258" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#fca5a5">▸ 榜单第一不等于能商用，协议红绿灯逐个核对</text>
+
+  <!-- pills -->
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12">
+    <rect x="48" y="284" width="84" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="90" y="301" fill="#67e8f9" text-anchor="middle">Qwen3-VL</text>
+    <rect x="140" y="284" width="60" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.6"/>
+    <text x="170" y="301" fill="#86efac" text-anchor="middle">WeMM</text>
+    <rect x="208" y="284" width="110" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-opacity="0.6"/>
+    <text x="263" y="301" fill="#c4b5fd" text-anchor="middle">Jina v5-omni</text>
+    <rect x="326" y="284" width="86" height="26" rx="13" fill="none" stroke="#f472b6" stroke-opacity="0.6"/>
+    <text x="369" y="301" fill="#f9a8d4" text-anchor="middle">ColEmbed</text>
+    <rect x="420" y="284" width="98" height="26" rx="13" fill="none" stroke="#fbbf24" stroke-opacity="0.6"/>
+    <text x="469" y="301" fill="#fcd34d" text-anchor="middle">pplx-embed</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="336" x2="852" y2="336" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="48" y="360" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12" fill="#64748b">两条路线 · 通用单向量 · 视觉文档多向量 · 音视频 · 显存存储 · 协议 · 决策表</text>
+  <text x="852" y="360" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="12" fill="#475569" text-anchor="end">公众号 · AI 行业观察</text>
+</svg>

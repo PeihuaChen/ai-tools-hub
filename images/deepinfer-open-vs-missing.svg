@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="900" viewBox="0 0 1080 900">
+  <!-- 满幅不透明底 -->
+  <rect x="0" y="0" width="1080" height="900" fill="#f7f8fa"/>
+
+  <!-- 标题 -->
+  <text x="540" y="100" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">DeepInfer 到底开源了哪一块</text>
+  <text x="540" y="160" font-size="34" fill="#4b5563" text-anchor="middle">引擎在手，服务要自己搭</text>
+
+  <!-- 列标题 -->
+  <text x="288" y="256" font-size="44" font-weight="bold" fill="#15803d" text-anchor="middle">已开源：引擎侧</text>
+  <text x="792" y="256" font-size="44" font-weight="bold" fill="#b91c1c" text-anchor="middle">未开源：服务侧</text>
+
+  <!-- 左列 -->
+  <rect x="48" y="290" width="480" height="150" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="346" font-size="40" font-weight="bold" fill="#15803d">请求转换</text>
+  <text x="76" y="408" font-size="32" fill="#4b5563">deepseek-recipe</text>
+
+  <rect x="48" y="464" width="480" height="150" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="520" font-size="40" font-weight="bold" fill="#15803d">Prefill 引擎</text>
+  <text x="76" y="582" font-size="32" fill="#4b5563">推荐 8 卡机器</text>
+
+  <rect x="48" y="638" width="480" height="150" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="694" font-size="40" font-weight="bold" fill="#15803d">Decode 引擎</text>
+  <text x="76" y="756" font-size="32" fill="#4b5563">推荐 64–128 卡</text>
+
+  <!-- 右列 -->
+  <rect x="552" y="290" width="480" height="150" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2" stroke-dasharray="8"/>
+  <text x="580" y="346" font-size="40" font-weight="bold" fill="#b91c1c">负载均衡</text>
+  <text x="580" y="408" font-size="32" fill="#4b5563">跨数据并行副本</text>
+
+  <rect x="552" y="464" width="480" height="150" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2" stroke-dasharray="8"/>
+  <text x="580" y="520" font-size="40" font-weight="bold" fill="#b91c1c">KV 缓存系统</text>
+  <text x="580" y="582" font-size="32" fill="#4b5563">线上约 100 PiB SSD</text>
+
+  <rect x="552" y="638" width="480" height="150" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2" stroke-dasharray="8"/>
+  <text x="580" y="694" font-size="40" font-weight="bold" fill="#b91c1c">P/D 分离编排</text>
+  <text x="580" y="756" font-size="32" fill="#4b5563">引擎侧已实现大半</text>
+
+  <!-- 底部结论 -->
+  <text x="540" y="850" font-size="32" fill="#4b5563" text-anchor="middle">KV 缓存、分离编排、负载均衡，都要运营方自建</text>
+</svg>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a855f7"/>
+      <stop offset="0.5" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#6366f1" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#2a2a55" stroke-width="0.8" stroke-opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- right concept: AAIF three-layer stack -->
+  <g transform="translate(716,168)">
+    <circle cx="0" cy="0" r="118" fill="url(#glow)"/>
+    <rect x="-96" y="-96" width="192" height="56" rx="10" fill="#12203a" stroke="#38bdf8" stroke-width="1.6"/>
+    <text x="0" y="-70" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#7dd3fc">MCP</text>
+    <text x="0" y="-50" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#a5b4fc">Anthropic · 连接协议</text>
+
+    <rect x="-96" y="-28" width="192" height="56" rx="10" fill="#151f36" stroke="#34d399" stroke-width="1.6"/>
+    <text x="0" y="-2" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#6ee7b7">AGENTS.md</text>
+    <text x="0" y="18" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#a5b4fc">OpenAI · 项目约定</text>
+
+    <rect x="-96" y="40" width="192" height="56" rx="10" fill="#1d1733" stroke="#a855f7" stroke-width="1.6"/>
+    <text x="0" y="66" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#d8b4fe">goose</text>
+    <text x="0" y="86" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#fbcfe8">Block · 执行载体</text>
+
+    <text x="0" y="122" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" fill="#7c83b8">AAIF 首批三项目</text>
+  </g>
+
+  <!-- top-left tag box -->
+  <rect x="40" y="34" width="248" height="30" rx="6" fill="#1a1a3d" stroke="#6366f1" stroke-width="1.2"/>
+  <circle cx="58" cy="49" r="4" fill="#22d3ee"/>
+  <text x="72" y="54" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#c7d2fe">AI 行业观察 · 开源Agent</text>
+
+  <!-- year badge -->
+  <g transform="translate(836,34)">
+    <rect x="0" y="0" width="44" height="30" rx="6" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.2"/>
+    <text x="22" y="21" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#e9d5ff">26</text>
+  </g>
+
+  <!-- main title -->
+  <text x="40" y="124" font-family="Segoe UI,Arial,sans-serif" font-size="31" font-weight="700" fill="#ffffff">开源 Goose</text>
+  <text x="40" y="166" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">凭何与 MCP、AGENTS.md</text>
+  <text x="40" y="198" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">在 Linux 基金会同桌并列</text>
+
+  <!-- subtitle -->
+  <text x="40" y="230" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="600" fill="url(#subtitle)">从 Block 内部工具到 AAIF 首批项目</text>
+
+  <!-- 3 highlight lines -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="13">
+    <text x="40" y="258" fill="#22d3ee">▸ 5.3万星 · Rust打造 · Apache 2.0 完全开源</text>
+    <text x="40" y="278" fill="#ec4899">▸ Block 8周全员部署，人力节省 20%-25%</text>
+    <text x="40" y="298" fill="#f59e0b">▸ 免费的代价：同模型基准低 27 分 · CVE教训</text>
+  </g>
+
+  <!-- tag pills -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#cbd5ff">
+    <rect x="40" y="312" width="74" height="22" rx="11" fill="none" stroke="#6366f1" stroke-width="1"/>
+    <text x="77" y="327" text-anchor="middle">AAIF治理</text>
+    <rect x="122" y="312" width="64" height="22" rx="11" fill="none" stroke="#22d3ee" stroke-width="1"/>
+    <text x="154" y="327" text-anchor="middle">MCP原生</text>
+    <rect x="194" y="312" width="74" height="22" rx="11" fill="none" stroke="#ec4899" stroke-width="1"/>
+    <text x="231" y="327" text-anchor="middle">模型中立</text>
+    <rect x="276" y="312" width="74" height="22" rx="11" fill="none" stroke="#a855f7" stroke-width="1"/>
+    <text x="313" y="327" text-anchor="middle">本地优先</text>
+    <rect x="358" y="312" width="64" height="22" rx="11" fill="none" stroke="#34d399" stroke-width="1"/>
+    <text x="390" y="327" text-anchor="middle">Recipes</text>
+    <rect x="430" y="312" width="74" height="22" rx="11" fill="none" stroke="#f59e0b" stroke-width="1"/>
+    <text x="467" y="327" text-anchor="middle">安全攻防</text>
+  </g>
+
+  <!-- bottom divider + footer -->
+  <line x1="40" y1="350" x2="560" y2="350" stroke="#2a2a55" stroke-width="1"/>
+  <text x="40" y="368" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#7c83b8">出身 · 治理 · 架构 · 免费的代价 · 2026 路线图</text>
+  <text x="860" y="368" text-anchor="end" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#5a5f8a">公众号：AI工具箱</text>
+</svg>

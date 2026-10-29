@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#1a1a3e"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff7a18"/>
+      <stop offset="100%" stop-color="#ffb347"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#3a7bd5"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a18"/>
+      <stop offset="100%" stop-color="#ff512f"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff7a18"/>
+      <stop offset="50%" stop-color="#ffb347"/>
+      <stop offset="100%" stop-color="#00d2ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <g opacity="0.05" stroke="#fff" stroke-width="0.5">
+    <line x1="60" y1="0" x2="60" y2="383"/>
+    <line x1="120" y1="0" x2="120" y2="383"/>
+    <line x1="180" y1="0" x2="180" y2="383"/>
+    <line x1="240" y1="0" x2="240" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="420" y1="0" x2="420" y2="383"/>
+    <line x1="480" y1="0" x2="480" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="660" y1="0" x2="660" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/>
+    <line x1="780" y1="0" x2="780" y2="383"/>
+    <line x1="840" y1="0" x2="840" y2="383"/>
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+  </g>
+
+  <!-- Decorative circles right -->
+  <circle cx="770" cy="70" r="170" fill="none" stroke="#ff7a18" stroke-width="0.5" opacity="0.08"/>
+  <circle cx="770" cy="70" r="120" fill="none" stroke="#ff7a18" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="770" cy="70" r="70" fill="none" stroke="#ff7a18" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Check-mark decoration (review) -->
+  <g transform="translate(700, 150)" opacity="0.06">
+    <text x="0" y="0" font-family="'Courier New', monospace" font-weight="900" font-size="150" fill="#00d2ff">&#10003;</text>
+  </g>
+
+  <!-- Matrix dots -->
+  <g fill="#00d2ff" opacity="0.04">
+    <circle cx="50" cy="50" r="2"/>
+    <circle cx="150" cy="120" r="1.5"/>
+    <circle cx="250" cy="40" r="2"/>
+    <circle cx="450" cy="70" r="2"/>
+    <circle cx="600" cy="130" r="1.5"/>
+    <circle cx="100" cy="290" r="1.5"/>
+    <circle cx="300" cy="255" r="1.5"/>
+    <circle cx="500" cy="275" r="2"/>
+    <circle cx="800" cy="330" r="2"/>
+    <circle cx="850" cy="210" r="1.5"/>
+  </g>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- Logo/badge area - top left -->
+  <g transform="translate(35, 22)">
+    <rect x="0" y="0" width="210" height="28" rx="4" fill="url(#logoGrad)" opacity="0.92"/>
+    <text x="105" y="19" font-family="Arial, sans-serif" font-weight="bold" font-size="13" fill="#fff" text-anchor="middle">AI 行业观察 · 开发者工具</text>
+  </g>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 22)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#accent)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#ff7a18" text-anchor="middle">26</text>
+  </g>
+
+  <!-- Main title -->
+  <text x="45" y="150" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', Arial, sans-serif" font-weight="900" font-size="31" fill="#ffffff" letter-spacing="1">
+    <tspan x="45" dy="0">阿里开源 Open Code Review</tspan>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="45" y="194" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', Arial, sans-serif" font-weight="700" font-size="18" fill="url(#accent)" letter-spacing="1">
+    <tspan x="45" dy="0">确定性工程 × Agent 的 AI 代码审查</tspan>
+  </text>
+
+  <!-- Three highlight lines -->
+  <g font-family="'PingFang SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" letter-spacing="0.5">
+    <text x="45" y="230" fill="#ff7a18">&#9679; 内部实战两年 · 识别数百万缺陷</text>
+    <text x="45" y="252" fill="#00d2ff">&#9679; SEM-F1 提升 2.17 倍 · token 省 5-15 倍</text>
+    <text x="45" y="274" fill="#7ee787">&#9679; Apache 2.0 · 一行命令 npm 安装 ocr</text>
+  </g>
+
+  <!-- Tag pills -->
+  <g font-family="'PingFang SC', 'Microsoft YaHei', Arial, sans-serif" font-size="12">
+    <rect x="45" y="300" width="90" height="26" rx="13" fill="none" stroke="#ff7a18" stroke-width="1.2" opacity="0.8"/>
+    <text x="90" y="317" fill="#ffb347" text-anchor="middle">代码审查</text>
+    <rect x="145" y="300" width="90" height="26" rx="13" fill="none" stroke="#00d2ff" stroke-width="1.2" opacity="0.8"/>
+    <text x="190" y="317" fill="#00d2ff" text-anchor="middle">混合架构</text>
+    <rect x="245" y="300" width="76" height="26" rx="13" fill="none" stroke="#7ee787" stroke-width="1.2" opacity="0.8"/>
+    <text x="283" y="317" fill="#7ee787" text-anchor="middle">开源</text>
+    <rect x="331" y="300" width="76" height="26" rx="13" fill="none" stroke="#c792ea" stroke-width="1.2" opacity="0.8"/>
+    <text x="369" y="317" fill="#c792ea" text-anchor="middle">阿里</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- Bottom-left hashtags -->
+  <text x="45" y="355" font-family="Arial, sans-serif" font-size="11" fill="#666" letter-spacing="1">#OpenCodeReview  #AI代码审查  #2026</text>
+
+  <!-- Bottom-right watermark -->
+  <g transform="translate(690, 352)" opacity="0.35">
+    <text x="0" y="0" font-family="'PingFang SC', 'Microsoft YaHei', Arial, sans-serif" font-size="11" fill="#00d2ff">公众号 - 最新AI知识宇宙</text>
+  </g>
+</svg>

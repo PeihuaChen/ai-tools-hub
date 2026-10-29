@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580">
+  <defs>
+    <linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f7fa"/>
+    </linearGradient>
+    <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="a2o" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#b45309"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="580" fill="#ffffff"/>
+  <rect width="1200" height="580" fill="url(#pg2)"/>
+
+  <text x="40" y="42" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#111827">嵌入反演：从向量还原原文的迭代过程</text>
+  <text x="40" y="70" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#4b5563">攻击者只需要能调用嵌入接口，不需要模型权重。Vec2Text 在 32-token 输入上精确重建率 92%</text>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="40" y="106" width="230" height="120" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+    <text x="58" y="130" font-size="12" font-weight="bold" fill="#b91c1c">攻击者已获得的东西</text>
+    <text x="58" y="156" font-size="11" fill="#4b5563">① 目标向量（来自暴露的</text>
+    <text x="58" y="173" font-size="11" fill="#4b5563">　 向量库或过宽的 API key）</text>
+    <text x="58" y="196" font-size="11" fill="#4b5563">② 嵌入接口的调用权限</text>
+    <text x="58" y="216" font-size="11" fill="#b91c1c">不需要：模型权重、训练数据</text>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="330" y="106" width="180" height="70" rx="10" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="420" y="132" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">目标向量 v*</text>
+    <text x="420" y="155" text-anchor="middle" font-size="11" fill="#6b7280">[0.13, -0.87, 0.42, …]</text>
+
+    <rect x="330" y="230" width="180" height="70" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <text x="420" y="256" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">假设文本 t₀</text>
+    <text x="420" y="279" text-anchor="middle" font-size="11" fill="#1d4ed8">随机初始化的候选文本</text>
+
+    <rect x="600" y="230" width="180" height="70" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.3"/>
+    <text x="690" y="256" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">嵌入 t₀ → v₀</text>
+    <text x="690" y="279" text-anchor="middle" font-size="11" fill="#b45309">调用嵌入 API</text>
+
+    <rect x="870" y="230" width="200" height="70" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.3"/>
+    <text x="970" y="256" text-anchor="middle" font-size="13" font-weight="bold" fill="#6d28d9">计算余弦距离</text>
+    <text x="970" y="279" text-anchor="middle" font-size="11" fill="#6d28d9">d = cos(v₀, v*)</text>
+
+    <rect x="600" y="360" width="180" height="70" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.3"/>
+    <text x="690" y="386" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">修正生成 t₁</text>
+    <text x="690" y="409" text-anchor="middle" font-size="11" fill="#15803d">缩小距离的方向重写</text>
+
+    <line x1="420" y1="176" x2="420" y2="226" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a2)"/>
+    <line x1="510" y1="265" x2="596" y2="265" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a2)"/>
+    <line x1="780" y1="265" x2="866" y2="265" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a2)"/>
+    <path d="M970,300 L970,395 L784,395" fill="none" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a2)"/>
+    <path d="M600,395 L420,395 L420,304" fill="none" stroke="#b45309" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a2o)"/>
+    <text x="455" y="418" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#b45309">迭代若干轮直到距离收敛</text>
+
+    <line x1="330" y1="141" x2="240" y2="141" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="1100" y="106" width="66" height="194" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+    <text x="1133" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">原</text>
+    <text x="1133" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">文</text>
+    <text x="1133" y="220" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">还</text>
+    <text x="1133" y="240" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">原</text>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <rect x="40" y="460" width="360" height="98" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.3"/>
+    <text x="58" y="486" font-size="12" font-weight="bold" fill="#b45309">三年演进：前提被逐个拆掉</text>
+    <text x="58" y="510" font-size="11" fill="#4b5563">2023 Vec2Text：需要访问目标嵌入模型</text>
+    <text x="58" y="530" font-size="11" fill="#4b5563">2025 ALGEN：少样本，跨域跨语言迁移</text>
+    <text x="58" y="550" font-size="11" fill="#4b5563">2026 Zero2Text：零训练跨域反演</text>
+
+    <rect x="420" y="460" width="360" height="98" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <text x="438" y="486" font-size="12" font-weight="bold" fill="#1d4ed8">已验证的敏感场景</text>
+    <text x="438" y="510" font-size="11" fill="#4b5563">MIMIC-III 临床病历：高准确率还原</text>
+    <text x="438" y="530" font-size="11" fill="#4b5563">完整患者姓名</text>
+    <text x="438" y="550" font-size="11" fill="#1d4ed8">结论：向量库暴露 = 实质数据泄露</text>
+
+    <rect x="800" y="460" width="366" height="98" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.3"/>
+    <text x="818" y="486" font-size="12" font-weight="bold" fill="#15803d">缓解手段与代价</text>
+    <text x="818" y="510" font-size="11" fill="#4b5563">校准高斯噪声：压制重建，召回略降</text>
+    <text x="818" y="530" font-size="11" fill="#4b5563">SPARSE 维度敏感加噪：精度损失更小</text>
+    <text x="818" y="550" font-size="11" fill="#b45309">注意 DeepInvert 已能反演被混淆的表示</text>
+  </g>
+</svg>

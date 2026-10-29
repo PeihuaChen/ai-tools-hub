@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1040" viewBox="0 0 1080 1040">
+  <rect width="1080" height="1040" fill="#ffffff"/>
+
+  <text x="40" y="80" font-size="60" font-weight="bold" fill="#111827">机器翻译的五个时代</text>
+  <text x="40" y="136" font-size="34" fill="#4b5563">从规则映射到文化推理，每一代都把更多「理解」交给模型</text>
+
+  <g>
+    <rect x="40" y="196" width="1000" height="132" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="72" y="276" font-size="32" fill="#6b7280">1950s-1990s</text>
+    <text x="300" y="276" font-size="40" font-weight="bold" fill="#6b7280">规则翻译</text>
+    <text x="615" y="276" font-size="32" fill="#4b5563">人写语法规则，译文生硬</text>
+  </g>
+
+  <path d="M534 340 L546 340 L540 350 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="40" y="364" width="1000" height="132" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="72" y="444" font-size="32" fill="#6b7280">1990s-2016</text>
+    <text x="300" y="444" font-size="40" font-weight="bold" fill="#6b7280">统计翻译</text>
+    <text x="615" y="444" font-size="32" fill="#4b5563">短语对齐概率，靠语料规模</text>
+  </g>
+
+  <path d="M534 508 L546 508 L540 518 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="40" y="532" width="1000" height="132" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="72" y="612" font-size="32" fill="#1d4ed8">2017-2023</text>
+    <text x="300" y="612" font-size="40" font-weight="bold" fill="#1d4ed8">神经翻译 NMT</text>
+    <text x="615" y="612" font-size="32" fill="#1e40af">整句建模快省，不懂上下文</text>
+  </g>
+
+  <path d="M534 676 L546 676 L540 686 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="40" y="700" width="1000" height="132" rx="16" fill="#ecfdf5" stroke="#15803d" stroke-width="2"/>
+    <text x="72" y="780" font-size="32" fill="#15803d">2023-2025</text>
+    <text x="300" y="780" font-size="40" font-weight="bold" fill="#15803d">大模型 LLM</text>
+    <text x="615" y="780" font-size="32" fill="#166534">懂语境可调风格，质量登顶</text>
+  </g>
+
+  <path d="M534 844 L546 844 L540 854 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="40" y="868" width="1000" height="132" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="72" y="948" font-size="32" fill="#b45309">2026 起</text>
+    <text x="300" y="948" font-size="40" font-weight="bold" fill="#b45309">推理模型 LRM</text>
+    <text x="615" y="948" font-size="32" fill="#92400e">思维链纠错，多智能体协作</text>
+  </g>
+</svg>

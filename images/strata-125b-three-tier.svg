@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="940" viewBox="0 0 1080 940">
+  <rect width="1080" height="940" fill="#f7f8fa"/>
+
+  <text x="60" y="88" font-size="56" font-weight="bold" fill="#111827">三层分工：一个 token 的取数路径</text>
+  <text x="60" y="142" font-size="32" fill="#4b5563">MoE 只激活少数专家，剩下的是搬运问题</text>
+
+  <rect x="60" y="182" width="960" height="200" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="90" y="248" font-size="44" font-weight="bold" fill="#1d4ed8">显卡</text>
+  <text x="90" y="298" font-size="30" fill="#1e40af">12–24 GB · 最快</text>
+  <line x1="372" y1="202" x2="372" y2="362" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="404" y="230" font-size="34" fill="#111827">注意力、路由、共享专家、输出头</text>
+  <text x="404" y="284" font-size="34" fill="#111827">KV 缓存 + MTP 草稿层</text>
+  <text x="404" y="338" font-size="34" fill="#1d4ed8">热专家缓存：每 GB 约 700 个</text>
+
+  <line x1="540" y1="386" x2="540" y2="410" stroke="#94a3b8" stroke-width="3"/>
+  <polygon points="540,422 533,406 547,406" fill="#94a3b8"/>
+  <text x="566" y="414" font-size="30" fill="#4b5563">PCIe 预取</text>
+
+  <rect x="60" y="426" width="960" height="200" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="90" y="492" font-size="44" font-weight="bold" fill="#6d28d9">内存</text>
+  <text x="90" y="542" font-size="30" fill="#5b21b6">32–64 GB · 容量层</text>
+  <line x1="372" y1="446" x2="372" y2="606" stroke="#ddd6fe" stroke-width="2"/>
+  <text x="404" y="474" font-size="34" fill="#111827">全部 24,576 个专家常驻</text>
+  <text x="404" y="528" font-size="34" fill="#111827">CPU 与 GPU 并行计算未命中专家</text>
+  <text x="404" y="582" font-size="34" fill="#6d28d9">容量决定能不能跑</text>
+
+  <line x1="540" y1="630" x2="540" y2="654" stroke="#94a3b8" stroke-width="3"/>
+  <polygon points="540,666 533,650 547,650" fill="#94a3b8"/>
+  <text x="566" y="658" font-size="30" fill="#4b5563">NVMe 按需读取</text>
+
+  <rect x="60" y="670" width="960" height="200" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+  <text x="90" y="736" font-size="44" font-weight="bold" fill="#b45309">SSD</text>
+  <text x="90" y="786" font-size="30" fill="#92400e">28.8 GB · 最慢</text>
+  <line x1="372" y1="690" x2="372" y2="850" stroke="#fed7aa" stroke-width="2"/>
+  <text x="404" y="718" font-size="34" fill="#111827">n-gram 查找表，每 token 只读几行</text>
+  <text x="404" y="772" font-size="34" fill="#111827">DeepSeek 线：权重也放在这里</text>
+  <text x="404" y="826" font-size="34" fill="#b45309">同一块盘，两种命运</text>
+
+  <text x="60" y="916" font-size="32" font-weight="bold" fill="#111827">结论：瓶颈不是算力，而是把对的专家搬到对的处理器。</text>
+</svg>

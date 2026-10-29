@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1480" viewBox="0 0 1080 1480">
+  <!-- 满幅不透明底 -->
+  <rect x="0" y="0" width="1080" height="1480" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">AI 公平性审计七步流程</text>
+  <text x="540" y="152" font-size="34" fill="#4b5563" text-anchor="middle">定义问题 → 测量诊断 → 干预监控</text>
+
+  <!-- 阶段一 -->
+  <text x="60" y="235" font-size="40" font-weight="bold" fill="#1d4ed8">阶段一 · 定义问题</text>
+  <g>
+    <rect x="60" y="260" width="960" height="120" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <circle cx="130" cy="320" r="38" fill="#ffffff" stroke="#1d4ed8" stroke-width="3"/>
+    <text x="130" y="334" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">1</text>
+    <text x="200" y="312" font-size="40" font-weight="bold" fill="#111827">定义决策与潜在伤害</text>
+    <text x="200" y="360" font-size="32" fill="#4b5563">谁受影响，哪种错误代价最高</text>
+  </g>
+  <g>
+    <rect x="60" y="396" width="960" height="120" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <circle cx="130" cy="456" r="38" fill="#ffffff" stroke="#1d4ed8" stroke-width="3"/>
+    <text x="130" y="470" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">2</text>
+    <text x="200" y="448" font-size="40" font-weight="bold" fill="#111827">选定群体与交叉群体</text>
+    <text x="200" y="496" font-size="32" fill="#4b5563">性别 × 年龄等组合，记录缺失数据</text>
+  </g>
+
+  <!-- 阶段二 -->
+  <text x="60" y="590" font-size="40" font-weight="bold" fill="#0e7490">阶段二 · 测量诊断</text>
+  <g>
+    <rect x="60" y="615" width="960" height="120" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <circle cx="130" cy="675" r="38" fill="#ffffff" stroke="#0e7490" stroke-width="3"/>
+    <text x="130" y="689" font-size="40" font-weight="bold" fill="#0e7490" text-anchor="middle">3</text>
+    <text x="200" y="667" font-size="40" font-weight="bold" fill="#111827">建立效用基线</text>
+    <text x="200" y="715" font-size="32" fill="#4b5563">先测整体准确率与校准</text>
+  </g>
+  <g>
+    <rect x="60" y="751" width="960" height="120" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <circle cx="130" cy="811" r="38" fill="#ffffff" stroke="#0e7490" stroke-width="3"/>
+    <text x="130" y="825" font-size="40" font-weight="bold" fill="#0e7490" text-anchor="middle">4</text>
+    <text x="200" y="803" font-size="40" font-weight="bold" fill="#111827">计算多个公平指标</text>
+    <text x="200" y="851" font-size="32" fill="#4b5563">附置信区间与各组样本量</text>
+  </g>
+  <g>
+    <rect x="60" y="887" width="960" height="120" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <circle cx="130" cy="947" r="38" fill="#ffffff" stroke="#0e7490" stroke-width="3"/>
+    <text x="130" y="961" font-size="40" font-weight="bold" fill="#0e7490" text-anchor="middle">5</text>
+    <text x="200" y="939" font-size="40" font-weight="bold" fill="#111827">检查样本、找原因</text>
+    <text x="200" y="987" font-size="32" fill="#4b5563">标签偏差、代理变量、反馈回路</text>
+  </g>
+
+  <!-- 阶段三 -->
+  <text x="60" y="1080" font-size="40" font-weight="bold" fill="#15803d">阶段三 · 干预监控</text>
+  <g>
+    <rect x="60" y="1105" width="960" height="120" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <circle cx="130" cy="1165" r="38" fill="#ffffff" stroke="#15803d" stroke-width="3"/>
+    <text x="130" y="1179" font-size="40" font-weight="bold" fill="#15803d" text-anchor="middle">6</text>
+    <text x="200" y="1157" font-size="40" font-weight="bold" fill="#111827">把缓解当成一次实验</text>
+    <text x="200" y="1205" font-size="32" fill="#4b5563">对比前、中、后处理的得与失</text>
+  </g>
+  <g>
+    <rect x="60" y="1241" width="960" height="120" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <circle cx="130" cy="1301" r="38" fill="#ffffff" stroke="#15803d" stroke-width="3"/>
+    <text x="130" y="1315" font-size="40" font-weight="bold" fill="#15803d" text-anchor="middle">7</text>
+    <text x="200" y="1293" font-size="40" font-weight="bold" fill="#111827">上线后持续监控</text>
+    <text x="200" y="1341" font-size="32" fill="#4b5563">用新数据定期重跑审计</text>
+  </g>
+
+  <line x1="60" y1="1395" x2="1020" y2="1395" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8"/>
+  <text x="540" y="1445" font-size="34" fill="#b45309" font-weight="bold" text-anchor="middle">工具产出证据，伤害与权衡由人来定</text>
+</svg>

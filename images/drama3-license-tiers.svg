@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1180" viewBox="0 0 1080 1180">
+  <rect x="0" y="0" width="1080" height="1180" fill="#f7f8fa"/>
+
+  <text x="48" y="96" font-size="60" font-weight="bold" fill="#111827">Drama 3 许可：谁免费，谁要授权</text>
+  <text x="48" y="150" font-size="34" fill="#4b5563">Community License v1.0 四种情形</text>
+
+  <!-- Card 1 green -->
+  <rect x="48" y="190" width="984" height="216" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="84" y="254" font-size="44" font-weight="bold" fill="#15803d">免费商用</text>
+  <text x="84" y="320" font-size="34" fill="#111827">你和关联方年收入低于 50 万美元</text>
+  <text x="84" y="372" font-size="34" fill="#4b5563">配音、有声书、游戏角色都在内</text>
+
+  <!-- Card 2 orange -->
+  <rect x="48" y="430" width="984" height="216" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="84" y="494" font-size="44" font-weight="bold" fill="#b45309">收入达线：需书面授权</text>
+  <text x="84" y="560" font-size="34" fill="#111827">达到 50 万美元后 30 天内通知</text>
+  <text x="84" y="612" font-size="34" fill="#4b5563">90 天过渡期内可继续使用</text>
+
+  <!-- Card 3 red -->
+  <rect x="48" y="670" width="984" height="216" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="84" y="734" font-size="44" font-weight="bold" fill="#b91c1c">无论收入：托管服务要授权</text>
+  <text x="84" y="800" font-size="34" fill="#111827">对外提供 TTS 或克隆 API</text>
+  <text x="84" y="852" font-size="34" fill="#4b5563">自用、交付成品音频不算</text>
+
+  <!-- Card 4 purple -->
+  <rect x="48" y="910" width="984" height="216" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="84" y="974" font-size="44" font-weight="bold" fill="#6d28d9">一律禁止</text>
+  <text x="84" y="1040" font-size="34" fill="#111827">未经同意克隆真人声音</text>
+  <text x="84" y="1092" font-size="34" fill="#4b5563">去除水印、训练其他语音模型</text>
+</svg>

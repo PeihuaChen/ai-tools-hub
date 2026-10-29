@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e293b"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="60" x2="900" y2="60"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top & bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="40" y="34" width="230" height="30" rx="6" fill="none" stroke="#38bdf8" stroke-opacity="0.7"/>
+  <text x="56" y="54" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#7dd3fc">AI 行业观察 · 大模型推理</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="50" r="24" fill="none" stroke="#f472b6" stroke-opacity="0.6" stroke-width="2"/>
+  <text x="838" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#f9a8d4">26</text>
+
+  <!-- title -->
+  <text x="40" y="130" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="bold" fill="#ffffff">显存不够也能跑万亿参数模型</text>
+  <text x="40" y="170" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="bold" fill="url(#sub)">AirLLM 逐层流式加载：原理与实战避坑指南</text>
+
+  <!-- highlights -->
+  <text x="40" y="212" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#22d3ee">▸ 70B 跑 4GB 显卡 · 671B 跑 12GB · 2.8T 跑不到 4GB</text>
+  <text x="40" y="236" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#a78bfa">▸ 一次只加载一层：显存看单层，不看模型总量</text>
+  <text x="40" y="260" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#f9a8d4">▸ 不量化不蒸馏，代价是慢——用磁盘 I/O 换显存</text>
+
+  <!-- pills -->
+  <g font-family="Microsoft YaHei, sans-serif" font-size="12">
+    <rect x="40" y="286" width="92" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.55"/>
+    <text x="86" y="303" text-anchor="middle" fill="#bae6fd">逐层流式</text>
+    <rect x="142" y="286" width="80" height="26" rx="13" fill="none" stroke="#818cf8" stroke-opacity="0.55"/>
+    <text x="182" y="303" text-anchor="middle" fill="#c7d2fe">MoE 专家</text>
+    <rect x="232" y="286" width="80" height="26" rx="13" fill="none" stroke="#f472b6" stroke-opacity="0.55"/>
+    <text x="272" y="303" text-anchor="middle" fill="#fbcfe8">显存优化</text>
+    <rect x="322" y="286" width="80" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.55"/>
+    <text x="362" y="303" text-anchor="middle" fill="#a7f3d0">块级压缩</text>
+  </g>
+
+  <!-- right side concept: stacked layers streaming into a small GPU -->
+  <g>
+    <!-- disk stack of layers -->
+    <g font-family="Microsoft YaHei, sans-serif" font-size="10" fill="#94a3b8">
+      <rect x="600" y="120" width="120" height="16" rx="3" fill="url(#chip)" stroke="#334155"/>
+      <rect x="600" y="140" width="120" height="16" rx="3" fill="url(#chip)" stroke="#334155"/>
+      <rect x="600" y="160" width="120" height="16" rx="3" fill="#1e3a5f" stroke="#38bdf8"/>
+      <rect x="600" y="180" width="120" height="16" rx="3" fill="url(#chip)" stroke="#334155"/>
+      <rect x="600" y="200" width="120" height="16" rx="3" fill="url(#chip)" stroke="#334155"/>
+      <text x="660" y="248" text-anchor="middle" fill="#64748b">磁盘：分层权重</text>
+    </g>
+    <!-- arrow -->
+    <path d="M726 168 L800 168" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4" fill="none"/>
+    <path d="M800 168 l-8 -4 l0 8 z" fill="#38bdf8"/>
+    <!-- small GPU -->
+    <rect x="800" y="150" width="56" height="40" rx="6" fill="#1e293b" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="828" y="167" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#f9a8d4">4GB</text>
+    <text x="828" y="181" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">GPU</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="40" y1="336" x2="860" y2="336" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="40" y="360" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#64748b">原理拆解 · 速度代价 · 适用场景 · 避坑清单</text>
+  <text x="860" y="360" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#475569">公众号：AI 行业观察</text>
+</svg>

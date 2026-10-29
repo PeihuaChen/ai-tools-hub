@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">Muse Glimmer 30B 架构总览</text>
+  <text x="40" y="74" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#4b5563">约 29.6B 稠密模型：27.9B 文本解码器 + 1.8B 视觉编码器，混合注意力 52 层，附带 DFlash 草稿模型</text>
+  <line x1="40" y1="90" x2="1160" y2="90" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- INPUT column -->
+  <text x="40" y="126" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8">① 输入</text>
+
+  <rect x="40" y="140" width="190" height="56" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="135" y="164" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8">文本 tokens</text>
+  <text x="135" y="183" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">vocab 202,048</text>
+
+  <rect x="40" y="212" width="190" height="80" rx="10" fill="#f0fdfa" stroke="#0e7490" stroke-width="1.4"/>
+  <text x="135" y="236" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#0e7490">图像 / 截图</text>
+  <text x="135" y="256" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">视频按帧采样</text>
+  <text x="135" y="274" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">示例上限 96 帧</text>
+
+  <rect x="40" y="308" width="190" height="76" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4"/>
+  <text x="135" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#6b7280">不支持</text>
+  <text x="135" y="352" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">音频输入 / 输出</text>
+  <text x="135" y="370" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">图像 / 视频生成</text>
+
+  <!-- perception encoder -->
+  <text x="270" y="126" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#0e7490">② 感知编码</text>
+
+  <rect x="270" y="212" width="180" height="80" rx="10" fill="#f0fdfa" stroke="#0e7490" stroke-width="1.4"/>
+  <text x="360" y="238" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#0e7490">Perception Encoder</text>
+  <text x="360" y="258" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">ViT-G/14 风格 · 50 层</text>
+  <text x="360" y="276" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">约 1.8B 参数</text>
+
+  <rect x="270" y="304" width="180" height="46" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="360" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">GELU 多模态投影器</text>
+
+  <line x1="230" y1="252" x2="268" y2="252" stroke="#94a3b8" stroke-width="1.4"/>
+  <path d="M262 246 L270 252 L262 258 Z" fill="#94a3b8"/>
+  <line x1="360" y1="292" x2="360" y2="302" stroke="#94a3b8" stroke-width="1.4"/>
+
+  <!-- decoder -->
+  <text x="490" y="126" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#6d28d9">③ 稠密文本解码器 · 52 层 · 27.9B</text>
+
+  <rect x="490" y="140" width="420" height="244" rx="12" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+
+  <text x="510" y="168" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#6d28d9">混合注意力：3 层滑动窗口 + 1 层全局，重复 13 次</text>
+
+  <!-- attention pattern blocks -->
+  <g font-family="Microsoft YaHei, Arial, sans-serif" font-size="10">
+    <rect x="510" y="180" width="66" height="46" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="543" y="199" text-anchor="middle" fill="#1d4ed8" font-size="11" font-weight="bold">SWA</text>
+    <text x="543" y="215" text-anchor="middle" fill="#4b5563">2048 · RoPE</text>
+
+    <rect x="582" y="180" width="66" height="46" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="615" y="199" text-anchor="middle" fill="#1d4ed8" font-size="11" font-weight="bold">SWA</text>
+    <text x="615" y="215" text-anchor="middle" fill="#4b5563">2048 · RoPE</text>
+
+    <rect x="654" y="180" width="66" height="46" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="687" y="199" text-anchor="middle" fill="#1d4ed8" font-size="11" font-weight="bold">SWA</text>
+    <text x="687" y="215" text-anchor="middle" fill="#4b5563">2048 · RoPE</text>
+
+    <rect x="726" y="180" width="72" height="46" rx="6" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="762" y="199" text-anchor="middle" fill="#6d28d9" font-size="11" font-weight="bold">Full</text>
+    <text x="762" y="215" text-anchor="middle" fill="#4b5563">全局 · NoPE</text>
+
+    <text x="812" y="199" font-family="Arial, sans-serif" font-size="13" fill="#6b7280">×13</text>
+    <text x="812" y="216" font-family="Microsoft YaHei, Arial, sans-serif" font-size="10" fill="#6b7280">= 52 层</text>
+  </g>
+
+  <!-- specs inside decoder -->
+  <g font-family="Microsoft YaHei, Arial, sans-serif" font-size="11">
+    <rect x="510" y="240" width="185" height="38" rx="6" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="522" y="264" fill="#111827">GQA：32 query / 2 KV heads</text>
+
+    <rect x="705" y="240" width="185" height="38" rx="6" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="717" y="264" fill="#111827">head dim 128 · hidden 6656</text>
+
+    <rect x="510" y="288" width="185" height="38" rx="6" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="522" y="312" fill="#111827">SwiGLU FFN · untied lm_head</text>
+
+    <rect x="705" y="288" width="185" height="38" rx="6" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+    <text x="717" y="312" fill="#111827">上下文 131,072 tokens</text>
+
+    <rect x="510" y="336" width="380" height="36" rx="6" fill="#ecfdf5" stroke="#15803d" stroke-width="1.2"/>
+    <text x="522" y="359" fill="#15803d">推理档位：low / medium / high / xhigh（提示模板设置）</text>
+  </g>
+
+  <line x1="450" y1="252" x2="488" y2="252" stroke="#94a3b8" stroke-width="1.4"/>
+  <path d="M482 246 L490 252 L482 258 Z" fill="#94a3b8"/>
+
+  <!-- DFlash drafter -->
+  <text x="950" y="126" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#b45309">④ 加速</text>
+
+  <rect x="950" y="140" width="210" height="112" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="1.4"/>
+  <text x="1055" y="166" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#b45309">DFlash 草稿模型</text>
+  <text x="1055" y="188" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">整块提议 tokens</text>
+  <text x="1055" y="206" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">主模型并行验证</text>
+  <text x="1055" y="228" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#b45309">RTX 5090：74.9 → 233 tok/s</text>
+  <text x="1055" y="244" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">M5-Max 1.8× · M4-Max 1.5×</text>
+
+  <line x1="912" y1="196" x2="948" y2="196" stroke="#b45309" stroke-width="1.4" stroke-dasharray="4"/>
+  <path d="M942 190 L950 196 L942 202 Z" fill="#b45309"/>
+
+  <rect x="950" y="266" width="210" height="118" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+  <text x="1055" y="290" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#111827">训练来源</text>
+  <text x="962" y="312" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">预训练：Muse Spark logit 蒸馏</text>
+  <text x="962" y="332" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">中训练：长上下文 + Agent 数据</text>
+  <text x="962" y="352" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#4b5563">后训练：SFT + on-policy + RL</text>
+  <text x="962" y="372" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">知识截止：2026-01-04</text>
+
+  <!-- capability strip -->
+  <line x1="40" y1="410" x2="1160" y2="410" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="40" y="440" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" fill="#111827">⑤ 官方主打的六项 Agent 能力</text>
+
+  <g font-family="Microsoft YaHei, Arial, sans-serif">
+    <rect x="40" y="456" width="176" height="70" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="128" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">端到端任务完成</text>
+    <text x="128" y="503" text-anchor="middle" font-size="10" fill="#4b5563">MCP-Atlas · SWE-Bench</text>
+    <text x="128" y="518" text-anchor="middle" font-size="10" fill="#6b7280">DeepSearch QA · τ-Bench</text>
+
+    <rect x="228" y="456" width="176" height="70" rx="8" fill="#f0fdfa" stroke="#0e7490" stroke-width="1.2"/>
+    <text x="316" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#0e7490">可靠工具调用</text>
+    <text x="316" y="503" text-anchor="middle" font-size="10" fill="#4b5563">精确 schema</text>
+    <text x="316" y="518" text-anchor="middle" font-size="10" fill="#6b7280">跨长流程保持一致</text>
+
+    <rect x="416" y="456" width="176" height="70" rx="8" fill="#ecfdf5" stroke="#15803d" stroke-width="1.2"/>
+    <text x="504" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">多步推理</text>
+    <text x="504" y="503" text-anchor="middle" font-size="10" fill="#4b5563">长时程计划连贯</text>
+    <text x="504" y="518" text-anchor="middle" font-size="10" fill="#6b7280">复杂工作流不断链</text>
+
+    <rect x="604" y="456" width="176" height="70" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="1.2"/>
+    <text x="692" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">失败恢复</text>
+    <text x="692" y="503" text-anchor="middle" font-size="10" fill="#4b5563">工具报错时诊断重试</text>
+    <text x="692" y="518" text-anchor="middle" font-size="10" fill="#6b7280">而不是直接停住</text>
+
+    <rect x="792" y="456" width="176" height="70" rx="8" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="880" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#6d28d9">多模态推理</text>
+    <text x="880" y="503" text-anchor="middle" font-size="10" fill="#4b5563">交错文本 + 图像</text>
+    <text x="880" y="518" text-anchor="middle" font-size="10" fill="#6b7280">读截图 / 图表 / 文档</text>
+
+    <rect x="980" y="456" width="180" height="70" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+    <text x="1070" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#b91c1c">脚手架兼容</text>
+    <text x="1070" y="503" text-anchor="middle" font-size="10" fill="#4b5563">OpenClaw 等编排模式</text>
+    <text x="1070" y="518" text-anchor="middle" font-size="10" fill="#6b7280">100+ 语言训练</text>
+  </g>
+
+  <line x1="40" y1="556" x2="1160" y2="556" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="40" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">关键点：稠密架构意味着每个 token 都走完整个模型 —— 没有路由与专家选择，延迟可预测、失败模式更少，这是它选择 Agent 场景的直接理由。</text>
+  <text x="40" y="600" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">数据来源：Meta Research 官方博客、Hugging Face 官方 model card 与集成指南、LMSYS SGLang day-0 支持说明（2026-08-10）</text>
+  <text x="1160" y="600" text-anchor="end" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#94a3b8">AI 行业观察</text>
+</svg>

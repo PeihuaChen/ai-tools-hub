@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="880" viewBox="0 0 1080 880">
+  <rect width="1080" height="880" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">DMB 独立实测：四项结论</text>
+  <text x="540" y="140" font-size="32" fill="#4b5563" text-anchor="middle">协议冻结 · 自费 28.34 美元 · 原始日志公开</text>
+
+  <g>
+    <rect x="48" y="180" width="478" height="290" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="76" y="234" font-size="40" font-weight="bold" fill="#1d4ed8">准确率：中游</text>
+    <text x="76" y="300" font-size="56" font-weight="bold" fill="#1d4ed8">76.3%</text>
+    <text x="76" y="384" font-size="32" fill="#4b5563">Banking 意图识别任务</text>
+    <text x="76" y="432" font-size="32" fill="#4b5563">领先者 81.3%，Jev 属中游</text>
+  </g>
+
+  <g>
+    <rect x="554" y="180" width="478" height="290" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="582" y="234" font-size="40" font-weight="bold" fill="#0e7490">延迟：264ms</text>
+    <text x="582" y="300" font-size="56" font-weight="bold" fill="#0e7490">1.2×</text>
+    <text x="582" y="384" font-size="32" fill="#4b5563">仅比最快 LLM 快 1.2 倍</text>
+    <text x="582" y="432" font-size="32" fill="#4b5563">厂商口径称快 40–200 倍</text>
+  </g>
+
+  <g>
+    <rect x="48" y="498" width="478" height="290" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="76" y="552" font-size="40" font-weight="bold" fill="#b45309">选项上限：硬墙</text>
+    <text x="76" y="618" font-size="56" font-weight="bold" fill="#b45309">255</text>
+    <text x="76" y="702" font-size="32" fill="#4b5563">第 256 个选项直接报错</text>
+    <text x="76" y="750" font-size="32" fill="#4b5563">对照 LLM 均支持 512 个</text>
+  </g>
+
+  <g>
+    <rect x="554" y="498" width="478" height="290" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="582" y="552" font-size="40" font-weight="bold" fill="#b91c1c">校准：全场最差</text>
+    <text x="582" y="618" font-size="56" font-weight="bold" fill="#b91c1c">0.246</text>
+    <text x="582" y="702" font-size="32" fill="#4b5563">ECE 远高于所有 LLM</text>
+    <text x="582" y="750" font-size="32" fill="#4b5563">选项换序，13% 判断翻转</text>
+  </g>
+
+  <text x="48" y="836" font-size="32" fill="#6b7280">唯一无争议的优势是成本：每千次决策 $0.07</text>
+</svg>

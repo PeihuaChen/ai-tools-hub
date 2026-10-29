@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d2b"/>
+      <stop offset="100%" stop-color="#1a1a42"/>
+    </linearGradient>
+    <linearGradient id="topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="33%" stop-color="#f7c948"/>
+      <stop offset="66%" stop-color="#48bb78"/>
+      <stop offset="100%" stop-color="#4299e1"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9f7aea"/>
+      <stop offset="33%" stop-color="#ed64a6"/>
+      <stop offset="66%" stop-color="#f56565"/>
+      <stop offset="100%" stop-color="#f6ad55"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topBar)"/>
+  <!-- Bottom bar -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#bottomBar)"/>
+
+  <!-- Top-left label -->
+  <rect x="30" y="22" width="280" height="30" rx="4" fill="rgba(255,107,53,0.1)" stroke="rgba(255,107,53,0.45)" stroke-width="1"/>
+  <text x="44" y="42" font-family="'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif" font-size="12.5" fill="#f6ad55">AI 行业观察 · WAIC 2026 产业地图</text>
+
+  <!-- Year badge -->
+  <rect x="832" y="20" width="42" height="42" rx="8" fill="rgba(66,153,225,0.12)" stroke="rgba(66,153,225,0.5)" stroke-width="1"/>
+  <text x="853" y="48" font-family="'Helvetica Neue',Arial,sans-serif" font-size="20" font-weight="bold" fill="#4299e1" text-anchor="middle">26</text>
+
+  <!-- Main title line 1 -->
+  <text x="40" y="98" font-family="'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif" font-size="30" font-weight="bold" fill="#ffffff">2026 智能体应用元年</text>
+
+  <!-- Subtitle -->
+  <text x="40" y="134" font-family="'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif" font-size="17" fill="#5ce0b8">WAIC 2026 智能体软硬件生态与落地场景产业地图</text>
+
+  <!-- Highlights -->
+  <text x="40" y="174" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12.5" fill="#f6ad55">▸ 算力：Atlas 950 (8192卡) / 曙光8000 (10万卡) / 燧原·壁仞超节点</text>
+  <text x="40" y="196" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12.5" fill="#48bb78">▸ 硬件：首款 L3 Agent手机 STEPX Neo / Step AOS / 200+人形厂</text>
+  <text x="40" y="218" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12.5" fill="#63b3ed">▸ 落地：智能药房 / 无人店 / 整车产线 / 金融Agent / 脑控机器人</text>
+
+  <!-- Right side stack diagram -->
+  <rect x="610" y="152" width="250" height="38" rx="5" fill="rgba(245,101,101,0.08)" stroke="rgba(245,101,101,0.5)" stroke-width="1"/>
+  <text x="735" y="176" font-family="'PingFang SC','Microsoft YaHei',monospace" font-size="11.5" fill="#f56565" text-anchor="middle">行业应用层 (Industry Agents)</text>
+
+  <rect x="610" y="198" width="250" height="38" rx="5" fill="rgba(66,153,225,0.08)" stroke="rgba(66,153,225,0.5)" stroke-width="1"/>
+  <text x="735" y="222" font-family="'PingFang SC','Microsoft YaHei',monospace" font-size="11.5" fill="#63b3ed" text-anchor="middle">模型平台层 (M3 / LingBot-VLA)</text>
+
+  <rect x="610" y="244" width="250" height="38" rx="5" fill="rgba(72,187,120,0.08)" stroke="rgba(72,187,120,0.5)" stroke-width="1"/>
+  <text x="735" y="268" font-family="'PingFang SC','Microsoft YaHei',monospace" font-size="11.5" fill="#48bb78" text-anchor="middle">具身智能层 (Robot / Dexterous)</text>
+
+  <rect x="610" y="290" width="250" height="38" rx="5" fill="rgba(246,173,85,0.08)" stroke="rgba(246,173,85,0.5)" stroke-width="1"/>
+  <text x="735" y="314" font-family="'PingFang SC','Microsoft YaHei',monospace" font-size="11.5" fill="#f6ad55" text-anchor="middle">端侧硬件层 (Agent Phone / Car)</text>
+
+  <rect x="610" y="336" width="250" height="34" rx="5" fill="rgba(159,122,234,0.08)" stroke="rgba(159,122,234,0.5)" stroke-width="1"/>
+  <text x="735" y="358" font-family="'PingFang SC','Microsoft YaHei',monospace" font-size="11.5" fill="#b794f4" text-anchor="middle">算力基建层 (Atlas 950 / Sugon)</text>
+
+  <!-- Stack arrows -->
+  <line x1="735" y1="190" x2="735" y2="198" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <line x1="735" y1="236" x2="735" y2="244" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <line x1="735" y1="282" x2="735" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <line x1="735" y1="328" x2="735" y2="336" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+
+  <!-- Tag pills -->
+  <rect x="40" y="248" width="74" height="24" rx="12" fill="none" stroke="rgba(255,107,53,0.5)" stroke-width="1"/>
+  <text x="77" y="264" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10.5" fill="#f6ad55" text-anchor="middle">超节点</text>
+
+  <rect x="124" y="248" width="88" height="24" rx="12" fill="none" stroke="rgba(72,187,120,0.5)" stroke-width="1"/>
+  <text x="168" y="264" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10.5" fill="#48bb78" text-anchor="middle">Agent 手机</text>
+
+  <rect x="222" y="248" width="88" height="24" rx="12" fill="none" stroke="rgba(66,153,225,0.5)" stroke-width="1"/>
+  <text x="266" y="264" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10.5" fill="#63b3ed" text-anchor="middle">人形机器人</text>
+
+  <rect x="320" y="248" width="88" height="24" rx="12" fill="none" stroke="rgba(159,122,234,0.5)" stroke-width="1"/>
+  <text x="364" y="264" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10.5" fill="#b794f4" text-anchor="middle">具身大模型</text>
+
+  <rect x="418" y="248" width="76" height="24" rx="12" fill="none" stroke="rgba(237,100,166,0.5)" stroke-width="1"/>
+  <text x="456" y="264" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10.5" fill="#ed64a6" text-anchor="middle">一脑多机</text>
+
+  <rect x="504" y="248" width="78" height="24" rx="12" fill="none" stroke="rgba(245,101,101,0.5)" stroke-width="1"/>
+  <text x="543" y="264" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10.5" fill="#fc8181" text-anchor="middle">IDC 139%</text>
+
+  <!-- Divider line -->
+  <line x1="40" y1="330" x2="580" y2="330" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Chapter hint -->
+  <text x="40" y="352" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="rgba(255,255,255,0.35)">算力底座 → 端侧硬件 → 具身智能 → 模型平台 → 落地场景 → 产业信号</text>
+
+  <!-- Watermark -->
+  <text x="580" y="352" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="10" fill="rgba(255,255,255,0.2)" text-anchor="end">VirxACT · AI 行业观察</text>
+</svg>
