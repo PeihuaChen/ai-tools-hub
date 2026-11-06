@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#ffffff"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">胜负分界线：Muse Glimmer 30B / Qwen3.6-27B / Gemma4-31B</text>
+  <text x="40" y="74" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#4b5563">全部分数来自 Meta 官方发布表格。同一张表里三个模型各有主场 —— 这不是排名，而是任务分工</text>
+  <line x1="40" y1="90" x2="1160" y2="90" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- legend -->
+  <g font-family="Microsoft YaHei, Arial, sans-serif" font-size="12">
+    <rect x="40" y="104" width="14" height="14" rx="3" fill="#1d4ed8"/>
+    <text x="60" y="116" fill="#1d4ed8">Muse Glimmer 30B</text>
+    <rect x="200" y="104" width="14" height="14" rx="3" fill="#b45309"/>
+    <text x="220" y="116" fill="#b45309">Qwen3.6-27B</text>
+    <rect x="340" y="104" width="14" height="14" rx="3" fill="#15803d"/>
+    <text x="360" y="116" fill="#15803d">Gemma4-31B</text>
+    <text x="900" y="116" fill="#6b7280">横条按各行最高分归一化，长度仅供组内比较</text>
+  </g>
+
+  <!-- Panel A: Glimmer leads -->
+  <rect x="40" y="134" width="1120" height="216" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="60" y="162" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d4ed8">A. Glimmer 明确领先：通用 Agent、检索、长上下文</text>
+
+  <g font-family="Microsoft YaHei, Arial, sans-serif" font-size="11">
+    <!-- MCP Atlas: max 75.5 -> 420px scale 5.56 -->
+    <text x="60" y="190" fill="#111827" font-size="12">MCP Atlas Public</text>
+    <rect x="220" y="180" width="420" height="12" rx="3" fill="#1d4ed8"/>
+    <text x="648" y="190" fill="#1d4ed8" font-weight="bold">75.5</text>
+    <rect x="220" y="195" width="347" height="12" rx="3" fill="#b45309"/>
+    <text x="575" y="205" fill="#b45309">62.5</text>
+    <rect x="220" y="210" width="301" height="12" rx="3" fill="#15803d"/>
+    <text x="529" y="220" fill="#15803d">54.2</text>
+    <text x="700" y="205" fill="#6b7280">差距最大的一行：领先 Gemma 21.3 分、Qwen 13.0 分</text>
+
+    <text x="60" y="248" fill="#111827" font-size="12">DeepSearch QA</text>
+    <rect x="220" y="238" width="420" height="12" rx="3" fill="#1d4ed8"/>
+    <text x="648" y="248" fill="#1d4ed8" font-weight="bold">74.6</text>
+    <rect x="220" y="253" width="400" height="12" rx="3" fill="#b45309"/>
+    <text x="628" y="263" fill="#b45309">71.1</text>
+    <rect x="220" y="268" width="347" height="12" rx="3" fill="#15803d"/>
+    <text x="575" y="278" fill="#15803d">61.7</text>
+    <text x="700" y="263" fill="#6b7280">深度检索问答，Qwen 咬得较紧</text>
+
+    <text x="60" y="306" fill="#111827" font-size="12">长上下文 AA-LCR</text>
+    <rect x="220" y="296" width="420" height="12" rx="3" fill="#1d4ed8"/>
+    <text x="648" y="306" fill="#1d4ed8" font-weight="bold">80.0</text>
+    <rect x="220" y="311" width="385" height="12" rx="3" fill="#b45309"/>
+    <text x="613" y="321" fill="#b45309">73.3</text>
+    <rect x="220" y="326" width="359" height="12" rx="3" fill="#15803d"/>
+    <text x="587" y="336" fill="#15803d">68.3</text>
+    <text x="700" y="321" fill="#6b7280">另有 GAIA2 43.3、WildClawBench 47.6、SWE-Bench Pro 51.2、AIME 2026 94.7 领先</text>
+  </g>
+
+  <!-- Panel B: Qwen leads -->
+  <rect x="40" y="364" width="1120" height="180" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="1.4"/>
+  <text x="60" y="392" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" fill="#b45309">B. Qwen3.6-27B 反超：动手操作电脑、终端密集型编码、多模态</text>
+
+  <g font-family="Microsoft YaHei, Arial, sans-serif" font-size="11">
+    <text x="60" y="420" fill="#111827" font-size="12">OSWorld-Verified</text>
+    <rect x="220" y="410" width="420" height="12" rx="3" fill="#b45309"/>
+    <text x="648" y="420" fill="#b45309" font-weight="bold">75.6</text>
+    <rect x="220" y="425" width="366" height="12" rx="3" fill="#1d4ed8"/>
+    <text x="594" y="435" fill="#1d4ed8">65.9</text>
+    <rect x="220" y="440" width="325" height="12" rx="3" fill="#15803d"/>
+    <text x="553" y="450" fill="#15803d">58.5</text>
+    <text x="700" y="435" fill="#6b7280">桌面操作，Glimmer 落后 9.7 分（不是小数）</text>
+
+    <text x="60" y="478" fill="#111827" font-size="12">TerminalBench 2.1</text>
+    <rect x="220" y="468" width="420" height="12" rx="3" fill="#b45309"/>
+    <text x="648" y="478" fill="#b45309" font-weight="bold">60.7</text>
+    <rect x="220" y="483" width="358" height="12" rx="3" fill="#1d4ed8"/>
+    <text x="586" y="493" fill="#1d4ed8">51.7</text>
+    <rect x="220" y="498" width="300" height="12" rx="3" fill="#15803d"/>
+    <text x="528" y="508" fill="#15803d">43.4</text>
+    <text x="700" y="493" fill="#6b7280">终端任务落后 9 分</text>
+
+    <text x="60" y="530" fill="#4b5563" font-size="11">Qwen 同时领先：SWE-Bench Verified 77.2 : 76.0 · GDPVal-AA v2 1141 : 953 · SkillsBench 46.6 : 44.3 · ScreenSpot Pro / OmniDocBench / MMMU Pro 全部微弱领先</text>
+  </g>
+
+  <!-- Panel C: Gemma leads -->
+  <rect x="40" y="558" width="1120" height="96" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.4"/>
+  <text x="60" y="586" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" fill="#15803d">C. Gemma4-31B 守住的：知识推理与两项安全指标（越低越好）</text>
+
+  <g font-family="Microsoft YaHei, Arial, sans-serif" font-size="11">
+    <text x="60" y="612" fill="#111827" font-size="12">CI Memories 违规率 ↓</text>
+    <text x="240" y="612" fill="#15803d" font-weight="bold">Gemma 12.1%</text>
+    <text x="380" y="612" fill="#1d4ed8">Glimmer 26.4%</text>
+    <text x="530" y="612" fill="#b45309">Qwen 53.4%</text>
+
+    <text x="60" y="634" fill="#111827" font-size="12">Siren AgentDojo 攻击成功率 ↓</text>
+    <text x="240" y="634" fill="#15803d" font-weight="bold">Gemma 25.6%</text>
+    <text x="380" y="634" fill="#1d4ed8">Glimmer 28.4%</text>
+    <text x="530" y="634" fill="#b45309">Qwen 40.3%</text>
+
+    <text x="700" y="612" fill="#4b5563">GPQA Diamond 85.7 : 83.5 : 84.2 · HLE Text 23.6 : 22.0 : 23.1</text>
+    <text x="700" y="634" fill="#6b7280">谷歌模型最难被诱导突破自身护栏，哪怕原始能力落后</text>
+  </g>
+
+  <text x="40" y="678" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#b91c1c">注意：Meta 在方法论报告中承认测试设置未针对竞品调优 —— 采样参数不一致（top-k 64 vs 20）、脚手架各异、OSWorld 给三方用了不同动作空间、多个评分器是别家模型。</text>
+  <text x="40" y="696" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">数据来源：Meta Research 官方发布表格与评测方法论报告，经 Kingy AI 与 OfficeChai 逐行整理；应视为脚手架特定的发布日证据，而非普适排名。</text>
+  <text x="1160" y="696" text-anchor="end" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#94a3b8">AI 行业观察</text>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0062ff"/><stop offset="0.5" stop-color="#6929c4"/><stop offset="1" stop-color="#1192e8"/></linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#009d9a"/><stop offset="0.5" stop-color="#0062ff"/><stop offset="1" stop-color="#6929c4"/></linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#78a9ff"/><stop offset="1" stop-color="#a56eff"/></linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="900" height="383" rx="12" fill="url(#bg)"/>
+  <rect width="900" height="383" rx="12" fill="url(#grid)"/>
+  <rect x="1" y="1" width="898" height="381" rx="12" fill="none" stroke="#334155" stroke-width="2"/>
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- tag box -->
+  <rect x="40" y="34" width="280" height="30" rx="6" fill="#1e1e44" stroke="#0062ff" stroke-opacity="0.6"/>
+  <text x="56" y="54" fill="#78a9ff" font-size="14" font-weight="600">AI 开发平台 · 企业级 Agent 框架</text>
+
+  <!-- year badge -->
+  <circle cx="840" cy="50" r="26" fill="#1e1e44" stroke="#6929c4" stroke-opacity="0.7"/>
+  <text x="840" y="58" fill="#a56eff" font-size="22" font-weight="700" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="40" y="118" fill="#ffffff" font-size="29" font-weight="700">IBM CUGA 深度解读</text>
+  <text x="40" y="153" fill="url(#sub)" font-size="18" font-weight="600">开源企业级通用 Agent 框架的架构、治理与落地实践</text>
+
+  <!-- highlights -->
+  <text x="40" y="196" fill="#78a9ff" font-size="13">▸ AppWorld #1 · WebArena #1（连续 7 个月）</text>
+  <text x="40" y="220" fill="#009d9a" font-size="13">▸ 层级 Planner-Executor · Policy-as-Code 治理</text>
+  <text x="40" y="244" fill="#a56eff" font-size="13">▸ OpenAPI + MCP + Agent-as-Tool · BPO 生产试点</text>
+
+  <!-- concept: layered architecture -->
+  <g transform="translate(570,115)">
+    <rect x="0" y="0" width="260" height="36" rx="6" fill="#1e293b" stroke="#0062ff" stroke-opacity="0.7"/>
+    <text x="130" y="23" fill="#78a9ff" font-size="12" font-weight="700" text-anchor="middle">Policy Layer（治理）</text>
+    <rect x="0" y="44" width="260" height="36" rx="6" fill="#1e293b" stroke="#6929c4" stroke-opacity="0.7"/>
+    <text x="130" y="67" fill="#a56eff" font-size="12" font-weight="700" text-anchor="middle">Planner（规划）</text>
+    <rect x="0" y="88" width="260" height="36" rx="6" fill="#1e293b" stroke="#009d9a" stroke-opacity="0.7"/>
+    <text x="130" y="111" fill="#009d9a" font-size="12" font-weight="700" text-anchor="middle">Executor（ReAct 执行）</text>
+    <rect x="0" y="132" width="260" height="36" rx="6" fill="#1e293b" stroke="#1192e8" stroke-opacity="0.7"/>
+    <text x="130" y="155" fill="#1192e8" font-size="12" font-weight="700" text-anchor="middle">Tools: OpenAPI · MCP · Custom</text>
+  </g>
+
+  <!-- tag pills -->
+  <g font-size="12">
+    <rect x="40" y="296" width="50" height="26" rx="13" fill="none" stroke="#0062ff" stroke-opacity="0.7"/>
+    <text x="65" y="313" fill="#78a9ff" text-anchor="middle">IBM</text>
+    <rect x="98" y="296" width="66" height="26" rx="13" fill="none" stroke="#6929c4" stroke-opacity="0.7"/>
+    <text x="131" y="313" fill="#a56eff" text-anchor="middle">CUGA</text>
+    <rect x="172" y="296" width="76" height="26" rx="13" fill="none" stroke="#009d9a" stroke-opacity="0.7"/>
+    <text x="210" y="313" fill="#009d9a" text-anchor="middle">治理优先</text>
+    <rect x="256" y="296" width="66" height="26" rx="13" fill="none" stroke="#1192e8" stroke-opacity="0.7"/>
+    <text x="289" y="313" fill="#1192e8" text-anchor="middle">开源</text>
+    <rect x="330" y="296" width="56" height="26" rx="13" fill="none" stroke="#0062ff" stroke-opacity="0.7"/>
+    <text x="358" y="313" fill="#78a9ff" text-anchor="middle">MCP</text>
+    <rect x="394" y="296" width="76" height="26" rx="13" fill="none" stroke="#6929c4" stroke-opacity="0.7"/>
+    <text x="432" y="313" fill="#a56eff" text-anchor="middle">企业落地</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="40" y1="344" x2="860" y2="344" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="40" y="366" fill="#64748b" font-size="12">深度解析 · 九大章节 · 架构 + 治理 + 落地</text>
+  <text x="860" y="366" fill="#475569" font-size="12" text-anchor="end">AI Tools Hub</text>
+</svg>

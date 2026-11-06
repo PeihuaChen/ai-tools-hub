@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1008" viewBox="0 0 1080 1008">
+  <rect x="0" y="0" width="1080" height="1008" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="56" font-weight="bold" fill="#111827" text-anchor="middle">两条技术路线对比</text>
+
+  <!-- 列标题 -->
+  <rect x="48" y="150" width="480" height="90" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+  <text x="288" y="208" font-size="44" font-weight="bold" fill="#b45309" text-anchor="middle">级联三段式</text>
+  <rect x="552" y="150" width="480" height="90" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="792" y="208" font-size="44" font-weight="bold" fill="#1d4ed8" text-anchor="middle">端到端模型</text>
+
+  <!-- 左列步骤 -->
+  <g>
+    <rect x="48" y="260" width="480" height="140" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="310" font-size="40" font-weight="bold" fill="#111827">① 语音检测</text>
+    <text x="76" y="370" font-size="32" fill="#4b5563">找出有人说话的段</text>
+
+    <rect x="48" y="450" width="480" height="140" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="500" font-size="40" font-weight="bold" fill="#111827">② 切段提声纹</text>
+    <text x="76" y="560" font-size="32" fill="#4b5563">每段提一个嵌入向量</text>
+
+    <rect x="48" y="640" width="480" height="140" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="690" font-size="40" font-weight="bold" fill="#111827">③ 聚类归人</text>
+    <text x="76" y="750" font-size="32" fill="#4b5563">阈值要反复调参</text>
+
+    <rect x="48" y="820" width="480" height="140" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="76" y="870" font-size="40" font-weight="bold" fill="#b91c1c">重叠语音难处理</text>
+    <text x="76" y="930" font-size="32" fill="#b91c1c">三步误差逐级累积</text>
+  </g>
+
+  <!-- 右列步骤 -->
+  <g>
+    <rect x="552" y="260" width="480" height="140" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="580" y="310" font-size="40" font-weight="bold" fill="#111827">① 端到端编码器</text>
+    <text x="580" y="370" font-size="32" fill="#4b5563">31 层 Transformer</text>
+
+    <rect x="552" y="450" width="480" height="140" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="580" y="500" font-size="40" font-weight="bold" fill="#111827">② 输出 T×8 概率</text>
+    <text x="580" y="560" font-size="32" fill="#4b5563">每人每 10ms 一个值</text>
+
+    <rect x="552" y="640" width="480" height="140" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="580" y="690" font-size="40" font-weight="bold" fill="#111827">③ 缓存 + FIFO</text>
+    <text x="580" y="750" font-size="32" fill="#4b5563">流式时编号不乱跳</text>
+
+    <rect x="552" y="820" width="480" height="140" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="580" y="870" font-size="40" font-weight="bold" fill="#15803d">重叠天然支持</text>
+    <text x="580" y="930" font-size="32" fill="#15803d">无需聚类与调参</text>
+  </g>
+
+  <!-- 箭头 -->
+  <g stroke="#94a3b8" stroke-width="4">
+    <line x1="288" y1="404" x2="288" y2="432"/>
+    <line x1="288" y1="594" x2="288" y2="622"/>
+    <line x1="288" y1="784" x2="288" y2="804"/>
+    <line x1="792" y1="404" x2="792" y2="432"/>
+    <line x1="792" y1="594" x2="792" y2="622"/>
+    <line x1="792" y1="784" x2="792" y2="804"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M276 432 L300 432 L288 446 Z"/>
+    <path d="M276 622 L300 622 L288 636 Z"/>
+    <path d="M276 804 L300 804 L288 816 Z"/>
+    <path d="M780 432 L804 432 L792 446 Z"/>
+    <path d="M780 622 L804 622 L792 636 Z"/>
+    <path d="M780 804 L804 804 L792 816 Z"/>
+  </g>
+</svg>

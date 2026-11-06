@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#111827">从 55GB 到 16.76GB：Muse Glimmer 的显存预算账</text>
+  <text x="40" y="74" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#4b5563">主 GGUF 文件大小不等于运行时需求 —— 视觉投影器、草稿模型、KV cache 与运行时余量都要算进来</text>
+  <line x1="40" y1="90" x2="1160" y2="90" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- three tiers -->
+  <text x="40" y="122" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" fill="#111827">三个官方档位（横条长度按文件体积等比）</text>
+
+  <!-- BF16 -->
+  <text x="40" y="158" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">BF16 全精度</text>
+  <rect x="180" y="140" width="800" height="30" rx="5" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.3"/>
+  <text x="196" y="160" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#b91c1c">权重分片 59.55GB · 加 tokenizer / 运行时 / cache</text>
+  <text x="1000" y="160" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c">目标 64GB 显存</text>
+  <text x="180" y="188" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">用于参考级评测与微调，实践上 80GB 加速卡余量更安全；多卡 BF16 服务在 HF 示例里是 4 卡 vLLM</text>
+
+  <!-- K-Quant-Dynamic -->
+  <text x="40" y="230" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">K-Quant-Dynamic</text>
+  <rect x="180" y="212" width="264" height="30" rx="5" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.3"/>
+  <text x="196" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#1d4ed8">19.65GB</text>
+  <text x="460" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">15 项基准平均掉点 0.2%</text>
+  <text x="1000" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">目标 32GB 整机</text>
+
+  <!-- K-Quant-17GB -->
+  <text x="40" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" font-weight="bold" fill="#15803d">K-Quant-17GB</text>
+  <rect x="180" y="270" width="225" height="30" rx="5" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+  <text x="196" y="290" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#15803d">16.76GB（16,756,681,056 字节）</text>
+  <text x="420" y="290" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#4b5563">平均掉点 1.0%</text>
+  <text x="1000" y="290" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#15803d">目标 24GB 整机</text>
+
+  <line x1="40" y1="322" x2="1160" y2="322" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- 24GB envelope breakdown -->
+  <text x="40" y="354" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" fill="#111827">24GB 机器上，这 24GB 是怎么被用掉的</text>
+
+  <rect x="40" y="368" width="1120" height="86" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.4"/>
+
+  <!-- stacked bar: total 24GB -> 1080px wide inside, scale 45px per GB -->
+  <rect x="60" y="386" width="754" height="40" fill="#ecfdf5" stroke="#15803d" stroke-width="1.3"/>
+  <text x="437" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" font-weight="bold" fill="#15803d">语言模型主文件</text>
+  <text x="437" y="420" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#15803d">16.76GB</text>
+
+  <rect x="814" y="386" width="63" height="40" fill="#f0fdfa" stroke="#0e7490" stroke-width="1.3"/>
+  <text x="845" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" font-weight="bold" fill="#0e7490">视觉</text>
+  <text x="845" y="420" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="10" fill="#0e7490">1.40GB</text>
+
+  <rect x="877" y="386" width="73" height="40" fill="#fffbeb" stroke="#b45309" stroke-width="1.3"/>
+  <text x="913" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" font-weight="bold" fill="#b45309">DFlash</text>
+  <text x="913" y="420" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="10" fill="#b45309">1.63GB</text>
+
+  <rect x="950" y="386" width="190" height="40" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.3" stroke-dasharray="4"/>
+  <text x="1045" y="404" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" font-weight="bold" fill="#6d28d9">KV cache + 运行时 + OS</text>
+  <text x="1045" y="420" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="10" fill="#6d28d9">约 4.2GB 余量（随上下文变化）</text>
+
+  <text x="60" y="446" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">可选组件建议逐个加载：先跑纯文本，确认稳定后再加 mmproj-kquant.gguf（图像），最后加 dflash-kquant.gguf（加速）</text>
+
+  <line x1="40" y1="478" x2="1160" y2="478" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- DFlash speed panel -->
+  <text x="40" y="508" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" fill="#111827">DFlash 投机解码的加速幅度：算力富余的卡收益最大</text>
+
+  <g font-family="Microsoft YaHei, Arial, sans-serif">
+    <rect x="40" y="520" width="356" height="76" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="1.3"/>
+    <text x="56" y="544" font-size="13" font-weight="bold" fill="#b45309">RTX 5090</text>
+    <text x="56" y="566" font-size="12" fill="#4b5563">74.9 → 233 tok/s</text>
+    <text x="360" y="556" text-anchor="end" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#b45309">3.1×</text>
+    <text x="56" y="586" font-size="11" fill="#6b7280">经 llama.cpp 测得，带宽紧张的卡可回收余量最多</text>
+
+    <rect x="422" y="520" width="356" height="76" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <text x="438" y="544" font-size="13" font-weight="bold" fill="#1d4ed8">MacBook M5-Max</text>
+    <text x="438" y="566" font-size="12" fill="#4b5563">达到 50 tok/s</text>
+    <text x="742" y="556" text-anchor="end" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#1d4ed8">1.8×</text>
+    <text x="438" y="586" font-size="11" fill="#6b7280">统一内存基线本就少受带宽限制，余量更小</text>
+
+    <rect x="804" y="520" width="356" height="76" rx="8" fill="#f0fdfa" stroke="#0e7490" stroke-width="1.3"/>
+    <text x="820" y="544" font-size="13" font-weight="bold" fill="#0e7490">MacBook M4-Max</text>
+    <text x="820" y="566" font-size="12" fill="#4b5563">达到 38 tok/s</text>
+    <text x="1124" y="556" text-anchor="end" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#0e7490">1.5×</text>
+    <text x="820" y="586" font-size="11" fill="#6b7280">仍足够支撑流畅对话与实时 Agent 交互</text>
+  </g>
+
+  <text x="40" y="618" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#6b7280">数据来源：Meta Research 官方博客与 Hugging Face 官方 GGUF 仓库；文件字节数与目标硬件为官方口径，均为厂商自测，未经独立复现。</text>
+  <text x="1160" y="618" text-anchor="end" font-family="Microsoft YaHei, Arial, sans-serif" font-size="11" fill="#94a3b8">AI 行业观察</text>
+</svg>

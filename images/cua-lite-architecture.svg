@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="672" viewBox="0 0 1200 672">
+  <rect width="1200" height="672" fill="#ffffff"/>
+
+  <text x="50" y="46" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="24" font-weight="bold" fill="#111827">CUA-Lite 的四层结构</text>
+  <text x="50" y="74" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#4b5563">一套动作空间 + 一套数据 schema + 一条命令，横跨桌面 / 浏览器 / 手机</text>
+
+  <!-- Layer 1: Sandboxes -->
+  <rect x="50" y="96" width="1100" height="108" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="50" y="96" width="6" height="108" rx="3" fill="#1d4ed8"/>
+  <text x="78" y="128" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8">① 沙箱 Sandboxes</text>
+  <text x="78" y="152" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">VM-free · 普通 Docker 主机即可</text>
+  <text x="78" y="174" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">30k+ 可验证任务</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13">
+    <rect x="330" y="118" width="150" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="405" y="140" text-anchor="middle" fill="#1d4ed8">Lite.OSWorld</text>
+    <rect x="496" y="118" width="150" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="571" y="140" text-anchor="middle" fill="#1d4ed8">Lite.ScaleCUA</text>
+    <rect x="662" y="118" width="150" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="737" y="140" text-anchor="middle" fill="#1d4ed8">Lite.CUAGym</text>
+    <rect x="828" y="118" width="290" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="973" y="140" text-anchor="middle" fill="#1d4ed8">Lite.CUAWorld（约 40 个应用）</text>
+  </g>
+  <text x="330" y="176" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">同一套容器底座；Blender、QGIS、VS Code 这类重桌面应用也在里面，每个任务自带可验证奖励</text>
+
+  <!-- Layer 2: Data -->
+  <rect x="50" y="216" width="1100" height="108" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <rect x="50" y="216" width="6" height="108" rx="3" fill="#15803d"/>
+  <text x="78" y="248" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="bold" fill="#15803d">② 数据 Data</text>
+  <text x="78" y="272" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">LiteSample 一套 schema</text>
+  <text x="78" y="294" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">parquet + 图片</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13">
+    <rect x="330" y="238" width="240" height="34" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="450" y="260" text-anchor="middle" fill="#15803d">Corpora：10+ 现有数据集</text>
+    <rect x="586" y="238" width="240" height="34" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="706" y="260" text-anchor="middle" fill="#15803d">Rollouts：教师模型轨迹</text>
+    <rect x="842" y="238" width="276" height="34" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1"/>
+    <text x="980" y="260" text-anchor="middle" fill="#15803d">每个模型族一个 adapter</text>
+  </g>
+  <text x="330" y="296" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">Aguvis / OpenCUA / ScaleCUA / GUI-360 / GUIOdyssey / Mind2Web 等已预处理，免费挂 Hugging Face</text>
+
+  <!-- Layer 3: Eval -->
+  <rect x="50" y="336" width="1100" height="108" rx="10" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <rect x="50" y="336" width="6" height="108" rx="3" fill="#6d28d9"/>
+  <text x="78" y="368" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="bold" fill="#6d28d9">③ 评测 Eval</text>
+  <text x="78" y="392" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">lite.gym 统一接口</text>
+  <text x="78" y="414" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">15+ benchmark</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13">
+    <rect x="330" y="358" width="176" height="34" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="418" y="380" text-anchor="middle" fill="#6d28d9">定位 Grounding</text>
+    <rect x="522" y="358" width="176" height="34" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="610" y="380" text-anchor="middle" fill="#6d28d9">桌面 Desktop</text>
+    <rect x="714" y="358" width="176" height="34" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="802" y="380" text-anchor="middle" fill="#6d28d9">浏览器 Browser</text>
+    <rect x="906" y="358" width="212" height="34" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="1012" y="380" text-anchor="middle" fill="#6d28d9">手机 Mobile</text>
+  </g>
+  <text x="330" y="416" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">ScreenSpot-Pro、OSWorld、OSWorld-2、WindowsAgentArena、WebArena、WebVoyager、AndroidWorld、MobileWorld…</text>
+
+  <!-- Layer 4: Train -->
+  <rect x="50" y="456" width="1100" height="108" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="50" y="456" width="6" height="108" rx="3" fill="#b45309"/>
+  <text x="78" y="488" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="bold" fill="#b45309">④ 训练 Train</text>
+  <text x="78" y="512" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">跑在 Slime 之上</text>
+  <text x="78" y="534" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">同一条 rollout 循环</text>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13">
+    <rect x="330" y="478" width="240" height="34" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+    <text x="450" y="500" text-anchor="middle" fill="#b45309">SFT：导出 parquet 微调</text>
+    <rect x="586" y="478" width="240" height="34" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+    <text x="706" y="500" text-anchor="middle" fill="#b45309">RL：GRPO 及更多算法</text>
+    <rect x="842" y="478" width="276" height="34" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+    <text x="980" y="500" text-anchor="middle" fill="#b45309">env-server 支撑高并发 rollout</text>
+  </g>
+  <text x="330" y="536" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">一次 rollout 打分后既可用来排名（评测），也可用来更新策略（训练）——第三、四层共用一套循环</text>
+
+  <!-- Bottom command -->
+  <rect x="50" y="586" width="1100" height="56" rx="10" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="78" y="612" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#111827">$ python scripts/rollout.py --model-id gpt-5.5 --env-id osworld --splits eval</text>
+  <text x="78" y="632" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#6b7280">换 --model-id 换 Agent，换 --env-id 换环境；这条命令就是整个平台对外的全部接口</text>
+
+  <text x="1150" y="664" text-anchor="end" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">数据来源：CUA-Lite 官方仓库与项目主页（2026-09）</text>
+</svg>

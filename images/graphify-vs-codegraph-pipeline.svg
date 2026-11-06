@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660">
+  <rect x="0" y="0" width="1200" height="660" fill="#ffffff"/>
+
+  <text x="600" y="42" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle">CodeGraph 与 Graphify 的流水线分岔</text>
+  <text x="600" y="70" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b5563" text-anchor="middle">左：代码结构的确定性快查层（零 LLM）　　右：项目知识的语义汇聚层（文档部分需模型）</text>
+
+  <line x1="600" y1="92" x2="600" y2="600" stroke="#d9e2ec" stroke-width="1.5" stroke-dasharray="6"/>
+
+  <!-- LEFT: CodeGraph -->
+  <rect x="40" y="100" width="520" height="34" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="300" y="123" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">CodeGraph　v1.5.0　TypeScript + 原生 Rust 内核　MIT</text>
+
+  <rect x="40" y="152" width="520" height="70" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+  <text x="58" y="176" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#111827">输入：只有代码</text>
+  <text x="58" y="198" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4b5563">30+ 语言源文件 · 17 种 Web 框架路由 · iOS / RN / Expo 跨语言桥接</text>
+  <text x="58" y="215" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7280">自动跳过 node_modules / dist / .venv，尊重 .gitignore，&gt;1MB 文件跳过</text>
+
+  <path d="M300 222 L300 246" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M294 240 L300 250 L306 240 Z" fill="#94a3b8"/>
+
+  <rect x="40" y="252" width="520" height="62" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="58" y="276" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">① 抽取　Rust 内核 · tree-sitter 编译进二进制</text>
+  <text x="58" y="298" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#1e40af">20 语言编译态解析，图与参考引擎字节级一致才放行；无预编译平台自动逐文件回退</text>
+
+  <path d="M300 314 L300 338" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M294 332 L300 342 L306 332 Z" fill="#94a3b8"/>
+
+  <rect x="40" y="344" width="520" height="62" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="58" y="368" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">② 存储 + 解析　SQLite (WAL) + FTS5 全文索引</text>
+  <text x="58" y="390" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#1e40af">调用→定义、import→源文件、继承链、框架路由模式，全部解析成边</text>
+
+  <path d="M300 406 L300 430" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M294 424 L300 434 L306 424 Z" fill="#94a3b8"/>
+
+  <rect x="40" y="436" width="520" height="62" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.4"/>
+  <text x="58" y="460" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#15803d">③ 常驻 MCP　默认只暴露 1 个工具 codegraph_explore</text>
+  <text x="58" y="482" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#166534">一次调用返回逐字源码 + 调用路径 + 影响半径；其余 7 个工具保留但不列出</text>
+
+  <path d="M300 498 L300 522" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M294 516 L300 526 L306 516 Z" fill="#94a3b8"/>
+
+  <rect x="40" y="528" width="520" height="74" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="1.4"/>
+  <text x="58" y="552" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#b45309">④ 自动同步　原生 OS 文件事件 + 300ms debounce</text>
+  <text x="58" y="573" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#92400e">保存文件后亚秒更新：4400 文件项目约 0.3s，27000 文件 Swift 编译器仓库约 0.4s</text>
+  <text x="58" y="592" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#92400e">成本随「变更量」增长，不随仓库大小增长　·　全程 0 个 LLM token</text>
+
+  <!-- RIGHT: Graphify -->
+  <rect x="640" y="100" width="520" height="34" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.4"/>
+  <text x="900" y="123" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#6d28d9" text-anchor="middle">Graphify　v0.9.28　Python 100%　Apache-2.0　YC S26</text>
+
+  <rect x="640" y="152" width="520" height="70" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.2"/>
+  <text x="658" y="176" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#111827">输入：文件夹里的一切</text>
+  <text x="658" y="198" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4b5563">36 语言代码 · SQL schema · Terraform · Apex · MCP 配置 · 包清单</text>
+  <text x="658" y="215" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4b5563">Markdown / PDF / docx / xlsx / Google Docs · 图片 · 视频音频 · arXiv 论文</text>
+
+  <path d="M900 222 L900 246" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M894 240 L900 250 L906 240 Z" fill="#94a3b8"/>
+
+  <rect x="640" y="252" width="520" height="62" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.4"/>
+  <text x="658" y="276" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#15803d">Pass 1 　代码 AST（本地 · 免费 · 0 token）</text>
+  <text x="658" y="298" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#166534">tree-sitter 抽类 / 函数 / import / 调用图 / 内联注释；纯代码语料可完全离线</text>
+
+  <path d="M900 314 L900 338" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M894 332 L900 342 L906 332 Z" fill="#94a3b8"/>
+
+  <rect x="640" y="344" width="520" height="62" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.4"/>
+  <text x="658" y="368" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#15803d">Pass 2 　音视频转写（本地 faster-whisper · 免费）</text>
+  <text x="658" y="390" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#166534">转写提示用当前 god nodes 做种子，聚焦到你的领域词汇；结果带缓存</text>
+
+  <path d="M900 406 L900 430" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M894 424 L900 434 L906 424 Z" fill="#94a3b8"/>
+
+  <rect x="640" y="436" width="520" height="62" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+  <text x="658" y="460" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">Pass 3 　文档 / PDF / 图片语义抽取（走模型 · 花 token）</text>
+  <text x="658" y="482" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#991b1b">已知缺陷 #1890：模型静默省略的文档会无声消失，实测最高丢 53%（--code-only 可跳过）</text>
+
+  <path d="M900 498 L900 522" stroke="#94a3b8" stroke-width="1.6"/>
+  <path d="M894 516 L900 526 L906 516 Z" fill="#94a3b8"/>
+
+  <rect x="640" y="528" width="520" height="74" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.4"/>
+  <text x="658" y="552" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#6d28d9">产物　graph.json + graph.html + GRAPH_REPORT.md</text>
+  <text x="658" y="573" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#5b21b6">Leiden 社区 + god nodes；每条边标 EXTRACTED / INFERRED / AMBIGUOUS</text>
+  <text x="658" y="592" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#5b21b6">可进 Git（自带 merge driver）· 可导出 Neo4j / Obsidian / Gephi · 可起共享 HTTP MCP</text>
+
+  <!-- legend -->
+  <rect x="40" y="622" width="14" height="14" rx="3" fill="#ecfdf5" stroke="#15803d" stroke-width="1.2"/>
+  <text x="62" y="634" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#166534">零 LLM 成本环节</text>
+  <rect x="200" y="622" width="14" height="14" rx="3" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.2"/>
+  <text x="222" y="634" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#991b1b">消耗模型 token 的环节</text>
+  <rect x="400" y="622" width="14" height="14" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="422" y="634" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="#1e40af">确定性解析</text>
+  <text x="1160" y="634" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7280" text-anchor="end">数据来源：两项目官方 README / BENCHMARKS.md / issue，2026-07-28</text>
+</svg>

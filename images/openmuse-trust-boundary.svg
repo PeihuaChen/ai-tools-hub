@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1096" viewBox="0 0 1080 1096">
+  <rect width="1080" height="1096" fill="#f7f8fa"/>
+
+  <text x="48" y="100" fill="#111827" font-size="60" font-weight="700">OpenMuse 的信任边界</text>
+  <text x="48" y="166" fill="#4b5563" font-size="34">密钥只留在 API 一侧，浏览器和 Linux 都拿不到</text>
+
+  <!-- client -->
+  <rect x="48" y="206" width="984" height="150" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="76" y="260" fill="#111827" font-size="44" font-weight="700">客户端：手机与网页</text>
+  <text x="76" y="326" fill="#4b5563" font-size="32">模型密钥不下发；文件走短期签名链接</text>
+
+  <!-- arrow client -> api -->
+  <line x1="540" y1="356" x2="540" y2="398" stroke="#94a3b8" stroke-width="3"/>
+  <polygon points="528,396 552,396 540,412" fill="#94a3b8"/>
+  <text x="568" y="392" fill="#4b5563" font-size="32">访问密钥登录</text>
+
+  <!-- api -->
+  <rect x="48" y="412" width="984" height="228" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="474" fill="#1d4ed8" font-size="48" font-weight="700">API 与任务 Worker</text>
+  <text x="76" y="546" fill="#111827" font-size="34">持有：模型密钥、Google 令牌（加密）</text>
+  <text x="76" y="598" fill="#111827" font-size="34">保存：任务、审批记录、PDF 与签名密钥</text>
+
+  <!-- arrows api -> workers -->
+  <line x1="288" y1="640" x2="288" y2="726" stroke="#94a3b8" stroke-width="3"/>
+  <polygon points="276,724 300,724 288,744" fill="#94a3b8"/>
+  <line x1="792" y1="640" x2="792" y2="726" stroke="#94a3b8" stroke-width="3"/>
+  <polygon points="780,724 804,724 792,744" fill="#94a3b8"/>
+  <text x="312" y="700" fill="#4b5563" font-size="32">Worker 令牌</text>
+  <text x="768" y="700" fill="#4b5563" font-size="32" text-anchor="end">Docker CLI 调用</text>
+
+  <!-- browser worker -->
+  <rect x="48" y="744" width="480" height="304" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="76" y="804" fill="#111827" font-size="44" font-weight="700">浏览器 Worker</text>
+  <text x="76" y="870" fill="#4b5563" font-size="32">只持有 Worker 令牌</text>
+  <text x="76" y="918" fill="#4b5563" font-size="32">无应用与模型密钥</text>
+  <text x="76" y="966" fill="#4b5563" font-size="32">出站：公网，应用层校验</text>
+  <text x="76" y="1014" fill="#b45309" font-size="32" font-weight="700">Chromium 沙箱默认关闭</text>
+
+  <!-- linux computer -->
+  <rect x="552" y="744" width="480" height="304" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="580" y="804" fill="#111827" font-size="44" font-weight="700">Linux 电脑</text>
+  <text x="580" y="870" fill="#4b5563" font-size="32">可选，默认关闭</text>
+  <text x="580" y="918" fill="#4b5563" font-size="32">无网络、无挂载、无密钥</text>
+  <text x="580" y="966" fill="#4b5563" font-size="32">只读根目录，512 MB 内存</text>
+  <text x="580" y="1014" fill="#b45309" font-size="32" font-weight="700">共享宿主内核，非 VM</text>
+</svg>

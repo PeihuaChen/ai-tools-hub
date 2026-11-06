@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="a2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="46" font-family="'Microsoft YaHei',sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle">Dify + Firecrawl 构建网页知识库的数据流</text>
+  <text x="600" y="74" font-family="'Microsoft YaHei',sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">两个集成入口：知识库「从网站同步」数据源 · 工作流里的 Firecrawl 工具节点</text>
+
+  <!-- Website source -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="60" y="130" width="180" height="90" rx="10" fill="#f1f5f9" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="150" y="168" font-size="15" font-weight="bold" fill="#0e7490" text-anchor="middle">目标网站</text>
+    <text x="150" y="192" font-size="12" fill="#4b5563" text-anchor="middle">文档站 / 帮助中心</text>
+    <text x="150" y="210" font-size="12" fill="#4b5563" text-anchor="middle">行业博客 / 产品页</text>
+  </g>
+
+  <!-- Firecrawl -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="330" y="120" width="200" height="110" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+    <text x="430" y="152" font-size="16" font-weight="bold" fill="#b45309" text-anchor="middle">Firecrawl</text>
+    <text x="430" y="176" font-size="12" fill="#4b5563" text-anchor="middle">crawl / scrape</text>
+    <text x="430" y="196" font-size="12" fill="#4b5563" text-anchor="middle">剥离样板 → 干净 Markdown</text>
+    <text x="430" y="216" font-size="11.5" fill="#6b7280" text-anchor="middle">可自建：localhost:3002</text>
+  </g>
+
+  <!-- Dify -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="620" y="110" width="220" height="130" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+    <text x="730" y="140" font-size="16" font-weight="bold" fill="#15803d" text-anchor="middle">Dify 知识库</text>
+    <text x="730" y="164" font-size="12" fill="#4b5563" text-anchor="middle">解析 Markdown</text>
+    <text x="730" y="184" font-size="12" fill="#4b5563" text-anchor="middle">切块 Chunking</text>
+    <text x="730" y="204" font-size="12" fill="#4b5563" text-anchor="middle">向量化 Embedding</text>
+    <text x="730" y="224" font-size="12" fill="#4b5563" text-anchor="middle">存入向量库</text>
+  </g>
+
+  <!-- RAG app -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="930" y="130" width="210" height="90" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="1035" y="162" font-size="15" font-weight="bold" fill="#6d28d9" text-anchor="middle">RAG 问答应用</text>
+    <text x="1035" y="186" font-size="12" fill="#4b5563" text-anchor="middle">检索 + LLM 生成</text>
+    <text x="1035" y="206" font-size="12" fill="#4b5563" text-anchor="middle">带引用的回答</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#94a3b8" stroke-width="2" fill="none">
+    <path d="M240 175 L328 175" marker-end="url(#a2)"/>
+    <path d="M530 175 L618 175" marker-end="url(#a2)"/>
+    <path d="M840 175 L928 175" marker-end="url(#a2)"/>
+  </g>
+
+  <!-- divider -->
+  <line x1="60" y1="290" x2="1140" y2="290" stroke="#d9e2ec" stroke-width="1.5" stroke-dasharray="4"/>
+
+  <!-- Entry A -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="60" y="320" width="520" height="230" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <text x="84" y="352" font-size="16" font-weight="bold" fill="#1d4ed8">入口 A：知识库「从网站同步」</text>
+    <text x="84" y="380" font-size="13" fill="#374151">纯配置，不写代码。Provider 选 Firecrawl，填 URL。</text>
+    <text x="84" y="404" font-size="12.5" fill="#4b5563">可配置项（对应 crawl 参数）：</text>
+    <text x="100" y="428" font-size="12.5" fill="#374151">· 是否抓取子页面　· 页面数量上限</text>
+    <text x="100" y="450" font-size="12.5" fill="#374151">· 最大爬取深度　· 排除路径 / 只包含路径</text>
+    <text x="100" y="472" font-size="12.5" fill="#374151">· 内容提取范围</text>
+    <text x="84" y="504" font-size="12.5" fill="#4b5563">适合：把某个网站一次性变成可问答知识库</text>
+    <text x="84" y="530" font-size="12" fill="#6b7280">路径：创建知识库 → 从网站同步 → Firecrawl</text>
+  </g>
+
+  <!-- Entry B -->
+  <g font-family="'Microsoft YaHei',sans-serif">
+    <rect x="620" y="320" width="520" height="230" rx="10" fill="#fff7ed" stroke="#b45309" stroke-width="1.3"/>
+    <text x="644" y="352" font-size="16" font-weight="bold" fill="#b45309">入口 B：插件市场 Firecrawl 工具</text>
+    <text x="644" y="380" font-size="13" fill="#374151">把抓取变成工作流里可编排的节点。</text>
+    <text x="644" y="404" font-size="12.5" fill="#4b5563">提供的节点：</text>
+    <text x="660" y="428" font-size="12.5" fill="#374151">· Crawl　· Crawl Job　· Map　· Scrape</text>
+    <text x="644" y="456" font-size="12.5" fill="#4b5563">典型流程：</text>
+    <text x="660" y="480" font-size="12.5" fill="#374151">Scrape 抓页面 → LLM 节点做摘要/舆情分析</text>
+    <text x="660" y="502" font-size="12.5" fill="#374151">→ 按需输出（翻译 / 结构化 / 存档）</text>
+    <text x="644" y="532" font-size="12" fill="#6b7280">适合：把抓取作为 Agent 流程中的一步</text>
+  </g>
+
+  <text x="600" y="582" font-family="'Microsoft YaHei',sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">数据来源：Dify 官方文档 & Marketplace · Firecrawl 官方文档 · 制图：AI 行业观察</text>
+</svg>

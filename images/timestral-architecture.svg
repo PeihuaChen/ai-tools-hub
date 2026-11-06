@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1490" viewBox="0 0 1080 1490">
+<rect x="0" y="0" width="1080" height="1490" fill="#f7f8fa"/>
+<text x="540" y="84" text-anchor="middle" fill="#111827" font-size="56" font-weight="700">Timestral 模型架构</text>
+
+<!-- R1 输入 -->
+<rect x="48" y="116" width="312" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="204" y="178" text-anchor="middle" fill="#1d4ed8" font-size="40" font-weight="700">目标序列</text>
+<text x="204" y="238" text-anchor="middle" fill="#4b5563" font-size="32">历史 + 待预测</text>
+<rect x="384" y="116" width="312" height="150" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+<text x="540" y="178" text-anchor="middle" fill="#15803d" font-size="40" font-weight="700">过去协变量</text>
+<text x="540" y="238" text-anchor="middle" fill="#4b5563" font-size="32">只有历史值</text>
+<rect x="720" y="116" width="312" height="150" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+<text x="876" y="178" text-anchor="middle" fill="#b45309" font-size="40" font-weight="700">未来协变量</text>
+<text x="876" y="238" text-anchor="middle" fill="#4b5563" font-size="32">整个窗口已知</text>
+
+<g stroke="#94a3b8" stroke-width="3">
+<line x1="204" y1="266" x2="204" y2="278"/><line x1="540" y1="266" x2="540" y2="278"/><line x1="876" y1="266" x2="876" y2="278"/>
+<line x1="540" y1="440" x2="540" y2="452"/><line x1="540" y1="614" x2="540" y2="626"/>
+<line x1="540" y1="938" x2="540" y2="950"/><line x1="540" y1="1162" x2="540" y2="1174"/>
+<line x1="540" y1="1286" x2="540" y2="1298"/>
+</g>
+<g fill="#94a3b8">
+<polygon points="192,278 216,278 204,290"/><polygon points="528,278 552,278 540,290"/><polygon points="864,278 888,278 876,290"/>
+<polygon points="528,452 552,452 540,464"/><polygon points="528,626 552,626 540,638"/>
+<polygon points="528,950 552,950 540,962"/><polygon points="528,1174 552,1174 540,1186"/>
+<polygon points="528,1298 552,1298 540,1310"/>
+</g>
+
+<!-- R2 归一化 -->
+<rect x="48" y="290" width="648" height="150" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+<text x="372" y="352" text-anchor="middle" fill="#111827" font-size="40" font-weight="700">因果归一化</text>
+<text x="372" y="412" text-anchor="middle" fill="#4b5563" font-size="32">目标与过去协变量 · 不看未来</text>
+<rect x="720" y="290" width="312" height="150" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+<text x="876" y="352" text-anchor="middle" fill="#111827" font-size="40" font-weight="700">全窗口归一化</text>
+<text x="876" y="412" text-anchor="middle" fill="#4b5563" font-size="32">未来协变量</text>
+
+<!-- R3 分块嵌入 -->
+<rect x="48" y="464" width="984" height="150" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+<text x="540" y="526" text-anchor="middle" fill="#0e7490" font-size="40" font-weight="700">分块嵌入</text>
+<text x="540" y="586" text-anchor="middle" fill="#4b5563" font-size="32">每 32 步一块：数值 + 缺失掩码</text>
+
+<!-- R4 token 网格 -->
+<rect x="48" y="638" width="984" height="300" rx="14" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+<text x="461" y="688" text-anchor="middle" fill="#4b5563" font-size="32" font-weight="700">历史块</text>
+<text x="772" y="688" text-anchor="middle" fill="#4b5563" font-size="32" font-weight="700">预测位置</text>
+<line x1="666" y1="700" x2="666" y2="912" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8"/>
+<text x="76" y="747" fill="#1d4ed8" font-size="32" font-weight="700">目标</text>
+<text x="76" y="817" fill="#15803d" font-size="32" font-weight="700">过去协变量</text>
+<text x="76" y="887" fill="#b45309" font-size="32" font-weight="700">未来协变量</text>
+<g stroke-width="2">
+<g fill="#dbeafe" stroke="#1d4ed8">
+<rect x="268" y="708" width="56" height="56" rx="8"/><rect x="334" y="708" width="56" height="56" rx="8"/><rect x="400" y="708" width="56" height="56" rx="8"/><rect x="466" y="708" width="56" height="56" rx="8"/><rect x="532" y="708" width="56" height="56" rx="8"/><rect x="598" y="708" width="56" height="56" rx="8"/>
+</g>
+<g fill="#f5f3ff" stroke="#6d28d9">
+<rect x="678" y="708" width="56" height="56" rx="8"/><rect x="744" y="708" width="56" height="56" rx="8"/><rect x="810" y="708" width="56" height="56" rx="8"/>
+</g>
+<g fill="#dcfce7" stroke="#15803d">
+<rect x="268" y="778" width="56" height="56" rx="8"/><rect x="334" y="778" width="56" height="56" rx="8"/><rect x="400" y="778" width="56" height="56" rx="8"/><rect x="466" y="778" width="56" height="56" rx="8"/><rect x="532" y="778" width="56" height="56" rx="8"/><rect x="598" y="778" width="56" height="56" rx="8"/>
+</g>
+<g fill="#ffffff" stroke="#94a3b8" stroke-dasharray="6">
+<rect x="678" y="778" width="56" height="56" rx="8"/><rect x="744" y="778" width="56" height="56" rx="8"/><rect x="810" y="778" width="56" height="56" rx="8"/>
+</g>
+<g fill="#fef3c7" stroke="#b45309">
+<rect x="268" y="848" width="56" height="56" rx="8"/><rect x="334" y="848" width="56" height="56" rx="8"/><rect x="400" y="848" width="56" height="56" rx="8"/><rect x="466" y="848" width="56" height="56" rx="8"/><rect x="532" y="848" width="56" height="56" rx="8"/><rect x="598" y="848" width="56" height="56" rx="8"/>
+<rect x="678" y="848" width="56" height="56" rx="8"/><rect x="744" y="848" width="56" height="56" rx="8"/><rect x="810" y="848" width="56" height="56" rx="8"/>
+</g>
+</g>
+<g fill="#6d28d9" font-size="32" font-weight="700" text-anchor="middle">
+<text x="706" y="747">P</text><text x="772" y="747">P</text><text x="838" y="747">P</text>
+</g>
+<text x="894" y="747" fill="#6d28d9" font-size="32">预测</text>
+<text x="894" y="817" fill="#6d28d9" font-size="32">token</text>
+
+<!-- R5 Transformer -->
+<rect x="48" y="962" width="984" height="200" rx="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+<text x="540" y="1024" text-anchor="middle" fill="#6d28d9" font-size="40" font-weight="700">Transformer 主干</text>
+<text x="540" y="1084" text-anchor="middle" fill="#4b5563" font-size="32">时间注意力 + 变量间注意力</text>
+<text x="540" y="1132" text-anchor="middle" fill="#4b5563" font-size="32">信息只从协变量流向目标</text>
+
+<!-- R6 -->
+<rect x="48" y="1186" width="984" height="100" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+<text x="540" y="1250" text-anchor="middle" fill="#111827" font-size="40" font-weight="700">分位数头 → 反归一化</text>
+
+<!-- R7 -->
+<rect x="48" y="1310" width="984" height="100" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+<text x="540" y="1374" text-anchor="middle" fill="#0e7490" font-size="40" font-weight="700">输出：目标的 21 个分位数预测</text>
+
+<text x="540" y="1462" text-anchor="middle" fill="#6b7280" font-size="32">据 Mistral 官方模型示意图重绘，已简化</text>
+</svg>

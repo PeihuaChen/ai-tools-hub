@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1320" viewBox="0 0 1080 1320">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f7f8fa"/>
+    </linearGradient>
+    <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#eff6ff"/>
+      <stop offset="1" stop-color="#dbeafe"/>
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background (opaque, full-bleed) -->
+  <rect width="1080" height="1320" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="540" y="62" text-anchor="middle" fill="#111827" font-size="56" font-weight="700">LFM3 模型家族：共享底座</text>
+  <text x="540" y="120" text-anchor="middle" fill="#111827" font-size="56" font-weight="700">→ 六种专用能力</text>
+  <text x="540" y="164" text-anchor="middle" fill="#4b5563" font-size="32" font-weight="400">基于 1.7B 级共享底座分化 · 参数量约 2B · 面向端侧部署</text>
+
+  <!-- Shared Base -->
+  <g transform="translate(540, 260)">
+    <rect x="-330" y="-80" width="660" height="160" rx="32" fill="url(#baseGrad)" stroke="#1d4ed8" stroke-width="3"/>
+    <text x="0" y="-34" text-anchor="middle" fill="#1d4ed8" font-size="42" font-weight="700">LFM3-1.7B-Base</text>
+    <text x="0" y="12" text-anchor="middle" fill="#4b5563" font-size="33" font-weight="500">共享底座 · 约 22T Tokens 训练</text>
+    <text x="0" y="52" text-anchor="middle" fill="#374151" font-size="32" font-weight="400">三路混合架构：短卷积 + 滑动窗口注意力</text>
+  </g>
+
+  <!-- Branching arrows: base -> Row 1 -->
+  <g stroke="#94a3b8" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)">
+    <path d="M450 344 Q300 362 188 378"/>
+    <path d="M540 344 L540 378"/>
+    <path d="M630 344 Q780 362 892 378"/>
+  </g>
+
+  <!-- Row 1 Cards -->
+  <g>
+    <!-- Card 1: 文本模型 -->
+    <g transform="translate(24, 380)">
+      <rect x="0" y="0" width="328" height="372" rx="16" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2"/>
+      <rect x="20" y="20" width="288" height="58" rx="16" fill="#eff6ff"/>
+      <text x="164" y="56" text-anchor="middle" fill="#1d4ed8" font-size="40" font-weight="700" letter-spacing="0.5">文本模型</text>
+      <text x="164" y="124" text-anchor="middle" fill="#111827" font-size="42" font-weight="700">LFM3-1.7B</text>
+      <text x="164" y="162" text-anchor="middle" fill="#6b7280" font-size="30">文本 → 文本</text>
+      <text x="164" y="196" text-anchor="middle" fill="#6b7280" font-size="30">256K 上下文</text>
+      <g font-size="30" fill="#374151">
+        <text x="28" y="236">✦ Agent 与工具调用</text>
+        <text x="28" y="270">✦ 结构化输出与规划</text>
+        <text x="28" y="304">✦ 领域微调友好</text>
+      </g>
+      <rect x="20" y="314" width="140" height="38" rx="19" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="90" y="341" text-anchor="middle" fill="#1d4ed8" font-size="30" font-weight="600">1.7B</text>
+      <rect x="168" y="314" width="140" height="38" rx="19" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="238" y="341" text-anchor="middle" fill="#1d4ed8" font-size="30" font-weight="600">256K ctx</text>
+    </g>
+
+    <!-- Card 2: 视觉模型 -->
+    <g transform="translate(376, 380)">
+      <rect x="0" y="0" width="328" height="372" rx="16" fill="#f8fafc" stroke="#6d28d9" stroke-width="2"/>
+      <rect x="20" y="20" width="288" height="58" rx="16" fill="#f5f3ff"/>
+      <text x="164" y="56" text-anchor="middle" fill="#6d28d9" font-size="40" font-weight="700" letter-spacing="0.5">视觉模型</text>
+      <text x="164" y="124" text-anchor="middle" fill="#111827" font-size="42" font-weight="700">LFM3-VL-2B</text>
+      <text x="164" y="162" text-anchor="middle" fill="#6b7280" font-size="30">文本/图像/视频 → 文本</text>
+      <text x="164" y="196" text-anchor="middle" fill="#6b7280" font-size="30">128K 上下文</text>
+      <g font-size="30" fill="#374151">
+        <text x="28" y="236">✦ OCR 与票据识别</text>
+        <text x="28" y="270">✦ 视觉问答与读数</text>
+        <text x="28" y="304">✦ 卷积+注意力编码</text>
+      </g>
+      <rect x="20" y="314" width="140" height="38" rx="19" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="90" y="341" text-anchor="middle" fill="#6d28d9" font-size="30" font-weight="600">2B</text>
+      <rect x="168" y="314" width="140" height="38" rx="19" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="238" y="341" text-anchor="middle" fill="#6d28d9" font-size="30" font-weight="600">128K ctx</text>
+    </g>
+
+    <!-- Card 3: 音频模型 -->
+    <g transform="translate(728, 380)">
+      <rect x="0" y="0" width="328" height="372" rx="16" fill="#f8fafc" stroke="#15803d" stroke-width="2"/>
+      <rect x="20" y="20" width="288" height="58" rx="16" fill="#f0fdf4"/>
+      <text x="164" y="56" text-anchor="middle" fill="#15803d" font-size="40" font-weight="700" letter-spacing="0.5">音频模型</text>
+      <text x="164" y="124" text-anchor="middle" fill="#111827" font-size="42" font-weight="700">LFM3-Audio-2B</text>
+      <text x="164" y="162" text-anchor="middle" fill="#6b7280" font-size="30">文本/音频 → 文本/语音</text>
+      <text x="164" y="196" text-anchor="middle" fill="#6b7280" font-size="30">32K 上下文</text>
+      <g font-size="30" fill="#374151">
+        <text x="28" y="236">✦ 端到端语音链路</text>
+        <text x="28" y="270">✦ ASR+TTS 融合</text>
+        <text x="28" y="304">✦ 低延迟语音助手</text>
+      </g>
+      <rect x="20" y="314" width="140" height="38" rx="19" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+      <text x="90" y="341" text-anchor="middle" fill="#15803d" font-size="30" font-weight="600">2B</text>
+      <rect x="168" y="314" width="140" height="38" rx="19" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+      <text x="238" y="341" text-anchor="middle" fill="#15803d" font-size="30" font-weight="600">32K ctx</text>
+    </g>
+  </g>
+
+  <!-- Row 1 -> Row 2 connectors + label -->
+  <g stroke="#94a3b8" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)">
+    <path d="M188 754 L188 826"/>
+    <path d="M540 754 L540 826"/>
+    <path d="M892 754 L892 826"/>
+  </g>
+  <g>
+    <rect x="330" y="772" width="420" height="36" rx="18" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="540" y="796" text-anchor="middle" fill="#475569" font-size="30" font-weight="500">同底座分化 · 全模态与决策</text>
+  </g>
+
+  <!-- Row 2 Cards -->
+  <g>
+    <!-- Card 4: 全模态模型 -->
+    <g transform="translate(24, 828)">
+      <rect x="0" y="0" width="328" height="372" rx="16" fill="#f8fafc" stroke="#b45309" stroke-width="2"/>
+      <rect x="20" y="20" width="288" height="58" rx="16" fill="#fffbeb"/>
+      <text x="164" y="56" text-anchor="middle" fill="#b45309" font-size="40" font-weight="700" letter-spacing="0.5">全模态模型</text>
+      <text x="164" y="124" text-anchor="middle" fill="#111827" font-size="42" font-weight="700">LFM3-Omni-2B</text>
+      <text x="164" y="162" text-anchor="middle" fill="#6b7280" font-size="30">文/图/视/音 → 文本/语音</text>
+      <text x="164" y="196" text-anchor="middle" fill="#6b7280" font-size="30">32K 上下文</text>
+      <g font-size="30" fill="#374151">
+        <text x="28" y="236">✦ 端侧多模态入口</text>
+        <text x="28" y="270">✦ 视听统一理解生成</text>
+        <text x="28" y="304">✦ 设备级助手首选</text>
+      </g>
+      <rect x="20" y="314" width="140" height="38" rx="19" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+      <text x="90" y="341" text-anchor="middle" fill="#b45309" font-size="30" font-weight="600">2B</text>
+      <rect x="168" y="314" width="140" height="38" rx="19" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+      <text x="238" y="341" text-anchor="middle" fill="#b45309" font-size="30" font-weight="600">32K ctx</text>
+    </g>
+
+    <!-- Card 5: 视觉决策模型 -->
+    <g transform="translate(376, 828)">
+      <rect x="0" y="0" width="328" height="372" rx="16" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2"/>
+      <rect x="20" y="20" width="288" height="58" rx="16" fill="#eff6ff"/>
+      <text x="164" y="56" text-anchor="middle" fill="#1d4ed8" font-size="40" font-weight="700" letter-spacing="0.5">视觉决策模型</text>
+      <text x="164" y="124" text-anchor="middle" fill="#111827" font-size="42" font-weight="700">d1-2B</text>
+      <text x="164" y="162" text-anchor="middle" fill="#6b7280" font-size="30">文本/图像/视频 → 判断</text>
+      <text x="164" y="196" text-anchor="middle" fill="#6b7280" font-size="30">128K 上下文</text>
+      <g font-size="30" fill="#374151">
+        <text x="28" y="236">✦ 分类打分与抽取</text>
+        <text x="28" y="270">✦ 单次前向即判断</text>
+        <text x="28" y="304">✦ 审核质检与分流</text>
+      </g>
+      <rect x="20" y="314" width="140" height="38" rx="19" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="90" y="341" text-anchor="middle" fill="#1d4ed8" font-size="30" font-weight="600">2B</text>
+      <rect x="168" y="314" width="140" height="38" rx="19" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="238" y="341" text-anchor="middle" fill="#1d4ed8" font-size="30" font-weight="600">128K ctx</text>
+    </g>
+
+    <!-- Card 6: 音频决策模型 -->
+    <g transform="translate(728, 828)">
+      <rect x="0" y="0" width="328" height="372" rx="16" fill="#f8fafc" stroke="#6d28d9" stroke-width="2"/>
+      <rect x="20" y="20" width="288" height="58" rx="16" fill="#f5f3ff"/>
+      <text x="164" y="56" text-anchor="middle" fill="#6d28d9" font-size="40" font-weight="700" letter-spacing="0.5">音频决策模型</text>
+      <text x="164" y="124" text-anchor="middle" fill="#111827" font-size="42" font-weight="700">d1-Omni-2B</text>
+      <text x="164" y="162" text-anchor="middle" fill="#6b7280" font-size="30">文本/图/音频 → 判断</text>
+      <text x="164" y="196" text-anchor="middle" fill="#6b7280" font-size="30">32K 上下文</text>
+      <g font-size="30" fill="#374151">
+        <text x="28" y="236">✦ 电话路由与分流</text>
+        <text x="28" y="270">✦ 非生成式判断</text>
+        <text x="28" y="304">✦ 语音事件告警</text>
+      </g>
+      <rect x="20" y="314" width="140" height="38" rx="19" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="90" y="341" text-anchor="middle" fill="#6d28d9" font-size="30" font-weight="600">2B</text>
+      <rect x="168" y="314" width="140" height="38" rx="19" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="238" y="341" text-anchor="middle" fill="#6d28d9" font-size="30" font-weight="600">32K ctx</text>
+    </g>
+  </g>
+
+  <!-- Bottom insight box -->
+  <g>
+    <rect x="100" y="1220" width="880" height="64" rx="24" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="540" y="1246" text-anchor="middle" fill="#111827" font-size="34" font-weight="600">核心优势：一个底座支撑六条产品路线</text>
+    <text x="540" y="1276" text-anchor="middle" fill="#4b5563" font-size="30" font-weight="400">根据输入/输出/延迟选择模型 · 非单一大模型覆盖所有任务</text>
+  </g>
+
+  <!-- Footer attribution -->
+  <text x="1050" y="1308" text-anchor="end" fill="#9ca3af" font-size="30">基于 Liquid AI 官方资料 · AI INSIGHT</text>
+</svg>

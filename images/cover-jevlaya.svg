@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="barTop" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.45" stop-color="#6366f1"/>
+      <stop offset="0.75" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="barBot" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="0.5" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+    <pattern id="grid" width="45" height="45" patternUnits="userSpaceOnUse">
+      <path d="M45 0 L0 0 0 45" fill="none" stroke="#2a2a55" stroke-width="1" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#barTop)"/>
+  <rect y="379" width="900" height="4" fill="url(#barBot)"/>
+
+  <rect x="48" y="30" width="212" height="28" rx="6" fill="#1b1b45" stroke="#4f46a8" stroke-width="1.5"/>
+  <text x="62" y="49" font-size="13" fill="#a5b4fc">AI 行业观察 · 决策模型</text>
+
+  <circle cx="846" cy="44" r="21" fill="#1b1b45" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="846" y="51" font-size="19" font-weight="bold" fill="#f59e0b" text-anchor="middle">26</text>
+
+  <text x="48" y="112" font-size="31" font-weight="bold" fill="#ffffff">决策模型：谁的概率能信</text>
+  <text x="48" y="146" font-size="18" font-weight="bold" fill="url(#sub)">Jev 闭源收费 vs Laya 开源免费</text>
+
+  <text x="48" y="188" font-size="13" fill="#22d3ee">单问延迟 32.8ms vs 264ms（T4 / 第三方实测）</text>
+  <text x="48" y="212" font-size="13" fill="#fbbf24">ECE 校准误差 0.081 vs 0.246（越低越好）</text>
+  <text x="48" y="236" font-size="13" fill="#c4b5fd">Apache 2.0 开源权重 vs 闭源托管 API</text>
+
+  <g font-size="12">
+    <rect x="48" y="260" width="72" height="26" rx="13" fill="none" stroke="#4f46a8" stroke-width="1.2"/>
+    <text x="84" y="277" fill="#a5b4fc" text-anchor="middle">决策模型</text>
+    <rect x="128" y="260" width="88" height="26" rx="13" fill="none" stroke="#0e7490" stroke-width="1.2"/>
+    <text x="172" y="277" fill="#67e8f9" text-anchor="middle">System One</text>
+    <rect x="224" y="260" width="56" height="26" rx="13" fill="none" stroke="#b45309" stroke-width="1.2"/>
+    <text x="252" y="277" fill="#fbbf24" text-anchor="middle">RLCD</text>
+    <rect x="288" y="260" width="72" height="26" rx="13" fill="none" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="324" y="277" fill="#c4b5fd" text-anchor="middle">校准概率</text>
+    <rect x="368" y="260" width="72" height="26" rx="13" fill="none" stroke="#15803d" stroke-width="1.2"/>
+    <text x="404" y="277" fill="#6ee7b7" text-anchor="middle">开源复现</text>
+  </g>
+
+  <g>
+    <rect x="556" y="96" width="146" height="172" rx="14" fill="#15153a" stroke="#4f46a8" stroke-width="1.5"/>
+    <text x="629" y="130" font-size="20" font-weight="bold" fill="#a5b4fc" text-anchor="middle">JEV</text>
+    <rect x="618" y="142" width="22" height="16" rx="3" fill="none" stroke="#818cf8" stroke-width="1.6"/>
+    <path d="M623 142 v-6 a6 6 0 0 1 12 0 v6" fill="none" stroke="#818cf8" stroke-width="1.6"/>
+    <rect x="580" y="176" width="98" height="9" rx="4" fill="#4f46a8"/>
+    <rect x="580" y="198" width="70" height="9" rx="4" fill="#4f46a8"/>
+    <rect x="580" y="220" width="46" height="9" rx="4" fill="#4f46a8"/>
+    <text x="629" y="246" font-size="13" fill="#818cf8" text-anchor="middle">按量计费</text>
+
+    <rect x="726" y="96" width="146" height="172" rx="14" fill="#14252e" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="799" y="130" font-size="20" font-weight="bold" fill="#67e8f9" text-anchor="middle">LAYA</text>
+    <rect x="788" y="142" width="22" height="16" rx="3" fill="none" stroke="#22d3ee" stroke-width="1.6"/>
+    <path d="M793 142 v-6 a6 6 0 0 1 12 0" fill="none" stroke="#22d3ee" stroke-width="1.6"/>
+    <rect x="750" y="176" width="26" height="9" rx="4" fill="#0e7490"/>
+    <rect x="750" y="198" width="92" height="9" rx="4" fill="#0e7490"/>
+    <rect x="750" y="220" width="104" height="9" rx="4" fill="#0e7490"/>
+    <text x="799" y="246" font-size="13" fill="#22d3ee" text-anchor="middle">自托管免费</text>
+  </g>
+
+  <line x1="48" y1="316" x2="852" y2="316" stroke="#2f2f60" stroke-width="1.5"/>
+  <text x="48" y="345" font-size="12" fill="#9ca3d4">接口原语 · 独立实测复盘 · 开源五条路线 · 四种场景选型</text>
+  <text x="852" y="345" font-size="11" fill="#5b5b8f" text-anchor="end">VXI AI 行业观察</text>
+</svg>

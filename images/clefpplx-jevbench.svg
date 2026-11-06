@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1250" viewBox="0 0 1080 1250">
+  <rect width="1080" height="1250" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">JevBench 四个轴</text>
+  <text x="540" y="140" font-size="32" fill="#4b5563" text-anchor="middle">1,500 条决策，1,200 条是封闭题</text>
+
+  <rect x="48" y="170" width="28" height="28" rx="6" fill="#1d4ed8"/>
+  <text x="88" y="196" font-size="32" fill="#111827">Clef</text>
+  <rect x="220" y="170" width="28" height="28" rx="6" fill="#b45309"/>
+  <text x="260" y="196" font-size="32" fill="#111827">pplx v1.1</text>
+  <rect x="470" y="170" width="28" height="28" rx="6" fill="#15803d"/>
+  <text x="510" y="196" font-size="32" fill="#111827">Jev 1.13</text>
+
+  <g>
+    <rect x="48" y="240" width="984" height="170" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="310" font-size="36" font-weight="bold" fill="#111827">智能分</text>
+    <text x="76" y="364" font-size="32" fill="#6b7280">准确率</text>
+    <rect x="320" y="252" width="378" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="710" y="282" font-size="32" font-weight="bold" fill="#1d4ed8">59.1</text>
+    <rect x="320" y="302" width="485" height="40" rx="8" fill="#b45309"/>
+    <text x="817" y="332" font-size="32" font-weight="bold" fill="#b45309">75.7</text>
+    <rect x="320" y="352" width="407" height="40" rx="8" fill="#15803d"/>
+    <text x="739" y="382" font-size="32" font-weight="bold" fill="#15803d">63.6</text>
+  </g>
+
+  <g>
+    <rect x="48" y="430" width="984" height="170" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="500" font-size="36" font-weight="bold" fill="#111827">校准分</text>
+    <text x="76" y="554" font-size="32" fill="#6b7280">概率可信度</text>
+    <rect x="320" y="442" width="586" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="918" y="472" font-size="32" font-weight="bold" fill="#1d4ed8">91.6</text>
+    <rect x="320" y="492" width="575" height="40" rx="8" fill="#b45309"/>
+    <text x="907" y="522" font-size="32" font-weight="bold" fill="#b45309">89.9</text>
+    <rect x="320" y="542" width="580" height="40" rx="8" fill="#15803d"/>
+    <text x="912" y="572" font-size="32" font-weight="bold" fill="#15803d">90.6</text>
+  </g>
+
+  <g>
+    <rect x="48" y="620" width="984" height="170" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="690" font-size="36" font-weight="bold" fill="#111827">速度分</text>
+    <text x="76" y="744" font-size="32" fill="#6b7280">中位延迟</text>
+    <rect x="320" y="632" width="534" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="866" y="662" font-size="32" font-weight="bold" fill="#1d4ed8">83.4</text>
+    <rect x="320" y="682" width="556" height="40" rx="8" fill="#b45309"/>
+    <text x="888" y="712" font-size="32" font-weight="bold" fill="#b45309">86.8</text>
+    <rect x="320" y="732" width="586" height="40" rx="8" fill="#15803d"/>
+    <text x="918" y="762" font-size="32" font-weight="bold" fill="#15803d">91.5</text>
+  </g>
+
+  <g>
+    <rect x="48" y="810" width="984" height="170" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="880" font-size="36" font-weight="bold" fill="#111827">成本分</text>
+    <text x="76" y="934" font-size="32" fill="#6b7280">越便宜越高</text>
+    <rect x="320" y="822" width="180" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="512" y="852" font-size="32" font-weight="bold" fill="#1d4ed8">28.1</text>
+    <rect x="320" y="872" width="191" height="40" rx="8" fill="#b45309"/>
+    <text x="523" y="902" font-size="32" font-weight="bold" fill="#b45309">29.9</text>
+    <rect x="320" y="922" width="350" height="40" rx="8" fill="#15803d"/>
+    <text x="682" y="952" font-size="32" font-weight="bold" fill="#15803d">54.7</text>
+  </g>
+
+  <g>
+    <rect x="48" y="1000" width="984" height="200" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="76" y="1056" font-size="40" font-weight="bold" fill="#b45309">综合分：Jev 71.5，v1.1 20.6，Clef 16.8</text>
+    <text x="76" y="1116" font-size="32" fill="#4b5563">成本按底座参考价估算，不是真实账单</text>
+    <text x="76" y="1164" font-size="32" fill="#4b5563">校准分三家只差不到 2 分</text>
+  </g>
+</svg>

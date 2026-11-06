@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1060" viewBox="0 0 1080 1060">
+<rect x="0" y="0" width="1080" height="1060" fill="#f7f8fa"/>
+<text x="48" y="100" fill="#111827" font-size="60" font-weight="700">遇到长输入，先问三件事</text>
+<text x="48" y="156" fill="#4b5563" font-size="32">按任务类型选方案，而不是一味加长窗口</text>
+
+<rect x="48" y="220" width="500" height="150" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+<text x="76" y="308" fill="#111827" font-size="40" font-weight="700">答案只在几段话里？</text>
+<line x1="548" y1="295" x2="616" y2="295" stroke="#94a3b8" stroke-width="3"/>
+<polygon points="614,285 614,305 632,295" fill="#94a3b8"/>
+<text x="590" y="275" text-anchor="middle" fill="#4b5563" font-size="32">是</text>
+<rect x="632" y="220" width="400" height="150" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="660" y="278" fill="#1d4ed8" font-size="36" font-weight="700">RAG + 检索重排</text>
+<text x="660" y="334" fill="#4b5563" font-size="32">证据稀疏时够用</text>
+
+<line x1="298" y1="372" x2="298" y2="426" stroke="#94a3b8" stroke-width="3"/>
+<polygon points="288,424 308,424 298,440" fill="#94a3b8"/>
+<text x="330" y="412" fill="#4b5563" font-size="32">否</text>
+
+<rect x="48" y="440" width="500" height="150" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+<text x="76" y="528" fill="#111827" font-size="40" font-weight="700">需要通读全文归纳？</text>
+<line x1="548" y1="515" x2="616" y2="515" stroke="#94a3b8" stroke-width="3"/>
+<polygon points="614,505 614,525 632,515" fill="#94a3b8"/>
+<text x="590" y="495" text-anchor="middle" fill="#4b5563" font-size="32">是</text>
+<rect x="632" y="440" width="400" height="150" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+<text x="660" y="498" fill="#0e7490" font-size="36" font-weight="700">长窗口 + 压缩</text>
+<text x="660" y="554" fill="#4b5563" font-size="32">广泛知识任务更稳</text>
+
+<line x1="298" y1="592" x2="298" y2="646" stroke="#94a3b8" stroke-width="3"/>
+<polygon points="288,644 308,644 298,660" fill="#94a3b8"/>
+<text x="330" y="632" fill="#4b5563" font-size="32">否</text>
+
+<rect x="48" y="660" width="500" height="150" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+<text x="76" y="748" fill="#111827" font-size="40" font-weight="700">是多轮 Agent 任务？</text>
+<line x1="548" y1="735" x2="616" y2="735" stroke="#94a3b8" stroke-width="3"/>
+<polygon points="614,725 614,745 632,735" fill="#94a3b8"/>
+<text x="590" y="715" text-anchor="middle" fill="#4b5563" font-size="32">是</text>
+<rect x="632" y="660" width="400" height="150" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+<text x="660" y="718" fill="#b45309" font-size="36" font-weight="700">分段压缩 + 提醒</text>
+<text x="660" y="774" fill="#4b5563" font-size="32">防止长任务越跑越偏</text>
+
+<line x1="298" y1="812" x2="298" y2="866" stroke="#94a3b8" stroke-width="3"/>
+<polygon points="288,864 308,864 298,880" fill="#94a3b8"/>
+<text x="330" y="852" fill="#4b5563" font-size="32">否</text>
+
+<rect x="48" y="880" width="500" height="120" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+<text x="76" y="952" fill="#111827" font-size="36" font-weight="700">先用自家数据评测</text>
+</svg>

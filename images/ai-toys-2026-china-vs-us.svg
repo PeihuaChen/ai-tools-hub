@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+  <!-- 满幅不透明浅底：公众号 Dark Mode 不处理图片内容，必须自带底色 -->
+  <rect x="0" y="0" width="1080" height="760" fill="#f7f8fa"/>
+
+  <text x="540" y="82" text-anchor="middle" font-size="56" font-weight="bold" fill="#111827">AI 玩具：两条增长路线</text>
+  <text x="540" y="136" text-anchor="middle" font-size="34" fill="#6b7280">中国铺量狂奔 vs 海外立法禁售</text>
+
+  <!-- 中国阵营 -->
+  <rect x="50" y="184" width="470" height="386" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="285" y="248" text-anchor="middle" font-size="48" font-weight="bold" fill="#1d4ed8">中国</text>
+  <line x1="86" y1="276" x2="484" y2="276" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="86" y="336" font-size="34" fill="#1f2937">打法：供应链铺量</text>
+  <text x="86" y="396" font-size="34" fill="#1f2937">价格：¥300–1500</text>
+  <text x="86" y="456" font-size="34" fill="#1f2937">模型：DeepSeek、豆包</text>
+  <text x="86" y="516" font-size="34" fill="#b91c1c">新规：7/15 已施行</text>
+
+  <!-- 海外阵营 -->
+  <rect x="560" y="184" width="470" height="386" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="795" y="248" text-anchor="middle" font-size="48" font-weight="bold" fill="#6d28d9">美国 / 海外</text>
+  <line x1="596" y1="276" x2="994" y2="276" stroke="#6d28d9" stroke-width="2"/>
+  <text x="596" y="336" font-size="34" fill="#1f2937">打法：模型 + 品牌 IP</text>
+  <text x="596" y="396" font-size="34" fill="#1f2937">价格：$90–$500+</text>
+  <text x="596" y="456" font-size="34" fill="#1f2937">模型：GPT、Grok</text>
+  <text x="596" y="516" font-size="34" fill="#b91c1c">加州：SB 867 待签</text>
+
+  <!-- 共同的坎 -->
+  <rect x="50" y="606" width="980" height="116" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+  <text x="540" y="656" text-anchor="middle" font-size="36" font-weight="bold" fill="#b45309">2026 转折：监管从软约束变硬约束</text>
+  <text x="540" y="702" text-anchor="middle" font-size="34" fill="#92400e">共同的坎：长期留存 + 合法销售</text>
+</svg>

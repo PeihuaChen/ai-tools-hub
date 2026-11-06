@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.35" stop-color="#3b82f6"/>
+      <stop offset="0.7" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#2a2a55" stroke-width="1" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- 左上角标签框 -->
+  <rect x="48" y="40" width="250" height="34" rx="8" fill="#1d1d40" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="66" y="63" font-size="16" fill="#93c5fd" font-weight="bold">AI 行业观察 · 多智能体公司</text>
+
+  <!-- 右上角年份徽章 -->
+  <circle cx="838" cy="58" r="26" fill="#1d1d40" stroke="#a78bfa" stroke-width="2"/>
+  <text x="838" y="66" font-size="24" fill="#a78bfa" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- 主标题 -->
+  <text x="48" y="132" font-size="40" fill="#ffffff" font-weight="bold">MetaGPT → Atoms</text>
+  <!-- 副标题 -->
+  <text x="48" y="170" font-size="19" fill="url(#title)" font-weight="bold">3 小时复刻 Manus 的团队，如何把 Agent 做成生意</text>
+
+  <!-- 三行关键亮点 -->
+  <text x="48" y="212" font-size="14" fill="#22d3ee">▪ Code = SOP(Team)：7 万星开源框架，ICLR 2024 Oral</text>
+  <text x="48" y="238" font-size="14" fill="#fbbf24">▪ MGX 上线一月 50 万用户、ARR 破 100 万美元</text>
+  <text x="48" y="264" font-size="14" fill="#f87171">▪ 开源迭代放缓，商业重心转向 Atoms</text>
+
+  <!-- 标签栏 pill -->
+  <g font-size="13">
+    <rect x="48" y="292" width="80" height="28" rx="14" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="88" y="311" fill="#93c5fd" text-anchor="middle">MetaGPT</text>
+    <rect x="138" y="292" width="62" height="28" rx="14" fill="none" stroke="#22d3ee" stroke-width="1.2"/>
+    <text x="169" y="311" fill="#67e8f9" text-anchor="middle">SOP</text>
+    <rect x="210" y="292" width="62" height="28" rx="14" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+    <text x="241" y="311" fill="#c4b5fd" text-anchor="middle">MGX</text>
+    <rect x="282" y="292" width="68" height="28" rx="14" fill="none" stroke="#fbbf24" stroke-width="1.2"/>
+    <text x="316" y="311" fill="#fcd34d" text-anchor="middle">Atoms</text>
+    <rect x="360" y="292" width="90" height="28" rx="14" fill="none" stroke="#34d399" stroke-width="1.2"/>
+    <text x="405" y="311" fill="#6ee7b7" text-anchor="middle">OpenManus</text>
+  </g>
+
+  <!-- 右侧概念示意：SOP 流水线 -> 营收 -->
+  <g stroke="#4b5b8a" stroke-width="1.5" fill="none">
+    <line x1="630" y1="130" x2="630" y2="160"/>
+    <line x1="630" y1="196" x2="630" y2="226"/>
+    <line x1="630" y1="262" x2="630" y2="282"/>
+    <path d="M660 300 C 710 300, 730 250, 770 230"/>
+  </g>
+  <rect x="580" y="98" width="100" height="32" rx="8" fill="#1d3a5f" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="630" y="119" font-size="13" fill="#67e8f9" text-anchor="middle">产品经理</text>
+  <rect x="580" y="160" width="100" height="36" rx="8" fill="#2a1f4d" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="630" y="183" font-size="13" fill="#c4b5fd" text-anchor="middle">架构师</text>
+  <rect x="580" y="226" width="100" height="36" rx="8" fill="#0f3320" stroke="#34d399" stroke-width="1.5"/>
+  <text x="630" y="249" font-size="13" fill="#6ee7b7" text-anchor="middle">工程师</text>
+  <rect x="580" y="282" width="100" height="36" rx="8" fill="#3a2410" stroke="#f97316" stroke-width="1.5"/>
+  <text x="630" y="305" font-size="13" fill="#fdba74" text-anchor="middle">QA</text>
+  <circle cx="792" cy="214" r="30" fill="#3a2f10" stroke="#fbbf24" stroke-width="2"/>
+  <text x="792" y="222" font-size="24" fill="#fcd34d" text-anchor="middle" font-weight="bold">$</text>
+  <text x="792" y="268" font-size="12" fill="#8892b0" text-anchor="middle">上线即变现</text>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="48" y1="342" x2="852" y2="342" stroke="#2a2a55" stroke-width="1"/>
+  <text x="48" y="366" font-size="13" fill="#8892b0">SOP 原理 · 学术飞轮 · MGX 到 Atoms · 局限与选型</text>
+  <text x="852" y="366" font-size="12" fill="#5a6382" text-anchor="end">AI 行业观察</text>
+</svg>

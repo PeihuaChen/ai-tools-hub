@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="900" viewBox="0 0 1080 900">
+  <rect width="1080" height="900" fill="#f7f8fa"/>
+  <text x="540" y="82" text-anchor="middle" fill="#111827" font-size="64" font-weight="700">ThinkRail 的并发 Agent 闭环</text>
+  <text x="540" y="132" text-anchor="middle" fill="#4b5563" font-size="36">把任务隔离、长期意图与代码审阅连成一条流程</text>
+  <g fill="none" stroke="#94a3b8" stroke-width="4"><path d="M540 290V342M348 460H278M732 460H802M540 578V630"/><path d="M540 342l-12-20h24zM278 460l20-12v24zM802 460l-20-12v24zM540 630l-12-20h24z" fill="#94a3b8" stroke="none"/></g>
+  <rect x="370" y="180" width="340" height="110" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="3"/>
+  <text x="540" y="230" text-anchor="middle" fill="#1d4ed8" font-size="44" font-weight="700">Git 仓库</text><text x="540" y="270" text-anchor="middle" fill="#1d4ed8" font-size="32">主分支与任务来源</text>
+  <rect x="48" y="372" width="300" height="176" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="3"/>
+  <text x="198" y="425" text-anchor="middle" fill="#6d28d9" font-size="40" font-weight="700">Spec Graph</text><text x="198" y="470" text-anchor="middle" fill="#6d28d9" font-size="32">边界与决策</text><text x="198" y="514" text-anchor="middle" fill="#6d28d9" font-size="32">长期上下文</text>
+  <rect x="366" y="342" width="348" height="236" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="3"/>
+  <text x="540" y="405" text-anchor="middle" fill="#0e7490" font-size="44" font-weight="700">Worktree</text><text x="540" y="452" text-anchor="middle" fill="#0e7490" font-size="36">任务独立分支</text><text x="540" y="504" text-anchor="middle" fill="#0e7490" font-size="32">代码、终端、会话</text><text x="540" y="546" text-anchor="middle" fill="#0e7490" font-size="32">都绑定当前工作区</text>
+  <rect x="732" y="372" width="300" height="176" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="3"/>
+  <text x="882" y="425" text-anchor="middle" fill="#15803d" font-size="40" font-weight="700">pi Agent</text><text x="882" y="470" text-anchor="middle" fill="#15803d" font-size="32">模型与技能</text><text x="882" y="514" text-anchor="middle" fill="#15803d" font-size="32">执行与反馈</text>
+  <rect x="340" y="630" width="400" height="154" rx="16" fill="#fef3e8" stroke="#b45309" stroke-width="3"/>
+  <text x="540" y="687" text-anchor="middle" fill="#b45309" font-size="44" font-weight="700">差异与 PR 审阅</text><text x="540" y="734" text-anchor="middle" fill="#b45309" font-size="32">CI、评论、合并或丢弃</text>
+  <text x="540" y="846" text-anchor="middle" fill="#4b5563" font-size="36">关键单位：可审阅、可合并、可回退的分支</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+  <rect width="1080" height="760" fill="#f7f8fa"/>
+
+  <text x="540" y="78" text-anchor="middle" font-size="58" font-weight="700" fill="#111827">AAIF 首批三项目</text>
+  <text x="540" y="136" text-anchor="middle" font-size="38" fill="#4b5563">协议、约定、执行，拼出智能体基础设施</text>
+
+  <!-- card 1: MCP -->
+  <g>
+    <rect x="40" y="188" width="316" height="340" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <rect x="64" y="212" width="128" height="52" rx="12" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="128" y="248" text-anchor="middle" font-size="34" font-weight="700" fill="#1d4ed8">MCP</text>
+    <text x="64" y="316" font-size="34" font-weight="700" fill="#1d4ed8">连接协议</text>
+    <text x="64" y="368" font-size="32" fill="#374151">模型怎么连上</text>
+    <text x="64" y="412" font-size="32" fill="#374151">数据与工具</text>
+    <line x1="64" y1="444" x2="332" y2="444" stroke="#bfdbfe" stroke-width="2"/>
+    <text x="64" y="492" font-size="32" fill="#1d4ed8">Anthropic 捐赠</text>
+  </g>
+
+  <!-- card 2: AGENTS.md -->
+  <g>
+    <rect x="382" y="188" width="316" height="340" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <rect x="406" y="212" width="216" height="52" rx="12" fill="#ffffff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="514" y="248" text-anchor="middle" font-size="34" font-weight="700" fill="#15803d">AGENTS.md</text>
+    <text x="406" y="316" font-size="34" font-weight="700" fill="#15803d">项目约定</text>
+    <text x="406" y="368" font-size="32" fill="#374151">在仓库里守规矩</text>
+    <text x="406" y="412" font-size="32" fill="#374151">怎么测怎么构建</text>
+    <line x1="406" y1="444" x2="674" y2="444" stroke="#bbf7d0" stroke-width="2"/>
+    <text x="406" y="492" font-size="32" fill="#15803d">OpenAI 捐赠</text>
+  </g>
+
+  <!-- card 3: goose -->
+  <g>
+    <rect x="724" y="188" width="316" height="340" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <rect x="748" y="212" width="150" height="52" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="823" y="248" text-anchor="middle" font-size="34" font-weight="700" fill="#6d28d9">goose</text>
+    <text x="748" y="316" font-size="34" font-weight="700" fill="#6d28d9">执行载体</text>
+    <text x="748" y="368" font-size="32" fill="#374151">真正把活干完</text>
+    <text x="748" y="412" font-size="32" fill="#374151">写码、跑测试、修错</text>
+    <line x1="748" y1="444" x2="1016" y2="444" stroke="#ddd6fe" stroke-width="2"/>
+    <text x="748" y="492" font-size="32" fill="#6d28d9">Block 捐赠</text>
+  </g>
+
+  <!-- arrows between cards -->
+  <path d="M362 358 L376 358 L376 350 L388 366 L376 382 L376 374 L362 374 Z" fill="#94a3b8"/>
+  <path d="M704 358 L718 358 L718 350 L730 366 L718 382 L718 374 L704 374 Z" fill="#94a3b8"/>
+
+  <!-- bottom band -->
+  <rect x="40" y="576" width="1000" height="96" rx="16" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="620" text-anchor="middle" font-size="38" font-weight="700" fill="#111827">能连 · 守规 · 会干活</text>
+  <text x="540" y="660" text-anchor="middle" font-size="32" fill="#4b5563">前两者定义标准，Goose 是消费标准的参考实现</text>
+
+  <text x="540" y="722" text-anchor="middle" font-size="32" fill="#6b7280">2025-12-09 Linux基金会成立AAIF，AWS、Google、Microsoft等支持</text>
+</svg>

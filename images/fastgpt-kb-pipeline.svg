@@ -1,0 +1,49 @@
+<svg width="1080" height="980" viewBox="0 0 1080 980" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="980" fill="#f7f8fa"/>
+
+  <!-- title -->
+  <text x="60" y="80" font-size="46" font-weight="bold" fill="#111827">FastGPT 知识库问答数据流</text>
+
+  <!-- Stage 1 -->
+  <rect x="60" y="130" width="960" height="148" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <circle cx="140" cy="204" r="38" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="140" y="219" font-size="42" font-weight="bold" fill="#1d4ed8" text-anchor="middle">1</text>
+  <text x="210" y="196" font-size="38" font-weight="bold" fill="#111827">文档导入</text>
+  <text x="210" y="242" font-size="30" fill="#4b5563">支持 pdf、docx、url 等格式</text>
+
+  <path d="M140 282 l0 22 M124 298 l16 16 l16 -16" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <!-- Stage 2 -->
+  <rect x="60" y="298" width="960" height="148" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <circle cx="140" cy="372" r="38" fill="#ecfeff" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="140" y="387" font-size="42" font-weight="bold" fill="#0e7490" text-anchor="middle">2</text>
+  <text x="210" y="364" font-size="38" font-weight="bold" fill="#111827">智能分块</text>
+  <text x="210" y="410" font-size="30" fill="#4b5563">按自定义分隔符切分文本片段</text>
+
+  <path d="M140 450 l0 22 M124 466 l16 16 l16 -16" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <!-- Stage 3 -->
+  <rect x="60" y="466" width="960" height="148" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <circle cx="140" cy="540" r="38" fill="#f0fdf4" stroke="#15803d" stroke-width="2.5"/>
+  <text x="140" y="555" font-size="42" font-weight="bold" fill="#15803d" text-anchor="middle">3</text>
+  <text x="210" y="532" font-size="38" font-weight="bold" fill="#111827">向量化入库</text>
+  <text x="210" y="578" font-size="30" fill="#4b5563">存入向量库，支持多库混合</text>
+
+  <path d="M140 618 l0 22 M124 634 l16 16 l16 -16" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <!-- Stage 4 -->
+  <rect x="60" y="634" width="960" height="148" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <circle cx="140" cy="708" r="38" fill="#fff7ed" stroke="#b45309" stroke-width="2.5"/>
+  <text x="140" y="723" font-size="42" font-weight="bold" fill="#b45309" text-anchor="middle">4</text>
+  <text x="210" y="700" font-size="38" font-weight="bold" fill="#111827">混合检索重排</text>
+  <text x="210" y="746" font-size="30" fill="#4b5563">向量加关键词召回后再重排</text>
+
+  <path d="M140 786 l0 22 M124 802 l16 16 l16 -16" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <!-- Stage 5 -->
+  <rect x="60" y="802" width="960" height="148" rx="14" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+  <circle cx="140" cy="876" r="38" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="140" y="891" font-size="42" font-weight="bold" fill="#6d28d9" text-anchor="middle">5</text>
+  <text x="210" y="868" font-size="38" font-weight="bold" fill="#111827">大模型生成</text>
+  <text x="210" y="914" font-size="30" fill="#4b5563">拼接检索片段生成最终回答</text>
+</svg>

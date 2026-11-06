@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="680" viewBox="0 0 1160 680">
+  <rect width="1160" height="680" fill="#ffffff"/>
+
+  <text x="48" y="52" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="bold" fill="#111827">自建 OCR 与商业 API 的成本结构对比</text>
+  <text x="48" y="80" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">横轴为月处理页数（对数刻度示意），纵轴为月度总成本。曲线为结构示意，非厂商实测报价</text>
+
+  <!-- chart frame -->
+  <rect x="64" y="112" width="640" height="400" rx="10" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- axes -->
+  <line x1="120" y1="472" x2="676" y2="472" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="120" y1="472" x2="120" y2="140" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M115 140 L120 130 L125 140 Z" fill="#94a3b8"/>
+  <path d="M676 467 L686 472 L676 477 Z" fill="#94a3b8"/>
+
+  <text x="132" y="152" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">月度总成本</text>
+  <text x="660" y="496" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280" text-anchor="end">月处理页数</text>
+
+  <!-- gridlines -->
+  <line x1="120" y1="392" x2="676" y2="392" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="120" y1="312" x2="676" y2="312" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="120" y1="232" x2="676" y2="232" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="120" y1="152" x2="676" y2="152" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4"/>
+
+  <!-- x ticks -->
+  <line x1="240" y1="472" x2="240" y2="478" stroke="#94a3b8" stroke-width="2"/>
+  <text x="240" y="496" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">1 万页</text>
+  <line x1="380" y1="472" x2="380" y2="478" stroke="#94a3b8" stroke-width="2"/>
+  <text x="380" y="496" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">10 万页</text>
+  <line x1="520" y1="472" x2="520" y2="478" stroke="#94a3b8" stroke-width="2"/>
+  <text x="520" y="496" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">100 万页</text>
+  <line x1="640" y1="472" x2="640" y2="478" stroke="#94a3b8" stroke-width="2"/>
+  <text x="640" y="496" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">1000 万页</text>
+
+  <!-- self-host: high fixed, flat marginal -->
+  <path d="M120 336 L240 330 L380 318 L520 296 L660 258" fill="none" stroke="#1d4ed8" stroke-width="3"/>
+  <circle cx="240" cy="330" r="4.5" fill="#1d4ed8"/>
+  <circle cx="380" cy="318" r="4.5" fill="#1d4ed8"/>
+  <circle cx="520" cy="296" r="4.5" fill="#1d4ed8"/>
+
+  <!-- API cheap tier (text extraction ~$1.5/1k) -->
+  <path d="M120 462 L240 450 L380 404 L520 300 L660 168" fill="none" stroke="#15803d" stroke-width="3"/>
+  <circle cx="380" cy="404" r="4.5" fill="#15803d"/>
+  <circle cx="520" cy="300" r="4.5" fill="#15803d"/>
+
+  <!-- API premium tier (structured extraction) -->
+  <path d="M120 456 L240 424 L380 336 L520 190 L620 140" fill="none" stroke="#b91c1c" stroke-width="3"/>
+  <circle cx="380" cy="336" r="4.5" fill="#b91c1c"/>
+  <circle cx="520" cy="190" r="4.5" fill="#b91c1c"/>
+
+  <!-- breakeven marker -->
+  <line x1="520" y1="140" x2="520" y2="472" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5"/>
+  <rect x="428" y="524" width="188" height="30" rx="6" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="522" y="544" font-family="Microsoft YaHei, sans-serif" font-size="12" font-weight="bold" fill="#b45309" text-anchor="middle">盈亏平衡带 ≈ 月 100 万页</text>
+
+  <!-- legend -->
+  <rect x="150" y="164" width="286" height="94" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1.2"/>
+  <line x1="164" y1="186" x2="196" y2="186" stroke="#b91c1c" stroke-width="3"/>
+  <text x="206" y="191" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">商业 API · 结构化抽取档（15-50 美元/千页）</text>
+  <line x1="164" y1="212" x2="196" y2="212" stroke="#15803d" stroke-width="3"/>
+  <text x="206" y="217" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">商业 API · 纯文本档（1.5-4 美元/千页）</text>
+  <line x1="164" y1="238" x2="196" y2="238" stroke="#1d4ed8" stroke-width="3"/>
+  <text x="206" y="243" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">开源自建（固定成本高，边际成本趋零）</text>
+
+  <!-- right decision panel -->
+  <rect x="736" y="112" width="376" height="400" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="762" y="146" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#111827">四条可以直接套用的判断</text>
+
+  <rect x="762" y="164" width="324" height="70" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.2"/>
+  <text x="776" y="186" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#15803d">月 10 万页以下 → 用 API</text>
+  <text x="776" y="207" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">GPU 与人力成本远超 API 账单，还要背运维</text>
+  <text x="776" y="225" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">负担（模型升级、显存 OOM、批处理堆积）</text>
+
+  <rect x="762" y="248" width="324" height="70" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+  <text x="776" y="270" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8">月 100 万页以上 → 自建通常划算</text>
+  <text x="776" y="291" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">PP-OCRv6 这类小模型可纯 CPU 跑，</text>
+  <text x="776" y="309" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">这时真正的成本是人，不是卡</text>
+
+  <rect x="762" y="332" width="324" height="70" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+  <text x="776" y="354" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#6d28d9">硬性合规要求 → 不算成本</text>
+  <text x="776" y="375" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">金融、医疗、政务、军工：直接自建，或选</text>
+  <text x="776" y="393" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">支持 VPC / 本地 / 气隙部署的商业方案</text>
+
+  <rect x="762" y="416" width="324" height="70" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/>
+  <text x="776" y="438" font-family="Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#b45309">版式多样且持续变化 → 商业平台</text>
+  <text x="776" y="459" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">多轮次自纠错和持续模型更新，自建团队</text>
+  <text x="776" y="477" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#4b5563">很难复制</text>
+
+  <!-- hidden cost callout -->
+  <rect x="64" y="576" width="1048" height="72" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+  <text x="88" y="604" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">别忘了那笔没人写进预算的隐性成本：质检</text>
+  <text x="88" y="628" font-family="Microsoft YaHei, sans-serif" font-size="12.5" fill="#4b5563">无论选哪个方案，生产环境都需要抽样人工复核、置信度阈值告警和异常样本队列。这部分工作量和方案选择关系不大，但常常整个从预算里消失。</text>
+</svg>

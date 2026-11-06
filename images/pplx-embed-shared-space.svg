@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1010" viewBox="0 0 1080 1010">
+  <rect x="0" y="0" width="1080" height="1010" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="60" font-weight="700" fill="#111827" text-anchor="middle">一个空间，两种尺寸</text>
+  <text x="540" y="160" font-size="34" fill="#4b5563" text-anchor="middle">9B 建索引，0.6B 在端侧查询</text>
+
+  <!-- lane 1: offline cloud -->
+  <rect x="48" y="210" width="984" height="290" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="270" font-size="40" font-weight="700" fill="#1d4ed8">离线 · 云端建索引</text>
+
+  <g fill="#ffffff" stroke="#1d4ed8" stroke-width="2">
+    <rect x="76" y="300" width="272" height="160" rx="14"/>
+    <rect x="404" y="300" width="272" height="160" rx="14"/>
+    <rect x="732" y="300" width="272" height="160" rx="14"/>
+  </g>
+  <g stroke="#94a3b8" stroke-width="3">
+    <line x1="352" y1="380" x2="384" y2="380"/>
+    <line x1="680" y1="380" x2="712" y2="380"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M384 370 L400 380 L384 390 Z"/>
+    <path d="M712 370 L728 380 L712 390 Z"/>
+  </g>
+  <text x="212" y="360" font-size="40" font-weight="700" fill="#111827" text-anchor="middle">文档</text>
+  <text x="212" y="425" font-size="32" fill="#4b5563" text-anchor="middle">PDF / 图片</text>
+  <text x="540" y="360" font-size="40" font-weight="700" fill="#111827" text-anchor="middle">9B 编码器</text>
+  <text x="540" y="425" font-size="32" fill="#4b5563" text-anchor="middle">高质量</text>
+  <text x="868" y="360" font-size="40" font-weight="700" fill="#111827" text-anchor="middle">多向量索引</text>
+  <text x="868" y="425" font-size="32" fill="#4b5563" text-anchor="middle">128 维/token</text>
+
+  <!-- shared space link -->
+  <line x1="868" y1="460" x2="868" y2="652" stroke="#6d28d9" stroke-width="3" stroke-dasharray="8"/>
+  <path d="M858 652 L868 668 L878 652 Z" fill="#6d28d9"/>
+  <text x="848" y="552" font-size="32" font-weight="700" fill="#6d28d9" text-anchor="end">同一向量空间</text>
+
+  <!-- lane 2: online edge -->
+  <rect x="48" y="580" width="984" height="290" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="76" y="640" font-size="40" font-weight="700" fill="#15803d">在线 · 端侧查询</text>
+
+  <g fill="#ffffff" stroke="#15803d" stroke-width="2">
+    <rect x="76" y="670" width="272" height="160" rx="14"/>
+    <rect x="404" y="670" width="272" height="160" rx="14"/>
+    <rect x="732" y="670" width="272" height="160" rx="14"/>
+  </g>
+  <g stroke="#94a3b8" stroke-width="3">
+    <line x1="352" y1="750" x2="384" y2="750"/>
+    <line x1="680" y1="750" x2="712" y2="750"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M384 740 L400 750 L384 760 Z"/>
+    <path d="M712 740 L728 750 L712 760 Z"/>
+  </g>
+  <text x="212" y="730" font-size="40" font-weight="700" fill="#111827" text-anchor="middle">用户查询</text>
+  <text x="212" y="795" font-size="32" fill="#4b5563" text-anchor="middle">文本 / 图片</text>
+  <text x="540" y="730" font-size="40" font-weight="700" fill="#111827" text-anchor="middle">0.6B 编码</text>
+  <text x="540" y="795" font-size="32" fill="#4b5563" text-anchor="middle">本地运行</text>
+  <text x="868" y="730" font-size="40" font-weight="700" fill="#111827" text-anchor="middle">MaxSim</text>
+  <text x="868" y="795" font-size="32" fill="#4b5563" text-anchor="middle">返回页面</text>
+
+  <text x="540" y="950" font-size="34" font-weight="700" fill="#b45309" text-anchor="middle">ViDoRe v3：混用 63.5% &gt; 纯 0.6B 62.3%</text>
+</svg>

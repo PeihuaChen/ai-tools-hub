@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="960" viewBox="0 0 1080 960">
+  <rect width="1080" height="960" fill="#f7f8fa"/>
+
+  <text x="540" y="72" fill="#111827" font-size="58" font-weight="bold" text-anchor="middle">VLA 训练数据金字塔</text>
+  <text x="540" y="124" fill="#4b5563" font-size="32" text-anchor="middle">越往上越贵越少，越往下越多越便宜</text>
+
+  <!-- L1 top: real teleop -->
+  <polygon points="410,180 670,180 710,300 370,300" fill="#fee2e2" stroke="#b91c1c" stroke-width="2.5"/>
+  <text x="540" y="232" fill="#b91c1c" font-size="34" font-weight="bold" text-anchor="middle">真实遥操作</text>
+  <text x="540" y="276" fill="#4b5563" font-size="30" text-anchor="middle">贵·少·做对齐</text>
+
+  <!-- L2: world-model synthetic -->
+  <polygon points="370,300 710,300 760,420 320,420" fill="#ffedd5" stroke="#b45309" stroke-width="2.5"/>
+  <text x="540" y="352" fill="#b45309" font-size="34" font-weight="bold" text-anchor="middle">世界模型合成数据</text>
+  <text x="540" y="396" fill="#4b5563" font-size="30" text-anchor="middle">Cosmos 造数据</text>
+
+  <!-- L3: cross-embodiment robot data -->
+  <polygon points="320,420 760,420 820,540 260,540" fill="#dcfce7" stroke="#15803d" stroke-width="2.5"/>
+  <text x="540" y="472" fill="#15803d" font-size="34" font-weight="bold" text-anchor="middle">跨本体机器人数据</text>
+  <text x="540" y="516" fill="#4b5563" font-size="30" text-anchor="middle">Open X-Embodiment 协同训练</text>
+
+  <!-- L4: human ego video -->
+  <polygon points="260,540 820,540 880,660 200,660" fill="#cffafe" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="540" y="592" fill="#0e7490" font-size="34" font-weight="bold" text-anchor="middle">人类第一视角视频</text>
+  <text x="540" y="636" fill="#4b5563" font-size="30" text-anchor="middle">GR00T EgoScale 2 万+ 小时</text>
+
+  <!-- L5 base: web image-text -->
+  <polygon points="200,660 880,660 940,790 140,790" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="540" y="714" fill="#1d4ed8" font-size="36" font-weight="bold" text-anchor="middle">互联网图文（VLM 底座）</text>
+  <text x="540" y="758" fill="#4b5563" font-size="30" text-anchor="middle">继承语义常识·涌现泛化来源</text>
+
+  <!-- footer note -->
+  <text x="540" y="860" fill="#4b5563" font-size="32" text-anchor="middle">后训练：强化学习 + 人类纠错做最终对齐</text>
+</svg>

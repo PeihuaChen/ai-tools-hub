@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d2d44;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1f1f35;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)" rx="12"/>
+  
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#e0e0e0" font-size="18" font-weight="bold">Autoreason 核心工作流程</text>
+  
+  <!-- Step 1: Task Prompt -->
+  <rect x="310" y="50" width="180" height="40" rx="8" fill="#4a90d9" opacity="0.9"/>
+  <text x="400" y="75" text-anchor="middle" fill="white" font-size="13" font-weight="bold">📝 任务提示</text>
+  
+  <!-- Arrow down -->
+  <path d="M400 90 L400 115" stroke="#6bb5ff" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <defs><marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#6bb5ff"/></marker></defs>
+  
+  <!-- Step 2: Incumbent A -->
+  <rect x="310" y="120" width="180" height="40" rx="8" fill="#2ecc71" opacity="0.85"/>
+  <text x="400" y="145" text-anchor="middle" fill="white" font-size="13" font-weight="bold">🏆 擂主 A（不变）</text>
+  
+  <!-- Three branches -->
+  <!-- Left: Critic -->
+  <path d="M350 160 L200 200" stroke="#ff6b6b" stroke-width="2"/>
+  <rect x="100" y="200" width="200" height="50" rx="8" fill="url(#cardGrad)" stroke="#ff6b6b" stroke-width="1.5"/>
+  <text x="200" y="220" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="bold">🔍 批评者（全新Agent）</text>
+  <text x="200" y="238" text-anchor="middle" fill="#aaa" font-size="10">找出问题，不提解决方案</text>
+  
+  <!-- Middle: Author B -->
+  <path d="M400 160 L400 200" stroke="#f39c12" stroke-width="2"/>
+  <rect x="300" y="200" width="200" height="50" rx="8" fill="url(#cardGrad)" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="400" y="220" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">✍️ 作者 B（全新Agent）</text>
+  <text x="400" y="238" text-anchor="middle" fill="#aaa" font-size="10">基于批评生成对抗修订版</text>
+  
+  <!-- Right: Synthesizer -->
+  <path d="M450 160 L600 200" stroke="#9b59b6" stroke-width="2"/>
+  <rect x="500" y="200" width="200" height="50" rx="8" fill="url(#cardGrad)" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="600" y="220" text-anchor="middle" fill="#9b59b6" font-size="11" font-weight="bold">🔀 综合者（全新Agent）</text>
+  <text x="600" y="238" text-anchor="middle" fill="#aaa" font-size="10">融合 A 和 B 的最佳部分</text>
+  
+  <!-- Arrows to candidates -->
+  <path d="M200 250 L250 300" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="4"/>
+  <path d="M400 250 L400 300" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="4"/>
+  <path d="M600 250 L550 300" stroke="#9b59b6" stroke-width="1.5" stroke-dasharray="4"/>
+  
+  <!-- Three candidates -->
+  <rect x="180" y="300" width="120" height="35" rx="6" fill="#2ecc71" opacity="0.7"/>
+  <text x="240" y="322" text-anchor="middle" fill="white" font-size="11" font-weight="bold">A（原版）</text>
+  
+  <rect x="340" y="300" width="120" height="35" rx="6" fill="#f39c12" opacity="0.7"/>
+  <text x="400" y="322" text-anchor="middle" fill="white" font-size="11" font-weight="bold">B（修订版）</text>
+  
+  <rect x="500" y="300" width="120" height="35" rx="6" fill="#9b59b6" opacity="0.7"/>
+  <text x="560" y="322" text-anchor="middle" fill="white" font-size="11" font-weight="bold">AB（综合版）</text>
+  
+  <!-- Arrow to judges -->
+  <path d="M400 335 L400 365" stroke="#6bb5ff" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Judge Panel -->
+  <rect x="250" y="370" width="300" height="55" rx="8" fill="url(#cardGrad)" stroke="#6bb5ff" stroke-width="2"/>
+  <text x="400" y="392" text-anchor="middle" fill="#6bb5ff" font-size="12" font-weight="bold">⚖️ 评审团（3个全新盲审Agent）</text>
+  <text x="400" y="412" text-anchor="middle" fill="#aaa" font-size="10">Borda 计数投票 · 不知道哪个是原版</text>
+  
+  <!-- Two outcomes -->
+  <path d="M330 425 L250 455" stroke="#2ecc71" stroke-width="2"/>
+  <path d="M470 425 L550 455" stroke="#e74c3c" stroke-width="2"/>
+  
+  <!-- Outcome: A wins -->
+  <rect x="140" y="450" width="220" height="40" rx="8" fill="#2ecc71" opacity="0.3" stroke="#2ecc71"/>
+  <text x="250" y="475" text-anchor="middle" fill="#2ecc71" font-size="11" font-weight="bold">A 连赢 2 轮 → ✅ 收敛停止</text>
+  
+  <!-- Outcome: B or AB wins -->
+  <rect x="440" y="450" width="220" height="40" rx="8" fill="#f39c12" opacity="0.3" stroke="#f39c12"/>
+  <text x="550" y="475" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">B/AB 获胜 → 🔄 新一轮</text>
+  
+  <!-- Loop arrow -->
+  <path d="M660 470 Q720 470 720 300 Q720 130 460 130" stroke="#f39c12" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrowOrange)"/>
+  <defs><marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#f39c12"/></marker></defs>
+</svg>

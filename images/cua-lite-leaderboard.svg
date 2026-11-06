@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660">
+  <rect width="1200" height="660" fill="#ffffff"/>
+
+  <text x="48" y="42" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="23" font-weight="bold" fill="#111827">CUA-Lite 自跑的 OSWorld 榜单：一个闭源模型，和它后面的中国开源权重</text>
+  <text x="48" y="68" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#4b5563">13 个 agent · 325 个任务 · 成功率（%）· 榜单日期 2026-07-18</text>
+
+  <!-- 图例：独占一行，避免与标题同基线重叠 -->
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#4b5563">
+    <rect x="48" y="82" width="14" height="14" rx="3" fill="#1d4ed8"/>
+    <text x="70" y="93">闭源 API</text>
+    <rect x="148" y="82" width="14" height="14" rx="3" fill="#15803d"/>
+    <text x="170" y="93">阿里 Qwen</text>
+    <rect x="256" y="82" width="14" height="14" rx="3" fill="#b45309"/>
+    <text x="278" y="93">美团 EvoCUA</text>
+    <rect x="384" y="82" width="14" height="14" rx="3" fill="#6d28d9"/>
+    <text x="406" y="93">字节 UI-TARS</text>
+    <rect x="516" y="82" width="14" height="14" rx="3" fill="#0e7490"/>
+    <text x="538" y="93">OpenGVLab ScaleCUA</text>
+  </g>
+
+  <!-- 网格线与横轴刻度 -->
+  <g stroke="#d9e2ec" stroke-width="1">
+    <path d="M330 134V570M510 134V570M690 134V570M870 134V570M1050 134V570"/>
+  </g>
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">
+    <text x="330" y="124">0</text>
+    <text x="510" y="124">20</text>
+    <text x="690" y="124">40</text>
+    <text x="870" y="124">60</text>
+    <text x="1050" y="124">80</text>
+  </g>
+
+  <!-- 模型名 -->
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12.5" fill="#4b5563" text-anchor="end">
+    <text x="320" y="158">gpt-5.5</text>
+    <text x="320" y="191">Qwen3.5-27B</text>
+    <text x="320" y="224">EvoCUA-8B（美团）</text>
+    <text x="320" y="257">Qwen3.5-9B</text>
+    <text x="320" y="290">Qwen3-VL-32B-Instruct</text>
+    <text x="320" y="323">Qwen3-VL-8B-Instruct</text>
+    <text x="320" y="356">Qwen3.5-4B</text>
+    <text x="320" y="389">UI-TARS-1.5-7B</text>
+    <text x="320" y="422">Qwen3-VL-4B-Instruct</text>
+    <text x="320" y="455">Qwen3-VL-2B-Instruct</text>
+    <text x="320" y="488">ScaleCUA-7B</text>
+    <text x="320" y="521">UI-TARS-7B-DPO</text>
+    <text x="320" y="554">Qwen3.5-2B</text>
+  </g>
+
+  <!-- 柱条：x=330 起，9px 对应 1% -->
+  <g>
+    <rect x="330" y="142" width="651" height="22" rx="4" fill="#1d4ed8"/>
+    <rect x="330" y="175" width="416" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="208" width="385" height="22" rx="4" fill="#b45309"/>
+    <rect x="330" y="241" width="343" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="274" width="322" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="307" width="308" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="340" width="273" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="373" width="265" height="22" rx="4" fill="#6d28d9"/>
+    <rect x="330" y="406" width="262" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="439" width="185" height="22" rx="4" fill="#15803d"/>
+    <rect x="330" y="472" width="135" height="22" rx="4" fill="#0e7490"/>
+    <rect x="330" y="505" width="132" height="22" rx="4" fill="#6d28d9"/>
+    <rect x="330" y="538" width="96" height="22" rx="4" fill="#15803d"/>
+  </g>
+
+  <!-- 人类基线：画在柱条之后，避免被 gpt-5.5 的柱条边缘盖住 -->
+  <path d="M981 134V570" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="975" y="588" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#b91c1c">人类基线 72.36%</text>
+
+  <!-- 数值标签：柱条末端右侧 8px -->
+  <g font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" font-weight="bold">
+    <text x="989" y="158" fill="#1d4ed8">72.3</text>
+    <text x="754" y="191" fill="#15803d">46.2</text>
+    <text x="723" y="224" fill="#b45309">42.8</text>
+    <text x="681" y="257" fill="#15803d">38.1</text>
+    <text x="660" y="290" fill="#15803d">35.8</text>
+    <text x="646" y="323" fill="#15803d">34.2</text>
+    <text x="611" y="356" fill="#15803d">30.3</text>
+    <text x="603" y="389" fill="#6d28d9">29.4</text>
+    <text x="600" y="422" fill="#15803d">29.1</text>
+    <text x="523" y="455" fill="#15803d">20.5</text>
+    <text x="473" y="488" fill="#0e7490">15.0</text>
+    <text x="470" y="521" fill="#6d28d9">14.7</text>
+    <text x="434" y="554" fill="#15803d">10.7</text>
+  </g>
+
+  <rect x="48" y="598" width="1104" height="46" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="1"/>
+  <text x="66" y="618" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#b45309">注意：8B 的 EvoCUA（42.8）压过 32B 的 Qwen3-VL（35.8）和 9B 的 Qwen3.5（38.1）——这条赛道上「专门训过」比「参数更大」更值钱。</text>
+  <text x="66" y="637" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#6b7280">数据来源：CUA-Lite 项目主页 Leaderboard（2026-07-18 快照）。榜单分数全部由 CUA-Lite 团队自行跑出，非第三方独立复现。</text>
+</svg>

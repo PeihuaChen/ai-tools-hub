@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+<rect x="0" y="0" width="1080" height="760" fill="#f7f8fa"/>
+<text x="48" y="96" fill="#111827" font-size="60" font-weight="700">门控插在第几层</text>
+<text x="48" y="150" fill="#4b5563" font-size="32">太早信号不足，太晚省不下计算</text>
+
+<line x1="762" y1="84" x2="812" y2="84" stroke="#b45309" stroke-width="5"/>
+<text x="826" y="94" fill="#4b5563" font-size="30">可省的计算</text>
+<line x1="762" y1="124" x2="812" y2="124" stroke="#1d4ed8" stroke-width="5"/>
+<text x="826" y="134" fill="#4b5563" font-size="30">打分可靠性</text>
+
+<rect x="186" y="250" width="120" height="330" fill="#dcfce7" fill-opacity="0.85" stroke="#15803d" stroke-width="2" stroke-dasharray="8"/>
+<text x="186" y="232" fill="#15803d" font-size="30" font-weight="700">第 1–2 层：可用窗口</text>
+
+<line x1="120" y1="580" x2="1010" y2="580" stroke="#94a3b8" stroke-width="2"/>
+<line x1="120" y1="580" x2="120" y2="250" stroke="#94a3b8" stroke-width="2"/>
+
+<path d="M140 282 C 240 300, 300 360, 380 420 C 520 470, 760 500, 980 516" fill="none" stroke="#b45309" stroke-width="5"/>
+<path d="M140 540 C 172 500, 190 400, 218 356 C 246 318, 300 310, 380 308 C 620 304, 820 304, 980 304" fill="none" stroke="#1d4ed8" stroke-width="5"/>
+
+<circle cx="140" cy="282" r="7" fill="#b45309"/>
+<circle cx="218" cy="356" r="7" fill="#1d4ed8"/>
+
+<g fill="#6b7280" font-size="30" text-anchor="middle">
+<text x="140" y="622">0</text><text x="218" y="622">1</text><text x="290" y="622">2</text><text x="362" y="622">3</text><text x="570" y="622">6</text><text x="980" y="622">12</text>
+</g>
+<text x="1010" y="556" text-anchor="end" fill="#6b7280" font-size="30">层数</text>
+
+<text x="140" y="686" fill="#b45309" font-size="30">第 0 层：打分不可靠</text>
+<text x="140" y="726" fill="#b45309" font-size="30">第 3 层后：省得少</text>
+<text x="560" y="686" fill="#1d4ed8" font-size="30">门控层及以下全量</text>
+<text x="560" y="726" fill="#1d4ed8" font-size="30">收益只来自上层</text>
+</svg>

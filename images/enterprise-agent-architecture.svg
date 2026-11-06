@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="a2aGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#00f2fe"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="Arial, Microsoft YaHei, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">企业AI Agent 分层架构</text>
+
+  <!-- A2A Layer -->
+  <rect x="40" y="55" width="720" height="150" rx="10" fill="none" stroke="url(#a2aGrad)" stroke-width="2" stroke-dasharray="6,3"/>
+  <rect x="50" y="48" width="200" height="22" rx="4" fill="#1a1a2e"/>
+  <text x="60" y="64" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#9b8ce8">Agent 编排层（A2A协议）</text>
+
+  <!-- Agent nodes -->
+  <rect x="80" y="90" width="120" height="55" rx="8" fill="#2d2b55" stroke="#667eea" stroke-width="1.5"/>
+  <text x="140" y="113" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#a8b4ff" text-anchor="middle">🧠 规划Agent</text>
+  <text x="140" y="133" font-family="Arial, sans-serif" font-size="10" fill="#707090" text-anchor="middle">任务分解与调度</text>
+
+  <rect x="240" y="90" width="120" height="55" rx="8" fill="#2d2b55" stroke="#667eea" stroke-width="1.5"/>
+  <text x="300" y="113" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#a8b4ff" text-anchor="middle">⚡ 执行Agent</text>
+  <text x="300" y="133" font-family="Arial, sans-serif" font-size="10" fill="#707090" text-anchor="middle">工具调用与操作</text>
+
+  <rect x="400" y="90" width="120" height="55" rx="8" fill="#2d2b55" stroke="#667eea" stroke-width="1.5"/>
+  <text x="460" y="113" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#a8b4ff" text-anchor="middle">📋 审计Agent</text>
+  <text x="460" y="133" font-family="Arial, sans-serif" font-size="10" fill="#707090" text-anchor="middle">合规检查与记录</text>
+
+  <rect x="560" y="90" width="120" height="55" rx="8" fill="#2d2b55" stroke="#667eea" stroke-width="1.5"/>
+  <text x="620" y="113" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#a8b4ff" text-anchor="middle">📊 监控Agent</text>
+  <text x="620" y="133" font-family="Arial, sans-serif" font-size="10" fill="#707090" text-anchor="middle">性能与成本追踪</text>
+
+  <!-- Connection arrows between agents -->
+  <line x1="200" y1="117" x2="240" y2="117" stroke="#667eea" stroke-width="1" opacity="0.6" marker-end="url(#arrowA2A)"/>
+  <line x1="360" y1="117" x2="400" y2="117" stroke="#667eea" stroke-width="1" opacity="0.6"/>
+  <line x1="520" y1="117" x2="560" y2="117" stroke="#667eea" stroke-width="1" opacity="0.6"/>
+
+  <!-- Vertical connectors -->
+  <line x1="140" y1="145" x2="140" y2="175" stroke="#4facfe" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="300" y1="145" x2="300" y2="175" stroke="#4facfe" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="460" y1="145" x2="460" y2="175" stroke="#4facfe" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="620" y1="145" x2="620" y2="175" stroke="#4facfe" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <!-- Governance bar -->
+  <rect x="40" y="165" width="720" height="30" rx="4" fill="#1e3a5f" opacity="0.5"/>
+  <text x="400" y="184" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" fill="#7fc4ff" text-anchor="middle">🔒 治理层：分级授权 · 审计日志 · 成本预算 · 护栏规则</text>
+
+  <!-- MCP Layer -->
+  <rect x="40" y="210" width="720" height="150" rx="10" fill="none" stroke="url(#mcpGrad)" stroke-width="2" stroke-dasharray="6,3"/>
+  <rect x="50" y="203" width="210" height="22" rx="4" fill="#1a1a2e"/>
+  <text x="60" y="219" font-family="Arial, Microsoft YaHei, sans-serif" font-size="13" font-weight="bold" fill="#4facfe">工具连接层（MCP协议）</text>
+
+  <!-- Tool nodes -->
+  <rect x="80" y="245" width="120" height="55" rx="8" fill="#1a2e40" stroke="#4facfe" stroke-width="1.5"/>
+  <text x="140" y="268" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#7fc4ff" text-anchor="middle">💼 CRM系统</text>
+  <text x="140" y="288" font-family="Arial, sans-serif" font-size="10" fill="#507090" text-anchor="middle">Salesforce / 纷享</text>
+
+  <rect x="240" y="245" width="120" height="55" rx="8" fill="#1a2e40" stroke="#4facfe" stroke-width="1.5"/>
+  <text x="300" y="268" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#7fc4ff" text-anchor="middle">📦 ERP系统</text>
+  <text x="300" y="288" font-family="Arial, sans-serif" font-size="10" fill="#507090" text-anchor="middle">SAP / 用友</text>
+
+  <rect x="400" y="245" width="120" height="55" rx="8" fill="#1a2e40" stroke="#4facfe" stroke-width="1.5"/>
+  <text x="460" y="268" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#7fc4ff" text-anchor="middle">📧 邮件/IM</text>
+  <text x="460" y="288" font-family="Arial, sans-serif" font-size="10" fill="#507090" text-anchor="middle">飞书 / 钉钉 / 企微</text>
+
+  <rect x="560" y="245" width="120" height="55" rx="8" fill="#1a2e40" stroke="#4facfe" stroke-width="1.5"/>
+  <text x="620" y="268" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#7fc4ff" text-anchor="middle">🗄️ 数据库</text>
+  <text x="620" y="288" font-family="Arial, sans-serif" font-size="10" fill="#507090" text-anchor="middle">MySQL / ES / 向量库</text>
+
+  <!-- Vertical connectors from tools down -->
+  <line x1="140" y1="300" x2="140" y2="330" stroke="#4facfe" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+  <line x1="300" y1="300" x2="300" y2="330" stroke="#4facfe" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+  <line x1="460" y1="300" x2="460" y2="330" stroke="#4facfe" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+  <line x1="620" y1="300" x2="620" y2="330" stroke="#4facfe" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+
+  <!-- Observability bar -->
+  <rect x="40" y="370" width="720" height="35" rx="8" fill="#0d1b2a" stroke="#2a4a6a" stroke-width="1"/>
+  <text x="400" y="392" font-family="Arial, Microsoft YaHei, sans-serif" font-size="12" fill="#5a8aaa" text-anchor="middle">📡 可观测性：OpenTelemetry 追踪 · Langfuse 评估 · 成本仪表盘 · 告警系统</text>
+
+  <!-- Side labels -->
+  <text x="770" y="130" font-family="Arial, sans-serif" font-size="10" fill="#667eea" text-anchor="end" transform="rotate(-90, 770, 130)">Agent↔Agent</text>
+  <text x="770" y="285" font-family="Arial, sans-serif" font-size="10" fill="#4facfe" text-anchor="end" transform="rotate(-90, 770, 285)">Agent↔Tool</text>
+</svg>

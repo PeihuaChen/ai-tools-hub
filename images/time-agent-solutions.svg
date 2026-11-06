@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="640" viewBox="0 0 1160 640">
+  <rect width="1160" height="640" fill="#ffffff"/>
+
+  <text x="580" y="46" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" fill="#111827">给 AI Agent 装上“时钟”：四条修复路线</text>
+  <text x="580" y="74" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#6b7280">从最轻到最重，真实系统通常叠加使用（多数团队用好 A+B+C 即可）</text>
+
+  <!-- Route A -->
+  <rect x="40" y="110" width="1080" height="108" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <circle cx="86" cy="164" r="24" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="86" y="172" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="bold" fill="#1d4ed8">A</text>
+  <text x="134" y="146" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8">Prompt / 上下文注入　<tspan font-size="13" fill="#6b7280" font-weight="normal">成本最低 · 见效最快</tspan></text>
+  <text x="134" y="174" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">注入无歧义的“现在”（含时区语义）+ 标注知识截止，让模型主动求助外部</text>
+  <text x="134" y="197" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">解决：感知“现在”　✗ 改不了日期算术与全局时间线</text>
+
+  <!-- Route B -->
+  <rect x="40" y="234" width="1080" height="108" rx="12" fill="#ecfdf5" stroke="#15803d" stroke-width="1.5"/>
+  <circle cx="86" cy="288" r="24" fill="#d1fae5" stroke="#15803d" stroke-width="1.5"/>
+  <text x="86" y="296" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="bold" fill="#15803d">B</text>
+  <text x="134" y="270" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#15803d">工具化（Tool Use）　<tspan font-size="13" fill="#6b7280" font-weight="normal">最可靠 · 最不翻车</tspan></text>
+  <text x="134" y="298" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">datetime / 日历 / 定时调度（cron）——把时间计算外包给确定性代码</text>
+  <text x="134" y="321" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">解决：日期算术（几乎彻底消除）　模型只负责“决定算什么”</text>
+
+  <!-- Route C -->
+  <rect x="40" y="358" width="1080" height="120" rx="12" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <circle cx="86" cy="418" r="24" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="86" y="426" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="bold" fill="#6d28d9">C</text>
+  <text x="134" y="392" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#6d28d9">时间感知记忆层　<tspan font-size="13" fill="#6b7280" font-weight="normal">当前工程界最重要方向</tspan></text>
+  <text x="134" y="420" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">双时间（bi-temporal）知识图谱：每条事实记录“何时成立 / 何时失效 / 何时写入”</text>
+  <text x="134" y="442" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">支持事实失效 + “what was true when” 查询　代表：Zep / Graphiti</text>
+  <text x="134" y="463" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">解决：知识截止盲区 + 全局时间线　✓ 优于 Flat RAG / 向量追加</text>
+
+  <!-- Route D -->
+  <rect x="40" y="494" width="1080" height="108" rx="12" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+  <circle cx="86" cy="548" r="24" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text x="86" y="556" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="bold" fill="#b45309">D</text>
+  <text x="134" y="530" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#b45309">训练 / 微调强化　<tspan font-size="13" fill="#6b7280" font-weight="normal">成本最高 · 练“内功”</tspan></text>
+  <text x="134" y="558" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">RL 强化时序推理（Time-R1）· 对齐时间动态与语义（TPP-TAL）· 训练注入时间上下文</text>
+  <text x="134" y="581" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">适用：垂直领域模型 / 对时间推理有硬性要求的团队</text>
+
+  <!-- weight indicator right side -->
+  <text x="1140" y="150" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#9ca3af">轻</text>
+  <text x="1140" y="560" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#9ca3af">重</text>
+</svg>

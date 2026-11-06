@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>社区AI乐园 · 家门口的科技馆</title>
+<style>
+  :root {
+    --bg: #fdf7ee; --card: #ffffff; --ink: #222; --muted: #555;
+    --pri: #0b6bcb; --ok: #1f7a3a; --bad: #b3261e; --warn: #8a5a00;
+    --radius: 16px; --fs: 18px;
+  }
+  body.big { --fs: 23px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: var(--fs);
+         background: var(--bg); color: var(--ink); line-height: 1.6; }
+  header { background: linear-gradient(90deg, #0b6bcb, #6a3fb5); color: #fff; padding: 14px 18px;
+           display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+  header h1 { margin: 0; font-size: 1.3em; }
+  main { max-width: 920px; margin: 0 auto; padding: 18px; }
+  .screen[hidden] { display: none; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 18px; margin: 14px 0;
+          box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  h2 { margin: 6px 0 10px; font-size: 1.35em; }
+  h2:focus { outline: none; }
+  button { font: inherit; border: 0; border-radius: 12px; padding: 10px 18px; cursor: pointer;
+           background: var(--pri); color: #fff; min-height: 48px; }
+  button.ghost { background: #fff; color: var(--pri); border: 2px solid var(--pri); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button:focus-visible, input:focus-visible { outline: 4px solid #ffb300; outline-offset: 2px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .halls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .hall { text-align: left; background: #fff; color: var(--ink); border: 3px solid transparent;
+          box-shadow: 0 2px 8px rgba(0,0,0,.08); padding: 18px; border-radius: var(--radius); }
+  .hall:hover { border-color: var(--pri); }
+  .hall .emoji { font-size: 2.4em; display: block; }
+  .hall b { font-size: 1.15em; display: block; }
+  .hall small { color: var(--muted); }
+  .stamps { display: flex; gap: 14px; flex-wrap: wrap; }
+  .stamp { width: 90px; height: 90px; border-radius: 50%; border: 4px dashed #bbb; display: flex;
+           align-items: center; justify-content: center; text-align: center; color: #999; font-size: .8em; padding: 8px; }
+  .stamp.got { border: 4px solid var(--bad); color: var(--bad); transform: rotate(-8deg); font-weight: bold; }
+  .bubble { background: #eef5ff; border-left: 6px solid var(--pri); padding: 14px; border-radius: 10px; }
+  .src { color: var(--muted); font-size: .9em; }
+  .fb { margin-top: 12px; padding: 12px; border-radius: 10px; }
+  .fb.ok { background: #e6f4ea; color: var(--ok); }
+  .fb.bad { background: #fce8e6; color: var(--bad); }
+  .progress { color: var(--muted); }
+  /* 画板 */
+  .draw-wrap { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 16px; }
+  @media (max-width: 640px) { .draw-wrap { grid-template-columns: 1fr; } }
+  #pad { width: 100%; max-width: 300px; aspect-ratio: 1; border: 3px solid #333; border-radius: 12px;
+         background: #fff; touch-action: none; cursor: crosshair; }
+  #eye { width: 120px; height: 120px; image-rendering: pixelated; border: 2px solid #999; background: #fff; }
+  .cls { border: 2px solid #ddd; border-radius: 12px; padding: 10px; margin-bottom: 10px; }
+  .cls input { font: inherit; width: 8em; padding: 4px 8px; border: 2px solid #aaa; border-radius: 8px; }
+  .thumbs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; min-height: 34px; }
+  .thumbs img { width: 32px; height: 32px; image-rendering: pixelated; border: 1px solid #ccc; }
+  .bar { height: 22px; background: #eee; border-radius: 11px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: var(--pri); transition: width .4s; }
+  /* 垃圾分类 */
+  .item { font-size: 4em; text-align: center; }
+  .bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .bin-recycle { background: #1557a0; } .bin-harm { background: #c62828; }
+  .bin-wet { background: #6d4c1f; } .bin-dry { background: #333; }
+  .ai-hint { background: #fff8e1; border: 2px dashed #e0a800; padding: 10px 14px; border-radius: 10px; color: var(--warn); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #222; color: #fff;
+           padding: 12px 22px; border-radius: 30px; z-index: 9; }
+  footer { text-align: center; color: var(--muted); font-size: .8em; padding: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏛️ 社区AI乐园 · 家门口的科技馆</h1>
+  <div class="row">
+    <button class="ghost" id="btnBig" aria-pressed="false">🔍 大字</button>
+    <button class="ghost" id="btnRead">🔊 朗读</button>
+    <button class="ghost" id="btnHome">🏠 回大厅</button>
+  </div>
+</header>
+
+<main>
+  <!-- ========== 大厅 ========== -->
+  <section class="screen" id="home">
+    <div class="card">
+      <h2 data-read>欢迎来到家门口的科技馆</h2>
+      <p data-read>这里有三个展厅。爷爷奶奶、叔叔阿姨、小朋友都能玩。每通关一个展厅，就能得到一枚印章，集齐三枚成为“社区AI小达人”。</p>
+    </div>
+    <div class="halls">
+      <button class="hall" data-go="fraud"><span class="emoji" aria-hidden="true">🛡️</span>
+        <b>展厅一：火眼金睛防AI诈骗</b><small>AI能模仿声音、换脸，学会识破骗局（推荐长辈）</small></button>
+      <button class="hall" data-go="draw"><span class="emoji" aria-hidden="true">🎨</span>
+        <b>展厅二：我来教AI认东西</b><small>画几张画，亲手训练一个会“看图”的AI（推荐孩子）</small></button>
+      <button class="hall" data-go="sort"><span class="emoji" aria-hidden="true">♻️</span>
+        <b>展厅三：AI也会犯错吗</b><small>和AI小助手一起垃圾分类，看看谁更准（全家一起）</small></button>
+    </div>
+    <div class="card">
+      <h2>我的集章卡</h2>
+      <div class="stamps" id="stamps"></div>
+      <p id="cert" hidden style="font-size:1.2em;color:var(--bad);font-weight:bold" data-read>🎉 恭喜你集齐三枚印章，成为“社区AI小达人”！</p>
+      <button class="ghost" id="btnResetStamps">清空印章（给下一位居民玩）</button>
+    </div>
+  </section>
+
+  <!-- ========== 展厅一 防诈骗 ========== -->
+  <section class="screen" id="fraud" hidden>
+    <div class="card">
+      <h2 data-read>🛡️ 火眼金睛防AI诈骗</h2>
+      <p class="progress" id="fProg"></p>
+      <p class="src" id="fSrc"></p>
+      <div class="bubble" id="fMsg" data-read></div>
+      <div class="row" style="margin-top:14px" id="fBtns">
+        <button style="background:var(--bad)" data-ans="scam">⚠️ 可能是骗局</button>
+        <button style="background:var(--ok)" data-ans="safe">✅ 看起来安全</button>
+      </div>
+      <div id="fFb" aria-live="polite"></div>
+      <div class="row" style="margin-top:12px"><button id="fNext" hidden>下一题 ➜</button></div>
+    </div>
+  </section>
+
+  <!-- ========== 展厅二 训练AI ========== -->
+  <section class="screen" id="draw" hidden>
+    <div class="card">
+      <h2 data-read>🎨 我来教AI认东西</h2>
+      <p data-read>第一步：在画板上画一个东西，点“教给AI”存成例子。两种东西各教至少3张。第二步：再画一张，点“让AI猜”，看看它学会了没有。</p>
+      <div class="draw-wrap">
+        <div>
+          <canvas id="pad" width="280" height="280" aria-label="画板，用手指或鼠标画画"></canvas>
+          <div class="row"><button class="ghost" id="btnClear">🧽 擦掉</button></div>
+          <p class="src">AI看到的样子（缩小成 20×20 个格子）：</p>
+          <canvas id="eye" width="20" height="20" aria-label="AI看到的像素图"></canvas>
+        </div>
+        <div>
+          <div class="cls">
+            <label>第1种：<input id="name0" value="太阳"></label>
+            <button data-add="0">➕ 教给AI</button> <span id="cnt0">0 张</span>
+            <div class="thumbs" id="th0"></div>
+          </div>
+          <div class="cls">
+            <label>第2种：<input id="name1" value="月亮"></label>
+            <button data-add="1">➕ 教给AI</button> <span id="cnt1">0 张</span>
+            <div class="thumbs" id="th1"></div>
+          </div>
+          <p class="ai-hint" id="dTask" data-read></p>
+          <div class="row">
+            <button id="btnGuess" style="background:#6a3fb5">🤖 让AI猜</button>
+            <button class="ghost" id="btnForget">🎲 换一组重新开始</button>
+          </div>
+          <div id="dFb" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>小知识</h2>
+      <p data-read>AI不是天生聪明，它靠大量“例子”学习。你教得越多、越认真，它就越准；如果你故意教错，它也会学错。这叫“数据决定AI”。</p>
+    </div>
+  </section>
+
+  <!-- ========== 展厅三 垃圾分类 ========== -->
+  <section class="screen" id="sort" hidden>
+    <div class="card">
+      <h2 data-read>♻️ AI也会犯错吗</h2>
+      <p class="progress" id="sProg"></p>
+      <div class="item" id="sItem" aria-hidden="true"></div>
+      <p style="text-align:center;font-size:1.3em;margin:0" id="sName" data-read></p>
+      <p class="ai-hint" id="sHint" data-read></p>
+      <div class="bins" id="sBins">
+        <button class="bin-recycle" data-bin="可回收物">🔵 可回收物</button>
+        <button class="bin-harm" data-bin="有害垃圾">🔴 有害垃圾</button>
+        <button class="bin-wet" data-bin="湿垃圾">🟤 湿垃圾</button>
+        <button class="bin-dry" data-bin="干垃圾">⚫ 干垃圾</button>
+      </div>
+      <div id="sFb" aria-live="polite"></div>
+      <div class="row" style="margin-top:12px"><button id="sNext" hidden>下一个 ➜</button></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  作品：社区AI乐园——家门口的科技馆 ｜ 单文件网页，无需联网，手机扫码即玩 ｜ 垃圾分类依据《上海市生活垃圾管理条例》四分类标准
+</footer>
+
+<script>
+"use strict";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/* ---------- 通用：页面切换 / 朗读 / 大字 / 提示 ---------- */
+function show(id) {
+  $$(".screen").forEach(s => (s.hidden = s.id !== id));
+  window.scrollTo(0, 0);
+  const h = $("#" + id + " h2");
+  if (h) { h.tabIndex = -1; h.focus(); }
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  if (id === "fraud") fraudStart();
+  if (id === "sort") sortStart();
+  if (id === "draw" && !samples[0].length && !samples[1].length) resetDraw();
+}
+function speak(text) {
+  if (!("speechSynthesis" in window) || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "zh-CN"; u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
+function toast(msg) {
+  const t = document.createElement("div");
+  t.className = "toast"; t.setAttribute("role", "status"); t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2200);
+}
+$$("[data-go]").forEach(b => b.addEventListener("click", () => show(b.dataset.go)));
+$("#btnHome").onclick = () => show("home");
+$("#btnBig").onclick = e => {
+  const on = document.body.classList.toggle("big");
+  e.currentTarget.setAttribute("aria-pressed", String(on));
+};
+$("#btnRead").onclick = () => {
+  const cur = $$(".screen").find(s => !s.hidden);
+  const parts = $$("[data-read]", cur).filter(el => !el.hidden && el.offsetParent !== null).map(el => el.textContent);
+  const fb = $$("[aria-live]", cur).map(el => el.textContent).join("。");
+  speak(parts.join("。") + "。" + fb);
+};
+
+/* ---------- 集章 ---------- */
+const STAMP_KEY = "aipark_stamps";
+const STAMP_DEF = { fraud: "防骗\n小卫士", draw: "AI\n训练师", sort: "分类\n小能手" };
+let stamps = {};
+try { stamps = JSON.parse(localStorage.getItem(STAMP_KEY) || "{}"); } catch (e) { stamps = {}; }
+function saveStamps() { try { localStorage.setItem(STAMP_KEY, JSON.stringify(stamps)); } catch (e) {} }
+function renderStamps() {
+  $("#stamps").innerHTML = "";
+  for (const k in STAMP_DEF) {
+    const d = document.createElement("div");
+    d.className = "stamp" + (stamps[k] ? " got" : "");
+    d.innerText = stamps[k] ? STAMP_DEF[k] : "未获得";
+    d.setAttribute("aria-label", STAMP_DEF[k].replace("\n", "") + (stamps[k] ? " 已获得" : " 未获得"));
+    $("#stamps").appendChild(d);
+  }
+  $("#cert").hidden = Object.keys(STAMP_DEF).some(k => !stamps[k]);
+}
+function award(k) {
+  if (stamps[k]) return;
+  stamps[k] = true; saveStamps(); renderStamps();
+  toast("🎖️ 获得印章：" + STAMP_DEF[k].replace("\n", ""));
+}
+$("#btnResetStamps").onclick = () => { stamps = {}; saveStamps(); renderStamps(); };
+renderStamps();
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+// 从题库随机抽 n 道，优先抽“最近没玩过”的；全部玩过后自动重置。记录存在本机，换人玩也能保持新鲜
+function pickFresh(key, pool, n) {
+  const k = "aipark_seen_" + key;
+  let seen = [];
+  try { seen = JSON.parse(localStorage.getItem(k) || "[]"); } catch (e) {}
+  let fresh = shuffle(pool.filter(q => !seen.includes(q.id)));
+  if (fresh.length < n) {
+    const rest = shuffle(pool.filter(q => seen.includes(q.id)));
+    fresh = fresh.concat(rest);
+    seen = [];
+  }
+  const out = fresh.slice(0, n);
+  seen = seen.concat(out.map(q => q.id));
+  try { localStorage.setItem(k, JSON.stringify(seen)); } catch (e) {}
+  return out;
+}
+const rand = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+
+/* ---------- 展厅一：防AI诈骗 ---------- */
+const FRAUD = [
+  { src: "📞 电话", msg: "电话里传来“孙子”的哭声，声音和孙子一模一样：“奶奶，我出车祸了，快转2万块给我，别告诉爸妈！”", ans: "scam",
+    tip: "AI只要几秒录音就能模仿声音。先挂断，再用自己存的号码打给孙子本人或他爸妈核实。建议全家约定一个“暗号”。" },
+  { src: "📹 视频通话", msg: "老朋友打来视频，脸是对的，但画面有点卡，他说急需借5000元周转，让你马上转账。", ans: "scam",
+    tip: "AI可以“换脸”。可以请对方挥挥手、侧过脸、用手挡一下脸，换脸画面常会出现变形。涉及借钱，一定电话再核实。" },
+  { src: "📋 小区公告栏", msg: "居委会通知：本周六上午在社区活动室免费量血压，请带好身份证到现场登记。", ans: "safe",
+    tip: "线下活动、不要钱、可以到居委会当面确认，一般是安全的。" },
+  { src: "✉️ 手机短信", msg: "【医保中心】您的医保卡异常将被冻结，请点击链接 http://yb-xxx.cc 填写银行卡号和验证码解冻。", ans: "scam",
+    tip: "官方不会发链接让你填银行卡和验证码。验证码就是“钥匙”，谁要都不给。" },
+  { src: "📱 短视频", msg: "一位“白发老专家”在视频里说：“这款神药能根治高血压，今天限时特价，只剩最后50盒！”", ans: "scam",
+    tip: "这类“专家”很可能是AI生成的虚拟人。看病吃药要去正规医院，别信网上“神药”。" },
+  { src: "💬 微信", msg: "一个陌生号码发来：“妈，我是女儿，原来的微信号被封了，这是新号，先帮我付个款。”", ans: "scam",
+    tip: "“换新号+要钱”是典型套路。用原来的电话号码打给女儿本人确认。" },
+  { src: "📦 手机短信", msg: "【丰巢】您的快递已到小区东门快递柜，取件码 358912。（短信里没有链接）", ans: "safe",
+    tip: "只有取件码、不要你点链接、不要钱，一般是正常通知。" },
+  { src: "📞 电话", msg: "“我们有AI智能炒股机器人，保证每月收益30%，稳赚不赔，先交3000元会员费就能用。”", ans: "scam",
+    tip: "“保证收益、稳赚不赔”都是骗局。任何投资都有风险，AI也不能保证赚钱。" },
+  { src: "📞 电话", msg: "“我是公安局的，你的银行卡涉嫌洗钱，为了查清楚，请把存款转到我们的‘安全账户’，不要告诉家人。”", ans: "scam",
+    tip: "公安、法院从不会在电话里办案，更没有“安全账户”。遇到这种电话直接挂断，拨打110核实。" },
+  { src: "📺 直播间", msg: "直播间里一位笑容亲切的“数字人主播”说：“关注就送鸡蛋，老年人免费体检，只要先交99元押金！”", ans: "scam",
+    tip: "“免费送、先交钱”是老套路。AI数字人主播看起来很真，但说的话不一定是真的。" },
+  { src: "📞 电话", msg: "“您好，这里是社区医院，您的体检报告出来了，请下载一个APP，打开‘屏幕共享’让我们帮您查看。”", ans: "scam",
+    tip: "“屏幕共享”会让骗子看到你的验证码和银行信息。正规医院不会让你装陌生APP、开屏幕共享。" },
+  { src: "💬 微信", msg: "一个头像、名字都和单位领导一样的人加你好友，说：“我在开会不方便，你先帮我给这个账户转2万，回头给你。”", ans: "scam",
+    tip: "头像和名字很容易假冒。凡是要钱的，都要打电话或当面向本人确认。" },
+  { src: "📱 短视频", msg: "一段明星视频说：“恭喜你被抽中，获得一部新手机！只需付39元邮费就寄给你。”", ans: "scam",
+    tip: "明星的脸和声音可以用AI合成。“中奖先付费”一定是骗局。" },
+  { src: "✉️ 手机短信", msg: "【某某银行】您尾号1234的账户于10:23消费58.00元。（短信里没有链接，也没有让你回复或打电话）", ans: "safe",
+    tip: "只是告诉你消费记录，没有链接、不要你操作，一般是正常通知。如有疑问，可以拨打银行卡背面的官方电话。" },
+  { src: "📹 视频通话", msg: "孙子打来视频，说周末回来吃饭，完全没提钱。挂断后你用自己存的号码回拨，确实是他本人。", ans: "safe",
+    tip: "不谈钱、还用自己存的号码核实过，这是安全的。“回拨核实”是最好的防骗习惯。" },
+  { src: "💬 社区微信群", msg: "居委会干部在群里发了垃圾分类宣传海报，说有问题可以到居委会一楼咨询。", ans: "safe",
+    tip: "不要钱、不要个人信息，还能到居委会当面问，一般是安全的。" }
+];
+FRAUD.forEach((q, i) => (q.id = i));
+const F_ROUND = 8;
+let fList = [], fIdx = 0, fScore = 0;
+function fraudStart() {
+  // 每轮随机：2~3道安全题 + 其余为骗局题，顺序打乱
+  const safeN = rand(2, 3);
+  fList = shuffle([
+    ...pickFresh("fraud_safe", FRAUD.filter(q => q.ans === "safe"), safeN),
+    ...pickFresh("fraud_scam", FRAUD.filter(q => q.ans === "scam"), F_ROUND - safeN)
+  ]);
+  fIdx = 0; fScore = 0; fraudRender();
+}
+function fraudRender() {
+  const q = fList[fIdx];
+  $("#fProg").textContent = `第 ${fIdx + 1} / ${fList.length} 题`;
+  $("#fSrc").textContent = "来自：" + q.src;
+  $("#fMsg").textContent = q.msg;
+  $("#fFb").innerHTML = "";
+  $("#fBtns").hidden = false;
+  $("#fNext").hidden = true;
+}
+$$("#fBtns [data-ans]").forEach(b => b.addEventListener("click", () => {
+  const q = fList[fIdx], right = b.dataset.ans === q.ans;
+  if (right) fScore++;
+  const fb = document.createElement("div");
+  fb.className = "fb " + (right ? "ok" : "bad");
+  fb.textContent = (right ? "✔ 答对了！" : "✘ 再想想：") + (q.ans === "scam" ? "这是骗局。" : "这是安全的。") + q.tip;
+  $("#fFb").replaceChildren(fb);
+  $("#fBtns").hidden = true;
+  $("#fNext").hidden = false;
+  $("#fNext").textContent = fIdx === fList.length - 1 ? "看成绩 ➜" : "下一题 ➜";
+  $("#fNext").focus();
+}));
+$("#fNext").onclick = () => {
+  if (++fIdx < fList.length) return fraudRender();
+  $("#fProg").textContent = "闯关完成";
+  $("#fSrc").textContent = "";
+  $("#fMsg").textContent = `你答对了 ${fScore} / ${fList.length} 题。记住防骗口诀：一不轻信，二要核实，三不转账，四不给验证码。`;
+  $("#fFb").innerHTML = "";
+  $("#fNext").hidden = true;
+  const again = document.createElement("button");
+  again.textContent = "再玩一次"; again.onclick = fraudStart;
+  $("#fFb").appendChild(again);
+  if (fScore >= 6) award("fraud");
+  else $("#fFb").insertAdjacentText("afterbegin", "答对6题以上可获得印章，再试一次吧！ ");
+};
+
+/* ---------- 展厅二：训练AI（K近邻图像分类） ---------- */
+const pad = $("#pad"), pctx = pad.getContext("2d");
+const eye = $("#eye"), ectx = eye.getContext("2d");
+const G = 20;                       // AI看到的格子数 20×20
+const off = document.createElement("canvas"); off.width = off.height = G;
+const octx = off.getContext("2d", { willReadFrequently: true });
+let samples = [[], []];
+let drawing = false, last = null;
+
+function clearPad() {
+  pctx.fillStyle = "#fff"; pctx.fillRect(0, 0, pad.width, pad.height);
+  ectx.fillStyle = "#fff"; ectx.fillRect(0, 0, G, G);
+}
+function padPos(e) {
+  const r = pad.getBoundingClientRect();
+  return { x: (e.clientX - r.left) * pad.width / r.width, y: (e.clientY - r.top) * pad.height / r.height };
+}
+function stroke(a, b) {
+  pctx.strokeStyle = "#000"; pctx.lineWidth = 16; pctx.lineCap = "round"; pctx.lineJoin = "round";
+  pctx.beginPath(); pctx.moveTo(a.x, a.y); pctx.lineTo(b.x, b.y); pctx.stroke();
+}
+pad.addEventListener("pointerdown", e => { drawing = true; pad.setPointerCapture(e.pointerId); last = padPos(e); stroke(last, last); });
+pad.addEventListener("pointermove", e => { if (!drawing) return; const p = padPos(e); stroke(last, p); last = p; });
+["pointerup", "pointercancel"].forEach(t => pad.addEventListener(t, () => { if (drawing) { drawing = false; featurize(); } }));
+$("#btnClear").onclick = clearPad;
+
+// 把画缩成 20×20 灰度向量：先裁出笔画范围并居中，这样画大画小、画在哪都不影响
+function featurize() {
+  const W = pad.width, H = pad.height, d = pctx.getImageData(0, 0, W, H).data;
+  let x0 = W, y0 = H, x1 = -1, y1 = -1;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    if (d[(y * W + x) * 4] < 128) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+  }
+  if (x1 < 0) return null;
+  const side = Math.max(x1 - x0, y1 - y0) * 1.2 + 10, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  // 先复制到带白边的临时画布，避免源区域越界
+  const big = document.createElement("canvas"); big.width = big.height = Math.ceil(side);
+  const bctx = big.getContext("2d");
+  bctx.fillStyle = "#fff"; bctx.fillRect(0, 0, big.width, big.height);
+  bctx.drawImage(pad, big.width / 2 - cx, big.width / 2 - cy);
+  octx.fillStyle = "#fff"; octx.fillRect(0, 0, G, G);
+  octx.drawImage(big, 0, 0, G, G);
+  const px = octx.getImageData(0, 0, G, G).data, vec = new Float32Array(G * G);
+  for (let i = 0; i < G * G; i++) vec[i] = (255 - px[i * 4]) / 255;
+  ectx.drawImage(off, 0, 0);
+  return vec;
+}
+function dist(a, b) { let s = 0; for (let i = 0; i < a.length; i++) { const t = a[i] - b[i]; s += t * t; } return Math.sqrt(s); }
+function nameOf(c) { return $("#name" + c).value.trim() || "第" + (c + 1) + "种"; }
+function refreshCounts() { [0, 1].forEach(c => ($("#cnt" + c).textContent = samples[c].length + " 张")); }
+
+$$("[data-add]").forEach(b => b.addEventListener("click", () => {
+  const c = +b.dataset.add, vec = featurize();
+  if (!vec) return $("#dFb").replaceChildren(msgBox("先在画板上画一画哦。", false));
+  samples[c].push(vec);
+  const img = new Image(); img.src = off.toDataURL(); img.alt = nameOf(c) + " 例子 " + samples[c].length;
+  $("#th" + c).appendChild(img);
+  refreshCounts(); clearPad();
+  $("#dFb").replaceChildren(msgBox(`已教给AI：这是“${nameOf(c)}”。`, true));
+}));
+
+$("#btnGuess").onclick = () => {
+  if (samples[0].length < 3 || samples[1].length < 3)
+    return $("#dFb").replaceChildren(msgBox("两种东西各教至少3张，AI才学得会。", false));
+  const vec = featurize();
+  if (!vec) return $("#dFb").replaceChildren(msgBox("先画一张要考AI的画。", false));
+  // K近邻：找出和新画最像的 K 张例子，让它们“投票”
+  const all = [];
+  samples.forEach((arr, c) => arr.forEach(v => all.push({ c, d: dist(vec, v) })));
+  all.sort((a, b) => a.d - b.d);
+  const K = Math.min(5, all.length), votes = [0, 0];
+  all.slice(0, K).forEach(n => votes[n.c]++);
+  const win = votes[1] > votes[0] ? 1 : 0, conf = Math.round(votes[win] / K * 100);
+  const hit = win === dTarget;
+  const box = document.createElement("div");
+  box.className = "fb " + (hit ? "ok" : "bad");
+  box.innerHTML = `<b>🤖 AI猜：这是“${escapeHtml(nameOf(win))}”${hit ? " —— 猜对了！" : " —— 猜错了"}</b><br>把握：${conf}%（最像的 ${K} 张例子里有 ${votes[win]} 张是“${escapeHtml(nameOf(win))}”）
+    <div class="bar" role="img" aria-label="把握${conf}%"><span style="width:${conf}%"></span></div>
+    <small>猜错了？把这张画“教给AI”正确的答案，它就会变聪明。</small>`;
+  $("#dFb").replaceChildren(box);
+  if (hit) award("draw");
+  newTask();   // 保留这张画，猜错时可以直接“教给AI”正确答案
+};
+// 随机主题：每次进展厅或点“换一组”都换一对要教的东西
+const DRAW_PAIRS = [
+  ["太阳", "月亮"], ["房子", "大树"], ["苹果", "香蕉"], ["星星", "爱心"], ["笑脸", "哭脸"],
+  ["小鱼", "小鸟"], ["雨伞", "杯子"], ["花朵", "蘑菇"], ["雪花", "闪电"], ["汽车", "自行车"]
+].map((p, i) => ({ id: i, p }));
+let dTarget = 0;
+function newTask() {
+  dTarget = rand(0, 1);
+  newTaskText();
+}
+function resetDraw() {
+  samples = [[], []]; $("#th0").innerHTML = $("#th1").innerHTML = ""; refreshCounts(); clearPad(); $("#dFb").innerHTML = "";
+  const pair = pickFresh("draw", DRAW_PAIRS, 1)[0].p;
+  $("#name0").value = pair[0]; $("#name1").value = pair[1];
+  newTask();
+}
+$("#btnForget").onclick = resetDraw;
+["name0", "name1"].forEach(id => $("#" + id).addEventListener("input", newTaskText));
+function newTaskText() { $("#dTask").textContent = `🎯 考考AI：训练好以后，请画一个“${nameOf(dTarget)}”，看AI能不能认出来。`; }
+function msgBox(t, ok) { const d = document.createElement("div"); d.className = "fb " + (ok ? "ok" : "bad"); d.textContent = t; return d; }
+function escapeHtml(s) { return s.replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch])); }
+clearPad();
+
+/* ---------- 展厅三：AI也会犯错（上海四分类） ---------- */
+// aiGuess 与 bin 不同的，是故意设计的“AI犯错”题，用来说明：AI会出错，把握低时更要自己判断
+const ITEMS = [
+  { e: "🥤", n: "塑料饮料瓶", bin: "可回收物", ai: "可回收物", p: 96 },
+  { e: "📰", n: "旧报纸", bin: "可回收物", ai: "可回收物", p: 94 },
+  { e: "🥫", n: "易拉罐", bin: "可回收物", ai: "可回收物", p: 97 },
+  { e: "🍌", n: "香蕉皮", bin: "湿垃圾", ai: "湿垃圾", p: 98 },
+  { e: "🍚", n: "剩饭剩菜", bin: "湿垃圾", ai: "湿垃圾", p: 95 },
+  { e: "🍵", n: "茶叶渣", bin: "湿垃圾", ai: "湿垃圾", p: 88 },
+  { e: "💊", n: "过期药品", bin: "有害垃圾", ai: "有害垃圾", p: 93 },
+  { e: "🌡️", n: "水银温度计", bin: "有害垃圾", ai: "有害垃圾", p: 90 },
+  { e: "🦴", n: "猪大骨头", bin: "干垃圾", ai: "湿垃圾", p: 61, why: "大骨头太硬，难以腐烂粉碎，上海规定属于干垃圾。" },
+  { e: "🧻", n: "用过的餐巾纸", bin: "干垃圾", ai: "可回收物", p: 58, why: "用过的纸巾被污染、纤维短，不能回收，属于干垃圾。" },
+  { e: "🐚", n: "贝壳", bin: "干垃圾", ai: "湿垃圾", p: 55, why: "贝壳很硬不易腐烂，属于干垃圾。" },
+  { e: "🧴", n: "空的杀虫剂罐", bin: "有害垃圾", ai: "可回收物", p: 63, why: "杀虫剂罐残留有毒物质，属于有害垃圾。" },
+  { e: "🍾", n: "空玻璃瓶", bin: "可回收物", ai: "可回收物", p: 95 },
+  { e: "👕", n: "旧衣服", bin: "可回收物", ai: "可回收物", p: 89 },
+  { e: "📦", n: "快递纸箱", bin: "可回收物", ai: "可回收物", p: 96 },
+  { e: "🍉", n: "西瓜皮", bin: "湿垃圾", ai: "湿垃圾", p: 97 },
+  { e: "🥚", n: "鸡蛋壳", bin: "湿垃圾", ai: "湿垃圾", p: 86 },
+  { e: "🔋", n: "废充电电池", bin: "有害垃圾", ai: "有害垃圾", p: 92 },
+  { e: "💡", n: "废节能灯管", bin: "有害垃圾", ai: "有害垃圾", p: 90 },
+  { e: "🥣", n: "打碎的陶瓷碗", bin: "干垃圾", ai: "干垃圾", p: 87 },
+  { e: "🚬", n: "烟头", bin: "干垃圾", ai: "干垃圾", p: 91 },
+  { e: "🪫", n: "普通5号干电池", bin: "干垃圾", ai: "有害垃圾", p: 64, why: "上海规定普通无汞干电池属于干垃圾，充电电池、纽扣电池才是有害垃圾。" },
+  { e: "🥥", n: "椰子壳", bin: "干垃圾", ai: "湿垃圾", p: 59, why: "椰子壳又硬又厚，很难腐烂，属于干垃圾。" }
+];
+ITEMS.forEach((it, i) => (it.id = i));
+const S_ROUND = 8;
+let sList = [], sIdx = 0, sScore = 0, sBeat = 0;
+function sortStart() {
+  // 每轮随机：2~4个“AI会犯错”的物品 + 其余普通物品；AI把握上下浮动，避免背答案
+  const wrongN = rand(2, 4);
+  sList = shuffle([
+    ...pickFresh("sort_wrong", ITEMS.filter(i => i.ai !== i.bin), wrongN),
+    ...pickFresh("sort_right", ITEMS.filter(i => i.ai === i.bin), S_ROUND - wrongN)
+  ]).map(it => ({ ...it, p: Math.min(99, Math.max(50, it.p + rand(-4, 4))) }));
+  sIdx = sScore = sBeat = 0; sortRender();
+}
+function sortRender() {
+  const it = sList[sIdx];
+  $("#sProg").textContent = `第 ${sIdx + 1} / ${sList.length} 个`;
+  $("#sItem").textContent = it.e;
+  $("#sName").textContent = it.n;
+  $("#sHint").hidden = false;
+  $("#sHint").textContent = `🤖 AI小助手猜：${it.ai}（把握 ${it.p}%）。你同意吗？`;
+  $("#sBins").hidden = false; $("#sFb").innerHTML = ""; $("#sNext").hidden = true;
+}
+$$("#sBins [data-bin]").forEach(b => b.addEventListener("click", () => {
+  const it = sList[sIdx], me = b.dataset.bin, ok = me === it.bin, aiOk = it.ai === it.bin;
+  if (ok) sScore++;
+  if (ok && !aiOk) sBeat++;
+  let t = ok ? `✔ 正确！${it.n}是${it.bin}。` : `✘ ${it.n}应该是${it.bin}。`;
+  if (!aiOk) t += ` 这次AI猜错了！${it.why} ` + (ok ? "你比AI更厉害！" : "AI把握只有" + it.p + "%，把握低的时候要多想一想。");
+  $("#sFb").replaceChildren(msgBox(t, ok));
+  $("#sBins").hidden = true; $("#sNext").hidden = false;
+  $("#sNext").textContent = sIdx === sList.length - 1 ? "看成绩 ➜" : "下一个 ➜";
+  $("#sNext").focus();
+}));
+$("#sNext").onclick = () => {
+  if (++sIdx < sList.length) return sortRender();
+  $("#sProg").textContent = "挑战完成";
+  $("#sItem").textContent = "🏅"; $("#sName").textContent = `分对 ${sScore} / ${sList.length} 个，其中 ${sBeat} 次你纠正了AI！`;
+  $("#sHint").textContent = "AI是好帮手，但它也会犯错。用AI的时候，要保持自己的判断。";
+  $("#sNext").hidden = true;
+  const again = document.createElement("button"); again.textContent = "再玩一次"; again.onclick = sortStart;
+  $("#sFb").replaceChildren(again);
+  if (sScore >= 6) award("sort");
+};
+
+show("home");
+</script>
+</body>
+</html>

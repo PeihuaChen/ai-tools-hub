@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="50%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" fill="#fff" font-size="26" font-weight="800">CodeGraph — AI 编码的代码知识图谱</text>
+  <text x="600" y="78" text-anchor="middle" fill="#888" font-size="14">~35% cheaper · ~70% fewer tool calls · 100% local</text>
+
+  <!-- Left: Without CodeGraph -->
+  <rect x="40" y="110" width="520" height="420" rx="12" fill="rgba(231,76,60,0.05)" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="300" y="140" text-anchor="middle" fill="#e74c3c" font-size="15" font-weight="700">❌ 没有 CodeGraph</text>
+
+  <!-- Agent box -->
+  <rect x="180" y="160" width="240" height="45" rx="8" fill="rgba(231,76,60,0.12)" stroke="#e74c3c" stroke-width="1"/>
+  <text x="300" y="188" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="600">AI Agent（Claude Code）</text>
+
+  <!-- Multiple tool calls -->
+  <path d="M300 205 L300 235" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="3"/>
+  <rect x="120" y="240" width="360" height="30" rx="6" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="0.5"/>
+  <text x="300" y="260" text-anchor="middle" fill="#c0392b" font-size="10">🔍 grep "UserService" → 扫描 10,000 个文件...</text>
+
+  <rect x="120" y="280" width="360" height="30" rx="6" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="0.5"/>
+  <text x="300" y="300" text-anchor="middle" fill="#c0392b" font-size="10">📂 glob "**/*.ts" → 列出 3,000 个文件...</text>
+
+  <rect x="120" y="320" width="360" height="30" rx="6" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="0.5"/>
+  <text x="300" y="340" text-anchor="middle" fill="#c0392b" font-size="10">📖 Read file → 逐个读取相关文件...</text>
+
+  <rect x="120" y="360" width="360" height="30" rx="6" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="0.5"/>
+  <text x="300" y="380" text-anchor="middle" fill="#c0392b" font-size="10">🔍 grep "import.*UserService" → 再扫一遍...</text>
+
+  <rect x="120" y="400" width="360" height="30" rx="6" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="0.5"/>
+  <text x="300" y="420" text-anchor="middle" fill="#c0392b" font-size="10">📖 Read file → 继续读取更多文件...</text>
+
+  <!-- Stats -->
+  <rect x="120" y="450" width="360" height="60" rx="8" fill="rgba(231,76,60,0.1)" stroke="#e74c3c" stroke-width="1"/>
+  <text x="200" y="475" text-anchor="middle" fill="#e74c3c" font-size="18" font-weight="800">85次</text>
+  <text x="200" y="495" text-anchor="middle" fill="#888" font-size="10">工具调用</text>
+  <text x="340" y="475" text-anchor="middle" fill="#e74c3c" font-size="18" font-weight="800">$100</text>
+  <text x="340" y="495" text-anchor="middle" fill="#888" font-size="10">月费用</text>
+  <text x="440" y="475" text-anchor="middle" fill="#e74c3c" font-size="18" font-weight="800">慢</text>
+  <text x="440" y="495" text-anchor="middle" fill="#888" font-size="10">响应速度</text>
+
+  <!-- Right: With CodeGraph -->
+  <rect x="620" y="110" width="540" height="420" rx="12" fill="rgba(46,204,113,0.05)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="890" y="140" text-anchor="middle" fill="#2ecc71" font-size="15" font-weight="700">✅ 使用 CodeGraph</text>
+
+  <!-- Agent box -->
+  <rect x="770" y="160" width="240" height="45" rx="8" fill="rgba(46,204,113,0.12)" stroke="#2ecc71" stroke-width="1"/>
+  <text x="890" y="188" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="600">AI Agent（Claude Code）</text>
+
+  <!-- Single MCP call -->
+  <path d="M890 205 L890 235" stroke="#2ecc71" stroke-width="2"/>
+
+  <!-- CodeGraph MCP Server -->
+  <rect x="700" y="240" width="380" height="80" rx="10" fill="rgba(52,152,219,0.1)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="890" y="265" text-anchor="middle" fill="#3498db" font-size="13" font-weight="700">CodeGraph MCP Server</text>
+  <text x="890" y="290" text-anchor="middle" fill="#7ec8e3" font-size="10">codegraph_trace("request", "database")</text>
+  <text x="890" y="308" text-anchor="middle" fill="#888" font-size="10">→ 一次调用返回完整调用链 + 源码</text>
+
+  <!-- Arrow to SQLite -->
+  <path d="M890 320 L890 350" stroke="#3498db" stroke-width="1.5"/>
+
+  <!-- SQLite Knowledge Graph -->
+  <rect x="700" y="355" width="380" height="80" rx="10" fill="rgba(155,89,182,0.1)" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="890" y="380" text-anchor="middle" fill="#9b59b6" font-size="13" font-weight="700">SQLite 知识图谱（本地）</text>
+  <text x="780" y="405" fill="#888" font-size="10">symbols</text>
+  <text x="860" y="405" fill="#888" font-size="10">edges</text>
+  <text x="930" y="405" fill="#888" font-size="10">files</text>
+  <text x="1010" y="405" fill="#888" font-size="10">FTS5</text>
+  <text x="890" y="425" text-anchor="middle" fill="#666" font-size="9">tree-sitter 预索引 · 自动同步 · 零配置</text>
+
+  <!-- Stats -->
+  <rect x="700" y="450" width="380" height="60" rx="8" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="1"/>
+  <text x="780" y="475" text-anchor="middle" fill="#2ecc71" font-size="18" font-weight="800">25次</text>
+  <text x="780" y="495" text-anchor="middle" fill="#888" font-size="10">工具调用(-71%)</text>
+  <text x="910" y="475" text-anchor="middle" fill="#2ecc71" font-size="18" font-weight="800">$65</text>
+  <text x="910" y="495" text-anchor="middle" fill="#888" font-size="10">月费用(-35%)</text>
+  <text x="1030" y="475" text-anchor="middle" fill="#2ecc71" font-size="18" font-weight="800">快46%</text>
+  <text x="1030" y="495" text-anchor="middle" fill="#888" font-size="10">响应速度</text>
+
+  <!-- VS arrow -->
+  <text x="580" y="320" text-anchor="middle" fill="#f39c12" font-size="24" font-weight="800">VS</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="560" width="1200" height="70" fill="rgba(0,0,0,0.5)"/>
+  <text x="150" y="595" text-anchor="middle" fill="#3498db" font-size="13" font-weight="600">31.2k ⭐ GitHub</text>
+  <text x="350" y="595" text-anchor="middle" fill="#2ecc71" font-size="13" font-weight="600">20+ 语言支持</text>
+  <text x="550" y="595" text-anchor="middle" fill="#9b59b6" font-size="13" font-weight="600">14 种框架路由识别</text>
+  <text x="780" y="595" text-anchor="middle" fill="#f39c12" font-size="13" font-weight="600">MIT 开源 · 100% 本地</text>
+  <text x="1030" y="595" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="600">支持 8 种 AI Agent</text>
+
+  <!-- Badge -->
+  <rect x="40" y="20" width="180" height="28" rx="14" fill="rgba(243,156,18,0.2)" stroke="#f39c12" stroke-width="1"/>
+  <text x="130" y="39" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="600">GitHub Trending #1</text>
+</svg>

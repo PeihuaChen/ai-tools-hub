@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <rect width="1100" height="500" fill="#ffffff"/>
+
+  <text x="40" y="44" fill="#111827" font-size="24" font-weight="700">Dify + Weaviate 混合检索落地链路</text>
+  <text x="40" y="70" fill="#4b5563" font-size="14">Dify 负责编排与召回设置，Weaviate 负责 BM25F + 向量融合，Rerank 收尾后交给 LLM</text>
+
+  <!-- Dify layer -->
+  <rect x="40" y="100" width="300" height="330" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="60" y="132" fill="#1d4ed8" font-size="18" font-weight="700">Dify（编排层）</text>
+  <text x="60" y="158" fill="#4b5563" font-size="12">知识库 · 分段策略 · 召回设置</text>
+
+  <rect x="60" y="176" width="260" height="54" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="76" y="199" fill="#1e3a8a" font-size="13" font-weight="700">三种检索模式</text>
+  <text x="76" y="219" fill="#374151" font-size="11.5">向量检索 · 全文检索(BM25) · 混合检索</text>
+
+  <rect x="60" y="244" width="260" height="54" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="76" y="267" fill="#1e3a8a" font-size="13" font-weight="700">混合模式的合并方式</text>
+  <text x="76" y="287" fill="#374151" font-size="11.5">权重设置(语义/关键词) 或 Rerank 模型</text>
+
+  <rect x="60" y="312" width="260" height="54" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="76" y="335" fill="#1e3a8a" font-size="13" font-weight="700">可插拔向量库后端</text>
+  <text x="76" y="355" fill="#374151" font-size="11.5">Weaviate · Qdrant · Milvus · pgvector</text>
+
+  <!-- arrow -->
+  <path d="M340 265 L 392 265" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="392,258 406,265 392,272" fill="#94a3b8"/>
+
+  <!-- Weaviate layer -->
+  <rect x="410" y="100" width="330" height="330" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+  <text x="430" y="132" fill="#15803d" font-size="18" font-weight="700">Weaviate（检索引擎）</text>
+  <text x="430" y="158" fill="#4b5563" font-size="12">原生混合检索：BM25F + 稠密向量</text>
+
+  <rect x="430" y="176" width="140" height="70" rx="8" fill="#dcfce7" stroke="#15803d"/>
+  <text x="500" y="204" fill="#166534" font-size="13" font-weight="700" text-anchor="middle">BM25F</text>
+  <text x="500" y="226" fill="#374151" font-size="11" text-anchor="middle">关键词 · 倒排索引</text>
+
+  <rect x="580" y="176" width="140" height="70" rx="8" fill="#ede9fe" stroke="#6d28d9"/>
+  <text x="650" y="204" fill="#5b21b6" font-size="13" font-weight="700" text-anchor="middle">向量检索</text>
+  <text x="650" y="226" fill="#374151" font-size="11" text-anchor="middle">HNSW · 语义</text>
+
+  <!-- fusion inside weaviate -->
+  <rect x="430" y="260" width="290" height="66" rx="8" fill="#ccfbf1" stroke="#0e7490"/>
+  <text x="446" y="280" fill="#0e7490" font-size="12.5" font-weight="700">alpha 融合（权重旋钮）</text>
+  <text x="446" y="299" fill="#374151" font-size="10">α=0 纯 BM25 · α=1 纯向量 · α=0.5 各半</text>
+  <text x="446" y="316" fill="#374151" font-size="10">融合算法：rankedFusion / relativeScoreFusion</text>
+
+  <rect x="430" y="336" width="290" height="60" rx="8" fill="#fef9c3" stroke="#b45309"/>
+  <text x="446" y="359" fill="#b45309" font-size="12.5" font-weight="700">⚠ 分词器（tokenizer）是命门</text>
+  <text x="446" y="379" fill="#374151" font-size="11">中文/多语言配错 → BM25 那一路直接失效变噪声</text>
+
+  <!-- arrow to rerank/llm -->
+  <path d="M740 195 L 802 195" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="802,189 810,195 802,201" fill="#94a3b8"/>
+
+  <!-- Rerank + LLM -->
+  <rect x="810" y="150" width="250" height="90" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+  <text x="935" y="182" fill="#b45309" font-size="15" font-weight="700" text-anchor="middle">Rerank 模型</text>
+  <text x="935" y="206" fill="#374151" font-size="11.5" text-anchor="middle">对融合候选统一精排</text>
+  <text x="935" y="226" fill="#6b7280" font-size="10.5" text-anchor="middle">Dify 官方推荐生产使用</text>
+
+  <path d="M935 240 L 935 290" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="928,290 935,304 942,290" fill="#94a3b8"/>
+
+  <rect x="810" y="306" width="250" height="90" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="935" y="340" fill="#0369a1" font-size="15" font-weight="700" text-anchor="middle">LLM 生成回答</text>
+  <text x="935" y="364" fill="#374151" font-size="11.5" text-anchor="middle">基于检索片段，有据可依</text>
+
+  <text x="40" y="470" fill="#6b7280" font-size="12">链路：Dify（分段+召回设置）→ Weaviate（BM25F + 向量，alpha 融合）→ Rerank → LLM</text>
+</svg>

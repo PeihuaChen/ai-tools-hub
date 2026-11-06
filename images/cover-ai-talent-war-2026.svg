@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f43f5e"/>
+      <stop offset="0.5" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#facc15"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="subtitle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#a855f7" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowO" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#2a2a55" stroke-width="0.8" stroke-opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- right concept: Google node losing two talents to two rivals -->
+  <g transform="translate(712,178)">
+    <!-- Google center -->
+    <circle cx="0" cy="0" r="60" fill="url(#glowA)" opacity="0.6"/>
+    <circle cx="0" cy="0" r="34" fill="#1e1e44" stroke="#94a3ff" stroke-width="2"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" fill="#e0e7ff">Google</text>
+    <text x="0" y="13" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="#8b91c4">DeepMind</text>
+
+    <!-- arrows to rivals -->
+    <line x1="28" y1="-22" x2="92" y2="-78" stroke="#22d3ee" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr1)"/>
+    <line x1="28" y1="22" x2="92" y2="78" stroke="#a855f7" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr2)"/>
+
+    <!-- OpenAI node -->
+    <g transform="translate(118,-92)">
+      <circle cx="0" cy="0" r="30" fill="url(#glowO)" opacity="0.7"/>
+      <circle cx="0" cy="0" r="26" fill="#0e2436" stroke="#22d3ee" stroke-width="1.6"/>
+      <text x="0" y="-2" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="9.5" font-weight="700" fill="#a5f3fc">OpenAI</text>
+      <text x="0" y="11" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="7.5" fill="#67e8f9">Shazeer</text>
+    </g>
+    <!-- Anthropic node -->
+    <g transform="translate(118,92)">
+      <circle cx="0" cy="0" r="30" fill="url(#glowA)" opacity="0.7"/>
+      <circle cx="0" cy="0" r="26" fill="#2a1a3e" stroke="#c084fc" stroke-width="1.6"/>
+      <text x="0" y="-2" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="8.5" font-weight="700" fill="#e9d5ff">Anthropic</text>
+      <text x="0" y="11" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="7.5" fill="#d8b4fe">Jumper</text>
+    </g>
+  </g>
+  <defs>
+    <marker id="arr1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#22d3ee"/></marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#a855f7"/></marker>
+  </defs>
+
+  <!-- top-left tag box -->
+  <rect x="40" y="34" width="236" height="30" rx="6" fill="#1a1a3d" stroke="#f43f5e" stroke-width="1.2"/>
+  <circle cx="58" cy="49" r="4" fill="#f59e0b"/>
+  <text x="72" y="54" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#fecdd3">AI 行业观察 · 人才战</text>
+
+  <!-- year badge -->
+  <g transform="translate(836,34)">
+    <rect x="0" y="0" width="44" height="30" rx="6" fill="#f43f5e" fill-opacity="0.18" stroke="#f43f5e" stroke-width="1.2"/>
+    <text x="22" y="21" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#fda4af">26</text>
+  </g>
+
+  <!-- main title -->
+  <text x="40" y="120" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#ffffff">48 小时，谷歌失去</text>
+  <text x="40" y="158" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#ffffff">两位时代奠基人</text>
+
+  <!-- subtitle -->
+  <text x="40" y="192" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="600" fill="url(#subtitle)">AlphaFold 与 Transformer 之父，同周出走</text>
+
+  <!-- 3 highlight lines -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="13">
+    <text x="40" y="222" fill="#f43f5e">▸ 诺奖得主 John Jumper → Anthropic</text>
+    <text x="40" y="242" fill="#22d3ee">▸ Transformer 作者 Shazeer → OpenAI</text>
+    <text x="40" y="262" fill="#facc15">▸ 留存率：Anthropic 80% &gt; DeepMind 78% &gt; OpenAI 67%</text>
+  </g>
+
+  <!-- tag pills -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#cbd5ff">
+    <rect x="40" y="278" width="72" height="22" rx="11" fill="none" stroke="#f43f5e" stroke-width="1"/>
+    <text x="76" y="293" text-anchor="middle">天价挖角</text>
+    <rect x="120" y="278" width="86" height="22" rx="11" fill="none" stroke="#22d3ee" stroke-width="1"/>
+    <text x="163" y="293" text-anchor="middle">AI for Science</text>
+    <rect x="214" y="278" width="72" height="22" rx="11" fill="none" stroke="#a855f7" stroke-width="1"/>
+    <text x="250" y="293" text-anchor="middle">理念留人</text>
+    <rect x="294" y="278" width="72" height="22" rx="11" fill="none" stroke="#facc15" stroke-width="1"/>
+    <text x="330" y="293" text-anchor="middle">人才拐点</text>
+  </g>
+
+  <!-- bottom divider + footer -->
+  <line x1="40" y1="322" x2="500" y2="322" stroke="#2a2a55" stroke-width="1"/>
+  <text x="40" y="342" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#7c83b8">时间线 · AlphaFold · 薪酬与留存数据 · 行业拐点</text>
+  <text x="40" y="362" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#7c83b8">最贵的不再是芯片，而是人</text>
+  <text x="860" y="362" text-anchor="end" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#5a5f8a">公众号：AI工具箱</text>
+</svg>

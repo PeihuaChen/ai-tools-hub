@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="970" viewBox="0 0 1080 970">
+  <!-- 满幅不透明底 -->
+  <rect x="0" y="0" width="1080" height="970" fill="#f7f8fa"/>
+
+  <!-- 标题 -->
+  <text x="540" y="100" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">三个引擎，跑同一个模型</text>
+  <text x="540" y="160" font-size="34" fill="#4b5563" text-anchor="middle">V4.1-Flash 推理性能已基本拉平</text>
+
+  <!-- DeepInfer -->
+  <rect x="48" y="220" width="984" height="200" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="305" font-size="44" font-weight="bold" fill="#1d4ed8">DeepInfer</text>
+  <text x="76" y="371" font-size="32" fill="#4b5563">DeepSeek 自研</text>
+  <text x="420" y="305" font-size="40" font-weight="bold" fill="#1d4ed8">官方性能曲线</text>
+  <text x="420" y="371" font-size="32" fill="#4b5563">无缓存、编排、均衡</text>
+
+  <!-- vLLM -->
+  <rect x="48" y="440" width="984" height="200" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="76" y="525" font-size="44" font-weight="bold" fill="#b45309">vLLM</text>
+  <text x="76" y="591" font-size="32" fill="#4b5563">通用引擎</text>
+  <text x="420" y="525" font-size="40" font-weight="bold" fill="#b45309">decode 差距 ≤ 6%</text>
+  <text x="420" y="591" font-size="32" fill="#4b5563">已跑通整柜在线服务</text>
+
+  <!-- SGLang -->
+  <rect x="48" y="660" width="984" height="200" rx="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="76" y="745" font-size="44" font-weight="bold" fill="#6d28d9">SGLang</text>
+  <text x="76" y="811" font-size="32" fill="#4b5563">通用引擎</text>
+  <text x="420" y="745" font-size="40" font-weight="bold" fill="#6d28d9">decode 最多快 7.4%</text>
+  <text x="420" y="811" font-size="32" fill="#4b5563">同机实测，prefill 持平</text>
+
+  <!-- 底部说明 -->
+  <text x="540" y="925" font-size="32" fill="#6b7280" text-anchor="middle">数据均为各团队自报，口径见正文</text>
+</svg>

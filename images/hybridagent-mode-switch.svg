@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1180" viewBox="0 0 1080 1180">
+<rect x="0" y="0" width="1080" height="1180" fill="#f7f8fa"/>
+<text x="48" y="100" fill="#111827" font-size="64" font-weight="700">一次生成里的两种模式</text>
+<text x="48" y="156" fill="#4b5563" font-size="32">隐空间静默想，文本模式才开口</text>
+
+<rect x="48" y="196" width="32" height="32" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="3"/>
+<text x="96" y="224" fill="#111827" font-size="32">隐空间模式</text>
+<rect x="340" y="196" width="32" height="32" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="3"/>
+<text x="388" y="224" fill="#111827" font-size="32">文本模式</text>
+
+<rect x="48" y="270" width="984" height="104" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+<text x="76" y="334" fill="#b45309" font-size="40" font-weight="700">文本 · 接收问题</text>
+<text x="1004" y="334" text-anchor="end" fill="#4b5563" font-size="32">算声音传 10 公里要几秒</text>
+
+<line x1="540" y1="380" x2="540" y2="400" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 398 L552 398 L540 410 Z" fill="#94a3b8"/>
+
+<rect x="48" y="410" width="984" height="104" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="76" y="474" fill="#1d4ed8" font-size="40" font-weight="700">隐空间 · 静默思考</text>
+<text x="1004" y="474" text-anchor="end" fill="#4b5563" font-size="32">声速约 343，先搜索核实</text>
+
+<line x1="540" y1="520" x2="540" y2="540" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 538 L552 538 L540 550 Z" fill="#94a3b8"/>
+
+<rect x="48" y="550" width="984" height="104" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+<text x="76" y="614" fill="#b45309" font-size="40" font-weight="700">文本 · 调用搜索</text>
+<text x="1004" y="614" text-anchor="end" fill="#4b5563" font-size="32">写出搜索请求，拿回结果</text>
+
+<line x1="540" y1="660" x2="540" y2="680" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 678 L552 678 L540 690 Z" fill="#94a3b8"/>
+
+<rect x="48" y="690" width="984" height="104" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="76" y="754" fill="#1d4ed8" font-size="40" font-weight="700">隐空间 · 静默思考</text>
+<text x="1004" y="754" text-anchor="end" fill="#4b5563" font-size="32">列出算式 10000÷343</text>
+
+<line x1="540" y1="800" x2="540" y2="820" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 818 L552 818 L540 830 Z" fill="#94a3b8"/>
+
+<rect x="48" y="830" width="984" height="104" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+<text x="76" y="894" fill="#b45309" font-size="40" font-weight="700">文本 · 调用 Python</text>
+<text x="1004" y="894" text-anchor="end" fill="#4b5563" font-size="32">运行代码，得到 29.15</text>
+
+<line x1="540" y1="940" x2="540" y2="960" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 958 L552 958 L540 970 Z" fill="#94a3b8"/>
+
+<rect x="48" y="970" width="984" height="104" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+<text x="76" y="1034" fill="#b45309" font-size="40" font-weight="700">文本 · 给出答案</text>
+<text x="1004" y="1034" text-anchor="end" fill="#4b5563" font-size="32">四舍五入，答案为 29 秒</text>
+
+<text x="48" y="1136" fill="#6b7280" font-size="32">示意：据官方仓库示例简化</text>
+</svg>
