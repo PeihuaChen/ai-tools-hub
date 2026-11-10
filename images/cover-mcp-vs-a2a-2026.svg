@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="50%" stop-color="#1a1a3e"/>
+      <stop offset="100%" stop-color="#0f0f2a"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#3a7bd5"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="100%" stop-color="#f7c948"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f260"/>
+      <stop offset="100%" stop-color="#0575e6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="383"/><line x1="60" y1="0" x2="60" y2="383"/>
+    <line x1="120" y1="0" x2="120" y2="383"/><line x1="180" y1="0" x2="180" y2="383"/>
+    <line x1="240" y1="0" x2="240" y2="383"/><line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/><line x1="420" y1="0" x2="420" y2="383"/>
+    <line x1="480" y1="0" x2="480" y2="383"/><line x1="540" y1="0" x2="540" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/><line x1="660" y1="0" x2="660" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/><line x1="780" y1="0" x2="780" y2="383"/>
+    <line x1="840" y1="0" x2="840" y2="383"/><line x1="900" y1="0" x2="900" y2="383"/>
+    <line x1="0" y1="0" x2="900" y2="0"/><line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/><line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/><line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/><line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="0" y1="383" x2="900" y2="383"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="760" cy="50" r="200" fill="none" stroke="#00d2ff" stroke-width="0.5" opacity="0.06"/>
+  <circle cx="760" cy="50" r="140" fill="none" stroke="#00d2ff" stroke-width="0.5" opacity="0.10"/>
+  <circle cx="760" cy="50" r="80" fill="none" stroke="#00d2ff" stroke-width="0.5" opacity="0.14"/>
+
+  <!-- Top accent -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#accent1)"/>
+
+  <!-- Badge top-left -->
+  <g transform="translate(35, 22)">
+    <rect x="0" y="0" width="120" height="28" rx="4" fill="url(#badge)" opacity="0.9"/>
+    <text x="60" y="19" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="bold" font-size="13" fill="#fff" text-anchor="middle">AI 协议深度解析</text>
+  </g>
+
+  <!-- Year badge -->
+  <g transform="translate(835, 22)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#accent1)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#00d2ff" text-anchor="middle">26</text>
+  </g>
+
+  <!-- VS decoration -->
+  <text x="760" y="280" font-family="'Courier New',monospace" font-weight="900" font-size="90" fill="#ffffff" opacity="0.03">MCP · A2A</text>
+
+  <!-- Main title -->
+  <text x="45" y="145" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',Arial,sans-serif" font-weight="900" font-size="34" fill="#ffffff" letter-spacing="2">
+    <tspan x="45" dy="0">MCP vs A2A：重塑 AI Agent 生态的</tspan>
+    <tspan x="45" dy="48">两大协议深度解析</tspan>
+  </text>
+
+  <!-- Protocol badges -->
+  <g transform="translate(45, 230)">
+    <rect x="0" y="0" width="160" height="30" rx="15" fill="url(#accent1)" opacity="0.15"/>
+    <text x="80" y="20" font-family="'Courier New',Consolas,monospace" font-weight="700" font-size="15" fill="#00d2ff" text-anchor="middle">MCP 协议</text>
+
+    <text x="185" y="20" font-family="Arial,sans-serif" font-size="14" fill="#666" text-anchor="middle">+</text>
+
+    <rect x="205" y="0" width="160" height="30" rx="15" fill="url(#accent2)" opacity="0.15"/>
+    <text x="285" y="20" font-family="'Courier New',Consolas,monospace" font-weight="700" font-size="15" fill="#f7c948" text-anchor="middle">A2A 协议</text>
+  </g>
+
+  <!-- Tagline -->
+  <rect x="45" y="285" width="560" height="32" rx="16" fill="url(#accent1)" opacity="0.10"/>
+  <text x="325" y="306" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="14" fill="#00d2ff" text-anchor="middle" letter-spacing="1">工具连接 · 智能体协作 · 协议互补 · 行业标准</text>
+
+  <!-- Bottom accent -->
+  <rect x="0" y="379" width="900" height="4" fill="url(#accent1)"/>
+
+  <!-- Tags -->
+  <g transform="translate(45, 350)">
+    <text x="0" y="0" font-family="Arial,sans-serif" font-size="11" fill="#555" letter-spacing="1">#AI Agent  #MCP  #A2A  #协议标准  #2026</text>
+  </g>
+
+  <!-- Credit -->
+  <g transform="translate(700, 355)" opacity="0.3">
+    <text x="0" y="0" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#00d2ff">公众号 - 最新AI知识宇宙</text>
+  </g>
+</svg>

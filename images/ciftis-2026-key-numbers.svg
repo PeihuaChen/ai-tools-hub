@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+  <!-- opaque full-bleed background -->
+  <rect width="1080" height="760" fill="#f7f8fa"/>
+
+  <!-- title -->
+  <text x="48" y="84" font-size="58" font-weight="bold" fill="#111827">2026 服贸会 · 关键数字</text>
+  <text x="48" y="128" font-size="32" fill="#4b5563">北京首钢园 · 9 月 9—13 日 · 七大类 1200 多项成果</text>
+  <rect x="48" y="146" width="180" height="6" rx="3" fill="#1d4ed8"/>
+
+  <!-- ============ Row 1 (top=196, h=200) ============ -->
+  <!-- card 1: 90  (x=48, w=312, text x=76) -->
+  <rect x="48" y="196" width="312" height="200" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="76" y="291" font-size="56" font-weight="bold" fill="#0e7490">90</text>
+  <text x="76" y="341" font-size="32" fill="#111827">国家地区及组织</text>
+  <text x="76" y="378" font-size="30" fill="#6b7280">参与本届服贸会</text>
+
+  <!-- card 2: 1800+  (x=384, text x=412) -->
+  <rect x="384" y="196" width="312" height="200" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="412" y="291" font-size="56" font-weight="bold" fill="#15803d">1800+</text>
+  <text x="412" y="341" font-size="32" fill="#111827">线下参展企业</text>
+  <text x="412" y="378" font-size="30" fill="#6b7280">线上 5300+ 家</text>
+
+  <!-- card 3: 470+  (x=720, text x=748) -->
+  <rect x="720" y="196" width="312" height="200" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="748" y="291" font-size="56" font-weight="bold" fill="#b45309">470+</text>
+  <text x="748" y="341" font-size="32" fill="#111827">世界 500 强龙头</text>
+  <text x="748" y="378" font-size="30" fill="#6b7280">占比超四分之一</text>
+
+  <!-- ============ Row 2 (top=430, h=200) ============ -->
+  <!-- card 4: 1200+ -->
+  <rect x="48" y="430" width="312" height="200" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="76" y="525" font-size="56" font-weight="bold" fill="#6d28d9">1200+</text>
+  <text x="76" y="575" font-size="32" fill="#111827">七大类成果</text>
+  <text x="76" y="612" font-size="30" fill="#6b7280">签约 · 首发 · 合作</text>
+
+  <!-- card 5: 近 40% (highlight) -->
+  <rect x="384" y="430" width="312" height="200" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="412" y="525" font-size="56" font-weight="bold" fill="#1d4ed8">近 40%</text>
+  <text x="412" y="575" font-size="32" fill="#1d4ed8">核心案例聚焦 AI</text>
+  <text x="412" y="612" font-size="30" fill="#2563eb">大模型与智能体</text>
+
+  <!-- card 6: +36.6% -->
+  <rect x="720" y="430" width="312" height="200" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="748" y="525" font-size="56" font-weight="bold" fill="#b91c1c">+36.6%</text>
+  <text x="748" y="575" font-size="32" fill="#111827">参观量同比增长</text>
+  <text x="748" y="612" font-size="30" fill="#6b7280">核心区近 42 万</text>
+
+  <!-- footnote -->
+  <text x="48" y="700" font-size="28" fill="#6b7280">数据来源：新华社 · 北京市商务局闭幕发布会（2026-09-13）</text>
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="0.5" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#ff5ca8"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <linearGradient id="vlaGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5ca8"/>
+      <stop offset="1" stop-color="#ff8a5c"/>
+    </linearGradient>
+    <linearGradient id="rosGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#37d67a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="60" y1="0" x2="60" y2="383"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="240" y1="0" x2="240" y2="383"/>
+    <line x1="330" y1="0" x2="330" y2="383"/>
+    <line x1="420" y1="0" x2="420" y2="383"/>
+    <line x1="510" y1="0" x2="510" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="690" y1="0" x2="690" y2="383"/>
+    <line x1="780" y1="0" x2="780" y2="383"/>
+    <line x1="0" y1="70" x2="900" y2="70"/>
+    <line x1="0" y1="140" x2="900" y2="140"/>
+    <line x1="0" y1="210" x2="900" y2="210"/>
+    <line x1="0" y1="280" x2="900" y2="280"/>
+  </g>
+
+  <!-- top / bottom color bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- top-left tag box -->
+  <rect x="40" y="34" width="248" height="30" rx="6" fill="#00e5ff" fill-opacity="0.08" stroke="#00e5ff" stroke-opacity="0.5" stroke-width="1"/>
+  <text x="56" y="54" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="14" fill="#7fe9ff">AI 行业观察 · 具身智能操作系统</text>
+
+  <!-- year badge -->
+  <circle cx="838" cy="49" r="24" fill="#7c5cff" fill-opacity="0.12" stroke="#7c5cff" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="838" y="56" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="20" font-weight="700" fill="#b9a8ff">26</text>
+
+  <!-- main title -->
+  <text x="40" y="128" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="31" font-weight="700" fill="#ffffff">端到端 VLA vs 传统 ROS</text>
+  <text x="40" y="168" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="19" font-weight="600" fill="url(#sub)">2026 人形机器人操作系统的两条技术路线之争</text>
+
+  <!-- VS diagram on the right -->
+  <g>
+    <!-- VLA block -->
+    <rect x="560" y="120" width="120" height="54" rx="8" fill="url(#vlaGrad)" fill-opacity="0.14" stroke="#ff5ca8" stroke-opacity="0.7" stroke-width="1.5"/>
+    <text x="620" y="145" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#ff9ec7">VLA</text>
+    <text x="620" y="163" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="10" fill="#ffb3d4">端到端大模型</text>
+
+    <!-- ROS block -->
+    <rect x="740" y="120" width="120" height="54" rx="8" fill="url(#rosGrad)" fill-opacity="0.14" stroke="#00e5ff" stroke-opacity="0.7" stroke-width="1.5"/>
+    <text x="800" y="145" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#7fe9ff">ROS</text>
+    <text x="800" y="163" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="10" fill="#8ff0c2">分层中间件</text>
+
+    <!-- VS -->
+    <text x="710" y="153" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="16" font-weight="700" fill="#b9a8ff">vs</text>
+  </g>
+
+  <!-- three highlight lines -->
+  <text x="40" y="212" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="13" fill="#ff9ec7">▎大脑 / 小脑 / 实时内核 —— 拆解三层软件栈</text>
+  <text x="40" y="236" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="13" fill="#7fe9ff">▎GR00T 全栈 vs RoboNeuron · rosaOS · EMOS</text>
+  <text x="40" y="260" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="13" fill="#8ff0c2">▎实时性与安全的硬约束 · NVIDIA 的 Wintel 打法</text>
+
+  <!-- tag pills -->
+  <g font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="12">
+    <rect x="40" y="286" width="86" height="26" rx="13" fill="none" stroke="#00e5ff" stroke-opacity="0.45"/>
+    <text x="83" y="303" text-anchor="middle" fill="#9fe8ff">人形机器人</text>
+
+    <rect x="134" y="286" width="72" height="26" rx="13" fill="none" stroke="#7c5cff" stroke-opacity="0.45"/>
+    <text x="170" y="303" text-anchor="middle" fill="#c1b3ff">具身智能</text>
+
+    <rect x="214" y="286" width="100" height="26" rx="13" fill="none" stroke="#ff5ca8" stroke-opacity="0.45"/>
+    <text x="264" y="303" text-anchor="middle" fill="#ffb0d3">Isaac GR00T</text>
+
+    <rect x="322" y="286" width="86" height="26" rx="13" fill="none" stroke="#37d67a" stroke-opacity="0.45"/>
+    <text x="365" y="303" text-anchor="middle" fill="#8ff0c2">机器人 OS</text>
+
+    <rect x="416" y="286" width="72" height="26" rx="13" fill="none" stroke="#ff8a5c" stroke-opacity="0.45"/>
+    <text x="452" y="303" text-anchor="middle" fill="#ffbf9c">Physical AI</text>
+  </g>
+
+  <!-- divider + footer -->
+  <line x1="40" y1="336" x2="860" y2="336" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <text x="40" y="360" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="12" fill="#8a8ab0">路线之争 · 分层架构 · 实时与安全 · 中美路线 · 终局融合</text>
+  <text x="860" y="360" text-anchor="end" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="12" fill="#6a6a90">公众号 · AI行业观察</text>
+</svg>

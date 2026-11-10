@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1172" viewBox="0 0 1080 1172">
+  <rect width="1080" height="1172" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">Decision Index 五个维度</text>
+  <text x="540" y="140" font-size="32" fill="#4b5563" text-anchor="middle">Clef 与 pplx v1.1 都是自报成绩</text>
+
+  <rect x="48" y="170" width="28" height="28" rx="6" fill="#1d4ed8"/>
+  <text x="88" y="196" font-size="32" fill="#111827">Clef</text>
+  <rect x="220" y="170" width="28" height="28" rx="6" fill="#b45309"/>
+  <text x="260" y="196" font-size="32" fill="#111827">pplx v1.1</text>
+
+  <g>
+    <rect x="48" y="230" width="984" height="120" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="302" font-size="36" font-weight="bold" fill="#111827">知识与推理</text>
+    <rect x="320" y="242" width="369" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="701" y="272" font-size="32" font-weight="bold" fill="#1d4ed8">51.2</text>
+    <rect x="320" y="292" width="347" height="40" rx="8" fill="#b45309"/>
+    <text x="679" y="322" font-size="32" font-weight="bold" fill="#b45309">48.18</text>
+  </g>
+
+  <g>
+    <rect x="48" y="370" width="984" height="120" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="442" font-size="36" font-weight="bold" fill="#111827">语言理解</text>
+    <rect x="320" y="382" width="441" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="773" y="412" font-size="32" font-weight="bold" fill="#1d4ed8">61.2</text>
+    <rect x="320" y="432" width="500" height="40" rx="8" fill="#b45309"/>
+    <text x="832" y="462" font-size="32" font-weight="bold" fill="#b45309">69.45</text>
+  </g>
+
+  <g>
+    <rect x="48" y="510" width="984" height="120" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="582" font-size="36" font-weight="bold" fill="#111827">检索与分类</text>
+    <rect x="320" y="522" width="450" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="782" y="552" font-size="32" font-weight="bold" fill="#1d4ed8">62.5</text>
+    <rect x="320" y="572" width="441" height="40" rx="8" fill="#b45309"/>
+    <text x="773" y="602" font-size="32" font-weight="bold" fill="#b45309">61.26</text>
+  </g>
+
+  <g>
+    <rect x="48" y="650" width="984" height="120" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="722" font-size="36" font-weight="bold" fill="#111827">工具与自动化</text>
+    <rect x="320" y="662" width="585" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="917" y="692" font-size="32" font-weight="bold" fill="#1d4ed8">81.2</text>
+    <rect x="320" y="712" width="568" height="40" rx="8" fill="#b45309"/>
+    <text x="900" y="742" font-size="32" font-weight="bold" fill="#b45309">78.88</text>
+  </g>
+
+  <g>
+    <rect x="48" y="790" width="984" height="120" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="862" font-size="36" font-weight="bold" fill="#111827">艺术与品味</text>
+    <rect x="320" y="802" width="344" height="40" rx="8" fill="#1d4ed8"/>
+    <text x="676" y="832" font-size="32" font-weight="bold" fill="#1d4ed8">47.8</text>
+    <rect x="320" y="852" width="322" height="40" rx="8" fill="#b45309"/>
+    <text x="654" y="882" font-size="32" font-weight="bold" fill="#b45309">44.66</text>
+  </g>
+
+  <g>
+    <rect x="48" y="930" width="984" height="194" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="76" y="986" font-size="40" font-weight="bold" fill="#b45309">综合分：61.21 对 61.56</text>
+    <text x="76" y="1046" font-size="32" fill="#4b5563">v1.1 只高 0.35 分，全部来自语言理解</text>
+    <text x="76" y="1094" font-size="32" fill="#4b5563">其余四个维度都是 Clef 更高</text>
+  </g>
+</svg>

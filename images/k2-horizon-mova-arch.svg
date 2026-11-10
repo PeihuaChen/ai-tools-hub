@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#ffffff"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#111827">MoVA：把稀疏专家从前馈层延伸到注意力层</text>
+  <text x="40" y="74" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="14" fill="#6b7280">36B 总参数，每 token 仅激活约 4B —— 兼容 FlashAttention / 分组查询注意力 / 稀疏注意力</text>
+
+  <!-- LEFT: 传统 MoE -->
+  <g transform="translate(60,120)">
+    <rect x="0" y="0" width="480" height="420" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+    <text x="240" y="34" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#111827">传统 MoE：稀疏只用在前馈层</text>
+
+    <!-- token -->
+    <rect x="200" y="60" width="80" height="30" rx="6" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.2"/>
+    <text x="240" y="80" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="12" fill="#4338ca">Token</text>
+
+    <!-- attention: dense (all heads) -->
+    <rect x="60" y="120" width="360" height="70" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="240" y="146" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#334155">注意力层（稠密，全部计算）</text>
+    <g fill="#cbd5e1" stroke="#94a3b8" stroke-width="1">
+      <rect x="90" y="160" width="30" height="18" rx="3"/>
+      <rect x="130" y="160" width="30" height="18" rx="3"/>
+      <rect x="170" y="160" width="30" height="18" rx="3"/>
+      <rect x="210" y="160" width="30" height="18" rx="3"/>
+      <rect x="250" y="160" width="30" height="18" rx="3"/>
+      <rect x="290" y="160" width="30" height="18" rx="3"/>
+      <rect x="330" y="160" width="30" height="18" rx="3"/>
+    </g>
+
+    <line x1="240" y1="90" x2="240" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="240" y1="190" x2="240" y2="220" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <!-- FFN experts, router picks few -->
+    <rect x="60" y="220" width="360" height="150" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="240" y="246" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#1d4ed8">前馈专家（路由只激活少数）</text>
+    <g font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="11">
+      <rect x="80" y="270" width="52" height="80" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="106" y="314" text-anchor="middle" fill="#1d4ed8">E1 ✓</text>
+      <rect x="142" y="270" width="52" height="80" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="168" y="314" text-anchor="middle" fill="#94a3b8">E2</text>
+      <rect x="204" y="270" width="52" height="80" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="230" y="314" text-anchor="middle" fill="#1d4ed8">E3 ✓</text>
+      <rect x="266" y="270" width="52" height="80" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="292" y="314" text-anchor="middle" fill="#94a3b8">E4</text>
+      <rect x="328" y="270" width="52" height="80" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="354" y="314" text-anchor="middle" fill="#94a3b8">E5</text>
+    </g>
+    <text x="240" y="400" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="12" fill="#6b7280">注意力仍是全量计算 —— 容量扩展受限于此</text>
+  </g>
+
+  <!-- arrow between -->
+  <g transform="translate(560,330)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4"/>
+    <path d="M60 0 l-10 -5 l0 10 z" fill="#94a3b8"/>
+    <text x="30" y="-14" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="12" fill="#6b7280">MoVA</text>
+  </g>
+
+  <!-- RIGHT: MoVA -->
+  <g transform="translate(660,120)">
+    <rect x="0" y="0" width="480" height="420" rx="12" fill="#faf5ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="240" y="34" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#6d28d9">MoVA：注意力层也变稀疏</text>
+
+    <rect x="200" y="60" width="80" height="30" rx="6" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="240" y="80" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="12" fill="#6d28d9">Token</text>
+
+    <!-- attention with value experts routed -->
+    <rect x="60" y="120" width="360" height="100" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.2"/>
+    <text x="240" y="146" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#6d28d9">注意力 + 价值专家路由（只激活少数）</text>
+    <g font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="10">
+      <rect x="80" y="162" width="46" height="44" rx="5" fill="#ddd6fe" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="103" y="188" text-anchor="middle" fill="#5b21b6">V1 ✓</text>
+      <rect x="136" y="162" width="46" height="44" rx="5" fill="#faf5ff" stroke="#c4b5fd"/>
+      <text x="159" y="188" text-anchor="middle" fill="#a78bfa">V2</text>
+      <rect x="192" y="162" width="46" height="44" rx="5" fill="#faf5ff" stroke="#c4b5fd"/>
+      <text x="215" y="188" text-anchor="middle" fill="#a78bfa">V3</text>
+      <rect x="248" y="162" width="46" height="44" rx="5" fill="#ddd6fe" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="271" y="188" text-anchor="middle" fill="#5b21b6">V4 ✓</text>
+      <rect x="304" y="162" width="46" height="44" rx="5" fill="#faf5ff" stroke="#c4b5fd"/>
+      <text x="327" y="188" text-anchor="middle" fill="#a78bfa">V5</text>
+    </g>
+
+    <line x1="240" y1="90" x2="240" y2="120" stroke="#6d28d9" stroke-width="1.5"/>
+    <line x1="240" y1="220" x2="240" y2="250" stroke="#6d28d9" stroke-width="1.5"/>
+
+    <!-- FFN experts still sparse -->
+    <rect x="60" y="250" width="360" height="120" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.2"/>
+    <text x="240" y="276" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#1d4ed8">前馈专家（同样稀疏）</text>
+    <g font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="11">
+      <rect x="90" y="296" width="52" height="56" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="116" y="328" text-anchor="middle" fill="#1d4ed8">E1 ✓</text>
+      <rect x="152" y="296" width="52" height="56" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="178" y="328" text-anchor="middle" fill="#94a3b8">E2</text>
+      <rect x="214" y="296" width="52" height="56" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="240" y="328" text-anchor="middle" fill="#1d4ed8">E3 ✓</text>
+      <rect x="276" y="296" width="52" height="56" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="302" y="328" text-anchor="middle" fill="#94a3b8">E4</text>
+    </g>
+    <text x="240" y="400" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="12" fill="#15803d" font-weight="600">两处都稀疏 → 容量更大，激活参数更少</text>
+  </g>
+
+  <!-- bottom summary -->
+  <g transform="translate(60,560)">
+    <rect x="0" y="0" width="1080" height="30" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+    <text x="16" y="20" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="13" fill="#15803d">结果：36B-A4B 在相同训练条件下性能仅略低于稠密 32B，激活参数却少了近一个数量级</text>
+  </g>
+</svg>

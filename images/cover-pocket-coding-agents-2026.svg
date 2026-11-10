@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="botbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="0.5" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect width="900" height="4" fill="url(#topbar)"/>
+  <rect y="379" width="900" height="4" fill="url(#botbar)"/>
+
+  <!-- 左上角标签框 -->
+  <rect x="40" y="34" width="260" height="30" rx="6" fill="none" stroke="#22d3ee" stroke-opacity="0.55" stroke-width="1.2"/>
+  <text x="56" y="54" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="14" fill="#9beaf2" letter-spacing="1">AI 编程助手 · 移动端 Agent</text>
+
+  <!-- 年份徽章 -->
+  <circle cx="838" cy="50" r="26" fill="none" stroke="#a855f7" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="838" y="58" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="22" font-weight="700" fill="#c8a8ff">26</text>
+
+  <!-- 主标题 -->
+  <text x="40" y="126" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="31" font-weight="700" fill="#ffffff">随时随地指挥 AI 写代码</text>
+  <text x="40" y="168" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="25" font-weight="700" fill="#ffffff">当 Cursor、Trae、OpenClaw 把 Agent 塞进口袋</text>
+
+  <!-- 副标题 -->
+  <text x="40" y="204" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="600" fill="url(#sub)">软件开发正从"坐班敲码"转向"随时随地的异步监督"</text>
+
+  <!-- 三行亮点 -->
+  <text x="40" y="244" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#7dd3fc">▍ Cursor Mobile ｜ 云端 VM Agent ｜ iPhone/iPad 公测（2026.6.29）</text>
+  <text x="40" y="268" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#fbbf72">▍ 字节 Trae 跨设备派单 ｜ Claude Code 本地遥控 ｜ OpenClaw 自托管</text>
+  <text x="40" y="292" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#6ee7b7">▍ SWE-bench 80.84% 之后：程序员从"执行者"变成"监工"</text>
+
+  <!-- 标签栏 pill -->
+  <g font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12">
+    <rect x="40" y="318" width="64" height="24" rx="12" fill="none" stroke="#22d3ee" stroke-opacity="0.6"/>
+    <text x="72" y="334" text-anchor="middle" fill="#9beaf2">移动端</text>
+    <rect x="112" y="318" width="78" height="24" rx="12" fill="none" stroke="#6366f1" stroke-opacity="0.6"/>
+    <text x="151" y="334" text-anchor="middle" fill="#b4b8ff">编程Agent</text>
+    <rect x="198" y="318" width="78" height="24" rx="12" fill="none" stroke="#34d399" stroke-opacity="0.6"/>
+    <text x="237" y="334" text-anchor="middle" fill="#6ee7b7">异步开发</text>
+    <rect x="284" y="318" width="60" height="24" rx="12" fill="none" stroke="#a855f7" stroke-opacity="0.6"/>
+    <text x="314" y="334" text-anchor="middle" fill="#c8a8ff">Cursor</text>
+    <rect x="352" y="318" width="52" height="24" rx="12" fill="none" stroke="#ec4899" stroke-opacity="0.6"/>
+    <text x="378" y="334" text-anchor="middle" fill="#f9a8d4">开源</text>
+  </g>
+
+  <!-- 右侧概念示意图：手机 + Agent 任务气泡 -->
+  <g transform="translate(690,120)" opacity="0.95">
+    <!-- 手机外框 -->
+    <rect x="0" y="0" width="120" height="200" rx="18" fill="none" stroke="url(#phone)" stroke-width="2"/>
+    <rect x="46" y="10" width="28" height="5" rx="2.5" fill="#22d3ee" fill-opacity="0.6"/>
+    <!-- 任务气泡 -->
+    <rect x="14" y="30" width="78" height="26" rx="8" fill="none" stroke="#22d3ee" stroke-opacity="0.7" stroke-width="1.3"/>
+    <text x="24" y="47" font-family="'Segoe UI',sans-serif" font-size="11" fill="#9beaf2">▶ 起任务</text>
+    <rect x="28" y="66" width="78" height="26" rx="8" fill="none" stroke="#a855f7" stroke-opacity="0.7" stroke-width="1.3"/>
+    <text x="38" y="83" font-family="'Segoe UI',sans-serif" font-size="11" fill="#c8a8ff">Agent 运行…</text>
+    <rect x="14" y="102" width="92" height="26" rx="8" fill="none" stroke="#34d399" stroke-opacity="0.75" stroke-width="1.3"/>
+    <text x="24" y="119" font-family="'Segoe UI',sans-serif" font-size="11" fill="#6ee7b7">✓ 审 diff · 合并</text>
+    <!-- 进度点 -->
+    <circle cx="24" cy="150" r="4" fill="#22d3ee" fill-opacity="0.8"/>
+    <circle cx="42" cy="150" r="4" fill="#a855f7" fill-opacity="0.8"/>
+    <circle cx="60" cy="150" r="4" fill="#34d399" fill-opacity="0.8"/>
+    <line x1="14" y1="172" x2="106" y2="172" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+    <text x="60" y="188" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10" fill="#5a6080">Cloud / Local</text>
+  </g>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="40" y1="360" x2="860" y2="360" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+  <text x="40" y="375" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#5a6080">趋势解读 · 四大玩家拆解 · 横向对比 · 代价与选型</text>
+  <text x="860" y="375" text-anchor="end" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#5a6080">公众号：AI工具箱</text>
+</svg>

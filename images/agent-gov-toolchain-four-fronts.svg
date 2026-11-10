@@ -1,0 +1,42 @@
+<svg width="1080" height="860" viewBox="0 0 1080 860" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="860" fill="#f7f8fa"/>
+
+  <text x="540" y="64" font-size="56" font-weight="bold" fill="#111827" text-anchor="middle">治理工具链的四条战线</text>
+  <text x="540" y="112" font-size="32" fill="#6b7280" text-anchor="middle">2026 年产品、并购、融资与开源发布同时撞期</text>
+
+  <!-- Card 1: 可观测升级 -->
+  <rect x="40" y="150" width="490" height="310" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="72" y="210" font-size="40" font-weight="bold" fill="#1d4ed8">① 可观测升级</text>
+  <line x1="72" y1="234" x2="498" y2="234" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="72" y="292" font-size="32" fill="#111827">LangSmith 推出运行时网关</text>
+  <text x="72" y="344" font-size="32" fill="#111827">Signal / Engine / Topics</text>
+  <text x="72" y="396" font-size="32" fill="#111827">三大观测平台齐发</text>
+  <text x="72" y="440" font-size="32" fill="#4b5563">从「记日志」到「拦得住」</text>
+
+  <!-- Card 2: 并购整合 -->
+  <rect x="550" y="150" width="490" height="310" rx="16" fill="#ecfdf5" stroke="#15803d" stroke-width="2.5"/>
+  <text x="582" y="210" font-size="40" font-weight="bold" fill="#15803d">② 并购整合</text>
+  <line x1="582" y1="234" x2="1008" y2="234" stroke="#bbf7d0" stroke-width="2"/>
+  <text x="582" y="292" font-size="32" fill="#111827">Dynatrace 收购 Arize</text>
+  <text x="582" y="344" font-size="32" fill="#111827">9.15 亿美元，首笔大额</text>
+  <text x="582" y="396" font-size="32" fill="#111827">Cisco 并购 Galileo</text>
+  <text x="582" y="440" font-size="32" fill="#4b5563">补进 Splunk 可观测</text>
+
+  <!-- Card 3: 创业公司涌现 -->
+  <rect x="40" y="500" width="490" height="310" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="72" y="560" font-size="40" font-weight="bold" fill="#6d28d9">③ 创业公司涌现</text>
+  <line x1="72" y1="584" x2="498" y2="584" stroke="#ddd6fe" stroke-width="2"/>
+  <text x="72" y="642" font-size="32" fill="#111827">Geordie 融 3000 万 A 轮</text>
+  <text x="72" y="694" font-size="32" fill="#111827">MintMCP、GovAgent 等成立</text>
+  <text x="72" y="746" font-size="32" fill="#111827">Braintrust 融 8000 万</text>
+  <text x="72" y="790" font-size="32" fill="#4b5563">赛道拥挤，窗口期缩短</text>
+
+  <!-- Card 4: 大厂控制面 -->
+  <rect x="550" y="500" width="490" height="310" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2.5"/>
+  <text x="582" y="560" font-size="40" font-weight="bold" fill="#b45309">④ 大厂控制面</text>
+  <line x1="582" y1="584" x2="1008" y2="584" stroke="#fed7aa" stroke-width="2"/>
+  <text x="582" y="642" font-size="32" fill="#111827">WSO2 Agent Manager GA</text>
+  <text x="582" y="694" font-size="32" fill="#111827">AWS AgentCore + 安全族</text>
+  <text x="582" y="746" font-size="32" fill="#111827">Kong、Red Hat 补网关</text>
+  <text x="582" y="790" font-size="32" fill="#4b5563">治理嵌进流量控制面</text>
+</svg>

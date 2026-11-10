@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1060" viewBox="0 0 1080 1060">
+  <rect width="1080" height="1060" fill="#f7f8fa"/>
+
+  <text x="540" y="92" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">四个场景怎么选</text>
+  <text x="540" y="140" font-size="32" fill="#4b5563" text-anchor="middle">数字来自 Requesty 与官方文档</text>
+
+  <g>
+    <rect x="48" y="180" width="480" height="270" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="76" y="238" font-size="40" font-weight="bold" fill="#111827">选项多的意图识别</text>
+    <text x="76" y="304" font-size="44" font-weight="bold" fill="#1d4ed8">Clef</text>
+    <text x="76" y="370" font-size="32" fill="#4b5563">Banking77 94.3 对 79.5</text>
+    <text x="76" y="418" font-size="32" fill="#4b5563">MASSIVE 89.3 对 69.7</text>
+  </g>
+
+  <g>
+    <rect x="552" y="180" width="480" height="270" rx="16" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="580" y="238" font-size="40" font-weight="bold" fill="#111827">选项少的审核路由</text>
+    <text x="580" y="304" font-size="44" font-weight="bold" fill="#b45309">pplx v1.1</text>
+    <text x="580" y="370" font-size="32" fill="#4b5563">准确率与 Clef 接近</text>
+    <text x="580" y="418" font-size="32" fill="#4b5563">每千条 $0.02 对 $0.13</text>
+  </g>
+
+  <g>
+    <rect x="48" y="470" width="480" height="270" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="76" y="528" font-size="40" font-weight="bold" fill="#111827">延迟最敏感热路径</text>
+    <text x="76" y="594" font-size="44" font-weight="bold" fill="#0e7490">Clef-flash</text>
+    <text x="76" y="660" font-size="32" fill="#4b5563">$0.038 / 百万 token</text>
+    <text x="76" y="708" font-size="32" fill="#4b5563">官方中位 38.8 ms，需复测</text>
+  </g>
+
+  <g>
+    <rect x="552" y="470" width="480" height="270" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="580" y="528" font-size="40" font-weight="bold" fill="#111827">工具调用与多级评分</text>
+    <text x="580" y="594" font-size="44" font-weight="bold" fill="#b91c1c">大模型兜底</text>
+    <text x="580" y="660" font-size="32" fill="#4b5563">两家工具判断仅 68.7</text>
+    <text x="580" y="708" font-size="32" fill="#4b5563">Opus 5.5 为 90.0</text>
+  </g>
+
+  <g>
+    <rect x="48" y="760" width="984" height="240" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="76" y="816" font-size="40" font-weight="bold" fill="#111827">上线前三件事</text>
+    <text x="76" y="876" font-size="32" fill="#4b5563">状态格式固定，换格式要重测</text>
+    <text x="76" y="924" font-size="32" fill="#4b5563">阈值设在概率上，不设在 confidence</text>
+    <text x="76" y="972" font-size="32" fill="#4b5563">多级评分尽量拆成多个是/否问题</text>
+  </g>
+</svg>

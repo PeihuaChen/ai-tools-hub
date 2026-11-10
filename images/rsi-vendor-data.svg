@@ -1,0 +1,78 @@
+<svg width="1080" height="1480" viewBox="0 0 1080 1480" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1480" fill="#f7f8fa"/>
+
+  <text x="60" y="80" font-size="60" font-weight="bold" fill="#111827">RSI 进展关键数据</text>
+  <text x="60" y="140" font-size="32" fill="#4b5563">国内外厂商已公开的自我改进量级（2026）</text>
+
+  <!-- R1C1: Anthropic 80% -->
+  <g>
+    <rect x="60" y="190" width="465" height="290" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="88" y="240" font-size="30" font-weight="bold" fill="#0e7490">Anthropic</text>
+    <text x="88" y="310" font-size="58" font-weight="bold" fill="#0e7490">80%</text>
+    <text x="88" y="398" font-size="31" fill="#4b5563">Claude 已写公司</text>
+    <text x="88" y="446" font-size="31" fill="#4b5563">合并代码占比</text>
+  </g>
+
+  <!-- R1C2: Anthropic 8倍 -->
+  <g>
+    <rect x="555" y="190" width="465" height="290" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="583" y="240" font-size="30" font-weight="bold" fill="#0e7490">Anthropic</text>
+    <text x="583" y="310" font-size="58" font-weight="bold" fill="#0e7490">8 倍</text>
+    <text x="583" y="398" font-size="31" fill="#4b5563">工程师人均季度</text>
+    <text x="583" y="446" font-size="31" fill="#4b5563">代码产出倍增</text>
+  </g>
+
+  <!-- R2C1: OpenAI 3天 -->
+  <g>
+    <rect x="60" y="504" width="465" height="290" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="88" y="554" font-size="30" font-weight="bold" fill="#1d4ed8">OpenAI</text>
+    <text x="88" y="624" font-size="58" font-weight="bold" fill="#1d4ed8">3 天</text>
+    <text x="88" y="712" font-size="31" fill="#4b5563">每 1 人类工作日</text>
+    <text x="88" y="760" font-size="31" fill="#4b5563">的 AI 研究产出</text>
+  </g>
+
+  <!-- R2C2: OpenAI 2028 -->
+  <g>
+    <rect x="555" y="504" width="465" height="290" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="583" y="554" font-size="30" font-weight="bold" fill="#1d4ed8">OpenAI</text>
+    <text x="583" y="624" font-size="58" font-weight="bold" fill="#1d4ed8">2028</text>
+    <text x="583" y="712" font-size="31" fill="#4b5563">目标建成全自动</text>
+    <text x="583" y="760" font-size="31" fill="#4b5563">AI 研究员</text>
+  </g>
+
+  <!-- R3C1: DeepMind 0.7% -->
+  <g>
+    <rect x="60" y="818" width="465" height="290" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="88" y="868" font-size="30" font-weight="bold" fill="#15803d">Google DeepMind</text>
+    <text x="88" y="938" font-size="58" font-weight="bold" fill="#15803d">0.7%</text>
+    <text x="88" y="1026" font-size="31" fill="#4b5563">AlphaEvolve 回收</text>
+    <text x="88" y="1074" font-size="31" fill="#4b5563">谷歌全球算力</text>
+  </g>
+
+  <!-- R3C2: 智谱 GLM 3倍 -->
+  <g>
+    <rect x="555" y="818" width="465" height="290" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="583" y="868" font-size="30" font-weight="bold" fill="#b91c1c">智谱 GLM（中国）</text>
+    <text x="583" y="938" font-size="58" font-weight="bold" fill="#b91c1c">3 倍</text>
+    <text x="583" y="1026" font-size="31" fill="#4b5563">Infra Agent 两周</text>
+    <text x="583" y="1074" font-size="31" fill="#4b5563">推理吞吐提升</text>
+  </g>
+
+  <!-- R4C1: MiniMax +30% -->
+  <g>
+    <rect x="60" y="1132" width="465" height="290" rx="16" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="88" y="1182" font-size="30" font-weight="bold" fill="#b45309">MiniMax（中国）</text>
+    <text x="88" y="1252" font-size="58" font-weight="bold" fill="#b45309">+30%</text>
+    <text x="88" y="1340" font-size="31" fill="#4b5563">M2.7 自跑百轮</text>
+    <text x="88" y="1388" font-size="31" fill="#4b5563">优化性能提升</text>
+  </g>
+
+  <!-- R4C2: 上海交大等 5级 -->
+  <g>
+    <rect x="555" y="1132" width="465" height="290" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="583" y="1182" font-size="30" font-weight="bold" fill="#6d28d9">上海交大等（中国）</text>
+    <text x="583" y="1252" font-size="58" font-weight="bold" fill="#6d28d9">5 级</text>
+    <text x="583" y="1340" font-size="31" fill="#4b5563">「最后的 AI」</text>
+    <text x="583" y="1388" font-size="31" fill="#4b5563">自主分级路线图</text>
+  </g>
+</svg>

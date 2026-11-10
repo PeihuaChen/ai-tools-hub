@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="900" viewBox="0 0 1080 900">
+  <rect width="1080" height="900" fill="#f7f8fa"/>
+  <rect width="1080" height="8" fill="#b91c1c"/>
+  <text x="48" y="102" fill="#111827" font-size="62" font-weight="700">三堵墙，一个闭环</text>
+  <text x="48" y="160" fill="#4b5563" font-size="34">为什么单点突破撬不动这个品类</text>
+  <path d="M48 192H1032" stroke="#d9e2ec" stroke-width="2"/>
+
+  <rect x="48" y="260" width="300" height="320" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="325" fill="#1d4ed8" font-size="44" font-weight="700">戴不住</text>
+  <path d="M76 346H320" stroke="#93c5fd" stroke-width="2"/>
+  <text x="76" y="412" fill="#1d4ed8" font-size="54" font-weight="700">35–50g</text>
+  <text x="76" y="470" fill="#4b5563" font-size="32">带屏续航 2–4h</text>
+  <text x="76" y="520" fill="#4b5563" font-size="32">重量续航算力互斥</text>
+
+  <rect x="390" y="260" width="300" height="320" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="418" y="325" fill="#b45309" font-size="44" font-weight="700">不被信任</text>
+  <path d="M418 346H662" stroke="#fcd34d" stroke-width="2"/>
+  <text x="418" y="412" fill="#b45309" font-size="54" font-weight="700">9.9 元</text>
+  <text x="418" y="470" fill="#4b5563" font-size="32">提示灯可被遮蔽</text>
+  <text x="418" y="520" fill="#4b5563" font-size="32">公共拍摄规则未定</text>
+
+  <rect x="732" y="260" width="300" height="320" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="760" y="325" fill="#6d28d9" font-size="44" font-weight="700">用不上</text>
+  <path d="M760 346H1004" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="760" y="412" fill="#6d28d9" font-size="54" font-weight="700">&lt;6%</text>
+  <text x="760" y="470" fill="#4b5563" font-size="32">200+ 项功能上线</text>
+  <text x="760" y="520" fill="#4b5563" font-size="32">缺长期佩戴理由</text>
+
+  <text x="369" y="432" text-anchor="middle" fill="#94a3b8" font-size="40" font-weight="700">&#8594;</text>
+  <text x="711" y="432" text-anchor="middle" fill="#94a3b8" font-size="40" font-weight="700">&#8594;</text>
+
+  <path d="M882 580V648Q882 680 850 680H230Q198 680 198 648V592" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="8"/>
+  <path d="M198 578l-8 14h16z" fill="#94a3b8"/>
+  <text x="540" y="748" text-anchor="middle" fill="#4b5563" font-size="34">价值缺失，又削弱硬件攻坚的投入</text>
+
+  <rect x="48" y="792" width="984" height="76" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="840" text-anchor="middle" fill="#111827" font-size="34" font-weight="700">成本下降 + 规则重建 + 场景验证，需要同时发生</text>
+</svg>

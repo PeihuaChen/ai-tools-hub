@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="990" viewBox="0 0 1080 990">
+<rect x="0" y="0" width="1080" height="990" fill="#f7f8fa"/>
+<text x="48" y="100" fill="#111827" font-size="56" font-weight="700">DCA：把远距离拉回已见范围</text>
+<text x="48" y="156" fill="#4b5563" font-size="32">以 Qwen2.5-1M 为例：训练长度 256K，目标 1M</text>
+
+<rect x="48" y="200" width="984" height="300" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+<text x="76" y="252" fill="#b91c1c" font-size="44" font-weight="700">原始 RoPE：远距离没学过</text>
+<rect x="76" y="290" width="238" height="50" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+<text x="195" y="326" text-anchor="middle" fill="#15803d" font-size="32" font-weight="700">已训练</text>
+<rect x="314" y="290" width="690" height="50" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+<text x="659" y="326" text-anchor="middle" fill="#b91c1c" font-size="32" font-weight="700">未训练：性能下滑</text>
+<text x="76" y="396" fill="#6b7280" font-size="32">0</text>
+<text x="314" y="396" text-anchor="middle" fill="#6b7280" font-size="32">256K</text>
+<text x="1004" y="396" text-anchor="end" fill="#6b7280" font-size="32">1M</text>
+<text x="76" y="456" fill="#4b5563" font-size="32">横轴为 token 间的相对距离，越右越没见过</text>
+
+<rect x="48" y="530" width="984" height="400" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+<text x="76" y="582" fill="#15803d" font-size="44" font-weight="700">加 DCA：分块后重映射</text>
+<rect x="76" y="620" width="214" height="70" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="183" y="667" text-anchor="middle" fill="#1d4ed8" font-size="32" font-weight="700">块 1</text>
+<rect x="314" y="620" width="214" height="70" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="421" y="667" text-anchor="middle" fill="#1d4ed8" font-size="32" font-weight="700">块 2</text>
+<rect x="552" y="620" width="214" height="70" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="659" y="667" text-anchor="middle" fill="#1d4ed8" font-size="32" font-weight="700">块 3</text>
+<rect x="790" y="620" width="214" height="70" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="897" y="667" text-anchor="middle" fill="#1d4ed8" font-size="32" font-weight="700">块 4</text>
+<g stroke="#94a3b8" stroke-width="3" fill="#94a3b8">
+<line x1="183" y1="692" x2="183" y2="732"/><polygon points="173,730 193,730 183,746" stroke="none"/>
+<line x1="421" y1="692" x2="421" y2="732"/><polygon points="411,730 431,730 421,746" stroke="none"/>
+<line x1="659" y1="692" x2="659" y2="732"/><polygon points="649,730 669,730 659,746" stroke="none"/>
+<line x1="897" y1="692" x2="897" y2="732"/><polygon points="887,730 907,730 897,746" stroke="none"/>
+</g>
+<rect x="76" y="750" width="928" height="50" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+<text x="540" y="786" text-anchor="middle" fill="#15803d" font-size="32" font-weight="700">块内 + 块间距离都落在已训练范围</text>
+<text x="76" y="870" fill="#4b5563" font-size="32">32K 训练 + DCA：1M 密钥检索接近满分</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="850" viewBox="0 0 1080 850">
+  <rect x="0" y="0" width="1080" height="850" fill="#f7f8fa"/>
+  <text x="60" y="88" font-size="60" font-weight="800" fill="#111827">AI 账号管理赛道的三层结构</text>
+  <text x="60" y="148" font-size="34" fill="#4b5563">越往下越贴近凭据，维护成本与信任成本同步上升</text>
+
+  <rect x="60" y="190" width="960" height="150" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="100" y="248" font-size="44" font-weight="800" fill="#1d4ed8">第一层 · 配置切换</text>
+  <text x="100" y="298" font-size="32" fill="#4b5563">只改供应商地址与 API Key，不碰登录态</text>
+  <text x="100" y="334" font-size="32" fill="#4b5563">边界最轻，受众最广，配置可备份可还原</text>
+  <text x="980" y="248" font-size="34" font-weight="700" fill="#1d4ed8" text-anchor="end">CC Switch · 15.2 万星</text>
+
+  <line x1="540" y1="342" x2="540" y2="386" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M540 392l-9-14h18z" fill="#94a3b8"/>
+
+  <rect x="60" y="390" width="960" height="150" rx="16" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+  <text x="100" y="448" font-size="44" font-weight="800" fill="#0e7490">第二层 · API 网关</text>
+  <text x="100" y="498" font-size="32" fill="#4b5563">把账号池包装成兼容接口，做路由与轮询</text>
+  <text x="100" y="534" font-size="32" fill="#4b5563">面向团队：独立密钥、用量隔离、请求追踪</text>
+  <text x="980" y="448" font-size="34" font-weight="700" fill="#0e7490" text-anchor="end">CLIProxyAPI · 5.76 万星</text>
+
+  <line x1="540" y1="542" x2="540" y2="586" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M540 592l-9-14h18z" fill="#94a3b8"/>
+
+  <rect x="60" y="590" width="960" height="150" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="100" y="648" font-size="44" font-weight="800" fill="#b91c1c">第三层 · 客户端账号</text>
+  <text x="100" y="698" font-size="32" fill="#4b5563">改写各 IDE 本机登录文件，独立目录多开</text>
+  <text x="100" y="734" font-size="32" fill="#4b5563">最贴近凭据，也最依赖上游客户端不改动</text>
+  <text x="980" y="648" font-size="34" font-weight="700" fill="#b91c1c" text-anchor="end">Cockpit Tools · 1.97 万星</text>
+
+  <text x="60" y="800" font-size="32" fill="#6b7280">同一条需求链，三种抽象层级：选错层级比选错项目更费事</text>
+</svg>

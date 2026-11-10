@@ -1,0 +1,45 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="700" viewBox="0 0 1080 700">
+  <rect x="0" y="0" width="1080" height="700" fill="#ffffff"/>
+
+  <text x="60" y="84" font-size="60" font-weight="bold" fill="#111827">脑机接口的三步：读 → 写 → 闭环</text>
+  <text x="60" y="136" font-size="34" fill="#4b5563">光遗传学补上的，正是“写”这块短板</text>
+
+  <!-- step 1: 读 -->
+  <rect x="60" y="188" width="280" height="330" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="200" y="252" font-size="44" font-weight="bold" fill="#1d4ed8" text-anchor="middle">读</text>
+  <text x="200" y="300" font-size="32" fill="#111827" text-anchor="middle">电极记录信号</text>
+  <text x="200" y="344" font-size="32" fill="#111827" text-anchor="middle">AI 解码意图</text>
+  <text x="200" y="388" font-size="32" fill="#111827" text-anchor="middle">意念控光标</text>
+  <rect x="100" y="432" width="200" height="52" rx="10" fill="#1d4ed8"/>
+  <text x="200" y="466" font-size="30" fill="#ffffff" text-anchor="middle">已临床破冰</text>
+
+  <!-- arrow 1 -->
+  <path d="M 356 353 L 404 353" stroke="#94a3b8" stroke-width="4"/>
+  <path d="M 404 353 L 388 341 L 388 365 Z" fill="#94a3b8"/>
+
+  <!-- step 2: 写 -->
+  <rect x="416" y="188" width="280" height="330" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2.5"/>
+  <text x="556" y="252" font-size="44" font-weight="bold" fill="#15803d" text-anchor="middle">写</text>
+  <text x="556" y="300" font-size="32" fill="#111827" text-anchor="middle">光遗传精准写入</text>
+  <text x="556" y="344" font-size="32" fill="#111827" text-anchor="middle">按细胞类型开关</text>
+  <text x="556" y="388" font-size="32" fill="#111827" text-anchor="middle">无线图案化光刺激</text>
+  <rect x="456" y="432" width="200" height="52" rx="10" fill="#15803d"/>
+  <text x="556" y="466" font-size="30" fill="#ffffff" text-anchor="middle">临床进行中</text>
+
+  <!-- arrow 2 -->
+  <path d="M 712 353 L 760 353" stroke="#94a3b8" stroke-width="4"/>
+  <path d="M 760 353 L 744 341 L 744 365 Z" fill="#94a3b8"/>
+
+  <!-- step 3: 闭环 -->
+  <rect x="772" y="188" width="248" height="330" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="896" y="252" font-size="44" font-weight="bold" fill="#6d28d9" text-anchor="middle">闭环</text>
+  <text x="896" y="300" font-size="32" fill="#111827" text-anchor="middle">读写同环</text>
+  <text x="896" y="344" font-size="32" fill="#111827" text-anchor="middle">感知可写回</text>
+  <text x="896" y="388" font-size="32" fill="#111827" text-anchor="middle">调控可分型</text>
+  <rect x="802" y="432" width="188" height="52" rx="10" fill="#6d28d9"/>
+  <text x="896" y="466" font-size="30" fill="#ffffff" text-anchor="middle">下一站</text>
+
+  <!-- bottom band -->
+  <rect x="60" y="564" width="960" height="84" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="540" y="616" font-size="34" font-weight="bold" fill="#b45309" text-anchor="middle">读是电极的强项，写是光的强项，合流才是下一站</text>
+</svg>

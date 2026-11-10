@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1120" viewBox="0 0 1080 1120">
+<rect x="0" y="0" width="1080" height="1120" fill="#f7f8fa"/>
+<text x="48" y="100" fill="#111827" font-size="64" font-weight="700">HybridAgent 的训练流水线</text>
+<text x="48" y="156" fill="#4b5563" font-size="32">基座模型经两段后训练，才会切换模式</text>
+
+<rect x="48" y="220" width="984" height="104" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="76" y="284" fill="#1d4ed8" font-size="40" font-weight="700">基座模型</text>
+<text x="1004" y="284" text-anchor="end" fill="#4b5563" font-size="32">Qwen3-8B-Base / 14B-Base</text>
+
+<line x1="540" y1="330" x2="540" y2="352" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 350 L552 350 L540 364 Z" fill="#94a3b8"/>
+
+<rect x="48" y="364" width="984" height="184" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+<text x="76" y="428" fill="#6d28d9" font-size="40" font-weight="700">HybridSFT 监督微调</text>
+<text x="1004" y="428" text-anchor="end" fill="#4b5563" font-size="32">建议 8–16 张 GPU</text>
+<rect x="76" y="456" width="184" height="64" rx="14" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+<text x="168" y="500" text-anchor="middle" fill="#6d28d9" font-size="32">格式激活</text>
+<rect x="280" y="456" width="307" height="64" rx="14" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+<text x="433" y="500" text-anchor="middle" fill="#6d28d9" font-size="32">HybridLink 激活</text>
+<rect x="607" y="456" width="216" height="64" rx="14" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+<text x="715" y="500" text-anchor="middle" fill="#6d28d9" font-size="32">自条件训练</text>
+
+<line x1="540" y1="554" x2="540" y2="576" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 574 L552 574 L540 588 Z" fill="#94a3b8"/>
+
+<rect x="48" y="588" width="984" height="160" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+<text x="76" y="652" fill="#15803d" font-size="40" font-weight="700">HybridRL 强化学习</text>
+<text x="1004" y="652" text-anchor="end" fill="#4b5563" font-size="32">建议 32 张 GPU</text>
+<text x="76" y="712" fill="#4b5563" font-size="32">学会何时隐空间思考、何时用文本行动</text>
+
+<line x1="540" y1="754" x2="540" y2="776" stroke="#94a3b8" stroke-width="3"/>
+<path d="M528 774 L552 774 L540 788 Z" fill="#94a3b8"/>
+
+<rect x="48" y="788" width="984" height="220" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+<text x="76" y="852" fill="#0e7490" font-size="40" font-weight="700">开源产物</text>
+<text x="76" y="912" fill="#4b5563" font-size="32">8B、14B 模型与 HybridLink 权重</text>
+<text x="76" y="972" fill="#4b5563" font-size="32">MIT 协议，训练集同步开放</text>
+
+<text x="48" y="1068" fill="#6b7280" font-size="32">硬件为官方 README 建议配置</text>
+</svg>

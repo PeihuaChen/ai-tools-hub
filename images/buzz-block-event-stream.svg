@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660">
+  <rect width="1200" height="660" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="50" y="48" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827">Branch as Room：从七个割裂的标签页到一条签名事件流</text>
+  <text x="50" y="76" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" fill="#4b5563">同一个 feature branch 的完整生命周期，在两种工具形态下的差别</text>
+
+  <!-- ===== TOP: fragmented toolchain ===== -->
+  <rect x="50" y="100" width="1100" height="200" rx="12" fill="#f8fafc" stroke="#d9e2ec" stroke-width="1.5"/>
+  <text x="72" y="128" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#b91c1c">现状：上下文散落在多个系统里，靠人脑和胶水代码缝合</text>
+
+  <!-- 5 fragmented tools -->
+  <rect x="80" y="145" width="185" height="80" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="172" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">聊天工具</text>
+  <text x="172" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">讨论「为什么这么做」</text>
+  <text x="172" y="213" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Slack / 企业微信</text>
+
+  <rect x="290" y="145" width="185" height="80" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="382" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">代码托管</text>
+  <text x="382" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">存放 patch 与评审</text>
+  <text x="382" y="213" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">GitHub / GitLab</text>
+
+  <rect x="500" y="145" width="185" height="80" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="592" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">CI 面板</text>
+  <text x="592" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">构建与测试结果</text>
+  <text x="592" y="213" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Actions / Jenkins</text>
+
+  <rect x="710" y="145" width="185" height="80" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="802" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">任务看板</text>
+  <text x="802" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">追踪进度与归属</text>
+  <text x="802" y="213" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">Jira / Linear</text>
+
+  <rect x="920" y="145" width="185" height="80" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="1012" y="172" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Agent / Bot</text>
+  <text x="1012" y="194" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">在各自的孤岛里跑</text>
+  <text x="1012" y="213" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">终端 / Webhook</text>
+
+  <!-- Broken links between tools -->
+  <line x1="265" y1="185" x2="283" y2="185" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="274" y="177" font-family="monospace" font-size="13" fill="#b91c1c" text-anchor="middle">✕</text>
+  <line x1="475" y1="185" x2="493" y2="185" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="484" y="177" font-family="monospace" font-size="13" fill="#b91c1c" text-anchor="middle">✕</text>
+  <line x1="685" y1="185" x2="703" y2="185" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="694" y="177" font-family="monospace" font-size="13" fill="#b91c1c" text-anchor="middle">✕</text>
+  <line x1="895" y1="185" x2="913" y2="185" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="904" y="177" font-family="monospace" font-size="13" fill="#b91c1c" text-anchor="middle">✕</text>
+
+  <text x="600" y="255" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#b91c1c" text-anchor="middle">五套身份体系 · 五份互不相通的历史 · 搜索要挨个翻 · 「当初为什么这么改」往往查不到</text>
+  <text x="600" y="278" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">Agent 在这种结构里只能当外挂：它看不到全貌，也留不下可验证的痕迹</text>
+
+  <!-- Transition arrow -->
+  <line x1="600" y1="308" x2="600" y2="340" stroke="#1d4ed8" stroke-width="2"/>
+  <polygon points="592,340 608,340 600,352" fill="#1d4ed8"/>
+  <rect x="640" y="313" width="220" height="26" rx="13" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="750" y="331" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#1d4ed8" text-anchor="middle">Buzz：全部收敛为同一种事件</text>
+
+  <!-- ===== BOTTOM: unified event stream ===== -->
+  <rect x="50" y="360" width="1100" height="240" rx="12" fill="#f0f9ff" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="72" y="388" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#0e7490">Buzz：一个频道 = 一条按时间排列的签名事件流</text>
+
+  <!-- Timeline axis -->
+  <line x1="100" y1="470" x2="1100" y2="470" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="1100,464 1100,476 1112,470" fill="#94a3b8"/>
+  <text x="1075" y="494" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6b7280">时间</text>
+
+  <!-- Event nodes on timeline -->
+  <!-- 1. discussion -->
+  <circle cx="160" cy="470" r="9" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <line x1="160" y1="461" x2="160" y2="425" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="3"/>
+  <rect x="105" y="400" width="110" height="26" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="160" y="418" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#1d4ed8" text-anchor="middle">讨论方案</text>
+  <text x="160" y="500" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">kind:1</text>
+  <text x="160" y="515" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">人类签名</text>
+
+  <!-- 2. branch created -->
+  <circle cx="320" cy="470" r="9" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <line x1="320" y1="479" x2="320" y2="530" stroke="#6d28d9" stroke-width="1" stroke-dasharray="3"/>
+  <rect x="258" y="532" width="125" height="26" rx="6" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1"/>
+  <text x="320" y="550" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6d28d9" text-anchor="middle">分支自动建房</text>
+  <text x="320" y="444" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">kind:30617</text>
+
+  <!-- 3. patch -->
+  <circle cx="480" cy="470" r="9" fill="#ecfdf5" stroke="#15803d" stroke-width="2"/>
+  <line x1="480" y1="461" x2="480" y2="425" stroke="#15803d" stroke-width="1" stroke-dasharray="3"/>
+  <rect x="425" y="400" width="110" height="26" rx="6" fill="#ecfdf5" stroke="#15803d" stroke-width="1"/>
+  <text x="480" y="418" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#15803d" text-anchor="middle">提交 patch</text>
+  <text x="480" y="500" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">NIP-34</text>
+  <text x="480" y="515" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Agent 签名</text>
+
+  <!-- 4. CI -->
+  <circle cx="640" cy="470" r="9" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <line x1="640" y1="479" x2="640" y2="530" stroke="#b45309" stroke-width="1" stroke-dasharray="3"/>
+  <rect x="585" y="532" width="110" height="26" rx="6" fill="#fffbeb" stroke="#b45309" stroke-width="1"/>
+  <text x="640" y="550" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">CI 回帖结果</text>
+  <text x="640" y="444" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">workflow</text>
+
+  <!-- 5. agent review -->
+  <circle cx="800" cy="470" r="9" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <line x1="800" y1="461" x2="800" y2="425" stroke="#6d28d9" stroke-width="1" stroke-dasharray="3"/>
+  <rect x="738" y="400" width="125" height="26" rx="6" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1"/>
+  <text x="800" y="418" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#6d28d9" text-anchor="middle">Agent 代码审查</text>
+  <text x="800" y="500" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">kind:1111</text>
+  <text x="800" y="515" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Agent 签名</text>
+
+  <!-- 6. approval + merge -->
+  <circle cx="960" cy="470" r="9" fill="#ecfdf5" stroke="#15803d" stroke-width="2"/>
+  <line x1="960" y1="479" x2="960" y2="530" stroke="#15803d" stroke-width="1" stroke-dasharray="3"/>
+  <rect x="898" y="532" width="125" height="26" rx="6" fill="#ecfdf5" stroke="#15803d" stroke-width="1"/>
+  <text x="960" y="550" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="11" fill="#15803d" text-anchor="middle">审批通过并合并</text>
+  <text x="960" y="444" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">reaction</text>
+
+  <!-- Bottom takeaway -->
+  <line x1="50" y1="620" x2="1150" y2="620" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="50" y="644" font-family="Microsoft YaHei, system-ui, sans-serif" font-size="12" fill="#4b5563">六类事件同一种结构、同一个身份模型、同一个搜索索引——「这段代码为什么存在」的答案就躺在它旁边</text>
+</svg>

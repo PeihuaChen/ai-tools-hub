@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="400" viewBox="0 0 860 400" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="cab" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0f1f"/><stop offset="1" stop-color="#15193a"/></linearGradient>
+    <pattern id="cag" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="860" height="400" rx="12" fill="url(#cab)"/>
+  <rect width="860" height="400" rx="12" fill="url(#cag)"/>
+  <rect x="1" y="1" width="858" height="398" rx="12" fill="none" stroke="#334155" stroke-width="2"/>
+
+  <text x="430" y="38" fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle">CUGA 架构：层级 Planner-Executor + Policy-as-Code</text>
+
+  <!-- User -->
+  <rect x="350" y="60" width="160" height="36" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="430" y="83" fill="#fcd34d" font-size="14" font-weight="700" text-anchor="middle">用户任务（自然语言）</text>
+
+  <!-- arrow -->
+  <line x1="430" y1="96" x2="430" y2="118" stroke="#475569" stroke-width="2"/>
+
+  <!-- Policy Layer -->
+  <rect x="130" y="118" width="600" height="44" rx="10" fill="#1e293b" stroke="#0062ff" stroke-width="2"/>
+  <text x="430" y="145" fill="#78a9ff" font-size="15" font-weight="700" text-anchor="middle">Policy Layer — 治理策略（允许/禁止/审批/脱敏）</text>
+
+  <!-- arrow -->
+  <line x1="430" y1="162" x2="430" y2="180" stroke="#475569" stroke-width="2"/>
+
+  <!-- Planner -->
+  <rect x="230" y="180" width="400" height="44" rx="10" fill="#1e293b" stroke="#6929c4" stroke-width="2"/>
+  <text x="430" y="207" fill="#a56eff" font-size="15" font-weight="700" text-anchor="middle">Planner — 任务分解为有序子步骤</text>
+
+  <!-- arrow -->
+  <line x1="430" y1="224" x2="430" y2="242" stroke="#475569" stroke-width="2"/>
+
+  <!-- Executor -->
+  <rect x="230" y="242" width="400" height="44" rx="10" fill="#1e293b" stroke="#009d9a" stroke-width="2"/>
+  <text x="430" y="269" fill="#009d9a" font-size="15" font-weight="700" text-anchor="middle">Executor — ReAct 循环（思考→行动→观察）</text>
+
+  <!-- arrow -->
+  <line x1="430" y1="286" x2="430" y2="304" stroke="#475569" stroke-width="2"/>
+
+  <!-- Tool Layer -->
+  <g transform="translate(130,304)">
+    <rect width="600" height="44" rx="10" fill="#1e293b" stroke="#1192e8" stroke-width="2"/>
+    <rect x="20" y="10" width="120" height="24" rx="6" fill="#0f172a" stroke="#1192e8" stroke-opacity="0.6"/>
+    <text x="80" y="27" fill="#1192e8" font-size="12" font-weight="600" text-anchor="middle">OpenAPI</text>
+    <rect x="160" y="10" width="80" height="24" rx="6" fill="#0f172a" stroke="#1192e8" stroke-opacity="0.6"/>
+    <text x="200" y="27" fill="#1192e8" font-size="12" font-weight="600" text-anchor="middle">MCP</text>
+    <rect x="260" y="10" width="100" height="24" rx="6" fill="#0f172a" stroke="#1192e8" stroke-opacity="0.6"/>
+    <text x="310" y="27" fill="#1192e8" font-size="12" font-weight="600" text-anchor="middle">自定义连接器</text>
+    <rect x="380" y="10" width="130" height="24" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.6"/>
+    <text x="445" y="27" fill="#fcd34d" font-size="12" font-weight="600" text-anchor="middle">Agent-as-Tool</text>
+  </g>
+
+  <!-- LLM -->
+  <rect x="310" y="362" width="240" height="28" rx="6" fill="#0f172a" stroke="#64748b"/>
+  <text x="430" y="381" fill="#94a3b8" font-size="12" text-anchor="middle">底层 LLM（任意模型，可替换）</text>
+
+  <!-- arrow: Tool Layer → LLM -->
+  <line x1="430" y1="348" x2="430" y2="362" stroke="#475569" stroke-width="2"/>
+
+  <!-- side label: Policy intercepts at every step -->
+  <path d="M128 140 L100 140 L100 348 L128 348" fill="none" stroke="#0062ff" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="100" y1="200" x2="108" y2="200" stroke="#0062ff" stroke-width="1.5"/>
+  <line x1="100" y1="264" x2="108" y2="264" stroke="#0062ff" stroke-width="1.5"/>
+  <line x1="100" y1="326" x2="108" y2="326" stroke="#0062ff" stroke-width="1.5"/>
+  <text x="56" y="250" fill="#78a9ff" font-size="11" text-anchor="middle" transform="rotate(-90 56 250)">Policy 全程拦截</text>
+</svg>

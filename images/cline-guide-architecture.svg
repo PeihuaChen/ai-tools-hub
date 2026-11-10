@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1064" width="1080" height="1064">
+  <rect x="0" y="0" width="1080" height="1064" fill="#f7f8fa"/>
+
+  <text x="540" y="100" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">一个引擎，六个入口</text>
+  <text x="540" y="160" font-size="32" fill="#4b5563" text-anchor="middle">所有入口共享同一个 Agent 核心</text>
+
+  <!-- Row 1 -->
+  <rect x="48" y="200" width="312" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="204" y="260" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">VS Code</text>
+  <text x="204" y="322" font-size="32" fill="#4b5563" text-anchor="middle">编辑器插件</text>
+
+  <rect x="384" y="200" width="312" height="150" rx="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="540" y="260" font-size="40" font-weight="bold" fill="#6d28d9" text-anchor="middle">JetBrains</text>
+  <text x="540" y="322" font-size="32" fill="#4b5563" text-anchor="middle">插件·未开源</text>
+
+  <rect x="720" y="200" width="312" height="150" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="876" y="260" font-size="40" font-weight="bold" fill="#15803d" text-anchor="middle">CLI</text>
+  <text x="876" y="322" font-size="32" fill="#4b5563" text-anchor="middle">终端与 CI</text>
+
+  <!-- Row 2 -->
+  <rect x="48" y="374" width="312" height="150" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="204" y="434" font-size="40" font-weight="bold" fill="#b45309" text-anchor="middle">桌面 App</text>
+  <text x="204" y="496" font-size="32" fill="#4b5563" text-anchor="middle">macOS 与 Win</text>
+
+  <rect x="384" y="374" width="312" height="150" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="540" y="434" font-size="40" font-weight="bold" fill="#b91c1c" text-anchor="middle">IM 连接器</text>
+  <text x="540" y="496" font-size="32" fill="#4b5563" text-anchor="middle">Slack 等平台</text>
+
+  <rect x="720" y="374" width="312" height="150" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="876" y="434" font-size="40" font-weight="bold" fill="#0e7490" text-anchor="middle">你的应用</text>
+  <text x="876" y="496" font-size="32" fill="#4b5563" text-anchor="middle">基于 SDK 自建</text>
+
+  <!-- arrow 1 -->
+  <line x1="540" y1="532" x2="540" y2="560" stroke="#94a3b8" stroke-width="4"/>
+  <path d="M526 556 L540 570 L554 556 Z" fill="#94a3b8"/>
+
+  <!-- Core -->
+  <rect x="48" y="574" width="984" height="230" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="540" y="634" font-size="44" font-weight="bold" fill="#1d4ed8" text-anchor="middle">@cline/sdk 共享 Agent 核心</text>
+  <g font-size="32" font-weight="bold" fill="#1d4ed8">
+    <rect x="76" y="670" width="217" height="96" rx="12" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="184" y="729" text-anchor="middle">Plan/Act</text>
+    <rect x="313" y="670" width="217" height="96" rx="12" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="421" y="729" text-anchor="middle">规则/技能</text>
+    <rect x="550" y="670" width="217" height="96" rx="12" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="658" y="729" text-anchor="middle">MCP/插件</text>
+    <rect x="787" y="670" width="217" height="96" rx="12" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="895" y="729" text-anchor="middle">多 Agent</text>
+  </g>
+
+  <!-- arrow 2 -->
+  <line x1="540" y1="812" x2="540" y2="840" stroke="#94a3b8" stroke-width="4"/>
+  <path d="M526 836 L540 850 L554 836 Z" fill="#94a3b8"/>
+
+  <!-- Provider -->
+  <rect x="48" y="854" width="984" height="170" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="540" y="916" font-size="40" font-weight="bold" fill="#15803d" text-anchor="middle">模型层：任意 Provider（BYOK）</text>
+  <text x="540" y="978" font-size="32" fill="#4b5563" text-anchor="middle">Claude · GPT · Gemini · Kimi · 本地 Ollama</text>
+</svg>

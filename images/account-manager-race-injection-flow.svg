@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="850" viewBox="0 0 1080 850">
+  <rect x="0" y="0" width="1080" height="850" fill="#f7f8fa"/>
+  <text x="60" y="88" font-size="60" font-weight="800" fill="#111827">切号链路：凭据如何进入客户端</text>
+  <text x="60" y="148" font-size="34" fill="#4b5563">全程在本机完成，请求仍由官方客户端原生发出</text>
+
+  <rect x="60" y="196" width="960" height="106" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <circle cx="132" cy="249" r="28" fill="#1d4ed8"/><text x="132" y="261" font-size="34" font-weight="800" fill="#f8fafc" text-anchor="middle">1</text>
+  <text x="190" y="241" font-size="42" font-weight="800" fill="#1d4ed8">本地账号库</text>
+  <text x="190" y="284" font-size="32" fill="#4b5563">加密保存账号凭据，数据目录留在本机</text>
+
+  <line x1="540" y1="304" x2="540" y2="340" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M540 346l-9-14h18z" fill="#94a3b8"/>
+
+  <rect x="60" y="348" width="960" height="106" rx="16" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+  <circle cx="132" cy="401" r="28" fill="#0e7490"/><text x="132" y="413" font-size="34" font-weight="800" fill="#f8fafc" text-anchor="middle">2</text>
+  <text x="190" y="393" font-size="42" font-weight="800" fill="#0e7490">写入私有存储</text>
+  <text x="190" y="436" font-size="32" fill="#4b5563">state.vscdb / auth.json 等登录文件</text>
+
+  <line x1="540" y1="456" x2="540" y2="492" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M540 498l-9-14h18z" fill="#94a3b8"/>
+
+  <rect x="60" y="500" width="960" height="106" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <circle cx="132" cy="553" r="28" fill="#6d28d9"/><text x="132" y="565" font-size="34" font-weight="800" fill="#f8fafc" text-anchor="middle">3</text>
+  <text x="190" y="545" font-size="42" font-weight="800" fill="#6d28d9">独立实例启动</text>
+  <text x="190" y="588" font-size="32" fill="#4b5563">每个实例独占用户数据目录，多账号并行</text>
+
+  <line x1="540" y1="608" x2="540" y2="644" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M540 650l-9-14h18z" fill="#94a3b8"/>
+
+  <rect x="60" y="652" width="960" height="106" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <circle cx="132" cy="705" r="28" fill="#15803d"/><text x="132" y="717" font-size="34" font-weight="800" fill="#f8fafc" text-anchor="middle">4</text>
+  <text x="190" y="697" font-size="42" font-weight="800" fill="#15803d">官方客户端发请求</text>
+  <text x="190" y="740" font-size="32" fill="#4b5563">不经过项目自建云端，流量形态不变</text>
+
+  <text x="60" y="806" font-size="32" fill="#6b7280">改写的只是本机登录态，上游看到的仍是对应账号本身</text>
+</svg>

@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="620" viewBox="0 0 1320 620">
+  <rect width="1320" height="620" fill="#ffffff"/>
+
+  <text x="60" y="42" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="bold" fill="#111827">oh-my-pi / Pi / Claude Code / OpenCode / Cursor 五方对照</text>
+  <text x="60" y="66" font-family="Microsoft YaHei, sans-serif" font-size="12.5" fill="#4b5563">同一个"终端编程 Agent"问题，五种完全不同的答案</text>
+
+  <!-- header row -->
+  <g font-family="Microsoft YaHei, sans-serif" font-size="12.5" font-weight="bold">
+    <rect x="60" y="90" width="170" height="34" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="73" y="112" fill="#374151">维度</text>
+    <rect x="230" y="90" width="190" height="34" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="325" y="112" fill="#1d4ed8" text-anchor="middle">oh-my-pi</text>
+    <rect x="420" y="90" width="150" height="34" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+    <text x="495" y="112" fill="#15803d" text-anchor="middle">Pi（原版）</text>
+    <rect x="570" y="90" width="210" height="34" fill="#fff7ed" stroke="#b45309" stroke-width="1"/>
+    <text x="675" y="112" fill="#b45309" text-anchor="middle">Claude Code</text>
+    <rect x="780" y="90" width="190" height="34" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="875" y="112" fill="#b91c1c" text-anchor="middle">OpenCode</text>
+    <rect x="970" y="90" width="190" height="34" fill="#faf5ff" stroke="#6d28d9" stroke-width="1"/>
+    <text x="1065" y="112" fill="#6d28d9" text-anchor="middle">Cursor</text>
+  </g>
+
+  <!-- rows data -->
+  <g font-family="Microsoft YaHei, sans-serif" font-size="10.8" fill="#374151">
+    <!-- row1: 形态 -->
+    <rect x="60" y="124" width="170" height="56" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="147" font-weight="bold" fill="#111827">形态</text>
+    <text x="73" y="166" fill="#6b7280" font-size="10">Harness 越重越贵</text>
+    <rect x="230" y="124" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="147">终端，内置 LSP+DAP</text>
+    <text x="243" y="164" fill="#6b7280" font-size="10">32 工具，55k 行 Rust 核心</text>
+    <rect x="420" y="124" width="150" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="147">终端，极简核心</text>
+    <text x="433" y="164" fill="#6b7280" font-size="10">仅 4 个工具</text>
+    <rect x="570" y="124" width="210" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="147">终端 + 多端（VSCode/桌面/网页/手机）</text>
+    <text x="583" y="164" fill="#6b7280" font-size="10">10+ 内置工具，官方维护</text>
+    <rect x="780" y="124" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="147">终端 CLI + 桌面应用</text>
+    <text x="793" y="164" fill="#6b7280" font-size="10">Go 编写，单二进制文件</text>
+    <rect x="970" y="124" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="147">图形化 IDE</text>
+    <text x="983" y="164" fill="#6b7280" font-size="10">VS Code fork</text>
+
+    <!-- row2: 开源协议 -->
+    <rect x="60" y="180" width="170" height="56" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="203" font-weight="bold" fill="#111827">开源协议</text>
+    <rect x="230" y="180" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="203">MIT（can1357 维护）</text>
+    <rect x="420" y="180" width="150" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="203">MIT（Earendil 维护）</text>
+    <rect x="570" y="180" width="210" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="203">闭源（Anthropic 官方）</text>
+    <rect x="780" y="180" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="203">MIT（Anomaly/SST 团队）</text>
+    <rect x="970" y="180" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="203">闭源</text>
+
+    <!-- row3: 独家技术 -->
+    <rect x="60" y="236" width="170" height="56" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="259" font-weight="bold" fill="#111827">独家技术</text>
+    <text x="73" y="278" fill="#6b7280" font-size="10">语义与运行时理解</text>
+    <rect x="230" y="236" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="256" fill="#1d4ed8">Hashline 编辑 · LSP 重构</text>
+    <text x="243" y="273" fill="#1d4ed8">DAP 真调试器 · 角色路由</text>
+    <rect x="420" y="236" width="150" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="256" fill="#15803d">会话树 /tree /fork</text>
+    <text x="433" y="273" fill="#6b7280" font-size="10">TS 扩展热重载</text>
+    <rect x="570" y="236" width="210" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="256" fill="#b45309">Agent Teams · 检查点回滚</text>
+    <text x="583" y="273" fill="#6b7280" font-size="10">Computer-use 桌面控制</text>
+    <rect x="780" y="236" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="256" fill="#b91c1c">内置 Plan Mode/Subagent</text>
+    <text x="793" y="273" fill="#6b7280" font-size="10">内置 MCP，插件系统</text>
+    <rect x="970" y="236" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="256" fill="#6d28d9">全仓库上下文索引</text>
+    <text x="983" y="273" fill="#6b7280" font-size="10">行内 Tab 补全</text>
+
+    <!-- row4: 模型支持 -->
+    <rect x="60" y="292" width="170" height="56" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="315" font-weight="bold" fill="#111827">模型支持</text>
+    <text x="73" y="334" fill="#6b7280" font-size="10">是否锁定单一厂商</text>
+    <rect x="230" y="292" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="315" fill="#1d4ed8" font-weight="bold">40+ providers</text>
+    <text x="243" y="332" fill="#6b7280" font-size="10">同一会话内可切换</text>
+    <rect x="420" y="292" width="150" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="315" fill="#15803d" font-weight="bold">15+ providers</text>
+    <rect x="570" y="292" width="210" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="315" fill="#b45309" font-weight="bold">仅 Claude 系列</text>
+    <text x="583" y="332" fill="#6b7280" font-size="10">Opus / Sonnet / Haiku</text>
+    <rect x="780" y="292" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="315" fill="#b91c1c" font-weight="bold">75+ providers</text>
+    <text x="793" y="332" fill="#6b7280" font-size="10">含本地 Ollama</text>
+    <rect x="970" y="292" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="315" fill="#6d28d9">多模型可选</text>
+    <text x="983" y="332" fill="#6b7280" font-size="10">自研 Composer + 第三方</text>
+
+    <!-- row5: 权限与安全 -->
+    <rect x="60" y="348" width="170" height="56" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="371" font-weight="bold" fill="#111827">权限与安全</text>
+    <text x="73" y="390" fill="#6b7280" font-size="10">默认防护等级</text>
+    <rect x="230" y="348" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="371" fill="#b91c1c">无内置权限系统</text>
+    <text x="243" y="388" fill="#6b7280" font-size="10">依赖容器化隔离</text>
+    <rect x="420" y="348" width="150" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="371" fill="#b91c1c">同上，YOLO 模式</text>
+    <rect x="570" y="348" width="210" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="371" fill="#15803d">默认拒绝 + 5 种权限模式</text>
+    <text x="583" y="388" fill="#6b7280" font-size="10">OS 级 Bash 沙箱</text>
+    <rect x="780" y="348" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="371" fill="#15803d">权限式沙箱</text>
+    <text x="793" y="388" fill="#6b7280" font-size="10">操作前确认提示</text>
+    <rect x="970" y="348" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="371" fill="#15803d">编辑器级审批弹窗</text>
+
+    <!-- row6: 系统提示词 -->
+    <rect x="60" y="404" width="170" height="56" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="427" font-weight="bold" fill="#111827">系统提示词</text>
+    <rect x="230" y="404" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="427" fill="#374151">中等（内置能力多）</text>
+    <rect x="420" y="404" width="150" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="427" fill="#15803d" font-weight="bold">&lt;1000 tokens</text>
+    <rect x="570" y="404" width="210" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="427" fill="#374151">Claude 5 代已砍 80%+</text>
+    <text x="583" y="444" fill="#6b7280" font-size="10">此前约 1-1.4 万 tokens</text>
+    <rect x="780" y="404" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="427" fill="#374151">中等，配置驱动</text>
+    <rect x="970" y="404" width="190" height="56" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="427" fill="#374151">编辑器内嵌，不对外公开</text>
+
+    <!-- row7: 最适合谁 -->
+    <rect x="60" y="460" width="170" height="60" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="73" y="483" font-weight="bold" fill="#111827">最适合谁</text>
+    <rect x="230" y="460" width="190" height="60" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="243" y="483" fill="#1d4ed8">要 IDE 级语义能力</text>
+    <text x="243" y="500" fill="#1d4ed8">又想多模型路由的重度用户</text>
+    <rect x="420" y="460" width="150" height="60" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="433" y="483" fill="#15803d">想自己造轮子的</text>
+    <text x="433" y="500" fill="#15803d">Harness 极客</text>
+    <rect x="570" y="460" width="210" height="60" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="583" y="483" fill="#b45309">要开箱即用护栏</text>
+    <text x="583" y="500" fill="#b45309">已是 Claude 订阅用户</text>
+    <rect x="780" y="460" width="190" height="60" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="793" y="483" fill="#b91c1c">想要开箱即用的</text>
+    <text x="793" y="500" fill="#b91c1c">开源替代品，重视数据主权</text>
+    <rect x="970" y="460" width="190" height="60" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="983" y="483" fill="#6d28d9">喜欢贴着代码写</text>
+    <text x="983" y="500" fill="#6d28d9">要图形化交互</text>
+  </g>
+
+  <text x="660" y="552" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">数据来源：oh-my-pi / Pi / OpenCode 官方仓库文档、Composio 100 小时实测、docs.bswen.com 对比系列（2026 年 4-8 月）</text>
+  <text x="660" y="574" font-family="Microsoft YaHei, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">五者并非互斥：不少重度用户同时运行两到三个工具，按场景切换</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+  <rect width="1080" height="760" fill="#f7f8fa"/>
+  <rect width="1080" height="8" fill="#0e7490"/>
+  <text x="48" y="102" fill="#111827" font-size="62" font-weight="700">同一个病灶，两条修补路线</text>
+  <text x="48" y="160" fill="#4b5563" font-size="34">小模型绕圈：改权重，还是挂调度代码</text>
+  <path d="M48 192H1032" stroke="#d9e2ec" stroke-width="2"/>
+
+  <rect x="290" y="218" width="500" height="98" rx="16" fill="#fef2f2" stroke="#b45309" stroke-width="2"/>
+  <text x="540" y="280" text-anchor="middle" fill="#b45309" font-size="36" font-weight="700">小模型绕圈 · 回答写不完</text>
+
+  <g fill="none" stroke="#94a3b8" stroke-width="3">
+    <path d="M540 316V348"/>
+    <path d="M283 348H797"/>
+    <path d="M283 348V372"/>
+    <path d="M797 348V372"/>
+  </g>
+  <g fill="#94a3b8">
+    <path d="M283 380l-9-14h18z"/>
+    <path d="M797 380l-9-14h18z"/>
+  </g>
+
+  <rect x="48" y="390" width="470" height="242" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="456" fill="#1d4ed8" font-size="44" font-weight="700">改权重</text>
+  <path d="M76 476H490" stroke="#93c5fd" stroke-width="2"/>
+  <text x="76" y="528" fill="#4b5563" font-size="32">WSP · 连续参数</text>
+  <text x="76" y="574" fill="#4b5563" font-size="32">减掉 131,072 个权重</text>
+  <text x="76" y="620" fill="#4b5563" font-size="32">改动极小难名状</text>
+
+  <rect x="562" y="390" width="470" height="242" rx="16" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+  <text x="590" y="456" fill="#0e7490" font-size="44" font-weight="700">挂代码</text>
+  <path d="M590 476H1004" stroke="#67e8f9" stroke-width="2"/>
+  <text x="590" y="528" fill="#4b5563" font-size="32">机制干预 · 符号代码</text>
+  <text x="590" y="574" fill="#4b5563" font-size="32">写 Python 调度策略</text>
+  <text x="590" y="620" fill="#4b5563" font-size="32">可读、可测试</text>
+
+  <rect x="48" y="660" width="984" height="84" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="714" text-anchor="middle" fill="#111827" font-size="36" font-weight="700">改动落在哪一层，决定它能否被审计</text>
+</svg>

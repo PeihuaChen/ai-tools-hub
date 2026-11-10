@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="780" viewBox="0 0 1080 780">
+<rect x="0" y="0" width="1080" height="780" fill="#f7f8fa"/>
+<text x="48" y="96" fill="#111827" font-size="60" font-weight="700">TokenGate 的三段式前向</text>
+<text x="48" y="150" fill="#4b5563" font-size="32">门控层以上只处理 K 个 Token，省计算也省 KV</text>
+
+<rect x="48" y="200" width="300" height="300" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+<rect x="48" y="200" width="300" height="8" rx="4" fill="#1d4ed8"/>
+<text x="72" y="262" fill="#1d4ed8" font-size="40" font-weight="700">L 层以下</text>
+<text x="72" y="306" fill="#4b5563" font-size="32">全量 N 个 Token</text>
+<g fill="#94a3b8">
+<circle cx="80" cy="356" r="5"/><circle cx="108" cy="356" r="5"/><circle cx="136" cy="356" r="5"/><circle cx="164" cy="356" r="5"/><circle cx="192" cy="356" r="5"/><circle cx="220" cy="356" r="5"/><circle cx="248" cy="356" r="5"/><circle cx="276" cy="356" r="5"/><circle cx="304" cy="356" r="5"/>
+<circle cx="80" cy="386" r="5"/><circle cx="108" cy="386" r="5"/><circle cx="136" cy="386" r="5"/><circle cx="164" cy="386" r="5"/><circle cx="192" cy="386" r="5"/><circle cx="220" cy="386" r="5"/><circle cx="248" cy="386" r="5"/><circle cx="276" cy="386" r="5"/><circle cx="304" cy="386" r="5"/>
+<circle cx="80" cy="416" r="5"/><circle cx="108" cy="416" r="5"/><circle cx="136" cy="416" r="5"/><circle cx="164" cy="416" r="5"/><circle cx="192" cy="416" r="5"/><circle cx="220" cy="416" r="5"/><circle cx="248" cy="416" r="5"/><circle cx="276" cy="416" r="5"/><circle cx="304" cy="416" r="5"/>
+</g>
+<text x="72" y="474" fill="#6b7280" font-size="30">标准 forward</text>
+
+<path d="M356 350H378" stroke="#94a3b8" stroke-width="3"/><path d="M370 342L382 350L370 358" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+<rect x="390" y="200" width="300" height="300" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+<rect x="390" y="200" width="300" height="8" rx="4" fill="#6d28d9"/>
+<text x="414" y="262" fill="#6d28d9" font-size="40" font-weight="700">第 L 层门控</text>
+<text x="414" y="306" fill="#4b5563" font-size="32">打分后选 top-K</text>
+<rect x="414" y="334" width="252" height="58" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+<text x="540" y="372" text-anchor="middle" fill="#6d28d9" font-size="32" font-weight="700">打分 MLP</text>
+<rect x="414" y="408" width="252" height="58" rx="10" fill="#ede9fe" stroke="#6d28d9" stroke-width="2"/>
+<text x="540" y="446" text-anchor="middle" fill="#6d28d9" font-size="32" font-weight="700">top-K 选择</text>
+
+<path d="M698 350H720" stroke="#94a3b8" stroke-width="3"/><path d="M712 342L724 350L712 358" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+<rect x="732" y="200" width="300" height="300" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+<rect x="732" y="200" width="300" height="8" rx="4" fill="#15803d"/>
+<text x="756" y="262" fill="#15803d" font-size="40" font-weight="700">L 层以上</text>
+<text x="756" y="306" fill="#4b5563" font-size="32">只处理 K 个 Token</text>
+<g fill="#15803d">
+<circle cx="772" cy="360" r="7"/><circle cx="836" cy="352" r="7"/><circle cx="900" cy="364" r="7"/><circle cx="964" cy="350" r="7"/><circle cx="1000" cy="384" r="7"/>
+<circle cx="790" cy="404" r="7"/><circle cx="870" cy="410" r="7"/><circle cx="944" cy="400" r="7"/>
+</g>
+<text x="756" y="474" fill="#6b7280" font-size="30">被剪 Token 不写 KV</text>
+
+<rect x="48" y="540" width="984" height="104" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="76" y="604" fill="#1d4ed8" font-size="34" font-weight="700">省掉：上层注意力、上层 MLP、被剪 Token 的 KV 条目</text>
+
+<text x="48" y="702" fill="#4b5563" font-size="30">指令、问题、答案模板不参与打分；只有 {state} 内的文档可被剪</text>
+</svg>

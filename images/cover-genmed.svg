@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#6ee7b7"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.15"/>
+      <stop offset="0.5" stop-color="#22d3ee" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- subtle grid -->
+  <g stroke="#2a2a55" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top / bottom gradient bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- tag box -->
+  <rect x="48" y="42" width="250" height="34" rx="8" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="66" y="65" font-size="17" fill="#67e8f9" font-weight="bold">AI 行业观察 · 医疗大模型</text>
+
+  <!-- year badge -->
+  <circle cx="836" cy="60" r="26" fill="none" stroke="#34d399" stroke-width="2"/>
+  <text x="836" y="69" font-size="24" fill="#6ee7b7" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="150" font-size="31" fill="#ffffff" font-weight="bold">"一病一模型"时代结束</text>
+  <text x="48" y="192" font-size="19" fill="url(#sub)" font-weight="bold">两篇顶刊揭示中国通用医疗 AI 的现状与前景</text>
+
+  <!-- highlight lines -->
+  <text x="48" y="242" font-size="13" fill="#7dd3fc">· 达摩院 RADAR 登 Science：单模型识别 146 种腹部病症</text>
+  <text x="48" y="266" font-size="13" fill="#6ee7b7">· 华西 LungGPT 登 Cell Reports Medicine：覆盖 22 种呼吸疾病</text>
+  <text x="48" y="290" font-size="13" fill="#c4b5fd">· 技术拐点已过，落地拐点未到：三道坎待跨越</text>
+
+  <!-- right concept: scan lines + pulse -->
+  <g opacity="0.9">
+    <rect x="646" y="150" width="196" height="120" rx="10" fill="none" stroke="#2f6f7a" stroke-width="1.5"/>
+    <path d="M656 218 h30 l14 -34 l18 66 l16 -50 l14 18 h74" fill="none" stroke="url(#pulse)" stroke-width="2.5"/>
+    <circle cx="744" cy="210" r="3" fill="#22d3ee"/>
+  </g>
+
+  <!-- tag pills -->
+  <g font-size="12">
+    <rect x="48" y="316" width="92" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-width="1"/>
+    <text x="94" y="333" fill="#7dd3fc" text-anchor="middle">通用影像 AI</text>
+    <rect x="150" y="316" width="80" height="26" rx="13" fill="none" stroke="#22d3ee" stroke-width="1"/>
+    <text x="190" y="333" fill="#67e8f9" text-anchor="middle">多模态</text>
+    <rect x="240" y="316" width="92" height="26" rx="13" fill="none" stroke="#34d399" stroke-width="1"/>
+    <text x="286" y="333" fill="#6ee7b7" text-anchor="middle">可解释诊断</text>
+    <rect x="342" y="316" width="80" height="26" rx="13" fill="none" stroke="#a78bfa" stroke-width="1"/>
+    <text x="382" y="333" fill="#c4b5fd" text-anchor="middle">三甲落地</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="360" x2="852" y2="360" stroke="#2a2a55" stroke-width="1"/>
+  <text x="852" y="333" font-size="12" fill="#5b6b8c" text-anchor="end">深度解读 · 公众号同步</text>
+</svg>

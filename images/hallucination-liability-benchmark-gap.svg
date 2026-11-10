@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="600" viewBox="0 0 1160 600">
+  <rect width="1160" height="600" fill="#ffffff"/>
+
+  <text x="40" y="46" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="bold" fill="#111827">2% 还是 33%？厂商宣传的幻觉率和你遇到的幻觉率</text>
+  <text x="40" y="74" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">同一代模型，换个基准就差一个数量级——因为两者测的不是同一件事</text>
+  <line x1="40" y1="92" x2="1120" y2="92" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <rect x="40" y="116" width="530" height="250" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="66" y="146" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#1d4ed8">有依据的摘要任务（厂商常引用）</text>
+  <text x="66" y="170" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">给定文档 → 要求总结，模型有明确接地材料</text>
+
+  <rect x="66" y="192" width="478" height="34" rx="5" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <rect x="66" y="192" width="19" height="34" rx="5" fill="#1d4ed8"/>
+  <text x="100" y="214" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8">低于 2%</text>
+
+  <text x="66" y="256" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">测量对象：模型在总结文档时引入幻觉的频率</text>
+  <text x="66" y="278" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">典型来源：HHEM 类幻觉评估排行榜</text>
+  <text x="66" y="300" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">对应场景：企业 POC、有知识库的受控测试</text>
+  <rect x="66" y="318" width="478" height="32" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.1"/>
+  <text x="82" y="339" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">前提：答案就在给定材料里，模型只需不跑偏</text>
+
+  <rect x="590" y="116" width="530" height="250" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+  <text x="616" y="146" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#b91c1c">开放域事实性测试（用户实际遭遇）</text>
+  <text x="616" y="170" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">无参考资料 → 直接问事实，模型只能靠参数记忆</text>
+
+  <rect x="616" y="192" width="478" height="34" rx="5" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <rect x="616" y="192" width="158" height="34" rx="5" fill="#b91c1c"/>
+  <text x="790" y="214" font-family="Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">16% ~ 33% 以上</text>
+
+  <text x="616" y="256" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">测量对象：模型凭记忆回答事实问题的错误率</text>
+  <text x="616" y="278" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">典型来源：开放域事实问答基准</text>
+  <text x="616" y="300" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">对应场景：真实用户提问知识库里没有的问题</text>
+  <rect x="616" y="318" width="478" height="32" rx="6" fill="#ffffff" stroke="#b91c1c" stroke-width="1.1"/>
+  <text x="632" y="339" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">前提：答案不在上下文里，模型倾向于猜而非拒答</text>
+
+  <line x1="570" y1="209" x2="590" y2="209" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4"/>
+
+  <text x="40" y="404" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#111827">已验证有效的降幻觉手段（同场景可复现的量化结果）</text>
+
+  <rect x="40" y="422" width="530" height="150" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.4"/>
+  <text x="66" y="450" font-family="Microsoft YaHei, sans-serif" font-size="15" font-weight="bold" fill="#6d28d9">商业保险核保 · 对抗式自我批判</text>
+  <text x="66" y="474" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">500 个专家验证案例；让一个模型实例专职反驳主模型结论</text>
+
+  <text x="66" y="512" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">幻觉率</text>
+  <text x="140" y="512" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#b91c1c">11.3%</text>
+  <text x="212" y="512" font-family="Microsoft YaHei, sans-serif" font-size="15" fill="#94a3b8">→</text>
+  <text x="240" y="512" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#15803d">3.8%</text>
+
+  <text x="330" y="512" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">准确率</text>
+  <text x="400" y="512" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#6b7280">92%</text>
+  <text x="452" y="512" font-family="Microsoft YaHei, sans-serif" font-size="15" fill="#94a3b8">→</text>
+  <text x="480" y="512" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#15803d">96%</text>
+
+  <rect x="66" y="530" width="478" height="28" rx="6" fill="#ffffff" stroke="#6d28d9" stroke-width="1.1"/>
+  <text x="82" y="549" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6d28d9">对应航空业的「双人复核」：关键动作须两个独立主体确认</text>
+
+  <rect x="590" y="422" width="530" height="150" rx="10" fill="#ecfdf5" stroke="#15803d" stroke-width="1.4"/>
+  <text x="616" y="450" font-family="Microsoft YaHei, sans-serif" font-size="15" font-weight="bold" fill="#15803d">医疗问诊 · 只换解码策略</text>
+  <text x="616" y="474" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">同一模型、同一场景，仅调整采样方式；指标为建议中含已淘汰药物的比例</text>
+
+  <text x="616" y="512" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">Top-p 采样</text>
+  <text x="712" y="512" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#b91c1c">17.3%</text>
+
+  <text x="800" y="512" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">Beam Search</text>
+  <text x="912" y="512" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="bold" fill="#15803d">6.8%</text>
+  <text x="976" y="512" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#6b7280">相差 2.5 倍</text>
+
+  <rect x="616" y="530" width="478" height="28" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1.1"/>
+  <text x="632" y="549" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">成本最低的一项调整：高风险场景不要沿用默认推理参数</text>
+</svg>

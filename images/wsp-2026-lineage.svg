@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+  <rect width="1080" height="760" fill="#f7f8fa"/>
+  <rect width="1080" height="8" fill="#1d4ed8"/>
+  <text x="48" y="102" fill="#111827" font-size="62" font-weight="700">优化器可写的对象，一路下沉</text>
+  <text x="48" y="160" fill="#4b5563" font-size="34">从离散的文本，到连续的参数</text>
+  <path d="M48 192H1032" stroke="#d9e2ec" stroke-width="2"/>
+
+  <rect x="48" y="230" width="300" height="256" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="76" y="296" fill="#1d4ed8" font-size="44" font-weight="700">DSPy</text>
+  <path d="M76 316H320" stroke="#93c5fd" stroke-width="2"/>
+  <text x="76" y="376" fill="#4b5563" font-size="32">提示词与示例</text>
+  <text x="76" y="424" fill="#4b5563" font-size="32">声明结构</text>
+  <text x="76" y="466" fill="#4b5563" font-size="32">优化器找实现</text>
+
+  <rect x="390" y="230" width="300" height="256" rx="16" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+  <text x="418" y="296" fill="#0e7490" font-size="44" font-weight="700">GEPA</text>
+  <path d="M418 316H662" stroke="#67e8f9" stroke-width="2"/>
+  <text x="418" y="376" fill="#4b5563" font-size="32">读失败轨迹</text>
+  <text x="418" y="424" fill="#4b5563" font-size="32">反思后改指令</text>
+  <text x="418" y="466" fill="#4b5563" font-size="32">不只看标量</text>
+
+  <rect x="732" y="230" width="300" height="256" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="760" y="296" fill="#6d28d9" font-size="44" font-weight="700">WSP</text>
+  <path d="M760 316H1004" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="760" y="376" fill="#4b5563" font-size="32">权重数值</text>
+  <text x="760" y="424" fill="#4b5563" font-size="32">推理直接下刀</text>
+  <text x="760" y="466" fill="#4b5563" font-size="32">不经梯度</text>
+
+  <text x="363" y="372" text-anchor="middle" fill="#94a3b8" font-size="40" font-weight="700">&#8594;</text>
+  <text x="705" y="372" text-anchor="middle" fill="#94a3b8" font-size="40" font-weight="700">&#8594;</text>
+
+  <text x="48" y="540" fill="#111827" font-size="34" font-weight="700">同一个循环，换了三次对象</text>
+  <rect x="48" y="562" width="984" height="92" rx="14" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <g fill="#111827" font-size="36" font-weight="700" text-anchor="middle">
+    <text x="170" y="620">观察</text>
+    <text x="400" y="620">分析</text>
+    <text x="630" y="620">修改</text>
+    <text x="860" y="620">验证</text>
+  </g>
+  <g fill="#94a3b8" font-size="34" text-anchor="middle">
+    <text x="285" y="620">&#8594;</text>
+    <text x="515" y="620">&#8594;</text>
+    <text x="745" y="620">&#8594;</text>
+  </g>
+  <text x="48" y="724" fill="#4b5563" font-size="32">每下沉一层，描述「必须保留什么」就更难</text>
+</svg>

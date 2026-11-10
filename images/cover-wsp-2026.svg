@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="accent" x1="0" x2="1"><stop stop-color="#38bdf8"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#fb7185"/></linearGradient>
+  </defs>
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <g stroke="#4f46a5" stroke-opacity=".25" stroke-width="1"><path d="M0 70H900M0 140H900M0 210H900M0 280H900M0 350H900"/><path d="M70 0V383M140 0V383M210 0V383M280 0V383M350 0V383M420 0V383M490 0V383M560 0V383M630 0V383M700 0V383M770 0V383M840 0V383"/></g>
+  <rect width="300" height="4" fill="#38bdf8"/><rect x="300" width="300" height="4" fill="#a78bfa"/><rect x="600" width="300" height="4" fill="#fb7185"/>
+  <rect y="379" width="300" height="4" fill="#fb7185"/><rect x="300" y="379" width="300" height="4" fill="#a78bfa"/><rect x="600" y="379" width="300" height="4" fill="#38bdf8"/>
+
+  <rect x="48" y="35" width="248" height="30" rx="7" fill="#172554" stroke="#38bdf8"/>
+  <text x="62" y="56" fill="#bae6fd" font-size="13" font-weight="700">AI 技术观察 · 2026</text>
+  <text x="48" y="125" fill="#ffffff" font-size="31" font-weight="700">权重空间编程</text>
+  <text x="48" y="157" fill="url(#accent)" font-size="19" font-weight="700">从 DSPy 到连续参数空间</text>
+  <g font-size="13" font-weight="600">
+    <text x="50" y="205" fill="#7dd3fc">01  改 0.016% 权重 · 7.9 到 48.1</text>
+    <text x="50" y="231" fill="#c4b5fd">02  24 小时内被复现，也被拆解</text>
+    <text x="50" y="257" fill="#fda4af">03  同一周，另一条路线动架构</text>
+  </g>
+
+  <text x="600" y="88" fill="#94a3b8" font-size="13" font-weight="600">连续参数空间</text>
+  <g>
+    <rect x="600" y="104" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="630" y="104" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="660" y="104" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="690" y="104" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="720" y="104" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="750" y="104" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="600" y="134" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="630" y="134" width="26" height="26" rx="4" fill="#0c4a6e" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="660" y="134" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="690" y="134" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="720" y="134" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="750" y="134" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="600" y="164" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="630" y="164" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="660" y="164" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="690" y="164" width="26" height="26" rx="4" fill="#4c1d95" stroke="#a78bfa" stroke-width="2"/>
+    <rect x="720" y="164" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="750" y="164" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="600" y="194" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="630" y="194" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="660" y="194" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="690" y="194" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="720" y="194" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+    <rect x="750" y="194" width="26" height="26" rx="4" fill="#1e293b" stroke="#334155"/>
+  </g>
+  <path d="M786 170H818" stroke="#64748b" stroke-width="2"/>
+  <path d="M818 170l-10-7v14z" fill="#64748b"/>
+  <text x="828" y="160" fill="#7dd3fc" font-size="13" font-weight="700">READ</text>
+  <text x="828" y="182" fill="#c4b5fd" font-size="13" font-weight="700">WRITE</text>
+  <text x="600" y="252" fill="#e2e8f0" font-size="14" font-weight="600">131,072 / 0.8B = 0.016%</text>
+
+  <rect x="820" y="34" width="38" height="38" rx="19" fill="#1e1b4b" stroke="#a78bfa" stroke-width="2"/>
+  <text x="839" y="60" text-anchor="middle" fill="#ddd6fe" font-size="18" font-weight="700">26</text>
+
+  <path d="M48 302H852" stroke="#475569"/>
+  <g font-size="12" font-weight="600">
+    <rect x="48" y="314" width="72" height="25" rx="12" fill="none" stroke="#38bdf8" stroke-opacity=".7"/><text x="84" y="331" text-anchor="middle" fill="#bae6fd">DSPy</text>
+    <rect x="128" y="314" width="72" height="25" rx="12" fill="none" stroke="#a78bfa" stroke-opacity=".7"/><text x="164" y="331" text-anchor="middle" fill="#ddd6fe">GEPA</text>
+    <rect x="208" y="314" width="86" height="25" rx="12" fill="none" stroke="#fb7185" stroke-opacity=".7"/><text x="251" y="331" text-anchor="middle" fill="#fecdd3">无梯度</text>
+    <rect x="302" y="314" width="100" height="25" rx="12" fill="none" stroke="#34d399" stroke-opacity=".7"/><text x="352" y="331" text-anchor="middle" fill="#a7f3d0">可解释性</text>
+    <rect x="410" y="314" width="96" height="25" rx="12" fill="none" stroke="#fbbf24" stroke-opacity=".7"/><text x="458" y="331" text-anchor="middle" fill="#fde68a">24h 祛魅</text>
+  </g>
+  <path d="M48 358H852" stroke="#475569"/>
+  <text x="48" y="374" fill="#94a3b8" font-size="12">DSPY · GEPA · WEIGHT SPACE · REPLICABILITY</text>
+  <text x="852" y="374" text-anchor="end" fill="#94a3b8" font-size="12">AI 知识宇宙</text>
+</svg>

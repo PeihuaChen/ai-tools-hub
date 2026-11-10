@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+
+  <text x="60" y="52" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" fill="#111827">AI 内容标识的三层技术栈</text>
+  <text x="60" y="80" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="#4b5563">三层解决的不是同一个问题，也不能互相替代；每一层挡住的正是其他层挡不住的失效模式</text>
+
+  <!-- Layer 1 -->
+  <g transform="translate(60,108)">
+    <rect x="0" y="0" width="1080" height="146" rx="12" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.4"/>
+    <rect x="20" y="20" width="126" height="28" rx="6" fill="#ffffff" stroke="#b91c1c" stroke-width="1"/>
+    <text x="83" y="39" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#b91c1c" text-anchor="middle">第 1 层 · 显式标识</text>
+    <text x="166" y="40" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#111827">可见 / 可感知标识</text>
+    <text x="20" y="72" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">画面角标「AI 生成」· 音频起始提示音 · 聊天界面首屏告知 · 欧盟官方 AI/KI/IA 图标</text>
+    <rect x="20" y="88" width="330" height="42" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="34" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">✔ 优势：法律效力最强，成本近乎为零</text>
+    <text x="34" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">部署者对深伪的可见标注义务不可被机器标记免除</text>
+    <rect x="366" y="88" width="330" height="42" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="380" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">✘ 失效：裁剪、遮挡、二次剪辑即失</text>
+    <text x="380" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">短视频平台的常规裁边就足以去掉角标</text>
+    <rect x="712" y="88" width="348" height="42" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+    <text x="726" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">面向对象：人</text>
+    <text x="726" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">不可机器验证，不承载出处信息</text>
+  </g>
+
+  <path d="M600 262 L600 282" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4"/>
+
+  <!-- Layer 2 -->
+  <g transform="translate(60,286)">
+    <rect x="0" y="0" width="1080" height="146" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.4"/>
+    <rect x="20" y="20" width="126" height="28" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="83" y="39" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#1d4ed8" text-anchor="middle">第 2 层 · 隐式标识</text>
+    <text x="166" y="40" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#111827">元数据溯源（C2PA 内容来源与真实性联盟 / Content Credentials 内容凭证）</text>
+    <text x="20" y="72" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">JUMBF（元数据盒格式）容器 + CBOR（二进制 JSON）载荷 + COSE（CBOR 对象签名）· 内容哈希作硬绑定 · GB 45438 元数据字段</text>
+    <rect x="20" y="88" width="330" height="42" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="34" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">✔ 优势：密码学可验证，信息量最大</text>
+    <text x="34" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">能确认签发者、完整编辑链、是否被篡改</text>
+    <rect x="366" y="88" width="330" height="42" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="380" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">✘ 失效：截图、转码、格式转换即被剥离</text>
+    <text x="380" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">常在传输链第一跳就丢失</text>
+    <rect x="712" y="88" width="348" height="42" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="726" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#1d4ed8">面向对象：机器（可验签）</text>
+    <text x="726" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">相机固件已内置：索尼 / 尼康 / 佳能</text>
+  </g>
+
+  <path d="M600 440 L600 460" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4"/>
+
+  <!-- Layer 3 -->
+  <g transform="translate(60,464)">
+    <rect x="0" y="0" width="1080" height="146" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="1.4"/>
+    <rect x="20" y="20" width="126" height="28" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1"/>
+    <text x="83" y="39" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#15803d" text-anchor="middle">第 3 层 · 隐式标识</text>
+    <text x="166" y="40" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="bold" fill="#111827">隐形水印（SynthID / AudioSeal / Tree-Ring / Stable Signature）</text>
+    <text x="20" y="72" font-family="Microsoft YaHei, sans-serif" font-size="13" fill="#4b5563">信号埋进像素、音频采样点或 token 概率分布——不是元数据，而是内容本身的一部分</text>
+    <rect x="20" y="88" width="330" height="42" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="34" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">✔ 优势：抗截图、转码、压缩、裁剪</text>
+    <text x="34" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">元数据已丢失时唯一还活着的信号</text>
+    <rect x="366" y="88" width="330" height="42" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+    <text x="380" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">✘ 失效：重生成攻击、改写、微调洗除</text>
+    <text x="380" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">SemanticRegen 可保 SSIM 0.94 击穿主流方案</text>
+    <rect x="712" y="88" width="348" height="42" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1"/>
+    <text x="726" y="106" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#15803d">面向对象：持密钥的检测器</text>
+    <text x="726" y="123" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#6b7280">鲁棒但不可验签，无法向第三方举证</text>
+  </g>
+</svg>

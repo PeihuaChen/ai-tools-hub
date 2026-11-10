@@ -1,0 +1,95 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="0.5" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6ee7b7"/>
+      <stop offset="1" stop-color="#7dd3fc"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e2a5a"/>
+      <stop offset="1" stop-color="#2a2a55"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="48" x2="900" y2="48"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="120" y1="0" x2="120" y2="383"/>
+    <line x1="240" y1="0" x2="240" y2="383"/>
+    <line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="480" y1="0" x2="480" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="720" y1="0" x2="720" y2="383"/>
+  </g>
+
+  <!-- top/bottom bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <!-- label box -->
+  <rect x="48" y="40" width="238" height="34" rx="8" fill="none" stroke="#34d399" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="64" y="63" font-size="16" fill="#6ee7b7" font-weight="bold">AI 开发平台 · Agent 编排</text>
+
+  <!-- year badge -->
+  <circle cx="852" cy="57" r="22" fill="none" stroke="#818cf8" stroke-opacity="0.7" stroke-width="2"/>
+  <text x="852" y="64" font-size="20" fill="#a5b4fc" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- main title -->
+  <text x="48" y="150" font-size="40" fill="#ffffff" font-weight="bold">LangGraph 深度解析</text>
+  <!-- subtitle -->
+  <text x="48" y="190" font-size="19" fill="url(#sub)" font-weight="bold">从状态图原理到大厂生产落地</text>
+
+  <!-- highlights -->
+  <text x="48" y="232" font-size="14" fill="#34d399">● 状态 / 节点 / 边 / 检查点 五个核心零件</text>
+  <text x="48" y="258" font-size="14" fill="#38bdf8">● 1.0 GA 后成为 LangChain 生态运行时底座</text>
+  <text x="48" y="284" font-size="14" fill="#818cf8">● Klarna 8500 万用户 · 解决时长降 80%</text>
+
+  <!-- tags -->
+  <g font-size="12">
+    <rect x="48" y="304" width="72" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.5"/>
+    <text x="84" y="321" fill="#6ee7b7" text-anchor="middle">状态图</text>
+    <rect x="130" y="304" width="86" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="173" y="321" fill="#7dd3fc" text-anchor="middle">检查点持久化</text>
+    <rect x="226" y="304" width="72" height="26" rx="13" fill="none" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="262" y="321" fill="#a5b4fc" text-anchor="middle">人机协同</text>
+    <rect x="308" y="304" width="58" height="26" rx="13" fill="none" stroke="#34d399" stroke-opacity="0.5"/>
+    <text x="337" y="321" fill="#6ee7b7" text-anchor="middle">1.0 GA</text>
+  </g>
+
+  <!-- right side concept: cyclic state graph -->
+  <g>
+    <rect x="640" y="120" width="96" height="42" rx="10" fill="url(#node)" stroke="#34d399" stroke-opacity="0.5"/>
+    <text x="688" y="146" font-size="14" fill="#6ee7b7" text-anchor="middle">节点 A</text>
+    <rect x="760" y="188" width="96" height="42" rx="10" fill="url(#node)" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="808" y="214" font-size="14" fill="#7dd3fc" text-anchor="middle">节点 B</text>
+    <rect x="640" y="256" width="96" height="42" rx="10" fill="url(#node)" stroke="#818cf8" stroke-opacity="0.5"/>
+    <text x="688" y="282" font-size="14" fill="#a5b4fc" text-anchor="middle">节点 C</text>
+
+    <!-- edges forming a cycle -->
+    <line x1="736" y1="141" x2="760" y2="196" stroke="#38bdf8" stroke-opacity="0.6" stroke-width="2"/>
+    <line x1="760" y1="220" x2="736" y2="272" stroke="#818cf8" stroke-opacity="0.6" stroke-width="2"/>
+    <path d="M640 272 q-40 -55 0 -125" fill="none" stroke="#34d399" stroke-opacity="0.6" stroke-width="2" stroke-dasharray="6"/>
+    <text x="576" y="214" font-size="12" fill="#6ee7b7" text-anchor="middle">循环</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="48" y1="350" x2="852" y2="350" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="48" y="370" font-size="12" fill="#64748b">有状态 · 可循环 · 能中断的 Agent 运行时</text>
+  <text x="852" y="370" font-size="12" fill="#64748b" text-anchor="end">AI知识宇宙</text>
+</svg>

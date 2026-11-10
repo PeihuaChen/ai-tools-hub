@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="0.5" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="0.5" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#2a2a55" stroke-width="1" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect x="0" y="0" width="900" height="4" fill="url(#bar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#bar)"/>
+
+  <!-- 左上角标签框 -->
+  <rect x="48" y="40" width="260" height="36" rx="8" fill="#1d1d40" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="66" y="63" font-size="16" fill="#93c5fd" font-weight="bold">AI 行业观察 · 个人 Agent</text>
+
+  <!-- 右上角年份徽章 -->
+  <circle cx="838" cy="58" r="26" fill="#1d1d40" stroke="#fbbf24" stroke-width="2"/>
+  <text x="838" y="66" font-size="24" fill="#fbbf24" font-weight="bold" text-anchor="middle">26</text>
+
+  <!-- 主标题 -->
+  <text x="48" y="132" font-size="40" fill="#ffffff" font-weight="bold">个人 Agent 入口之争</text>
+  <!-- 副标题 -->
+  <text x="48" y="170" font-size="19" fill="url(#sub)" font-weight="bold">云端分身 · 系统接管 · 生态闭环</text>
+
+  <!-- 三行关键亮点 -->
+  <text x="48" y="212" font-size="14" fill="#60a5fa">▪ Dots / Muse / Grok Bot / Cue：给 Agent 一台云电脑</text>
+  <text x="48" y="238" font-size="14" fill="#fbbf24">▪ 豆包手机读屏，遭微信、淘宝、美团封禁</text>
+  <text x="48" y="264" font-size="14" fill="#4ade80">▪ 千问办事覆盖 20+ 领域，走自家生态闭环</text>
+
+  <!-- 标签栏 pill -->
+  <g font-size="13">
+    <rect x="48" y="292" width="56" height="28" rx="14" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="76" y="311" fill="#93c5fd" text-anchor="middle">Dots</text>
+    <rect x="114" y="292" width="60" height="28" rx="14" fill="none" stroke="#60a5fa" stroke-width="1.2"/>
+    <text x="144" y="311" fill="#93c5fd" text-anchor="middle">Muse</text>
+    <rect x="184" y="292" width="80" height="28" rx="14" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+    <text x="224" y="311" fill="#c4b5fd" text-anchor="middle">Grok Bot</text>
+    <rect x="274" y="292" width="90" height="28" rx="14" fill="none" stroke="#22d3ee" stroke-width="1.2"/>
+    <text x="319" y="311" fill="#67e8f9" text-anchor="middle">Manus Cue</text>
+    <rect x="374" y="292" width="56" height="28" rx="14" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="402" y="311" fill="#fcd34d" text-anchor="middle">豆包</text>
+    <rect x="440" y="292" width="56" height="28" rx="14" fill="none" stroke="#22c55e" stroke-width="1.2"/>
+    <text x="468" y="311" fill="#86efac" text-anchor="middle">千问</text>
+  </g>
+
+  <!-- 右侧概念示意：用户居中，三条路线 -->
+  <g stroke-width="1.8" fill="none">
+    <line x1="720" y1="210" x2="640" y2="130" stroke="#3b82f6"/>
+    <line x1="720" y1="210" x2="800" y2="130" stroke="#f59e0b"/>
+    <line x1="720" y1="210" x2="720" y2="300" stroke="#22c55e"/>
+  </g>
+  <circle cx="720" cy="210" r="26" fill="#1d1d40" stroke="#ffffff" stroke-width="2"/>
+  <text x="720" y="216" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">你</text>
+
+  <!-- 云端分身：云 -->
+  <circle cx="640" cy="118" r="26" fill="#12244a" stroke="#3b82f6" stroke-width="2"/>
+  <path d="M626 124 a7 7 0 0 1 3 -13 a9 9 0 0 1 17 -2 a7 7 0 0 1 2 15 z" fill="none" stroke="#93c5fd" stroke-width="1.8"/>
+  <!-- 系统接管：手机 -->
+  <circle cx="800" cy="118" r="26" fill="#3a2410" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="791" y="104" width="18" height="28" rx="3" fill="none" stroke="#fcd34d" stroke-width="1.8"/>
+  <line x1="797" y1="127" x2="803" y2="127" stroke="#fcd34d" stroke-width="1.8"/>
+  <!-- 生态闭环：环 -->
+  <circle cx="720" cy="312" r="26" fill="#0f3320" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="720" cy="312" r="11" fill="none" stroke="#86efac" stroke-width="2.2" stroke-dasharray="14 4"/>
+
+  <!-- 底部分隔线 + 章节提示 + 水印 -->
+  <line x1="48" y1="342" x2="600" y2="342" stroke="#2a2a55" stroke-width="1"/>
+  <text x="48" y="366" font-size="13" fill="#8892b0">三条路线 · 定价对比 · 三道墙 · 选择建议</text>
+  <text x="852" y="366" font-size="12" fill="#5a6382" text-anchor="end">AI 行业观察</text>
+</svg>
