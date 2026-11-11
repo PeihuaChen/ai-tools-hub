@@ -1,7 +1,24 @@
 {
-  "generated_at": "2026-11-10T19:27:25.891720",
-  "total": 210,
+  "total": 211,
   "posts": [
+    {
+      "slug": "ai-glasses-2026-boom-three-walls",
+      "title": "AI眼镜出货涨七成、退货率超三成：千万台狂欢下的三堵墙",
+      "date": "2026-11-11",
+      "category": "AI行业观察",
+      "description": "2026年上半年全球智能眼镜出货711.4万台、同比增长70.5%，中国二季度却首次负增长，行业退货率超三成、功能长期使用率不足6%。出货狂欢与留存困境的落差，指向硬件、隐私、需求三堵互为因果的墙。",
+      "keywords": [
+        "AI眼镜",
+        "智能硬件",
+        "消费电子",
+        "市场研究",
+        "端侧AI"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 10510,
+      "view_count": 0,
+      "created_at": "2026-11-11 04:51:27"
+    },
     {
       "slug": "dspy-to-weight-space-programming-2026",
       "title": "从 DSPy 到权重空间编程：推理驱动优化闯进连续参数空间",
@@ -18,8 +35,7 @@
       "read_time": "24 分钟",
       "word_count": 14385,
       "view_count": 0,
-      "created_at": "2026-11-10 11:27:19",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-11-10 11:27:19"
     },
     {
       "slug": "ai-account-manager-race-cc-switch-vs-cockpit-tools-2026",
@@ -37,8 +53,7 @@
       "read_time": "15 分钟",
       "word_count": 9397,
       "view_count": 0,
-      "created_at": "2026-11-06 10:50:38",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-11-06 10:50:38"
     },
     {
       "slug": "jetbrains-thinkrail-worktree-ide-pi-agent-2026",
@@ -56,8 +71,7 @@
       "read_time": "11 分钟",
       "word_count": 6517,
       "view_count": 0,
-      "created_at": "2026-11-05 11:51:34",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-11-05 11:51:34"
     },
     {
       "slug": "coolify-vs-dokploy-self-hosted-paas-comparison-2026",
@@ -78,8 +92,7 @@
       "read_time": "20 分钟",
       "word_count": 12766,
       "view_count": 0,
-      "created_at": "2026-11-04 11:54:54",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-11-04 11:54:54"
     },
     {
       "slug": "liquid-ai-lfm3-six-2b-models-2026",
@@ -98,8 +111,7 @@
       "read_time": "11 分钟",
       "word_count": 7437,
       "view_count": 0,
-      "created_at": "2026-11-04 03:21:13",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-11-04 03:21:13"
     },
     {
       "slug": "tokengate-learned-token-pruning-prefill-2026",
@@ -119,8 +131,7 @@
       "read_time": "16 分钟",
       "word_count": 9681,
       "view_count": 0,
-      "created_at": "2026-11-02 11:39:53",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-11-02 11:39:53"
     },
     {
       "slug": "octop-vs-workbuddy-tencent-agent-landscape-2026",
@@ -139,8 +150,7 @@
       "read_time": "17 分钟",
       "word_count": 10357,
       "view_count": 0,
-      "created_at": "2026-11-02 02:53:13",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-11-02 02:53:13"
     },
     {
       "slug": "strata-125b-moe-three-tier-inference-2026",
@@ -160,8 +170,7 @@
       "read_time": "16 分钟",
       "word_count": 11415,
       "view_count": 0,
-      "created_at": "2026-10-27 12:12:56",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-10-27 12:12:56"
     },
     {
       "slug": "attu-3-milvus-ai-workbench-guide-2026",
@@ -180,8 +189,7 @@
       "read_time": "17 分钟",
       "word_count": 11613,
       "view_count": 0,
-      "created_at": "2026-10-27 11:38:37",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-10-27 11:38:37"
     },
     {
       "slug": "deepseek-deepinfer-open-source-inference-engine-cost-2026",
@@ -202,8 +210,7 @@
       "read_time": "22 分钟",
       "word_count": 13888,
       "view_count": 0,
-      "created_at": "2026-10-26 11:47:24",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-10-26 11:47:24"
     },
     {
       "slug": "hybridagent-latent-reasoning-token-savings-2026",
@@ -223,8 +230,7 @@
       "read_time": "15 分钟",
       "word_count": 9562,
       "view_count": 0,
-      "created_at": "2026-10-23 11:38:10",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-10-23 11:38:10"
     },
     {
       "slug": "mistral-timestral-time-series-foundation-model-2026",
@@ -244,8 +250,7 @@
       "read_time": "19 分钟",
       "word_count": 11979,
       "view_count": 0,
-      "created_at": "2026-10-22 11:55:43",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-10-22 11:55:43"
     },
     {
       "slug": "fish-audio-drama-3-open-weight-tts-license-2026",
@@ -266,8 +271,7 @@
       "read_time": "25 分钟",
       "word_count": 16695,
       "view_count": 0,
-      "created_at": "2026-10-21 03:46:00",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-10-21 03:46:00"
     },
     {
       "slug": "long-context-recognition-five-layers-2026",
@@ -287,8 +291,7 @@
       "read_time": "29 分钟",
       "word_count": 17040,
       "view_count": 0,
-      "created_at": "2026-10-19 11:01:03",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-10-19 11:01:03"
     },
     {
       "slug": "open-source-reranker-model-selection-guide-2026",
@@ -309,8 +312,7 @@
       "read_time": "27 分钟",
       "word_count": 18358,
       "view_count": 0,
-      "created_at": "2026-10-19 11:01:05",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-10-19 11:01:05"
     },
     {
       "slug": "multimodal-embedding-model-selection-guide-2026",
@@ -331,8 +333,7 @@
       "read_time": "29 分钟",
       "word_count": 18785,
       "view_count": 0,
-      "created_at": "2026-10-13 11:45:49",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-10-13 11:45:49"
     },
     {
       "slug": "pplx-embed-v2-late-multimodal-retrieval-no-ocr-2026",
@@ -352,8 +353,7 @@
       "read_time": "23 分钟",
       "word_count": 15388,
       "view_count": 0,
-      "created_at": "2026-10-13 11:45:51",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-10-13 11:45:51"
     },
     {
       "slug": "openmuse-vs-meta-muse-alpha-boundaries-security-2026",
@@ -372,8 +372,7 @@
       "read_time": "19 分钟",
       "word_count": 12401,
       "view_count": 0,
-      "created_at": "2026-10-12 11:20:05",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-10-12 11:20:05"
     },
     {
       "slug": "agent-sandbox-policy-layer-openshell-kata-dual-2026",
@@ -391,8 +390,7 @@
       "read_time": "21 分钟",
       "word_count": 13366,
       "view_count": 0,
-      "created_at": "2026-10-12 04:48:13",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-10-12 04:48:13"
     },
     {
       "slug": "decision-models-clef-pplx-decider-jev-comparison-2026",
@@ -411,8 +409,7 @@
       "read_time": "26 分钟",
       "word_count": 16688,
       "view_count": 0,
-      "created_at": "2026-10-10 11:39:24",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-10-10 11:39:24"
     },
     {
       "slug": "free-llm-openrouter-opencode-anonymous-models-2026",
@@ -431,8 +428,7 @@
       "read_time": "17 分钟",
       "word_count": 10812,
       "view_count": 0,
-      "created_at": "2026-10-09 11:47:04",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-10-09 11:47:04"
     },
     {
       "slug": "ai-coding-agent-cost-gap-terminal-bench-4-2026",
@@ -450,8 +446,7 @@
       "read_time": "17 分钟",
       "word_count": 11360,
       "view_count": 0,
-      "created_at": "2026-10-08 10:54:04",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-10-08 10:54:04"
     },
     {
       "slug": "optogenetics-nobel-bci-next-stop-2026",
@@ -469,8 +464,7 @@
       "read_time": "13 分钟",
       "word_count": 7997,
       "view_count": 0,
-      "created_at": "2026-10-06 12:11:50",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-10-06 12:11:50"
     },
     {
       "slug": "open-source-goose-block-linux-foundation-aaif-2026",
@@ -489,8 +483,7 @@
       "read_time": "17 分钟",
       "word_count": 11099,
       "view_count": 0,
-      "created_at": "2026-10-06 12:11:50",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-10-06 12:11:50"
     },
     {
       "slug": "metagpt-atoms-deepwisdom-multi-agent-company-2026",
@@ -509,8 +502,7 @@
       "read_time": "14 分钟",
       "word_count": 11610,
       "view_count": 0,
-      "created_at": "2026-10-04 13:03:53",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-10-04 13:03:53"
     },
     {
       "slug": "cline-open-source-coding-agent-guide-2026",
@@ -530,8 +522,7 @@
       "read_time": "23 分钟",
       "word_count": 15635,
       "view_count": 0,
-      "created_at": "2026-10-04 13:03:49",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-10-04 13:03:49"
     },
     {
       "slug": "open-source-speaker-diarization-nemotron-3-2026",
@@ -551,8 +542,7 @@
       "read_time": "19 分钟",
       "word_count": 12257,
       "view_count": 0,
-      "created_at": "2026-10-02 11:59:17",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-10-02 11:59:17"
     },
     {
       "slug": "ai-fairness-bias-detection-tools-guide-2026",
@@ -571,8 +561,7 @@
       "read_time": "22 分钟",
       "word_count": 13305,
       "view_count": 0,
-      "created_at": "2026-10-02 11:55:09",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-10-02 11:55:09"
     },
     {
       "slug": "personal-agent-entry-war-three-routes-2026",
@@ -593,8 +582,7 @@
       "read_time": "15 分钟",
       "word_count": 15987,
       "view_count": 0,
-      "created_at": "2026-10-01 14:07:07",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-10-01 14:07:07"
     },
     {
       "slug": "crewai-multi-agent-framework-deep-dive-2026",
@@ -611,8 +599,7 @@
       "read_time": "12 分钟",
       "word_count": 7398,
       "view_count": 0,
-      "created_at": "2026-09-29 11:34:03",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-09-29 11:34:03"
     },
     {
       "slug": "alibaba-open-code-review-deterministic-agent-2026",
@@ -629,8 +616,7 @@
       "read_time": "12 分钟",
       "word_count": 7861,
       "view_count": 0,
-      "created_at": "2026-09-29 11:34:01",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-09-29 11:34:01"
     },
     {
       "slug": "ai-translation-evolution-nmt-llm-china-2026",
@@ -648,8 +634,7 @@
       "read_time": "25 分钟",
       "word_count": 15706,
       "view_count": 0,
-      "created_at": "2026-09-28 11:13:44",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-09-28 11:13:44"
     },
     {
       "slug": "per-user-model-vs-memory-2026",
@@ -667,8 +652,7 @@
       "read_time": "16 分钟",
       "word_count": 10395,
       "view_count": 0,
-      "created_at": "2026-09-27 12:38:53",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-09-27 12:38:53"
     },
     {
       "slug": "ai-pace-frontier-slowdown-global-game-2026",
@@ -686,8 +670,7 @@
       "read_time": "23 分钟",
       "word_count": 13942,
       "view_count": 0,
-      "created_at": "2026-09-26 12:39:14",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-09-26 12:39:14"
     },
     {
       "slug": "device-cloud-hybrid-llm-routing-deployment-2026",
@@ -705,8 +688,7 @@
       "read_time": "27 分钟",
       "word_count": 16265,
       "view_count": 0,
-      "created_at": "2026-09-24 11:28:40",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-09-24 11:28:40"
     },
     {
       "slug": "agent-production-governance-toolchain-2026",
@@ -725,8 +707,7 @@
       "read_time": "25 分钟",
       "word_count": 15295,
       "view_count": 0,
-      "created_at": "2026-09-24 11:28:37",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-09-24 11:28:37"
     },
     {
       "slug": "agent-commercialization-conversational-advertising-2026",
@@ -744,8 +725,7 @@
       "read_time": "13 分钟",
       "word_count": 7984,
       "view_count": 0,
-      "created_at": "2026-09-21 11:28:13",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-09-21 11:28:13"
     },
     {
       "slug": "decision-model-jev-vs-laya-open-source-2026",
@@ -763,8 +743,7 @@
       "read_time": "27 分钟",
       "word_count": 16843,
       "view_count": 0,
-      "created_at": "2026-09-21 11:28:16",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-09-21 11:28:16"
     },
     {
       "slug": "general-medical-ai-china-radar-lunggpt-2026",
@@ -782,8 +761,7 @@
       "read_time": "17 分钟",
       "word_count": 10164,
       "view_count": 0,
-      "created_at": "2026-09-20 11:18:21",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-09-20 11:18:21"
     },
     {
       "slug": "rsi-recursive-self-improvement-progress-2026",
@@ -801,8 +779,7 @@
       "read_time": "17 分钟",
       "word_count": 10029,
       "view_count": 0,
-      "created_at": "2026-09-18 11:45:52",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-09-18 11:45:52"
     },
     {
       "slug": "langflow-open-source-ai-agent-builder-guide-2026",
@@ -820,8 +797,7 @@
       "read_time": "13 分钟",
       "word_count": 8023,
       "view_count": 0,
-      "created_at": "2026-09-17 11:53:49",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-09-17 11:53:49"
     },
     {
       "slug": "langgraph-stateful-agent-orchestration-deep-dive-2026",
@@ -838,8 +814,7 @@
       "read_time": "13 分钟",
       "word_count": 8327,
       "view_count": 0,
-      "created_at": "2026-09-17 11:53:50",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-09-17 11:53:50"
     },
     {
       "slug": "fastgpt-enterprise-knowledge-base-guide-2026",
@@ -856,8 +831,7 @@
       "read_time": "14 分钟",
       "word_count": 8774,
       "view_count": 0,
-      "created_at": "2026-09-16 11:09:46",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-09-16 11:09:46"
     },
     {
       "slug": "ciftis-2026-china-service-trade-ai-shift",
@@ -878,8 +852,7 @@
       "read_time": "12 分钟",
       "word_count": 7120,
       "view_count": 0,
-      "created_at": "2026-09-15 01:32:32",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-09-15 01:32:32"
     },
     {
       "slug": "openmaic-tsinghua-multi-agent-interactive-classroom-2026",
@@ -897,8 +870,7 @@
       "read_time": "14 分钟",
       "word_count": 8560,
       "view_count": 0,
-      "created_at": "2026-09-13 04:09:37",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-09-13 04:09:37"
     },
     {
       "slug": "vla-models-architecture-training-applications-2026",
@@ -921,8 +893,7 @@
       "read_time": "17 分钟",
       "word_count": 10708,
       "view_count": 0,
-      "created_at": "2026-09-13 12:51:45",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-09-13 12:51:45"
     },
     {
       "slug": "cua-lite-computer-use-agent-open-platform-2026",
@@ -940,8 +911,7 @@
       "read_time": "27 分钟",
       "word_count": 16758,
       "view_count": 0,
-      "created_at": "2026-09-09 11:34:29",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-09-09 11:34:29"
     },
     {
       "slug": "agentic-payments-china-vs-us-two-paths-2026",
@@ -963,8 +933,7 @@
       "read_time": "35 分钟",
       "word_count": 22101,
       "view_count": 0,
-      "created_at": "2026-09-09 01:26:18",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-09-09 01:26:18"
     },
     {
       "slug": "ai-toys-2026-china-vs-us-market-and-competition",
@@ -986,8 +955,7 @@
       "read_time": "21 分钟",
       "word_count": 13557,
       "view_count": 0,
-      "created_at": "2026-06-09 02:29:28",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-06-09 02:29:28"
     },
     {
       "slug": "do-you-need-graphrag-microsoft-principles-cost-selection-2026",
@@ -1005,8 +973,7 @@
       "read_time": "19 分钟",
       "word_count": 12226,
       "view_count": 0,
-      "created_at": "2026-09-07 11:48:49",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-09-07 11:48:49"
     },
     {
       "slug": "firecrawl-web-context-api-rag-dify-mcp-2026",
@@ -1024,8 +991,7 @@
       "read_time": "17 分钟",
       "word_count": 10488,
       "view_count": 0,
-      "created_at": "2026-09-04 11:24:20",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-09-04 11:24:20"
     },
     {
       "slug": "k2-horizon-fully-open-source-fleet-mbzuai-ifm-2026",
@@ -1045,8 +1011,7 @@
       "read_time": "19 分钟",
       "word_count": 11408,
       "view_count": 0,
-      "created_at": "2026-09-05 02:27:39",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-09-05 02:27:39"
     },
     {
       "slug": "llm-knowledge-graph-graphrag-graph-native-agent-2026",
@@ -1064,8 +1029,7 @@
       "read_time": "25 分钟",
       "word_count": 15403,
       "view_count": 0,
-      "created_at": "2026-09-03 11:24:53",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-09-03 11:24:53"
     },
     {
       "slug": "ai-chip-design-democratization-redwood-2026",
@@ -1083,8 +1047,7 @@
       "read_time": "19 分钟",
       "word_count": 11626,
       "view_count": 0,
-      "created_at": "2026-09-02 11:23:26",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-09-02 11:23:26"
     },
     {
       "slug": "ai-agent-temporal-awareness-time-perception-guide-2026",
@@ -1102,8 +1065,7 @@
       "read_time": "23 分钟",
       "word_count": 13816,
       "view_count": 0,
-      "created_at": "2026-09-01 14:15:21",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-09-01 14:15:21"
     },
     {
       "slug": "rag-data-leakage-four-chains-defense-2026",
@@ -1122,8 +1084,7 @@
       "read_time": "53 分钟",
       "word_count": 32566,
       "view_count": 0,
-      "created_at": "2026-08-31 11:47:39",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-08-31 11:47:39"
     },
     {
       "slug": "ocr-selection-guide-open-source-vs-commercial-2026",
@@ -1146,8 +1107,7 @@
       "read_time": "41 分钟",
       "word_count": 25975,
       "view_count": 0,
-      "created_at": "2026-08-25 11:37:52",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-08-25 11:37:52"
     },
     {
       "slug": "ai-hallucination-liability-chain-2026",
@@ -1166,8 +1126,7 @@
       "read_time": "55 分钟",
       "word_count": 33079,
       "view_count": 0,
-      "created_at": "2026-08-25 11:37:47",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-08-25 11:37:47"
     },
     {
       "slug": "test-time-compute-self-improving-llm-2026",
@@ -1190,8 +1149,7 @@
       "read_time": "45 分钟",
       "word_count": 27185,
       "view_count": 0,
-      "created_at": "2026-08-24 11:44:11",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-08-24 11:44:11"
     },
     {
       "slug": "awesome-llm-apps-complete-guide-2026",
@@ -1209,8 +1167,7 @@
       "read_time": "18 分钟",
       "word_count": 13181,
       "view_count": 0,
-      "created_at": "2026-08-23 12:42:46",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-08-23 12:42:46"
     },
     {
       "slug": "ai-agent-memory-systems-open-source-guide-2026",
@@ -1229,8 +1186,7 @@
       "read_time": "24 分钟",
       "word_count": 14070,
       "view_count": 0,
-      "created_at": "2026-08-23 02:22:58",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-08-23 02:22:58"
     },
     {
       "slug": "slm-ecosystem-2026-healthcare-agriculture-electronics",
@@ -1250,8 +1206,7 @@
       "read_time": "29 分钟",
       "word_count": 16582,
       "view_count": 0,
-      "created_at": "2026-08-21 11:49:17",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-08-21 11:49:17"
     },
     {
       "slug": "llm-attention-mechanisms-comparison-guide-2026",
@@ -1271,8 +1226,7 @@
       "read_time": "33 分钟",
       "word_count": 19706,
       "view_count": 0,
-      "created_at": "2026-08-20 11:29:40",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-08-20 11:29:40"
     },
     {
       "slug": "zed-editor-ai-coding-review-2026",
@@ -1291,8 +1245,7 @@
       "read_time": "12 分钟",
       "word_count": 7479,
       "view_count": 0,
-      "created_at": "2026-08-19 10:59:09",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-08-19 10:59:09"
     },
     {
       "slug": "llm-evaluation-guide-mmlu-swe-bench-arena-2026",
@@ -1311,8 +1264,7 @@
       "read_time": "15 分钟",
       "word_count": 9716,
       "view_count": 0,
-      "created_at": "2026-08-18 11:04:02",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-08-18 11:04:02"
     },
     {
       "slug": "deepseek-harness-agent-runtime-open-source-2026",
@@ -1331,8 +1283,7 @@
       "read_time": "9 分钟",
       "word_count": 5465,
       "view_count": 0,
-      "created_at": "2026-08-16 12:54:33",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-08-16 12:54:33"
     },
     {
       "slug": "mini-swe-agent-bash-first-react-evaluation-harness-2026",
@@ -1351,8 +1302,7 @@
       "read_time": "14 分钟",
       "word_count": 8528,
       "view_count": 0,
-      "created_at": "2026-08-16 12:54:35",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-08-16 12:54:35"
     },
     {
       "slug": "ai-supply-chain-security-guide-data-model-dependency-cicd-2026",
@@ -1371,8 +1321,7 @@
       "read_time": "12 分钟",
       "word_count": 7320,
       "view_count": 0,
-      "created_at": "2026-08-15 13:03:23",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-08-15 13:03:23"
     },
     {
       "slug": "openhands-deep-dive-opendevin-to-80k-stars-2026",
@@ -1392,8 +1341,7 @@
       "read_time": "19 分钟",
       "word_count": 11182,
       "view_count": 0,
-      "created_at": "2026-08-14 10:54:19",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-08-14 10:54:19"
     },
     {
       "slug": "ohmypi-fork-ide-in-terminal-2026",
@@ -1413,8 +1361,7 @@
       "read_time": "17 分钟",
       "word_count": 10057,
       "view_count": 0,
-      "created_at": "2026-08-13 10:42:12",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-08-13 10:42:12"
     },
     {
       "slug": "buzz-block-nostr-agent-workspace-2026",
@@ -1434,8 +1381,7 @@
       "read_time": "16 分钟",
       "word_count": 10979,
       "view_count": 0,
-      "created_at": "2026-08-12 12:41:28",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-08-12 12:41:28"
     },
     {
       "slug": "meta-muse-glimmer-30b-open-weights-distillation-war-2026",
@@ -1455,8 +1401,7 @@
       "read_time": "32 分钟",
       "word_count": 19777,
       "view_count": 0,
-      "created_at": "2026-08-11 10:50:37",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-08-11 10:50:37"
     },
     {
       "slug": "ai-content-watermarking-engineering-guide-2026",
@@ -1474,8 +1419,7 @@
       "read_time": "39 分钟",
       "word_count": 24189,
       "view_count": 0,
-      "created_at": "2026-08-10 03:12:32",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-08-10 03:12:32"
     },
     {
       "slug": "full-duplex-voice-model-open-vs-closed-2026",
@@ -1495,8 +1439,7 @@
       "read_time": "24 分钟",
       "word_count": 14357,
       "view_count": 0,
-      "created_at": "2026-08-10 10:55:23",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-08-10 10:55:23"
     },
     {
       "slug": "self-hosted-voice-agent-huggingface-speech-to-speech-guide-2026",
@@ -1515,8 +1458,7 @@
       "read_time": "32 分钟",
       "word_count": 21003,
       "view_count": 0,
-      "created_at": "2026-08-08 13:06:45",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-08-08 13:06:45"
     },
     {
       "slug": "specialized-small-models-vs-llm-coexistence-2026",
@@ -1535,8 +1477,7 @@
       "read_time": "17 分钟",
       "word_count": 11420,
       "view_count": 0,
-      "created_at": "2026-08-07 10:50:30",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-08-07 10:50:30"
     },
     {
       "slug": "bitchat-decentralized-mesh-chat-guide-2026",
@@ -1555,8 +1496,7 @@
       "read_time": "20 分钟",
       "word_count": 13967,
       "view_count": 0,
-      "created_at": "2026-08-06 11:22:01",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-08-06 11:22:01"
     },
     {
       "slug": "airllm-layer-wise-streaming-low-vram-guide-2026",
@@ -1574,8 +1514,7 @@
       "read_time": "15 分钟",
       "word_count": 9616,
       "view_count": 0,
-      "created_at": "2026-08-05 11:12:28",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-08-05 11:12:28"
     },
     {
       "slug": "microsoft-orchard-agentic-modeling-framework-2026",
@@ -1593,8 +1532,7 @@
       "read_time": "21 分钟",
       "word_count": 12878,
       "view_count": 0,
-      "created_at": "2026-08-04 11:15:43",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-08-04 11:15:43"
     },
     {
       "slug": "bm25-rag-hybrid-search-scaling-2026",
@@ -1612,8 +1550,7 @@
       "read_time": "23 分钟",
       "word_count": 14409,
       "view_count": 0,
-      "created_at": "2026-08-03 11:28:47",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-08-03 11:28:47"
     },
     {
       "slug": "pii-masking-presidio-litellm-guide-2026",
@@ -1632,8 +1569,7 @@
       "read_time": "30 分钟",
       "word_count": 19283,
       "view_count": 0,
-      "created_at": "2026-08-01 12:33:51",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-08-01 12:33:51"
     },
     {
       "slug": "generative-ai-design-tools-landscape-2026",
@@ -1651,8 +1587,7 @@
       "read_time": "22 分钟",
       "word_count": 12018,
       "view_count": 0,
-      "created_at": "2026-08-01 12:33:49",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-08-01 12:33:49"
     },
     {
       "slug": "tts-commercial-open-source-comparison-guide-2026",
@@ -1672,8 +1607,7 @@
       "read_time": "22 分钟",
       "word_count": 16821,
       "view_count": 0,
-      "created_at": "2026-07-31 10:58:03",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-07-31 10:58:03"
     },
     {
       "slug": "commercial-asr-comparison-chinese-english-dialect-2026",
@@ -1691,8 +1625,7 @@
       "read_time": "24 分钟",
       "word_count": 16709,
       "view_count": 0,
-      "created_at": "2026-07-30 11:23:36",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-07-30 11:23:36"
     },
     {
       "slug": "free-open-source-design-tools-comparison-2026",
@@ -1711,8 +1644,7 @@
       "read_time": "25 分钟",
       "word_count": 17916,
       "view_count": 0,
-      "created_at": "2026-07-29 10:52:34",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-07-29 10:52:34"
     },
     {
       "slug": "graphify-vs-codegraph-knowledge-graph-fork-2026",
@@ -1731,8 +1663,7 @@
       "read_time": "56 分钟",
       "word_count": 37618,
       "view_count": 0,
-      "created_at": "2026-07-28 09:39:50",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-07-28 09:39:50"
     },
     {
       "slug": "openmontage-open-source-agentic-video-production-guide-2026",
@@ -1751,8 +1682,7 @@
       "read_time": "18 分钟",
       "word_count": 13151,
       "view_count": 0,
-      "created_at": "2026-07-27 11:40:31",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-07-27 11:40:31"
     },
     {
       "slug": "loop-engineering-hottest-ai-concept-2026",
@@ -1772,8 +1702,7 @@
       "read_time": "19 分钟",
       "word_count": 13271,
       "view_count": 0,
-      "created_at": "2026-07-26 13:09:12",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-07-26 13:09:12"
     },
     {
       "slug": "llm-guardrails-open-source-production-guide-2026",
@@ -1792,8 +1721,7 @@
       "read_time": "25 分钟",
       "word_count": 18639,
       "view_count": 0,
-      "created_at": "2026-07-25 13:06:18",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-07-25 13:06:18"
     },
     {
       "slug": "multica-managed-agents-open-source-platform-2026",
@@ -1812,8 +1740,7 @@
       "read_time": "17 分钟",
       "word_count": 11329,
       "view_count": 0,
-      "created_at": "2026-07-24 11:25:39",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-07-24 11:25:39"
     },
     {
       "slug": "world-model-2026-landscape-technical-routes",
@@ -1833,8 +1760,7 @@
       "read_time": "17 分钟",
       "word_count": 11412,
       "view_count": 0,
-      "created_at": "2026-07-23 11:34:34",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-07-23 11:34:34"
     },
     {
       "slug": "open-source-vector-database-comparison-2026",
@@ -1852,8 +1778,7 @@
       "read_time": "18 分钟",
       "word_count": 10820,
       "view_count": 0,
-      "created_at": "2026-07-22 11:09:42",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-07-22 11:09:42"
     },
     {
       "slug": "vla-vs-ros-humanoid-robot-operating-system-2026",
@@ -1875,8 +1800,7 @@
       "read_time": "18 分钟",
       "word_count": 12094,
       "view_count": 0,
-      "created_at": "2026-07-21 11:00:53",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-07-21 11:00:53"
     },
     {
       "slug": "mineru-document-parsing-agent-rag-vlm-2026",
@@ -1898,8 +1822,7 @@
       "read_time": "21 分钟",
       "word_count": 13596,
       "view_count": 0,
-      "created_at": "2026-07-20 11:33:30",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-07-20 11:33:30"
     },
     {
       "slug": "random-forest-to-mixture-of-agents-ensemble-evolution-2026",
@@ -1920,8 +1843,7 @@
       "read_time": "18 分钟",
       "word_count": 11539,
       "view_count": 0,
-      "created_at": "2026-07-19 11:20:41",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-07-19 11:20:41"
     },
     {
       "slug": "1-bit-llm-quantization-guide-model-selection-2026",
@@ -1942,8 +1864,7 @@
       "read_time": "32 分钟",
       "word_count": 19523,
       "view_count": 0,
-      "created_at": "2026-07-18 13:21:28",
-      "updated_at": "2026-11-10 11:27:14"
+      "created_at": "2026-07-18 13:21:28"
     },
     {
       "slug": "waic-2026-ai-agent-hardware-software-ecosystem",
@@ -1963,8 +1884,7 @@
       "read_time": "15 分钟",
       "word_count": 9901,
       "view_count": 0,
-      "created_at": "2026-07-17 11:43:15",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-07-17 11:43:15"
     },
     {
       "slug": "ai-native-os-step-aos-harmonyos-gemini-2026",
@@ -1984,8 +1904,7 @@
       "read_time": "17 分钟",
       "word_count": 11730,
       "view_count": 0,
-      "created_at": "2026-07-16 11:35:15",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-07-16 11:35:15"
     },
     {
       "slug": "deepfake-attack-defense-enterprise-guide-2026",
@@ -2004,8 +1923,7 @@
       "read_time": "14 分钟",
       "word_count": 9820,
       "view_count": 0,
-      "created_at": "2026-07-15 10:59:27",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-07-15 10:59:27"
     },
     {
       "slug": "agent-reach-cli-tools-ai-agent-internet-access-guide-2026",
@@ -2024,8 +1942,7 @@
       "read_time": "22 分钟",
       "word_count": 16409,
       "view_count": 0,
-      "created_at": "2026-07-14 11:12:49",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-07-14 11:12:49"
     },
     {
       "slug": "cli-anything-agent-native-software-tool-market-2026",
@@ -2044,8 +1961,7 @@
       "read_time": "21 分钟",
       "word_count": 14684,
       "view_count": 0,
-      "created_at": "2026-07-13 10:51:18",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-07-13 10:51:18"
     },
     {
       "slug": "llm-doom-loop-fix-antidoom-comparison-2026",
@@ -2064,8 +1980,7 @@
       "read_time": "18 分钟",
       "word_count": 12419,
       "view_count": 0,
-      "created_at": "2026-07-12 11:25:46",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-07-12 11:25:46"
     },
     {
       "slug": "llm-finetuning-framework-comparison-2026",
@@ -2083,8 +1998,7 @@
       "read_time": "18 分钟",
       "word_count": 11368,
       "view_count": 0,
-      "created_at": "2026-07-11 12:10:21",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-07-11 12:10:21"
     },
     {
       "slug": "multi-domain-finetuning-seesaw-effect-solutions-2026",
@@ -2104,8 +2018,7 @@
       "read_time": "17 分钟",
       "word_count": 11310,
       "view_count": 0,
-      "created_at": "2026-07-10 11:02:48",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-07-10 11:02:48"
     },
     {
       "slug": "ai-search-geo-brand-citation-roi-2026",
@@ -2123,8 +2036,7 @@
       "read_time": "15 分钟",
       "word_count": 8890,
       "view_count": 0,
-      "created_at": "2026-07-09 11:24:00",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-07-09 11:24:00"
     },
     {
       "slug": "code-sandbox-ai-agent-guide-2026",
@@ -2142,8 +2054,7 @@
       "read_time": "25 分钟",
       "word_count": 15449,
       "view_count": 0,
-      "created_at": "2026-07-08 11:30:30",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-07-08 11:30:30"
     },
     {
       "slug": "browser-mcp-year-safari-chrome-webmcp-2026",
@@ -2161,8 +2072,7 @@
       "read_time": "19 分钟",
       "word_count": 11492,
       "view_count": 0,
-      "created_at": "2026-07-07 11:39:00",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-07-07 11:39:00"
     },
     {
       "slug": "scaling-law-bug-kaplan-chinchilla-truth-2026",
@@ -2180,8 +2090,7 @@
       "read_time": "17 分钟",
       "word_count": 11156,
       "view_count": 0,
-      "created_at": "2026-07-06 11:12:35",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-07-06 11:12:35"
     },
     {
       "slug": "agency-agents-open-source-ai-specialists-review-2026",
@@ -2202,8 +2111,7 @@
       "read_time": "15 分钟",
       "word_count": 9681,
       "view_count": 0,
-      "created_at": "2026-07-05 12:55:41",
-      "updated_at": "2026-11-10 11:27:14"
+      "created_at": "2026-07-05 12:55:41"
     },
     {
       "slug": "forward-deployed-engineer-microsoft-aws-ai-delivery-2026",
@@ -2224,8 +2132,7 @@
       "read_time": "18 分钟",
       "word_count": 11253,
       "view_count": 0,
-      "created_at": "2026-07-04 12:41:47",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-07-04 12:41:47"
     },
     {
       "slug": "browser-gui-agent-page-agent-browser-use-stagehand-skyvern-2026",
@@ -2245,8 +2152,7 @@
       "read_time": "17 分钟",
       "word_count": 11437,
       "view_count": 0,
-      "created_at": "2026-07-03 11:12:14",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-07-03 11:12:14"
     },
     {
       "slug": "dspark-vs-dflash-speculative-decoding-inference-2026",
@@ -2266,8 +2172,7 @@
       "read_time": "14 分钟",
       "word_count": 9109,
       "view_count": 0,
-      "created_at": "2026-07-02 11:38:23",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-07-02 11:38:23"
     },
     {
       "slug": "ai-coding-agents-in-your-pocket-cursor-trae-openclaw-2026",
@@ -2288,8 +2193,7 @@
       "read_time": "14 分钟",
       "word_count": 9052,
       "view_count": 0,
-      "created_at": "2026-07-02 01:20:37",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-07-02 01:20:37"
     },
     {
       "slug": "qwen-agentworld-language-world-model-2026",
@@ -2310,8 +2214,7 @@
       "read_time": "14 分钟",
       "word_count": 13999,
       "view_count": 0,
-      "created_at": "2026-06-30 11:16:53",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-06-30 11:16:53"
     },
     {
       "slug": "joyai-vl-interaction-proactive-vision-language-2026",
@@ -2332,8 +2235,7 @@
       "read_time": "12 分钟",
       "word_count": 7029,
       "view_count": 0,
-      "created_at": "2026-06-29 11:08:09",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-06-29 11:08:09"
     },
     {
       "slug": "moe-post-training-acceleration-nemo-automodel-2026",
@@ -2354,8 +2256,7 @@
       "read_time": "13 分钟",
       "word_count": 9997,
       "view_count": 0,
-      "created_at": "2026-06-28 11:58:35",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-06-28 11:58:35"
     },
     {
       "slug": "alibaba-qwen-open-source-monetization-vs-aws-2026",
@@ -2376,8 +2277,7 @@
       "read_time": "13 分钟",
       "word_count": 7984,
       "view_count": 0,
-      "created_at": "2026-06-27 14:25:50",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-06-27 14:25:50"
     },
     {
       "slug": "ornith-1-0-self-scaffolding-coding-model-benchmaxxing-2026",
@@ -2398,8 +2298,7 @@
       "read_time": "13 分钟",
       "word_count": 13643,
       "view_count": 0,
-      "created_at": "2026-06-26 03:41:51",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-06-26 03:41:51"
     },
     {
       "slug": "oak-vcs-ai-agent-git-alternative-2026",
@@ -2422,8 +2321,7 @@
       "read_time": "16 分钟",
       "word_count": 10892,
       "view_count": 0,
-      "created_at": "2026-06-25 11:09:51",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-06-25 11:09:51"
     },
     {
       "slug": "ibm-cuga-enterprise-generalist-agent-deep-dive-2026",
@@ -2446,8 +2344,7 @@
       "read_time": "16 分钟",
       "word_count": 11664,
       "view_count": 0,
-      "created_at": "2026-06-24 11:30:04",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-06-24 11:30:04"
     },
     {
       "slug": "multi-agent-collaboration-framework-guide-2026",
@@ -2470,8 +2367,7 @@
       "read_time": "20 分钟",
       "word_count": 14181,
       "view_count": 0,
-      "created_at": "2026-06-23 11:15:11",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-06-23 11:15:11"
     },
     {
       "slug": "scaling-law-bottleneck-to-asi-breakthrough-paths-2026",
@@ -2494,8 +2390,7 @@
       "read_time": "18 分钟",
       "word_count": 10508,
       "view_count": 0,
-      "created_at": "2026-06-22 05:43:46",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-06-22 05:43:46"
     },
     {
       "slug": "ai-talent-war-john-jumper-anthropic-2026",
@@ -2515,8 +2410,7 @@
       "read_time": "15 分钟",
       "word_count": 10033,
       "view_count": 0,
-      "created_at": "2026-06-21 12:12:19",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-06-21 12:12:19"
     },
     {
       "slug": "harness-engineering-invisible-half-of-ai-agents-2026",
@@ -2534,8 +2428,7 @@
       "read_time": "16 分钟",
       "word_count": 14959,
       "view_count": 0,
-      "created_at": "2026-06-20 11:56:21",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-06-20 11:56:21"
     },
     {
       "slug": "ai-distillation-war-china-models-2026",
@@ -2558,8 +2451,7 @@
       "read_time": "15 分钟",
       "word_count": 9503,
       "view_count": 0,
-      "created_at": "2026-06-19 05:40:33",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-06-19 05:40:33"
     },
     {
       "slug": "anti-vendor-lockin-ai-workflow-2026",
@@ -2582,8 +2474,7 @@
       "read_time": "14 分钟",
       "word_count": 12751,
       "view_count": 0,
-      "created_at": "2026-06-17 11:34:44",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-06-17 11:34:44"
     },
     {
       "slug": "litellm-ai-gateway-deep-dive-2026",
@@ -2606,8 +2497,7 @@
       "read_time": "15 分钟",
       "word_count": 11985,
       "view_count": 0,
-      "created_at": "2026-06-17 13:36:26",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-06-17 13:36:26"
     },
     {
       "slug": "ai-world-cup-2026-football-intelligence",
@@ -2626,8 +2516,7 @@
       "read_time": "15 分钟",
       "word_count": 11533,
       "view_count": 0,
-      "created_at": "2026-06-17 01:21:38",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-06-17 01:21:38"
     },
     {
       "slug": "ai-smart-transportation-seven-applications-2026",
@@ -2650,8 +2539,7 @@
       "read_time": "16 分钟",
       "word_count": 11652,
       "view_count": 0,
-      "created_at": "2026-06-15 09:02:12",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-06-15 09:02:12"
     },
     {
       "slug": "llm-inference-framework-comparison-2026",
@@ -2674,8 +2562,7 @@
       "read_time": "15 分钟",
       "word_count": 12558,
       "view_count": 0,
-      "created_at": "2026-06-14 04:00:31",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-06-14 04:00:31"
     },
     {
       "slug": "claude-fable-5-ban-china-ai-opportunity-2026",
@@ -2698,8 +2585,7 @@
       "read_time": "14 分钟",
       "word_count": 10301,
       "view_count": 0,
-      "created_at": "2026-06-13 12:17:48",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-06-13 12:17:48"
     },
     {
       "slug": "physical-ai-world-model-humanoid-robot-2026",
@@ -2722,8 +2608,7 @@
       "read_time": "15 分钟",
       "word_count": 13876,
       "view_count": 0,
-      "created_at": "2026-06-12 02:39:39",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-06-12 02:39:39"
     },
     {
       "slug": "ai-customer-service-agent-landscape-2026",
@@ -2746,8 +2631,7 @@
       "read_time": "14 分钟",
       "word_count": 10151,
       "view_count": 0,
-      "created_at": "2026-06-11 06:12:57",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-06-11 06:12:57"
     },
     {
       "slug": "chatgpt-chat-is-dead-llm-to-agent-paradigm-2026",
@@ -2769,8 +2653,7 @@
       "read_time": "14 分钟",
       "word_count": 9277,
       "view_count": 0,
-      "created_at": "2026-06-09 11:38:18",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-06-09 11:38:18"
     },
     {
       "slug": "xinference-deployment-practice-guide-2026",
@@ -2792,8 +2675,7 @@
       "read_time": "13 分钟",
       "word_count": 9747,
       "view_count": 0,
-      "created_at": "2026-06-10 05:28:09",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-06-10 05:28:09"
     },
     {
       "slug": "humanoid-robot-2026-china-vs-us-investment",
@@ -2813,8 +2695,7 @@
       "read_time": "15 分钟",
       "word_count": 11489,
       "view_count": 0,
-      "created_at": "2026-06-08 06:40:45",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-06-08 06:40:45"
     },
     {
       "slug": "long-context-llm-12m-tokens-workflow-guide-2026",
@@ -2835,8 +2716,7 @@
       "read_time": "14 分钟",
       "word_count": 11273,
       "view_count": 0,
-      "created_at": "2026-06-08 04:46:58",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-06-08 04:46:58"
     },
     {
       "slug": "ai-era-college-major-guide-2026-gaokao",
@@ -2856,8 +2736,7 @@
       "read_time": "12 分钟",
       "word_count": 7394,
       "view_count": 0,
-      "created_at": "2026-06-06 13:08:54",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-06-06 13:08:54"
     },
     {
       "slug": "on-device-llm-2026-gemma4-minicpm-qwen",
@@ -2878,8 +2757,7 @@
       "read_time": "16 分钟",
       "word_count": 14250,
       "view_count": 0,
-      "created_at": "2026-06-05 10:05:25",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-06-05 10:05:25"
     },
     {
       "slug": "langfuse-llm-agent-observability-guide-2026",
@@ -2899,8 +2777,7 @@
       "read_time": "14 分钟",
       "word_count": 11107,
       "view_count": 0,
-      "created_at": "2026-06-04 11:45:13",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-06-04 11:45:13"
     },
     {
       "slug": "vibe-coding-hidden-costs-security-risks-2026",
@@ -2919,8 +2796,7 @@
       "read_time": "14 分钟",
       "word_count": 9429,
       "view_count": 0,
-      "created_at": "2026-06-03 08:28:42",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-06-03 08:28:42"
     },
     {
       "slug": "opencode-free-ai-coding-agent-guide-2026",
@@ -2940,8 +2816,7 @@
       "read_time": "12 分钟",
       "word_count": 11083,
       "view_count": 0,
-      "created_at": "2026-06-02 05:36:40",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-06-02 05:36:40"
     },
     {
       "slug": "agent-governance-observability-hidden-costs",
@@ -2960,8 +2835,7 @@
       "read_time": "15 分钟",
       "word_count": 10762,
       "view_count": 0,
-      "created_at": "2026-06-01 11:31:02",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-06-01 11:31:02"
     },
     {
       "slug": "enterprise-ai-agent-deployment-guide-2026",
@@ -2981,8 +2855,7 @@
       "read_time": "15 分钟",
       "word_count": 9240,
       "view_count": 0,
-      "created_at": "2026-05-31 04:07:43",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-31 04:07:43"
     },
     {
       "slug": "open-source-llm-comparison-2026",
@@ -3004,8 +2877,7 @@
       "read_time": "12 分钟",
       "word_count": 15554,
       "view_count": 0,
-      "created_at": "2026-05-31 02:22:07",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-05-31 02:22:07"
     },
     {
       "slug": "codegraph-ai-coding-knowledge-graph-review",
@@ -3024,8 +2896,7 @@
       "read_time": "13分钟",
       "word_count": 13150,
       "view_count": 0,
-      "created_at": "2026-05-28 14:42:37",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-28 14:42:37"
     },
     {
       "slug": "ai-resume-optimization-guide-2026",
@@ -3043,8 +2914,7 @@
       "read_time": "12分钟",
       "word_count": 7967,
       "view_count": 0,
-      "created_at": "2026-05-27 02:27:35",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-27 02:27:35"
     },
     {
       "slug": "openhuman-ai-agent-review-2026",
@@ -3062,8 +2932,7 @@
       "read_time": "14分钟",
       "word_count": 11555,
       "view_count": 0,
-      "created_at": "2026-05-27 09:21:16",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-05-27 09:21:16"
     },
     {
       "slug": "hermes-agent-autoreason-deep-dive",
@@ -3081,8 +2950,7 @@
       "read_time": "15分钟",
       "word_count": 11418,
       "view_count": 0,
-      "created_at": "2026-05-26 07:01:02",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-26 07:01:02"
     },
     {
       "slug": "one-person-company-2026-ai-guide",
@@ -3101,8 +2969,7 @@
       "read_time": "15 分钟",
       "word_count": 16336,
       "view_count": 0,
-      "created_at": "2026-05-25 09:07:41",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-05-25 09:07:41"
     },
     {
       "slug": "mcp-vs-a2a-ai-agent-protocols-deep-dive-2026",
@@ -3120,8 +2987,7 @@
       "read_time": "15 分钟",
       "word_count": 19484,
       "view_count": 0,
-      "created_at": "2026-05-24 06:35:45",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-05-24 06:35:45"
     },
     {
       "slug": "closed-source-ai-coding-tools-comparison-2026",
@@ -3136,8 +3002,7 @@
       "read_time": "15 分钟",
       "word_count": 21145,
       "view_count": 0,
-      "created_at": "2026-05-23 15:20:11",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-23 15:20:11"
     },
     {
       "slug": "livekit-realtime-voice-video-ai-platform-intro",
@@ -3151,8 +3016,7 @@
       "read_time": "8 分钟",
       "word_count": 13944,
       "view_count": 0,
-      "created_at": "2026-05-22 03:44:36",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-22 03:44:36"
     },
     {
       "slug": "dify-vs-coze-ragflow-n8n-fastgpt-comparison",
@@ -3166,8 +3030,7 @@
       "read_time": "8 分钟",
       "word_count": 12824,
       "view_count": 0,
-      "created_at": "2026-05-21 11:54:33",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-21 11:54:33"
     },
     {
       "slug": "hermes-agent-wechat-integration-guide",
@@ -3181,8 +3044,7 @@
       "read_time": "5 分钟",
       "word_count": 4110,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "kilo-code-review",
@@ -3196,8 +3058,7 @@
       "read_time": "5 分钟",
       "word_count": 8012,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "weknora-vs-dify-ragflow-fastgpt-comparison",
@@ -3211,8 +3072,7 @@
       "read_time": "5 分钟",
       "word_count": 11544,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:25"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "hermes-agent-deployment-guide",
@@ -3226,8 +3086,7 @@
       "read_time": "12分钟",
       "word_count": 10432,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "ai-code-tools-2025-guide",
@@ -3241,8 +3100,7 @@
       "read_time": "5 分钟",
       "word_count": 13386,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:15"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "ai-novel-writing-tools",
@@ -3256,8 +3114,7 @@
       "read_time": "5 分钟",
       "word_count": 4311,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "ai-tools-2025-must-have",
@@ -3271,8 +3128,7 @@
       "read_time": "5 分钟",
       "word_count": 12029,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "ai-tools-2025-roundup",
@@ -3286,8 +3142,7 @@
       "read_time": "5 分钟",
       "word_count": 4238,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "ai-video-upscaling-tools-comparison",
@@ -3301,8 +3156,7 @@
       "read_time": "5 分钟",
       "word_count": 4367,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "akkio-no-code-ml-review",
@@ -3316,8 +3170,7 @@
       "read_time": "5 分钟",
       "word_count": 4902,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "azure-speech-vs-aws-polly-enterprise",
@@ -3331,8 +3184,7 @@
       "read_time": "5 分钟",
       "word_count": 4638,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:16"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "canva-ai-2026-review",
@@ -3346,8 +3198,7 @@
       "read_time": "5 分钟",
       "word_count": 3573,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "capcut-ai-video-editing-deep-dive",
@@ -3361,8 +3212,7 @@
       "read_time": "5 分钟",
       "word_count": 3562,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "chatgpt-advanced-data-analysis-deep-dive",
@@ -3376,8 +3226,7 @@
       "read_time": "5 分钟",
       "word_count": 4554,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "chatgpt5-review",
@@ -3391,8 +3240,7 @@
       "read_time": "5 分钟",
       "word_count": 6334,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "claude-sonnet-4-coding-review",
@@ -3406,8 +3254,7 @@
       "read_time": "5 分钟",
       "word_count": 5126,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "claude-sonnet-4-extended-coding",
@@ -3421,8 +3268,7 @@
       "read_time": "5 分钟",
       "word_count": 7103,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "claude-sonnet-4-review",
@@ -3436,8 +3282,7 @@
       "read_time": "10分钟",
       "word_count": 3789,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:17"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "comfyui-beginners-guide",
@@ -3451,8 +3296,7 @@
       "read_time": "5 分钟",
       "word_count": 6001,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "copilot-vs-cursor-vs-codeium",
@@ -3466,8 +3310,7 @@
       "read_time": "5 分钟",
       "word_count": 5058,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "copyai-vs-writesonic",
@@ -3481,8 +3324,7 @@
       "read_time": "5 分钟",
       "word_count": 3724,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "cursor-ai-editor-review",
@@ -3496,8 +3338,7 @@
       "read_time": "5 分钟",
       "word_count": 5265,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "dalle3-review",
@@ -3511,8 +3352,7 @@
       "read_time": "5 分钟",
       "word_count": 3412,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "deepseek-v3-vs-gpt4o-chatgpt-comparison",
@@ -3526,8 +3366,7 @@
       "read_time": "5 分钟",
       "word_count": 7861,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:22",
-      "updated_at": "2026-11-10 11:27:18"
+      "created_at": "2026-05-19 11:32:22"
     },
     {
       "slug": "elevenlabs-review-2025",
@@ -3541,8 +3380,7 @@
       "read_time": "5 分钟",
       "word_count": 6340,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "elevenlabs-tts-2025-review",
@@ -3556,8 +3394,7 @@
       "read_time": "5 分钟",
       "word_count": 2391,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "elevenlabs-vs-fish-audio",
@@ -3571,8 +3408,7 @@
       "read_time": "8分钟",
       "word_count": 4596,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "gamma-ai-presentation-review",
@@ -3586,8 +3422,7 @@
       "read_time": "5 分钟",
       "word_count": 7631,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "github-copilot-2026-in-depth-review",
@@ -3601,8 +3436,7 @@
       "read_time": "15分钟",
       "word_count": 10324,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "grammarly-vs-prowritingaid",
@@ -3616,8 +3450,7 @@
       "read_time": "5 分钟",
       "word_count": 4072,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:19"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "heygen-digital-avatar-guide",
@@ -3631,8 +3464,7 @@
       "read_time": "5 分钟",
       "word_count": 3093,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "jasper-ai-review",
@@ -3646,8 +3478,7 @@
       "read_time": "5 分钟",
       "word_count": 3386,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "julius-ai-data-analysis-review",
@@ -3661,8 +3492,7 @@
       "read_time": "5 分钟",
       "word_count": 4439,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "kaiber-ai-music-video-review",
@@ -3676,8 +3506,7 @@
       "read_time": "5 分钟",
       "word_count": 3503,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "leonardo-ai-game-assets",
@@ -3691,8 +3520,7 @@
       "read_time": "5 分钟",
       "word_count": 3804,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:20"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "mem-ai-knowledge-management-review",
@@ -3706,8 +3534,7 @@
       "read_time": "5 分钟",
       "word_count": 4645,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "midjourney-v6-ai-image-review",
@@ -3721,8 +3548,7 @@
       "read_time": "5 分钟",
       "word_count": 9820,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "midjourney-vs-dalle-vs-sd",
@@ -3736,8 +3562,7 @@
       "read_time": "5 分钟",
       "word_count": 7547,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:21"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "motion-ai-calendar-automation-test",
@@ -3751,8 +3576,7 @@
       "read_time": "5 分钟",
       "word_count": 4618,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "murf-vs-elevenlabs-voiceover-comparison",
@@ -3766,8 +3590,7 @@
       "read_time": "5 分钟",
       "word_count": 4064,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "notion-ai-review-productivity",
@@ -3781,8 +3604,7 @@
       "read_time": "5 分钟",
       "word_count": 7982,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "obviously-ai-vs-obviously-comparison",
@@ -3796,8 +3618,7 @@
       "read_time": "5 分钟",
       "word_count": 5482,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:22"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "otter-ai-vs-fireflies-comparison",
@@ -3811,8 +3632,7 @@
       "read_time": "5 分钟",
       "word_count": 5667,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "pandasai-tutorial-beginners",
@@ -3826,8 +3646,7 @@
       "read_time": "5 分钟",
       "word_count": 6965,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "perplexity-ai-search-review",
@@ -3841,8 +3660,7 @@
       "read_time": "5 分钟",
       "word_count": 7738,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "pika-2-0-review",
@@ -3856,8 +3674,7 @@
       "read_time": "5 分钟",
       "word_count": 4138,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "play-dot-ht-review-2025",
@@ -3871,8 +3688,7 @@
       "read_time": "5 分钟",
       "word_count": 3673,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:23",
-      "updated_at": "2026-11-10 11:27:23"
+      "created_at": "2026-05-19 11:32:23"
     },
     {
       "slug": "replit-agent-ai-coding-review",
@@ -3886,8 +3702,7 @@
       "read_time": "5 分钟",
       "word_count": 7354,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "resemble-ai-voice-cloning-test",
@@ -3901,8 +3716,7 @@
       "read_time": "5 分钟",
       "word_count": 3724,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "rows-com-ai-spreadsheet-review",
@@ -3916,8 +3730,7 @@
       "read_time": "5 分钟",
       "word_count": 5078,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "runway-gen3-ai-video-review",
@@ -3931,8 +3744,7 @@
       "read_time": "5 分钟",
       "word_count": 9014,
       "view_count": 0,
-      "created_at": "2026-05-19 10:48:00",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 10:48:00"
     },
     {
       "slug": "stable-diffusion-3.5-workflow",
@@ -3946,8 +3758,7 @@
       "read_time": "5 分钟",
       "word_count": 5191,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "synthesia-vs-heygen-vs-colossyan-2025",
@@ -3961,8 +3772,7 @@
       "read_time": "5 分钟",
       "word_count": 4078,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "tableau-vs-power-bi-ai-comparison",
@@ -3976,8 +3786,7 @@
       "read_time": "5 分钟",
       "word_count": 5750,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "taskade-ai-project-management-review",
@@ -3991,8 +3800,7 @@
       "read_time": "5 分钟",
       "word_count": 4905,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     },
     {
       "slug": "vercel-ai-deploy-review",
@@ -4006,8 +3814,7 @@
       "read_time": "5 分钟",
       "word_count": 7408,
       "view_count": 0,
-      "created_at": "2026-05-19 11:32:24",
-      "updated_at": "2026-11-10 11:27:24"
+      "created_at": "2026-05-19 11:32:24"
     }
   ]
 }

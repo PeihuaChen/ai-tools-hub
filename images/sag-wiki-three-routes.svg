@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="800" viewBox="0 0 1080 800">
+  <rect width="1080" height="800" fill="#f7f8fa"/>
+
+  <text x="60" y="92" font-size="60" font-weight="bold" fill="#111827">三条路线的分水岭</text>
+  <text x="60" y="146" font-size="34" fill="#4b5563">「理解文档」发生在哪个阶段</text>
+
+  <g>
+    <rect x="60" y="190" width="300" height="420" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="60" y="190" width="300" height="9" rx="4" fill="#1d4ed8"/>
+    <text x="88" y="258" font-size="44" font-weight="bold" fill="#1d4ed8">向量 RAG</text>
+    <text x="88" y="312" font-size="34" fill="#4b5563">入库时理解</text>
+    <line x1="88" y1="336" x2="332" y2="336" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="88" y="392" font-size="32" fill="#111827">先切块编码</text>
+    <text x="88" y="444" font-size="32" fill="#111827">语义泛化稳</text>
+    <text x="88" y="496" font-size="32" fill="#111827">改动要重算</text>
+    <rect x="88" y="532" width="180" height="54" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="178" y="570" font-size="32" font-weight="bold" fill="#1d4ed8" text-anchor="middle">固定成本</text>
+  </g>
+
+  <g>
+    <rect x="390" y="190" width="300" height="420" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="390" y="190" width="300" height="9" rx="4" fill="#6d28d9"/>
+    <text x="418" y="258" font-size="44" font-weight="bold" fill="#6d28d9">LLM Wiki</text>
+    <text x="418" y="312" font-size="34" fill="#4b5563">模型代写页面</text>
+    <line x1="418" y1="336" x2="662" y2="336" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="418" y="392" font-size="32" fill="#111827">读原始资料</text>
+    <text x="418" y="444" font-size="32" fill="#111827">生成 Wiki 页</text>
+    <text x="418" y="496" font-size="32" fill="#111827">页面会过时</text>
+    <rect x="418" y="532" width="180" height="54" rx="10" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="508" y="570" font-size="32" font-weight="bold" fill="#6d28d9" text-anchor="middle">生成成本</text>
+  </g>
+
+  <g>
+    <rect x="720" y="190" width="300" height="420" rx="16" fill="#f8fafc" stroke="#d9e2ec" stroke-width="2"/>
+    <rect x="720" y="190" width="300" height="9" rx="4" fill="#0e7490"/>
+    <text x="748" y="258" font-size="44" font-weight="bold" fill="#0e7490">SAG-Wiki</text>
+    <text x="748" y="312" font-size="34" fill="#4b5563">查询时判断</text>
+    <line x1="748" y1="336" x2="992" y2="336" stroke="#d9e2ec" stroke-width="2"/>
+    <text x="748" y="392" font-size="32" fill="#111827">只建词法索引</text>
+    <text x="748" y="444" font-size="32" fill="#111827">逐条筛证据</text>
+    <text x="748" y="496" font-size="32" fill="#111827">改动只增量</text>
+    <rect x="748" y="532" width="180" height="54" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="838" y="570" font-size="32" font-weight="bold" fill="#0e7490" text-anchor="middle">可变成本</text>
+  </g>
+
+  <text x="60" y="680" font-size="34" fill="#4b5563">建库阶段</text>
+  <text x="1020" y="680" font-size="34" fill="#4b5563" text-anchor="end">查询阶段</text>
+  <line x1="60" y1="710" x2="1020" y2="710" stroke="#94a3b8" stroke-width="3"/>
+  <circle cx="200" cy="710" r="14" fill="#1d4ed8"/>
+  <circle cx="340" cy="710" r="14" fill="#6d28d9"/>
+  <circle cx="880" cy="710" r="14" fill="#0e7490"/>
+  <text x="540" y="772" font-size="34" font-weight="bold" fill="#111827" text-anchor="middle">理解越靠后，预处理越轻，查询开销越大</text>
+</svg>

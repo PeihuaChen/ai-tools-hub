@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="920" viewBox="0 0 1080 920">
+  <rect width="1080" height="920" fill="#f7f8fa"/>
+
+  <text x="60" y="92" font-size="60" font-weight="bold" fill="#111827">SAG2：查询时才判断证据</text>
+  <text x="60" y="146" font-size="34" fill="#4b5563">BM25 召回 → Jev 判断 → 词项扩展 → 再检索</text>
+
+  <g>
+    <rect x="60" y="180" width="960" height="110" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="96" y="252" font-size="44" font-weight="bold" fill="#1d4ed8">01</text>
+    <text x="196" y="252" font-size="42" font-weight="bold" fill="#111827">召回候选</text>
+    <text x="470" y="252" font-size="32" fill="#4b5563">BM25 取最多 100 个段落</text>
+  </g>
+  <path d="M525 292 L555 292 L540 308 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="60" y="310" width="960" height="110" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="96" y="382" font-size="44" font-weight="bold" fill="#6d28d9">02</text>
+    <text x="196" y="382" font-size="42" font-weight="bold" fill="#111827">判断证据</text>
+    <text x="470" y="382" font-size="32" fill="#4b5563">Jev noul 逐条筛有用段落</text>
+  </g>
+  <path d="M525 422 L555 422 L540 438 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="60" y="440" width="960" height="110" rx="16" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="96" y="512" font-size="44" font-weight="bold" fill="#b45309">03</text>
+    <text x="196" y="512" font-size="42" font-weight="bold" fill="#111827">提取词项</text>
+    <text x="470" y="512" font-size="32" fill="#4b5563">最多 10 个种子、20 个词</text>
+  </g>
+  <path d="M525 552 L555 552 L540 568 Z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="60" y="570" width="960" height="110" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="96" y="642" font-size="44" font-weight="bold" fill="#0e7490">04</text>
+    <text x="196" y="642" font-size="42" font-weight="bold" fill="#111827">再检索并重排</text>
+    <text x="470" y="642" font-size="32" fill="#4b5563">默认两轮扩展，本地排前 10</text>
+  </g>
+
+  <path d="M1020 625 L1042 625 L1042 235 L1020 235" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="8"/>
+  <path d="M1006 235 L1024 226 L1024 244 Z" fill="#94a3b8"/>
+  <text x="1000" y="730" font-size="32" fill="#6b7280" text-anchor="end">虚线：循环最多两轮</text>
+
+  <g>
+    <rect x="60" y="760" width="960" height="110" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="96" y="810" font-size="36" font-weight="bold" fill="#15803d">多跳扩展贡献约 19 个百分点</text>
+    <text x="96" y="852" font-size="32" fill="#4b5563">MuSiQue R@10：不扩展 67.93 / 一轮 83.36 / 两轮 86.62</text>
+  </g>
+</svg>
