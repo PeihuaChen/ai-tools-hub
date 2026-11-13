@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="960" viewBox="0 0 1080 960">
+  <rect width="1080" height="960" fill="#f7f8fa"/>
+  <rect width="1080" height="8" fill="#6d28d9"/>
+
+  <text x="48" y="102" fill="#111827" font-size="60" font-weight="700">一次删库，两条代码线</text>
+  <text x="48" y="160" fill="#4b5563" font-size="34">2026 年 4 月 17 日之后的分叉与同步方向</text>
+  <path d="M48 192H1032" stroke="#d9e2ec" stroke-width="2"/>
+
+  <path d="M150 260V790" stroke="#d9e2ec" stroke-width="4"/>
+
+  <circle cx="150" cy="290" r="14" fill="#1d4ed8"/>
+  <rect x="200" y="232" width="830" height="116" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="224" y="282" fill="#1d4ed8" font-size="40" font-weight="700">主线 CLIProxyAPI 创建</text>
+  <text x="1006" y="282" text-anchor="end" fill="#1d4ed8" font-size="32">2025-07-01</text>
+  <text x="224" y="328" fill="#4b5563" font-size="32">MIT 许可，持续公开演进，58,323 Star</text>
+
+  <circle cx="150" cy="440" r="14" fill="#b91c1c"/>
+  <rect x="200" y="382" width="830" height="116" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="224" y="432" fill="#b91c1c" font-size="40" font-weight="700">上游 Plus 仓库被删除</text>
+  <text x="1006" y="432" text-anchor="end" fill="#b91c1c" font-size="32">2026-04-17</text>
+  <text x="224" y="478" fill="#4b5563" font-size="32">同组织另立 SSPL 许可的商业版仓库</text>
+
+  <circle cx="150" cy="590" r="14" fill="#6d28d9"/>
+  <rect x="200" y="532" width="830" height="116" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="224" y="582" fill="#6d28d9" font-size="40" font-weight="700">MIT 快照重建 Plus 分支</text>
+  <text x="1006" y="582" text-anchor="end" fill="#6d28d9" font-size="32">2026-04-22</text>
+  <text x="224" y="628" fill="#4b5563" font-size="32">CCS 维护，多 7 个第三方 provider</text>
+
+  <circle cx="150" cy="740" r="14" fill="#0e7490"/>
+  <rect x="200" y="682" width="830" height="116" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="224" y="732" fill="#0e7490" font-size="40" font-weight="700">同步滞后，合并被阻塞</text>
+  <text x="1006" y="732" text-anchor="end" fill="#0e7490" font-size="32">2026-11-12</text>
+  <text x="224" y="778" fill="#4b5563" font-size="32">主线 v8.0.67，Plus 停在 v8.0.56</text>
+
+  <rect x="48" y="830" width="984" height="96" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="890" text-anchor="middle" fill="#111827" font-size="34" font-weight="700">主线每日单向同步 Plus，商业版代码不进入 MIT 分支</text>
+</svg>

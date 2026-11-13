@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="800" viewBox="0 0 1080 800">
+  <rect width="1080" height="800" fill="#f7f8fa"/>
+  <rect width="1080" height="8" fill="#1d4ed8"/>
+
+  <text x="48" y="102" fill="#111827" font-size="60" font-weight="700">一次请求穿过的四层</text>
+  <text x="48" y="160" fill="#4b5563" font-size="34">协议翻译与账号调度都发生在代理内部</text>
+  <path d="M48 192H1032" stroke="#d9e2ec" stroke-width="2"/>
+
+  <rect x="48" y="230" width="228" height="330" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="66" y="288" fill="#1d4ed8" font-size="44" font-weight="700">客户端</text>
+  <text x="66" y="340" fill="#1d4ed8" font-size="32">01 · 发起</text>
+  <path d="M66 362H258" stroke="#93c5fd" stroke-width="2"/>
+  <text x="66" y="420" fill="#4b5563" font-size="32">三种格式</text>
+  <text x="66" y="472" fill="#4b5563" font-size="32">本地 8317</text>
+  <text x="66" y="524" fill="#4b5563" font-size="32">OpenAI SDK</text>
+
+  <rect x="306" y="230" width="228" height="330" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="324" y="288" fill="#0e7490" font-size="44" font-weight="700">协议翻译</text>
+  <text x="324" y="340" fill="#0e7490" font-size="32">02 · 改写</text>
+  <path d="M324 362H516" stroke="#a5f3fc" stroke-width="2"/>
+  <text x="324" y="420" fill="#4b5563" font-size="32">结构转换</text>
+  <text x="324" y="472" fill="#4b5563" font-size="32">流式翻译</text>
+  <text x="324" y="524" fill="#4b5563" font-size="32">工具透传</text>
+
+  <rect x="564" y="230" width="228" height="330" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="582" y="288" fill="#6d28d9" font-size="44" font-weight="700">凭证池</text>
+  <text x="582" y="340" fill="#6d28d9" font-size="32">03 · 挑选</text>
+  <path d="M582 362H774" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="582" y="420" fill="#4b5563" font-size="32">令牌在本机</text>
+  <text x="582" y="472" fill="#4b5563" font-size="32">多账号轮询</text>
+  <text x="582" y="524" fill="#4b5563" font-size="32">冷却与切换</text>
+
+  <rect x="822" y="230" width="210" height="330" rx="16" fill="#ffedd5" stroke="#b45309" stroke-width="2"/>
+  <text x="840" y="288" fill="#b45309" font-size="44" font-weight="700">上游</text>
+  <text x="840" y="340" fill="#b45309" font-size="32">04 · 判定</text>
+  <path d="M840 362H1014" stroke="#fcd34d" stroke-width="2"/>
+  <text x="840" y="420" fill="#4b5563" font-size="32">识别来源</text>
+  <text x="840" y="472" fill="#4b5563" font-size="32">按规则计费</text>
+  <text x="840" y="524" fill="#4b5563" font-size="32">触发风控</text>
+
+  <text x="291" y="410" fill="#94a3b8" font-size="40" font-weight="700">&#8250;</text>
+  <text x="549" y="410" fill="#94a3b8" font-size="40" font-weight="700">&#8250;</text>
+  <text x="807" y="410" fill="#94a3b8" font-size="40" font-weight="700">&#8250;</text>
+
+  <rect x="48" y="620" width="984" height="112" rx="16" fill="#f1f5f9" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="674" text-anchor="middle" fill="#111827" font-size="34" font-weight="700">代理对上游是客户端，对下游是服务端</text>
+  <text x="540" y="716" text-anchor="middle" fill="#4b5563" font-size="32">令牌留在代理主机，账号风险也留在这里</text>
+</svg>

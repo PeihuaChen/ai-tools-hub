@@ -1,6 +1,27 @@
 {
-  "total": 211,
+  "total": 212,
   "posts": [
+    {
+      "slug": "sag-wiki-vs-vector-rag-llm-wiki-2026",
+      "title": "SAG-Wiki 对比向量 RAG 和 LLM Wiki：三条路线的成本与溯源差异",
+      "date": "2026-11-13",
+      "category": "AI基础设施",
+      "description": "SAG-Wiki 是给人和 Agent 用的本地知识库：加个文件夹就能搜文档与代码，答案可点回原文。它用 SQLite 加 BM25 把建库压到 2.36 秒且不用模型，对照向量 RAG 与 LLM Wiki 的成本、溯源与边界。",
+      "keywords": [
+        "SAG-Wiki",
+        "SAG2",
+        "RAG",
+        "Jev",
+        "本地知识库",
+        "Embedding",
+        "Agent",
+        "开源"
+      ],
+      "read_time": "17 分钟",
+      "word_count": 10454,
+      "view_count": 0,
+      "created_at": "2026-11-13 11:01:37"
+    },
     {
       "slug": "ai-glasses-2026-boom-three-walls",
       "title": "AI眼镜出货涨七成、退货率超三成：千万台狂欢下的三堵墙",
