@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="720" viewBox="0 0 1080 720">
+<rect x="0" y="0" width="1080" height="720" fill="#f7f8fa"/>
+<text x="48" y="96" fill="#111827" font-size="60" font-weight="700">工具定义怎么进上下文</text>
+<text x="48" y="152" fill="#4b5563" font-size="32">全量加载与按需检索，差的不是速度</text>
+
+<text x="48" y="232" fill="#b91c1c" font-size="40" font-weight="700">直连：全部加载</text>
+<rect x="48" y="256" width="290" height="116" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+<text x="193" y="302" text-anchor="middle" fill="#b91c1c" font-size="36" font-weight="700">AI 客户端</text>
+<text x="193" y="344" text-anchor="middle" fill="#4b5563" font-size="30">配置 N 台服务器</text>
+<rect x="395" y="256" width="290" height="116" rx="14" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+<text x="540" y="302" text-anchor="middle" fill="#b91c1c" font-size="36" font-weight="700">上千工具定义</text>
+<text x="540" y="344" text-anchor="middle" fill="#4b5563" font-size="30">每轮全价付费</text>
+<rect x="742" y="256" width="290" height="116" rx="14" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+<text x="887" y="302" text-anchor="middle" fill="#b91c1c" font-size="36" font-weight="700">上下文被占满</text>
+<text x="887" y="344" text-anchor="middle" fill="#4b5563" font-size="30">3 万 token 起</text>
+<g stroke="#94a3b8" stroke-width="3" fill="#94a3b8">
+<path d="M340 314H388"/><path d="M395 314l-10-7v14z"/>
+<path d="M687 314H735"/><path d="M742 314l-10-7v14z"/>
+</g>
+
+<text x="48" y="452" fill="#1d4ed8" font-size="40" font-weight="700">智能路由：按需加载</text>
+<rect x="48" y="476" width="290" height="116" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="193" y="522" text-anchor="middle" fill="#1d4ed8" font-size="36" font-weight="700">AI 客户端</text>
+<text x="193" y="564" text-anchor="middle" fill="#4b5563" font-size="30">只连 $smart</text>
+<rect x="395" y="476" width="290" height="116" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="540" y="522" text-anchor="middle" fill="#1d4ed8" font-size="34" font-weight="700">search_tools</text>
+<text x="540" y="564" text-anchor="middle" fill="#4b5563" font-size="30">pgvector 检索</text>
+<rect x="742" y="476" width="290" height="116" rx="14" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="887" y="522" text-anchor="middle" fill="#1d4ed8" font-size="36" font-weight="700">上下文很轻</text>
+<text x="887" y="564" text-anchor="middle" fill="#4b5563" font-size="30">仅 Top-K 定义</text>
+<g stroke="#94a3b8" stroke-width="3" fill="#94a3b8">
+<path d="M340 534H388"/><path d="M395 534l-10-7v14z"/>
+<path d="M687 534H735"/><path d="M742 534l-10-7v14z"/>
+</g>
+
+<line x1="48" y1="630" x2="1032" y2="630" stroke="#d9e2ec" stroke-width="2"/>
+<text x="48" y="682" fill="#4b5563" font-size="32">关键差别：进入模型视野的工具数量，而不是调用快慢</text>
+</svg>

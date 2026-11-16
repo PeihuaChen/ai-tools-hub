@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+<rect x="0" y="0" width="1080" height="760" fill="#f7f8fa"/>
+<text x="48" y="96" fill="#111827" font-size="60" font-weight="700">MCPHub 的三层结构</text>
+<text x="48" y="152" fill="#4b5563" font-size="32">治理收在中间层，上游服务器不必改造</text>
+
+<rect x="48" y="186" width="984" height="104" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="76" y="232" fill="#111827" font-size="42" font-weight="700">AI 客户端</text>
+<text x="76" y="272" fill="#4b5563" font-size="30">Claude Code · Cursor · Cherry Studio · OpenWebUI</text>
+
+<g stroke="#94a3b8" stroke-width="3" fill="#94a3b8">
+<path d="M540 292V324"/><path d="M540 330l-8-10h16z"/>
+</g>
+
+<rect x="48" y="336" width="984" height="186" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+<text x="76" y="386" fill="#1d4ed8" font-size="44" font-weight="700">统一端点 / 网关控制面</text>
+<text x="76" y="438" fill="#1e3a8a" font-size="34">认证 · 分组 · 个人凭据 · 日志 · 智能路由</text>
+<text x="76" y="488" fill="#4b5563" font-size="32">/mcp · /mcp/{group} · /mcp/$smart</text>
+
+<g stroke="#94a3b8" stroke-width="3" fill="#94a3b8">
+<path d="M540 524V552"/><path d="M193 558l-8-10h16z"/>
+<path d="M540 558l-8-10h16z"/><path d="M887 558l-8-10h16z"/>
+<path d="M193 552H887"/>
+</g>
+
+<rect x="48" y="564" width="290" height="96" rx="14" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+<text x="193" y="606" text-anchor="middle" fill="#0e7490" font-size="36" font-weight="700">stdio</text>
+<text x="193" y="642" text-anchor="middle" fill="#4b5563" font-size="30">本地子进程</text>
+<rect x="395" y="564" width="290" height="96" rx="14" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+<text x="540" y="606" text-anchor="middle" fill="#0e7490" font-size="36" font-weight="700">SSE</text>
+<text x="540" y="642" text-anchor="middle" fill="#4b5563" font-size="30">远程服务</text>
+<rect x="742" y="564" width="290" height="96" rx="14" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+<text x="887" y="606" text-anchor="middle" fill="#0e7490" font-size="32" font-weight="700">Streamable HTTP</text>
+<text x="887" y="642" text-anchor="middle" fill="#4b5563" font-size="30">远程服务</text>
+
+<text x="48" y="722" fill="#4b5563" font-size="30">上游各跑各的，权限、路由与审计集中在一处</text>
+</svg>

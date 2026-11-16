@@ -1,6 +1,27 @@
 {
-  "total": 212,
+  "total": 213,
   "posts": [
+    {
+      "slug": "cliproxyapi-subscription-api-risks-config-guide-2026",
+      "title": "想用订阅跑 API？先看清 CLIProxyAPI 的封号风险、配置要点与 Plus 分支的真实来路",
+      "date": "2026-11-16",
+      "category": "AI基础设施",
+      "description": "58,323 星标的 CLIProxyAPI 把订阅 OAuth 转成兼容 API，代价写在三个 issue 里，封号、按 API 价计费、端点无限流。Plus 分支并非官方增强版，而是删库前的 MIT 快照。",
+      "keywords": [
+        "CLIProxyAPI",
+        "CLIProxyAPIPlus",
+        "OAuth",
+        "AI 编程",
+        "订阅转 API",
+        "SSPL",
+        "账号风险",
+        "开源"
+      ],
+      "read_time": "19 分钟",
+      "word_count": 11733,
+      "view_count": 0,
+      "created_at": "2026-11-16 07:40:31"
+    },
     {
       "slug": "sag-wiki-vs-vector-rag-llm-wiki-2026",
       "title": "SAG-Wiki 对比向量 RAG 和 LLM Wiki：三条路线的成本与溯源差异",
