@@ -1,6 +1,28 @@
 {
-  "total": 213,
+  "total": 214,
   "posts": [
+    {
+      "slug": "mcphub-tool-sprawl-smart-routing-2026",
+      "title": "工具越多 Agent 越笨：MCPHub 用向量检索把上千工具挡在上下文外",
+      "date": "2026-11-17",
+      "category": "AI开发平台",
+      "description": "挂 5 个 MCP 服务器，单轮工具定义就吃掉 3 万 token。MCPHub 用一条 Docker 命令收拢服务器，再用 pgvector 只把相关工具送进上下文。项目有 2681 Star、v1.2.3，同批公开过 8 个 CVE。",
+      "keywords": [
+        "MCP",
+        "MCPHub",
+        "MCP网关",
+        "智能路由",
+        "工具膨胀",
+        "pgvector",
+        "Agent",
+        "自托管",
+        "开源"
+      ],
+      "read_time": "23 分钟",
+      "word_count": 14717,
+      "view_count": 0,
+      "created_at": "2026-11-17 11:33:40"
+    },
     {
       "slug": "cliproxyapi-subscription-api-risks-config-guide-2026",
       "title": "想用订阅跑 API？先看清 CLIProxyAPI 的封号风险、配置要点与 Plus 分支的真实来路",

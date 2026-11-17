@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="820" viewBox="0 0 1080 820">
+  <rect width="1080" height="820" fill="#f7f8fa"/>
+
+  <text x="540" y="72" font-size="64" fill="#111827" text-anchor="middle" font-weight="bold">同一份 PDF 的处理速度</text>
+  <text x="540" y="128" font-size="34" fill="#4b5563" text-anchor="middle">4 vCPU · 无 GPU · 单位：秒/页，越短越快</text>
+
+  <text x="44" y="222" font-size="30" fill="#334155">MarkItDown</text>
+  <rect x="330" y="190" width="41" height="58" rx="8" fill="#94a3b8"/>
+  <text x="381" y="230" font-size="32" fill="#1e3a8a" font-weight="bold">0.35</text>
+
+  <text x="44" y="304" font-size="30" fill="#334155">Unstructured</text>
+  <rect x="330" y="272" width="42" height="58" rx="8" fill="#94a3b8"/>
+  <text x="382" y="312" font-size="32" fill="#1e3a8a" font-weight="bold">0.36</text>
+
+  <text x="44" y="386" font-size="30" fill="#334155">PyMuPDF4LLM</text>
+  <rect x="330" y="354" width="72" height="58" rx="8" fill="#94a3b8"/>
+  <text x="412" y="394" font-size="32" fill="#1e3a8a" font-weight="bold">0.69</text>
+
+  <text x="44" y="468" font-size="30" fill="#334155">Docling 关OCR</text>
+  <rect x="330" y="436" width="143" height="58" rx="8" fill="#0e7490"/>
+  <text x="483" y="476" font-size="32" fill="#083344" font-weight="bold">1.83</text>
+
+  <text x="44" y="550" font-size="30" fill="#1d4ed8" font-weight="bold">Docling 默认</text>
+  <rect x="330" y="518" width="280" height="58" rx="8" fill="#1d4ed8"/>
+  <text x="620" y="558" font-size="32" fill="#1d4ed8" font-weight="bold">6.58</text>
+
+  <text x="44" y="632" font-size="30" fill="#334155">Unstruct hi_res</text>
+  <rect x="330" y="600" width="329" height="58" rx="8" fill="#94a3b8"/>
+  <text x="669" y="640" font-size="32" fill="#1e3a8a" font-weight="bold">10.01</text>
+
+  <text x="44" y="714" font-size="30" fill="#b91c1c" font-weight="bold">Marker</text>
+  <rect x="330" y="682" width="620" height="58" rx="8" fill="#b91c1c"/>
+  <text x="838" y="722" font-size="34" fill="#ffffff" font-weight="bold">90.66</text>
+
+  <line x1="40" y1="760" x2="1040" y2="760" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="40" y="796" font-size="30" fill="#6b7280">横轴为对数刻度；数字为实测值。数据来自 docling.org 官方对比页</text>
+</svg>
