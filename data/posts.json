@@ -1,6 +1,23 @@
 {
-  "total": 214,
+  "total": 215,
   "posts": [
+    {
+      "slug": "docling-deep-dive-document-parser-2026",
+      "title": "Docling 深度调研：70K Star 文档解析标准，强在哪慢在哪",
+      "date": "2026-11-18",
+      "category": "AI工具",
+      "description": "IBM 开源的 Docling 已积累 7 万 Star，成为 RAG 文档预处理的热门选择。本文拆解它的统一文档模型、PDF 理解能力与生态集成，并用公开实测数据看清它的速度短板与适用边界。",
+      "keywords": [
+        "Docling",
+        "文档解析",
+        "RAG",
+        "开源工具"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 8948,
+      "view_count": 0,
+      "created_at": "2026-11-18 11:26:21"
+    },
     {
       "slug": "mcphub-tool-sprawl-smart-routing-2026",
       "title": "工具越多 Agent 越笨：MCPHub 用向量检索把上千工具挡在上下文外",

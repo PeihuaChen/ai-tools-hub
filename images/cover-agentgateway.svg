@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#161638"/>
+      <stop offset="100%" stop-color="#0d0d28"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7c948"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#00d2ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="60" y1="0" x2="60" y2="383"/><line x1="120" y1="0" x2="120" y2="383"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="240" y1="0" x2="240" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="420" y1="0" x2="420" y2="383"/><line x1="480" y1="0" x2="480" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="660" y1="0" x2="660" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+    <line x1="780" y1="0" x2="780" y2="383"/><line x1="840" y1="0" x2="840" y2="383"/>
+    <line x1="0" y1="48" x2="900" y2="48"/><line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/><line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+  </g>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#accent1)"/>
+
+  <g transform="translate(35, 22)">
+    <rect x="0" y="0" width="252" height="28" rx="4" fill="url(#badge)" opacity="0.9"/>
+    <text x="126" y="19" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="bold" font-size="13" fill="#fff" text-anchor="middle">AI 基础设施调研 · 智能体网关</text>
+  </g>
+
+  <g transform="translate(835, 22)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="none" stroke="url(#accent1)" stroke-width="1.5"/>
+    <text x="20" y="19" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#00d2ff" text-anchor="middle">26</text>
+  </g>
+
+  <g opacity="0.55" stroke="#00d2ff" stroke-width="1.5" fill="none">
+    <path d="M700 90 L780 165"/>
+    <path d="M860 90 L780 165"/>
+    <path d="M700 250 L780 165"/>
+    <path d="M860 250 L780 165"/>
+    <circle cx="700" cy="90" r="10" fill="#0a0a1e"/>
+    <circle cx="860" cy="90" r="10" fill="#0a0a1e"/>
+    <circle cx="700" cy="250" r="10" fill="#0a0a1e"/>
+    <circle cx="860" cy="250" r="10" fill="#0a0a1e"/>
+    <circle cx="780" cy="165" r="26" fill="#0a0a1e" stroke="#6d28d9" stroke-width="2"/>
+  </g>
+  <text x="780" y="171" font-family="Arial,sans-serif" font-weight="bold" font-size="13" fill="#00d2ff" text-anchor="middle">AGW</text>
+
+  <text x="45" y="150" font-family="'Courier New',Consolas,monospace" font-weight="900" font-size="38" fill="#ffffff" letter-spacing="1">agentgateway</text>
+  <text x="45" y="200" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-weight="800" font-size="30" fill="url(#accent1)">性能神话能信几分？</text>
+
+  <g font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="14">
+    <circle cx="50" cy="244" r="3" fill="#00d2ff"/>
+    <text x="62" y="249" fill="#e6e6f0">吞吐 11.5× · P99 1.97ms</text>
+    <circle cx="50" cy="270" r="3" fill="#6d28d9"/>
+    <text x="62" y="275" fill="#e6e6f0">内存省 500× · Rust 数据面</text>
+    <circle cx="50" cy="296" r="3" fill="#f7c948"/>
+    <text x="62" y="301" fill="#e6e6f0">LLM / MCP / A2A 统一网关</text>
+  </g>
+
+  <g transform="translate(45, 330)">
+    <rect x="0" y="0" width="58" height="26" rx="13" fill="#00d2ff" opacity="0.12" stroke="#00d2ff" stroke-width="1"/>
+    <text x="29" y="17" font-family="Arial,sans-serif" font-size="11" fill="#00d2ff" text-anchor="middle">Rust</text>
+    <rect x="66" y="0" width="58" height="26" rx="13" fill="#00d2ff" opacity="0.12" stroke="#00d2ff" stroke-width="1"/>
+    <text x="95" y="17" font-family="Arial,sans-serif" font-size="11" fill="#00d2ff" text-anchor="middle">MCP</text>
+    <rect x="132" y="0" width="58" height="26" rx="13" fill="#6d28d9" opacity="0.18" stroke="#9b6dff" stroke-width="1"/>
+    <text x="161" y="17" font-family="Arial,sans-serif" font-size="11" fill="#c4a8ff" text-anchor="middle">A2A</text>
+    <rect x="198" y="0" width="92" height="26" rx="13" fill="#f7c948" opacity="0.12" stroke="#f7c948" stroke-width="1"/>
+    <text x="244" y="17" font-family="Arial,sans-serif" font-size="11" fill="#f7c948" text-anchor="middle">LiteLLM 对比</text>
+    <rect x="298" y="0" width="118" height="26" rx="13" fill="#15803d" opacity="0.15" stroke="#4ade80" stroke-width="1"/>
+    <text x="357" y="17" font-family="Arial,sans-serif" font-size="11" fill="#86efac" text-anchor="middle">Linux 基金会</text>
+  </g>
+
+  <text x="45" y="378" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#666" letter-spacing="1">AI 网关深潜 · 基准口径拆解 · 选型决策</text>
+  <text x="855" y="378" font-family="'PingFang SC','Microsoft YaHei',Arial,sans-serif" font-size="11" fill="#666" text-anchor="end">公众号 · 最新AI知识宇宙</text>
+
+  <rect x="0" y="379" width="900" height="4" fill="url(#accent2)"/>
+</svg>

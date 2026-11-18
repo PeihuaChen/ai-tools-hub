@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="860" viewBox="0 0 1080 860">
+  <rect x="0" y="0" width="1080" height="860" fill="#f7f8fa"/>
+
+  <text x="60" y="88" font-size="64" font-weight="bold" fill="#111827">选型：按核心需求分流</text>
+  <text x="60" y="150" font-size="36" fill="#4b5563">没有全能冠军，只有场景匹配</text>
+
+  <!-- LiteLLM 分支 -->
+  <rect x="60" y="210" width="460" height="540" rx="20" fill="#eff6ff" stroke="#1d4ed8" stroke-width="3"/>
+  <text x="290" y="278" font-size="42" font-weight="bold" fill="#1d4ed8" text-anchor="middle">选 LiteLLM</text>
+  <line x1="100" y1="306" x2="480" y2="306" stroke="#93c5fd" stroke-width="2"/>
+  <text x="100" y="372" font-size="34" fill="#374151">· 多模型归一化调用</text>
+  <text x="100" y="432" font-size="34" fill="#374151">· 需要响应语义缓存</text>
+  <text x="100" y="492" font-size="34" fill="#374151">· 跨实例统一预算配额</text>
+  <text x="100" y="552" font-size="34" fill="#374151">· 100+ 供应商覆盖</text>
+  <text x="100" y="612" font-size="34" fill="#374151">· 参数级工具权限</text>
+  <rect x="100" y="660" width="380" height="60" rx="12" fill="#dbeafe"/>
+  <text x="290" y="700" font-size="32" font-weight="bold" fill="#1d4ed8" text-anchor="middle">生态成熟 · Python 技术栈</text>
+
+  <!-- agentgateway 分支 -->
+  <rect x="560" y="210" width="460" height="540" rx="20" fill="#faf5ff" stroke="#6d28d9" stroke-width="3"/>
+  <text x="790" y="278" font-size="39" font-weight="bold" fill="#6d28d9" text-anchor="middle">选 agentgateway</text>
+  <line x1="600" y1="306" x2="980" y2="306" stroke="#d8b4fe" stroke-width="2"/>
+  <text x="600" y="372" font-size="34" fill="#374151">· MCP / A2A 是核心</text>
+  <text x="600" y="432" font-size="34" fill="#374151">· 按会话过滤工具列表</text>
+  <text x="600" y="492" font-size="34" fill="#374151">· 已在 K8s / Istio 体系</text>
+  <text x="600" y="552" font-size="34" fill="#374151">· 高并发低延迟敏感</text>
+  <text x="600" y="612" font-size="34" fill="#374151">· 单二进制轻量部署</text>
+  <rect x="600" y="660" width="380" height="60" rx="12" fill="#ede9fe"/>
+  <text x="790" y="700" font-size="32" font-weight="bold" fill="#6d28d9" text-anchor="middle">Rust 数据面 · 协议原生</text>
+
+  <text x="60" y="812" font-size="30" fill="#6b7280">注：性能数字为厂商模拟后端自测，选型前建议用真实流量复测</text>
+</svg>
