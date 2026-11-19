@@ -1,6 +1,29 @@
 {
-  "total": 215,
+  "total": 217,
   "posts": [
+    {
+      "slug": "agentgateway-ai-native-gateway-deep-dive-2026",
+      "title": "比 LiteLLM 快 11 倍、省 500 倍内存：agentgateway 的性能神话能信几分",
+      "date": "2026-11-19",
+      "category": "AI开发平台",
+      "description": "agentgateway 是捐给 Linux 基金会的 Rust 开源智能体网关，厂商自测比 LiteLLM 快 11 倍、省 500 倍内存。本文拆开测试口径，讲清它对 LLM、MCP、A2A 流量的支持、LiteLLM 强项与选型建议。",
+      "keywords": [
+        "agentgateway",
+        "AI网关",
+        "MCP",
+        "A2A",
+        "LiteLLM",
+        "Linux基金会",
+        "Rust",
+        "Agent基础设施",
+        "可观测性",
+        "开源"
+      ],
+      "read_time": "18 分钟",
+      "word_count": 10776,
+      "view_count": 0,
+      "created_at": "2026-11-19 11:45:25"
+    },
     {
       "slug": "docling-deep-dive-document-parser-2026",
       "title": "Docling 深度调研：70K Star 文档解析标准，强在哪慢在哪",
@@ -17,6 +40,27 @@
       "word_count": 9471,
       "view_count": 0,
       "created_at": "2026-11-18 11:26:21"
+    },
+    {
+      "slug": "marker-pdf-document-parsing-deep-dive-2026",
+      "title": "精度不打折、速度提 5 倍：Marker 2 如何重写 PDF 解析流水线",
+      "date": "2026-11-18",
+      "category": "AI开发平台",
+      "description": "Marker 2 拿下 olmOCR-bench 76.0 分，吞吐做到 MinerU 的 5 倍。拆解混合流水线如何按页路由、四档模式怎么选，以及许可证与跑分背后的坑。",
+      "keywords": [
+        "Marker",
+        "PDF解析",
+        "文档解析",
+        "OCR",
+        "RAG",
+        "Datalab",
+        "Surya",
+        "Docling"
+      ],
+      "read_time": "14 分钟",
+      "word_count": 10449,
+      "view_count": 0,
+      "created_at": "2026-11-19 11:45:32"
     },
     {
       "slug": "mcphub-tool-sprawl-smart-routing-2026",

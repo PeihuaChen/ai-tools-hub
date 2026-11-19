@@ -1,66 +1,66 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="940" viewBox="0 0 1080 940">
   <rect x="0" y="0" width="1080" height="940" fill="#f7f8fa"/>
 
-  <text x="60" y="88" font-size="64" font-weight="bold" fill="#111827">一个数据面，跑三类流量</text>
-  <text x="60" y="150" font-size="36" fill="#4b5563">传统 API 与智能体流量，共享同一套策略与安全模型</text>
+  <text x="50" y="88" font-size="64" font-weight="bold" fill="#111827">一个数据面，跑三类流量</text>
+  <text x="50" y="150" font-size="36" fill="#4b5563">传统 API 与智能体流量，共享同一套策略与安全模型</text>
 
   <!-- 左侧四类客户端 -->
   <g>
-    <rect x="60" y="220" width="270" height="120" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
-    <text x="195" y="272" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">智能体框架</text>
-    <text x="195" y="318" font-size="32" fill="#4b5563" text-anchor="middle">LangGraph · AutoGen</text>
+    <rect x="50" y="220" width="372" height="120" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="236" y="272" font-size="40" font-weight="bold" fill="#1d4ed8" text-anchor="middle">智能体框架</text>
+    <text x="236" y="318" font-size="32" fill="#4b5563" text-anchor="middle">LangGraph · AutoGen</text>
 
-    <rect x="60" y="360" width="270" height="120" rx="16" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
-    <text x="195" y="412" font-size="40" font-weight="bold" fill="#0e7490" text-anchor="middle">MCP 工具</text>
-    <text x="195" y="458" font-size="32" fill="#4b5563" text-anchor="middle">工具服务器 · REST API</text>
+    <rect x="50" y="360" width="372" height="120" rx="16" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+    <text x="236" y="412" font-size="40" font-weight="bold" fill="#0e7490" text-anchor="middle">MCP 工具</text>
+    <text x="236" y="458" font-size="32" fill="#4b5563" text-anchor="middle">工具服务器 · REST API</text>
 
-    <rect x="60" y="500" width="270" height="120" rx="16" fill="#faf5ff" stroke="#6d28d9" stroke-width="2"/>
-    <text x="195" y="552" font-size="40" font-weight="bold" fill="#6d28d9" text-anchor="middle">A2A 智能体</text>
-    <text x="195" y="598" font-size="32" fill="#4b5563" text-anchor="middle">跨团队能力发现</text>
+    <rect x="50" y="500" width="372" height="120" rx="16" fill="#faf5ff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="236" y="552" font-size="40" font-weight="bold" fill="#6d28d9" text-anchor="middle">A2A 智能体</text>
+    <text x="236" y="598" font-size="32" fill="#4b5563" text-anchor="middle">跨团队能力发现</text>
 
-    <rect x="60" y="640" width="270" height="120" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
-    <text x="195" y="692" font-size="40" font-weight="bold" fill="#b45309" text-anchor="middle">应用服务</text>
-    <text x="195" y="738" font-size="32" fill="#4b5563" text-anchor="middle">HTTP · gRPC 常规流量</text>
+    <rect x="50" y="640" width="372" height="120" rx="16" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+    <text x="236" y="692" font-size="40" font-weight="bold" fill="#b45309" text-anchor="middle">应用服务</text>
+    <text x="236" y="738" font-size="32" fill="#4b5563" text-anchor="middle">HTTP · gRPC 常规流量</text>
   </g>
 
   <!-- 汇聚箭头 -->
   <g stroke="#94a3b8" stroke-width="3" fill="none">
-    <path d="M330 280 L455 420"/>
-    <path d="M330 420 L455 440"/>
-    <path d="M330 560 L455 460"/>
-    <path d="M330 700 L455 480"/>
+    <path d="M422 280 L474 420"/>
+    <path d="M422 420 L474 440"/>
+    <path d="M422 560 L474 460"/>
+    <path d="M422 700 L474 480"/>
   </g>
-  <path d="M455 450 L445 440 L445 460 Z" fill="#94a3b8"/>
+  <path d="M474 445 L464 435 L464 455 Z" fill="#94a3b8"/>
 
   <!-- 中央数据面 -->
-  <rect x="458" y="300" width="314" height="290" rx="20" fill="#1d4ed8" stroke="#1e40af" stroke-width="3"/>
-  <text x="615" y="372" font-size="33" font-weight="bold" fill="#ffffff" text-anchor="middle">agentgateway</text>
-  <text x="615" y="424" font-size="34" fill="#dbeafe" text-anchor="middle">统一数据面</text>
-  <line x1="508" y1="452" x2="722" y2="452" stroke="#60a5fa" stroke-width="2"/>
-  <text x="615" y="506" font-size="32" fill="#ffffff" text-anchor="middle">Rust 构建</text>
-  <text x="615" y="552" font-size="32" fill="#ffffff" text-anchor="middle">协议感知路由</text>
+  <rect x="477" y="300" width="310" height="290" rx="20" fill="#1d4ed8" stroke="#1e40af" stroke-width="3"/>
+  <text x="632" y="372" font-size="33" font-weight="bold" fill="#ffffff" text-anchor="middle">agentgateway</text>
+  <text x="632" y="424" font-size="34" fill="#dbeafe" text-anchor="middle">统一数据面</text>
+  <line x1="517" y1="452" x2="747" y2="452" stroke="#60a5fa" stroke-width="2"/>
+  <text x="632" y="506" font-size="32" fill="#ffffff" text-anchor="middle">Rust 构建</text>
+  <text x="632" y="552" font-size="32" fill="#ffffff" text-anchor="middle">协议感知路由</text>
 
   <!-- 右侧能力 -->
   <g stroke="#94a3b8" stroke-width="3" fill="none">
-    <path d="M765 380 L880 270"/>
-    <path d="M765 445 L880 445"/>
-    <path d="M765 510 L880 620"/>
+    <path d="M787 380 L837 270"/>
+    <path d="M787 445 L837 445"/>
+    <path d="M787 510 L837 620"/>
   </g>
 
   <g>
-    <rect x="885" y="210" width="135" height="120" rx="16" fill="#f1f5f9" stroke="#15803d" stroke-width="2"/>
-    <text x="952" y="262" font-size="34" font-weight="bold" fill="#15803d" text-anchor="middle">安全</text>
-    <text x="952" y="306" font-size="30" fill="#4b5563" text-anchor="middle">鉴权 RBAC</text>
+    <rect x="842" y="210" width="192" height="120" rx="16" fill="#f1f5f9" stroke="#15803d" stroke-width="2"/>
+    <text x="938" y="262" font-size="34" font-weight="bold" fill="#15803d" text-anchor="middle">安全</text>
+    <text x="938" y="306" font-size="30" fill="#4b5563" text-anchor="middle">鉴权 RBAC</text>
 
-    <rect x="885" y="385" width="135" height="120" rx="16" fill="#f1f5f9" stroke="#b45309" stroke-width="2"/>
-    <text x="952" y="437" font-size="34" font-weight="bold" fill="#b45309" text-anchor="middle">治理</text>
-    <text x="952" y="481" font-size="30" fill="#4b5563" text-anchor="middle">限流 策略</text>
+    <rect x="842" y="385" width="192" height="120" rx="16" fill="#f1f5f9" stroke="#b45309" stroke-width="2"/>
+    <text x="938" y="437" font-size="34" font-weight="bold" fill="#b45309" text-anchor="middle">治理</text>
+    <text x="938" y="481" font-size="30" fill="#4b5563" text-anchor="middle">限流 策略</text>
 
-    <rect x="885" y="560" width="135" height="120" rx="16" fill="#f1f5f9" stroke="#6d28d9" stroke-width="2"/>
-    <text x="952" y="612" font-size="34" font-weight="bold" fill="#6d28d9" text-anchor="middle">可观测</text>
-    <text x="952" y="656" font-size="30" fill="#4b5563" text-anchor="middle">OTel 追踪</text>
+    <rect x="842" y="560" width="192" height="120" rx="16" fill="#f1f5f9" stroke="#6d28d9" stroke-width="2"/>
+    <text x="938" y="612" font-size="34" font-weight="bold" fill="#6d28d9" text-anchor="middle">可观测</text>
+    <text x="938" y="656" font-size="30" fill="#4b5563" text-anchor="middle">OTel 追踪</text>
   </g>
 
-  <line x1="60" y1="812" x2="1020" y2="812" stroke="#d9e2ec" stroke-width="2"/>
-  <text x="60" y="878" font-size="30" fill="#374151">关键判断：会话状态、工具虚拟化、协议协商是传统网关最难补齐的部分</text>
+  <line x1="50" y1="812" x2="1034" y2="812" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="50" y="878" font-size="30" fill="#374151">关键判断：会话状态、工具虚拟化、协议协商是传统网关最难补齐的部分</text>
 </svg>
