@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a5f"/>
+      <stop offset="1" stop-color="#2a2a5a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <!-- subtle grid -->
+  <g stroke="#2a2a55" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="64" x2="900" y2="64"/>
+    <line x1="0" y1="128" x2="900" y2="128"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="256" x2="900" y2="256"/>
+    <line x1="0" y1="320" x2="900" y2="320"/>
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+  </g>
+
+  <!-- top & bottom color bars -->
+  <rect x="0" y="0" width="300" height="4" fill="#22d3ee"/>
+  <rect x="300" y="0" width="300" height="4" fill="#6366f1"/>
+  <rect x="600" y="0" width="300" height="4" fill="#a855f7"/>
+  <rect x="0" y="379" width="450" height="4" fill="#6366f1"/>
+  <rect x="450" y="379" width="450" height="4" fill="#22d3ee"/>
+
+  <!-- tag box -->
+  <rect x="40" y="34" width="252" height="30" rx="6" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="56" y="54" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#7dd3fc">AI 行业观察 · 开源项目拆解</text>
+
+  <!-- year badge -->
+  <circle cx="842" cy="52" r="24" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="842" y="59" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="bold" fill="#c4b5fd">26</text>
+
+  <!-- title -->
+  <text x="40" y="126" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">Ragent 深度拆解</text>
+  <text x="40" y="164" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600" fill="url(#sub)">从 Workflow 到 Agentic 双引擎的 RAG 落地参考</text>
+
+  <!-- highlights -->
+  <text x="40" y="212" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#5eead4">◆ 一年 4492 Star · 927 Fork · Apache-2.0 全量开源</text>
+  <text x="40" y="236" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#93c5fd">◆ 四路混合召回 · RRF 融合 · Rerank 精排</text>
+  <text x="40" y="260" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#c4b5fd">◆ AgentScope ReAct 引擎 · 三态熔断 · 公平排队</text>
+
+  <!-- pill tags -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    <rect x="40" y="292" width="62" height="26" rx="13" fill="none" stroke="#38bdf8" stroke-width="1"/>
+    <text x="71" y="309" text-anchor="middle" fill="#7dd3fc">Java</text>
+    <rect x="114" y="292" width="104" height="26" rx="13" fill="none" stroke="#818cf8" stroke-width="1"/>
+    <text x="166" y="309" text-anchor="middle" fill="#a5b4fc">Agentic RAG</text>
+    <rect x="232" y="292" width="100" height="26" rx="13" fill="none" stroke="#c084fc" stroke-width="1"/>
+    <text x="282" y="309" text-anchor="middle" fill="#d8b4fe">AgentScope</text>
+    <rect x="346" y="292" width="62" height="26" rx="13" fill="none" stroke="#5eead4" stroke-width="1"/>
+    <text x="377" y="309" text-anchor="middle" fill="#5eead4">MCP</text>
+    <rect x="422" y="292" width="88" height="26" rx="13" fill="none" stroke="#fbbf24" stroke-width="1"/>
+    <text x="466" y="309" text-anchor="middle" fill="#fcd34d">Langfuse</text>
+  </g>
+
+  <!-- right concept: four channels converging into a funnel -->
+  <g>
+    <rect x="632" y="98" width="96" height="30" rx="6" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+    <text x="680" y="118" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#7dd3fc">向量</text>
+    <rect x="744" y="98" width="96" height="30" rx="6" fill="none" stroke="#5eead4" stroke-width="1.2"/>
+    <text x="792" y="118" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#5eead4">关键词</text>
+    <rect x="632" y="138" width="96" height="30" rx="6" fill="none" stroke="#c084fc" stroke-width="1.2"/>
+    <text x="680" y="158" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#d8b4fe">图谱</text>
+    <rect x="744" y="138" width="96" height="30" rx="6" fill="none" stroke="#fbbf24" stroke-width="1.2"/>
+    <text x="792" y="158" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#fcd34d">联网</text>
+
+    <line x1="680" y1="128" x2="722" y2="208" stroke="#38bdf8" stroke-width="1.2"/>
+    <line x1="792" y1="128" x2="770" y2="208" stroke="#5eead4" stroke-width="1.2"/>
+    <line x1="680" y1="168" x2="730" y2="208" stroke="#c084fc" stroke-width="1.2"/>
+    <line x1="792" y1="168" x2="762" y2="208" stroke="#fbbf24" stroke-width="1.2"/>
+
+    <path d="M 660 212 L 832 212 L 778 262 L 714 262 Z" fill="url(#node)" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="746" y="240" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="bold" fill="#e0e7ff">RRF+Rerank</text>
+
+    <rect x="700" y="272" width="92" height="28" rx="6" fill="none" stroke="#22d3ee" stroke-width="1.2"/>
+    <text x="746" y="291" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#67e8f9">TopK 结果</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="40" y1="344" x2="860" y2="344" stroke="#2a2a55" stroke-width="1"/>
+  <text x="40" y="366" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#64748b">全链路架构 · 生产级机制 · 框架选型之争</text>
+  <text x="860" y="366" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">公众号：AI 行业观察</text>
+</svg>

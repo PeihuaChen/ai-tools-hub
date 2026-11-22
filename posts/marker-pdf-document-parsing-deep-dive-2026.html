@@ -30,13 +30,13 @@
             <h1 class="post-title">精度不打折、速度提 5 倍：Marker 2 如何重写 PDF 解析流水线</h1>
             <div class="post-meta">
                 <span class="cat">AI开发平台</span>
-                <span>2026-11-18 · 14 分钟</span>
+                <span>2026-11-23 · 16 分钟</span>
             </div>
             <h2 id="_1">一个"既要又要"的数字</h2>
 <p>文档解析领域长期有个默认的取舍：要么精度高但慢，要么快但精度崩。</p>
 <p>2026 年 7 月，Datalab 发布的 Marker 2 把这条规则撕开了一道口子。在 Allen AI 的第三方基准 olmOCR-bench 上，它的 balanced 模式拿到 <strong>76.0 分</strong>，单张 B200 GPU  sustained 吞吐 <strong>2.9 页/秒</strong>。</p>
 <p>同场竞技的 MinerU pipeline 后端得分 72.7，但只有 0.54 页/秒。Docling 得分 50.3，吞吐 2.1 页/秒。也就是说，Marker 2 在精度更高的同时，把速度做到了 MinerU 的 5.4 倍。</p>
-<p>更反常识的是它的另一档。纯 CPU、不调用任何视觉模型的 <code>--disable_ocr</code> 模式，能跑到 <strong>23.7 页/秒</strong>，得分仍有 43.6。而最新 README 用自建的 OmniParseBench 口径给出的数字更激进：<code>fast</code> 模式 71.0 分 / 23.6 页/秒，<code>no_ocr</code> 模式 57.0 分 / 40.8 页——后者的速度是 docling 的二十多倍。</p>
+<p>更反常识的是它的另一档。纯 CPU、不调用任何视觉模型的 <code>--disable_ocr</code> 模式，能跑到 <strong>23.7 页/秒</strong>，得分仍有 43.6。而最新 README 用自建的 OmniParseBench 口径给出的数字更激进：<code>fast</code> 模式 71.0 分 / 23.6 页/秒，<code>no_ocr</code> 模式 57.0 分 / 40.8 页/秒——后者的速度是 docling 的二十多倍。</p>
 <p>这套"精度与速度不再二选一"的打法，靠的不是堆更大的模型，恰恰相反，是<strong>把大模型用得更少、更精准</strong>。</p>
 <hr />
 <h2 id="pdf-rag">为什么 PDF 是 RAG 的第一道坎</h2>

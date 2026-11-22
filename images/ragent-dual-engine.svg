@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="670" viewBox="0 0 1080 670">
+  <rect x="0" y="0" width="1080" height="670" fill="#f7f8fa"/>
+
+  <!-- title -->
+  <text x="540" y="60" text-anchor="middle" font-size="56" font-weight="bold" fill="#111827">Workflow 与 Agentic 双引擎</text>
+  <text x="540" y="108" text-anchor="middle" font-size="32" fill="#4b5563">固定路径的知识问答走 v1；要规划、要动手的任务交给 v2</text>
+
+  <!-- left card: v1 workflow -->
+  <rect x="40" y="136" width="480" height="424" rx="16" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="280" y="184" text-anchor="middle" font-size="40" font-weight="bold" fill="#1d4ed8">v1 · Workflow 编排</text>
+
+  <g>
+    <rect x="90" y="210" width="380" height="54" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+    <text x="280" y="237" text-anchor="middle" font-size="32" fill="#1e40af">问题重写与拆分</text>
+
+    <line x1="280" y1="266" x2="280" y2="282" stroke="#94a3b8" stroke-width="2.5"/>
+    <line x1="271" y1="274" x2="280" y2="286" stroke="#94a3b8" stroke-width="2.5"/>
+    <line x1="289" y1="274" x2="280" y2="286" stroke="#94a3b8" stroke-width="2.5"/>
+
+    <rect x="90" y="288" width="380" height="54" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+    <text x="280" y="315" text-anchor="middle" font-size="32" fill="#1e40af">树形意图识别</text>
+
+    <line x1="280" y1="344" x2="280" y2="360" stroke="#94a3b8" stroke-width="2.5"/>
+    <line x1="271" y1="352" x2="280" y2="364" stroke="#94a3b8" stroke-width="2.5"/>
+    <line x1="289" y1="352" x2="280" y2="364" stroke="#94a3b8" stroke-width="2.5"/>
+
+    <rect x="90" y="366" width="380" height="54" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+    <text x="280" y="393" text-anchor="middle" font-size="32" fill="#1e40af">多路并行召回</text>
+
+    <line x1="280" y1="422" x2="280" y2="438" stroke="#94a3b8" stroke-width="2.5"/>
+    <line x1="271" y1="430" x2="280" y2="442" stroke="#94a3b8" stroke-width="2.5"/>
+    <line x1="289" y1="430" x2="280" y2="442" stroke="#94a3b8" stroke-width="2.5"/>
+
+    <rect x="90" y="444" width="380" height="54" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+    <text x="280" y="471" text-anchor="middle" font-size="32" fill="#1e40af">组装与流式生成</text>
+  </g>
+
+  <text x="280" y="532" text-anchor="middle" font-size="30" fill="#6b7280">路径固定 · 行为可控 · 更快</text>
+
+  <!-- right card: v2 agentic -->
+  <rect x="560" y="136" width="480" height="424" rx="16" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="800" y="184" text-anchor="middle" font-size="40" font-weight="bold" fill="#6d28d9">v2 · Agentic 架构</text>
+
+  <g stroke="#6d28d9" stroke-width="2.5" fill="none">
+    <circle cx="695" cy="275" r="46"/>
+    <circle cx="905" cy="275" r="46"/>
+    <circle cx="800" cy="400" r="46"/>
+  </g>
+  <text x="695" y="288" text-anchor="middle" font-size="34" font-weight="bold" fill="#6d28d9">思考</text>
+  <text x="905" y="288" text-anchor="middle" font-size="34" font-weight="bold" fill="#6d28d9">行动</text>
+  <text x="800" y="413" text-anchor="middle" font-size="34" font-weight="bold" fill="#6d28d9">观察</text>
+
+  <g stroke="#94a3b8" stroke-width="2.5">
+    <line x1="743" y1="275" x2="853" y2="275"/>
+    <line x1="843" y1="265" x2="856" y2="275"/>
+    <line x1="843" y1="285" x2="856" y2="275"/>
+
+    <line x1="872" y1="312" x2="830" y2="360"/>
+    <line x1="840" y1="352" x2="828" y2="364"/>
+    <line x1="830" y1="344" x2="828" y2="364"/>
+
+    <line x1="730" y1="360" x2="688" y2="312"/>
+    <line x1="686" y1="326" x2="684" y2="310"/>
+    <line x1="700" y1="320" x2="684" y2="310"/>
+  </g>
+
+  <text x="800" y="486" text-anchor="middle" font-size="30" fill="#6b7280">AgentScope ReAct 循环</text>
+  <text x="800" y="532" text-anchor="middle" font-size="30" fill="#6b7280">模型自主决策 · 链路更长</text>
+
+  <!-- bottom note -->
+  <rect x="60" y="590" width="960" height="56" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="540" y="618" text-anchor="middle" font-size="34" fill="#166534">人设与提示词归智能体管理；知识库与 MCP 工具挂在意图树</text>
+</svg>

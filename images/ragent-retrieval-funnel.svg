@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="964" viewBox="0 0 1080 964">
+  <rect x="0" y="0" width="1080" height="964" fill="#f7f8fa"/>
+
+  <!-- title -->
+  <text x="540" y="64" text-anchor="middle" font-size="56" font-weight="bold" fill="#111827">Ragent 四路检索与漏斗后处理</text>
+  <text x="540" y="112" text-anchor="middle" font-size="32" fill="#4b5563">四通道并行召回，后处理链逐级收窄</text>
+
+  <!-- four channel cards (2x2) -->
+  <g>
+    <rect x="28" y="140" width="430" height="112" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="243" y="170" text-anchor="middle" font-size="36" font-weight="bold" fill="#1d4ed8">向量检索</text>
+    <text x="243" y="226" text-anchor="middle" font-size="32" fill="#4b5563">pgvector · Milvus</text>
+
+    <rect x="622" y="140" width="430" height="112" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="837" y="170" text-anchor="middle" font-size="36" font-weight="bold" fill="#15803d">关键词检索</text>
+    <text x="837" y="226" text-anchor="middle" font-size="32" fill="#4b5563">Elasticsearch</text>
+
+    <rect x="28" y="266" width="430" height="112" rx="14" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+    <text x="243" y="296" text-anchor="middle" font-size="36" font-weight="bold" fill="#b45309">知识图谱</text>
+    <text x="243" y="352" text-anchor="middle" font-size="32" fill="#4b5563">LightRAG + Neo4j</text>
+
+    <rect x="622" y="266" width="430" height="112" rx="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="837" y="296" text-anchor="middle" font-size="36" font-weight="bold" fill="#6d28d9">联网搜索</text>
+    <text x="837" y="352" text-anchor="middle" font-size="32" fill="#4b5563">You.com</text>
+  </g>
+
+  <!-- connectors to junction -->
+  <g stroke="#94a3b8" stroke-width="2.5">
+    <line x1="458" y1="196" x2="528" y2="316"/>
+    <line x1="458" y1="322" x2="526" y2="324"/>
+    <line x1="622" y1="196" x2="552" y2="316"/>
+    <line x1="622" y1="322" x2="554" y2="324"/>
+  </g>
+  <circle cx="540" cy="326" r="12" fill="#94a3b8"/>
+
+  <!-- arrow to dispatch band -->
+  <g stroke="#94a3b8" stroke-width="2.5">
+    <line x1="540" y1="338" x2="540" y2="404"/>
+    <line x1="530" y1="394" x2="540" y2="408"/>
+    <line x1="550" y1="394" x2="540" y2="408"/>
+  </g>
+
+  <!-- dispatch band -->
+  <rect x="60" y="420" width="960" height="58" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="540" y="451" text-anchor="middle" font-size="34" font-weight="bold" fill="#1d4ed8">并行调度 · 专用线程池 · 单通道失败不阻断</text>
+
+  <!-- funnel container -->
+  <rect x="110" y="500" width="860" height="366" rx="14" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+  <text x="540" y="534" text-anchor="middle" font-size="36" font-weight="bold" fill="#334155">后处理漏斗</text>
+
+  <g>
+    <rect x="140" y="552" width="800" height="64" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="540" y="589" text-anchor="middle" font-size="32" fill="#334155">去重（ID 与内容摘要）</text>
+
+    <rect x="195" y="628" width="690" height="64" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="540" y="665" text-anchor="middle" font-size="32" fill="#334155">加权 RRF 融合</text>
+
+    <rect x="255" y="704" width="570" height="64" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="540" y="741" text-anchor="middle" font-size="32" fill="#334155">Rerank 精排候选池</text>
+
+    <rect x="290" y="780" width="500" height="64" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="540" y="817" text-anchor="middle" font-size="32" fill="#1e40af">元数据富化 → 最终 TopK</text>
+  </g>
+
+  <!-- bottom note -->
+  <rect x="60" y="890" width="960" height="56" rx="12" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+  <text x="540" y="919" text-anchor="middle" font-size="34" fill="#92400e">启动时校验：召回预算 ≥ Rerank 候选池 ≥ 最终 TopK</text>
+</svg>
