@@ -1,6 +1,25 @@
 {
-  "total": 217,
+  "total": 218,
   "posts": [
+    {
+      "slug": "ragent-java-agentic-rag-deep-dive-2026",
+      "title": "从 Workflow 到 Agentic 双引擎：Ragent 给 Java 开发者的 RAG 落地参考",
+      "date": "2026-11-24",
+      "category": "AI基础设施",
+      "description": "拿个offer 社群开源的企业级 Java Agentic RAG 平台 Ragent，一年收获约 4500 Star。本文拆解其四路混合检索、AgentScope ReAct 引擎、三态熔断与公平排队等生产级设计。",
+      "keywords": [
+        "Ragent",
+        "Agentic RAG",
+        "Java",
+        "AgentScope",
+        "MCP",
+        "开源项目"
+      ],
+      "read_time": "15 分钟",
+      "word_count": 9575,
+      "view_count": 0,
+      "created_at": "2026-11-23 11:05:55"
+    },
     {
       "slug": "marker-pdf-document-parsing-deep-dive-2026",
       "title": "精度不打折、速度提 5 倍：Marker 2 如何重写 PDF 解析流水线",
