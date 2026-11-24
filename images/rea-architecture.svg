@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="960" viewBox="0 0 1080 960">
+  <rect width="1080" height="960" fill="#f7f8fa"/>
+
+  <text x="540" y="76" text-anchor="middle" font-size="58" font-weight="bold" fill="#111827">REA 分层架构：编排层是核心</text>
+  <text x="540" y="126" text-anchor="middle" font-size="32" fill="#4b5563">Agent 不直接碰引擎，所有结论经编排层带证据返回</text>
+
+  <rect x="90" y="160" width="900" height="132" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="130" y="208" font-size="40" font-weight="bold" fill="#1d4ed8">编程 Agent 层</text>
+  <text x="130" y="252" font-size="32" fill="#334155">Claude Code · Codex · Cursor · Gemini CLI</text>
+  <text x="130" y="284" font-size="32" fill="#334155">任意支持本地 MCP 的 Agent 均可接入</text>
+
+  <line x1="540" y1="292" x2="540" y2="348" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M 540 356 L 530 342 L 550 342 Z" fill="#94a3b8"/>
+  <text x="560" y="330" font-size="32" fill="#4b5563">MCP 调用（全本地）</text>
+
+  <rect x="90" y="362" width="900" height="196" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="130" y="410" font-size="40" font-weight="bold" fill="#0e7490">REA 编排层（rea-agents）</text>
+  <g>
+    <rect x="130" y="432" width="230" height="56" rx="10" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
+    <text x="245" y="470" text-anchor="middle" font-size="32" fill="#0e7490">MCP 服务器</text>
+    <rect x="380" y="432" width="230" height="56" rx="10" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
+    <text x="495" y="470" text-anchor="middle" font-size="32" fill="#0e7490">rea 命令行</text>
+    <rect x="630" y="432" width="330" height="56" rx="10" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
+    <text x="795" y="470" text-anchor="middle" font-size="32" fill="#0e7490">证据链纪律（核心设计）</text>
+  </g>
+  <text x="130" y="532" font-size="32" fill="#475569">每个结论附证据与局限：空结果 ≠ 不存在，可导出复核</text>
+
+  <line x1="540" y1="558" x2="540" y2="614" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M 540 622 L 530 608 L 550 608 Z" fill="#94a3b8"/>
+  <text x="560" y="596" font-size="32" fill="#4b5563">引擎适配（Ghidra 适配器只读）</text>
+
+  <rect x="90" y="628" width="900" height="132" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="130" y="676" font-size="40" font-weight="bold" fill="#6d28d9">反编译引擎层（授权自备）</text>
+  <text x="130" y="720" font-size="32" fill="#334155">Ghidra（只读） · IDA · Hopper · Kuna</text>
+  <text x="130" y="752" font-size="32" fill="#334155">静态 JS 与 .NET 分析不依赖原生引擎</text>
+
+  <line x1="540" y1="760" x2="540" y2="816" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M 540 824 L 530 810 L 550 810 Z" fill="#94a3b8"/>
+  <text x="560" y="798" font-size="32" fill="#4b5563">分析目标（全本地，不上传）</text>
+
+  <rect x="90" y="830" width="900" height="100" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="130" y="872" font-size="40" font-weight="bold" fill="#15803d">目标格式层</text>
+  <text x="130" y="912" font-size="32" fill="#334155">原生二进制 · Electron · .NET · Android · 固件 · WASM</text>
+</svg>
