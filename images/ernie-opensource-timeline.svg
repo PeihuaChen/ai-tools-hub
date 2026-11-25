@@ -1,0 +1,66 @@
+<svg width="1080" height="1380" viewBox="0 0 1080 1380" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1380" fill="#f7f8fa"/>
+
+  <text x="540" y="85" text-anchor="middle" fill="#111827" font-size="54" font-weight="700">文心开源时间线：2023–2026</text>
+  <text x="540" y="140" text-anchor="middle" fill="#4b5563" font-size="32">从闭源起步，到旗舰闭源 + 主力开源双轨并行</text>
+
+  <line x1="210" y1="200" x2="210" y2="1265" stroke="#94a3b8" stroke-width="4"/>
+
+  <g>
+    <circle cx="210" cy="245" r="13" fill="#64748b" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="253" text-anchor="end" fill="#64748b" font-size="32" font-weight="700">2023.3</text>
+    <text x="265" y="239" fill="#111827" font-size="38" font-weight="700">文心一言邀测上线</text>
+    <text x="265" y="279" fill="#4b5563" font-size="32">闭源路线起步</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="380" r="13" fill="#b91c1c" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="388" text-anchor="end" fill="#b91c1c" font-size="32" font-weight="700">2024.4</text>
+    <text x="265" y="374" fill="#111827" font-size="38" font-weight="700">「开源成本最高」表态</text>
+    <text x="265" y="414" fill="#4b5563" font-size="32">闭源立场最坚定时刻</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="515" r="13" fill="#b45309" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="523" text-anchor="end" fill="#b45309" font-size="32" font-weight="700">2025.1</text>
+    <text x="265" y="509" fill="#111827" font-size="38" font-weight="700">DeepSeek-R1 开源爆火</text>
+    <text x="265" y="549" fill="#4b5563" font-size="32">开源模型冲击闭源叙事</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="650" r="13" fill="#1d4ed8" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="658" text-anchor="end" fill="#1d4ed8" font-size="32" font-weight="700">2025.2</text>
+    <text x="265" y="644" fill="#111827" font-size="38" font-weight="700">宣布免费 + 开源</text>
+    <text x="265" y="684" fill="#4b5563" font-size="32">组合拳比原计划提前约一年</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="785" r="13" fill="#15803d" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="793" text-anchor="end" fill="#15803d" font-size="32" font-weight="700">2025.6.30</text>
+    <text x="265" y="779" fill="#111827" font-size="38" font-weight="700">文心 4.5 全量开源</text>
+    <text x="265" y="819" fill="#4b5563" font-size="32">十款模型 · Apache 2.0 免费商用</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="920" r="13" fill="#15803d" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="928" text-anchor="end" fill="#15803d" font-size="32" font-weight="700">2025.9</text>
+    <text x="265" y="914" fill="#111827" font-size="38" font-weight="700">X1.1 登顶趋势榜</text>
+    <text x="265" y="954" fill="#4b5563" font-size="32">开源版登顶 HuggingFace 榜单</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="1055" r="13" fill="#6d28d9" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="1063" text-anchor="end" fill="#6d28d9" font-size="32" font-weight="700">2025.11</text>
+    <text x="265" y="1049" fill="#111827" font-size="38" font-weight="700">旗舰 5.0 发布（闭源）</text>
+    <text x="265" y="1089" fill="#4b5563" font-size="32">2.4 万亿参数 · 仅千帆 API</text>
+  </g>
+
+  <g>
+    <circle cx="210" cy="1190" r="13" fill="#0e7490" stroke="#f7f8fa" stroke-width="4"/>
+    <text x="185" y="1198" text-anchor="end" fill="#0e7490" font-size="32" font-weight="700">2026.11</text>
+    <text x="265" y="1184" fill="#111827" font-size="38" font-weight="700">5.5 Flash 开源</text>
+    <text x="265" y="1224" fill="#4b5563" font-size="32">280B 总参 / 14B 激活 MoE</text>
+  </g>
+
+  <text x="540" y="1320" text-anchor="middle" fill="#6b7280" font-size="32">图 1：文心大模型开源之路的八个关键节点</text>
+</svg>

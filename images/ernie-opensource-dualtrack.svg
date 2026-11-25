@@ -1,0 +1,54 @@
+<svg width="1080" height="1040" viewBox="0 0 1080 1040" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="1040" fill="#f7f8fa"/>
+
+  <text x="540" y="85" text-anchor="middle" fill="#111827" font-size="54" font-weight="700">双轨制：旗舰闭源，主力开源</text>
+  <text x="540" y="135" text-anchor="middle" fill="#4b5563" font-size="32">两条轨道最终都回流飞桨与千帆的商业底盘</text>
+
+  <rect x="290" y="170" width="500" height="75" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="540" y="218" text-anchor="middle" fill="#1d4ed8" font-size="36" font-weight="700">文心大模型产品矩阵</text>
+
+  <line x1="540" y1="245" x2="305" y2="322" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="540" y1="245" x2="775" y2="322" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="300" y="368" text-anchor="middle" fill="#1d4ed8" font-size="36" font-weight="700">旗舰轨道 · 闭源</text>
+  <text x="780" y="368" text-anchor="middle" fill="#15803d" font-size="36" font-weight="700">主力轨道 · 开源</text>
+
+  <rect x="70" y="385" width="460" height="110" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="300" y="433" text-anchor="middle" fill="#1d4ed8" font-size="34" font-weight="700">文心 5.0 / 5.1</text>
+  <text x="300" y="472" text-anchor="middle" fill="#4b5563" font-size="32">2.4 万亿参数 · 原生全模态</text>
+
+  <rect x="70" y="515" width="460" height="110" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="300" y="563" text-anchor="middle" fill="#1d4ed8" font-size="34" font-weight="700">仅千帆 API 调用</text>
+  <text x="300" y="602" text-anchor="middle" fill="#4b5563" font-size="32">无公开权重，按调用量收费</text>
+
+  <rect x="70" y="645" width="460" height="110" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="300" y="693" text-anchor="middle" fill="#1d4ed8" font-size="34" font-weight="700">收入：旗舰溢价</text>
+  <text x="300" y="732" text-anchor="middle" fill="#4b5563" font-size="32">最强能力留在自家云上变现</text>
+
+  <rect x="550" y="385" width="460" height="110" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="780" y="433" text-anchor="middle" fill="#15803d" font-size="34" font-weight="700">文心 4.5 系列</text>
+  <text x="780" y="472" text-anchor="middle" fill="#4b5563" font-size="32">0.3B–424B · Apache 2.0</text>
+
+  <rect x="550" y="515" width="460" height="110" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="780" y="563" text-anchor="middle" fill="#15803d" font-size="34" font-weight="700">5.5 Flash / X1 系列</text>
+  <text x="780" y="602" text-anchor="middle" fill="#4b5563" font-size="32">280B 总参 · 14B 激活</text>
+
+  <rect x="550" y="645" width="460" height="110" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+  <text x="780" y="693" text-anchor="middle" fill="#15803d" font-size="34" font-weight="700">目的：生态获客</text>
+  <text x="780" y="732" text-anchor="middle" fill="#4b5563" font-size="32">私有化部署入口，引流上云</text>
+
+  <line x1="300" y1="755" x2="490" y2="795" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="780" y1="755" x2="590" y2="795" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="140" y="800" width="800" height="120" rx="14" fill="#f1f5f9" stroke="#0e7490" stroke-width="2"/>
+  <text x="540" y="852" text-anchor="middle" fill="#0e7490" font-size="38" font-weight="700">飞桨框架 + 千帆平台</text>
+  <text x="540" y="895" text-anchor="middle" fill="#4b5563" font-size="32">开源与闭源的流量，最终都回到百度智能云生态</text>
+
+  <text x="540" y="975" text-anchor="middle" fill="#6b7280" font-size="32">图 2：旗舰闭源卖 API，主力开源换生态</text>
+</svg>

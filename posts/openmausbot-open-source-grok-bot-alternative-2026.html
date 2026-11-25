@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3个月2.7万星：OpenMausBot把一队AI Agent装进聊天App，开源版Grok Bot来了</title>
+    <meta name="description" content="2026年8月上线的开源项目OpenMausBot，三个多月攒下2.7万星：界面像聊天软件，但每个联系人都是会干活的AI Agent，用自己的Claude、Codex、Grok订阅驱动，数据留在本机。本文拆解它的架构、玩法与风险边界。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">3个月2.7万星：OpenMausBot把一队AI Agent装进聊天App，开源版Grok Bot来了</h1>
+            <div class="post-meta">
+                <span class="cat">AI智能体平台</span>
+                <span>2026-11-26 · 15 分钟</span>
+            </div>
+            <h2 id="27350">先看数据：三个多月，27350 颗星</h2>
+<p>GitHub 上一个 2026 年 8 月 11 日才创建的仓库，到 11 月下旬已经攒下约 <strong>27350 Star、3900 Fork</strong>——平均每天 137 颗星。它叫 <strong>OpenMausBot</strong>，定位一句话就能说清：<strong>开源版 Grok Bot</strong>。</p>
+<p>它长得很像 Telegram：一个联系人列表，每个联系人都有头像、人设和独立聊天记录。区别在于，列表里坐着的不是人，而是一队 <strong>AI Agent</strong>——每个 bot 可以用不同的模型、连不同的应用、操作自己的电脑，你像发消息一样给它们派活，像看直播一样看它们干活。</p>
+<p>作者是旧金山湾区的独立开发者 Milind Soni，项目以 Apache 2.0 协议开源，技术栈是 TypeScript + Electron + React。一个人、三个半月、两万多颗星，这个速度本身就是一个信号。</p>
+<hr />
+<h2 id="agent">它是什么：一支装进聊天软件的 Agent 团队</h2>
+<p>OpenMausBot 的核心形态是「<strong>AI 即通讯录</strong>」。每个 bot 拥有四样自己的东西：<strong>人设、模型、电脑、已连接应用</strong>。</p>
+<ul>
+<li><strong>人设</strong>：名字、头像、性格、系统提示词，右键就能复制、编辑、置顶</li>
+<li><strong>模型</strong>：bot 可以分别跑 Claude、Codex、Grok，聊天中途还能换脑</li>
+<li><strong>电脑</strong>：云 Linux 桌面、隔离虚拟机，或在安全认证通过后直接用你的本机</li>
+<li><strong>应用</strong>：通过 Composio 一键连接 Gmail、Slack、GitHub、Notion 等 500 多个应用</li>
+</ul>
+<p>最关键的设计是「<strong>自带 Agent</strong>」（bring your own agents）：bot 底层跑的是你机器上已经装好的 <code>claude</code>、<code>codex</code>、<code>grok</code> 命令行工具，用你<strong>已有的登录和订阅</strong>，不需要注册新账号，也没有中间商代理。</p>
+<p>再往上一层是<strong>频道</strong>（channels）。工作、生活、每个项目各开一个频道，每个频道有自己的聊天记录、共享指令、工作目录和成员名单——同一批 bot 可以按不同组合出现在不同频道里，不必反复克隆配置。</p>
+<p>群聊场景下还有个讨巧的设计：房间设为「Auto」时，一个轻量决策模型会在几百毫秒内判断没人 @ 的消息该交给哪个 bot 处理，拿不准就回落给房间的主答 bot。路由能力用 Cloudflare Workers AI 或 OpenRouter 的 key 就能开启。</p>
+<p>这个思路与行业里「一个订阅一个孤岛」的做法正好相反，和《<a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从LLM到Agent的范式跃迁2026：OpenAI「去聊天化」背后，整个行业在押注什么</a>》里讨论的趋势同源：AI 的入口正在从「对话框」变成「会干活的联系人」。</p>
+<hr />
+<h2 id="_1">背景：七周五款闭源产品，然后有了开源回应</h2>
+<p>要看懂这个项目为什么爆红，得先看它出生的时间点。2026 年 8 月到 9 月的七周里，五款闭源「个人 Agent」密集发布：</p>
+<table>
+<thead>
+<tr>
+<th>闭源产品</th>
+<th>关键限制</th>
+<th>OpenMausBot 对应做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grok Bot（xAI）</td>
+<td>仅Grok模型</td>
+<td>每个bot任意模型</td>
+</tr>
+<tr>
+<td>Meta Muse</td>
+<td>仅美加地区</td>
+<td>装哪跑哪</td>
+</tr>
+<tr>
+<td>OpenAI dots</td>
+<td>需特定订阅</td>
+<td>复用现有CLI登录</td>
+</tr>
+<tr>
+<td>Cue by Manus</td>
+<td>邀请制</td>
+<td>无门槛直接装</td>
+</tr>
+<tr>
+<td>Instinct</td>
+<td>云端持有密码</td>
+<td>本机执行+审批</td>
+</tr>
+</tbody>
+</table>
+<p>这五款产品形态各异，但有一个共同点：<strong>模型、执行电脑和你的数据，都留在厂商那一侧</strong>。Grok Bot 的机器人跑在 xAI 的共享云电脑上；Muse 装在 Meta 的云虚拟机里；Instinct 甚至把你的密码放在云端电脑上保管。</p>
+<p>OpenMausBot 保留了这个产品形态里最有价值的部分——「一队机器人 + 聊天式交互」，然后把边界整个翻了过来：进程跑在你本机，密钥和聊天记录存在 <code>~/.openmausbot</code> 目录，Agent 用你自己的订阅。仓库里那句自我介绍很直白：如果你在找「开源的 Muse、开源的 dots、开源的 Grok Bot」，就是这里。</p>
+<p><img alt="闭源个人Agent与OpenMausBot的信任边界对比" src="../images/openmausbot-trust-boundary.png" /></p>
+<p>上图的核心差别一句话就能说完：闭源五款把模型、电脑、数据都放在厂商侧，OpenMausBot 把这三样全部挪回你的机器——这也是它全部设计决策的出发点。</p>
+<hr />
+<h2 id="_2">架构拆解：两个进程、一套权限闸门</h2>
+<p>OpenMausBot 的工程结构意外地克制，只有两个进程。</p>
+<p><strong>一个是桌面应用</strong>（Electron 壳 + React 界面），自身不持有任何 Agent 进程，只通过 HTTP 发送命令、通过一条 SSE 事件流接收状态。<strong>另一个是 harness 服务器</strong>，绑定在 <code>127.0.0.1:8799</code>，拥有全部 Agent 进程，负责把 Claude、Codex、Grok 各家 CLI 的原生协议归一化成统一的事件流，按线程落成 NDJSON 日志。</p>
+<p><img alt="OpenMausBot双进程架构示意" src="../images/openmausbot-architecture.png" /></p>
+<p>如上图所示：界面层只跟 harness 说话；harness 通过驱动层拉起本机的三个 CLI；所有敏感动作都必须先过权限闸门。每接入一个新厂商，只需要在 <code>server/drivers/</code> 下加一个文件再注册一行；识别不了的引擎会降级显示为「不可用」，不会拖垮整个机队。</p>
+<p>架构里最有含金量的是<strong>权限代理</strong>（permission broker）。bot 要执行 shell 命令、改文件、或者遇到拿不准的问题时，动作会被拦下来，以行内卡片的形式出现在聊天流里——<strong>允许 / 拒绝 / 直接回答</strong>，云端电脑和本机控制一视同仁。这相当于给「Agent 自主干话」这道行业难题加了一个最小可行的答案，相关的治理视角可以延伸阅读《<a href="../posts/agent-governance-observability-hidden-costs.html">AI Agent治理与可观测性：企业落地的隐藏成本</a>》。</p>
+<p>几个工程细节能看出这个项目的克制程度：每接入一个新厂商，只需在驱动目录加一个文件再注册一行；识别不了的引擎降级显示为「不可用」，不会拖垮整个机队；所有事件按线程落成 NDJSON 日志，排查问题有据可查。<strong>界面层没有任何自有传输协议</strong>，全靠 HTTP 命令加一条 SSE 流，这也是它能同时支撑桌面端、浏览器端和手机端的原因。</p>
+<hr />
+<h2 id="_3">能干什么：从审批卡片到定时例程</h2>
+<p>除了基本对话，几个有代表性的能力值得单独说。</p>
+<p><strong>定时与触发</strong>。可以直接对 bot 说「每个工作日早上 9 点给我整理收件箱摘要」，它当轮就能建好触发器，聊天里出现可暂停、可撤销的实时卡片。触发器支持单次、按星期、5 到 1440 分钟间隔三种节奏，还支持 webhook 和应用事件——比如「收到某客户邮件就起草回复」。</p>
+<p><strong>一个 Markdown 文件装一支团队</strong>。社区仓库 <code>openmausbot-teams</code> 里有人把整套「部门」——多个 bot、参谋长、频道、例程、连接清单——打包成一个带 YAML 元数据的 Markdown 文件，应用内一键审阅安装。格式刻意保持可移植：OpenMausBot 读结构化字段，人类和其他 AI 读正文。连接默认关闭、例程默认暂停、永远不带密钥，这个默认值设计得相当克制。</p>
+<p>部门还能整体导出分享：右键一个部门，连 bot 的人设、头像、技能、群聊和参谋长一起存成一个文件；聊天历史、密钥、模型选择永远不进包，疑似密钥的文本会被自动抹掉。导入方拿到的是全新的 bot，技能默认关闭、例程默认暂停。</p>
+<p><strong>语音与来电</strong>。bot 可以把回复朗读出来，也能进入「打电话」模式：它一边干活一边口头汇报，遇到要审批的事开口问你。语音后端可选 ElevenLabs、Fish Audio、Grok，或本地部署的 Chatterbox，听夜间跑完的工作汇报适合在早餐厅使用。</p>
+<p><strong>给程序员的接口</strong>。内置 stdio 协议的 MCP 服务器，Claude Desktop、Cursor 可以直接编排这支 bot 团队（刻意只暴露有界的控制面，不给删除和授权权限）；命令行 <code>openmausbot run</code> 支持把任务丢给整个房间、等待所有相关 bot 完成、以 JSON 导出产物，可接进 CI。</p>
+<p><strong>手机与远程</strong>。桌面版可以经 Tailscale 配对成另一台电脑的客户端；服务器模式会生成一个配对链接，手机浏览器或原生应用扫码接入。躺在沙发上查看 bot 昨夜干了什么，这个场景是真实可用的。</p>
+<hr />
+<h2 id="_4">热度从哪来：一次精准的卡位</h2>
+<p>两万多颗星不是凭空来的。TrendShift 趋势榜上有它的位置，GitHub Daily 播客专门做了一期节目；外网的需求侧情绪也很明确——Reddit 的 Grok Bot 社区里有付费用户抱怨用量配额烧得太快、在找替代品，Cursor 论坛的对比帖里，它是少数被认可的真自托管选项。</p>
+<p>中文圈的跟进速度也很快：INSIDE、CSDN 相继做了介绍和解析，Threads 上有用户晒实测，台湾的 Facebook AI 社团里它被列进「三大免费/开源 Grok Bot 平替」的讨论清单。</p>
+<p>拆开看，这次走红是三股力的叠加：闭源五款产品刚刚完成市场教育，用户已经理解「一队 Agent + 聊天」是什么；订阅价格与配额焦虑同步升温；而数据归属的疑虑一直没人回应。OpenMausBot 恰好同时踩中三点，还赶上个人 Agent 话题的搜索高峰期。</p>
+<hr />
+<h2 id="_5">冷静看：四个必须知道的边界</h2>
+<p>热度归热度，这个项目自称「<strong>早期但真实</strong>」（early but real），有几个边界需要摆在桌面上。</p>
+<p><strong>其一，凭证与权限面。</strong> 终端模式下 API key 以明文存在 <code>config.json</code>（Unix 下权限 0600）；桌面版走操作系统加密，但部分引擎 key 和 MCP 头部仍是明文。给 bot 连接邮箱、代码仓库本身就是高敏感操作。</p>
+<p>审批卡片降低了风险，但没有消除——Agent 权限治理的通用问题在这里同样成立，《<a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞</a>》里的教训值得先读一遍。</p>
+<p><strong>其二，第三方付费依赖。</strong> 云电脑由赞助商 Boat 提供，试用期后收费；应用连接依赖 Composio，桌面版每天最多处理 500 个应用事件，付费云版 2000 个。云电脑和本地虚拟机之外，「控制你的本机」目前仅 macOS 和 Ubuntu Xorg 在显式开关后可用，Ubuntu Wayland 因安全问题暂时禁用。</p>
+<p><strong>其三，成熟度不均。</strong> 平台支持分三档：macOS 最完整，安装包已签名公证；Windows 功能可用，但安装包尚未代码签名，首次运行要过一道 SmartScreen；Ubuntu 24.04 还是 beta，仅 GNOME 桌面受支持。托管版和手机端连接仍在建设中，开源不等于稳定，拿生产数据喂它之前先掂量。</p>
+<p><strong>其四，隐私与遥测。</strong> 用量分析是可选且匿名的，只统计事件类型和每日一次的配置计数，不含密钥、姓名和对话内容，设置里可以一键关闭。这个态度在同体量的开源项目里算坦诚，但「给了 bot 多少权限」最终仍取决于使用者自己的审批习惯。</p>
+<p><strong>其五，许可证细节与蹭名乱象。</strong> 主体 Apache 2.0，但 <code>enterprise/</code> 目录是「源码可得」而非开源，删掉该目录才是纯开源版。另外作者公开声明项目<strong>没有任何加密货币</strong>——市面上蹭 Maus、SupaMaus 名字发币的都与项目无关，这个声明本身说明蹭名行为已经多到需要置顶。</p>
+<hr />
+<h2 id="_6">谁适合上手，怎么开始</h2>
+<p><strong>适合的人</strong>：手里已有 Claude、Codex 或 Grok 的订阅或 API key，想低成本试「个人 Agent 团队」这套形态；在意数据位置，不想把邮箱授权交给云端产品；有一定动手能力，能接受早期软件的毛边。</p>
+<p><strong>不太适合的人</strong>：想要开箱即用、全平台稳定托管服务的用户，现阶段闭源商业产品仍然更省心；完全不打算在本地装任何 CLI 的用户。</p>
+<p>依赖清单很短：Node 24 以上、包管理器 pnpm，以及至少一个登录过的 <code>claude</code>、<code>codex</code> 或 <code>grok</code> 命令行——装齐之后它们会自动出现在模型选择器里，同一个 bot 可以随时在三者之间换脑。Composio、Boat、语音这些凭据全部可选，不填也能跑纯本地聊天。</p>
+<p>上手路径很短。有 Node 24 环境的话，两条命令就能跑：</p>
+<pre><code>npm install -g openmausbot
+openmausbot
+</code></pre>
+<p>首次启动是箭头键向导：选 AI 接入方式、登录或贴 key、选模型，可选连接手机。也可以直接从官网下载 macOS、Windows、Ubuntu 安装包，桌面版内置 harness 服务器，无需单独部署。想跑在 VPS 上常驻，用 <code>npx openmausbot serve</code>，支持 Tailscale、反向代理等多种暴露方式。</p>
+<p>源码运行则三步：<code>pnpm install</code>、<code>pnpm dev:server</code>、<code>pnpm dev</code>，浏览器打开 5199 端口即可。</p>
+<hr />
+<h2 id="_7">小结</h2>
+<p>OpenMausBot 的走红不只是一个独立开发者的胜利。它踩在两个趋势的交点上：<strong>个人 Agent 形态被五款闭源产品验证成立，而「数据回家」的诉求又在同步升温</strong>。它用最朴素的答案回应了这个矛盾——形态照抄，边界翻转，进程、密钥、订阅全部留在用户手里。</p>
+<p>27350 颗星说明市场在奖励这种朴素。当然，它还年轻：安全边界仍在打磨，托管能力还没建成，商业生态（云电脑、企业版）与开源社区的关系也有待观察。但作为一个「开源如何回应闭源 Agent 潮」的样本，OpenMausBot 值得放进观察清单——个人 Agent 这场仗，才刚打过第一回合。</p>
+<hr />
+<h2 id="_8">免责声明</h2>
+<p>本文基于公开资料（项目 README、GitHub 数据、社区讨论）整理，数据截至 2026 年 11 月 24 日，Star 数等指标实时变化。项目处于快速迭代期，功能与平台支持以官方文档为准。本文不构成任何投资建议，亦与任何加密货币无关。</p>
+<hr />
+<h2 id="_9">参考来源</h2>
+<ul>
+<li><a href="https://github.com/milind-soni/OpenMausBot">GitHub —— milind-soni/OpenMausBot 官方仓库</a></li>
+<li><a href="https://github.com/milind-soni/OpenMausBot/releases">GitHub —— OpenMausBot Releases 发布页</a></li>
+<li><a href="https://github.com/milind-soni/openmausbot-teams">GitHub —— openmausbot-teams 团队模板仓库</a></li>
+<li><a href="https://openmausbot.com">OpenMausBot 官网 openmausbot.com</a></li>
+<li><a href="https://trendshift.io/repositories/138660">TrendShift —— OpenMausBot 趋势数据</a></li>
+<li><a href="https://www.inside.com.tw/article/42883-openmausbot-open-source-grok-bot-alternative-claude-codex">INSIDE 硬塞的 —— 开源版 Grok Bot，可用自己的 Claude 与 Codex</a></li>
+<li><a href="https://noma.security/blog/personal-ai-agent-security-discovering-and-governing-dots-grok-bot-muse-muse-code">Noma Security —— 个人 AI Agent 的发现与治理</a></li>
+<li><a href="https://mausbot.com/blog/muse-vs-grok-bot-vs-dots-vs-cue">MausBot Blog —— Muse vs Grok Bot vs Dots vs Cue 对比</a></li>
+<li><a href="https://codepick.dev/en/compare/cue-vs-muse-vs-grok-bot-vs-dots-2026">Codepick —— Cue vs Muse vs Grok Bot vs Dots（2026）</a></li>
+<li><a href="https://www.reddit.com/r/GrokBot/comments/1xnxlr7/what_are_you_using_for_autonomous_ai_agents">Reddit r/GrokBot —— Grok Bot 用户寻找替代品的讨论</a></li>
+</ul>
+<hr />
+<h2 id="_10">相关阅读</h2>
+<ul>
+<li><a href="../posts/chatgpt-chat-is-dead-llm-to-agent-paradigm-2026.html">从LLM到Agent的范式跃迁2026：OpenAI「去聊天化」背后，整个行业在押注什么</a></li>
+<li><a href="../posts/agent-governance-observability-hidden-costs.html">AI Agent治理与可观测性：企业落地的隐藏成本</a></li>
+<li><a href="../posts/enterprise-ai-agent-deployment-guide-2026.html">企业AI Agent部署实战：从0到1600个Agent的落地路径</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 尊尼获加&元气森林</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/Hrps3pr" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝数码家电会场</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E6%95%B0%E7%A0%81%E7%94%B5%E5%99%A8&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=openmausbot-open-source-grok-bot-alternative-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=openmausbot-open-source-grok-bot-alternative-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

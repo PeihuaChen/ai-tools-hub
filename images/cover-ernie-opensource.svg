@@ -1,0 +1,87 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1e"/>
+      <stop offset="1" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1d4ed8"/>
+      <stop offset="0.4" stop-color="#06b6d4"/>
+      <stop offset="0.75" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="trend" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#f87171"/>
+      <stop offset="0.5" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#bg)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.045" stroke-width="1">
+    <line x1="150" y1="0" x2="150" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/>
+    <line x1="450" y1="0" x2="450" y2="383"/>
+    <line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="750" y1="0" x2="750" y2="383"/>
+    <line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="288" x2="900" y2="288"/>
+  </g>
+
+  <rect x="0" y="0" width="900" height="4" fill="url(#topbar)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#topbar)"/>
+
+  <rect x="40" y="26" width="252" height="32" rx="16" fill="rgba(96,165,250,0.10)" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.2"/>
+  <text x="166" y="47" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="600">AI 行业观察 · 大模型开源战略</text>
+
+  <rect x="796" y="24" width="64" height="36" rx="10" fill="rgba(139,92,246,0.12)" stroke="#a78bfa" stroke-opacity="0.6" stroke-width="1.2"/>
+  <text x="828" y="49" text-anchor="middle" fill="#c4b5fd" font-size="18" font-weight="700">26</text>
+
+  <text x="40" y="130" fill="#ffffff" font-size="31" font-weight="700">文心开源战略转身</text>
+  <text x="40" y="164" fill="url(#sub)" font-size="18" font-weight="600">从「开源成本最高」到双轨并行</text>
+
+  <g font-size="12.5">
+    <circle cx="48" cy="222" r="3.5" fill="#60a5fa"/>
+    <text x="62" y="226.5" fill="#93c5fd">2025.6.30 文心 4.5 十款模型 Apache 2.0 全量开源</text>
+    <circle cx="48" cy="250" r="3.5" fill="#34d399"/>
+    <text x="62" y="254.5" fill="#6ee7b7">旗舰 5.0 保持闭源，卖 API 保住溢价</text>
+    <circle cx="48" cy="278" r="3.5" fill="#fbbf24"/>
+    <text x="62" y="282.5" fill="#fcd34d">2026.11 ERNIE 5.5 Flash 开源，280B/14B 激活</text>
+  </g>
+
+  <g font-size="11.5">
+    <rect x="40" y="308" width="58" height="24" rx="12" fill="none" stroke="#94a3b8" stroke-opacity="0.5"/>
+    <text x="69" y="324" text-anchor="middle" fill="#cbd5e1">百度</text>
+    <rect x="106" y="308" width="72" height="24" rx="12" fill="none" stroke="#94a3b8" stroke-opacity="0.5"/>
+    <text x="142" y="324" text-anchor="middle" fill="#cbd5e1">文心 4.5</text>
+    <rect x="186" y="308" width="92" height="24" rx="12" fill="none" stroke="#94a3b8" stroke-opacity="0.5"/>
+    <text x="232" y="324" text-anchor="middle" fill="#cbd5e1">Apache 2.0</text>
+    <rect x="286" y="308" width="72" height="24" rx="12" fill="none" stroke="#94a3b8" stroke-opacity="0.5"/>
+    <text x="322" y="324" text-anchor="middle" fill="#cbd5e1">双轨制</text>
+    <rect x="366" y="308" width="62" height="24" rx="12" fill="none" stroke="#94a3b8" stroke-opacity="0.5"/>
+    <text x="397" y="324" text-anchor="middle" fill="#cbd5e1">飞桨</text>
+  </g>
+
+  <g>
+    <polyline points="625,290 715,205 845,118" fill="none" stroke="url(#trend)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="625" cy="290" r="7" fill="#f87171"/>
+    <circle cx="625" cy="290" r="12" fill="none" stroke="#f87171" stroke-opacity="0.35" stroke-width="2"/>
+    <circle cx="715" cy="205" r="7" fill="#60a5fa"/>
+    <circle cx="715" cy="205" r="12" fill="none" stroke="#60a5fa" stroke-opacity="0.35" stroke-width="2"/>
+    <circle cx="845" cy="118" r="7" fill="#34d399"/>
+    <circle cx="845" cy="118" r="12" fill="none" stroke="#34d399" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="625" y="322" text-anchor="middle" fill="#fca5a5" font-size="12">2024 闭源</text>
+    <text x="715" y="237" text-anchor="middle" fill="#93c5fd" font-size="12">2025.6 开源</text>
+    <text x="845" y="150" text-anchor="middle" fill="#6ee7b7" font-size="12">2026 双轨</text>
+  </g>
+
+  <line x1="40" y1="352" x2="860" y2="352" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <text x="40" y="371" fill="#64748b" font-size="11.5">时间线 · 模型能力 · 商业账本</text>
+  <text x="860" y="371" text-anchor="end" fill="#64748b" font-size="11.5">AI 行业观察 · 2026.11</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="383" viewBox="0 0 900 383">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a1e"/><stop offset="1" stop-color="#161638"/></linearGradient>
+    <linearGradient id="sub" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="0.5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#555584" stroke-opacity=".25"/></pattern>
+  </defs>
+  <rect width="900" height="383" fill="url(#bg)"/>
+  <rect width="900" height="383" fill="url(#grid)"/>
+  <rect x="0" y="0" width="225" height="4" fill="#22d3ee"/><rect x="225" y="0" width="225" height="4" fill="#818cf8"/><rect x="450" y="0" width="225" height="4" fill="#a78bfa"/><rect x="675" y="0" width="225" height="4" fill="#f472b6"/>
+  <rect x="0" y="379" width="300" height="4" fill="#34d399"/><rect x="300" y="379" width="300" height="4" fill="#22d3ee"/><rect x="600" y="379" width="300" height="4" fill="#818cf8"/>
+  <rect x="48" y="36" width="268" height="34" rx="6" fill="#1e1e44" stroke="#6366f1" stroke-opacity=".8"/>
+  <text x="64" y="59" font-size="15" fill="#c4b5fd" font-weight="650">AI 行业观察 · 开源 Agent</text>
+  <circle cx="840" cy="55" r="26" fill="#1e1e44" stroke="#f472b6" stroke-width="1.5"/><text x="840" y="63" font-size="22" fill="#fbcfe8" font-weight="800" text-anchor="middle">26</text>
+  <text x="48" y="130" font-size="30" fill="#ffffff" font-weight="800">OpenMausBot</text>
+  <text x="48" y="168" font-size="29" fill="#ffffff" font-weight="800">把 AI Agent 装进聊天 App</text>
+  <text x="48" y="203" font-size="18" fill="url(#sub)" font-weight="700">开源版 Grok Bot · 三个多月 27350 星</text>
+  <text x="48" y="243" font-size="13" fill="#67e8f9">▸ 自带 Agent：跑你本机的 claude / codex / grok</text>
+  <text x="48" y="266" font-size="13" fill="#a5b4fc">▸ 本地优先：密钥与会话留在本机目录</text>
+  <text x="48" y="289" font-size="13" fill="#f9a8d4">▸ 权限闸门：敏感动作先弹审批卡片</text>
+  <g font-size="12" font-weight="650"><rect x="48" y="312" width="80" height="26" rx="13" fill="none" stroke="#22d3ee"/><text x="88" y="330" fill="#67e8f9" text-anchor="middle">TypeScript</text><rect x="136" y="312" width="72" height="26" rx="13" fill="none" stroke="#818cf8"/><text x="172" y="330" fill="#c4b5fd" text-anchor="middle">Electron</text><rect x="216" y="312" width="88" height="26" rx="13" fill="none" stroke="#34d399"/><text x="260" y="330" fill="#6ee7b7" text-anchor="middle">Apache 2.0</text><rect x="312" y="312" width="82" height="26" rx="13" fill="none" stroke="#a78bfa"/><text x="353" y="330" fill="#c4b5fd" text-anchor="middle">Composio</text><rect x="402" y="312" width="58" height="26" rx="13" fill="none" stroke="#f472b6"/><text x="431" y="330" fill="#f9a8d4" text-anchor="middle">MCP</text></g>
+  <g transform="translate(652 110)">
+    <rect x="0" y="0" width="200" height="196" rx="12" fill="#1e1e44" stroke="#6366f1" stroke-opacity=".7"/>
+    <text x="100" y="30" font-size="13" fill="#a5b4fc" text-anchor="middle" font-weight="700">机器人通讯录</text>
+    <g>
+      <circle cx="30" cy="56" r="11" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="52" y="52" font-size="11" fill="#e2e8f0">研究 bot · Claude</text><text x="52" y="66" font-size="10" fill="#8585a7">昨夜跑完 3 项任务</text>
+      <circle cx="30" cy="92" r="11" fill="none" stroke="#a78bfa" stroke-width="2"/><text x="52" y="88" font-size="11" fill="#e2e8f0">写码 bot · Codex</text><text x="52" y="102" font-size="10" fill="#8585a7">请求批准：npm install</text>
+      <circle cx="30" cy="128" r="11" fill="none" stroke="#f472b6" stroke-width="2"/><text x="52" y="124" font-size="11" fill="#e2e8f0">运营 bot · Grok</text><text x="52" y="138" font-size="10" fill="#8585a7">每天 9 点整理收件箱</text>
+    </g>
+    <rect x="16" y="152" width="92" height="26" rx="8" fill="none" stroke="#34d399" stroke-width="1.5"/><text x="62" y="169" font-size="11" fill="#6ee7b7" text-anchor="middle">允许</text>
+    <rect x="118" y="152" width="66" height="26" rx="8" fill="none" stroke="#f87171" stroke-width="1.5"/><text x="151" y="169" font-size="11" fill="#fca5a5" text-anchor="middle">拒绝</text>
+  </g>
+  <line x1="48" y1="354" x2="852" y2="354" stroke="#51517d" stroke-opacity=".7"/>
+  <text x="48" y="372" font-size="11" fill="#a0a0bd">架构拆解 · 玩法 · 风险边界 · 上手指南</text><text x="852" y="372" font-size="11" fill="#8585a7" text-anchor="end">公众号：AI工具箱</text>
+</svg>

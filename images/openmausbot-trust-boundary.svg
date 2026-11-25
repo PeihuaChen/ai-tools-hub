@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="880" viewBox="0 0 1080 880">
+  <rect width="1080" height="880" fill="#ffffff"/>
+  <text x="60" y="92" font-size="60" font-weight="800" fill="#111827">信任边界：东西放在谁那边？</text>
+  <text x="60" y="150" font-size="34" fill="#4b5563">2026 年秋的五款闭源个人 Agent vs OpenMausBot</text>
+  <line x1="540" y1="200" x2="540" y2="770" stroke="#94a3b8" stroke-width="3" stroke-dasharray="8"/>
+  <rect x="50" y="200" width="420" height="570" rx="16" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+  <text x="260" y="262" font-size="44" font-weight="800" fill="#b91c1c" text-anchor="middle">闭源五款</text>
+  <text x="260" y="308" font-size="32" fill="#6b7280" text-anchor="middle">Grok Bot · Muse · dots 等</text>
+  <rect x="80" y="340" width="360" height="120" rx="12" fill="#ffffff" stroke="#e5b4b4" stroke-width="2"/>
+  <text x="100" y="390" font-size="34" font-weight="700" fill="#111827">模型</text>
+  <text x="100" y="430" font-size="32" fill="#4b5563">仅用厂商自家模型</text>
+  <rect x="80" y="480" width="360" height="120" rx="12" fill="#ffffff" stroke="#e5b4b4" stroke-width="2"/>
+  <text x="100" y="530" font-size="34" font-weight="700" fill="#111827">执行电脑</text>
+  <text x="100" y="570" font-size="32" fill="#4b5563">厂商的云虚拟机</text>
+  <rect x="80" y="620" width="360" height="120" rx="12" fill="#ffffff" stroke="#e5b4b4" stroke-width="2"/>
+  <text x="100" y="670" font-size="34" font-weight="700" fill="#111827">数据 / 密码</text>
+  <text x="100" y="710" font-size="32" fill="#4b5563">存在厂商一侧</text>
+  <rect x="610" y="200" width="420" height="570" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="820" y="262" font-size="44" font-weight="800" fill="#1d4ed8" text-anchor="middle">OpenMausBot</text>
+  <text x="820" y="308" font-size="32" fill="#6b7280" text-anchor="middle">开源 · Apache 2.0</text>
+  <rect x="640" y="340" width="360" height="120" rx="12" fill="#ffffff" stroke="#b6cdf3" stroke-width="2"/>
+  <text x="660" y="390" font-size="34" font-weight="700" fill="#111827">模型</text>
+  <text x="660" y="430" font-size="32" fill="#4b5563">你已有的模型订阅</text>
+  <rect x="640" y="480" width="360" height="120" rx="12" fill="#ffffff" stroke="#b6cdf3" stroke-width="2"/>
+  <text x="660" y="530" font-size="34" font-weight="700" fill="#111827">执行电脑</text>
+  <text x="660" y="570" font-size="32" fill="#4b5563">本机、VM 或云桌面</text>
+  <rect x="640" y="620" width="360" height="120" rx="12" fill="#ffffff" stroke="#b6cdf3" stroke-width="2"/>
+  <text x="660" y="670" font-size="34" font-weight="700" fill="#111827">数据 / 密码</text>
+  <text x="660" y="710" font-size="32" fill="#4b5563">留在你的本机</text>
+  <rect x="470" y="450" width="140" height="60" rx="30" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="540" y="490" font-size="34" font-weight="700" fill="#4b5563" text-anchor="middle">信任边界</text>
+  <text x="540" y="836" font-size="34" fill="#4b5563" text-anchor="middle">同样的「Agent 团队 + 聊天」形态，边界整个翻转</text>
+</svg>
