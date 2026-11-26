@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="620" viewBox="0 0 1080 620">
+  <rect width="1080" height="620" fill="#f7f8fa"/>
+  <text x="60" y="72" font-size="56" font-weight="800" fill="#111827">Craft Anything 四步流水线</text>
+  <text x="60" y="118" font-size="32" fill="#4b5563">把「复刻」拆成可校验的工程步骤，每步都留证据</text>
+
+  <g>
+    <rect x="38" y="170" width="225" height="250" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <circle cx="150" cy="222" r="26" fill="#1d4ed8"/><text x="150" y="234" font-size="32" font-weight="800" fill="#ffffff" text-anchor="middle">1</text>
+    <text x="150" y="292" font-size="44" font-weight="800" fill="#1d4ed8" text-anchor="middle">研究</text>
+    <text x="150" y="340" font-size="30" fill="#111827" text-anchor="middle">真实检查工具</text>
+    <text x="150" y="382" font-size="30" fill="#4b5563" text-anchor="middle">结论都带证据</text>
+  </g>
+  <line x1="266" y1="295" x2="295" y2="295" stroke="#94a3b8" stroke-width="3"/><path d="M300 295l-10-6v12z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="298" y="170" width="225" height="250" rx="16" fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <circle cx="410" cy="222" r="26" fill="#6d28d9"/><text x="410" y="234" font-size="32" font-weight="800" fill="#ffffff" text-anchor="middle">2</text>
+    <text x="410" y="292" font-size="44" font-weight="800" fill="#6d28d9" text-anchor="middle">构建</text>
+    <text x="410" y="340" font-size="30" fill="#111827" text-anchor="middle">编码 Agent</text>
+    <text x="410" y="382" font-size="30" fill="#4b5563" text-anchor="middle">按指定栈新建</text>
+  </g>
+  <line x1="526" y1="295" x2="555" y2="295" stroke="#94a3b8" stroke-width="3"/><path d="M560 295l-10-6v12z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="558" y="170" width="225" height="250" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <circle cx="670" cy="222" r="26" fill="#0e7490"/><text x="670" y="234" font-size="32" font-weight="800" fill="#ffffff" text-anchor="middle">3</text>
+    <text x="670" y="292" font-size="44" font-weight="800" fill="#0e7490" text-anchor="middle">检查</text>
+    <text x="670" y="340" font-size="30" fill="#111827" text-anchor="middle">逐项比对原件</text>
+    <text x="670" y="382" font-size="30" fill="#4b5563" text-anchor="middle">量化相似度</text>
+  </g>
+  <line x1="786" y1="295" x2="815" y2="295" stroke="#94a3b8" stroke-width="3"/><path d="M820 295l-10-6v12z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="818" y="170" width="225" height="250" rx="16" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <circle cx="930" cy="222" r="26" fill="#15803d"/><text x="930" y="234" font-size="32" font-weight="800" fill="#ffffff" text-anchor="middle">4</text>
+    <text x="930" y="292" font-size="44" font-weight="800" fill="#15803d" text-anchor="middle">就绪</text>
+    <text x="930" y="340" font-size="30" fill="#111827" text-anchor="middle">打开试玩</text>
+    <text x="930" y="382" font-size="30" fill="#4b5563" text-anchor="middle">或继续提要求</text>
+  </g>
+
+  <path d="M670 424 L670 478 L410 478 L410 428" fill="none" stroke="#b45309" stroke-width="3" stroke-dasharray="10 8"/>
+  <path d="M410 424l-8 12h16z" fill="#b45309"/>
+  <text x="540" y="516" font-size="30" fill="#b45309" text-anchor="middle">相似度不达标：回到构建，继续收敛</text>
+
+  <text x="540" y="582" font-size="30" fill="#6b7280" text-anchor="middle">检查怎么比：网站三种屏宽截图 · 游戏跑自检 · 应用看运行</text>
+</svg>

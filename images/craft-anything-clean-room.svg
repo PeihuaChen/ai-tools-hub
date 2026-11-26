@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="700" viewBox="0 0 1080 700">
+  <rect width="1080" height="700" fill="#f7f8fa"/>
+  <text x="60" y="70" font-size="56" font-weight="800" fill="#111827">净室模式 vs Deep 模式</text>
+  <text x="60" y="116" font-size="32" fill="#4b5563">默认净室：把「不看代码」做成工具级硬约束</text>
+
+  <rect x="340" y="146" width="400" height="64" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="540" y="188" font-size="34" font-weight="700" fill="#111827" text-anchor="middle">目标：网站 / 应用 / 游戏</text>
+
+  <line x1="470" y1="212" x2="285" y2="252" stroke="#94a3b8" stroke-width="3"/><path d="M280 255l13-2-7-11z" fill="#94a3b8"/>
+  <line x1="610" y1="212" x2="795" y2="252" stroke="#94a3b8" stroke-width="3"/><path d="M800 255l-13-2 7-11z" fill="#94a3b8"/>
+
+  <g>
+    <rect x="50" y="260" width="470" height="330" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="84" y="322" font-size="44" font-weight="800" fill="#1d4ed8">净室模式</text>
+    <rect x="360" y="288" width="120" height="44" rx="22" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+    <text x="420" y="318" font-size="30" font-weight="700" fill="#15803d" text-anchor="middle">默认</text>
+    <text x="84" y="368" font-size="30" fill="#4b5563">不看原作一行代码</text>
+    <circle cx="102" cy="424" r="9" fill="#1d4ed8"/><text x="128" y="434" font-size="32" fill="#111827">只看外部：截图与实测</text>
+    <circle cx="102" cy="484" r="9" fill="#1d4ed8"/><text x="128" y="494" font-size="32" fill="#111827">内部工具一律拒绝</text>
+    <circle cx="102" cy="544" r="9" fill="#1d4ed8"/><text x="128" y="554" font-size="32" fill="#111827">适合：复刻网站界面</text>
+  </g>
+
+  <g>
+    <rect x="560" y="260" width="470" height="330" rx="18" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+    <text x="594" y="322" font-size="44" font-weight="800" fill="#b45309">Deep 模式</text>
+    <rect x="826" y="288" width="164" height="44" rx="22" fill="#f1f5f9" stroke="#6b7280" stroke-width="2"/>
+    <text x="908" y="318" font-size="30" font-weight="700" fill="#4b5563" text-anchor="middle">手动开启</text>
+    <text x="594" y="368" font-size="30" fill="#4b5563">供私人研究使用</text>
+    <circle cx="612" cy="424" r="9" fill="#b45309"/><text x="638" y="434" font-size="32" fill="#111827">反汇编反编译全开</text>
+    <circle cx="612" cy="484" r="9" fill="#b45309"/><text x="638" y="494" font-size="32" fill="#111827">可读代码联动 Ghidra</text>
+    <circle cx="612" cy="544" r="9" fill="#b45309"/><text x="638" y="554" font-size="32" fill="#111827">适合：研究自有软件</text>
+  </g>
+
+  <text x="540" y="656" font-size="30" fill="#6b7280" text-anchor="middle">注意：净室是产品规则而非沙箱，Agent 的实际权限取决于它自身</text>
+</svg>

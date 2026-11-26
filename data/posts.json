@@ -1,5 +1,5 @@
 {
-  "total": 222,
+  "total": 221,
   "posts": [
     {
       "slug": "baidu-ernie-open-source-strategy-2026",
@@ -16,24 +16,6 @@
       "word_count": 7619,
       "view_count": 0,
       "created_at": "2026-11-25 11:25:47"
-    },
-    {
-      "slug": "craft-anything-clean-room-rebuild-engine-2026",
-      "title": "Claude 不让逆向，他们干脆开源了一个逆向引擎：Craft Anything 的复刻流水线",
-      "date": "2026-11-26",
-      "category": "AI 行业观察",
-      "description": "开源26天揽下4.3万Star的Craft Anything，用纯Rust净室引擎把「看懂任何软件」做成四步流水线。它背后是ArtCraft复刻Adobe全家桶的方法论，也是Claude封锁逆向之后的一个工程答案。",
-      "keywords": [
-        "Craft Anything",
-        "逆向工程",
-        "AI Agent",
-        "开源",
-        "Rust"
-      ],
-      "read_time": "9 分钟",
-      "word_count": 7999,
-      "view_count": 0,
-      "created_at": "2026-11-26 14:12:21"
     },
     {
       "slug": "openmausbot-open-source-grok-bot-alternative-2026",
