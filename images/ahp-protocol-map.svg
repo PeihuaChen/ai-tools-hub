@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 880" width="1080" height="880">
+  <!-- full opaque light background -->
+  <rect x="0" y="0" width="1080" height="880" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="540" y="80" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">Agent 协议版图：四种协议各管一层</text>
+  <text x="540" y="132" font-size="32" fill="#4b5563" text-anchor="middle">AHP 与 MCP、A2A、ANP 位于协议栈的不同层次</text>
+
+  <!-- layer 1: AHP -->
+  <rect x="70" y="170" width="940" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="110" y="258" font-size="48" font-weight="bold" fill="#1d4ed8">AHP</text>
+  <line x1="300" y1="192" x2="300" y2="298" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="330" y="232" font-size="34" font-weight="bold" fill="#111827">客户端 ↔ 宿主 · 同一会话多端同步</text>
+  <text x="330" y="284" font-size="32" fill="#4b5563">手机、编辑器、云端共享一个 Agent 会话</text>
+
+  <!-- layer 2: A2A + ANP -->
+  <rect x="70" y="350" width="455" height="170" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2.5"/>
+  <text x="105" y="412" font-size="44" font-weight="bold" fill="#15803d">A2A</text>
+  <text x="105" y="458" font-size="32" font-weight="bold" fill="#111827">Agent ↔ Agent</text>
+  <text x="105" y="498" font-size="32" fill="#4b5563">企业内任务协作</text>
+
+  <rect x="555" y="350" width="455" height="170" rx="14" fill="#faf5ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="590" y="412" font-size="44" font-weight="bold" fill="#6d28d9">ANP</text>
+  <text x="590" y="458" font-size="32" font-weight="bold" fill="#111827">Agent ↔ Agent</text>
+  <text x="590" y="498" font-size="32" fill="#4b5563">开放网络 · DID 身份互联</text>
+
+  <!-- layer 3: MCP -->
+  <rect x="70" y="550" width="940" height="150" rx="14" fill="#fff7ed" stroke="#b45309" stroke-width="2.5"/>
+  <text x="110" y="638" font-size="48" font-weight="bold" fill="#b45309">MCP</text>
+  <line x1="300" y1="572" x2="300" y2="678" stroke="#fed7aa" stroke-width="2"/>
+  <text x="330" y="612" font-size="34" font-weight="bold" fill="#111827">Agent ↔ 工具与数据 · 访问外部能力</text>
+  <text x="330" y="664" font-size="32" fill="#4b5563">模型连接工具、数据与上下文</text>
+
+  <!-- summary band -->
+  <rect x="70" y="740" width="940" height="100" rx="12" fill="#f1f5f9"/>
+  <text x="540" y="780" font-size="32" fill="#111827" text-anchor="middle">一个跨设备任务可同时用到三层协议：</text>
+  <text x="540" y="822" font-size="32" font-weight="bold" fill="#111827" text-anchor="middle">AHP 同步会话 · A2A / ANP 组织协作 · MCP 调用工具</text>
+</svg>

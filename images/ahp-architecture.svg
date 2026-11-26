@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1200" width="1080" height="1200">
+  <!-- full opaque light background -->
+  <rect x="0" y="0" width="1080" height="1200" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="540" y="80" font-size="60" font-weight="bold" fill="#111827" text-anchor="middle">AHP 架构：一个宿主，多端客户端</text>
+  <text x="540" y="132" font-size="32" fill="#4b5563" text-anchor="middle">客户端发送带序号 action，宿主仲裁状态并广播变更</text>
+
+  <!-- client cards -->
+  <g>
+    <rect x="40" y="180" width="232" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="156" y="246" font-size="36" font-weight="bold" fill="#1d4ed8" text-anchor="middle">手机 App</text>
+    <text x="156" y="300" font-size="30" fill="#4b5563" text-anchor="middle">Copilot 移动端</text>
+
+    <rect x="300" y="180" width="232" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="416" y="246" font-size="36" font-weight="bold" fill="#1d4ed8" text-anchor="middle">VS Code</text>
+    <text x="416" y="300" font-size="30" fill="#4b5563" text-anchor="middle">桌面编辑器</text>
+
+    <rect x="560" y="180" width="232" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="676" y="246" font-size="36" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Web 客户端</text>
+    <text x="676" y="300" font-size="30" fill="#4b5563" text-anchor="middle">ahpw 浏览器</text>
+
+    <rect x="820" y="180" width="232" height="150" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="936" y="246" font-size="36" font-weight="bold" fill="#1d4ed8" text-anchor="middle">终端 CLI</text>
+    <text x="936" y="300" font-size="30" fill="#4b5563" text-anchor="middle">ahpc / AHPX</text>
+  </g>
+
+  <!-- connector stubs: clients -> middle zone -->
+  <g stroke="#cbd5e1" stroke-width="3">
+    <line x1="156" y1="330" x2="156" y2="352"/>
+    <line x1="416" y1="330" x2="416" y2="352"/>
+    <line x1="676" y1="330" x2="676" y2="352"/>
+    <line x1="936" y1="330" x2="936" y2="352"/>
+    <line x1="156" y1="478" x2="156" y2="500"/>
+    <line x1="416" y1="478" x2="416" y2="500"/>
+    <line x1="676" y1="478" x2="676" y2="500"/>
+    <line x1="936" y1="478" x2="936" y2="500"/>
+  </g>
+
+  <!-- direction labels and arrows -->
+  <text x="360" y="392" font-size="32" font-weight="bold" fill="#1d4ed8" text-anchor="middle">action 上行</text>
+  <line x1="360" y1="468" x2="360" y2="412" stroke="#1d4ed8" stroke-width="4"/>
+  <path d="M352,424 L360,406 L368,424" fill="none" stroke="#1d4ed8" stroke-width="4"/>
+
+  <text x="720" y="392" font-size="32" font-weight="bold" fill="#15803d" text-anchor="middle">状态广播下行</text>
+  <line x1="720" y1="412" x2="720" y2="468" stroke="#15803d" stroke-width="4"/>
+  <path d="M712,456 L720,474 L728,456" fill="none" stroke="#15803d" stroke-width="4"/>
+
+  <!-- host card -->
+  <rect x="90" y="500" width="900" height="270" rx="16" fill="#ecfeff" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="540" y="558" font-size="44" font-weight="bold" fill="#0e7490" text-anchor="middle">Agent Host（会话宿主）</text>
+  <text x="540" y="600" font-size="32" fill="#4b5563" text-anchor="middle">状态唯一仲裁者 · 不可变状态 + 纯函数 reducer</text>
+
+  <g>
+    <rect x="136" y="625" width="252" height="78" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="262" y="662" font-size="34" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Chat 会话</text>
+    <text x="262" y="696" font-size="30" fill="#6b7280" text-anchor="middle">基础必选通道</text>
+
+    <rect x="414" y="625" width="252" height="78" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+    <text x="540" y="662" font-size="34" font-weight="bold" fill="#15803d" text-anchor="middle">Terminals</text>
+    <text x="540" y="696" font-size="30" fill="#6b7280" text-anchor="middle">多端接管同一终端</text>
+
+    <rect x="692" y="625" width="252" height="78" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="818" y="662" font-size="34" font-weight="bold" fill="#b45309" text-anchor="middle">Automations</text>
+    <text x="818" y="696" font-size="30" fill="#6b7280" text-anchor="middle">定时自动化任务</text>
+  </g>
+  <text x="540" y="744" font-size="30" fill="#6b7280" text-anchor="middle">root / session / chat 必选 · 其余能力连接时协商</text>
+
+  <!-- connector to agents -->
+  <text x="540" y="800" font-size="32" fill="#4b5563" text-anchor="middle">宿主调度智能体运行时（harness 无关）</text>
+  <line x1="540" y1="822" x2="540" y2="866" stroke="#94a3b8" stroke-width="4"/>
+  <path d="M532,854 L540,872 L548,854" fill="none" stroke="#94a3b8" stroke-width="4"/>
+
+  <!-- agents card -->
+  <rect x="90" y="880" width="900" height="160" rx="16" fill="#faf5ff" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="540" y="928" font-size="36" font-weight="bold" fill="#6d28d9" text-anchor="middle">智能体运行时（多 harness 接入）</text>
+  <g>
+    <rect x="142" y="948" width="240" height="64" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="262" y="990" font-size="34" font-weight="bold" fill="#6d28d9" text-anchor="middle">Copilot</text>
+
+    <rect x="420" y="948" width="240" height="64" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="540" y="990" font-size="34" font-weight="bold" fill="#6d28d9" text-anchor="middle">Claude</text>
+
+    <rect x="698" y="948" width="240" height="64" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="818" y="990" font-size="34" font-weight="bold" fill="#6d28d9" text-anchor="middle">Codex</text>
+  </g>
+
+  <!-- footer band -->
+  <rect x="90" y="1080" width="900" height="90" rx="12" fill="#f1f5f9"/>
+  <text x="540" y="1135" font-size="32" fill="#111827" text-anchor="middle">断线重连：排队 action 重放，缺口过大回退状态快照</text>
+</svg>

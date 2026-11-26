@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 不让逆向，他们干脆开源了一个逆向引擎：Craft Anything 的复刻流水线</title>
+    <meta name="description" content="开源26天揽下4.3万Star的Craft Anything，用纯Rust净室引擎把「看懂任何软件」做成四步流水线。它背后是ArtCraft复刻Adobe全家桶的方法论，也是Claude封锁逆向之后的一个工程答案。">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6fa3b9fcd145f1b6f00f52f1a39fc7"}'></script><!-- End Cloudflare Web Analytics --></head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../">← 返回首页</a>
+                <a href="../archive.html">全部文章</a>
+            </nav>
+        </header>
+        
+        <article>
+            <h1 class="post-title">Claude 不让逆向，他们干脆开源了一个逆向引擎：Craft Anything 的复刻流水线</h1>
+            <div class="post-meta">
+                <span class="cat">AI 行业观察</span>
+                <span>2026-11-26 · 9 分钟</span>
+            </div>
+            <p>一个开源仓库，26 天拿下 43,846 个 Star、8,672 个 Fork。</p>
+<p>storytold/craft-anything 在 2026 年 10 月 31 日公开。时间点很微妙：这之前不久，Anthropic 刚刚收紧了 Claude 对逆向工程和游戏克隆的限制，知名逆向工具 REA（Reverse Engineer Anything）首当其冲，不少用户发现自己的逆向分析请求被 Claude Code 直接拒绝。</p>
+<p>ArtCraft 团队的回应不是绕过限制，而是换了一条路：把逆向分析从 AI 手里收回来，交给一个纯 Rust 写的确定性引擎，AI 只做它最擅长的事——照着证据写新代码。</p>
+<p>这个思路的产物就是 Craft Anything：看清任意网站、应用或游戏是怎么做的，再让 AI 给你造一个自己的版本。</p>
+<h2 id="rea">从 REA 被封锁说起</h2>
+<p>2026 年下半年，Anthropic 开始封锁 Claude 的游戏克隆和逆向工程行为。Tom's Hardware 的报道显示，受影响的远不止恶意场景，连普通的逆向分析、故障排查类请求也一并被拒。</p>
+<p>REA 是这波限制中最受关注的工具。它让 AI Agent 对软件做逆向分析并给出完整证据链，此前本站已在<a href="../posts/rea-reverse-engineer-anything-deep-dive-2026.html">REA爆火：AI Agent逆向一切，从网页行为到原生二进制的证据链革命</a>中做过详细解析。</p>
+<p>耐人寻味的是 ArtCraft 创始人 Brandon Thomas 的表态：他的团队不会使用 REA，理由是避免反编译商业软件带来的法律风险。这位亚特兰大工程师曾任 Storyteller.ai CEO、在 Square 做过工程师，2026 年 10 月刚刚用 Claude 协助、以纯 Rust 复刻了 Adobe 七款应用（PhotoCraft 对标 Photoshop、FilmCraft 对标 Premiere 等）和微软 Office 三件套，还在 Hacker News 上直接宣布「Software is over」。</p>
+<p>Craft Anything 正是这套打法的产品化。仓库公开 26 天后 Star 数突破 4.3 万；科技博客 ibl.ai 的记录显示，它开源仅 10 天就迈过了 2.5 万 Star。</p>
+<h2 id="craft-anything">Craft Anything 是什么：四步流水线</h2>
+<p>一句话概括：把目标指给它，说清你要什么，按下 Start。官方把流程拆成四步：</p>
+<p><img alt="Craft Anything 四步流水线：研究、构建、检查、就绪，检查结果不达标会回到构建环节反复收敛" src="../images/craft-anything-pipeline.png" /></p>
+<ul>
+<li><strong>研究（Study）</strong>：检查原件。网站看各种宽度下的页面，程序看代码、文件和运行方式，每个结论都带证据。</li>
+<li><strong>构建（Build）</strong>：编码 Agent 按你指定的语言、框架或引擎，建一个全新的项目。</li>
+<li><strong>检查（Check）</strong>：把构建成果与原件逐项比对，列出还不一致的地方。网站按桌面、平板、手机三种屏宽截图对比；游戏则跑它自己的自检。</li>
+<li><strong>就绪（Ready）</strong>：打开、试玩或预览结果；不满意就继续提要求，让它接着收敛。</li>
+</ul>
+<p>关键区别在于「比对过，不是猜的」。每次重建都有量化的相似度，而不是 Agent 自说自话。项目文件夹里的 <code>checks/</code> 目录保存了每一轮比对记录，<code>investigation.cany/</code> 存的是证据。</p>
+<p>使用方式分两档：Simple 模式只问「你想做什么」，适合直接复刻；Advanced 模式是完整工作台，函数列表、伪 C、反汇编、十六进制、调用图、证据账本一应俱全。两种模式驱动同一个引擎。</p>
+<p>命令行同样可以一键发起重建，问题会在终端里问你：</p>
+<pre><code class="language-sh">craft-anything-cli rebuild https://example.com &quot;复刻这个网站&quot;
+</code></pre>
+<h2 id="_1">净室模式：把「不看代码」做成硬约束</h2>
+<p>Craft Anything 最有设计感的部分，是默认开启的净室模式（Clean room）。</p>
+<p>净室模式下，原作的任何内部信息都不读：不读代码、不读文件、不读页面源码。引擎只从外部观察——你提供的截图、访客视角看到的网页（可见文字、实测的布局/颜色/字体/间距、被打开的菜单），以及你允许时的一张应用窗口截图。</p>
+<p>更关键的是，这不是一句提示词约束，而是工程约束：会「看内部」的工具在净室模式下直接拒绝执行，并提示你如何开启 Deep 模式。</p>
+<p><img alt="净室模式与 Deep 模式对比：净室只做外部观察，Deep 模式才动用反汇编、反编译等内部检查工具" src="../images/craft-anything-clean-room.png" /></p>
+<p>Deep 模式则放开所有工具：内置的反汇编器、反编译器全盘上阵，装了 Ghidra 还会联动，定位是私人研究自己拥有或有权检查的软件。</p>
+<p>官方对净室的边界说得很诚实：它是一条产品规则，不是操作系统沙箱，不隔离你的电脑。编码 Agent 仍以你的身份行动，能读写什么取决于它自己的权限。</p>
+<h2 id="309">309 个检查工具：引擎自己先看懂</h2>
+<p>Craft Anything 的引擎内置 309 个检查工具、分 17 个工具集，加上 AI 和安装层的工具共约 320 个。每个工具同时有三种身份：CLI 子命令、MCP 工具、Agent 可调用的函数。换句话说，任何 Agent 都能驱动跟桌面应用同一个引擎，纯研究甚至不需要 AI。</p>
+<p>覆盖面的几个样本：</p>
+<ul>
+<li><strong>原生程序（55 个）</strong>：反汇编、反编译伪 C、交叉引用、调用图、值流分析。</li>
+<li><strong>网站（24 个）</strong>：页面捕获、三屏宽截图对比、JS 分析、模块图追踪、脚本化走查。</li>
+<li><strong>移动与桌面生态</strong>：Android 14 个、Apple 14 个、.NET 8 个、Java 6 个、Electron/JS 11 个。</li>
+<li><strong>更偏门的</strong>：固件提取、抓包分析、数据库、Unity/Unreal 游戏资源解包、Frida 动态插桩、GDB 与 Rizin 调试会话。</li>
+</ul>
+<p>这些解码器、反汇编器和反编译器全部是纯 Rust 自研，不依赖外部程序。引擎同时驱动桌面应用（egui）、CLI 和 MCP Server，其中一部分还能编译成 WebAssembly 在浏览器里跑——网页版只做格式识别与检查，文件不离开浏览器。</p>
+<p>这个「把软件能力封装成 Agent 工具」的思路，与 CLI-Anything 是同一个趋势的产物，背景可参考<a href="../posts/cli-anything-agent-native-software-tool-market-2026.html">当软件的下一代用户是 AI：CLI-Anything 与 Agent 工具市场的未来</a>。</p>
+<h2 id="agent-claude-code-acp">Agent 生态：Claude Code 打头，ACP 通吃</h2>
+<p>构建环节需要一个装在你电脑上的编码 Agent，Craft Anything 自己不发明模型。</p>
+<ul>
+<li><strong>Claude Code</strong> 是一等公民：运行你本机未修改的 claude 程序，用你自己的登录，Craft Anything 不接触账号。</li>
+<li><strong>ACP 协议阵营</strong>：GitHub Copilot、Grok Build、Kimi Code CLI、Gemini CLI、Qwen Code、opencode、goose、Hermes、Maki、Devin，其中 Maki 和 Devin 已真机跑通。</li>
+<li><strong>问答与分析层</strong>：Anthropic、OpenAI、OpenRouter、xAI 以及本地 OpenAI 兼容服务，都可以在设置里接入。</li>
+</ul>
+<p>对国内用户的实际意义在于：Kimi Code 和 Qwen Code 都在支持列表里，构建 Agent 并不绑定 Claude。如果选择 opencode，用法可以参考<a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode实战指南：免费AI编程Agent + 免费大模型，零成本搞定代码开发</a>。</p>
+<p>平台支持也足够广：Windows、macOS、Linux、FreeBSD 都有签名安装包，从源码构建需要 Rust 1.97 以上。</p>
+<h2 id="early-alpha">冷静看：early alpha 的边界在哪</h2>
+<p>官方自己把状态标为 early alpha，而且把「没做完」写得很具体：API key 方式的构建从未真机跑过，Claude Code 之外的 Agent 只接好了一部分；应用和游戏的行为校验只做了一半；少数引擎工具只对替身程序测试过。路线图上还躺着未来的商业化方向——托管版（managed tier）。</p>
+<p>社区实测给了更直观的参照。有用户让它重建一个 3D 滚球小游戏，最终得到的是「一张截图式的近似」：页面布局在三种屏宽下都对齐了，但画面相似度检查只拿到 73%，没到 90% 的目标线，维护者在 issue #1590 里坦言放弃继续收敛。另一位用户用它做长链路逆向调查时撞上多层上下文压缩——标称 12 万 token 的窗口，有效预算早早落到 7.7 万左右，长调查被迫中断（issue #2150）。</p>
+<p>换句话说：网站复刻是目前最成熟的路径，游戏和应用的「神还原」还不是常态。期望管理很重要。</p>
+<h2 id="_2">法律与安全的边界</h2>
+<p>复刻软件天然踩在版权的灰色地带。Plagiarism Today 讨论 ArtCraft 的 Adobe 复刻时指出：即使不复制代码，界面布局与视觉风格是否构成商业外观侵权，仍是没有标准答案的问题。</p>
+<p>Craft Anything 的做法是把防线写进产品：明确声明不绕 DRM、不绕登录、不绕反作弊；重建的是布局、风格和行为，Agent 被告知不复制 logo、照片和文案，除非你确认拥有或已获授权。</p>
+<p>安全上，规则之外的命令要先弹审批卡。官方还特别提醒：npm 安装依赖时，包的安装脚本会在你电脑上真实执行，对不信任的项目可以用 <code>npm install --ignore-scripts</code>。这类供应链风险的系统分析，可参考<a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞</a>。</p>
+<p>这些约束挡不住有人拿它作恶，但至少把建议的使用方式定义得很清楚：用在你拥有或有权检查的软件上。</p>
+<h2 id="_3">小结</h2>
+<p>Craft Anything 的爆火，本质是「AI 复刻软件」从手工作坊走向流水线的标志。</p>
+<p>它把逆向分析从 LLM 手里收回，交给确定性的 Rust 引擎——既绕开了模型厂商对逆向行为的封锁，也用净室设计回应了版权争议；四步流水线加量化的相似度校验，则把「感觉像」变成了「测过像」。</p>
+<p>对开发者来说，眼下最实际的用法有三个：研究一个网站的实现后重建自己的版本、给老项目做竞品级分析，或者单纯把它的 309 个检查工具当免费逆向工作台。至于「一键克隆任何软件」，那是 alpha 之后的事。</p>
+<hr />
+<h2 id="_4">免责声明</h2>
+<p>本文基于公开资料整理，项目处于 early alpha 阶段，功能与数据可能快速变化，以官方仓库为准。复刻他人软件存在版权与合规风险，请仅用于你拥有或有权检查的软件。本文不构成法律意见或投资建议。</p>
+<h2 id="_5">参考来源</h2>
+<ul>
+<li><a href="https://github.com/storytold/craft-anything">GitHub —— storytold/craft-anything 项目主页</a></li>
+<li><a href="https://github.com/storytold/craft-anything/blob/main/docs/tools.md">GitHub —— Craft Anything 工具清单 docs/tools.md</a></li>
+<li><a href="https://github.com/storytold/craft-anything/blob/main/docs/ROADMAP.md">GitHub —— Craft Anything 路线图 docs/ROADMAP.md</a></li>
+<li><a href="https://github.com/storytold/craft-anything/blob/main/docs/STATUS.md">GitHub —— Craft Anything 现状说明 docs/STATUS.md</a></li>
+<li><a href="https://github.com/storytold/craft-anything/issues/1590">GitHub Issue #1590 —— 重建产出是截图式近似而非忠实复刻</a></li>
+<li><a href="https://github.com/storytold/craft-anything/issues/2150">GitHub Issue #2150 —— 长链路逆向时上下文被多层压缩</a></li>
+<li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-ai-model-is-now-blocking-attempts-at-video-game-recreation-and-cloning-users-also-claim-non-malicious-generic-reverse-engineering-tasks-are-blocked">Tom's Hardware —— Anthropic 封锁游戏克隆与逆向请求</a></li>
+<li><a href="https://petapixel.com/2026/10/07/someone-rebuilt-free-open-source-versions-of-photoshop-premiere-and-lightroom-using-ai/">PetaPixel —— 有人用 AI 重建了开源版 Photoshop、Premiere 和 Lightroom</a></li>
+<li><a href="https://futurism.com/artificial-intelligence/creator-free-adobe-suite-microsoft-office">Futurism —— Adobe 复刻的作者再度出手，逆向微软 Office</a></li>
+<li><a href="https://www.plagiarismtoday.com/2026/10/14/copyright-and-the-vibe-coded-adobe-clones/">Plagiarism Today —— Vibe Coding 版 Adobe 复刻的版权问题</a></li>
+<li><a href="https://ibl.ai/blog/craft-anything-clean-room-rebuild-software-moat">ibl.ai —— 当 Agent 能重建应用，软件护城河还剩什么</a></li>
+<li><a href="https://www.kucoin.com/news/flash/artcraft-founder-refuses-to-use-rea-despite-its-popularity-in-reverse-engineering">KuCoin News —— ArtCraft 创始人表态不使用 REA</a></li>
+</ul>
+<h2 id="_6">相关阅读</h2>
+<ul>
+<li><a href="../posts/rea-reverse-engineer-anything-deep-dive-2026.html">REA爆火：AI Agent逆向一切，从网页行为到原生二进制的证据链革命</a></li>
+<li><a href="../posts/cli-anything-agent-native-software-tool-market-2026.html">当软件的下一代用户是 AI：CLI-Anything 与 Agent 工具市场的未来</a></li>
+<li><a href="../posts/opencode-free-ai-coding-agent-guide-2026.html">OpenCode实战指南：免费AI编程Agent + 免费大模型，零成本搞定代码开发</a></li>
+<li><a href="../posts/vibe-coding-hidden-costs-security-risks-2026.html">Vibe Coding的隐藏代价：2000个裸奔应用、630万丢失订单、和322%的权限漏洞</a></li>
+</ul>
+            
+            
+            <div class="affiliate-box jd">
+                <p style="font-size:1.1em;">🛒 京东 挑好物逛京东(Skechers杯具)</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">京东大促进行中，超值好物等你来选</p>
+                <a href="https://u.jd.com/H1BFc81" class="btn" target="_blank" rel="nofollow">去京东看看 →</a>
+                <p class="note">* 京东联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+
+            
+            <div class="affiliate-box tb" style="margin-top:15px;background:linear-gradient(135deg,#1a1a2e 0%,#1e1621 100%);border:1px solid #ff7600;">
+                <p style="font-size:1.1em;">🟠 淘宝 淘宝电脑办公精选</p>
+                <p style="color:var(--text-secondary);font-size:0.9em;">淘宝精选好物，超值优惠等你来抢</p>
+                <a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91%E5%8A%9E%E5%85%AC&commend=all&ssid=s5-e&search_type=item&sourceId=union&unionId=28495695" class="btn" style="background:linear-gradient(135deg,#ff7600,#e85d00);" target="_blank" rel="nofollow">去淘宝看看 →</a>
+                <p class="note">* 淘宝联盟推广链接，你不需要多花钱，我们获得小额佣金</p>
+            </div>
+            
+            
+        
+
+<div class="affiliate-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 25px; margin: 30px 0;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+    <span style="font-size: 24px;">🛒</span>
+    <h3 style="margin: 0; color: #e94560; font-size: 18px;">推荐搭配装备</h3>
+  </div>
+  <p style="color: #aaa; margin: 0 0 15px 0; font-size: 14px;">
+    善其事，利其器。以下硬件能最大化你的AI体验👇
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+    <a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fclick.union.jd.com%2Fjds%3FunionId%3D2012428377%26to%3Dhttps%253A%2F%2Fsearch.jd.com%2FSearch%253Fkeyword%253DMacBook%252520Pro%25252014%252520M4%252520Pro%2526enc%253Dutf-8&platform=jd&article=craft-anything-clean-room-rebuild-engine-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #e84545; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">京东</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">MacBook Pro 14寸 M4 Pro</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发者首选笔记本，性能续航双优</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥15000-20000</div>
+      </div>
+    </a>
+<a href="/ai-tools-hub/go.html?url=https%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25E8%2581%2594%25E6%2583%25B3%2520%25E6%258B%25AF%25E6%2595%2591%25E8%2580%2585%2520Y9000P%26commend%3Dall%26ssid%3Ds5-e%26search_type%3Ditem%26sourceId%3Dunion%26unionId%3D28495695&platform=tb&article=craft-anything-clean-room-rebuild-engine-2026" target="_blank" rel="nofollow" style="text-decoration: none;">
+      <div style="background: rgba(15, 52, 96, 0.4); border: 1px solid #0f3460; border-radius: 8px; padding: 12px; transition: all 0.3s; position: relative;">
+        <div style="position: absolute; top: 6px; right: 6px; background: #ff7600; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px;">淘宝</div>
+        <div style="font-size: 14px; color: #4fc3f7; margin-bottom: 4px;">⚡</div>
+        <div style="font-size: 14px; color: #e0e0e0; font-weight: 500; margin-bottom: 4px; padding-right: 30px;">联想拯救者Y9000P 2026</div>
+        <div style="font-size: 12px; color: #999; margin-bottom: 6px;">AI开发游戏本，i9+RTX4070</div>
+        <div style="font-size: 13px; color: #e94560; font-weight: 600;">¥9000-12000</div>
+      </div>
+    </a>
+  </div>
+  <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span style="background: rgba(232, 69, 69, 0.15); color: #e84545; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔵 京东</span>
+    <span style="background: rgba(255, 118, 0, 0.15); color: #ff7600; padding: 4px 10px; border-radius: 4px; font-size: 11px;">🟠 淘宝</span>
+  </div>
+  <p style="color: #666; font-size: 12px; margin-top: 12px; text-align: center; border-top: 1px solid #0f3460; padding-top: 12px;">
+    🔗 通过以上链接购买可支持本站持续运营 🙏
+  </p>
+</div>
+
+
+</article>
+        
+        <footer>
+            <p>© 2026 AI知识宇宙 - 用AI采集，用AI生成</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button class="theme-switcher" id="theme-switcher" title="切换主题" aria-label="切换主题">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <script>
+    // 主题切换功能
+    (function() {
+        var switcher = document.getElementById('theme-switcher');
+        var icon = document.getElementById('theme-icon');
+        
+        function updateIcon(theme) {
+            icon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+        
+        // 初始化图标
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateIcon(currentTheme);
+        
+        switcher.addEventListener('click', function() {
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var newTheme = isLight ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    })();
+    </script>
+</body>
+</html>

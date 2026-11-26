@@ -1,6 +1,40 @@
 {
-  "total": 221,
+  "total": 222,
   "posts": [
+    {
+      "slug": "baidu-ernie-open-source-strategy-2026",
+      "title": "从「开源成本最高」到主动开源：百度文心战略转身始末",
+      "date": "2026-11-27",
+      "category": "AI行业观察",
+      "description": "百度曾是闭源路线最坚定的捍卫者，却在 2025 年 6 月把文心 4.5 系列十款模型全量开源，2026 年 11 月又开源 5.5 Flash。本文按时间线复盘这场战略转身，并盘点各代开源模型的真实能力与背后的商业账本。",
+      "keywords": [
+        "百度",
+        "文心大模型",
+        "开源"
+      ],
+      "read_time": "12 分钟",
+      "word_count": 7619,
+      "view_count": 0,
+      "created_at": "2026-11-25 11:25:47"
+    },
+    {
+      "slug": "craft-anything-clean-room-rebuild-engine-2026",
+      "title": "Claude 不让逆向，他们干脆开源了一个逆向引擎：Craft Anything 的复刻流水线",
+      "date": "2026-11-26",
+      "category": "AI 行业观察",
+      "description": "开源26天揽下4.3万Star的Craft Anything，用纯Rust净室引擎把「看懂任何软件」做成四步流水线。它背后是ArtCraft复刻Adobe全家桶的方法论，也是Claude封锁逆向之后的一个工程答案。",
+      "keywords": [
+        "Craft Anything",
+        "逆向工程",
+        "AI Agent",
+        "开源",
+        "Rust"
+      ],
+      "read_time": "9 分钟",
+      "word_count": 7999,
+      "view_count": 0,
+      "created_at": "2026-11-26 14:12:21"
+    },
     {
       "slug": "openmausbot-open-source-grok-bot-alternative-2026",
       "title": "3个月2.7万星：OpenMausBot把一队AI Agent装进聊天App，开源版Grok Bot来了",
@@ -21,22 +55,6 @@
       "word_count": 9455,
       "view_count": 0,
       "created_at": "2026-11-25 11:25:54"
-    },
-    {
-      "slug": "baidu-ernie-open-source-strategy-2026",
-      "title": "从「开源成本最高」到主动开源：百度文心战略转身始末",
-      "date": "2026-11-25",
-      "category": "AI 行业观察",
-      "description": "百度曾是闭源路线最坚定的捍卫者，却在 2025 年 6 月把文心 4.5 系列十款模型全量开源，2026 年 11 月又开源 5.5 Flash。本文按时间线复盘这场战略转身，并盘点各代开源模型的真实能力与背后的商业账本。",
-      "keywords": [
-        "百度",
-        "文心大模型",
-        "开源"
-      ],
-      "read_time": "8 分钟",
-      "word_count": 7619,
-      "view_count": 0,
-      "created_at": "2026-11-25 11:25:47"
     },
     {
       "slug": "rea-reverse-engineer-anything-deep-dive-2026",

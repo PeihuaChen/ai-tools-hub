@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 383" width="900" height="383">
+  <defs>
+    <linearGradient id="covBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="50%" stop-color="#141432"/>
+      <stop offset="100%" stop-color="#161638"/>
+    </linearGradient>
+    <linearGradient id="barA" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="barB" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="50%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="ahpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="383" fill="url(#covBg)"/>
+
+  <!-- Top / bottom gradient bars -->
+  <rect x="0" y="0" width="900" height="4" fill="url(#barA)"/>
+  <rect x="0" y="379" width="900" height="4" fill="url(#barB)"/>
+
+  <!-- Grid -->
+  <g opacity="0.05" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="48" x2="900" y2="48"/><line x1="0" y1="96" x2="900" y2="96"/>
+    <line x1="0" y1="144" x2="900" y2="144"/><line x1="0" y1="192" x2="900" y2="192"/>
+    <line x1="0" y1="240" x2="900" y2="240"/><line x1="0" y1="288" x2="900" y2="288"/>
+    <line x1="0" y1="336" x2="900" y2="336"/>
+    <line x1="60" y1="0" x2="60" y2="383"/><line x1="120" y1="0" x2="120" y2="383"/>
+    <line x1="180" y1="0" x2="180" y2="383"/><line x1="240" y1="0" x2="240" y2="383"/>
+    <line x1="300" y1="0" x2="300" y2="383"/><line x1="360" y1="0" x2="360" y2="383"/>
+    <line x1="420" y1="0" x2="420" y2="383"/><line x1="480" y1="0" x2="480" y2="383"/>
+    <line x1="540" y1="0" x2="540" y2="383"/><line x1="600" y1="0" x2="600" y2="383"/>
+    <line x1="660" y1="0" x2="660" y2="383"/><line x1="720" y1="0" x2="720" y2="383"/>
+    <line x1="780" y1="0" x2="780" y2="383"/><line x1="840" y1="0" x2="840" y2="383"/>
+  </g>
+
+  <!-- Top-left label box -->
+  <rect x="40" y="28" width="230" height="34" rx="6" fill="#3b82f6" fill-opacity="0.12" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="155" y="51" font-size="15" font-weight="bold" fill="#93c5fd" text-anchor="middle">AI 行业观察 · Agent 协议</text>
+
+  <!-- Year badge -->
+  <rect x="812" y="28" width="52" height="34" rx="8" fill="#8b5cf6" fill-opacity="0.18" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="838" y="52" font-size="17" font-weight="bold" fill="#c4b5fd" text-anchor="middle">26</text>
+
+  <!-- Main title -->
+  <text x="40" y="128" font-size="44" font-weight="bold" fill="#ffffff">一个 Agent 会话</text>
+  <text x="40" y="172" font-size="44" font-weight="bold" fill="#ffffff">四块屏幕同时在线</text>
+
+  <!-- Subtitle -->
+  <text x="40" y="214" font-size="19" fill="url(#ahpGrad)">GitHub 开源 Agent Host Protocol 深度解析</text>
+
+  <!-- Three highlight lines -->
+  <text x="40" y="252" font-size="14" fill="#60a5fa">40 万行扩展拆解 · 会话移出编辑器进程</text>
+  <text x="40" y="276" font-size="14" fill="#f472b6">通道 + 纯函数 reducer · 断线重连可回放</text>
+  <text x="40" y="300" font-size="14" fill="#34d399">六语言 SDK · 与 MCP / A2A / ANP 分层互补</text>
+
+  <!-- Tag pills -->
+  <g>
+    <rect x="40" y="318" width="80" height="24" rx="12" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="80" y="335" font-size="12" fill="#93c5fd" text-anchor="middle">开放标准</text>
+
+    <rect x="130" y="318" width="92" height="24" rx="12" fill="none" stroke="#06b6d4" stroke-width="1.2"/>
+    <text x="176" y="335" font-size="12" fill="#67e8f9" text-anchor="middle">跨设备同步</text>
+
+    <rect x="232" y="318" width="88" height="24" rx="12" fill="none" stroke="#8b5cf6" stroke-width="1.2"/>
+    <text x="276" y="335" font-size="12" fill="#c4b5fd" text-anchor="middle">Copilot</text>
+
+    <rect x="330" y="318" width="96" height="24" rx="12" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="378" y="335" font-size="12" fill="#fbbf24" text-anchor="middle">JSON-RPC</text>
+
+    <rect x="436" y="318" width="86" height="24" rx="12" fill="none" stroke="#34d399" stroke-width="1.2"/>
+    <text x="479" y="335" font-size="12" fill="#6ee7b7" text-anchor="middle">MIT 许可</text>
+  </g>
+
+  <!-- Right concept: host hub with three clients -->
+  <g transform="translate(710, 185)">
+    <!-- connector lines -->
+    <line x1="-105" y1="-70" x2="-45" y2="-18" stroke="#34d399" stroke-width="2.5"/>
+    <line x1="105" y1="-70" x2="45" y2="-18" stroke="#f472b6" stroke-width="2.5"/>
+    <line x1="0" y1="62" x2="0" y2="28" stroke="#f59e0b" stroke-width="2.5"/>
+
+    <!-- client: editor (top-left) -->
+    <rect x="-145" y="-108" width="82" height="38" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="-104" y="-83" font-size="14" fill="#7dd3fc" text-anchor="middle">编辑器</text>
+
+    <!-- client: phone (top-right) -->
+    <rect x="63" y="-108" width="82" height="38" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="104" y="-83" font-size="14" fill="#7dd3fc" text-anchor="middle">手机</text>
+
+    <!-- client: cloud (bottom) -->
+    <rect x="-41" y="62" width="82" height="38" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="0" y="87" font-size="14" fill="#7dd3fc" text-anchor="middle">云端</text>
+
+    <!-- host hub -->
+    <rect x="-72" y="-28" width="144" height="56" rx="10" fill="#0f172a" stroke="#6366f1" stroke-width="2.5"/>
+    <text x="0" y="-5" font-size="15" font-weight="bold" fill="#a5b4fc" text-anchor="middle">AHP Host</text>
+    <text x="0" y="17" font-size="12" fill="#94a3b8" text-anchor="middle">会话状态仲裁</text>
+  </g>
+
+  <!-- Bottom info -->
+  <rect x="40" y="354" width="560" height="1" fill="#ffffff" opacity="0.08"/>
+  <text x="40" y="372" font-size="12" fill="#64748b">架构拆解 · 协议版图 · AHP 与 ANP 对比 · 生态与冷思考</text>
+  <text x="860" y="372" font-size="12" fill="#475569" text-anchor="end">AI知识宇宙 | 2026.11</text>
+</svg>
